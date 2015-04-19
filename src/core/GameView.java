@@ -25,4 +25,10 @@ public class GameView extends JFrame implements IViewer {
 		
 		setTitle(game.NAME);
 	}
+	
+	@Override
+	public void display() {
+		pack();
+		setVisible(true);
+	}
 }

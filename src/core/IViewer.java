@@ -11,4 +11,5 @@ public interface IViewer {
 	public static final int BUTTON_DIM_HEIGHT = 26;
 	
 	public void bind(IViewable viewable);
+	public void display();
 }

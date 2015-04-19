@@ -18,6 +18,12 @@ public class RoundParameters extends Params {
 	public void setLevel(Level level) {
 		this.level = level;
 	}
+	
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void reset() {

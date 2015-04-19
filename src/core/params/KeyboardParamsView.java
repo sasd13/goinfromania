@@ -27,7 +27,7 @@ public class KeyboardParamsView extends ParamsView {
 		textFieldKeyMoveDown,
 		textFieldKeyPigAttak;
 	
-	private JButton buttonOK, buttonCancel;
+	
 	
 	public KeyboardParamsView() {
 		super();
@@ -42,12 +42,48 @@ public class KeyboardParamsView extends ParamsView {
 		this.textFieldKeyMoveDown = new JTextField();
 		this.textFieldKeyPigAttak = new JTextField();
 		
-		this.buttonOK = new JButton("OK");
-		this.buttonOK.setPreferredSize(new Dimension(BUTTON_DIM_WIDTH, BUTTON_DIM_HEIGHT));
-		this.buttonCancel = new JButton("Cancel");
-		this.buttonCancel.setPreferredSize(new Dimension(BUTTON_DIM_WIDTH, BUTTON_DIM_HEIGHT));
-		
 		setContent();
+	}
+	
+	@Override
+	public void setContent() {
+		super.setContent();
+		
+		getContentPane().add(this.labelText, BorderLayout.NORTH);
+		
+		panelContent.setLayout(new GridLayout(7, 2));
+		for(int i=0; i<7; i++) {
+			switch (i) {
+				case 0:
+					panelContent.add(new JLabel("Start"));
+					panelContent.add(this.textFieldKeyStart);
+					break;
+				case 1:
+					panelContent.add(new JLabel("Pause"));
+					panelContent.add(this.textFieldKeyPause);
+					break;
+				case 2:
+					panelContent.add(new JLabel("Left"));
+					panelContent.add(this.textFieldKeyMoveLeft);
+					break;
+				case 3:
+					panelContent.add(new JLabel("Right"));
+					panelContent.add(this.textFieldKeyMoveRight);
+					break;
+				case 4:
+					panelContent.add(new JLabel("Up"));
+					panelContent.add(this.textFieldKeyMoveUp);
+					break;
+				case 5:
+					panelContent.add(new JLabel("Down"));
+					panelContent.add(this.textFieldKeyMoveDown);
+					break;
+				case 6:
+					panelContent.add(new JLabel("Pig attak"));
+					panelContent.add(this.textFieldKeyPigAttak);
+					break;
+			}
+		}
 	}
 	
 	@Override
@@ -62,54 +98,5 @@ public class KeyboardParamsView extends ParamsView {
 		this.textFieldKeyMoveRight.setText(KeyEvent.getKeyText(keyboardParams.getKeyMoveRight()));
 		this.textFieldKeyMoveUp.setText(KeyEvent.getKeyText(keyboardParams.getKeyMoveUp()));
 		this.textFieldKeyMoveDown.setText(KeyEvent.getKeyText(keyboardParams.getKeyMoveDown()));
-	}
-	
-	@Override
-	public void setContent() {
-		super.setContent();
-		
-		getContentPane().add(this.labelText, BorderLayout.NORTH);
-		
-		JPanel panelForm = new JPanel();
-		panelForm.setLayout(new GridLayout(7, 2));
-		for(int i=0; i<7; i++) {
-			switch (i) {
-				case 0:
-					panelForm.add(new JLabel("Start"));
-					panelForm.add(this.textFieldKeyStart);
-					break;
-				case 1:
-					panelForm.add(new JLabel("Pause"));
-					panelForm.add(this.textFieldKeyPause);
-					break;
-				case 2:
-					panelForm.add(new JLabel("Left"));
-					panelForm.add(this.textFieldKeyMoveLeft);
-					break;
-				case 3:
-					panelForm.add(new JLabel("Right"));
-					panelForm.add(this.textFieldKeyMoveRight);
-					break;
-				case 4:
-					panelForm.add(new JLabel("Up"));
-					panelForm.add(this.textFieldKeyMoveUp);
-					break;
-				case 5:
-					panelForm.add(new JLabel("Down"));
-					panelForm.add(this.textFieldKeyMoveDown);
-					break;
-				case 6:
-					panelForm.add(new JLabel("Pig attak"));
-					panelForm.add(this.textFieldKeyPigAttak);
-					break;
-			}
-		}
-		getContentPane().add(panelForm);
-		
-		JPanel panelButton = new JPanel();
-		panelButton.setLayout(new FlowLayout());
-		panelButton.add(this.buttonOK);
-		panelButton.add(this.buttonCancel);
-		getContentPane().add(panelButton, BorderLayout.SOUTH);
 	}
 }

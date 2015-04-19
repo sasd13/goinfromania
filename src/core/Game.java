@@ -58,12 +58,10 @@ public class Game implements IViewable {
 	}
 	
 	@Override
-	public IViewer show() {
+	public IViewer display() {
 		 GameView gameView = new GameView();
 		 gameView.bind(this);
-		 
-		 gameView.pack();
-		 gameView.setVisible(true);
+		 gameView.display();
 		 
 		 return gameView;
 	}

@@ -28,7 +28,7 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				KeyboardParams keyboardParameters = new KeyboardParams();
-				keyboardParameters.show();
+				keyboardParameters.display();
 			}
 		});
 		menuSettings.add(itemKeyBoard);

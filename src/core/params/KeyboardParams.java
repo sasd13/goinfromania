@@ -80,6 +80,12 @@ public class KeyboardParams extends Params implements IViewable {
 	}
 	
 	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public void reset() {
 		setKeyStart(KeyEvent.VK_ENTER);
 		setKeyPause(KeyEvent.VK_ESCAPE);
@@ -91,12 +97,10 @@ public class KeyboardParams extends Params implements IViewable {
 	}
 	
 	@Override
-	public IViewer show() {
+	public IViewer display() {
 		KeyboardParamsView keyboardParamsView = new KeyboardParamsView();
 		keyboardParamsView.bind(this);
-		
-		keyboardParamsView.pack();
-		keyboardParamsView.setVisible(true);
+		keyboardParamsView.display();
 		
 		return keyboardParamsView;
 	}

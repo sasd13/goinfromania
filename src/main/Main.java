@@ -1,9 +1,11 @@
-package core;
+package main;
+
+import core.Game;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Game game = Game.getInstance();
-		game.show();
+		game.display();
 	}
 }

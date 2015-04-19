@@ -16,5 +16,7 @@ public abstract class Params {
 		this.name = name;
 	}
 	
+	public abstract void save();
+	
 	public abstract void reset();
 }
