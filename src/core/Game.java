@@ -2,7 +2,6 @@ package core;
 
 import java.util.ArrayList;
 
-import core.gui.GameView;
 import core.round.Round;
 import core.round.RoundData;
 
@@ -60,12 +59,12 @@ public class Game implements IViewable {
 	
 	@Override
 	public IViewer show() {
-		 GameView gameShow = new GameView();
-		 gameShow.bind(this);
+		 GameView gameView = new GameView();
+		 gameView.bind(this);
 		 
-		 gameShow.pack();
-		 gameShow.setVisible(true);
+		 gameView.pack();
+		 gameView.setVisible(true);
 		 
-		 return gameShow;
+		 return gameView;
 	}
 }

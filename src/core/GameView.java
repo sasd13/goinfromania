@@ -1,21 +1,22 @@
-package core.gui;
+package core;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import core.Game;
-import core.IViewer;
-import core.IViewable;
+import core.gui.menu.MenuBar;
 
 public class GameView extends JFrame implements IViewer {
 
-	public static final int FRAME_WIDTH = 500;
-	public static final int FRAME_HEIGHT = 500;
+	public static final int FRAME_WIDTH = 800;
+	public static final int FRAME_HEIGHT = 600;
 	
 	public GameView() {
 		setDefaultCloseOperation(GameView.EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+		
+		MenuBar menuBar = new MenuBar();
+		setJMenuBar(menuBar);
 	}
 	
 	@Override

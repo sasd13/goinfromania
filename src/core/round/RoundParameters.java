@@ -1,14 +1,14 @@
 package core.round;
 
-import core.IParameterizable;
 import core.IViewer;
+import core.params.Params;
 
-public class RoundParameters implements IParameterizable {
+public class RoundParameters extends Params {
 	
 	private Level level;
 	
 	public RoundParameters() {
-		setDefault();
+		reset();
 	}
 	
 	public Level getLevel() {
@@ -20,12 +20,7 @@ public class RoundParameters implements IParameterizable {
 	}
 
 	@Override
-	public void setDefault() {
-		this.level = Level.EASY;
-	}
-	
-	@Override
-	public IViewer show() {
-		return null;
+	public void reset() {
+		this.level = Level.NORMAL;
 	}
 }
