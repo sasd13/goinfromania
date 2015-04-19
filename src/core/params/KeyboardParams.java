@@ -80,12 +80,6 @@ public class KeyboardParams extends Params implements IViewable {
 	}
 	
 	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public void reset() {
 		setKeyStart(KeyEvent.VK_ENTER);
 		setKeyPause(KeyEvent.VK_ESCAPE);

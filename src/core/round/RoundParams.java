@@ -1,13 +1,12 @@
 package core.round;
 
-import core.IViewer;
 import core.params.Params;
 
-public class RoundParameters extends Params {
+public class RoundParams extends Params {
 	
 	private Level level;
 	
-	public RoundParameters() {
+	public RoundParams() {
 		reset();
 	}
 	
@@ -17,12 +16,6 @@ public class RoundParameters extends Params {
 	
 	public void setLevel(Level level) {
 		this.level = level;
-	}
-	
-	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

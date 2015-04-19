@@ -1,7 +1,6 @@
 package core.params;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -17,15 +16,11 @@ import core.IViewer;
 
 public class ParamsView extends JFrame implements IViewer {
 
-	protected JPanel panelContent;
 	private JPanel panelButton;
 	private JButton buttonSave, buttonCancel, buttonReset;
 	
 	public ParamsView() {
 		setPreferredSize(new Dimension(FRAME_DIM_MEDIUM, FRAME_DIM_MEDIUM));
-		
-		this.panelContent = new JPanel();
-		getContentPane().add(this.panelContent, BorderLayout.CENTER);
 		
 		this.panelButton = new JPanel();
 		this.panelButton.setLayout(new FlowLayout());
@@ -56,16 +51,8 @@ public class ParamsView extends JFrame implements IViewer {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String title = "Confirmation";
-				String message = "Confirm save modifications ?";
-				
-				int selected = JOptionPane.showConfirmDialog(ParamsView.this, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
-				if(selected == JOptionPane.YES_OPTION) {
-					params.save();
-					dispose();
-				} else if(selected == JOptionPane.NO_OPTION) {
-					dispose();
-				}
+				ParamsManager.save(params);
+				dispose();
 			}
 		});
 		
