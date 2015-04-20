@@ -65,9 +65,9 @@ public class Game extends Model {
 		return null;
 	}
 	
-	public void launch() {
+	public static void launch() {
 		GameView gameView = new GameView();
-		WindowController controller = new WindowController(this, gameView);
+		WindowController controller = new WindowController(getInstance(), gameView);
 		gameView.addWindowListener(controller);
 		gameView.display();
 	}
