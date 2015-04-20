@@ -38,35 +38,39 @@ public class SettingView extends FrameView {
 	
 	@Override
 	public void update(Observable model) {
-		final Setting params = (Setting) model;
+		final Setting setting = (Setting) model;
 		
-		this.buttonClose.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				String title = "Confirmation";
-				String message = "Save modifications ?";
+		if(this.buttonClose.getActionListeners().length == 0) {
+			this.buttonClose.addActionListener(new ActionListener() {
 				
-				int selected = JOptionPane.showConfirmDialog(SettingView.this, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
-				switch (selected) {
-					case JOptionPane.YES_OPTION :
-						SettingManager.save(params);
-						dispose();
-						break;
-					case JOptionPane.NO_OPTION :
-						dispose();
-						break;					
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					String title = "Confirmation";
+					String message = "Save modifications ?";
+					
+					int selected = JOptionPane.showConfirmDialog(SettingView.this, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
+					switch (selected) {
+						case JOptionPane.YES_OPTION :
+							SettingManager.save(setting);
+							dispose();
+							break;
+						case JOptionPane.NO_OPTION :
+							dispose();
+							break;					
+					}
 				}
-			}
-		});
+			});
+		}
 		
-		this.buttonReset.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				params.reset();
-			}
-		});
+		if(this.buttonReset.getActionListeners().length == 0) {
+			this.buttonReset.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					setting.reset();
+				}
+			});
+		}
 		
 		super.update(model);
 	}
