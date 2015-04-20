@@ -1,6 +1,6 @@
-package core.round;
+package game.round;
 
-import core.Model;
+import game.Model;
 
 public class Score extends Model {
 

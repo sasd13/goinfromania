@@ -1,4 +1,4 @@
-package core.round;
+package game.round;
 
 public enum Level {
 	EASY,

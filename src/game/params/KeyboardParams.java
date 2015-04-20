@@ -1,11 +1,9 @@
-package core.params;
+package game.params;
 
 import java.awt.event.KeyEvent;
 
 public class KeyboardParams extends Params {
 
-	private final String PARAMS_TITLE = "Keyboard Settings";
-	
 	private int keyStart;
 	private int keyPause;
 	private int keyMoveLeft;
@@ -92,7 +90,7 @@ public class KeyboardParams extends Params {
 	
 	@Override
 	public void reset() {		
-		setTitle(PARAMS_TITLE);
+		setTitle("Keyboard Settings");
 		
 		setKeyStart(KeyEvent.VK_ENTER);
 		setKeyPause(KeyEvent.VK_ESCAPE);

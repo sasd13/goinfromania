@@ -1,7 +1,7 @@
-package core.params;
+package game.params;
 
-import core.WindowController;
-import core.round.RoundView;
+import game.WindowController;
+import game.round.RoundView;
 
 public class ParamsViewFactory {
 

@@ -1,9 +1,10 @@
-package core;
+package game;
+
+import game.menu.MenuBar;
 
 import java.awt.Dimension;
 
-import pattern.Observable;
-import core.gui.menu.MenuBar;
+import patterns.Observable;
 
 public class GameView extends FrameView {
 	
@@ -24,8 +25,6 @@ public class GameView extends FrameView {
 	@Override
 	public void update(Observable observable) {
 		Game game = (Game) observable;
-		
-		setTitle(game.getTitle());
 		
 		super.update(observable);
 	}

@@ -1,6 +1,6 @@
-package core.round;
+package game.round;
 
-import core.params.ParamsView;
+import game.params.ParamsView;
 
 public class RoundView extends ParamsView {
 

@@ -1,4 +1,8 @@
-package core.gui.menu;
+package game.menu;
+
+import game.params.KeyboardParamsView;
+import game.params.ParamsType;
+import game.params.ParamsViewFactory;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,10 +10,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
-import core.params.KeyboardParamsView;
-import core.params.ParamsType;
-import core.params.ParamsViewFactory;
 
 public class MenuBar extends JMenuBar {
 

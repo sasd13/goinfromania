@@ -1,4 +1,4 @@
-package core.params;
+package game.params;
 
 public enum ParamsType {
 	KEYBOARD,

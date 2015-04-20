@@ -1,4 +1,4 @@
-package pattern;
+package patterns;
 
 public interface Observer {
 	

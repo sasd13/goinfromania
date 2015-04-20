@@ -1,9 +1,9 @@
-package core;
+package game;
+
+import game.round.Round;
+import game.round.RoundManager;
 
 import java.util.ArrayList;
-
-import core.round.Round;
-import core.round.RoundData;
 
 public class Game extends Model {
 
@@ -29,7 +29,7 @@ public class Game extends Model {
 	}
 	
 	private void initialize() {
-		this.listRound = RoundData.loadRounds();
+		this.listRound = RoundManager.loadAll();
 		
 		if(this.listRound == null) {
 			this.listRound = new ArrayList<>();
@@ -63,13 +63,6 @@ public class Game extends Model {
 		}
 		
 		return null;
-	}
-	
-	public static void launch() {
-		GameView gameView = new GameView();
-		WindowController controller = new WindowController(getInstance(), gameView);
-		gameView.addWindowListener(controller);
-		gameView.display();
 	}
 	
 	public void exit() {

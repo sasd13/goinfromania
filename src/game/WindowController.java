@@ -1,10 +1,10 @@
-package core;
+package game;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import pattern.Observable;
-import pattern.Observer;
+import patterns.Observable;
+import patterns.Observer;
 
 public class WindowController implements WindowListener {
 	

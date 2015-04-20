@@ -1,11 +1,11 @@
-package core;
+package game;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import pattern.Observable;
-import pattern.Observer;
+import patterns.Observable;
+import patterns.Observer;
 
 public class FrameView extends JFrame implements Observer {
 
@@ -13,13 +13,14 @@ public class FrameView extends JFrame implements Observer {
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setPreferredSize(new Dimension(Dimens.FRAME_DIM_MEDIUM, Dimens.FRAME_DIM_MEDIUM));
+		setPreferredSize(new Dimension(Dimens.FRAME_MEDIUM, Dimens.FRAME_MEDIUM));
 	}
 	
 	@Override
 	public void update(Observable observable) {
-		// TODO Auto-generated method stub
+		Model model = (Model) observable;
 		
+		setTitle(model.getTitle());
 	}
 
 	@Override

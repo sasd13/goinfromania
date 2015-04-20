@@ -1,6 +1,6 @@
-package core.params;
+package game.params;
 
-import core.Model;
+import game.Model;
 
 public abstract class Params extends Model {
 	

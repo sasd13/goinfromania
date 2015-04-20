@@ -1,4 +1,4 @@
-package core.params;
+package game.params;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -8,12 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import pattern.Observable;
+import patterns.Observable;
 
 public class KeyboardParamsView extends ParamsView {
 	
-	private final String LABEL_TEXT = "Set keyboard controller touchs :",
-		LABEL_START = "Start",
+	private final String LABEL_START = "Start",
 		LABEL_PAUSE = "Pause",
 		LABEL_MOVELEFT = "Left",
 		LABEL_MOVERIGHT = "Right",
@@ -34,7 +33,7 @@ public class KeyboardParamsView extends ParamsView {
 	public KeyboardParamsView() {
 		super();
 		
-		this.labelText = new JLabel(LABEL_TEXT);
+		this.labelText = new JLabel("Set keyboard controller touchs :");
 		getContentPane().add(this.labelText, BorderLayout.NORTH);
 		
 		JPanel panelForm = new JPanel();

@@ -1,4 +1,7 @@
-package core.params;
+package game.params;
+
+import game.Dimens;
+import game.FrameView;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -10,9 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import pattern.Observable;
-import core.Dimens;
-import core.FrameView;
+import patterns.Observable;
 
 public class ParamsView extends FrameView {
 
@@ -27,19 +28,17 @@ public class ParamsView extends FrameView {
 		getContentPane().add(panelButton, BorderLayout.SOUTH);
 		
 		this.buttonClose = new JButton("Close");
-		this.buttonClose.setPreferredSize(new Dimension(Dimens.BUTTON_DIM_WIDTH, Dimens.BUTTON_DIM_HEIGHT));
+		this.buttonClose.setPreferredSize(new Dimension(Dimens.BUTTON_WIDTH, Dimens.BUTTON_HEIGHT));
 		this.panelButton.add(this.buttonClose);
 		
 		this.buttonReset = new JButton("Reset");
-		this.buttonReset.setPreferredSize(new Dimension(Dimens.BUTTON_DIM_WIDTH, Dimens.BUTTON_DIM_HEIGHT));
+		this.buttonReset.setPreferredSize(new Dimension(Dimens.BUTTON_WIDTH, Dimens.BUTTON_HEIGHT));
 		this.panelButton.add(this.buttonReset);
 	}
 	
 	@Override
 	public void update(Observable model) {
 		final Params params = (Params) model;
-		
-		setTitle(params.getTitle());
 		
 		this.buttonClose.addActionListener(new ActionListener() {
 			

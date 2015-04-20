@@ -1,9 +1,9 @@
-package core;
+package game;
 
 import java.util.ArrayList;
 
-import pattern.Observable;
-import pattern.Observer;
+import patterns.Observable;
+import patterns.Observer;
 
 public abstract class Model implements Observable {
 
@@ -26,19 +26,19 @@ public abstract class Model implements Observable {
 	}
 	
 	@Override
-	public boolean addObserver(Observer view) {
-		return this.listObserver.add(view);
+	public boolean addObserver(Observer observer) {
+		return this.listObserver.add(observer);
 	}
 	
 	@Override
-	public boolean removeObserver(Observer view) {
-		return this.listObserver.remove(view);
+	public boolean removeObserver(Observer observer) {
+		return this.listObserver.remove(observer);
 	}
 	
 	@Override
 	public void notifyObservers() {
-		for(Observer view : this.listObserver) {
-			view.update(this);
+		for(Observer observer : this.listObserver) {
+			observer.update(this);
 		}
 	}
 }

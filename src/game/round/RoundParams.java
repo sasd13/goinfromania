@@ -1,6 +1,6 @@
-package core.round;
+package game.round;
 
-import core.params.Params;
+import game.params.Params;
 
 public class RoundParams extends Params {
 	

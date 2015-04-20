@@ -1,10 +1,10 @@
-package core;
+package game;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
-import pattern.Observable;
-import pattern.Observer;
+import patterns.Observable;
+import patterns.Observer;
 
 public class ComponentController implements ComponentListener {
 	

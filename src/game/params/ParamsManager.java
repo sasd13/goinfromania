@@ -1,6 +1,6 @@
-package core.params;
+package game.params;
 
-import core.round.RoundParams;
+import game.round.RoundParams;
 
 public class ParamsManager {
 
