@@ -1,16 +1,21 @@
 package game;
 
+import game.round.ListRound;
 import game.round.Round;
 import game.round.RoundManager;
-
-import java.util.ArrayList;
+import game.setting.SettingManager;
+import game.setting.SettingType;
+import game.setting.MapSetting;
+import game.setting.Setting;
 
 public class Game extends Model {
 
 	private static Game instance = null;
 	
 	public static final String NAME = "Goinfr'o'mania";
-	private ArrayList<Round> listRound;
+	
+	private MapSetting mapSetting;
+	private ListRound listRound;
 	
 	private Game() {
 		super();
@@ -29,11 +34,38 @@ public class Game extends Model {
 	}
 	
 	private void initialize() {
-		this.listRound = RoundManager.loadAll();
+		loadSettings();
+		loadRounds();
+	}
+	
+	public void loadSettings() {
+		this.mapSetting = SettingManager.loadAll();
 		
-		if(this.listRound == null) {
-			this.listRound = new ArrayList<>();
-		}
+		notifyObservers();
+	}
+	
+	public Setting newSetting(Setting setting) {
+		setting = this.mapSetting.put(setting);
+		
+		notifyObservers();
+		
+		return setting;
+	}
+	
+	public Setting deleteSetting(Setting setting) {
+		setting = this.mapSetting.remove(setting);
+		
+		notifyObservers();
+		
+		return setting;
+	}
+	
+	public Setting getSetting(SettingType settingType) {
+		return this.mapSetting.get(settingType);
+	}
+	
+	public void loadRounds() {
+		this.listRound = RoundManager.loadAll();
 		
 		notifyObservers();
 	}
@@ -47,22 +79,16 @@ public class Game extends Model {
 		return round;
 	}
 	
-	public boolean removeRound(Round round) {
-		boolean removed = this.listRound.remove(round);
+	public boolean deleteRound(Round round) {
+		boolean deleted = this.listRound.remove(round);
 		
 		notifyObservers();
 		
-		return removed;
+		return deleted;
 	}
 	
 	public Round getRound(String roundId) {
-		for(Round round : this.listRound) {
-			if(round.getId().compareTo(roundId) == 0) {
-				return round;
-			}
-		}
-		
-		return null;
+		return this.listRound.get(roundId);
 	}
 	
 	public void exit() {

@@ -1,12 +1,12 @@
 package game.round;
 
-import game.params.Params;
+import game.setting.Setting;
 
-public class RoundParams extends Params {
+public class RoundSetting extends Setting {
 	
 	private Level level;
 	
-	public RoundParams() {
+	public RoundSetting() {
 		super();
 		
 		reset();

@@ -1,4 +1,4 @@
-package game.params;
+package game.setting;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 import patterns.Observable;
 
-public class KeyboardParamsView extends ParamsView {
+public class KeyboardSettingView extends SettingView {
 	
 	private final String LABEL_START = "Start",
 		LABEL_PAUSE = "Pause",
@@ -30,7 +30,7 @@ public class KeyboardParamsView extends ParamsView {
 		textFieldKeyMoveDown,
 		textFieldKeyPigAttak;
 	
-	public KeyboardParamsView() {
+	public KeyboardSettingView() {
 		super();
 		
 		this.labelText = new JLabel("Set keyboard controller touchs :");
@@ -83,7 +83,7 @@ public class KeyboardParamsView extends ParamsView {
 	
 	@Override
 	public void update(Observable model) {
-		KeyboardParams keyboardParams = (KeyboardParams) model;
+		KeyboardSetting keyboardParams = (KeyboardSetting) model;
 		
 		this.textFieldKeyStart.setText(KeyEvent.getKeyText(keyboardParams.getKeyStart()));
 		this.textFieldKeyPause.setText(KeyEvent.getKeyText(keyboardParams.getKeyPause()));

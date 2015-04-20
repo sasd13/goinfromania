@@ -1,8 +1,8 @@
-package game.params;
+package game.setting;
 
 import java.awt.event.KeyEvent;
 
-public class KeyboardParams extends Params {
+public class KeyboardSetting extends Setting {
 
 	private int keyStart;
 	private int keyPause;
@@ -12,7 +12,7 @@ public class KeyboardParams extends Params {
 	private int keyMoveDown;
 	private int keyPigAttak;
 	
-	public KeyboardParams() {
+	public KeyboardSetting() {
 		super();
 		
 		reset();

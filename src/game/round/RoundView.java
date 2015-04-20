@@ -1,7 +1,7 @@
 package game.round;
 
-import game.params.ParamsView;
+import game.setting.SettingView;
 
-public class RoundView extends ParamsView {
+public class RoundView extends SettingView {
 
 }

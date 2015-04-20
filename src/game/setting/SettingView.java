@@ -1,4 +1,4 @@
-package game.params;
+package game.setting;
 
 import game.Dimens;
 import game.FrameView;
@@ -15,12 +15,12 @@ import javax.swing.JPanel;
 
 import patterns.Observable;
 
-public class ParamsView extends FrameView {
+public class SettingView extends FrameView {
 
 	private JPanel panelButton;
 	private JButton buttonClose, buttonReset;
 	
-	public ParamsView() {
+	public SettingView() {
 		super();
 		
 		this.panelButton = new JPanel();
@@ -38,7 +38,7 @@ public class ParamsView extends FrameView {
 	
 	@Override
 	public void update(Observable model) {
-		final Params params = (Params) model;
+		final Setting params = (Setting) model;
 		
 		this.buttonClose.addActionListener(new ActionListener() {
 			
@@ -47,10 +47,10 @@ public class ParamsView extends FrameView {
 				String title = "Confirmation";
 				String message = "Save modifications ?";
 				
-				int selected = JOptionPane.showConfirmDialog(ParamsView.this, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
+				int selected = JOptionPane.showConfirmDialog(SettingView.this, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
 				switch (selected) {
 					case JOptionPane.YES_OPTION :
-						ParamsManager.save(params);
+						SettingManager.save(params);
 						dispose();
 						break;
 					case JOptionPane.NO_OPTION :

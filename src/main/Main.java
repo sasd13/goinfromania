@@ -8,7 +8,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Game game = Game.getInstance();
-		GameView gameView = new GameView();
+		GameView gameView = GameView.getInstance();
 		WindowController controller = new WindowController(game, gameView);
 		gameView.addWindowListener(controller);
 		gameView.display();

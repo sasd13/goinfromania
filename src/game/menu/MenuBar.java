@@ -1,8 +1,10 @@
 package game.menu;
 
-import game.params.KeyboardParamsView;
-import game.params.ParamsType;
-import game.params.ParamsViewFactory;
+import game.Game;
+import game.GameView;
+import game.setting.SettingType;
+import game.setting.SettingViewFactory;
+import game.setting.KeyboardSettingView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +23,14 @@ public class MenuBar extends JMenuBar {
 		menuFile.add(itemNew);
 		JMenuItem itemExit = new JMenuItem("Exit");
 		menuFile.add(itemExit);
+		itemExit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Game.getInstance().exit();
+				GameView.getInstance().dispose();
+			}
+		});
 		add(menuFile);
 		
 		JMenu menuSettings = new JMenu("Settings");
@@ -29,8 +39,8 @@ public class MenuBar extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				KeyboardParamsView keyboardParamsView = (KeyboardParamsView) ParamsViewFactory.create(ParamsType.KEYBOARD);
-				keyboardParamsView.display();
+				KeyboardSettingView keyboardSettingView = (KeyboardSettingView) SettingViewFactory.create(SettingType.KEYBOARD);
+				keyboardSettingView.display();
 			}
 		});
 		menuSettings.add(itemKeyBoard);

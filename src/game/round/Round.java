@@ -24,10 +24,6 @@ public class Round extends Model {
 		notifyObservers();
 	}
 	
-	public void save() {
-		notifyObservers();
-	}
-	
 	public void pause() {
 		notifyObservers();
 	}
