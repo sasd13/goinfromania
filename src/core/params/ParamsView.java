@@ -7,65 +7,56 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import core.IViewable;
-import core.IViewer;
+import pattern.Observable;
+import core.Dimens;
+import core.FrameView;
 
-public class ParamsView extends JFrame implements IViewer {
+public class ParamsView extends FrameView {
 
 	private JPanel panelButton;
-	private JButton buttonSave, buttonCancel, buttonReset;
+	private JButton buttonClose, buttonReset;
 	
 	public ParamsView() {
-		setPreferredSize(new Dimension(FRAME_DIM_MEDIUM, FRAME_DIM_MEDIUM));
+		super();
 		
 		this.panelButton = new JPanel();
 		this.panelButton.setLayout(new FlowLayout());
 		getContentPane().add(panelButton, BorderLayout.SOUTH);
 		
-		this.buttonSave = new JButton("Save");
-		this.buttonSave.setPreferredSize(new Dimension(BUTTON_DIM_WIDTH, BUTTON_DIM_HEIGHT));
-		this.panelButton.add(this.buttonSave);
-		
-		this.buttonCancel = new JButton("Cancel");
-		this.buttonCancel.setPreferredSize(new Dimension(BUTTON_DIM_WIDTH, BUTTON_DIM_HEIGHT));
-		this.panelButton.add(this.buttonCancel);
+		this.buttonClose = new JButton("Close");
+		this.buttonClose.setPreferredSize(new Dimension(Dimens.BUTTON_DIM_WIDTH, Dimens.BUTTON_DIM_HEIGHT));
+		this.panelButton.add(this.buttonClose);
 		
 		this.buttonReset = new JButton("Reset");
-		this.buttonReset.setPreferredSize(new Dimension(BUTTON_DIM_WIDTH, BUTTON_DIM_HEIGHT));
+		this.buttonReset.setPreferredSize(new Dimension(Dimens.BUTTON_DIM_WIDTH, Dimens.BUTTON_DIM_HEIGHT));
 		this.panelButton.add(this.buttonReset);
 	}
 	
-	public void setContent() {};
-	
 	@Override
-	public void bind(IViewable viewable) {
-		final Params params = (Params) viewable;
+	public void update(Observable model) {
+		final Params params = (Params) model;
 		
-		setTitle(params.getName());
+		setTitle(params.getTitle());
 		
-		this.buttonSave.addActionListener(new ActionListener() {
+		this.buttonClose.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ParamsManager.save(params);
-				dispose();
-			}
-		});
-		
-		this.buttonCancel.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
 				String title = "Confirmation";
-				String message = "Your modifications will be losed. Confirm ?";
+				String message = "Save modifications ?";
 				
-				int selected = JOptionPane.showConfirmDialog(ParamsView.this, message, title, JOptionPane.YES_NO_OPTION);
-				if(selected == JOptionPane.YES_OPTION) {
-					dispose();
+				int selected = JOptionPane.showConfirmDialog(ParamsView.this, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
+				switch (selected) {
+					case JOptionPane.YES_OPTION :
+						ParamsManager.save(params);
+						dispose();
+						break;
+					case JOptionPane.NO_OPTION :
+						dispose();
+						break;					
 				}
 			}
 		});
@@ -77,11 +68,7 @@ public class ParamsView extends JFrame implements IViewer {
 				params.reset();
 			}
 		});
-	}
-	
-	@Override
-	public void display() {
-		this.pack();
-		this.setVisible(true);
+		
+		super.update(model);
 	}
 }

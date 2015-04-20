@@ -7,6 +7,8 @@ public class RoundParams extends Params {
 	private Level level;
 	
 	public RoundParams() {
+		super();
+		
 		reset();
 	}
 	
@@ -16,6 +18,8 @@ public class RoundParams extends Params {
 	
 	public void setLevel(Level level) {
 		this.level = level;
+		
+		notifyObservers();
 	}
 
 	@Override

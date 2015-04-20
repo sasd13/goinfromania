@@ -1,19 +1,11 @@
 package core.params;
 
-public abstract class Params {
-	
-	private String name;
+import core.Model;
+
+public abstract class Params extends Model {
 	
 	protected Params() {
-		this.name = "Settings";
-	}
-	
-	public String getName() {
-		return this.name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
+		super();
 	}
 	
 	public abstract void reset();

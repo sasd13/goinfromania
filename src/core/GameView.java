@@ -2,33 +2,31 @@ package core;
 
 import java.awt.Dimension;
 
-import javax.swing.JFrame;
-
+import pattern.Observable;
 import core.gui.menu.MenuBar;
 
-public class GameView extends JFrame implements IViewer {
-
+public class GameView extends FrameView {
+	
 	public static final int FRAME_WIDTH = 800;
 	public static final int FRAME_HEIGHT = 600;
 	
+	private MenuBar menuBar;
+	
 	public GameView() {
-		setDefaultCloseOperation(GameView.EXIT_ON_CLOSE);
+		super();
+		
 		setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		
-		MenuBar menuBar = new MenuBar();
-		setJMenuBar(menuBar);
+		this.menuBar = new MenuBar();
+		setJMenuBar(this.menuBar);
 	}
 	
 	@Override
-	public void bind(IViewable viewable) {
-		Game game = (Game) viewable;
+	public void update(Observable observable) {
+		Game game = (Game) observable;
 		
-		setTitle(game.NAME);
-	}
-	
-	@Override
-	public void display() {
-		pack();
-		setVisible(true);
+		setTitle(game.getTitle());
+		
+		super.update(observable);
 	}
 }

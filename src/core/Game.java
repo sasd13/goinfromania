@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import core.round.Round;
 import core.round.RoundData;
 
-public class Game implements IViewable {
+public class Game extends Model {
 
 	private static Game instance = null;
 	
@@ -13,6 +13,10 @@ public class Game implements IViewable {
 	private ArrayList<Round> listRound;
 	
 	private Game() {
+		super();
+		
+		setTitle(NAME);
+		
 		initialize();
 	}
 	
@@ -25,26 +29,30 @@ public class Game implements IViewable {
 	}
 	
 	private void initialize() {
-		this.listRound = RoundData.getRounds();
+		this.listRound = RoundData.loadRounds();
 		
 		if(this.listRound == null) {
 			this.listRound = new ArrayList<>();
 		}
-	}
-	
-	public void exit() {
 		
+		notifyObservers();
 	}
 	
 	public Round newRound() {
 		Round round = new Round();
 		this.listRound.add(round);
 		
+		notifyObservers();
+		
 		return round;
 	}
 	
 	public boolean removeRound(Round round) {
-		return this.listRound.remove(round);
+		boolean removed = this.listRound.remove(round);
+		
+		notifyObservers();
+		
+		return removed;
 	}
 	
 	public Round getRound(String roundId) {
@@ -57,12 +65,14 @@ public class Game implements IViewable {
 		return null;
 	}
 	
-	@Override
-	public IViewer display() {
-		 GameView gameView = new GameView();
-		 gameView.bind(this);
-		 gameView.display();
-		 
-		 return gameView;
+	public void launch() {
+		GameView gameView = new GameView();
+		WindowController controller = new WindowController(this, gameView);
+		gameView.addWindowListener(controller);
+		gameView.display();
+	}
+	
+	public void exit() {
+		
 	}
 }

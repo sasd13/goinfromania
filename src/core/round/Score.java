@@ -1,11 +1,15 @@
 package core.round;
 
-public class Score {
+import core.Model;
+
+public class Score extends Model {
 
 	private int value;
 	
 	public Score() {
-		// TODO Auto-generated constructor stub
+		super();
+		
+		reset();
 	}
 	
 	public int getValue() {
@@ -14,5 +18,13 @@ public class Score {
 	
 	public void setValue(int value) {
 		this.value = value;
+		
+		notifyObservers();
+	}
+	
+	public void reset() {
+		this.value = 0;
+		
+		notifyObservers();
 	}
 }

@@ -7,7 +7,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import core.params.KeyboardParams;
+import core.params.KeyboardParamsView;
+import core.params.ParamsType;
+import core.params.ParamsViewFactory;
 
 public class MenuBar extends JMenuBar {
 
@@ -22,13 +24,13 @@ public class MenuBar extends JMenuBar {
 		add(menuFile);
 		
 		JMenu menuSettings = new JMenu("Settings");
-		JMenuItem itemKeyBoard = new JMenuItem("KeyBoard...");
+		JMenuItem itemKeyBoard = new JMenuItem("KeyBoard controller");
 		itemKeyBoard.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				KeyboardParams keyboardParameters = new KeyboardParams();
-				keyboardParameters.display();
+				KeyboardParamsView keyboardParamsView = (KeyboardParamsView) ParamsViewFactory.create(ParamsType.KEYBOARD);
+				keyboardParamsView.display();
 			}
 		});
 		menuSettings.add(itemKeyBoard);
