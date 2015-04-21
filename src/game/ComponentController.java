@@ -6,19 +6,15 @@ import java.awt.event.ComponentListener;
 import patterns.Observable;
 import patterns.Observer;
 
-public class ComponentController implements ComponentListener {
+public class ComponentController extends Controller implements ComponentListener {
 	
-	private Observable observable;
-	private Observer observer;
-
 	public ComponentController(Observable observable, Observer observer) {
-		this.observable = observable;
-		this.observer = observer;
+		super(observable, observer);
 	}
 	
 	@Override
 	public void componentHidden(ComponentEvent arg0) {
-		this.observable.removeObserver(this.observer);
+		getObservable().removeObserver(getObserver());
 	}
 
 	@Override
@@ -35,7 +31,6 @@ public class ComponentController implements ComponentListener {
 
 	@Override
 	public void componentShown(ComponentEvent arg0) {
-		this.observable.addObserver(this.observer);
-		this.observer.update(this.observable);
+		getObserver().update(getObservable());
 	}
 }

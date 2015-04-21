@@ -34,6 +34,8 @@ public class GameView extends FrameView {
 	
 	@Override
 	public void update(Observable observable) {
+		Game game = (Game) observable;
+		
 		super.update(observable);
 	}
 }

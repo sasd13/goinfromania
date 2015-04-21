@@ -21,8 +21,6 @@ public class Game extends Model {
 		super();
 		
 		setTitle(NAME);
-		
-		initialize();
 	}
 	
 	public static synchronized Game getInstance() {
@@ -33,7 +31,7 @@ public class Game extends Model {
 		return instance;
 	}
 	
-	private void initialize() {
+	public void initialize() {
 		loadSettings();
 		loadRounds();
 	}

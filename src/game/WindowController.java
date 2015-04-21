@@ -6,14 +6,10 @@ import java.awt.event.WindowListener;
 import patterns.Observable;
 import patterns.Observer;
 
-public class WindowController implements WindowListener {
+public class WindowController extends Controller implements WindowListener {
 	
-	private Observable observable;
-	private Observer observer;
-
 	public WindowController(Observable observable, Observer observer) {
-		this.observable = observable;
-		this.observer = observer;
+		super(observable, observer);
 	}
 
 	@Override
@@ -24,7 +20,7 @@ public class WindowController implements WindowListener {
 
 	@Override
 	public void windowClosed(WindowEvent arg0) {
-		this.observable.removeObserver(this.observer);
+		getObservable().removeObserver(getObserver());
 	}
 
 	@Override
@@ -53,7 +49,6 @@ public class WindowController implements WindowListener {
 
 	@Override
 	public void windowOpened(WindowEvent arg0) {
-		this.observable.addObserver(this.observer);
-		this.observer.update(this.observable);
+		getObserver().update(getObservable());
 	}
 }

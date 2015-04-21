@@ -11,6 +11,7 @@ public class Main {
 		GameView gameView = GameView.getInstance();
 		WindowController controller = new WindowController(game, gameView);
 		gameView.addWindowListener(controller);
+		game.initialize();
 		gameView.display();
 	}
 }
