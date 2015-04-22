@@ -24,6 +24,7 @@ public abstract class Character extends Element implements IMovable {
 	public void setLife(Life life) {
 		this.life = life;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -36,6 +37,7 @@ public abstract class Character extends Element implements IMovable {
 	public void setMovable(boolean movable) {
 		this.movable = movable;
 		
+		setChanged();
 		notifyObservers();
 	}
 	

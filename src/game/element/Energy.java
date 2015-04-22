@@ -30,6 +30,7 @@ public class Energy extends Model {
 			this.value = value;
 		}
 		
+		setChanged();
 		notifyObservers();
 	}
 }

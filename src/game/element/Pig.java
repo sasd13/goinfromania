@@ -20,6 +20,7 @@ public class Pig extends Character {
 	public void setEnergy(Energy energy) {
 		this.energy = energy;
 		
+		setChanged();
 		notifyObservers();
 	}
 	

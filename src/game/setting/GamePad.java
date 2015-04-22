@@ -27,6 +27,7 @@ public class GamePad extends Setting {
 	public void setKeyStart(int keyStart) {
 		this.keyStart = keyStart;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -37,6 +38,7 @@ public class GamePad extends Setting {
 	public void setKeyPause(int keyPause) {
 		this.keyPause = keyPause;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -47,6 +49,7 @@ public class GamePad extends Setting {
 	public void setKeyMoveLeft(int keyMoveLeft) {
 		this.keyMoveLeft = keyMoveLeft;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -57,6 +60,7 @@ public class GamePad extends Setting {
 	public void setKeyMoveRight(int keyMoveRight) {
 		this.keyMoveRight = keyMoveRight;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -67,6 +71,7 @@ public class GamePad extends Setting {
 	public void setKeyMoveUp(int keyMoveUp) {
 		this.keyMoveUp = keyMoveUp;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -77,6 +82,7 @@ public class GamePad extends Setting {
 	public void setKeyMoveDown(int keyMoveDown) {
 		this.keyMoveDown = keyMoveDown;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -87,11 +93,14 @@ public class GamePad extends Setting {
 	public void setKeyPigAttak(int keyPigAttak) {
 		this.keyPigAttak = keyPigAttak;
 		
+		setChanged();
 		notifyObservers();
 	}
 
 	@Override
 	public void reset() {
+		setTitle("GamePad Setting");
+		
 		setKeyStart(KeyEvent.VK_ENTER);
 		setKeyPause(KeyEvent.VK_ESCAPE);
 		setKeyMoveLeft(KeyEvent.VK_LEFT);

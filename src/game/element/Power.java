@@ -21,6 +21,7 @@ public abstract class Power extends Model {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 		
+		setChanged();
 		notifyObservers();
 	}
 	

@@ -22,6 +22,7 @@ public class CakeEffect extends Effect {
 	public void setValueModifierPigEnergy(int valueModifierPigEnergy) {
 		this.valueModifierPigEnergy = valueModifierPigEnergy;
 		
+		setChanged();
 		notifyObservers();
 	}
 	

@@ -10,7 +10,9 @@ public abstract class PigPower extends Power {
 	
 	@Override
 	public void act(Character character) {
-		// TODO Auto-generated method stub
+		Nutritionist nutritionist = (Nutritionist) character;
 		
+		setChanged();
+		notifyObservers();
 	}
 }

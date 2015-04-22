@@ -33,6 +33,7 @@ public class Round extends Model {
 	public void setGrid(Grid grid) {
 		this.grid = grid;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -43,6 +44,7 @@ public class Round extends Model {
 	public void setLevel(Level level) {
 		this.level = level;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -53,24 +55,29 @@ public class Round extends Model {
 	public void setScore(Score score) {
 		this.score = score;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
 	public void start() {
+		setChanged();
 		notifyObservers();
 	}
 	
 	public void resume() {
+		setChanged();
 		notifyObservers();
 	}
 	
 	public void pause() {
+		setChanged();
 		notifyObservers();
 	}
 	
 	public RoundResult stop() {
 		RoundResult result = RoundResult.LOOSE;
 		
+		setChanged();
 		notifyObservers();
 		
 		return result;

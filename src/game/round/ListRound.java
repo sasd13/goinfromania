@@ -19,6 +19,7 @@ public class ListRound extends Model {
 	public boolean add(Round round) {
 		boolean added = this.list.add(round);
 		
+		setChanged();
 		notifyObservers();
 		
 		return added;
@@ -27,6 +28,7 @@ public class ListRound extends Model {
 	public boolean remove(Round round) {
 		boolean removed = this.list.remove(round);
 		
+		setChanged();
 		notifyObservers();
 		
 		return removed;

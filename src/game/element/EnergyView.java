@@ -1,20 +1,33 @@
 package game.element;
 
-import java.util.Observable;
-import java.util.Observer;
+import game.PanelView;
 
+import java.util.Observable;
+
+import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
-public class EnergyView extends JProgressBar implements Observer {
+public class EnergyView extends PanelView {
 
+	private JLabel labelTitle;
+	private JProgressBar progressBarEnergy;
+	
 	public EnergyView() {
-		super(Energy.MIN_VALUE, Energy.MAX_VALUE);
+		super();
+		
+		this.labelTitle = new JLabel();
+		
+		this.progressBarEnergy = new JProgressBar(Energy.MIN_VALUE, Energy.MAX_VALUE);
 	}
 	
 	@Override
 	public void update(Observable observable, Object arg) {
 		Energy energy = (Energy) observable;
 		
-		setValue(energy.getValue());
+		this.labelTitle.setText(energy.getTitle());
+		
+		this.progressBarEnergy.setValue(energy.getValue());
+		
+		super.update(observable, null);
 	}
 }

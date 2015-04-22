@@ -27,6 +27,7 @@ public class MapSetting extends Model {
 		
 		setting = this.map.put(settingType, setting);
 		
+		setChanged();
 		notifyObservers();
 		
 		return setting;
@@ -35,6 +36,7 @@ public class MapSetting extends Model {
 	public Setting remove(Setting setting) {
 		setting = this.map.remove(setting);
 		
+		setChanged();
 		notifyObservers();
 		
 		return setting;

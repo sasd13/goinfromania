@@ -19,6 +19,7 @@ public abstract class Edible extends Element {
 	public void setEffect(Effect effect) {
 		this.effect = effect;
 		
+		setChanged();
 		notifyObservers();
 	}
 }

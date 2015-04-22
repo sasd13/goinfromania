@@ -30,6 +30,7 @@ public class Grid extends Model {
 	public void setDrawing(GridDrawing drawing) {
 		this.drawing = drawing;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -40,6 +41,7 @@ public class Grid extends Model {
 	public void setPig(Pig pig) {
 		this.pig = pig;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -50,6 +52,7 @@ public class Grid extends Model {
 		
 		boolean added = this.listElement.add(element);
 		
+		setChanged();
 		notifyObservers();
 		
 		return added;

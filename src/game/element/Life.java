@@ -7,6 +7,9 @@ public class Life extends Model {
 	public static final int MIN_VALUE = 0;
 	public static final int MAX_VALUE = 100;
 	
+	public static final int LIFE_LOW = 20;
+	public static final int LIFE_MEDIUM = 50;
+	
 	private int value;
 	
 	public Life() {
@@ -30,6 +33,7 @@ public class Life extends Model {
 			this.value = value;
 		}
 		
+		setChanged();
 		notifyObservers();
 	}
 }

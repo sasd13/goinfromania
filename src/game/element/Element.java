@@ -29,6 +29,7 @@ public abstract class Element extends Model {
 	public void setId(String id) {
 		this.id = id;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -39,6 +40,7 @@ public abstract class Element extends Model {
 	public void setPosition(Position position) {
 		this.position = position;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -49,6 +51,7 @@ public abstract class Element extends Model {
 	public void setDimension(Dimension dimension) {
 		this.dimension = dimension;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -59,6 +62,7 @@ public abstract class Element extends Model {
 	public void setDrawing(ElementDrawing drawing) {
 		this.drawing = drawing;
 		
+		setChanged();
 		notifyObservers();
 	}
 }

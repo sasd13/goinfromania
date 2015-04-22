@@ -21,6 +21,7 @@ public class Score extends Model {
 	public void setValue(int value) {
 		this.value = value;
 		
+		setChanged();
 		notifyObservers();
 	}
 	

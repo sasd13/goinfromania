@@ -34,6 +34,7 @@ public class Dimension extends Model {
 	public void setWidth(int width) {
 		this.width = width;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -44,6 +45,7 @@ public class Dimension extends Model {
 	public void setHeight(int height) {
 		this.height = height;
 		
+		setChanged();
 		notifyObservers();
 	}
 }

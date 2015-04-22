@@ -35,6 +35,7 @@ public class Game extends Model {
 	public void setMapSetting(MapSetting mapSetting) {
 		this.mapSetting = mapSetting;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -45,6 +46,7 @@ public class Game extends Model {
 	public void setListRound(ListRound listRound) {
 		this.listRound = listRound;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -55,6 +57,7 @@ public class Game extends Model {
 	public void setRound(Round round) {
 		this.round = round;
 		
+		setChanged();
 		notifyObservers();
 	}
 }

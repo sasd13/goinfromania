@@ -23,6 +23,7 @@ public class Position extends Model {
 	public void setX(int x) {
 		this.x = x;
 		
+		setChanged();
 		notifyObservers();
 	}
 	
@@ -33,6 +34,7 @@ public class Position extends Model {
 	public void setY(int y) {
 		this.y = y;
 		
+		setChanged();
 		notifyObservers();
 	}
 }

@@ -17,6 +17,7 @@ public abstract class Model extends Observable {
 	public void setTitle(String title) {
 		this.title = title;
 		
+		setChanged();
 		notifyObservers();
 	}
 }

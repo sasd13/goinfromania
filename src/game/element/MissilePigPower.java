@@ -21,6 +21,9 @@ public class MissilePigPower extends PigPower {
 	public void setValueDecreaseNutritionistLife(
 			int valueDecreaseNutritionistLife) {
 		this.valueDecreaseNutritionistLife = valueDecreaseNutritionistLife;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	@Override
