@@ -1,7 +1,6 @@
 package game.setting;
 
 import game.Game;
-import game.WindowController;
 
 public class SettingViewFactory {
 
@@ -11,16 +10,17 @@ public class SettingViewFactory {
 		SettingView settingView = null;
 		
 		switch (settingType) {
-			case KEYBOARD :
-				settingView = new KeyboardSettingView();
+			case GAMEPAD :
+				settingView = new GamePadView();
 				break;
 			default :
 				break;
 		}
 		
-		Setting setting = Game.getInstance().getSetting(settingType);
-		WindowController controller = new WindowController(setting, settingView);
-		settingView.addWindowListener(controller);
+		MapSetting mapSetting = Game.getInstance().getMapSetting();
+		Setting setting = mapSetting.get(settingType);
+		setting.addObserver(settingView);
+		settingView.update(setting, null);
 		
 		return settingView;
 	}

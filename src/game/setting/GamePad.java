@@ -1,8 +1,6 @@
-package game;
+package game.setting;
 
 import java.awt.event.KeyEvent;
-
-import game.setting.Setting;
 
 public class GamePad extends Setting {
 
@@ -16,6 +14,8 @@ public class GamePad extends Setting {
 	
 	public GamePad() {
 		super();
+		
+		reset();
 	}
 	
 	public int getKeyStart() {

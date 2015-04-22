@@ -1,8 +1,10 @@
 package game.round;
 
+import game.Model;
+
 import java.util.ArrayList;
 
-public class ListRound {
+public class ListRound extends Model {
 
 	private ArrayList<Round> list;
 	
@@ -11,11 +13,19 @@ public class ListRound {
 	}
 	
 	public boolean add(Round round) {
-		return this.list.add(round);
+		boolean added = this.list.add(round);
+		
+		notifyObservers();
+		
+		return added;
 	}
 	
 	public boolean remove(Round round) {
-		return this.list.remove(round);
+		boolean removed = this.list.remove(round);
+		
+		notifyObservers();
+		
+		return removed;
 	}
 	
 	public Round get(String roundId) {
@@ -26,5 +36,13 @@ public class ListRound {
 		}
 		
 		return null;
+	}
+	
+	public Round get(int index) {
+		return this.list.get(index);
+	}
+	
+	public int size() {
+		return this.list.size();
 	}
 }

@@ -1,7 +1,7 @@
-package game;
+package patern;
 
-import patterns.Observable;
-import patterns.Observer;
+import java.util.Observable;
+import java.util.Observer;
 
 public abstract class Controller {
 

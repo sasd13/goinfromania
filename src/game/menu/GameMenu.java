@@ -1,10 +1,8 @@
 package game.menu;
 
-import game.Game;
-import game.GameView;
 import game.setting.SettingType;
 import game.setting.SettingViewFactory;
-import game.setting.KeyboardSettingView;
+import game.setting.GamePadView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,22 +11,25 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-public class MenuBar extends JMenuBar {
+import main.Launcher;
 
-	public MenuBar() {
+public class GameMenu extends JMenuBar {
+
+	public GameMenu() {
 		super();
 		
 		JMenu menuFile = new JMenu("File");
 		JMenuItem itemNew = new JMenuItem("New round");
 		menuFile.add(itemNew);
+		JMenuItem itemOpen = new JMenuItem("Open round");
+		menuFile.add(itemOpen);
 		JMenuItem itemExit = new JMenuItem("Exit");
 		menuFile.add(itemExit);
 		itemExit.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Game.getInstance().exit();
-				GameView.getInstance().dispose();
+				Launcher.exitGame();
 			}
 		});
 		add(menuFile);
@@ -39,8 +40,8 @@ public class MenuBar extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				KeyboardSettingView keyboardSettingView = (KeyboardSettingView) SettingViewFactory.create(SettingType.KEYBOARD);
-				keyboardSettingView.display();
+				GamePadView gamePadView = (GamePadView) SettingViewFactory.create(SettingType.GAMEPAD);
+				gamePadView.display();
 			}
 		});
 		menuSettings.add(itemKeyBoard);

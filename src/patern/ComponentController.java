@@ -1,10 +1,9 @@
-package game;
+package patern;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-
-import patterns.Observable;
-import patterns.Observer;
+import java.util.Observable;
+import java.util.Observer;
 
 public class ComponentController extends Controller implements ComponentListener {
 	
@@ -14,7 +13,7 @@ public class ComponentController extends Controller implements ComponentListener
 	
 	@Override
 	public void componentHidden(ComponentEvent arg0) {
-		getObservable().removeObserver(getObserver());
+		getObservable().deleteObserver(getObserver());
 	}
 
 	@Override
@@ -31,6 +30,6 @@ public class ComponentController extends Controller implements ComponentListener
 
 	@Override
 	public void componentShown(ComponentEvent arg0) {
-		getObserver().update(getObservable());
+		getObserver().update(getObservable(), null);
 	}
 }

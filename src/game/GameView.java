@@ -1,10 +1,15 @@
 package game;
 
-import game.menu.MenuBar;
+import game.menu.GameMenu;
+import game.round.ListRound;
+import game.round.ListRoundView;
+import game.round.Round;
+import game.round.RoundView;
+import game.setting.MapSetting;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-
-import patterns.Observable;
+import java.util.Observable;
 
 public class GameView extends FrameView {
 	
@@ -13,15 +18,22 @@ public class GameView extends FrameView {
 	public static final int FRAME_WIDTH = 800;
 	public static final int FRAME_HEIGHT = 600;
 	
-	private MenuBar menuBar;
+	private GameMenu gameMenu;
+	private ListRoundView listRoundView;
+	private RoundView roundView;
 	
 	private GameView() {
 		super();
 		
 		setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		
-		this.menuBar = new MenuBar();
-		setJMenuBar(this.menuBar);
+		this.gameMenu = new GameMenu();
+		setJMenuBar(this.gameMenu);
+		
+		this.listRoundView = new ListRoundView();
+		
+		this.roundView = new RoundView();
+		getContentPane().add(this.roundView, BorderLayout.CENTER);
 	}
 	
 	public static synchronized GameView getInstance() {
@@ -32,10 +44,23 @@ public class GameView extends FrameView {
 		return instance;
 	}
 	
+	public ListRoundView getListRoundView() {
+		return this.listRoundView;
+	}
+	
+	public RoundView getRoundView() {
+		return this.roundView;
+	}
+	
 	@Override
-	public void update(Observable observable) {
+	public void update(Observable observable, Object arg) {
 		Game game = (Game) observable;
 		
-		super.update(observable);
+		MapSetting mapSetting = game.getMapSetting();
+		ListRound listRound = game.getListRound();
+		Round round = game.getRound();
+		
+		
+		super.update(observable, arg);
 	}
 }

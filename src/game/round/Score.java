@@ -22,9 +22,11 @@ public class Score extends Model {
 		notifyObservers();
 	}
 	
+	public void increase(int increaseValue) {
+		setValue(this.value + increaseValue);
+	}
+	
 	public void reset() {
-		this.value = 0;
-		
-		notifyObservers();
+		setValue(0);
 	}
 }

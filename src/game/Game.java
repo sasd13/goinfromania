@@ -2,11 +2,7 @@ package game;
 
 import game.round.ListRound;
 import game.round.Round;
-import game.round.RoundManager;
-import game.setting.SettingManager;
-import game.setting.SettingType;
 import game.setting.MapSetting;
-import game.setting.Setting;
 
 public class Game extends Model {
 
@@ -16,6 +12,7 @@ public class Game extends Model {
 	
 	private MapSetting mapSetting;
 	private ListRound listRound;
+	private Round round;
 	
 	private Game() {
 		super();
@@ -31,65 +28,33 @@ public class Game extends Model {
 		return instance;
 	}
 	
-	public void initialize() {
-		loadSettings();
-		loadRounds();
+	public MapSetting getMapSetting() {
+		return this.mapSetting;
 	}
 	
-	public void loadSettings() {
-		this.mapSetting = SettingManager.loadAll();
+	public void setMapSetting(MapSetting mapSetting) {
+		this.mapSetting = mapSetting;
 		
 		notifyObservers();
 	}
 	
-	public Setting newSetting(Setting setting) {
-		setting = this.mapSetting.put(setting);
-		
-		notifyObservers();
-		
-		return setting;
+	public ListRound getListRound() {
+		return this.listRound;
 	}
 	
-	public Setting deleteSetting(Setting setting) {
-		setting = this.mapSetting.remove(setting);
-		
-		notifyObservers();
-		
-		return setting;
-	}
-	
-	public Setting getSetting(SettingType settingType) {
-		return this.mapSetting.get(settingType);
-	}
-	
-	public void loadRounds() {
-		this.listRound = RoundManager.loadAll();
+	public void setListRound(ListRound listRound) {
+		this.listRound = listRound;
 		
 		notifyObservers();
 	}
 	
-	public Round newRound() {
-		Round round = new Round();
-		this.listRound.add(round);
+	public Round getRound() {
+		return this.round;
+	}
+	
+	public void setRound(Round round) {
+		this.round = round;
 		
 		notifyObservers();
-		
-		return round;
-	}
-	
-	public boolean deleteRound(Round round) {
-		boolean deleted = this.listRound.remove(round);
-		
-		notifyObservers();
-		
-		return deleted;
-	}
-	
-	public Round getRound(String roundId) {
-		return this.listRound.get(roundId);
-	}
-	
-	public void exit() {
-		
 	}
 }

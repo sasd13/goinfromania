@@ -1,13 +1,14 @@
 package game.setting;
 
+
 public class SettingManager {
 
 	public static Setting load(SettingType settingType) {
 		//Database query
 		
 		switch (settingType) {
-			case KEYBOARD : 
-				return new KeyboardSetting();
+			case GAMEPAD : 
+				return new GamePad();
 			default :
 				return null;
 		}
@@ -25,7 +26,9 @@ public class SettingManager {
 		return mapSetting;
 	}
 	
-	public static void save(Setting params) {
+	public static boolean save(Setting setting) {
+		//Database query
 		
+		return false;
 	}
 }

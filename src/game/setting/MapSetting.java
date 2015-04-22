@@ -14,31 +14,35 @@ public class MapSetting extends Model {
 		this.map = new HashMap<>();
 	}
 	
-	public Setting put(Setting params) {
-		SettingType paramsType = null;
+	public Setting put(Setting setting) {
+		SettingType settingType = null;
 		
-		if(params instanceof KeyboardSetting) {
-			paramsType = SettingType.KEYBOARD;
+		if(setting.getClass().getSimpleName().compareTo("GamePad") == 0) {
+			settingType = SettingType.GAMEPAD;
 		} else {
 			//Throw Exception
 		}
 		
-		params = this.map.put(paramsType, params);
+		setting = this.map.put(settingType, setting);
 		
 		notifyObservers();
 		
-		return params;
+		return setting;
 	}
 	
-	public Setting remove(Setting params) {
-		params = this.map.remove(params);
+	public Setting remove(Setting setting) {
+		setting = this.map.remove(setting);
 		
 		notifyObservers();
 		
-		return params;
+		return setting;
 	}
 	
-	public Setting get(SettingType paramsType) {
-		return this.map.get(paramsType);
+	public Setting get(SettingType settingType) {
+		return this.map.get(settingType);
+	}
+	
+	public int size() {
+		return this.map.size();
 	}
 }

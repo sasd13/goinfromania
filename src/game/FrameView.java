@@ -1,23 +1,22 @@
 package game;
 
-import java.awt.Dimension;
+import game.setting.Dimension;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JFrame;
 
-import patterns.Observable;
-import patterns.Observer;
-
-public class FrameView extends JFrame implements Observer {
+public abstract class FrameView extends JFrame implements Observer, IViewable {
 
 	public FrameView() {
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setPreferredSize(new Dimension(Dimens.FRAME_MEDIUM, Dimens.FRAME_MEDIUM));
+		setPreferredSize(new java.awt.Dimension(Dimension.FRAME_MEDIUM, Dimension.FRAME_MEDIUM));
 	}
 	
 	@Override
-	public void update(Observable observable) {
+	public void update(Observable observable, Object arg) {
 		Model model = (Model) observable;
 		
 		setTitle(model.getTitle());
@@ -27,5 +26,10 @@ public class FrameView extends JFrame implements Observer {
 	public void display() {
 		pack();
 		setVisible(true);
+	}
+
+	@Override
+	public void mask() {
+		setVisible(false);
 	}
 }

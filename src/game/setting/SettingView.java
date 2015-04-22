@@ -1,44 +1,42 @@
 package game.setting;
 
-import game.Dimens;
 import game.FrameView;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import patterns.Observable;
-
 public class SettingView extends FrameView {
 
-	private JPanel panelButton;
 	private JButton buttonClose, buttonReset;
 	
 	public SettingView() {
 		super();
 		
-		this.panelButton = new JPanel();
-		this.panelButton.setLayout(new FlowLayout());
-		getContentPane().add(panelButton, BorderLayout.SOUTH);
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout());
+		getContentPane().add(panel, BorderLayout.SOUTH);
+		
+		java.awt.Dimension dimen = new java.awt.Dimension(Dimension.BUTTON_WIDTH, Dimension.BUTTON_HEIGHT);
 		
 		this.buttonClose = new JButton("Close");
-		this.buttonClose.setPreferredSize(new Dimension(Dimens.BUTTON_WIDTH, Dimens.BUTTON_HEIGHT));
-		this.panelButton.add(this.buttonClose);
+		this.buttonClose.setPreferredSize(dimen);
+		panel.add(this.buttonClose);
 		
 		this.buttonReset = new JButton("Reset");
-		this.buttonReset.setPreferredSize(new Dimension(Dimens.BUTTON_WIDTH, Dimens.BUTTON_HEIGHT));
-		this.panelButton.add(this.buttonReset);
+		this.buttonReset.setPreferredSize(dimen);
+		panel.add(this.buttonReset);
 	}
 	
 	@Override
-	public void update(Observable model) {
-		final Setting setting = (Setting) model;
+	public void update(Observable observable, Object arg) {
+		final Setting setting = (Setting) observable;
 		
 		if(this.buttonClose.getActionListeners().length == 0) {
 			this.buttonClose.addActionListener(new ActionListener() {
@@ -53,9 +51,11 @@ public class SettingView extends FrameView {
 						case JOptionPane.YES_OPTION :
 							SettingManager.save(setting);
 							dispose();
+							setting.deleteObserver(SettingView.this);
 							break;
 						case JOptionPane.NO_OPTION :
 							dispose();
+							setting.deleteObserver(SettingView.this);
 							break;					
 					}
 				}
@@ -72,6 +72,6 @@ public class SettingView extends FrameView {
 			});
 		}
 		
-		super.update(model);
+		super.update(observable, arg);
 	}
 }
