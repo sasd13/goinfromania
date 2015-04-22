@@ -15,6 +15,8 @@ public class GamePad extends Setting {
 	public GamePad() {
 		super();
 		
+		setTitle("GamePad Setting");
+		
 		reset();
 	}
 	

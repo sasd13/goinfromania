@@ -8,6 +8,10 @@ public class Position extends Model {
 	private int y;
 	
 	public Position() {
+		super();
+		
+		setTitle("Position");
+		
 		this.x = 0;
 		this.y = 0;
 	}

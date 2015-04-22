@@ -10,6 +10,8 @@ public class Energy extends Model {
 	private int value;
 	
 	public Energy() {
+		super();
+		
 		setTitle("Energy");
 		
 		this.value = MIN_VALUE;

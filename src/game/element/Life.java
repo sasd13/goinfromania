@@ -10,6 +10,8 @@ public class Life extends Model {
 	private int value;
 	
 	public Life() {
+		super();
+		
 		setTitle("Life");
 		
 		this.value = MAX_VALUE;

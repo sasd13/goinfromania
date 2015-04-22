@@ -11,6 +11,10 @@ public class Round extends Model {
 	private Score score;
 	
 	public Round() {
+		super();
+		
+		setTitle("Round");
+		
 		numberRound++;
 		this.id = "id-round-"+numberRound;
 		this.level = Level.EASY;

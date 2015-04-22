@@ -10,6 +10,8 @@ public class CakeEffect extends Effect {
 	public CakeEffect() {
 		super();
 		
+		setTitle("Cake Effect");
+		
 		this.valueModifierPigEnergy = DEFAULT_INCREASE_VALUE;
 	}
 	

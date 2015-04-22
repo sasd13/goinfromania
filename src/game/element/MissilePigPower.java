@@ -9,6 +9,8 @@ public class MissilePigPower extends PigPower {
 	public MissilePigPower() {
 		super();
 		
+		setTitle("Missile PigPower");
+		
 		this.valueDecreaseNutritionistLife = DEFAULT_DECREASE_VALUE;
 	}
 	

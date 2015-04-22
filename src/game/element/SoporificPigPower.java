@@ -4,6 +4,8 @@ public class SoporificPigPower extends PigPower {
 
 	public SoporificPigPower() {
 		super();
+		
+		setTitle("Soporific PigPower");
 	}
 	
 	@Override

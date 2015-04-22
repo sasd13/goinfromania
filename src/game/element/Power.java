@@ -1,10 +1,16 @@
 package game.element;
 
-public abstract class Power {
+import game.Model;
+
+public abstract class Power extends Model {
 
 	private boolean enabled;
 	
 	public Power() {
+		super();
+		
+		setTitle("Power");
+		
 		this.enabled = true;
 	}
 	
@@ -14,6 +20,8 @@ public abstract class Power {
 	
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+		
+		notifyObservers();
 	}
 	
 	public abstract void act(Character character);

@@ -9,6 +9,8 @@ public class MapSetting extends Model {
 	private HashMap<SettingType, Setting> map;
 	
 	public MapSetting() {
+		super();
+		
 		setTitle("Settings");
 		
 		this.map = new HashMap<>();

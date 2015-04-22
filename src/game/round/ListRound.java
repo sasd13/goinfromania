@@ -9,6 +9,10 @@ public class ListRound extends Model {
 	private ArrayList<Round> list;
 	
 	public ListRound() {
+		super();
+		
+		setTitle("List Round");
+		
 		this.list = new ArrayList<>();
 	}
 	

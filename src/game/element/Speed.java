@@ -14,6 +14,10 @@ public class Speed extends Model {
 	private int value;
 	
 	public Speed() {
+		super();
+		
+		setTitle("Speed");
+		
 		this.value = SPEED_MIN;
 	}
 	

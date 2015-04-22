@@ -9,6 +9,8 @@ public class Score extends Model {
 	public Score() {
 		super();
 		
+		setTitle("Score");
+		
 		reset();
 	}
 	

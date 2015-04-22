@@ -7,6 +7,8 @@ public class PoisonCakeEffect extends CakeEffect {
 	public PoisonCakeEffect() {
 		super();
 		
+		setTitle("PoisonCake Effect");
+		
 		setValueModifierPigEnergy(DEFAULT_DECREASE_VALUE);
 	}
 }

@@ -1,6 +1,5 @@
 package game.setting;
 
-
 public class SettingManager {
 
 	public static Setting load(SettingType settingType) {

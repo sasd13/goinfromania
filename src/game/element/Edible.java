@@ -7,6 +7,8 @@ public abstract class Edible extends Element {
 	public Edible() {
 		super();
 		
+		setTitle("Edible");
+		
 		this.effect = null;
 	}
 	

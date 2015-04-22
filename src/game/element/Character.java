@@ -35,11 +35,17 @@ public abstract class Character extends Element implements IMovable {
 	@Override
 	public void setMovable(boolean movable) {
 		this.movable = movable;
+		
+		notifyObservers();
 	}
 	
 	@Override
 	public Position move(Direction direction, Speed speed) {
 		Position position = getPosition();
+		
+		if(!isMovable()) {
+			return position;
+		}
 		
 		switch (direction) {
 			case LEFT :

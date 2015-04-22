@@ -19,6 +19,10 @@ public class Dimension extends Model {
 	private int height;
 	
 	public Dimension() {
+		super();
+		
+		setTitle("Dimension");
+		
 		this.width = 0;
 		this.height = 0;
 	}

@@ -60,7 +60,6 @@ public class GameView extends FrameView {
 		ListRound listRound = game.getListRound();
 		Round round = game.getRound();
 		
-		
 		super.update(observable, arg);
 	}
 }

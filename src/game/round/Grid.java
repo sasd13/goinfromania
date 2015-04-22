@@ -15,6 +15,10 @@ public class Grid extends Model {
 	private ArrayList<Element> listElement;
 	
 	public Grid() {
+		super();
+		
+		setTitle("Grid");
+		
 		this.pig = new Pig();
 		this.listElement = new ArrayList<>();
 	}
