@@ -1,8 +1,10 @@
-package game.setting;
+package game;
 
 import java.awt.event.KeyEvent;
 
-public class KeyboardSetting extends Setting {
+import game.setting.Setting;
+
+public class GamePad extends Setting {
 
 	private int keyStart;
 	private int keyPause;
@@ -12,10 +14,8 @@ public class KeyboardSetting extends Setting {
 	private int keyMoveDown;
 	private int keyPigAttak;
 	
-	public KeyboardSetting() {
+	public GamePad() {
 		super();
-		
-		reset();
 	}
 	
 	public int getKeyStart() {
@@ -87,11 +87,9 @@ public class KeyboardSetting extends Setting {
 		
 		notifyObservers();
 	}
-	
+
 	@Override
-	public void reset() {		
-		setTitle("Keyboard Settings");
-		
+	public void reset() {
 		setKeyStart(KeyEvent.VK_ENTER);
 		setKeyPause(KeyEvent.VK_ESCAPE);
 		setKeyMoveLeft(KeyEvent.VK_LEFT);
