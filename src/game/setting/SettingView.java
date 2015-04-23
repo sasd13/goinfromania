@@ -1,23 +1,31 @@
 package game.setting;
 
-import game.FrameView;
+import game.Game;
+import game.IViewable;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class SettingView extends FrameView {
+public class SettingView extends JFrame implements Observer, IViewable {
 
 	private JButton buttonClose, buttonReset;
 	
 	public SettingView() {
 		super();
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setPreferredSize(new java.awt.Dimension(Dimension.FRAME, Dimension.FRAME));
+		
+		setTitle(Game.NAME);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
@@ -50,12 +58,12 @@ public class SettingView extends FrameView {
 					switch (selected) {
 						case JOptionPane.YES_OPTION :
 							SettingManager.save(setting);
-							dispose();
 							setting.deleteObserver(SettingView.this);
+							mask();
 							break;
 						case JOptionPane.NO_OPTION :
-							dispose();
 							setting.deleteObserver(SettingView.this);
+							mask();
 							break;					
 					}
 				}
@@ -71,7 +79,16 @@ public class SettingView extends FrameView {
 				}
 			});
 		}
-		
-		super.update(observable, arg);
+	}
+
+	@Override
+	public void display() {
+		pack();
+		setVisible(true);
+	}
+
+	@Override
+	public void mask() {
+		dispose();
 	}
 }

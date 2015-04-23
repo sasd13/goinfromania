@@ -19,14 +19,19 @@ public class Launcher {
 		GameView gameView = GameView.getInstance();
 		
 		game.addObserver(gameView);
+		gameView.update(game, null);
 		
 		MapSetting mapSetting = SettingManager.loadAll();
 		game.setMapSetting(mapSetting);
 		
 		ListRound listRound = RoundManager.loadAll();
+		ListRoundView listRoundView = new ListRoundView();
+		
+		listRound.addObserver(listRoundView);
+		listRoundView.update(listRound, null);
+		
 		game.setListRound(listRound);
 		
-		gameView.update(game, null);
 		gameView.display();
 	}
 	
@@ -109,5 +114,6 @@ public class Launcher {
 		}
 		
 		liveRoundView.mask();
+		game.setLiveRound(null);
 	}
 }

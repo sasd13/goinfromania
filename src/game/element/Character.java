@@ -1,20 +1,17 @@
 package game.element;
 
-import game.setting.Direction;
-import game.setting.Position;
-
-public abstract class Character extends Element implements IMovable {
+public abstract class Character extends Element {
 
 	private Life life;
-	private boolean movable;
 	
 	protected Character() {
 		super();
 		
 		setTitle("Character");
+		setMovable(true);
+		getSpeed().setValue(Speed.SPEED_MEDIUM);
 		
 		this.life = new Life();
-		this.movable = true;
 	}
 	
 	public Life getLife() {
@@ -26,44 +23,5 @@ public abstract class Character extends Element implements IMovable {
 		
 		setChanged();
 		notifyObservers();
-	}
-	
-	@Override
-	public boolean isMovable() {
-		return this.movable;
-	}
-	
-	@Override
-	public void setMovable(boolean movable) {
-		this.movable = movable;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	@Override
-	public Position move(Direction direction, Speed speed) {
-		Position position = getPosition();
-		
-		if(!isMovable()) {
-			return position;
-		}
-		
-		switch (direction) {
-			case LEFT :
-				position.setX(position.getX() - speed.getValue());
-				break;
-			case RIGHT :
-				position.setX(position.getX() + speed.getValue());
-				break;
-			case UP :
-				position.setY(position.getY() + speed.getValue());
-				break;
-			case DOWN :
-				position.setY(position.getY() - speed.getValue());
-				break;
-		}
-		
-		return position;
 	}
 }

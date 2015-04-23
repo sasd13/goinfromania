@@ -2,14 +2,18 @@ package game.round;
 
 import java.awt.BorderLayout;
 import java.util.Observable;
+import java.util.Observer;
 
+import javax.swing.JPanel;
+
+import game.IViewable;
 import game.element.Energy;
 import game.element.EnergyView;
 import game.element.Life;
 import game.element.LifeView;
 import game.element.Pig;
 
-public class RoundView extends PanelView {
+public class RoundView extends JPanel implements Observer, IViewable {
 
 	private GridView gridView;
 	private LifeView lifeView;
@@ -39,11 +43,27 @@ public class RoundView extends PanelView {
 		Round round = (Round) observable;
 		
 		Grid grid = round.getGrid();
-		Pig pig = grid.getPig();
-		Life life = pig.getLife();
-		Energy energy = pig.getEnergy();
-		Score score = round.getScore();
+		this.gridView.update(grid, null);
 		
-		super.update(observable, arg);
+		Pig pig = grid.getPig();
+		
+		Life life = pig.getLife();
+		this.lifeView.update(life, null);
+		
+		Energy energy = pig.getEnergy();
+		this.energyView.update(energy, null);
+		
+		Score score = round.getScore();
+		this.scoreView.update(score, null);
+	}
+
+	@Override
+	public void display() {
+		setVisible(true);
+	}
+
+	@Override
+	public void mask() {
+		setVisible(false);
 	}
 }

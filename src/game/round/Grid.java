@@ -3,13 +3,12 @@ package game.round;
 import java.util.ArrayList;
 
 import game.Model;
-import game.draw.GridDrawing;
 import game.element.Element;
 import game.element.Pig;
+import game.setting.Position;
 
 public class Grid extends Model {
 	
-	private GridDrawing drawing;
 	private Pig pig;
 	private static int numberElement = 0;
 	private ArrayList<Element> listElement;
@@ -23,17 +22,6 @@ public class Grid extends Model {
 		this.listElement = new ArrayList<>();
 	}
 	
-	public GridDrawing getDrawing() {
-		return this.drawing;
-	}
-	
-	public void setDrawing(GridDrawing drawing) {
-		this.drawing = drawing;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
 	public Pig getPig() {
 		return this.pig;
 	}
@@ -43,6 +31,10 @@ public class Grid extends Model {
 		
 		setChanged();
 		notifyObservers();
+	}
+	
+	public ArrayList<Element> getListElement() {
+		return this.listElement;
 	}
 	
 	public boolean putElement(Element element) {
@@ -56,5 +48,15 @@ public class Grid extends Model {
 		notifyObservers();
 		
 		return added;
+	}
+	
+	public Element getElementAtPosition(Position position) {
+		for (Element element : this.listElement) {
+			if (element.getPosition().equals(position)) {
+				return element;
+			}
+		}
+		
+		return null;
 	}
 }

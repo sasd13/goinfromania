@@ -1,8 +1,13 @@
 package game.round;
 
-import java.util.Observable;
+import game.IViewable;
 
-public class ListRoundView extends PanelView {
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.JPanel;
+
+public class ListRoundView extends JPanel implements Observer, IViewable {
 
 	public ListRoundView() {
 		super();
@@ -11,7 +16,15 @@ public class ListRoundView extends PanelView {
 	@Override
 	public void update(Observable observable, Object arg) {
 		ListRound listRound = (ListRound) observable;
-		
-		super.update(observable, arg);
+	}
+	
+	@Override
+	public void display() {
+		setVisible(true);
+	}
+	
+	@Override
+	public void mask() {
+		setVisible(false);
 	}
 }

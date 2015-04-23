@@ -8,7 +8,6 @@ public class Wall extends Element {
 		super();
 		
 		setTitle("Wall");
-		
 		setDrawing(new WallDrawing());
 	}
 }

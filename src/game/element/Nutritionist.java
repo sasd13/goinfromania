@@ -8,7 +8,6 @@ public class Nutritionist extends Character {
 		super();
 		
 		setTitle("Nutritionist");
-		
 		setDrawing(new NutritionistDrawing());
 	}
 }

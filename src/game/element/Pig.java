@@ -1,5 +1,7 @@
 package game.element;
 
+import game.element.edible.Edible;
+
 
 public class Pig extends Character {
 

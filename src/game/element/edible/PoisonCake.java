@@ -1,4 +1,4 @@
-package game.element;
+package game.element.edible;
 
 public class PoisonCake extends Cake {
 	
@@ -6,7 +6,5 @@ public class PoisonCake extends Cake {
 		super();
 		
 		setTitle("PoisonCake");
-		
-		setEffect(new PoisonCakeEffect());
 	}
 }

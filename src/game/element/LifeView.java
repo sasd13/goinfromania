@@ -1,15 +1,15 @@
 package game.element;
 
-import game.round.PanelView;
-
 import java.awt.Color;
 import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.UIManager;
 
-public class LifeView extends PanelView {
+public class LifeView extends JPanel implements Observer {
 	
 	private JLabel labelTitle;
 	private JProgressBar progressBarLife;
@@ -36,7 +36,5 @@ public class LifeView extends PanelView {
 		} else {
 			UIManager.put("ProgressBar.foreground", Color.RED);
 		}
-		
-		super.update(observable, null);
 	}
 }

@@ -4,13 +4,11 @@ import game.Model;
 
 public class Dimension extends Model {
 	
-	public static final int FRAME_SMALL = 320;
-	public static final int FRAME_MEDIUM = 480;
-	public static final int FRAME_LARGE = 640;
+	public static final int FRAME = 480;
 	
-	public static final int PANEL_SMALL = 320;
-	public static final int PANEL_MEDIUM = 480;
-	public static final int PANEL_LARGE = 640;
+	public static final int PANEL_SMALL = 240;
+	public static final int PANEL_MEDIUM = 320;
+	public static final int PANEL_LARGE = 480;
 	
 	public static final int BUTTON_WIDTH = 74;
 	public static final int BUTTON_HEIGHT = 26;

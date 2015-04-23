@@ -5,13 +5,15 @@ import game.round.ListRound;
 import game.round.ListRoundView;
 import game.round.Round;
 import game.round.RoundView;
-import game.setting.MapSetting;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.Observable;
+import java.util.Observer;
 
-public class GameView extends FrameView {
+import javax.swing.JFrame;
+
+public class GameView extends JFrame implements Observer, IViewable {
 	
 	private static GameView instance = null;
 	
@@ -23,17 +25,18 @@ public class GameView extends FrameView {
 	private RoundView liveRoundView;
 	
 	private GameView() {
-		super();
+		super(Game.NAME);
 		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		
 		this.gameMenu = new GameMenu();
 		setJMenuBar(this.gameMenu);
 		
 		this.listRoundView = new ListRoundView();
+		getContentPane().add(this.listRoundView, BorderLayout.CENTER);
 		
 		this.liveRoundView = new RoundView();
-		getContentPane().add(this.liveRoundView, BorderLayout.CENTER);
 	}
 	
 	public static synchronized GameView getInstance() {
@@ -48,7 +51,7 @@ public class GameView extends FrameView {
 		return this.listRoundView;
 	}
 	
-	public RoundView getRoundView() {
+	public RoundView getLiveRoundView() {
 		return this.liveRoundView;
 	}
 	
@@ -56,14 +59,29 @@ public class GameView extends FrameView {
 	public void update(Observable observable, Object arg) {
 		Game game = (Game) observable;
 		
-		MapSetting mapSetting = game.getMapSetting();
-		
 		ListRound listRound = game.getListRound();
+		if(listRound.countObservers() == 0) {
+			listRound.addObserver(this.listRoundView);
+		}
 		this.listRoundView.update(listRound, null);
 		
 		Round liveRound = game.getLiveRound();
-		this.liveRoundView.update(liveRound, null);
-		
-		super.update(observable, arg);
+		if(liveRound != null) {
+			if(liveRound.countObservers() == 0) {
+				liveRound.addObserver(this.liveRoundView);
+			}
+			this.liveRoundView.update(liveRound, null);
+		}
+	}
+
+	@Override
+	public void display() {
+		pack();
+		setVisible(true);
+	}
+
+	@Override
+	public void mask() {
+		dispose();
 	}
 }

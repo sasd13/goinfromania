@@ -8,7 +8,6 @@ public class Trap extends Element {
 		super();
 		
 		setTitle("Trap");
-		
 		setDrawing(new TrapDrawing());
 	}
 }

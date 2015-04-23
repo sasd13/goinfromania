@@ -1,13 +1,13 @@
 package game.element;
 
-import game.round.PanelView;
-
 import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-public class EnergyView extends PanelView {
+public class EnergyView extends JPanel implements Observer {
 
 	private JLabel labelTitle;
 	private JProgressBar progressBarEnergy;
@@ -27,7 +27,5 @@ public class EnergyView extends PanelView {
 		this.labelTitle.setText(energy.getTitle());
 		
 		this.progressBarEnergy.setValue(energy.getValue());
-		
-		super.update(observable, null);
 	}
 }

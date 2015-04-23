@@ -26,7 +26,13 @@ public class Speed extends Model {
 	}
 	
 	public void setValue(int value) {
-		this.value = value;
+		if(value <= SPEED_MIN) {
+			this.value = SPEED_MIN;
+		} else if (value >= SPEED_MAX) {
+			this.value = SPEED_MAX;
+		} else {
+			this.value = value;
+		}
 		
 		setChanged();
 		notifyObservers();

@@ -2,10 +2,12 @@ package game.round;
 
 import java.awt.GridLayout;
 import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class ScoreView extends PanelView {
+public class ScoreView extends JPanel implements Observer {
 
 	private JLabel labelTitle, labelScore;
 	
@@ -27,7 +29,5 @@ public class ScoreView extends PanelView {
 		
 		this.labelScore.setText(score.getTitle());
 		this.labelScore.setText(String.valueOf(score.getValue()));
-		
-		super.update(observable, arg);
 	}
 }

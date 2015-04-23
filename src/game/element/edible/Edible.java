@@ -1,13 +1,16 @@
-package game.element;
+package game.element.edible;
+
+import game.element.Element;
 
 public abstract class Edible extends Element {
 
 	private Effect effect;
 	
-	public Edible() {
+	protected Edible() {
 		super();
 		
 		setTitle("Edible");
+		setMovable(false);
 		
 		this.effect = null;
 	}
