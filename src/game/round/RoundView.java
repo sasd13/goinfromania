@@ -3,7 +3,6 @@ package game.round;
 import java.awt.BorderLayout;
 import java.util.Observable;
 
-import game.PanelView;
 import game.element.Energy;
 import game.element.EnergyView;
 import game.element.Life;

@@ -78,36 +78,36 @@ public class Launcher {
 		Game game = Game.getInstance();
 		GameView gameView = GameView.getInstance();
 		
-		RoundView roundView = gameView.getRoundView();
+		RoundView liveRoundView = gameView.getRoundView();
 		
-		round.addObserver(roundView);
+		round.addObserver(liveRoundView);
 		
-		game.setRound(round);
+		game.setLiveRound(round);
 		
-		roundView.update(round, null);
-		roundView.display();
+		liveRoundView.update(round, null);
+		liveRoundView.display();
 	}
 	
 	public static void exitLiveRound() {
 		Game game = Game.getInstance();
 		GameView gameView = GameView.getInstance();
 		
-		Round round = game.getRound();
-		RoundView roundView = gameView.getRoundView();
+		Round liveRound = game.getLiveRound();
+		RoundView liveRoundView = gameView.getRoundView();
 		
-		round.deleteObserver(roundView);
+		liveRound.deleteObserver(liveRoundView);
 		
-		RoundResult result = round.stop();
+		RoundResult result = liveRound.stop();
 		switch (result) {
 			case WIN :
 				break;
 			case LOOSE :
 				break;
 			case PROGRESS :
-				RoundManager.save(round);
+				RoundManager.save(liveRound);
 				break;
 		}
 		
-		roundView.mask();
+		liveRoundView.mask();
 	}
 }

@@ -5,8 +5,6 @@ import java.util.Observable;
 
 import javax.swing.JLabel;
 
-import game.PanelView;
-
 public class ScoreView extends PanelView {
 
 	private JLabel labelTitle, labelScore;

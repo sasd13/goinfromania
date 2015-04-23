@@ -1,14 +1,9 @@
 package game.draw;
 
-public class NutritionistDrawing extends ElementDrawing {
+
+public class NutritionistDrawing extends Drawing {
 
 	public NutritionistDrawing() {
 		super();
-	}
-	
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-		super.draw();
 	}
 }

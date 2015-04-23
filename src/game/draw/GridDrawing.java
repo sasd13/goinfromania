@@ -1,14 +1,8 @@
 package game.draw;
 
-public class GridDrawing implements IDrawable {
+public class GridDrawing extends Drawing {
 
 	public GridDrawing() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-
+		super();
 	}
 }

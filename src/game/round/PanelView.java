@@ -1,5 +1,6 @@
-package game;
+package game.round;
 
+import game.IViewable;
 import game.setting.Dimension;
 
 import java.util.Observable;
@@ -9,7 +10,7 @@ import javax.swing.JPanel;
 
 public abstract class PanelView extends JPanel implements Observer, IViewable {
 
-	public PanelView() {
+	protected PanelView() {
 		super();
 		
 		setPreferredSize(new java.awt.Dimension(Dimension.PANEL_LARGE, Dimension.PANEL_MEDIUM));

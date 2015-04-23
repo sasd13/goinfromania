@@ -1,6 +1,7 @@
 package game.draw;
 
+
 public interface IDrawable {
 
-	public void draw();
+	public void draw(Drawing drawing);
 }

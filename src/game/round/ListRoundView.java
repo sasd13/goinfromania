@@ -2,8 +2,6 @@ package game.round;
 
 import java.util.Observable;
 
-import game.PanelView;
-
 public class ListRoundView extends PanelView {
 
 	public ListRoundView() {

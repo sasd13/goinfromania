@@ -1,14 +1,9 @@
 package game.draw;
 
-public class WallDrawing extends ElementDrawing {
+
+public class WallDrawing extends Drawing {
 
 	public WallDrawing() {
 		super();
-	}
-	
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-		super.draw();
 	}
 }

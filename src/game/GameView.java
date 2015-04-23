@@ -20,7 +20,7 @@ public class GameView extends FrameView {
 	
 	private GameMenu gameMenu;
 	private ListRoundView listRoundView;
-	private RoundView roundView;
+	private RoundView liveRoundView;
 	
 	private GameView() {
 		super();
@@ -32,8 +32,8 @@ public class GameView extends FrameView {
 		
 		this.listRoundView = new ListRoundView();
 		
-		this.roundView = new RoundView();
-		getContentPane().add(this.roundView, BorderLayout.CENTER);
+		this.liveRoundView = new RoundView();
+		getContentPane().add(this.liveRoundView, BorderLayout.CENTER);
 	}
 	
 	public static synchronized GameView getInstance() {
@@ -49,7 +49,7 @@ public class GameView extends FrameView {
 	}
 	
 	public RoundView getRoundView() {
-		return this.roundView;
+		return this.liveRoundView;
 	}
 	
 	@Override
@@ -57,8 +57,12 @@ public class GameView extends FrameView {
 		Game game = (Game) observable;
 		
 		MapSetting mapSetting = game.getMapSetting();
+		
 		ListRound listRound = game.getListRound();
-		Round round = game.getRound();
+		this.listRoundView.update(listRound, null);
+		
+		Round liveRound = game.getLiveRound();
+		this.liveRoundView.update(liveRound, null);
 		
 		super.update(observable, arg);
 	}

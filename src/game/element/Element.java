@@ -1,7 +1,7 @@
 package game.element;
 
 import game.Model;
-import game.draw.ElementDrawing;
+import game.draw.Drawing;
 import game.setting.Dimension;
 import game.setting.Position;
 
@@ -10,9 +10,9 @@ public abstract class Element extends Model {
 	private String id;
 	private Position position;
 	private Dimension dimension;
-	private ElementDrawing drawing;
+	private Drawing drawing;
 	
-	public Element() {
+	protected Element() {
 		super();
 		
 		setTitle("Element");
@@ -55,11 +55,11 @@ public abstract class Element extends Model {
 		notifyObservers();
 	}
 	
-	public ElementDrawing getDrawing() {
+	public Drawing getDrawing() {
 		return this.drawing;
 	}
 	
-	public void setDrawing(ElementDrawing drawing) {
+	public void setDrawing(Drawing drawing) {
 		this.drawing = drawing;
 		
 		setChanged();

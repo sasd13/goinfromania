@@ -12,7 +12,7 @@ public class Game extends Model {
 	
 	private MapSetting mapSetting;
 	private ListRound listRound;
-	private Round round;
+	private Round liveRound;
 	
 	private Game() {
 		super();
@@ -50,12 +50,12 @@ public class Game extends Model {
 		notifyObservers();
 	}
 	
-	public Round getRound() {
-		return this.round;
+	public Round getLiveRound() {
+		return this.liveRound;
 	}
 	
-	public void setRound(Round round) {
-		this.round = round;
+	public void setLiveRound(Round liveRound) {
+		this.liveRound = liveRound;
 		
 		setChanged();
 		notifyObservers();

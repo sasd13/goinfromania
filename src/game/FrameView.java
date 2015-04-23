@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 public abstract class FrameView extends JFrame implements Observer, IViewable {
 
-	public FrameView() {
+	protected FrameView() {
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

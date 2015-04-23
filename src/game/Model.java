@@ -7,6 +7,8 @@ public abstract class Model extends Observable {
 	private String title;
 	
 	protected Model() {
+		super();
+		
 		this.title = null;
 	}
 	

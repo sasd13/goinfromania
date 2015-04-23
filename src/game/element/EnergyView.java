@@ -1,6 +1,6 @@
 package game.element;
 
-import game.PanelView;
+import game.round.PanelView;
 
 import java.util.Observable;
 
