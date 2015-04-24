@@ -94,7 +94,7 @@ public abstract class Element extends Model {
 	}
 	
 	public Position getNextPosition(Direction direction) {
-		if(!isMovable()) {
+		if(!this.movable) {
 			return this.position;
 		}
 		

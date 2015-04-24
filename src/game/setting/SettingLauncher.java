@@ -2,11 +2,9 @@ package game.setting;
 
 import game.Game;
 
-public class SettingViewFactory {
+public class SettingLauncher {
 
-	private SettingViewFactory() {}
-	
-	public static SettingView create(SettingType settingType) {
+	public static void launch(SettingType settingType) {
 		SettingView settingView = null;
 		
 		switch (settingType) {
@@ -22,6 +20,7 @@ public class SettingViewFactory {
 		setting.addObserver(settingView);
 		settingView.update(setting, null);
 		
-		return settingView;
+		settingView.pack();
+		settingView.setVisible(true);
 	}
 }

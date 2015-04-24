@@ -1,17 +1,13 @@
 package game.setting;
 
-import game.Model;
-
 import java.util.HashMap;
 
-public class MapSetting extends Model {
+public class MapSetting {
 	
 	private HashMap<SettingType, Setting> map;
 	
 	public MapSetting() {
 		super();
-		
-		setTitle("Settings");
 		
 		this.map = new HashMap<>();
 	}
@@ -25,21 +21,11 @@ public class MapSetting extends Model {
 			//Throw Exception
 		}
 		
-		setting = this.map.put(settingType, setting);
-		
-		setChanged();
-		notifyObservers();
-		
-		return setting;
+		return this.map.put(settingType, setting);
 	}
 	
 	public Setting remove(Setting setting) {
-		setting = this.map.remove(setting);
-		
-		setChanged();
-		notifyObservers();
-		
-		return setting;
+		return this.map.remove(setting);
 	}
 	
 	public Setting get(SettingType settingType) {

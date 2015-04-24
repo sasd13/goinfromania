@@ -1,19 +1,21 @@
 package game.round;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import game.IViewable;
+import game.GameView;
 import game.element.Energy;
 import game.element.EnergyView;
 import game.element.Life;
 import game.element.LifeView;
 import game.element.Pig;
 
-public class RoundView extends JPanel implements Observer, IViewable {
+public class RoundView extends JPanel implements Observer {
 
 	private GridView gridView;
 	private LifeView lifeView;
@@ -23,10 +25,11 @@ public class RoundView extends JPanel implements Observer, IViewable {
 	public RoundView() {
 		super();
 		
-		setLayout(new BorderLayout());
+		setPreferredSize(new Dimension(GameView.GAMECONTENTPANE_WIDTH, GameView.GAMECONTENTPANE_HEIGHT));
+		setBackground(Color.RED);
 		
 		this.gridView = new GridView();
-		add(this.gridView, BorderLayout.CENTER);
+		//add(this.gridView, BorderLayout.CENTER);
 		
 		this.lifeView = new LifeView();
 		add(this.lifeView, BorderLayout.WEST);
@@ -55,15 +58,5 @@ public class RoundView extends JPanel implements Observer, IViewable {
 		
 		Score score = round.getScore();
 		this.scoreView.update(score, null);
-	}
-
-	@Override
-	public void display() {
-		setVisible(true);
-	}
-
-	@Override
-	public void mask() {
-		setVisible(false);
 	}
 }

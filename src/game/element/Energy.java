@@ -4,8 +4,12 @@ import game.Model;
 
 public class Energy extends Model {
 	
-	public static final int MIN_VALUE = 0;
-	public static final int MAX_VALUE = 100;
+	public static final int ENERGY_MIN = 0;
+	public static final int ENERGY_MAX = 120;
+	
+	public static final int ENERGY_LOW = 30;
+	public static final int ENERGY_MEDIUM = 60;
+	public static final int ENERGY_HIGH = 90;
 	
 	private int value;
 	
@@ -14,7 +18,7 @@ public class Energy extends Model {
 		
 		setTitle("Energy");
 		
-		this.value = MIN_VALUE;
+		this.value = ENERGY_MIN;
 	}
 	
 	public int getValue() {
@@ -22,10 +26,10 @@ public class Energy extends Model {
 	}
 	
 	public void setValue(int value) {
-		if (value >= MAX_VALUE) {
-			this.value = MAX_VALUE;
-		} else if (value <= MIN_VALUE ) {
-			this.value = MIN_VALUE;
+		if (value <= ENERGY_MIN) {
+			this.value = ENERGY_MIN;
+		} else if (value >= ENERGY_MAX) {
+			this.value = ENERGY_MAX;
 		} else {
 			this.value = value;
 		}

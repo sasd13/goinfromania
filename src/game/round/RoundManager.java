@@ -3,14 +3,17 @@ package game.round;
 public class RoundManager {
 
 	public static Round load(String roundId) {
-		//Database query
-		return null;
+		Round round = null;
+		
+		round = new Round(); //Database query
+		
+		return round;
 	}
 	
 	public static ListRound loadAll() {
 		ListRound listRound = new ListRound();
 		
-		String[] tabRoundId = new String[0]; //Database query
+		String[] tabRoundId = new String[1]; //Database query
 		
 		Round round;
 		for(String roundId : tabRoundId) {
@@ -21,7 +24,13 @@ public class RoundManager {
 		return listRound;
 	}
 	
-	public static boolean save(Round round) {
-		return false;
+	public static void save(Round round) {
+		//Database query
+	}
+	
+	public static void saveAll(ListRound listRound) {
+		for (int i=0; i<listRound.size(); i++) {
+			save(listRound.get(i));
+		}
 	}
 }

@@ -8,8 +8,8 @@ public class Speed extends Model {
 	public static final int SPEED_MAX = 50;
 	
 	public static final int SPEED_LOW = 10;
-	public static final int SPEED_MEDIUM = 20;
-	public static final int SPEED_HIGH = 30;
+	public static final int SPEED_MEDIUM = 25;
+	public static final int SPEED_HIGH = 40;
 	
 	private int value;
 	

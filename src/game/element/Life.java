@@ -4,11 +4,8 @@ import game.Model;
 
 public class Life extends Model {
 	
-	public static final int MIN_VALUE = 0;
-	public static final int MAX_VALUE = 100;
-	
-	public static final int LIFE_LOW = 20;
-	public static final int LIFE_MEDIUM = 50;
+	public static final int LIFE_MIN = 0;
+	public static final int LIFE_MAX = 5;
 	
 	private int value;
 	
@@ -17,7 +14,7 @@ public class Life extends Model {
 		
 		setTitle("Life");
 		
-		this.value = MAX_VALUE;
+		this.value = LIFE_MAX;
 	}
 	
 	public int getValue() {
@@ -25,10 +22,10 @@ public class Life extends Model {
 	}
 	
 	public void setValue(int value) {
-		if (value >= MAX_VALUE) {
-			this.value = MAX_VALUE;
-		} else if (value <= MIN_VALUE ) {
-			this.value = MIN_VALUE;
+		if (value <= LIFE_MIN) {
+			this.value = LIFE_MIN;
+		} else if (value >= LIFE_MAX) {
+			this.value = LIFE_MAX;
 		} else {
 			this.value = value;
 		}

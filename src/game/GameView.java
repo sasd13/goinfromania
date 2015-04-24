@@ -7,18 +7,17 @@ import game.round.Round;
 import game.round.RoundView;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
 
-public class GameView extends JFrame implements Observer, IViewable {
+public class GameView extends JFrame implements Observer {
 	
 	private static GameView instance = null;
 	
-	public static final int FRAME_WIDTH = 800;
-	public static final int FRAME_HEIGHT = 600;
+	public static final int GAMECONTENTPANE_WIDTH = 800;
+	public static final int GAMECONTENTPANE_HEIGHT = 600;
 	
 	private GameMenu gameMenu;
 	private ListRoundView listRoundView;
@@ -28,7 +27,6 @@ public class GameView extends JFrame implements Observer, IViewable {
 		super(Game.NAME);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		
 		this.gameMenu = new GameMenu();
 		setJMenuBar(this.gameMenu);
@@ -47,23 +45,17 @@ public class GameView extends JFrame implements Observer, IViewable {
 		return instance;
 	}
 	
-	public ListRoundView getListRoundView() {
-		return this.listRoundView;
-	}
-	
-	public RoundView getLiveRoundView() {
-		return this.liveRoundView;
-	}
-	
 	@Override
 	public void update(Observable observable, Object arg) {
 		Game game = (Game) observable;
 		
 		ListRound listRound = game.getListRound();
-		if(listRound.countObservers() == 0) {
-			listRound.addObserver(this.listRoundView);
+		if(listRound != null) {
+			if(listRound.countObservers() == 0) {
+				listRound.addObserver(this.listRoundView);
+			}
+			this.listRoundView.update(listRound, null);
 		}
-		this.listRoundView.update(listRound, null);
 		
 		Round liveRound = game.getLiveRound();
 		if(liveRound != null) {
@@ -73,15 +65,18 @@ public class GameView extends JFrame implements Observer, IViewable {
 			this.liveRoundView.update(liveRound, null);
 		}
 	}
-
-	@Override
-	public void display() {
-		pack();
-		setVisible(true);
+	
+	public void displayListRoundView() {
+		repaint();
+		getContentPane().remove(this.liveRoundView);
+		getContentPane().add(this.listRoundView, BorderLayout.CENTER);
+		validate();
 	}
-
-	@Override
-	public void mask() {
-		dispose();
+	
+	public void displayLiveRoundView() {
+		repaint();
+		getContentPane().remove(this.listRoundView);
+		getContentPane().add(this.liveRoundView, BorderLayout.CENTER);
+		validate();
 	}
 }

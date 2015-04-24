@@ -1,7 +1,6 @@
 package game.setting;
 
 import game.Game;
-import game.IViewable;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -15,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class SettingView extends JFrame implements Observer, IViewable {
+public class SettingView extends JFrame implements Observer {
 
 	private JButton buttonClose, buttonReset;
 	
@@ -59,11 +58,11 @@ public class SettingView extends JFrame implements Observer, IViewable {
 						case JOptionPane.YES_OPTION :
 							SettingManager.save(setting);
 							setting.deleteObserver(SettingView.this);
-							mask();
+							dispose();
 							break;
 						case JOptionPane.NO_OPTION :
 							setting.deleteObserver(SettingView.this);
-							mask();
+							dispose();
 							break;					
 					}
 				}
@@ -79,16 +78,5 @@ public class SettingView extends JFrame implements Observer, IViewable {
 				}
 			});
 		}
-	}
-
-	@Override
-	public void display() {
-		pack();
-		setVisible(true);
-	}
-
-	@Override
-	public void mask() {
-		dispose();
 	}
 }

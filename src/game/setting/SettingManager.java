@@ -3,14 +3,17 @@ package game.setting;
 public class SettingManager {
 
 	public static Setting load(SettingType settingType) {
-		//Database query
+		Setting setting = null;
 		
 		switch (settingType) {
 			case GAMEPAD : 
-				return new GamePad();
+				setting = new GamePad();
 			default :
-				return null;
+				//Throw exception
+				break;
 		}
+		
+		return setting;
 	}
 	
 	public static MapSetting loadAll() {
@@ -25,9 +28,13 @@ public class SettingManager {
 		return mapSetting;
 	}
 	
-	public static boolean save(Setting setting) {
+	public static void save(Setting setting) {
 		//Database query
-		
-		return false;
+	}
+	
+	public static void saveAll(MapSetting mapSetting) {
+		for (SettingType settingType : SettingType.values()) {
+			save(mapSetting.get(settingType));
+		}
 	}
 }
