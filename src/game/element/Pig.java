@@ -10,23 +10,34 @@ import game.element.power.SuperMissile;
 
 public class Pig extends Character {
 
+	private boolean greedy;
 	private Energy energy;
+	private boolean powerful;
 	private MapPower mapPower;
-	private boolean canAttak;
-	private boolean canEat;
 	
 	public Pig() {
 		super();
 		
 		setTitle("Pig");
 		
+		this.greedy = true;
 		this.energy = new Energy();
-		this.canAttak = true;
+		this.powerful = true;
 		this.mapPower = new MapPower();
 		this.mapPower.put(new Soporific());
 		this.mapPower.put(new Missile());
 		this.mapPower.put(new SuperMissile());
-		this.canEat = true;
+	}
+	
+	public boolean isGreedy() {
+		return this.greedy;
+	}
+	
+	public void setGreedy(boolean greedy) {
+		this.greedy = greedy;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Energy getEnergy() {
@@ -46,27 +57,30 @@ public class Pig extends Character {
 	
 	public void setMapPower(MapPower mapPower) {
 		this.mapPower = mapPower;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
-	public boolean getCanAttak() {
-		return this.canAttak;
+	public boolean isPowerful() {
+		return this.powerful;
 	}
 	
-	public void setCanAttak(boolean canAttak) {
-		this.canAttak = canAttak;
+	public void setPowerful(boolean powerful) {
+		this.powerful = powerful;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
 	public void attak(Nutritionist nutritionist) {
-		if (this.canAttak) {
+		if (this.powerful) {
 			Power power = selectPowerWithEnergy();
 			power.act(nutritionist);
 		}
 	}
 	
-	private Power selectPowerWithEnergy() {
+	public Power selectPowerWithEnergy() {
 		Power power = null;
 		
 		Energy energy = getEnergy();
@@ -81,16 +95,8 @@ public class Pig extends Character {
 		return power;
 	}
 	
-	public boolean getCanEat() {
-		return this.canEat;
-	}
-	
-	public void setCanEat(boolean canEat) {
-		this.canEat = canEat;
-	}
-	
 	public void eat(Food food) {
-		if (this.canEat) {
+		if (this.greedy) {
 			food.act(this);
 		}
 	}

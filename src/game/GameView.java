@@ -16,8 +16,8 @@ public class GameView extends JFrame implements Observer {
 	
 	private static GameView instance = null;
 	
-	public static final int GAMECONTENTPANE_WIDTH = 800;
-	public static final int GAMECONTENTPANE_HEIGHT = 600;
+	public static final int FRAME_WIDTH = 800;
+	public static final int FRAME_HEIGHT = 600;
 	
 	private GameMenu gameMenu;
 	private ListRoundView listRoundView;
@@ -46,37 +46,35 @@ public class GameView extends JFrame implements Observer {
 	}
 	
 	@Override
-	public void update(Observable observable, Object arg) {
+	public void update(Observable observable, Object arg) {		
 		Game game = (Game) observable;
 		
 		ListRound listRound = game.getListRound();
-		if(listRound != null) {
-			if(listRound.countObservers() == 0) {
-				listRound.addObserver(this.listRoundView);
-			}
+		if(listRound != null && listRound.countObservers() == 0) {
+			listRound.addObserver(this.listRoundView);
 			this.listRoundView.update(listRound, null);
 		}
 		
 		Round liveRound = game.getLiveRound();
-		if(liveRound != null) {
-			if(liveRound.countObservers() == 0) {
-				liveRound.addObserver(this.liveRoundView);
-			}
+		if(liveRound != null && liveRound.countObservers() == 0) {
+			liveRound.addObserver(this.liveRoundView);
 			this.liveRoundView.update(liveRound, null);
 		}
 	}
 	
-	public void displayListRoundView() {
-		repaint();
+	public void displayListRoundView() {		
 		getContentPane().remove(this.liveRoundView);
 		getContentPane().add(this.listRoundView, BorderLayout.CENTER);
+		
 		validate();
+		repaint();
 	}
 	
 	public void displayLiveRoundView() {
-		repaint();
 		getContentPane().remove(this.listRoundView);
 		getContentPane().add(this.liveRoundView, BorderLayout.CENTER);
+		
 		validate();
+		repaint();
 	}
 }

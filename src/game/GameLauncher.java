@@ -7,7 +7,7 @@ import game.setting.SettingManager;
 
 public class GameLauncher {
 
-	public static void launch() {
+	public static void play() {
 		Game game = Game.getInstance();
 		GameView gameView = GameView.getInstance();
 		

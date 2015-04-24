@@ -21,6 +21,9 @@ public abstract class Food extends Element {
 	
 	public void setEffectValue(int effectValue) {
 		this.effectValue = effectValue;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public abstract void act(Pig pig);

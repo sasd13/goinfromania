@@ -25,10 +25,6 @@ public class Score extends Model {
 		notifyObservers();
 	}
 	
-	public void increase(int increaseValue) {
-		setValue(this.value + increaseValue);
-	}
-	
 	public void reset() {
 		setValue(0);
 	}

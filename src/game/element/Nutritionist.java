@@ -5,8 +5,8 @@ import game.element.power.Diet;
 
 public class Nutritionist extends Character {
 
-	private Diet power;
-	private boolean canAttak;
+	private boolean powerful;
+	private Diet diet;
 	
 	public Nutritionist() {
 		super();
@@ -14,23 +14,35 @@ public class Nutritionist extends Character {
 		setTitle("Nutritionist");
 		setDrawing(new NutritionistDrawing());
 		
-		this.canAttak = true;
+		this.diet = new Diet();
+		this.powerful = true;
 	}
 	
-	public boolean getCanAttak() {
-		return this.canAttak;
+	public boolean isPowerful() {
+		return this.powerful;
 	}
 	
-	public void setCanAttak(boolean canAttak) {
-		this.canAttak = canAttak;
+	public void setPowerful(boolean powerful) {
+		this.powerful = powerful;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public Diet getDiet() {
+		return this.diet;
+	}
+	
+	public void setDiet(Diet diet) {
+		this.diet = diet;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
 	public void attak(Pig pig) {
-		if (this.canAttak) {
-			this.power.act(pig);
+		if (this.powerful) {
+			this.diet.act(pig);
 		}
 	}
 }

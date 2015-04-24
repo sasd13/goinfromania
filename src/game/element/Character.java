@@ -2,6 +2,7 @@ package game.element;
 
 public abstract class Character extends Element {
 
+	private boolean alive;
 	private Life life;
 	
 	protected Character() {
@@ -9,9 +10,20 @@ public abstract class Character extends Element {
 		
 		setTitle("Character");
 		setMovable(true);
-		getSpeed().setValue(Speed.SPEED_MEDIUM);
+		setSpeed(new Speed(Speed.SPEED_MEDIUM));
 		
 		this.life = new Life();
+	}
+	
+	public boolean isAlive() {
+		return this.alive;
+	}
+	
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Life getLife() {

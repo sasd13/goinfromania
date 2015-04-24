@@ -5,7 +5,7 @@ public class RoundManager {
 	public static Round load(String roundId) {
 		Round round = null;
 		
-		round = new Round(); //Database query
+		//Database query
 		
 		return round;
 	}

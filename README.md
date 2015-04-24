@@ -1,2 +1,2 @@
 # j-goinfromania
-Java game : Groinfr'o'mania
+Java game : Goinfr'o'mania

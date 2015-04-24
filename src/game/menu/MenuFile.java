@@ -2,8 +2,8 @@ package game.menu;
 
 import game.Game;
 import game.GameLauncher;
-import game.GameView;
 import game.round.Round;
+import game.round.RoundLauncher;
 import game.round.RoundManager;
 
 import java.awt.event.ActionEvent;
@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
 
 public class MenuFile extends JMenu implements ActionListener {
 
@@ -56,9 +55,9 @@ public class MenuFile extends JMenu implements ActionListener {
 		JMenuItem item = (JMenuItem) e.getSource();
 		
 		if (item.getText().compareTo(ITEM_NEW) == 0) {
-			GameView.getInstance().displayLiveRoundView();
+			RoundLauncher.newRound();
 		} else if (item.getText().compareTo(ITEM_OPEN) == 0) {
-			GameView.getInstance().displayListRoundView();
+			RoundLauncher.openRound("id");
 		} else if (item.getText().compareTo(ITEM_SAVE) == 0) {
 			Round round = Game.getInstance().getLiveRound();
 			RoundManager.save(round);

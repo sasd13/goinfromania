@@ -13,7 +13,7 @@ public class Cake extends Food {
 		
 		setTitle("Cake");
 		setMovable(true);
-		getSpeed().setValue(Speed.SPEED_LOW);
+		setSpeed(new Speed(Speed.SPEED_LOW));
 		setEffectValue(VALUE_EVOLVE_PIG_ENERGY);
 	}
 	

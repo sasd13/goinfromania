@@ -25,7 +25,7 @@ public class Soporific extends Power {
 		Speed speed = nutritionist.getSpeed();
 		
 		//Pendant 5 secondes
-		nutritionist.setCanAttak(false);
+		nutritionist.setPowerful(false);
 		speed.setValue(0);
 	}
 }

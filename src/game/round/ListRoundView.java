@@ -14,7 +14,7 @@ public class ListRoundView extends JPanel implements Observer {
 	public ListRoundView() {
 		super();
 		
-		setPreferredSize(new Dimension(GameView.GAMECONTENTPANE_WIDTH, GameView.GAMECONTENTPANE_HEIGHT));
+		setPreferredSize(new Dimension(GameView.FRAME_WIDTH, GameView.FRAME_HEIGHT));
 		setBackground(Color.BLUE);
 	}
 	

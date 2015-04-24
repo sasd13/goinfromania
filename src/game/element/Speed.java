@@ -21,6 +21,12 @@ public class Speed extends Model {
 		this.value = SPEED_MIN;
 	}
 	
+	public Speed(int value) {
+		this();
+		
+		setValue(value);
+	}
+	
 	public int getValue() {
 		return this.value;
 	}

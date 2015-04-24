@@ -21,6 +21,9 @@ public abstract class Power extends Element {
 	
 	public void setPowerValue(int powerValue) {
 		this.powerValue = powerValue;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public abstract void act(Character character);

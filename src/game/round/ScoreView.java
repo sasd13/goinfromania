@@ -1,6 +1,6 @@
 package game.round;
 
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -9,25 +9,24 @@ import javax.swing.JPanel;
 
 public class ScoreView extends JPanel implements Observer {
 
-	private JLabel labelTitle, labelScore;
+	private JLabel labelScore, labelScoreValue;
 	
 	public ScoreView() {
 		super();
 		
-		setLayout(new GridLayout(1, 2));
+		setLayout(new FlowLayout());
 		
-		this.labelTitle = new JLabel();
-		add(this.labelTitle);
-		
-		this.labelScore = new JLabel();
+		this.labelScore = new JLabel("Score : ");
 		add(this.labelScore);
+		
+		this.labelScoreValue = new JLabel();
+		add(this.labelScoreValue);
 	}
 	
 	@Override
 	public void update(Observable observable, Object arg) {
 		Score score = (Score) observable;
 		
-		this.labelScore.setText(score.getTitle());
-		this.labelScore.setText(String.valueOf(score.getValue()));
+		this.labelScoreValue.setText(String.valueOf(score.getValue()));
 	}
 }

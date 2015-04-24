@@ -11,6 +11,7 @@ public abstract class Element extends Model {
 	private String id;
 	private Position position;
 	private Dimension dimension;
+	private boolean visible;
 	private Drawing drawing;
 	private boolean movable;
 	private Speed speed;
@@ -22,6 +23,7 @@ public abstract class Element extends Model {
 		
 		this.position = new Position();
 		this.dimension = new Dimension();
+		this.visible = true;
 		this.drawing = null;
 		this.movable = false;
 		this.speed = new Speed();
@@ -60,6 +62,17 @@ public abstract class Element extends Model {
 		notifyObservers();
 	}
 	
+	public boolean isVisible() {
+		return this.visible;
+	}
+	
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
 	public Drawing getDrawing() {
 		return this.drawing;
 	}
@@ -71,23 +84,23 @@ public abstract class Element extends Model {
 		notifyObservers();
 	}
 	
-	public Speed getSpeed() {
-		return this.speed;
-	}
-	
-	public void setSpeed(Speed speed) {
-		this.speed = speed;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
 	public boolean isMovable() {
 		return this.movable;
 	}
 	
 	public void setMovable(boolean movable) {
 		this.movable = movable;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public Speed getSpeed() {
+		return this.speed;
+	}
+	
+	public void setSpeed(Speed speed) {
+		this.speed = speed;
 		
 		setChanged();
 		notifyObservers();
@@ -119,7 +132,7 @@ public abstract class Element extends Model {
 	}
 	
 	public Position move(Direction direction) {
-		if(!isMovable()) {
+		if(!this.movable) {
 			return this.position;
 		}
 		

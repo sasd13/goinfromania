@@ -17,8 +17,8 @@ public class Round extends Model {
 		
 		numberRound++;
 		this.id = "id-round-"+numberRound;
-		this.level = Level.EASY;
 		this.grid = new Grid();
+		this.level = Level.EASY;
 		this.score = new Score();
 	}
 	

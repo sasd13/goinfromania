@@ -8,11 +8,30 @@ import game.round.RoundResult;
 
 public class RoundLauncher {
 
-	public static void launchLiveRound(String roundId) {
+	public static void newRound() {
 		Game game = Game.getInstance();
 		GameView gameView = GameView.getInstance();
 		
-		Round liveRound = game.getListRound().get(roundId);
+		Round liveRound = new Round();
+		game.getListRound().add(liveRound);
+		
+		game.setLiveRound(liveRound);
+		
+		gameView.displayLiveRoundView();
+	}
+	
+	public static void openRound(String roundId) {
+		Game game = Game.getInstance();
+		GameView gameView = GameView.getInstance();
+		
+		Round liveRound;
+		if(roundId == null) {
+			liveRound = new Round();
+			game.getListRound().add(liveRound);
+		} else {
+			liveRound = game.getListRound().get(roundId);
+		}
+		
 		game.setLiveRound(liveRound);
 		
 		gameView.displayLiveRoundView();
