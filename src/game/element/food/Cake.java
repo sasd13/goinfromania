@@ -1,9 +1,9 @@
 package game.element.food;
 
-import game.draw.CakeDrawing;
 import game.element.Speed;
 import game.element.character.Energy;
 import game.element.character.Pig;
+import game.element.draw.CakeDrawing;
 
 public class Cake extends Food {
 

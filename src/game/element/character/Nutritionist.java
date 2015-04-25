@@ -1,6 +1,6 @@
 package game.element.character;
 
-import game.draw.NutritionistDrawing;
+import game.element.draw.NutritionistDrawing;
 import game.element.power.Diet;
 import game.element.power.MapPower;
 

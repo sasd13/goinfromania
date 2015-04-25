@@ -1,6 +1,6 @@
 package game.element.food;
 
-import game.draw.PoisonCakeDrawing;
+import game.element.draw.PoisonCakeDrawing;
 
 public class PoisonCake extends Cake {
 	

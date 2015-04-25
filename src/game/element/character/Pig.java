@@ -1,6 +1,6 @@
 package game.element.character;
 
-import game.draw.PigDrawing;
+import game.element.draw.PigDrawing;
 import game.element.food.Food;
 import game.element.power.MapPower;
 import game.element.power.Missile;

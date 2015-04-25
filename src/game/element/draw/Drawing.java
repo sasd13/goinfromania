@@ -1,4 +1,4 @@
-package game.draw;
+package game.element.draw;
 
 public abstract class Drawing {
 

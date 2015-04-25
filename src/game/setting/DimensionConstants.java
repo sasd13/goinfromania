@@ -1,6 +1,6 @@
 package game.setting;
 
-public class DimensConst {
+public class DimensionConstants {
 	
 	public static final int FRAME_WIDTH_SMALL = 600;
 	public static final int FRAME_WIDTH_MEDIUM = 700;

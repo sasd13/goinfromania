@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.util.Observable;
 
-import game.draw.Drawing;
+import game.element.draw.Drawing;
 import game.setting.Direction;
 
 public abstract class Element extends Observable {
