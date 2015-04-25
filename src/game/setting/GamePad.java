@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 
 public class GamePad extends Setting {
 
+	public static final String NAME = "GamePad";
+	
 	private int keyStart;
 	private int keyPause;
 	private int keyMoveLeft;
@@ -15,7 +17,7 @@ public class GamePad extends Setting {
 	public GamePad() {
 		super();
 		
-		setTitle("GamePad Setting");
+		setName(NAME);
 		
 		reset();
 	}
@@ -98,9 +100,7 @@ public class GamePad extends Setting {
 	}
 
 	@Override
-	public void reset() {
-		setTitle("GamePad Setting");
-		
+	public void reset() {		
 		setKeyStart(KeyEvent.VK_ENTER);
 		setKeyPause(KeyEvent.VK_ESCAPE);
 		setKeyMoveLeft(KeyEvent.VK_LEFT);

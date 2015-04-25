@@ -1,23 +1,20 @@
 package game.round;
 
-import game.Model;
-
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class ListRound extends Model {
+public class ListRound extends Observable {
 
 	private ArrayList<Round> list;
 	
 	public ListRound() {
 		super();
 		
-		setTitle("List Round");
-		
 		this.list = new ArrayList<>();
 	}
 	
 	public boolean add(Round round) {
-		boolean added = this.list.add(round);
+		boolean added =  this.list.add(round);
 		
 		setChanged();
 		notifyObservers();

@@ -1,8 +1,10 @@
-package game.element;
+package game.element.character;
 
-import game.Model;
+import java.util.Observable;
 
-public class Life extends Model {
+public class Life extends Observable {
+	
+	public static final String NAME = "Life";
 	
 	public static final int LIFE_MIN = 0;
 	public static final int LIFE_MAX = 120;
@@ -15,8 +17,6 @@ public class Life extends Model {
 	
 	public Life() {
 		super();
-		
-		setTitle("Life");
 		
 		this.value = LIFE_MAX;
 	}

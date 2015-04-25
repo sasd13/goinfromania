@@ -1,4 +1,4 @@
-package game.element;
+package game.element.character;
 
 import java.awt.FlowLayout;
 import java.util.Observable;

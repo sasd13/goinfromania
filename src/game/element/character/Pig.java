@@ -1,15 +1,17 @@
-package game.element;
+package game.element.character;
 
+import game.draw.PigDrawing;
 import game.element.food.Food;
 import game.element.power.MapPower;
 import game.element.power.Missile;
 import game.element.power.Power;
-import game.element.power.PowerType;
 import game.element.power.Soporific;
 import game.element.power.SuperMissile;
 
 public class Pig extends Character {
 
+	public static final String NAME = "Pig";
+	
 	private boolean greedy;
 	private Energy energy;
 	private boolean powerful;
@@ -18,7 +20,8 @@ public class Pig extends Character {
 	public Pig() {
 		super();
 		
-		setTitle("Pig");
+		setTitle(NAME);
+		setDrawing(new PigDrawing());
 		
 		this.greedy = true;
 		this.energy = new Energy();
@@ -85,11 +88,11 @@ public class Pig extends Character {
 		
 		Energy energy = getEnergy();
 		if (energy.getValue() == Energy.ENERGY_MAX) {
-			power = this.mapPower.get(PowerType.SUPERMISSILE);
+			power = this.mapPower.get(SuperMissile.NAME);
 		} else if (energy.getValue() < Energy.ENERGY_MAX && energy.getValue() >= Energy.ENERGY_MEDIUM) {
-			power = this.mapPower.get(PowerType.MISSILE);
+			power = this.mapPower.get(Missile.NAME);
 		} else {
-			power = this.mapPower.get(PowerType.SOPORIFIC);
+			power = this.mapPower.get(Soporific.NAME);
 		}
 		
 		return power;

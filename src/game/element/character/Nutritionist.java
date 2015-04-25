@@ -1,21 +1,23 @@
-package game.element;
+package game.element.character;
 
 import game.draw.NutritionistDrawing;
 import game.element.power.Diet;
 
 public class Nutritionist extends Character {
 
+	public static final String NAME = "Nutritionist";
+	
 	private boolean powerful;
 	private Diet diet;
 	
 	public Nutritionist() {
 		super();
 		
-		setTitle("Nutritionist");
+		setTitle(NAME);
 		setDrawing(new NutritionistDrawing());
 		
-		this.diet = new Diet();
 		this.powerful = true;
+		this.diet = new Diet();
 	}
 	
 	public boolean isPowerful() {

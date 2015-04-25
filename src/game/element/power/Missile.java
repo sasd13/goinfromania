@@ -1,18 +1,19 @@
 package game.element.power;
 
-import game.element.Character;
-import game.element.Life;
-import game.element.Nutritionist;
+import game.element.character.Character;
+import game.element.character.Life;
+import game.element.character.Nutritionist;
 
 public class Missile extends Power {
 
+	public static final String NAME = "Missile";
 	public static final int POWER_VALUE_DECREASE_NUTRITIONIST_LIFE = 50;
 	
 	public Missile() {
 		super();
 		
-		setTitle("Missile");
-		setPowerValue(POWER_VALUE_DECREASE_NUTRITIONIST_LIFE);
+		setName(NAME);
+		setValue(POWER_VALUE_DECREASE_NUTRITIONIST_LIFE);
 	}
 
 	@Override
@@ -20,6 +21,6 @@ public class Missile extends Power {
 		Nutritionist nutritionist = (Nutritionist) character;
 		
 		Life life = nutritionist.getLife();
-		life.setValue(life.getValue() - getPowerValue());
+		life.setValue(life.getValue() - getValue());
 	}
 }

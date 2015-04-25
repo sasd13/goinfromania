@@ -1,17 +1,20 @@
 package game.element;
 
-import game.Model;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.util.Observable;
+
 import game.draw.Drawing;
-import game.setting.Dimension;
 import game.setting.Direction;
-import game.setting.Position;
 
-public abstract class Element extends Model {
+public abstract class Element extends Observable {
 
+	private static int numberElement;
 	private String id;
-	private Position position;
-	private Dimension dimension;
+	private String title;
 	private boolean visible;
+	private Point position;
+	private Dimension dimension;
 	private Drawing drawing;
 	private boolean movable;
 	private Speed speed;
@@ -19,44 +22,27 @@ public abstract class Element extends Model {
 	protected Element() {
 		super();
 		
-		setTitle("Element");
-		
-		this.position = new Position();
-		this.dimension = new Dimension();
+		numberElement++;
+		this.id = "id-element"+numberElement;
+		this.title = null;
 		this.visible = true;
+		this.position = new Point();
+		this.dimension = new Dimension();
 		this.drawing = null;
 		this.movable = false;
-		this.speed = new Speed();
+		this.speed = null;
 	}
 	
 	public String getId() {
 		return this.id;
 	}
 	
-	public void setId(String id) {
-		this.id = id;
-		
-		setChanged();
-		notifyObservers();
+	public String getTitle() {
+		return this.title;
 	}
 	
-	public Position getPosition() {
-		return this.position;
-	}
-	
-	public void setPosition(Position position) {
-		this.position = position;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public Dimension getDimension() {
-		return this.dimension;
-	}
-	
-	public void setDimension(Dimension dimension) {
-		this.dimension = dimension;
+	public void setTitle(String title) {
+		this.title = title;
 		
 		setChanged();
 		notifyObservers();
@@ -68,6 +54,28 @@ public abstract class Element extends Model {
 	
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public Point getPosition() {
+		return this.position;
+	}
+	
+	private void setPosition(Point position) {
+		this.position = position;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public Dimension getDimension() {
+		return this.dimension;
+	}
+	
+	private void setDimension(Dimension dimension) {
+		this.dimension = dimension;
 		
 		setChanged();
 		notifyObservers();
@@ -106,37 +114,37 @@ public abstract class Element extends Model {
 		notifyObservers();
 	}
 	
-	public Position getNextPosition(Direction direction) {
+	public Point getNextPosition(Direction direction) {
 		if(!this.movable) {
 			return this.position;
 		}
 		
-		Position nextPosition = new Position();
+		Point nextPosition = new Point();
 		
 		switch (direction) {
 			case LEFT :
-				nextPosition.setX(this.position.getX() - this.speed.getValue());
+				nextPosition.x = this.position.x - this.speed.getValue();
 				break;
 			case RIGHT :
-				nextPosition.setX(this.position.getX() + this.speed.getValue());
+				nextPosition.x = this.position.x + this.speed.getValue();
 				break;
 			case UP :
-				nextPosition.setY(this.position.getY() + this.speed.getValue());
+				nextPosition.y = this.position.y + this.speed.getValue();
 				break;
 			case DOWN :
-				nextPosition.setY(this.position.getY() - this.speed.getValue());
+				nextPosition.y = this.position.y - this.speed.getValue();
 				break;
 		}
 		
 		return nextPosition;
 	}
 	
-	public Position move(Direction direction) {
+	public Point move(Direction direction) {
 		if(!this.movable) {
 			return this.position;
 		}
 		
-		Position nextPosition = getNextPosition(direction);
+		Point nextPosition = getNextPosition(direction);
 		setPosition(nextPosition);
 		
 		return nextPosition;

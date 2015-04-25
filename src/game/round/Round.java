@@ -1,8 +1,8 @@
 package game.round;
 
-import game.Model;
+import java.util.Observable;
 
-public class Round extends Model {
+public class Round extends Observable {
 
 	private static int numberRound = 0;
 	private String id;
@@ -12,8 +12,6 @@ public class Round extends Model {
 	
 	public Round() {
 		super();
-		
-		setTitle("Round");
 		
 		numberRound++;
 		this.id = "id-round-"+numberRound;

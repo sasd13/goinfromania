@@ -16,9 +16,6 @@ public class GameView extends JFrame implements Observer {
 	
 	private static GameView instance = null;
 	
-	public static final int FRAME_WIDTH = 800;
-	public static final int FRAME_HEIGHT = 600;
-	
 	private GameMenu gameMenu;
 	private ListRoundView listRoundView;
 	private RoundView liveRoundView;
@@ -50,7 +47,7 @@ public class GameView extends JFrame implements Observer {
 		Game game = (Game) observable;
 		
 		ListRound listRound = game.getListRound();
-		if(listRound != null && listRound.countObservers() == 0) {
+		if(listRound.countObservers() == 0) {
 			listRound.addObserver(this.listRoundView);
 			this.listRoundView.update(listRound, null);
 		}

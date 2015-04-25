@@ -1,26 +1,38 @@
 package game.element.power;
 
-import game.element.Character;
-import game.element.Element;
+import game.element.character.Character;
 
-public abstract class Power extends Element {
+import java.util.Observable;
 
-	private int powerValue;
+public abstract class Power extends Observable {
+
+	private String name;
+	private int value;
 	
 	protected Power() {
 		super();
 		
-		setTitle("Power");
+		this.name = null;
+		this.value = 0;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 		
-		this.powerValue = 0;
+		setChanged();
+		notifyObservers();
 	}
 	
-	public int getPowerValue() {
-		return this.powerValue;
+	public int getValue() {
+		return this.value;
 	}
 	
-	public void setPowerValue(int powerValue) {
-		this.powerValue = powerValue;
+	public void setValue(int value) {
+		this.value = value;
 		
 		setChanged();
 		notifyObservers();

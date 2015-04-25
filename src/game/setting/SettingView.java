@@ -3,6 +3,7 @@ package game.setting;
 import game.Game;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +23,7 @@ public class SettingView extends JFrame implements Observer {
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setPreferredSize(new java.awt.Dimension(Dimension.FRAME, Dimension.FRAME));
+		setPreferredSize(new Dimension(DimensConst.FRAME_WIDTH_MEDIUM, DimensConst.FRAME_HEIGHT_MEDIUM));
 		
 		setTitle(Game.NAME);
 		
@@ -30,7 +31,7 @@ public class SettingView extends JFrame implements Observer {
 		panel.setLayout(new FlowLayout());
 		getContentPane().add(panel, BorderLayout.SOUTH);
 		
-		java.awt.Dimension dimen = new java.awt.Dimension(Dimension.BUTTON_WIDTH, Dimension.BUTTON_HEIGHT);
+		java.awt.Dimension dimen = new java.awt.Dimension(DimensConst.BUTTON_WIDTH, DimensConst.BUTTON_HEIGHT);
 		
 		this.buttonClose = new JButton("Close");
 		this.buttonClose.setPreferredSize(dimen);

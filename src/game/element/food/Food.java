@@ -1,7 +1,7 @@
 package game.element.food;
 
 import game.element.Element;
-import game.element.Pig;
+import game.element.character.Pig;
 
 public abstract class Food extends Element {
 
@@ -9,8 +9,6 @@ public abstract class Food extends Element {
 	
 	protected Food() {
 		super();
-		
-		setTitle("Food");
 		
 		this.effectValue = 0;
 	}

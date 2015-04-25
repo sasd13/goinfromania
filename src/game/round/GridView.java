@@ -10,15 +10,14 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import game.draw.Drawing;
-import game.draw.IDrawable;
 import game.element.Element;
-import game.element.Nutritionist;
-import game.element.Pig;
+import game.element.ListElement;
+import game.element.character.Nutritionist;
+import game.element.character.Pig;
 import game.element.food.Cake;
 import game.element.food.PoisonCake;
 
-public class GridView extends JPanel implements Observer, IDrawable {
+public class GridView extends JPanel implements Observer {
 
 	public static final int GRID_WIDTH = 480;
 	public static final int GRID_HEIGHT = 320;
@@ -49,10 +48,11 @@ public class GridView extends JPanel implements Observer, IDrawable {
 		Grid grid = (Grid) observable;
 		
 		final Pig pig = grid.getPig();
-		draw(pig.getDrawing());
+		draw(pig);
 		
-		for(Element element : grid.getListElement()) {
-			draw(element.getDrawing());
+		ListElement listElement = grid.getListElement();
+		for(int i=0; i<listElement.size(); i++) {
+			draw(listElement.get(i));
 		}
 		
 		if (this.buttonPigAttak.getActionListeners().length == 0) {
@@ -100,8 +100,7 @@ public class GridView extends JPanel implements Observer, IDrawable {
 		}
 	}
 	
-	@Override
-	public void draw(Drawing drawing) {
+	public void draw(Element element) {
 		// TODO Auto-generated method stub
 		
 	}

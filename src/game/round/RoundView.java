@@ -10,12 +10,12 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import game.GameView;
-import game.element.Energy;
-import game.element.EnergyView;
-import game.element.Life;
-import game.element.LifeView;
-import game.element.Pig;
+import game.element.character.Energy;
+import game.element.character.EnergyView;
+import game.element.character.Life;
+import game.element.character.LifeView;
+import game.element.character.Pig;
+import game.setting.DimensConst;
 
 public class RoundView extends JPanel implements Observer {
 
@@ -29,7 +29,7 @@ public class RoundView extends JPanel implements Observer {
 		super();
 		
 		setLayout(new BorderLayout());
-		setPreferredSize(new Dimension(GameView.FRAME_WIDTH, GameView.FRAME_HEIGHT));
+		setPreferredSize(new Dimension(DimensConst.FRAME_WIDTH_LARGE, DimensConst.FRAME_HEIGHT_LARGE));
 		
 		JPanel panelState = new JPanel();
 		panelState.setLayout(new GridLayout(1, 2));

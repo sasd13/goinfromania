@@ -3,16 +3,17 @@ package game.element.power;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import game.element.Character;
-import game.element.Energy;
-import game.element.Pig;
+import game.element.character.Character;
+import game.element.character.Energy;
+import game.element.character.Pig;
 
 public class Diet extends Power {
-
+	
 	/*
 	 * Empeche le goinfre de manger pendant 10 secondes
 	 * Diminue de 10 son energie toutes les 2 secondes
 	 */
+	public static final String NAME = "Diet";
 	public static final int POWER_DELAY_STOP_PIG_EAT = 10000;
 	public static final int DIET_PERIOD_DECREASE_PIG_ENERGY = 2000;
 	public static final int DIET_VALUE_DECREASE_PIG_ENERGY = 10;
@@ -26,8 +27,8 @@ public class Diet extends Power {
 	public Diet() {
 		super();
 		
-		setTitle("Diet");
-		setPowerValue(POWER_DELAY_STOP_PIG_EAT);
+		setName(NAME);
+		setValue(POWER_DELAY_STOP_PIG_EAT);
 		
 		this.dietPeriod = DIET_PERIOD_DECREASE_PIG_ENERGY;
 		this.dietValue = DIET_VALUE_DECREASE_PIG_ENERGY;
@@ -79,7 +80,7 @@ public class Diet extends Power {
 			}
 		};
 		
-		this.timerPower.schedule(task, getPowerValue());
+		this.timerPower.schedule(task, getValue());
 	}
 	
 	private synchronized void startDiectAct(final Energy energy) {

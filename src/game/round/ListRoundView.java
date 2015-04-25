@@ -1,6 +1,6 @@
 package game.round;
 
-import game.GameView;
+import game.setting.DimensConst;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,12 +14,14 @@ public class ListRoundView extends JPanel implements Observer {
 	public ListRoundView() {
 		super();
 		
-		setPreferredSize(new Dimension(GameView.FRAME_WIDTH, GameView.FRAME_HEIGHT));
+		setPreferredSize(new Dimension(DimensConst.FRAME_WIDTH_LARGE, DimensConst.FRAME_HEIGHT_LARGE));
 		setBackground(Color.BLUE);
 	}
 	
 	@Override
 	public void update(Observable observable, Object arg) {
 		ListRound listRound = (ListRound) observable;
+
 	}
+
 }

@@ -1,10 +1,12 @@
 package game;
 
+import java.util.Observable;
+
 import game.round.ListRound;
 import game.round.Round;
 import game.setting.MapSetting;
 
-public class Game extends Model {
+public class Game extends Observable {
 
 	private static Game instance = null;
 	
@@ -16,8 +18,6 @@ public class Game extends Model {
 	
 	private Game() {
 		super();
-		
-		setTitle(NAME);
 	}
 	
 	public static synchronized Game getInstance() {

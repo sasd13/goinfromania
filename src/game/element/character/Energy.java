@@ -1,8 +1,10 @@
-package game.element;
+package game.element.character;
 
-import game.Model;
+import java.util.Observable;
 
-public class Energy extends Model {
+public class Energy extends Observable {
+	
+	public static final String NAME = "Energy";
 	
 	public static final int ENERGY_MIN = 0;
 	public static final int ENERGY_MAX = 120;
@@ -15,8 +17,6 @@ public class Energy extends Model {
 	
 	public Energy() {
 		super();
-		
-		setTitle("Energy");
 		
 		this.value = ENERGY_MIN;
 	}

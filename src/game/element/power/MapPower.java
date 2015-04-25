@@ -1,35 +1,20 @@
 package game.element.power;
 
-import game.Model;
-
 import java.util.HashMap;
+import java.util.Observable;
 
-public class MapPower extends Model {
+public class MapPower extends Observable {
 
-	private HashMap<PowerType, Power> map;
+	private HashMap<String, Power> map;
 	
 	public MapPower() {
 		super();
-		
-		setTitle("Pig powers");
 		
 		this.map = new HashMap<>();
 	}
 	
 	public Power put(Power pigPower) {
-		PowerType pigPowerType = null;
-		
-		if(pigPower.getTitle().compareTo("Soporific") == 0) {
-			pigPowerType = PowerType.SOPORIFIC;
-		} else if(pigPower.getTitle().compareTo("Missile") == 0) {
-			pigPowerType = PowerType.MISSILE;
-		} else if(pigPower.getTitle().compareTo("SuperMissile") == 0) {
-			pigPowerType = PowerType.SUPERMISSILE;
-		} else {
-			//Throw exception
-		}
-		
-		pigPower = this.map.put(pigPowerType, pigPower);
+		this.map.put(pigPower.getName(), pigPower);
 		
 		setChanged();
 		notifyObservers();
@@ -46,8 +31,8 @@ public class MapPower extends Model {
 		return pigPower;
 	}
 	
-	public Power get(PowerType powerType) {
-		return this.map.get(powerType);
+	public Power get(String powerName) {
+		return this.map.get(powerName);
 	}
 	
 	public int size() {

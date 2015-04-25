@@ -1,25 +1,22 @@
 package game.round;
 
-import java.util.ArrayList;
+import java.awt.Point;
+import java.util.Observable;
 
-import game.Model;
 import game.element.Element;
-import game.element.Pig;
-import game.setting.Position;
+import game.element.ListElement;
+import game.element.character.Pig;
 
-public class Grid extends Model {
+public class Grid extends Observable {
 	
 	private Pig pig;
-	private static int numberElement = 0;
-	private ArrayList<Element> listElement;
+	private ListElement listElement;
 	
 	public Grid() {
 		super();
 		
-		setTitle("Grid");
-		
 		this.pig = new Pig();
-		this.listElement = new ArrayList<>();
+		this.listElement = new ListElement();
 	}
 	
 	public Pig getPig() {
@@ -33,15 +30,11 @@ public class Grid extends Model {
 		notifyObservers();
 	}
 	
-	public ArrayList<Element> getListElement() {
+	public ListElement getListElement() {
 		return this.listElement;
 	}
 	
-	public boolean putElement(Element element) {
-		numberElement++;
-		String id = "id-element-"+numberElement;
-		element.setId(id);
-		
+	public boolean addElement(Element element) {
 		boolean added = this.listElement.add(element);
 		
 		setChanged();
@@ -50,8 +43,33 @@ public class Grid extends Model {
 		return added;
 	}
 	
-	public Element getElementAtPosition(Position position) {
-		for (Element element : this.listElement) {
+	public boolean removeElement(Element element) {
+		boolean removed = this.listElement.remove(element);
+		
+		setChanged();
+		notifyObservers();
+		
+		return removed;
+	}
+	
+	public Element getElement(String elementId) {
+		Element element = null;
+		
+		for (int i=0; i<this.listElement.size(); i++) {
+			element = this.listElement.get(i);
+			if (element.getId().compareTo(elementId) == 0) {
+				return element;
+			}
+		}
+		
+		return null;
+	}
+	
+	public Element getElementAtPosition(Point position) {
+		Element element = null;
+		
+		for (int i=0; i<this.listElement.size(); i++) {
+			element = this.listElement.get(i);
 			if (element.getPosition().equals(position)) {
 				return element;
 			}

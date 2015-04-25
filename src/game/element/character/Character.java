@@ -1,4 +1,7 @@
-package game.element;
+package game.element.character;
+
+import game.element.Element;
+import game.element.Speed;
 
 public abstract class Character extends Element {
 
@@ -8,10 +11,10 @@ public abstract class Character extends Element {
 	protected Character() {
 		super();
 		
-		setTitle("Character");
 		setMovable(true);
 		setSpeed(new Speed(Speed.SPEED_MEDIUM));
 		
+		this.alive = true;
 		this.life = new Life();
 	}
 	

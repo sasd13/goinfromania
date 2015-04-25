@@ -1,9 +1,11 @@
 package game.element;
 
-import game.Model;
+import java.util.Observable;
 
-public class Speed extends Model {
+public class Speed extends Observable {
 
+	public static final String NAME = "Speed";
+	
 	public static final int SPEED_MIN = 0;
 	public static final int SPEED_MAX = 50;
 	
@@ -15,8 +17,6 @@ public class Speed extends Model {
 	
 	public Speed() {
 		super();
-		
-		setTitle("Speed");
 		
 		this.value = SPEED_MIN;
 	}

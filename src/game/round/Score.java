@@ -1,17 +1,15 @@
 package game.round;
 
-import game.Model;
+import java.util.Observable;
 
-public class Score extends Model {
+public class Score extends Observable {
 
 	private int value;
 	
 	public Score() {
 		super();
 		
-		setTitle("Score");
-		
-		reset();
+		this.value = 0;
 	}
 	
 	public int getValue() {
