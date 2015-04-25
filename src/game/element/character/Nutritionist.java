@@ -2,13 +2,11 @@ package game.element.character;
 
 import game.draw.NutritionistDrawing;
 import game.element.power.Diet;
+import game.element.power.MapPower;
 
 public class Nutritionist extends Character {
 
 	public static final String NAME = "Nutritionist";
-	
-	private boolean powerful;
-	private Diet diet;
 	
 	public Nutritionist() {
 		super();
@@ -16,35 +14,20 @@ public class Nutritionist extends Character {
 		setTitle(NAME);
 		setDrawing(new NutritionistDrawing());
 		
-		this.powerful = true;
-		this.diet = new Diet();
-	}
-	
-	public boolean isPowerful() {
-		return this.powerful;
-	}
-	
-	public void setPowerful(boolean powerful) {
-		this.powerful = powerful;
+		setPowerful(true);
+		MapPower mapPower = new MapPower();
+		mapPower.put(new Diet());
 		
-		setChanged();
-		notifyObservers();
+		setMapPower(mapPower);
 	}
 	
-	public Diet getDiet() {
-		return this.diet;
-	}
-	
-	public void setDiet(Diet diet) {
-		this.diet = diet;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void attak(Pig pig) {
-		if (this.powerful) {
-			this.diet.act(pig);
+	@Override
+	public void attak(Character character) {
+		if (isPowerful()) {
+			Pig pig = (Pig) character;
+			
+			Diet diet = (Diet) getMapPower().get(Diet.NAME);
+			diet.act(pig);
 		}
 	}
 }

@@ -74,7 +74,7 @@ public abstract class Element extends Observable {
 		return this.dimension;
 	}
 	
-	private void setDimension(Dimension dimension) {
+	public void setDimension(Dimension dimension) {
 		this.dimension = dimension;
 		
 		setChanged();
@@ -140,10 +140,6 @@ public abstract class Element extends Observable {
 	}
 	
 	public Point move(Direction direction) {
-		if(!this.movable) {
-			return this.position;
-		}
-		
 		Point nextPosition = getNextPosition(direction);
 		setPosition(nextPosition);
 		

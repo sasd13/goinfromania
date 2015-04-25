@@ -9,40 +9,31 @@ import game.round.RoundResult;
 public class RoundLauncher {
 
 	public static void newRound() {
-		Game game = Game.getInstance();
 		GameView gameView = GameView.getInstance();
 		
+		Game game = Game.getInstance();
 		Round liveRound = new Round();
 		game.getListRound().add(liveRound);
 		
 		game.setLiveRound(liveRound);
-		
 		gameView.displayLiveRoundView();
 	}
 	
 	public static void openRound(String roundId) {
-		Game game = Game.getInstance();
 		GameView gameView = GameView.getInstance();
 		
-		Round liveRound;
-		if(roundId == null) {
-			liveRound = new Round();
-			game.getListRound().add(liveRound);
-		} else {
-			liveRound = game.getListRound().get(roundId);
-		}
-		
+		Game game = Game.getInstance();
+		Round liveRound = game.getListRound().get(roundId);
 		game.setLiveRound(liveRound);
 		
 		gameView.displayLiveRoundView();
 	}
 	
 	public static void exitLiveRound() {
-		Game game = Game.getInstance();
 		GameView gameView = GameView.getInstance();
 		
+		Game game = Game.getInstance();
 		Round liveRound = game.getLiveRound();
-		
 		RoundResult result = liveRound.stop();
 		switch (result) {
 			case WIN :
@@ -53,7 +44,6 @@ public class RoundLauncher {
 				RoundManager.save(liveRound);
 				break;
 		}
-		
 		game.setLiveRound(null);
 		
 		gameView.displayListRoundView();

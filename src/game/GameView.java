@@ -35,7 +35,7 @@ public class GameView extends JFrame implements Observer {
 	}
 	
 	public static synchronized GameView getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new GameView();
 		}
 		
@@ -47,13 +47,13 @@ public class GameView extends JFrame implements Observer {
 		Game game = (Game) observable;
 		
 		ListRound listRound = game.getListRound();
-		if(listRound.countObservers() == 0) {
+		if (listRound != null) {
 			listRound.addObserver(this.listRoundView);
 			this.listRoundView.update(listRound, null);
 		}
 		
 		Round liveRound = game.getLiveRound();
-		if(liveRound != null && liveRound.countObservers() == 0) {
+		if (liveRound != null) {
 			liveRound.addObserver(this.liveRoundView);
 			this.liveRoundView.update(liveRound, null);
 		}

@@ -8,9 +8,9 @@ import game.setting.SettingManager;
 public class GameLauncher {
 
 	public static void play() {
-		Game game = Game.getInstance();
 		GameView gameView = GameView.getInstance();
 		
+		Game game = Game.getInstance();
 		game.addObserver(gameView);
 		
 		MapSetting mapSetting = SettingManager.loadAll();
@@ -24,10 +24,9 @@ public class GameLauncher {
 	}
 	
 	public static void exit() {
-		Game game = Game.getInstance();
 		GameView gameView = GameView.getInstance();
 		
-		game.deleteObserver(gameView);
+		Game game = Game.getInstance();
 		
 		ListRound listRound = game.getListRound();
 		RoundManager.saveAll(listRound);

@@ -7,11 +7,11 @@ public class Energy extends Observable {
 	public static final String NAME = "Energy";
 	
 	public static final int ENERGY_MIN = 0;
-	public static final int ENERGY_MAX = 120;
+	public static final int ENERGY_MAX = 100;
 	
-	public static final int ENERGY_LOW = 30;
-	public static final int ENERGY_MEDIUM = 60;
-	public static final int ENERGY_HIGH = 90;
+	public static final int ENERGY_LOW = 20;
+	public static final int ENERGY_MEDIUM = 50;
+	public static final int ENERGY_HIGH = 80;
 	
 	private int value;
 	

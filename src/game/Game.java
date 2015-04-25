@@ -18,10 +18,14 @@ public class Game extends Observable {
 	
 	private Game() {
 		super();
+		
+		this.mapSetting = null;
+		this.listRound = null;
+		this.liveRound = null;
 	}
 	
 	public static synchronized Game getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new Game();
 		}
 		

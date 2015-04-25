@@ -20,7 +20,7 @@ public class LifeView extends JPanel implements Observer {
 		
 		setLayout(new FlowLayout());
 		
-		this.labelLife = new JLabel("Life : ");
+		this.labelLife = new JLabel(Life.NAME + " : ");
 		add(this.labelLife);
 		
 		this.progressBarLifeValue = new JProgressBar(Life.LIFE_MIN, Life.LIFE_MAX);

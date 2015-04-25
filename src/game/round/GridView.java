@@ -16,19 +16,17 @@ import game.element.character.Nutritionist;
 import game.element.character.Pig;
 import game.element.food.Cake;
 import game.element.food.PoisonCake;
+import game.setting.DimensConst;
 
 public class GridView extends JPanel implements Observer {
 
-	public static final int GRID_WIDTH = 480;
-	public static final int GRID_HEIGHT = 320;
-	
 	private JButton buttonPigAttak, buttonPigEatCake, buttonPigEatPoisonCake, buttonNutritionistAttak;
 	
 	public GridView() {
 		super();
 		
 		setLayout(new BorderLayout());
-		setPreferredSize(new Dimension(GRID_WIDTH, GRID_HEIGHT));
+		setPreferredSize(new Dimension(DimensConst.PANEL_WIDTH_MEDIUM, DimensConst.PANEL_HEIGHT_MEDIUM));
 		
 		this.buttonPigAttak = new JButton("Pig Attak!");
 		add(this.buttonPigAttak, BorderLayout.WEST);

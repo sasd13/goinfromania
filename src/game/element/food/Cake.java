@@ -9,7 +9,7 @@ public class Cake extends Food {
 
 	public static final String NAME = "Cake";
 	
-	public static final int VALUE_EVOLVE_PIG_ENERGY = 15;
+	public static final int VALUE_EVOLVE_PIG_ENERGY = 20;
 	
 	public Cake() {
 		super();

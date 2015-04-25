@@ -11,12 +11,12 @@ public class Diet extends Power {
 	
 	/*
 	 * Empeche le goinfre de manger pendant 10 secondes
-	 * Diminue de 10 son energie toutes les 2 secondes
+	 * Diminue de 8 son energie toutes les 2 secondes
 	 */
 	public static final String NAME = "Diet";
 	public static final int POWER_DELAY_STOP_PIG_EAT = 10000;
 	public static final int DIET_PERIOD_DECREASE_PIG_ENERGY = 2000;
-	public static final int DIET_VALUE_DECREASE_PIG_ENERGY = 10;
+	public static final int DIET_VALUE_DECREASE_PIG_ENERGY = 8;
 	
 	private int dietPeriod;
 	private int dietValue;
