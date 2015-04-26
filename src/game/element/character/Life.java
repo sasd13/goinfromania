@@ -3,9 +3,7 @@ package game.element.character;
 import java.util.Observable;
 
 public class Life extends Observable {
-	
-	public static final String NAME = "Life";
-	
+
 	public static final int LIFE_MIN = 0;
 	public static final int LIFE_MAX = 100;
 	
@@ -19,6 +17,12 @@ public class Life extends Observable {
 		super();
 		
 		this.value = LIFE_MAX;
+	}
+	
+	public Life(int value) {
+		this();
+		
+		setValue(value);
 	}
 	
 	public int getValue() {

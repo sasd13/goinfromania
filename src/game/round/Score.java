@@ -12,6 +12,12 @@ public class Score extends Observable {
 		this.value = 0;
 	}
 	
+	public Score(int value) {
+		this();
+		
+		this.value = value;
+	}
+	
 	public int getValue() {
 		return this.value;
 	}
@@ -21,9 +27,5 @@ public class Score extends Observable {
 		
 		setChanged();
 		notifyObservers();
-	}
-	
-	public void reset() {
-		setValue(0);
 	}
 }

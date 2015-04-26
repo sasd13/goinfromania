@@ -11,7 +11,7 @@ public class PoisonCake extends Cake {
 	public PoisonCake() {
 		super();
 		
-		setTitle(NAME);
+		setName(NAME);
 		setDrawing(new PoisonCakeDrawing());
 		setEffectValue(VALUE_EVOLVE_PIG_ENERGY);
 	}

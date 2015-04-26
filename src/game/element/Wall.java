@@ -1,6 +1,5 @@
-package game.element.item;
+package game.element;
 
-import game.element.Element;
 import game.element.draw.WallDrawing;
 
 public class Wall extends Element {
@@ -10,7 +9,7 @@ public class Wall extends Element {
 	public Wall() {
 		super();
 		
-		setTitle(NAME);
+		setName(NAME);
 		setDrawing(new WallDrawing());
 	}
 }

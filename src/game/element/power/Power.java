@@ -7,13 +7,11 @@ import java.util.Observable;
 public abstract class Power extends Observable {
 
 	private String name;
-	private int value;
 	
 	protected Power() {
 		super();
 		
 		this.name = null;
-		this.value = 0;
 	}
 	
 	public String getName() {
@@ -22,17 +20,6 @@ public abstract class Power extends Observable {
 	
 	public void setName(String name) {
 		this.name = name;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public int getValue() {
-		return this.value;
-	}
-	
-	public void setValue(int value) {
-		this.value = value;
 		
 		setChanged();
 		notifyObservers();

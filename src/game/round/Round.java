@@ -15,30 +15,41 @@ public class Round extends Observable {
 	public static final int TOTAL_CAKE_TO_EAT_LEVEL_NORMAL = 20;
 	public static final int TOTAL_CAKE_TO_EAT_LEVEL_HARD = 30;
 	
-	private static int numberRound = 0;
+	private static int countRound = 0;
 	private String id;
+	private int number;
 	private Level level;
-	private Score score;
+	private Score cumulatedScore;
 	private Pig pig;
 	private ListElement listElement;
-	private int numberEatenCakes;
 	private boolean finished;
 	
-	public Round() {
+	public Round(int number) {
 		super();
 		
-		numberRound++;
-		this.id = "id-round-"+numberRound;
+		countRound++;
+		this.id = "id-round-" + countRound;
+		this.number = number;
 		this.level = Level.EASY;
-		this.score = new Score();
+		this.cumulatedScore = new Score();
 		this.pig = new Pig();
 		this.listElement = new ListElement();
-		this.numberEatenCakes = 0;
 		this.finished = false;
 	}
 	
 	public String getId() {
 		return this.id;
+	}
+	
+	public int getNumber() {
+		return this.number;
+	}
+	
+	public void setNumber(int number) {
+		this.number = number;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Level getLevel() {
@@ -52,12 +63,12 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
-	public Score getScore() {
-		return this.score;
+	public Score getCumulatedScore() {
+		return this.cumulatedScore;
 	}
 	
-	public void setScore(Score score) {
-		this.score = score;
+	public void setCumulatedScore(Score cumulatedScore) {
+		this.cumulatedScore = cumulatedScore;
 		
 		setChanged();
 		notifyObservers();
@@ -115,41 +126,33 @@ public class Round extends Observable {
 		return null;
 	}
 	
-	public int getNumberEatenCakes() {
-		return this.numberEatenCakes;
-	}
-	
 	public boolean isFinished() {
 		return this.finished;
-	}
-	
-	public void setFinished(boolean finished) {
-		this.finished = finished;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void cakeEaten() {
-		this.numberEatenCakes++;
-		
-		checkEatenCakes();
 	}
 	
 	public void checkPigLife() {
 		Life life = this.pig.getLife();
 		
 		if (life.getValue() == Life.LIFE_MIN) {
-			this.pig.setAlive(false);
-			setFinished(true);
+			this.finished = true;
+			stop();
 		}
 	}
 	
-	private void checkEatenCakes() {
-		if ((this.level == Level.EASY && this.numberEatenCakes == Round.TOTAL_CAKE_TO_EAT_LEVEL_EASY) 
-				|| (this.level == Level.NORMAL && this.numberEatenCakes == Round.TOTAL_CAKE_TO_EAT_LEVEL_NORMAL)
-				|| this.level == Level.HARD && this.numberEatenCakes == Round.TOTAL_CAKE_TO_EAT_LEVEL_HARD) {
-			setFinished(true);
+	public void checkEatenCake() {
+		int countEatenCake = this.pig.getCountEatenCake();
+		
+		if ((this.level == Level.EASY && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_EASY) 
+				|| (this.level == Level.NORMAL && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_NORMAL)
+				|| this.level == Level.HARD && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_HARD) {
+			this.finished = true;
+			stop();
+		}
+	}
+	
+	public void notifyCumulatedScore(Score score) {
+		if (score != null) {
+			this.cumulatedScore.setValue(this.cumulatedScore.getValue() + score.getValue());
 		}
 	}
 	
@@ -168,15 +171,19 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
-	public RoundResult stop() {
+	public void stop() {
+		RoundResult roundResult = null;
+		
 		if (this.finished) {
-			if (this.pig.isAlive()) {
-				return RoundResult.WIN;
+			if (!this.pig.isDied()) {
+				roundResult = RoundResult.WIN;
 			} else {
-				return RoundResult.LOOSE;
+				roundResult = RoundResult.LOOSE;
 			}
 		} else {
-			return RoundResult.PROGRESS;
+			roundResult = RoundResult.PROGRESS;
 		}
+		
+		RoundLauncher.exitLiveRound(roundResult);
 	}
 }

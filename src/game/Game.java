@@ -4,7 +4,7 @@ import java.util.Observable;
 
 import game.round.ListRound;
 import game.round.Round;
-import game.setting.MapSetting;
+import game.setting.ListSetting;
 
 public class Game extends Observable {
 
@@ -12,14 +12,14 @@ public class Game extends Observable {
 	
 	public static final String NAME = "Goinfr'o'mania";
 	
-	private MapSetting mapSetting;
+	private ListSetting listSetting;
 	private ListRound listRound;
 	private Round liveRound;
 	
 	private Game() {
 		super();
 		
-		this.mapSetting = null;
+		this.listSetting = null;
 		this.listRound = null;
 		this.liveRound = null;
 	}
@@ -32,12 +32,12 @@ public class Game extends Observable {
 		return instance;
 	}
 	
-	public MapSetting getMapSetting() {
-		return this.mapSetting;
+	public ListSetting getMapSetting() {
+		return this.listSetting;
 	}
 	
-	public void setMapSetting(MapSetting mapSetting) {
-		this.mapSetting = mapSetting;
+	public void setMapSetting(ListSetting listSetting) {
+		this.listSetting = listSetting;
 		
 		setChanged();
 		notifyObservers();

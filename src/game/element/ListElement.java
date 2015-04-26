@@ -19,8 +19,8 @@ public class ListElement {
 	}
 	
 	public Element get(String elementId) {
-		for(Element element : this.list) {
-			if(element.getId().compareTo(elementId) == 0) {
+		for (Element element : this.list) {
+			if (element.getId().compareTo(elementId) == 0) {
 				return element;
 			}
 		}

@@ -5,44 +5,54 @@ import java.awt.Point;
 import java.util.Observable;
 
 import game.element.draw.Drawing;
+import game.round.Score;
 import game.setting.Direction;
 
 public abstract class Element extends Observable {
+	
+	public static final int SPEED_MIN = 0;
+	public static final int SPEED_MAX = 50;
+	
+	public static final int SPEED_LOW = 10;
+	public static final int SPEED_MEDIUM = 25;
+	public static final int SPEED_HIGH = 40;
 
-	private static int numberElement;
+	private static int countElement;
 	private String id;
-	private String title;
+	private String name;
 	private boolean visible;
 	private Point position;
 	private Dimension dimension;
 	private Drawing drawing;
 	private boolean movable;
-	private Speed speed;
+	private int speed;
+	private Score score;
 	
 	protected Element() {
 		super();
 		
-		numberElement++;
-		this.id = "id-element"+numberElement;
-		this.title = null;
+		countElement++;
+		this.id = "id-element-" + countElement;
+		this.name = null;
 		this.visible = true;
 		this.position = new Point();
 		this.dimension = new Dimension();
 		this.drawing = null;
 		this.movable = false;
-		this.speed = null;
+		this.speed = SPEED_MIN;
+		this.score = new Score();
 	}
 	
 	public String getId() {
 		return this.id;
 	}
 	
-	public String getTitle() {
-		return this.title;
+	public String getName() {
+		return this.name;
 	}
 	
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 		
 		setChanged();
 		notifyObservers();
@@ -103,19 +113,30 @@ public abstract class Element extends Observable {
 		notifyObservers();
 	}
 	
-	public Speed getSpeed() {
+	public int getSpeed() {
 		return this.speed;
 	}
 	
-	public void setSpeed(Speed speed) {
+	public void setSpeed(int speed) {
 		this.speed = speed;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
+	public Score getScore() {
+		return this.score;
+	}
+	
+	public void setScore(Score score) {
+		this.score = score;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
 	public Point getNextPosition(Direction direction) {
-		if(!this.movable) {
+		if (!this.movable) {
 			return this.position;
 		}
 		
@@ -123,16 +144,16 @@ public abstract class Element extends Observable {
 		
 		switch (direction) {
 			case LEFT :
-				nextPosition.x = this.position.x - this.speed.getValue();
+				nextPosition.x = this.position.x - this.speed;
 				break;
 			case RIGHT :
-				nextPosition.x = this.position.x + this.speed.getValue();
+				nextPosition.x = this.position.x + this.speed;
 				break;
 			case UP :
-				nextPosition.y = this.position.y + this.speed.getValue();
+				nextPosition.y = this.position.y + this.speed;
 				break;
 			case DOWN :
-				nextPosition.y = this.position.y - this.speed.getValue();
+				nextPosition.y = this.position.y - this.speed;
 				break;
 		}
 		

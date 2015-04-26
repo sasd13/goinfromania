@@ -7,8 +7,6 @@ import game.GameView;
 import game.round.Round;
 import game.round.RoundManager;
 import game.round.RoundResult;
-import game.setting.SettingManager;
-import game.setting.SettingView;
 
 public class RoundLauncher {
 
@@ -16,11 +14,12 @@ public class RoundLauncher {
 		GameView gameView = GameView.getInstance();
 		
 		Game game = Game.getInstance();
-		Round liveRound = new Round();
+		Round liveRound = new Round(1);
 		game.getListRound().add(liveRound);
-		
 		game.setLiveRound(liveRound);
+		
 		gameView.displayLiveRoundView();
+		gameView.update(game, null);
 	}
 	
 	public static void openRound(String roundId) {
@@ -31,6 +30,7 @@ public class RoundLauncher {
 		game.setLiveRound(liveRound);
 		
 		gameView.displayLiveRoundView();
+		gameView.update(game, null);
 	}
 	
 	public static void exitLiveRound(RoundResult roundResult) {
@@ -38,7 +38,6 @@ public class RoundLauncher {
 		
 		Game game = Game.getInstance();
 		Round liveRound = game.getLiveRound();
-		game.setLiveRound(null);
 		
 		String title = null;
 		String message = null;
@@ -49,10 +48,11 @@ public class RoundLauncher {
 				game.getListRound().remove(liveRound);
 				
 				title = "Result";
-				message = "YOU WIN!!! Score : " + liveRound.getScore().getValue();
+				message = "YOU WIN!!! Score : " + liveRound.getCumulatedScore().getValue();
 				
 				JOptionPane.showMessageDialog(gameView, message, title, JOptionPane.OK_OPTION);
 				gameView.displayListRoundView();
+				
 				break;
 			case LOOSE :
 				game.getListRound().remove(liveRound);
@@ -69,6 +69,7 @@ public class RoundLauncher {
 						gameView.displayListRoundView();
 						break;					
 				}
+				
 				break;
 			case PROGRESS :
 				title = "Exit round";
@@ -80,8 +81,10 @@ public class RoundLauncher {
 						RoundManager.save(liveRound);
 						break;					
 				}
-				gameView.displayListRoundView();
 				break;
 		}
+		
+		gameView.displayListRoundView();
+		gameView.update(game, null);
 	}
 }

@@ -4,12 +4,20 @@ import java.util.Observable;
 
 public abstract class Setting extends Observable {
 	
+	private static int countSetting = 0;
+	private String id;
 	private String name;
 	
 	protected Setting() {
 		super();
 		
+		countSetting++;
+		this.id = "id-setting-" + countSetting;
 		this.name = null;
+	}
+	
+	public String getId() {
+		return this.id;
 	}
 	
 	public String getName() {

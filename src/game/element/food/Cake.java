@@ -1,24 +1,27 @@
 package game.element.food;
 
-import game.element.Speed;
+import game.element.Element;
 import game.element.character.Energy;
 import game.element.character.Pig;
 import game.element.draw.CakeDrawing;
+import game.round.Score;
 
 public class Cake extends Food {
 
 	public static final String NAME = "Cake";
+	public static final int SCORE_VALUE = 50;
 	
 	public static final int VALUE_EVOLVE_PIG_ENERGY = 20;
 	
 	public Cake() {
 		super();
 		
-		setTitle(NAME);
+		setName(NAME);
 		setDrawing(new CakeDrawing());
 		setMovable(true);
-		setSpeed(new Speed(Speed.SPEED_LOW));
+		setSpeed(Element.SPEED_LOW);
 		setEffectValue(VALUE_EVOLVE_PIG_ENERGY);
+		setScore(new Score(SCORE_VALUE));
 	}
 	
 	@Override

@@ -29,4 +29,5 @@ public class ScoreView extends JPanel implements Observer {
 		
 		this.labelScoreValue.setText(String.valueOf(score.getValue()));
 	}
+
 }

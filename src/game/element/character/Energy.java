@@ -3,9 +3,7 @@ package game.element.character;
 import java.util.Observable;
 
 public class Energy extends Observable {
-	
-	public static final String NAME = "Energy";
-	
+
 	public static final int ENERGY_MIN = 0;
 	public static final int ENERGY_MAX = 100;
 	
@@ -19,6 +17,12 @@ public class Energy extends Observable {
 		super();
 		
 		this.value = ENERGY_MIN;
+	}
+	
+	public Energy(int value) {
+		this();
+		
+		setValue(value);
 	}
 	
 	public int getValue() {

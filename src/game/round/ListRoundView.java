@@ -1,5 +1,6 @@
 package game.round;
 
+import game.Game;
 import game.setting.DimensionConstants;
 
 import java.awt.Color;
@@ -20,8 +21,8 @@ public class ListRoundView extends JPanel implements Observer {
 	
 	@Override
 	public void update(Observable observable, Object arg) {
-		ListRound listRound = (ListRound) observable;
-
+		Game game = (Game) observable;
+		
+		ListRound listRound = game.getListRound();
 	}
-
 }

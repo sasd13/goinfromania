@@ -9,17 +9,19 @@ import game.element.character.Pig;
 
 public class Diet extends Power {
 	
+	public static final String NAME = "Diet";
+	
 	/*
 	 * Empeche le goinfre de manger pendant 10 secondes
 	 * Diminue de 8 son energie toutes les 2 secondes
-	 */
-	public static final String NAME = "Diet";
-	public static final int POWER_DELAY_STOP_PIG_EAT = 10000;
-	public static final int DIET_PERIOD_DECREASE_PIG_ENERGY = 2000;
-	public static final int DIET_VALUE_DECREASE_PIG_ENERGY = 8;
+	 */	
+	public static final int DELAY_STOP_PIG_EAT = 10000;
+	public static final int PERIOD_DECREASE_PIG_ENERGY = 2000;
+	public static final int VALUE_DECREASE_PIG_ENERGY = 8;
 	
-	private int dietPeriod;
-	private int dietValue;
+	private int delay;
+	private int period;
+	private int value;
 	
 	private Timer timerPower;
 	private Timer timerDiet;
@@ -28,29 +30,40 @@ public class Diet extends Power {
 		super();
 		
 		setName(NAME);
-		setValue(POWER_DELAY_STOP_PIG_EAT);
 		
-		this.dietPeriod = DIET_PERIOD_DECREASE_PIG_ENERGY;
-		this.dietValue = DIET_VALUE_DECREASE_PIG_ENERGY;
+		this.delay = DELAY_STOP_PIG_EAT;
+		this.period = PERIOD_DECREASE_PIG_ENERGY;
+		this.value = VALUE_DECREASE_PIG_ENERGY;
 	}
 	
-	public int getDietPeriod() {
-		return this.dietPeriod;
+	public int getDelay() {
+		return this.delay;
 	}
 	
-	public void setDietPeriod(int dietPeriod) {
-		this.dietPeriod = dietPeriod;
+	public void setDelay(int delay) {
+		this.delay = delay;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
-	public int getDietValue() {
-		return this.dietValue;
+	public int getPeriod() {
+		return this.period;
 	}
 	
-	public void setDietValue(int dietValue) {
-		this.dietValue = dietValue;
+	public void setPeriod(int period) {
+		this.period = period;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public int getValue() {
+		return this.value;
+	}
+	
+	public void setValue(int value) {
+		this.value = value;
 		
 		setChanged();
 		notifyObservers();
@@ -64,8 +77,32 @@ public class Diet extends Power {
 		this.timerDiet = new Timer();
 		
 		pig.setGreedy(false);
-		startDiectAct(pig.getEnergy());
+		startDiectAct(pig);
 		endPowerAct(pig);
+	}
+	
+	private synchronized void startDiectAct(final Pig pig) {
+		this.timerDiet.cancel();
+		this.timerDiet = new Timer();
+		
+		TimerTask task = new TimerTask() {
+			
+			private int count = 0;
+			
+			@Override
+			public void run() {
+				if(count >= DELAY_STOP_PIG_EAT / PERIOD_DECREASE_PIG_ENERGY) {
+					timerDiet.cancel();
+					timerDiet.purge();
+					return;
+				}
+				Energy energy = pig.getEnergy();
+				energy.setValue(energy.getValue() - getValue());
+				count++;
+			}
+		};
+		
+		this.timerDiet.schedule(task, getPeriod(), getPeriod());
 	}
 	
 	private synchronized void endPowerAct(final Pig pig) {
@@ -80,29 +117,6 @@ public class Diet extends Power {
 			}
 		};
 		
-		this.timerPower.schedule(task, getValue());
-	}
-	
-	private synchronized void startDiectAct(final Energy energy) {
-		this.timerDiet.cancel();
-		this.timerDiet = new Timer();
-		
-		TimerTask task = new TimerTask() {
-			
-			private int count = 0;
-			
-			@Override
-			public void run() {
-				if(count >= POWER_DELAY_STOP_PIG_EAT / DIET_PERIOD_DECREASE_PIG_ENERGY) {
-					timerDiet.cancel();
-					timerDiet.purge();
-					return;
-				}
-				energy.setValue(energy.getValue() - getDietValue());
-				count++;
-			}
-		};
-		
-		this.timerDiet.schedule(task, getDietPeriod(), getDietPeriod());
+		this.timerPower.schedule(task, getDelay());
 	}
 }

@@ -2,7 +2,7 @@ package game;
 
 import game.round.ListRound;
 import game.round.RoundManager;
-import game.setting.MapSetting;
+import game.setting.ListSetting;
 import game.setting.SettingManager;
 
 public class GameLauncher {
@@ -13,8 +13,8 @@ public class GameLauncher {
 		Game game = Game.getInstance();
 		game.addObserver(gameView);
 		
-		MapSetting mapSetting = SettingManager.loadAll();
-		game.setMapSetting(mapSetting);
+		ListSetting listSetting = SettingManager.loadAll();
+		game.setMapSetting(listSetting);
 		
 		ListRound listRound = RoundManager.loadAll();
 		game.setListRound(listRound);
@@ -31,8 +31,8 @@ public class GameLauncher {
 		ListRound listRound = game.getListRound();
 		RoundManager.saveAll(listRound);
 		
-		MapSetting  mapSetting = game.getMapSetting();
-		SettingManager.saveAll(mapSetting);
+		ListSetting listSetting = game.getMapSetting();
+		SettingManager.saveAll(listSetting);
 		
 		gameView.dispose();
 	}

@@ -1,12 +1,12 @@
 package game.element.character;
 
 import game.element.Element;
-import game.element.Speed;
 import game.element.power.MapPower;
+import game.round.Score;
 
 public abstract class Character extends Element {
-
-	private boolean alive;
+	
+	private boolean died;
 	private Life life;
 	private boolean powerful;
 	private MapPower mapPower;
@@ -15,23 +15,23 @@ public abstract class Character extends Element {
 		super();
 		
 		setMovable(true);
-		setSpeed(new Speed(Speed.SPEED_MEDIUM));
+		setSpeed(Element.SPEED_MEDIUM);
 		
-		this.alive = true;
+		this.died = false;
 		this.life = new Life();
 		this.powerful = false;
 		this.mapPower = null;
 	}
 	
-	public boolean isAlive() {
-		return this.alive;
+	public boolean isDied() {
+		return this.died;
 	}
 	
-	public void setAlive(boolean alive) {
-		this.alive = alive;
+	public void setDied(boolean died) {
+		this.died = died;
 		
 		setChanged();
-		notifyObservers();
+		notifyAll();
 	}
 	
 	public Life getLife() {
@@ -67,5 +67,11 @@ public abstract class Character extends Element {
 		notifyObservers();
 	}
 	
-	public abstract void attak(Character character);
+	public void checkLife() {
+		if (this.life.getValue() == Life.LIFE_MIN) {
+			this.died = true;
+		}
+	}
+	
+	public abstract Score attak(Character character);
 }

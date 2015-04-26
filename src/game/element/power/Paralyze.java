@@ -8,12 +8,15 @@ import game.element.character.Nutritionist;
 
 public class Paralyze extends Power {
 
+	public static final String NAME = "Paralyze";
+	
 	/*
 	 * Paralyse le nutritioniste pendant 5 secondes
 	 * Empeche son attaque
 	 */
-	public static final String NAME = "Paralyze";
-	public static final int POWER_VALUE_PARALYZE_NUTRITIONIST = 5;
+	public static final int VALUE_STOP_NUTRITIONIST_MOVE = 5;
+	
+	private int value;
 	
 	private Timer timerPower;
 	
@@ -21,18 +24,32 @@ public class Paralyze extends Power {
 		super();
 		
 		setName(NAME);
-		setValue(POWER_VALUE_PARALYZE_NUTRITIONIST);
+		
+		this.value = VALUE_STOP_NUTRITIONIST_MOVE;
+	}
+	
+	public int getValue() {
+		return this.value;
+	}
+	
+	public void setValue(int value) {
+		this.value = value;
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	@Override
 	public void act(Character character) {
-		Nutritionist nutritionist = (Nutritionist) character;
-		
-		this.timerPower = new Timer();
-		
-		nutritionist.setMovable(false);
-		nutritionist.setPowerful(false);
-		endPowerAct(nutritionist);
+		if (character.getName().compareTo(Nutritionist.NAME) == 0) {
+			Nutritionist nutritionist = (Nutritionist) character;
+			
+			this.timerPower = new Timer();
+			
+			nutritionist.setMovable(false);
+			nutritionist.setPowerful(false);
+			endPowerAct(nutritionist);
+		}
 	}
 	
 	private synchronized void endPowerAct(final Nutritionist nutritionist) {

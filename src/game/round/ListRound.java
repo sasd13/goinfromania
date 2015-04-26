@@ -1,9 +1,8 @@
 package game.round;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
-public class ListRound extends Observable {
+public class ListRound {
 
 	private ArrayList<Round> list;
 	
@@ -14,26 +13,22 @@ public class ListRound extends Observable {
 	}
 	
 	public boolean add(Round round) {
-		boolean added =  this.list.add(round);
+		if (this.list.contains(round)) {
+			return false;
+		}
 		
-		setChanged();
-		notifyObservers();
-		
-		return added;
+		return this.list.add(round);
 	}
 	
 	public boolean remove(Round round) {
-		boolean removed = this.list.remove(round);
+		round = get(round.getId());
 		
-		setChanged();
-		notifyObservers();
-		
-		return removed;
+		return this.list.remove(round);
 	}
 	
 	public Round get(String roundId) {
-		for(Round round : this.list) {
-			if(round.getId().compareTo(roundId) == 0) {
+		for (Round round : this.list) {
+			if (round.getId().compareTo(roundId) == 0) {
 				return round;
 			}
 		}

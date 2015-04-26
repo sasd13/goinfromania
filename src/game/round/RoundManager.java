@@ -18,7 +18,9 @@ public class RoundManager {
 		Round round;
 		for(String roundId : tabRoundId) {
 			round = load(roundId);
-			listRound.add(round);
+			if (round != null) {
+				listRound.add(round);
+			}
 		}
 		
 		return listRound;

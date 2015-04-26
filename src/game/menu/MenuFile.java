@@ -57,10 +57,12 @@ public class MenuFile extends JMenu implements ActionListener {
 		if (item.getText().compareTo(ITEM_NEW) == 0) {
 			RoundLauncher.newRound();
 		} else if (item.getText().compareTo(ITEM_OPEN) == 0) {
-			RoundLauncher.openRound("id");
+			RoundLauncher.openRound(null);
 		} else if (item.getText().compareTo(ITEM_SAVE) == 0) {
 			Round round = Game.getInstance().getLiveRound();
-			RoundManager.save(round);
+			if (round != null && !round.isFinished()) {
+				RoundManager.save(round);
+			}
 		} else if (item.getText().compareTo(ITEM_SCORES) == 0) {
 			
 		} else if (item.getText().compareTo(ITEM_EXIT) == 0) {

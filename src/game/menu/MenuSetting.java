@@ -1,7 +1,7 @@
 package game.menu;
 
+import game.setting.GamePad;
 import game.setting.SettingLauncher;
-import game.setting.SettingType;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +11,7 @@ import javax.swing.JMenuItem;
 
 public class MenuSetting extends JMenu implements ActionListener {
 
-	private final String ITEM_GAMEPAD = "Game pad";
+	private final String ITEM_GAMEPAD = "Gamepad";
 	
 	public MenuSetting() {
 		super("Setting");
@@ -26,7 +26,7 @@ public class MenuSetting extends JMenu implements ActionListener {
 		JMenuItem item = (JMenuItem) e.getSource();
 		
 		if (item.getText().compareTo(ITEM_GAMEPAD) == 0) {
-			SettingLauncher.launch(SettingType.GAMEPAD);
+			SettingLauncher.launch(GamePad.NAME);
 		} else {
 			//Throw exception
 		}

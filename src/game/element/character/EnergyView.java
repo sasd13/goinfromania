@@ -18,7 +18,7 @@ public class EnergyView extends JPanel implements Observer {
 		
 		setLayout(new FlowLayout());
 		
-		this.labelEnergy = new JLabel(Energy.NAME + " : ");
+		this.labelEnergy = new JLabel("Energy : ");
 		add(this.labelEnergy);
 		
 		this.progressBarEnergyValue = new JProgressBar(Energy.ENERGY_MIN, Energy.ENERGY_MAX);
@@ -26,7 +26,7 @@ public class EnergyView extends JPanel implements Observer {
 	}
 	
 	@Override
-	public void update(Observable observable, Object arg) {		
+	public void update(Observable observable, Object arg) {
 		Energy energy = (Energy) observable;
 		
 		this.progressBarEnergyValue.setValue(energy.getValue());

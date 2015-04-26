@@ -1,6 +1,5 @@
-package game.element.item;
+package game.element;
 
-import game.element.Element;
 import game.element.draw.TrapDrawing;
 
 public class Trap extends Element {
@@ -10,7 +9,7 @@ public class Trap extends Element {
 	public Trap() {
 		super();
 		
-		setTitle(NAME);
+		setName(NAME);
 		setDrawing(new TrapDrawing());
 	}
 }
