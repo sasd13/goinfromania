@@ -1,6 +1,9 @@
-package game.setting;
+package game.view;
 
 import game.Game;
+import game.setting.DimensionConstants;
+import game.setting.Setting;
+import game.setting.SettingViewListener;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

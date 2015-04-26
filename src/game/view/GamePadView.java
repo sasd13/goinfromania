@@ -1,4 +1,6 @@
-package game.setting;
+package game.view;
+
+import game.setting.GamePad;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

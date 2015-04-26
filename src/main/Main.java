@@ -1,10 +1,10 @@
 package main;
 
-import game.GameLauncher;
+import game.GameController;
 
 public class Main {
 
 	public static void main(String[] args) {
-		GameLauncher.play();
+		GameController.getInstance().play();
 	}
 }

@@ -2,7 +2,6 @@ package game.round;
 
 import game.element.Element;
 import game.element.ListElement;
-import game.element.character.Life;
 import game.element.character.Pig;
 import game.setting.Level;
 
@@ -130,60 +129,16 @@ public class Round extends Observable {
 		return this.finished;
 	}
 	
-	public void checkPigLife() {
-		Life life = this.pig.getLife();
+	public void setFinished(boolean finished) {
+		this.finished = finished;
 		
-		if (life.getValue() == Life.LIFE_MIN) {
-			this.finished = true;
-			stop();
-		}
+		setChanged();
+		notifyObservers();
 	}
 	
-	public void checkEatenCake() {
-		int countEatenCake = this.pig.getCountEatenCake();
-		
-		if ((this.level == Level.EASY && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_EASY) 
-				|| (this.level == Level.NORMAL && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_NORMAL)
-				|| this.level == Level.HARD && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_HARD) {
-			this.finished = true;
-			stop();
-		}
-	}
-	
-	public void notifyCumulatedScore(Score score) {
+	public void cumulScore(Score score) {
 		if (score != null) {
 			this.cumulatedScore.setValue(this.cumulatedScore.getValue() + score.getValue());
 		}
-	}
-	
-	public void start() {
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void resume() {
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void pause() {
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void stop() {
-		RoundResult roundResult = null;
-		
-		if (this.finished) {
-			if (!this.pig.isDied()) {
-				roundResult = RoundResult.WIN;
-			} else {
-				roundResult = RoundResult.LOOSE;
-			}
-		} else {
-			roundResult = RoundResult.PROGRESS;
-		}
-		
-		RoundLauncher.exitLiveRound(roundResult);
 	}
 }

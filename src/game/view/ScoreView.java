@@ -1,4 +1,6 @@
-package game.round;
+package game.view;
+
+import game.round.Score;
 
 import java.awt.FlowLayout;
 import java.util.Observable;

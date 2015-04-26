@@ -1,12 +1,14 @@
-package game.round;
+package game.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import game.element.Element;
@@ -16,12 +18,15 @@ import game.element.character.Pig;
 import game.element.character.Virus;
 import game.element.food.Cake;
 import game.element.food.PoisonCake;
+import game.round.Round;
+import game.round.Score;
 import game.setting.DimensionConstants;
 
 public class RoundView extends JPanel implements Observer {
 
-	private PanelState panelState;
-	private PanelPig panelPig;
+	private JLabel labelRound, labelRoundValue;
+	private ScoreView scoreView;
+	private PigStateView pigStateView;
 	
 	private JPanel panelGrid;
 	private JButton buttonPigAttak,
@@ -36,8 +41,26 @@ public class RoundView extends JPanel implements Observer {
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(DimensionConstants.FRAME_WIDTH_LARGE, DimensionConstants.FRAME_HEIGHT_LARGE));
 		
-		this.panelPig = new PanelPig();
-		add(this.panelPig, BorderLayout.NORTH);
+		JPanel panelState = new JPanel();
+		panelState.setLayout(new GridLayout(1, 2));
+		
+		JPanel panelRound = new JPanel();
+		panelRound.setLayout(new FlowLayout());
+		
+		this.labelRound = new JLabel("Round : ");
+		panelRound.add(this.labelRound);
+		this.labelRoundValue = new JLabel();
+		panelRound.add(this.labelRoundValue);
+		
+		panelState.add(panelRound);
+		
+		this.scoreView = new ScoreView();
+		panelState.add(this.scoreView);
+		
+		add(panelState, BorderLayout.SOUTH);
+		
+		this.pigStateView = new PigStateView();
+		add(this.pigStateView, BorderLayout.NORTH);
 		
 		this.panelGrid = new JPanel();
 		this.panelGrid.setLayout(new BorderLayout());
@@ -69,20 +92,45 @@ public class RoundView extends JPanel implements Observer {
 		this.panelGrid.add(panelEnemies, BorderLayout.EAST);
 		
 		add(this.panelGrid, BorderLayout.CENTER);
-		
-		this.panelState = new PanelState();
-		add(this.panelState, BorderLayout.SOUTH);
+	}
+	
+	public PigStateView getPigView() {
+		return this.pigStateView;
+	}
+	
+	public JButton getButtonPigAttak() {
+		return this.buttonPigAttak;
+	}
+	
+	public JButton getButtonPigEatCake() {
+		return this.buttonPigEatCake;
+	}
+	
+	public JButton getButtonPigEatPoisonCake() {
+		return this.buttonPigEatPoisonCake;
+	}
+	
+	public JButton getButtonNutritionistAttak() {
+		return this.buttonNutritionistAttak;
+	}
+	
+	public JButton getButtonVirusAttak() {
+		return this.buttonVirusAttak;
 	}
 	
 	@Override
 	public void update(Observable observable, Object arg) {
 		Round round = (Round) observable;
 		
-		this.panelState.update(round, arg);
+		this.labelRoundValue.setText(String.valueOf(round.getId()));
+		
+		Score cumulatedScore = round.getCumulatedScore();
+		cumulatedScore.addObserver(this.scoreView);
+		this.scoreView.update(cumulatedScore, arg);
 		
 		Pig pig = round.getPig();
-		pig.addObserver(this.panelPig);
-		this.panelPig.update(pig, arg);
+		pig.addObserver(this.pigStateView);
+		this.pigStateView.update(pig, arg);
 		
 		draw(pig);
 		
@@ -90,13 +138,6 @@ public class RoundView extends JPanel implements Observer {
 		for(int i=0; i<listElement.size(); i++) {
 			draw(listElement.get(i));
 		}
-		
-		RoundViewListener listener = new RoundViewListener(round, this);
-		this.buttonPigAttak.addActionListener(listener);
-		this.buttonPigEatCake.addActionListener(listener);
-		this.buttonPigEatPoisonCake.addActionListener(listener);
-		this.buttonNutritionistAttak.addActionListener(listener);
-		this.buttonVirusAttak.addActionListener(listener);
 	}
 	
 	private void draw(Element element) {

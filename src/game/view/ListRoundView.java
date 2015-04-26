@@ -1,6 +1,7 @@
-package game.round;
+package game.view;
 
 import game.Game;
+import game.round.ListRound;
 import game.setting.DimensionConstants;
 
 import java.awt.Color;

@@ -1,6 +1,8 @@
 package game.setting;
 
 import game.Game;
+import game.view.GamePadView;
+import game.view.SettingView;
 
 public class SettingLauncher {
 

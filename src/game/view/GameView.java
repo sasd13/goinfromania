@@ -1,9 +1,8 @@
-package game;
+package game.view;
 
+import game.Game;
 import game.menu.GameMenu;
-import game.round.ListRoundView;
 import game.round.Round;
-import game.round.RoundView;
 
 import java.awt.BorderLayout;
 import java.util.Observable;
@@ -41,6 +40,14 @@ public class GameView extends JFrame implements Observer {
 		return instance;
 	}
 	
+	public ListRoundView getListRoundView() {
+		return this.listRoundView;
+	}
+	
+	public RoundView getLiveRoundView() {
+		return this.liveRoundView;
+	}
+	
 	@Override
 	public void update(Observable observable, Object arg) {		
 		Game game = (Game) observable;
@@ -49,14 +56,12 @@ public class GameView extends JFrame implements Observer {
 		
 		Round liveRound = game.getLiveRound();
 		if (liveRound != null) {
-			liveRound.addObserver(this.liveRoundView);
 			this.liveRoundView.update(liveRound, arg);
 		}
 	}
 	
 	public void displayListRoundView() {		
 		getContentPane().remove(this.liveRoundView);
-		this.listRoundView = new ListRoundView();
 		getContentPane().add(this.listRoundView, BorderLayout.CENTER);
 		
 		validate();
@@ -65,7 +70,6 @@ public class GameView extends JFrame implements Observer {
 	
 	public void displayLiveRoundView() {
 		getContentPane().remove(this.listRoundView);
-		this.liveRoundView = new RoundView();
 		getContentPane().add(this.liveRoundView, BorderLayout.CENTER);
 		
 		validate();

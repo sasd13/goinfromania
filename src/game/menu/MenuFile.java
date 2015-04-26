@@ -1,9 +1,8 @@
 package game.menu;
 
 import game.Game;
-import game.GameLauncher;
+import game.GameController;
 import game.round.Round;
-import game.round.RoundLauncher;
 import game.round.RoundManager;
 
 import java.awt.event.ActionEvent;
@@ -55,9 +54,9 @@ public class MenuFile extends JMenu implements ActionListener {
 		JMenuItem item = (JMenuItem) e.getSource();
 		
 		if (item.getText().compareTo(ITEM_NEW) == 0) {
-			RoundLauncher.newRound();
+			GameController.getInstance().newRound();
 		} else if (item.getText().compareTo(ITEM_OPEN) == 0) {
-			RoundLauncher.openRound(null);
+			GameController.getInstance().openRound(null);
 		} else if (item.getText().compareTo(ITEM_SAVE) == 0) {
 			Round round = Game.getInstance().getLiveRound();
 			if (round != null && !round.isFinished()) {
@@ -66,7 +65,7 @@ public class MenuFile extends JMenu implements ActionListener {
 		} else if (item.getText().compareTo(ITEM_SCORES) == 0) {
 			
 		} else if (item.getText().compareTo(ITEM_EXIT) == 0) {
-			GameLauncher.exit();
+			GameController.getInstance().exit();
 		} else {
 			//Throw exception
 		}
