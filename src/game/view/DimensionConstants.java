@@ -1,4 +1,4 @@
-package game.setting;
+package game.view;
 
 public class DimensionConstants {
 	

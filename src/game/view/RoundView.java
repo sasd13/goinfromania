@@ -20,7 +20,6 @@ import game.element.food.Cake;
 import game.element.food.PoisonCake;
 import game.round.Round;
 import game.round.Score;
-import game.setting.DimensionConstants;
 
 public class RoundView extends JPanel implements Observer {
 

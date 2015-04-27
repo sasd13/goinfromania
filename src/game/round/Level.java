@@ -1,4 +1,4 @@
-package game.setting;
+package game.round;
 
 public enum Level {
 	EASY,

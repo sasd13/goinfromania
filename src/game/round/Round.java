@@ -3,7 +3,6 @@ package game.round;
 import game.element.Element;
 import game.element.ListElement;
 import game.element.character.Pig;
-import game.setting.Level;
 
 import java.awt.Point;
 import java.util.Observable;

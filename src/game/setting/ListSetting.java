@@ -13,9 +13,7 @@ public class ListSetting {
 	}
 	
 	public boolean add(Setting setting) {
-		if (this.list.contains(setting)) {
-			return false;
-		}
+		setting = get(setting.getName());
 		
 		return this.list.add(setting);
 	}
@@ -28,7 +26,7 @@ public class ListSetting {
 	
 	public Setting get(String settingName) {
 		for (Setting setting : this.list) {
-			if (setting.getName().compareTo(settingName) == 0) {
+			if (setting.getId().compareTo(settingName) == 0) {
 				return setting;
 			}
 		}

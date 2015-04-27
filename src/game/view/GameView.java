@@ -27,7 +27,6 @@ public class GameView extends JFrame implements Observer {
 		setJMenuBar(this.gameMenu);
 		
 		this.listRoundView = new ListRoundView();
-		getContentPane().add(this.listRoundView, BorderLayout.CENTER);
 		
 		this.liveRoundView = new RoundView();
 	}
@@ -44,8 +43,16 @@ public class GameView extends JFrame implements Observer {
 		return this.listRoundView;
 	}
 	
+	public void setListRoundView(ListRoundView listRoundView) {
+		this.listRoundView = listRoundView;
+	}
+	
 	public RoundView getLiveRoundView() {
 		return this.liveRoundView;
+	}
+	
+	public void setLiveRoundView(RoundView liveRoundView) {
+		this.liveRoundView = liveRoundView;
 	}
 	
 	@Override
@@ -56,6 +63,7 @@ public class GameView extends JFrame implements Observer {
 		
 		Round liveRound = game.getLiveRound();
 		if (liveRound != null) {
+			liveRound.addObserver(this.liveRoundView);
 			this.liveRoundView.update(liveRound, arg);
 		}
 	}

@@ -31,23 +31,9 @@ public class GameController {
 		return instance;
 	}
 	
-	private void update() {
-		this.gameView.update(this.game, null);
-	}
-	
-	private void loadSettings() {
-		ListSetting listSetting = SettingManager.loadAll();
-		this.game.setMapSetting(listSetting);
-	}
-	
 	private void loadRounds() {
 		ListRound listRound = RoundManager.loadAll();
 		this.game.setListRound(listRound);
-	}
-	
-	private void saveSettings() {
-		ListSetting listSetting = this.game.getMapSetting();
-		SettingManager.saveAll(listSetting);
 	}
 	
 	private void saveRounds() {
@@ -56,56 +42,52 @@ public class GameController {
 	}
 	
 	public void play() {
-		loadSettings();
-		loadRounds();
+		showListRounds();
 		
 		this.gameView.pack();
 		this.gameView.setVisible(true);
-		
-		update();
 	}
 	
 	public void showListRounds() {
 		loadRounds();
 		
 		this.gameView.displayListRoundView();
-		update();
 	}
 	
 	public void showLiveRound() {
 		if (this.game.getLiveRound() != null) {
 			this.gameView.displayLiveRoundView();
-			update();
 		}
+	}
+	
+	private void configRound(Round round) {
+		//ListSetting listSetting = SettingManager.loadAll();
+		
+		RoundView liveRoundView = new RoundView();
+		RoundController roundController = new RoundController(round, liveRoundView);
+		roundController.start();
+		
+		this.gameView.setLiveRoundView(liveRoundView);
+		this.game.setLiveRound(round);
+		this.game.getListRound().add(round);
 	}
 	
 	public void newRound() {
 		Round liveRound = new Round(1);
-		RoundView liveRoundView = this.gameView.getLiveRoundView();
-		RoundController roundController = new RoundController(liveRound, liveRoundView);
-		roundController.start();
-		
-		this.game.getListRound().add(liveRound);
-		this.game.setLiveRound(liveRound);
+		configRound(liveRound);
 		
 		showLiveRound();
 	}
 	
 	public void openRound(String roundId) {
 		Round liveRound = this.game.getListRound().get(roundId);
-		RoundView liveRoundView = this.gameView.getLiveRoundView();
-		RoundController roundController = new RoundController(liveRound, liveRoundView);
-		
-		this.game.setLiveRound(liveRound);
+		configRound(liveRound);
 		
 		showLiveRound();
-		
-		roundController.start();
 	}
 	
 	public void exit() {
 		saveRounds();
-		saveSettings();
 		
 		this.gameView.dispose();
 	}

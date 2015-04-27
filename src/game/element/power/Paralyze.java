@@ -48,11 +48,11 @@ public class Paralyze extends Power {
 			
 			nutritionist.setMovable(false);
 			nutritionist.setPowerful(false);
-			endPowerAct(nutritionist);
+			endParalyzeAct(nutritionist);
 		}
 	}
 	
-	private synchronized void endPowerAct(final Nutritionist nutritionist) {
+	private synchronized void endParalyzeAct(final Nutritionist nutritionist) {
 		this.timerPower.cancel();
 		this.timerPower = new Timer();
 		

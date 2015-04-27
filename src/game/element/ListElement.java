@@ -11,10 +11,14 @@ public class ListElement {
 	}
 	
 	public boolean add(Element element) {
+		element = get(element.getId());
+		
 		return this.list.add(element);
 	}
 	
 	public boolean remove(Element element) {
+		element = get(element.getId());
+		
 		return this.list.remove(element);
 	}
 	

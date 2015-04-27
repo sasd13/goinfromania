@@ -56,7 +56,7 @@ public class MenuFile extends JMenu implements ActionListener {
 		if (item.getText().compareTo(ITEM_NEW) == 0) {
 			GameController.getInstance().newRound();
 		} else if (item.getText().compareTo(ITEM_OPEN) == 0) {
-			GameController.getInstance().openRound(null);
+			//GameController.getInstance().openRound(null);
 		} else if (item.getText().compareTo(ITEM_SAVE) == 0) {
 			Round round = Game.getInstance().getLiveRound();
 			if (round != null && !round.isFinished()) {

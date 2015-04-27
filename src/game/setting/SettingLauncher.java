@@ -1,6 +1,5 @@
 package game.setting;
 
-import game.Game;
 import game.view.GamePadView;
 import game.view.SettingView;
 
@@ -17,8 +16,7 @@ public class SettingLauncher {
 				break;
 		}
 		
-		ListSetting listSetting = Game.getInstance().getMapSetting();
-		Setting setting = listSetting.get(settingName);
+		Setting setting = SettingManager.load(settingName);
 		setting.addObserver(settingView);
 		settingView.update(setting, null);
 		

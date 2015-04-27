@@ -6,6 +6,11 @@ public class SettingManager {
 		Setting setting = null;
 		
 		//Database query
+		switch (settingName) {
+			case GamePad.NAME :
+				setting = new GamePad();
+				break;
+		}
 		
 		return setting;
 	}
@@ -13,11 +18,11 @@ public class SettingManager {
 	public static ListSetting loadAll() {
 		ListSetting listSetting = new ListSetting();
 		
-		String[] tabSettingId = new String[1]; //Database query
+		String[] tabSettingName = new String[1]; //Database query
 		
 		Setting setting;
-		for(String settingId : tabSettingId) {
-			setting = load(settingId);
+		for(String settingName : tabSettingName) {
+			setting = load(settingName);
 			if (setting != null) {
 				listSetting.add(setting);
 			}

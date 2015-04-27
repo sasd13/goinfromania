@@ -4,7 +4,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import game.element.character.Character;
-import game.element.character.Energy;
 import game.element.character.Pig;
 
 public class Diet extends Power {
@@ -23,8 +22,8 @@ public class Diet extends Power {
 	private int period;
 	private int value;
 	
-	private Timer timerPower;
-	private Timer timerDiet;
+	private Timer timerEat;
+	private Timer timerEnergy;
 	
 	public Diet() {
 		super();
@@ -73,17 +72,17 @@ public class Diet extends Power {
 	public void act(Character character) {
 		Pig pig = (Pig) character;
 		
-		this.timerPower = new Timer();
-		this.timerDiet = new Timer();
+		this.timerEat = new Timer();
+		this.timerEnergy = new Timer();
 		
 		pig.setGreedy(false);
-		startDiectAct(pig);
-		endPowerAct(pig);
+		startEnergyAct(pig);
+		endEatAct(pig);
 	}
 	
-	private synchronized void startDiectAct(final Pig pig) {
-		this.timerDiet.cancel();
-		this.timerDiet = new Timer();
+	private synchronized void startEnergyAct(final Pig pig) {
+		this.timerEnergy.cancel();
+		this.timerEnergy = new Timer();
 		
 		TimerTask task = new TimerTask() {
 			
@@ -91,23 +90,22 @@ public class Diet extends Power {
 			
 			@Override
 			public void run() {
-				if(count >= DELAY_STOP_PIG_EAT / PERIOD_DECREASE_PIG_ENERGY) {
-					timerDiet.cancel();
-					timerDiet.purge();
+				if (count >= DELAY_STOP_PIG_EAT / PERIOD_DECREASE_PIG_ENERGY) {
+					timerEnergy.cancel();
+					timerEnergy.purge();
 					return;
 				}
-				Energy energy = pig.getEnergy();
-				energy.setValue(energy.getValue() - getValue());
+				pig.setEnergy(pig.getEnergy() - getValue());
 				count++;
 			}
 		};
 		
-		this.timerDiet.schedule(task, getPeriod(), getPeriod());
+		this.timerEnergy.schedule(task, getPeriod(), getPeriod());
 	}
 	
-	private synchronized void endPowerAct(final Pig pig) {
-		this.timerPower.cancel();
-		this.timerPower = new Timer();
+	private synchronized void endEatAct(final Pig pig) {
+		this.timerEat.cancel();
+		this.timerEat = new Timer();
 		
 		TimerTask task = new TimerTask() {
 			
@@ -117,6 +115,6 @@ public class Diet extends Power {
 			}
 		};
 		
-		this.timerPower.schedule(task, getDelay());
+		this.timerEat.schedule(task, getDelay());
 	}
 }

@@ -1,9 +1,8 @@
 package game.element.power;
 
 import java.util.HashMap;
-import java.util.Observable;
 
-public class MapPower extends Observable {
+public class MapPower {
 
 	private HashMap<String, Power> map;
 	
@@ -13,22 +12,16 @@ public class MapPower extends Observable {
 		this.map = new HashMap<>();
 	}
 	
-	public Power put(Power pigPower) {
-		this.map.put(pigPower.getName(), pigPower);
+	public Power put(Power power) {
+		this.map.put(power.getName(), power);
 		
-		setChanged();
-		notifyObservers();
-		
-		return pigPower;
+		return power;
 	}
 	
-	public Power remove(Power pigPower) {
-		pigPower = this.map.remove(pigPower);
+	public Power remove(Power power) {
+		power = this.map.remove(power);
 		
-		setChanged();
-		notifyObservers();
-		
-		return pigPower;
+		return power;
 	}
 	
 	public Power get(String powerName) {

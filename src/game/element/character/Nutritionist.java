@@ -15,8 +15,8 @@ public class Nutritionist extends Character {
 		
 		setName(NAME);
 		setDrawing(new NutritionistDrawing());
-		setPowerful(true);
 		setScore(new Score(SCORE_VALUE));
+		setPowerful(true);
 		
 		MapPower mapPower = new MapPower();
 		mapPower.put(new Diet());
@@ -30,8 +30,6 @@ public class Nutritionist extends Character {
 			
 			Diet diet = (Diet) getMapPower().get(Diet.NAME);
 			diet.act(pig);
-			
-			pig.checkLife();
 		}
 		
 		return null;

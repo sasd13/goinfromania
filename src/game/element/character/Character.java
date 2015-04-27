@@ -6,8 +6,15 @@ import game.round.Score;
 
 public abstract class Character extends Element {
 	
+	public static final int LIFE_MIN = 0;
+	public static final int LIFE_MAX = 100;
+	
+	public static final int LIFE_LOW = 20;
+	public static final int LIFE_MEDIUM = 50;
+	public static final int LIFE_HIGH = 80;
+	
 	private boolean died;
-	private Life life;
+	private int life;
 	private boolean powerful;
 	private MapPower mapPower;
 	
@@ -18,7 +25,7 @@ public abstract class Character extends Element {
 		setSpeed(Element.SPEED_MEDIUM);
 		
 		this.died = false;
-		this.life = new Life();
+		this.life = LIFE_MAX;
 		this.powerful = false;
 		this.mapPower = null;
 	}
@@ -31,18 +38,28 @@ public abstract class Character extends Element {
 		this.died = died;
 		
 		setChanged();
-		notifyAll();
+		notifyObservers();
 	}
 	
-	public Life getLife() {
+	public int getLife() {
 		return this.life;
 	}
 	
-	public void setLife(Life life) {
-		this.life = life;
+	public void setLife(int life) {
+		if (life <= LIFE_MIN) {
+			this.life = LIFE_MIN;
+		} else if (life >= LIFE_MAX) {
+			this.life = LIFE_MAX;
+		} else {
+			this.life = life;
+		}
 		
 		setChanged();
 		notifyObservers();
+		
+		if (this.life == LIFE_MIN) {
+			setDied(true);
+		}
 	}
 	
 	public boolean isPowerful() {
@@ -65,12 +82,6 @@ public abstract class Character extends Element {
 		
 		setChanged();
 		notifyObservers();
-	}
-	
-	public void checkLife() {
-		if (this.life.getValue() == Life.LIFE_MIN) {
-			this.died = true;
-		}
 	}
 	
 	public abstract Score attak(Character character);

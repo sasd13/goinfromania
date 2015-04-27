@@ -40,7 +40,7 @@ public abstract class Element extends Observable {
 		this.drawing = null;
 		this.movable = false;
 		this.speed = SPEED_MIN;
-		this.score = new Score();
+		this.score = null;
 	}
 	
 	public String getId() {

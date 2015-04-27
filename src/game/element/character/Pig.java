@@ -22,7 +22,7 @@ public class Pig extends Character {
 	public static final int ENERGY_HIGH = 80;
 	
 	private boolean greedy;
-	private Energy energy;
+	private int energy;
 	private int countEatenCake;
 	
 	public Pig() {
@@ -39,7 +39,7 @@ public class Pig extends Character {
 		setMapPower(mapPower);
 		
 		this.greedy = true;
-		this.energy = new Energy();
+		this.energy = ENERGY_MIN;
 		this.countEatenCake = 0;
 	}
 	
@@ -54,42 +54,37 @@ public class Pig extends Character {
 		notifyObservers();
 	}
 	
-	public Energy getEnergy() {
+	public int getEnergy() {
 		return this.energy;
 	}
 	
-	public void setEnergy(Energy energy) {
-		this.energy = energy;
+	public void setEnergy(int energy) {
+		if (energy <= ENERGY_MIN) {
+			this.energy = ENERGY_MIN;
+		} else if (energy >= ENERGY_MAX) {
+			this.energy = ENERGY_MAX;
+		} else {
+			this.energy = energy;
+		}
 		
 		setChanged();
 		notifyObservers();
+		
+		if (this.energy == ENERGY_MIN) {
+			setPowerful(false);
+		}
 	}
 	
 	public int getCountEatenCake() {
 		return this.countEatenCake;
 	}
 	
-	public Score eat(Food food) {
-		if (this.greedy) {
-			food.act(this);
-			
-			if (food.getName().compareTo(Cake.NAME) == 0) {
-				this.countEatenCake++;
-			}
-			
-			return food.getScore();
-		}
-		
-		return new Score();
-	}
-	
 	@Override
 	public Score attak(Character character) {
 		if (isPowerful()) {
-			Power power = selectPowerWithEnergy();
+			Power power = getPowerWithEnergy();
 			power.act(character);
 			
-			character.checkLife();
 			if (character.isDied()) {
 				return character.getScore();
 			}
@@ -98,12 +93,27 @@ public class Pig extends Character {
 		return null;
 	}
 	
-	public Power selectPowerWithEnergy() {
+	public Score eat(Food food) {
+		if (this.greedy) {
+			food.act(this);
+			food.setEated(true);
+			
+			if (food.getName().compareTo(Cake.NAME) == 0) {
+				this.countEatenCake++;
+			}
+			
+			return food.getScore();
+		}
+		
+		return null;
+	}
+	
+	public Power getPowerWithEnergy() {
 		Power power = null;
 		
-		if (this.energy.getValue() == ENERGY_MAX) {
+		if (this.energy == ENERGY_MAX) {
 			power = getMapPower().get(SuperMissile.NAME);
-		} else if (this.energy.getValue() < ENERGY_MAX && this.energy.getValue() >= ENERGY_MEDIUM) {
+		} else if (this.energy < ENERGY_MAX && this.energy >= ENERGY_MEDIUM) {
 			power = getMapPower().get(Missile.NAME);
 		} else {
 			power = getMapPower().get(Paralyze.NAME);
