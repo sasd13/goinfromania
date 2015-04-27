@@ -177,16 +177,25 @@ public class RoundController {
 		if (keyCode == gamePad.getKeyStart()) {
 			State state = this.round.getState();
 			
+			String title = "Round";
+			String message = null;
+			
 			switch (state) {
 				case STARTED :
 					pause();
+					
+					message = "Paused";
 					break;
 				case PAUSED :
 					resume();
+					
+					message = "Resumed";
 					break;
 				default :
 					break;
 			}
+			
+			JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
 		} else {
 			Pig pig = this.round.getPig();
 			
@@ -204,6 +213,8 @@ public class RoundController {
 				Nutritionist nutritionist = new Nutritionist();
 				pigAttak(nutritionist);
 			}
+			
+			System.out.println(pig.getPosition());
 		}
 	}
 }

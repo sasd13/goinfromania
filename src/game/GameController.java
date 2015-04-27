@@ -33,10 +33,40 @@ public class GameController {
 	}
 	
 	public void play() {
+		loadSettings();
 		showListRounds();
 		
 		this.gameView.pack();
 		this.gameView.setVisible(true);
+	}
+	
+	public void exit() {
+		saveRounds();
+		
+		this.gameView.dispose();
+	}
+	
+	private void loadSettings() {
+		//ListSetting listSetting = SettingManager.loadAll();
+		
+		GamePad gamePad = (GamePad) SettingManager.load(GamePad.NAME);
+		this.game.setGamePad(gamePad);
+	}
+	
+	private void loadRounds() {
+		ListRound listRound = RoundManager.loadAll();
+		this.game.setListRound(listRound);
+	}
+	
+	private void saveRounds() {
+		ListRound listRound = this.game.getListRound();
+		RoundManager.saveAll(listRound);
+	}
+	
+	public void showListRounds() {
+		loadRounds();
+		
+		this.gameView.displayListRoundView();
 	}
 	
 	public void newRound() {
@@ -65,34 +95,9 @@ public class GameController {
 		showListRounds();
 	}
 	
-	public void exit() {
-		saveRounds();
-		
-		this.gameView.dispose();
-	}
-	
-	private void loadRounds() {
-		ListRound listRound = RoundManager.loadAll();
-		this.game.setListRound(listRound);
-	}
-	
-	private void saveRounds() {
-		ListRound listRound = this.game.getListRound();
-		RoundManager.saveAll(listRound);
-	}
-	
-	public void showListRounds() {
-		loadRounds();
-		
-		this.gameView.displayListRoundView();
-	}
-	
 	private RoundController configRound(Round round) {
 		RoundController roundController = null;
 		
-		//ListSetting listSetting = SettingManager.loadAll();
-		GamePad gamePad = (GamePad) SettingManager.load(GamePad.NAME);
-		this.game.setGamePad(gamePad);
 		this.game.getListRound().add(round);
 		
 		RoundView roundView = new RoundView();		
