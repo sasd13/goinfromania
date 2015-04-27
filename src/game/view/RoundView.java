@@ -1,6 +1,7 @@
 package game.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -27,7 +28,7 @@ public class RoundView extends JPanel implements Observer {
 	private ScoreView scoreView;
 	private PigStateView pigStateView;
 	
-	private JPanel panelGrid;
+	private JPanel panelGrid, panelDraw;
 	private JButton buttonPigAttak,
 		buttonPigEatCake,
 		buttonPigEatPoisonCake,
@@ -90,11 +91,15 @@ public class RoundView extends JPanel implements Observer {
 		
 		this.panelGrid.add(panelEnemies, BorderLayout.EAST);
 		
+		this.panelDraw = new JPanel();
+		this.panelDraw.setBackground(Color.BLACK);
+		panelGrid.add(this.panelDraw, BorderLayout.CENTER);
+		
 		add(this.panelGrid, BorderLayout.CENTER);
 	}
 	
-	public PigStateView getPigView() {
-		return this.pigStateView;
+	public JPanel getPanelDraw() {
+		return this.panelDraw;
 	}
 	
 	public JButton getButtonPigAttak() {
@@ -123,7 +128,7 @@ public class RoundView extends JPanel implements Observer {
 		
 		this.labelRoundValue.setText(String.valueOf(round.getId()));
 		
-		Score cumulatedScore = round.getCumulatedScore();
+		Score cumulatedScore = round.getScore();
 		cumulatedScore.addObserver(this.scoreView);
 		this.scoreView.update(cumulatedScore, arg);
 		

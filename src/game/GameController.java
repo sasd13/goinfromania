@@ -4,6 +4,7 @@ import game.round.ListRound;
 import game.round.Round;
 import game.round.RoundController;
 import game.round.RoundManager;
+import game.round.State;
 import game.view.GameView;
 import game.view.RoundView;
 
@@ -19,7 +20,6 @@ public class GameController {
 		this.gameView = GameView.getInstance();
 		
 		this.game.addObserver(this.gameView);
-		this.gameView.update(this.game, null);
 	}
 	
 	public static synchronized GameController getInstance() {
@@ -85,7 +85,7 @@ public class GameController {
 	}
 	
 	public void closeRound(Round round) {
-		if (round.isFinished()) {
+		if (round.getState() == State.FINISHED) {
 			this.game.getListRound().remove(round);
 		}
 		

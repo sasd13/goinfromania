@@ -2,14 +2,23 @@ package game.round;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
+import game.Game;
 import game.GameController;
 import game.element.Element;
 import game.element.ListElement;
+import game.element.character.Character;
+import game.element.character.Nutritionist;
 import game.element.character.Pig;
+import game.element.character.Virus;
+import game.element.food.Cake;
+import game.element.food.Food;
 import game.round.Round;
 import game.round.RoundManager;
 import game.round.Result;
+import game.setting.Direction;
+import game.setting.GamePad;
 import game.view.RoundView;
 
 public class RoundController {
@@ -29,7 +38,7 @@ public class RoundController {
 		Pig pig = this.round.getPig();
 		
 		if (pig.isDied()) {
-			this.round.setFinished(true);
+			this.round.setState(State.FINISHED);
 			stop();
 		}
 	}
@@ -43,7 +52,7 @@ public class RoundController {
 		if ((level == Level.EASY && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_EASY)
 				|| (level == Level.NORMAL && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_NORMAL)
 				|| (level == Level.HARD && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_HARD)) {
-			this.round.setFinished(true);
+			this.round.setState(State.FINISHED);
 			stop();
 		}
 	}
@@ -61,8 +70,81 @@ public class RoundController {
 		}
 	}
 	
+	public void pigAttak(Character character) {
+		this.round.getPig().attak(character);
+		
+		if (character.getName().compareTo(Nutritionist.NAME) == 0) {
+			cumulScore(ScoreConstantes.CHARACTER_NUTRITIONIST);
+		} else if (character.getName().compareTo(Virus.NAME) == 0) {
+			cumulScore(ScoreConstantes.CHARACTER_VIRUS);
+		}
+	}
+	
+	public void enemyAttak(Character character) {
+		character.attak(this.round.getPig());
+		
+		checkPigLife();
+	}
+	
+	public void pigEat(Food food) {
+		this.round.getPig().eat(food);
+		
+		if (food.getName().compareTo(Cake.NAME) == 0) {
+			cumulScore(ScoreConstantes.FOOD_CAKE);
+		}
+		
+		checkEatenCake();
+	}
+	
+	private void cumulScore(int scoreValue) {
+		Score cumulatedScore = this.round.getScore();
+		
+		cumulatedScore.setValue(cumulatedScore.getValue() + scoreValue);
+	}
+	
+	public void manageKeyCode(int keyCode) {
+		GamePad gamePad = Game.getInstance().getGamePad();
+		
+		if (keyCode == gamePad.getKeyStart()) {
+			State state = this.round.getState();
+			
+			switch (state) {
+				case STARTED :
+					pause();
+					break;
+				case PAUSED :
+					resume();
+					break;
+				default :
+					break;
+			}
+		} else {
+			Pig pig = this.round.getPig();
+			
+			if (keyCode == gamePad.getKeyMoveLeft()) {
+				pig.move(Direction.LEFT);
+			} else if (keyCode == gamePad.getKeyMoveRight()) {
+				pig.move(Direction.RIGHT);
+			} else if (keyCode == gamePad.getKeyMoveUp()) {
+				pig.move(Direction.UP);
+			} else if (keyCode == gamePad.getKeyMoveDown()) {
+				pig.move(Direction.DOWN);
+			} else if (keyCode == gamePad.getKeyPigAttak()) {
+				
+			}
+		}
+	}
+	
 	public void start() {
-		GridListener listener = new GridListener(this, this.round);
+		this.round.setState(State.STARTED);
+		
+		GamePadListener gamePadListener = new GamePadListener(this);
+		
+		JPanel panelDraw = this.roundView.getPanelDraw();
+		panelDraw.addKeyListener(gamePadListener);
+		panelDraw.setFocusable(true);
+		
+		GridListener listener = new GridListener(this);
 		
 		JButton buttonPigAttak = this.roundView.getButtonPigAttak();
 		buttonPigAttak.addActionListener(listener);
@@ -81,55 +163,46 @@ public class RoundController {
 	}
 	
 	public void resume() {
-		
+		this.round.setState(State.STARTED);
 	}
 	
 	public void pause() {
-		
+		this.round.setState(State.PAUSED);
 	}
 	
 	public void stop() {
-		if (this.round.isFinished()) {
-			Pig pig = this.round.getPig();
-			
-			if (!pig.isDied()) {
-				this.round.setResult(Result.WIN);
-			} else {
-				this.round.setResult(Result.LOOSE);
-			}
-		} else {
-			this.round.setResult(Result.PROGRESS);
-		}
-		
 		String title = null;
 		String message = null;
-		int selected;
 		
-		switch (this.round.getResult()) {
-			case WIN :
-				
-				title = "Result";
-				message = "YOU WIN :-)!!! Score : " + this.round.getCumulatedScore().getValue();
-				
-				JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
-				break;
-			case LOOSE :
-				
-				title = "Result";
-				message = "YOU LOOSE... :-(";
-				
-				JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
-				break;
-			case PROGRESS :
+		switch (this.round.getState()) {
+			case STOPPED :
 				title = "Exit round";
 				message = "Save your progress?";
 				
-				selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_OPTION);
+				int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_OPTION);
 				switch (selected) {
 					case JOptionPane.YES_OPTION :
 						saveRound();
 						break;					
 				}
+				break;
+			case FINISHED :
+				title = "Result";
+				
+				Pig pig = this.round.getPig();
+				if (pig.isDied()) {
+					this.round.setResult(Result.LOOSE);
+					
+					message = "YOU LOOSE... :-(";
+					JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
+				} else {
+					this.round.setResult(Result.WIN);
+					
+					message = "YOU WIN :-)!!! Score : " + this.round.getScore().getValue();
+					JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
+				}
+				break;
+			default :
 				break;
 		}
 		
@@ -137,7 +210,7 @@ public class RoundController {
 	}
 	
 	public void saveRound() {
-		if (!this.round.isFinished()) {
+		if (this.round.getState() != State.FINISHED) {
 			RoundManager.save(this.round);
 		}
 	}

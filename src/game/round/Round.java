@@ -17,11 +17,11 @@ public class Round extends Observable {
 	private String id;
 	private int number;
 	private Level level;
+	private State state;
 	private Result result;
-	private Score cumulatedScore;
+	private Score score;
 	private Pig pig;
 	private ListElement listElement;
-	private boolean finished;
 	
 	public Round(int number) {
 		super();
@@ -30,10 +30,9 @@ public class Round extends Observable {
 		this.id = "id-round-" + countRound;
 		this.number = number;
 		this.level = Level.EASY;
-		this.cumulatedScore = new Score();
+		this.score = new Score();
 		this.pig = new Pig();
 		this.listElement = new ListElement();
-		this.finished = false;
 	}
 	
 	public String getId() {
@@ -62,6 +61,17 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
+	public State getState() {
+		return this.state;
+	}
+	
+	public void setState(State state) {
+		this.state = state;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
 	public Result getResult() {
 		return this.result;
 	}
@@ -73,12 +83,12 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
-	public Score getCumulatedScore() {
-		return this.cumulatedScore;
+	public Score getScore() {
+		return this.score;
 	}
 	
-	public void setCumulatedScore(Score cumulatedScore) {
-		this.cumulatedScore = cumulatedScore;
+	public void setScore(Score score) {
+		this.score = score;
 		
 		setChanged();
 		notifyObservers();
@@ -134,22 +144,5 @@ public class Round extends Observable {
 		}
 		
 		return null;
-	}
-	
-	public boolean isFinished() {
-		return this.finished;
-	}
-	
-	public void setFinished(boolean finished) {
-		this.finished = finished;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void cumulScore(Score score) {
-		if (score != null) {
-			this.cumulatedScore.setValue(this.cumulatedScore.getValue() + score.getValue());
-		}
 	}
 }

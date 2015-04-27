@@ -8,7 +8,6 @@ import game.element.power.Missile;
 import game.element.power.Power;
 import game.element.power.Paralyze;
 import game.element.power.SuperMissile;
-import game.round.Score;
 
 public class Pig extends Character {
 
@@ -80,20 +79,14 @@ public class Pig extends Character {
 	}
 	
 	@Override
-	public Score attak(Character character) {
+	public void attak(Character character) {
 		if (isPowerful()) {
 			Power power = getPowerWithEnergy();
 			power.act(character);
-			
-			if (character.isDied()) {
-				return character.getScore();
-			}
 		}
-		
-		return null;
 	}
 	
-	public Score eat(Food food) {
+	public void eat(Food food) {
 		if (this.greedy) {
 			food.act(this);
 			food.setEated(true);
@@ -101,11 +94,7 @@ public class Pig extends Character {
 			if (food.getName().compareTo(Cake.NAME) == 0) {
 				this.countEatenCake++;
 			}
-			
-			return food.getScore();
 		}
-		
-		return null;
 	}
 	
 	public Power getPowerWithEnergy() {

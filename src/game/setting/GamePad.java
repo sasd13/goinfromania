@@ -7,7 +7,6 @@ public class GamePad extends Setting {
 	public static final String NAME = "GamePad";
 	
 	private int keyStart;
-	private int keyPause;
 	private int keyMoveLeft;
 	private int keyMoveRight;
 	private int keyMoveUp;
@@ -28,17 +27,6 @@ public class GamePad extends Setting {
 	
 	public void setKeyStart(int keyStart) {
 		this.keyStart = keyStart;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public int getKeyPause() {
-		return this.keyPause;
-	}
-	
-	public void setKeyPause(int keyPause) {
-		this.keyPause = keyPause;
 		
 		setChanged();
 		notifyObservers();
@@ -102,7 +90,6 @@ public class GamePad extends Setting {
 	@Override
 	public void reset() {		
 		setKeyStart(KeyEvent.VK_ENTER);
-		setKeyPause(KeyEvent.VK_ESCAPE);
 		setKeyMoveLeft(KeyEvent.VK_LEFT);
 		setKeyMoveRight(KeyEvent.VK_RIGHT);
 		setKeyMoveUp(KeyEvent.VK_UP);

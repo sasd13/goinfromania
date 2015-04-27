@@ -5,7 +5,6 @@ import java.awt.Point;
 import java.util.Observable;
 
 import game.element.draw.Drawing;
-import game.round.Score;
 import game.setting.Direction;
 
 public abstract class Element extends Observable {
@@ -26,7 +25,6 @@ public abstract class Element extends Observable {
 	private Drawing drawing;
 	private boolean movable;
 	private int speed;
-	private Score score;
 	
 	protected Element() {
 		super();
@@ -40,7 +38,6 @@ public abstract class Element extends Observable {
 		this.drawing = null;
 		this.movable = false;
 		this.speed = SPEED_MIN;
-		this.score = null;
 	}
 	
 	public String getId() {
@@ -119,17 +116,6 @@ public abstract class Element extends Observable {
 	
 	public void setSpeed(int speed) {
 		this.speed = speed;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public Score getScore() {
-		return this.score;
-	}
-	
-	public void setScore(Score score) {
-		this.score = score;
 		
 		setChanged();
 		notifyObservers();

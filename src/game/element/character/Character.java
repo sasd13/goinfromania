@@ -2,7 +2,6 @@ package game.element.character;
 
 import game.element.Element;
 import game.element.power.MapPower;
-import game.round.Score;
 
 public abstract class Character extends Element {
 	
@@ -88,5 +87,5 @@ public abstract class Character extends Element {
 		notifyObservers();
 	}
 	
-	public abstract Score attak(Character character);
+	public abstract void attak(Character character);
 }
