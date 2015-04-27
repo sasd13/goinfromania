@@ -37,37 +37,6 @@ public class GameController {
 		this.gameView.setVisible(true);
 	}
 	
-	private void loadRounds() {
-		ListRound listRound = RoundManager.loadAll();
-		this.game.setListRound(listRound);
-	}
-	
-	private void saveRounds() {
-		ListRound listRound = this.game.getListRound();
-		RoundManager.saveAll(listRound);
-	}
-	
-	public void showListRounds() {
-		loadRounds();
-		
-		this.gameView.displayListRoundView();
-	}
-	
-	private RoundController configRound(Round round) {
-		RoundController roundController = null;
-		
-		//ListSetting listSetting = SettingManager.loadAll();
-		
-		this.game.getListRound().add(round);
-		
-		RoundView roundView = new RoundView();		
-		roundController = new RoundController(round, roundView);
-		
-		this.gameView.setLiveRoundView(roundView);
-		
-		return roundController;
-	}
-	
 	public void newRound() {
 		Round round = new Round(1);
 		RoundController roundController = configRound(round);
@@ -98,5 +67,36 @@ public class GameController {
 		saveRounds();
 		
 		this.gameView.dispose();
+	}
+	
+	private void loadRounds() {
+		ListRound listRound = RoundManager.loadAll();
+		this.game.setListRound(listRound);
+	}
+	
+	private void saveRounds() {
+		ListRound listRound = this.game.getListRound();
+		RoundManager.saveAll(listRound);
+	}
+	
+	public void showListRounds() {
+		loadRounds();
+		
+		this.gameView.displayListRoundView();
+	}
+	
+	private RoundController configRound(Round round) {
+		RoundController roundController = null;
+		
+		//ListSetting listSetting = SettingManager.loadAll();
+		
+		this.game.getListRound().add(round);
+		
+		RoundView roundView = new RoundView();		
+		roundController = new RoundController(round, roundView);
+		
+		this.gameView.setLiveRoundView(roundView);
+		
+		return roundController;
 	}
 }

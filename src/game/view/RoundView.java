@@ -20,12 +20,14 @@ import game.element.character.Virus;
 import game.element.food.Cake;
 import game.element.food.PoisonCake;
 import game.round.Round;
-import game.round.Score;
 
 public class RoundView extends JPanel implements Observer {
 
-	private JLabel labelRound, labelRoundValue;
-	private ScoreView scoreView;
+	private JLabel labelRound, 
+		labelRoundValue,
+		labelScore,
+		labelScoreValue;
+	
 	private PigStateView pigStateView;
 	
 	private JPanel panelGrid, panelDraw;
@@ -54,8 +56,15 @@ public class RoundView extends JPanel implements Observer {
 		
 		panelState.add(panelRound);
 		
-		this.scoreView = new ScoreView();
-		panelState.add(this.scoreView);
+		JPanel panelScore = new JPanel();
+		panelRound.setLayout(new FlowLayout());
+		
+		this.labelScore = new JLabel("Score : ");
+		panelScore.add(this.labelScore);
+		this.labelScoreValue = new JLabel();
+		panelScore.add(this.labelScoreValue);
+		
+		panelState.add(panelScore);
 		
 		add(panelState, BorderLayout.SOUTH);
 		
@@ -127,10 +136,7 @@ public class RoundView extends JPanel implements Observer {
 		Round round = (Round) observable;
 		
 		this.labelRoundValue.setText(String.valueOf(round.getId()));
-		
-		Score cumulatedScore = round.getScore();
-		cumulatedScore.addObserver(this.scoreView);
-		this.scoreView.update(cumulatedScore, arg);
+		this.labelScoreValue.setText(String.valueOf(round.getScore()));
 		
 		Pig pig = round.getPig();
 		pig.addObserver(this.pigStateView);

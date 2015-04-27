@@ -19,7 +19,7 @@ public class Round extends Observable {
 	private Level level;
 	private State state;
 	private Result result;
-	private Score score;
+	private int score;
 	private Pig pig;
 	private ListElement listElement;
 	
@@ -30,7 +30,7 @@ public class Round extends Observable {
 		this.id = "id-round-" + countRound;
 		this.number = number;
 		this.level = Level.EASY;
-		this.score = new Score();
+		this.score = 0;
 		this.pig = new Pig();
 		this.listElement = new ListElement();
 	}
@@ -83,11 +83,11 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
-	public Score getScore() {
+	public int getScore() {
 		return this.score;
 	}
 	
-	public void setScore(Score score) {
+	public void setScore(int score) {
 		this.score = score;
 		
 		setChanged();
