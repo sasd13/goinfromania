@@ -1,6 +1,6 @@
 package game.round;
 
-public enum RoundResult {
+public enum Result {
 	WIN,
 	LOOSE,
 	PROGRESS

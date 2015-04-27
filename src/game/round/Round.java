@@ -17,6 +17,7 @@ public class Round extends Observable {
 	private String id;
 	private int number;
 	private Level level;
+	private Result result;
 	private Score cumulatedScore;
 	private Pig pig;
 	private ListElement listElement;
@@ -56,6 +57,17 @@ public class Round extends Observable {
 	
 	public void setLevel(Level level) {
 		this.level = level;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public Result getResult() {
+		return this.result;
+	}
+	
+	public void setResult(Result result) {
+		this.result = result;
 		
 		setChanged();
 		notifyObservers();

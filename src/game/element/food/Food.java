@@ -24,6 +24,10 @@ public abstract class Food extends Element {
 		
 		setChanged();
 		notifyObservers();
+		
+		if (this.eated) {
+			setVisible(false);
+		}
 	}
 	
 	public int getEffectValue() {

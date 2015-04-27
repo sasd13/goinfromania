@@ -8,6 +8,7 @@ public class GameMenu extends JMenuBar {
 		super();
 		
 		add(new MenuFile());
+		add(new MenuRound());
 		add(new MenuSetting());
 	}
 }

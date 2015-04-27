@@ -4,8 +4,6 @@ import game.round.ListRound;
 import game.round.Round;
 import game.round.RoundController;
 import game.round.RoundManager;
-import game.setting.ListSetting;
-import game.setting.SettingManager;
 import game.view.GameView;
 import game.view.RoundView;
 
@@ -21,6 +19,7 @@ public class GameController {
 		this.gameView = GameView.getInstance();
 		
 		this.game.addObserver(this.gameView);
+		this.gameView.update(this.game, null);
 	}
 	
 	public static synchronized GameController getInstance() {
@@ -29,6 +28,13 @@ public class GameController {
 		}
 		
 		return instance;
+	}
+	
+	public void play() {
+		showListRounds();
+		
+		this.gameView.pack();
+		this.gameView.setVisible(true);
 	}
 	
 	private void loadRounds() {
@@ -41,49 +47,51 @@ public class GameController {
 		RoundManager.saveAll(listRound);
 	}
 	
-	public void play() {
-		showListRounds();
-		
-		this.gameView.pack();
-		this.gameView.setVisible(true);
-	}
-	
 	public void showListRounds() {
 		loadRounds();
 		
 		this.gameView.displayListRoundView();
 	}
 	
-	public void showLiveRound() {
-		if (this.game.getLiveRound() != null) {
-			this.gameView.displayLiveRoundView();
-		}
-	}
-	
-	private void configRound(Round round) {
+	private RoundController configRound(Round round) {
+		RoundController roundController = null;
+		
 		//ListSetting listSetting = SettingManager.loadAll();
 		
-		RoundView liveRoundView = new RoundView();
-		RoundController roundController = new RoundController(round, liveRoundView);
-		roundController.start();
-		
-		this.gameView.setLiveRoundView(liveRoundView);
-		this.game.setLiveRound(round);
 		this.game.getListRound().add(round);
+		
+		RoundView roundView = new RoundView();		
+		roundController = new RoundController(round, roundView);
+		
+		this.gameView.setLiveRoundView(roundView);
+		
+		return roundController;
 	}
 	
 	public void newRound() {
-		Round liveRound = new Round(1);
-		configRound(liveRound);
+		Round round = new Round(1);
+		RoundController roundController = configRound(round);
 		
-		showLiveRound();
+		this.gameView.displayLiveRoundView();
+		roundController.start();
 	}
 	
 	public void openRound(String roundId) {
-		Round liveRound = this.game.getListRound().get(roundId);
-		configRound(liveRound);
+		Round round = this.game.getListRound().get(roundId);
+		RoundController roundController = configRound(round);
 		
-		showLiveRound();
+		this.gameView.displayLiveRoundView();
+		roundController.start();
+	}
+	
+	public void closeRound(Round round) {
+		if (round.isFinished()) {
+			this.game.getListRound().remove(round);
+		}
+		
+		saveRounds();
+		
+		showListRounds();
 	}
 	
 	public void exit() {

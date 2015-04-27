@@ -3,7 +3,6 @@ package game;
 import java.util.Observable;
 
 import game.round.ListRound;
-import game.round.Round;
 
 public class Game extends Observable {
 
@@ -12,13 +11,11 @@ public class Game extends Observable {
 	public static final String NAME = "Goinfr'o'mania";
 	
 	private ListRound listRound;
-	private Round liveRound;
 	
 	private Game() {
 		super();
 		
 		this.listRound = null;
-		this.liveRound = null;
 	}
 	
 	public static synchronized Game getInstance() {
@@ -35,17 +32,6 @@ public class Game extends Observable {
 	
 	public void setListRound(ListRound listRound) {
 		this.listRound = listRound;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public Round getLiveRound() {
-		return this.liveRound;
-	}
-	
-	public void setLiveRound(Round liveRound) {
-		this.liveRound = liveRound;
 		
 		setChanged();
 		notifyObservers();

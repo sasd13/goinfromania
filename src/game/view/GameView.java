@@ -2,7 +2,6 @@ package game.view;
 
 import game.Game;
 import game.menu.GameMenu;
-import game.round.Round;
 
 import java.awt.BorderLayout;
 import java.util.Observable;
@@ -60,12 +59,6 @@ public class GameView extends JFrame implements Observer {
 		Game game = (Game) observable;
 		
 		this.listRoundView.update(game, arg);
-		
-		Round liveRound = game.getLiveRound();
-		if (liveRound != null) {
-			liveRound.addObserver(this.liveRoundView);
-			this.liveRoundView.update(liveRound, arg);
-		}
 	}
 	
 	public void displayListRoundView() {		

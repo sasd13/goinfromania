@@ -3,12 +3,13 @@ package game.round;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import game.Game;
 import game.GameController;
+import game.element.Element;
+import game.element.ListElement;
 import game.element.character.Pig;
 import game.round.Round;
 import game.round.RoundManager;
-import game.round.RoundResult;
+import game.round.Result;
 import game.view.RoundView;
 
 public class RoundController {
@@ -19,6 +20,45 @@ public class RoundController {
 	public RoundController(Round round, RoundView roundView) {
 		this.round = round;
 		this.roundView = roundView;
+		
+		this.round.addObserver(this.roundView);
+		this.roundView.update(this.round, null);
+	}
+	
+	public void checkPigLife() {
+		Pig pig = this.round.getPig();
+		
+		if (pig.isDied()) {
+			this.round.setFinished(true);
+			stop();
+		}
+	}
+	
+	public void checkEatenCake() {
+		Level level = this.round.getLevel();
+		
+		Pig pig = this.round.getPig();
+		int countEatenCake = pig.getCountEatenCake();
+		
+		if ((level == Level.EASY && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_EASY)
+				|| (level == Level.NORMAL && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_NORMAL)
+				|| (level == Level.HARD && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_HARD)) {
+			this.round.setFinished(true);
+			stop();
+		}
+	}
+	
+	public void checkListElement() {
+		ListElement listElement = this.round.getListElement();
+		
+		Element element;
+		for(int i=0; i<listElement.size(); i++) {
+			element = listElement.get(i);
+			
+			if (!element.isVisible()) {
+				listElement.remove(element);
+			}
+		}
 	}
 	
 	public void start() {
@@ -49,31 +89,24 @@ public class RoundController {
 	}
 	
 	public void stop() {
-		RoundResult roundResult = null;
-		
 		if (this.round.isFinished()) {
 			Pig pig = this.round.getPig();
 			
 			if (!pig.isDied()) {
-				roundResult = RoundResult.WIN;
+				this.round.setResult(Result.WIN);
 			} else {
-				roundResult = RoundResult.LOOSE;
+				this.round.setResult(Result.LOOSE);
 			}
 		} else {
-			roundResult = RoundResult.PROGRESS;
+			this.round.setResult(Result.PROGRESS);
 		}
 		
-		exitRound(roundResult);
-	}
-	
-	public void exitRound(RoundResult roundResult) {
 		String title = null;
 		String message = null;
 		int selected;
 		
-		switch (roundResult) {
+		switch (this.round.getResult()) {
 			case WIN :
-				Game.getInstance().getListRound().remove(this.round);
 				
 				title = "Result";
 				message = "YOU WIN :-)!!! Score : " + this.round.getCumulatedScore().getValue();
@@ -81,7 +114,6 @@ public class RoundController {
 				JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
 				break;
 			case LOOSE :
-				Game.getInstance().getListRound().remove(this.round);
 				
 				title = "Result";
 				message = "YOU LOOSE... :-(";
@@ -95,35 +127,18 @@ public class RoundController {
 				selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_OPTION);
 				switch (selected) {
 					case JOptionPane.YES_OPTION :
-						RoundManager.save(this.round);
+						saveRound();
 						break;					
 				}
 				break;
 		}
 		
-		GameController.getInstance().showListRounds();
+		GameController.getInstance().closeRound(this.round);
 	}
 	
-	public void checkPigLife() {
-		Pig pig = this.round.getPig();
-		
-		if (pig.isDied()) {
-			this.round.setFinished(true);
-			stop();
-		}
-	}
-	
-	public void checkEatenCake() {
-		Level level = this.round.getLevel();
-		
-		Pig pig = this.round.getPig();
-		int countEatenCake = pig.getCountEatenCake();
-		
-		if ((level == Level.EASY && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_EASY)
-				|| (level == Level.NORMAL && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_NORMAL)
-				|| (level == Level.HARD && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_HARD)) {
-			this.round.setFinished(true);
-			stop();
+	public void saveRound() {
+		if (!this.round.isFinished()) {
+			RoundManager.save(this.round);
 		}
 	}
 }
