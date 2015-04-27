@@ -4,11 +4,11 @@ public class DimensionConstants {
 	
 	public static final int FRAME_WIDTH_SMALL = 600;
 	public static final int FRAME_WIDTH_MEDIUM = 700;
-	public static final int FRAME_WIDTH_LARGE = 800;
+	public static final int FRAME_WIDTH_LARGE = 806; //Ne pas modifier
 	
 	public static final int FRAME_HEIGHT_SMALL = 400;
 	public static final int FRAME_HEIGHT_MEDIUM = 500;
-	public static final int FRAME_HEIGHT_LARGE = 600;
+	public static final int FRAME_HEIGHT_LARGE = 604; //Ne pas modifier
 	
 	public static final int PANEL_WIDTH_SMALL = 320;
 	public static final int PANEL_WIDTH_MEDIUM = 480;

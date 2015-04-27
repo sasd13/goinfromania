@@ -1,5 +1,6 @@
-package game.element;
+package game.element.item;
 
+import game.element.Element;
 import game.element.draw.WallDrawing;
 
 public class Wall extends Element {

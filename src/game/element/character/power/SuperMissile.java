@@ -1,4 +1,4 @@
-package game.element.power;
+package game.element.character.power;
 
 public class SuperMissile extends Missile {
 

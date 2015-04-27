@@ -1,4 +1,4 @@
-package game.element.power;
+package game.element.character.power;
 
 import java.util.HashMap;
 
@@ -7,8 +7,6 @@ public class MapPower {
 	private HashMap<String, Power> map;
 	
 	public MapPower() {
-		super();
-		
 		this.map = new HashMap<>();
 	}
 	

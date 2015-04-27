@@ -1,4 +1,4 @@
-package game.element.power;
+package game.element.character.power;
 
 import game.element.character.Character;
 

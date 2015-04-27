@@ -1,8 +1,6 @@
 package game.round;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import game.Game;
 import game.GameController;
@@ -19,6 +17,7 @@ import game.round.RoundManager;
 import game.round.Result;
 import game.setting.Direction;
 import game.setting.GamePad;
+import game.view.GridView;
 import game.view.RoundView;
 
 public class RoundController {
@@ -37,28 +36,18 @@ public class RoundController {
 	public void start() {
 		this.round.setState(State.STARTED);
 		
-		GamePadListener gamePadListener = new GamePadListener(this);
+		GridView gridView = this.roundView.getGridView();
 		
-		JPanel panelDraw = this.roundView.getPanelDraw();
-		panelDraw.addKeyListener(gamePadListener);
-		panelDraw.setFocusable(true);
+		GamePadListener gamePadListener = new GamePadListener(this);
+		gridView.getPanelDraw().addKeyListener(gamePadListener);
+		gridView.getPanelDraw().setFocusable(true);
+		gridView.getPanelDraw().requestFocusInWindow();
 		
 		GridListener listener = new GridListener(this);
-		
-		JButton buttonPigAttak = this.roundView.getButtonPigAttak();
-		buttonPigAttak.addActionListener(listener);
-		
-		JButton buttonPigEatCake = this.roundView.getButtonPigEatCake();
-		buttonPigEatCake.addActionListener(listener);
-		
-		JButton buttonPigEatPoisonCake = this.roundView.getButtonPigEatPoisonCake();
-		buttonPigEatPoisonCake.addActionListener(listener);
-		
-		JButton buttonNutritionistAttak = this.roundView.getButtonNutritionistAttak();
-		buttonNutritionistAttak.addActionListener(listener);
-		
-		JButton buttonVirusAttak = this.roundView.getButtonVirusAttak();
-		buttonVirusAttak.addActionListener(listener);
+		gridView.getButtonPigEatCake().addActionListener(listener);
+		gridView.getButtonPigEatPoisonCake().addActionListener(listener);
+		gridView.getButtonNutritionistAttak().addActionListener(listener);
+		gridView.getButtonVirusAttak().addActionListener(listener);
 	}
 	
 	public void resume() {
@@ -153,10 +142,12 @@ public class RoundController {
 	public void pigAttak(Character character) {
 		this.round.getPig().attak(character);
 		
-		if (character.getName().compareTo(Nutritionist.NAME) == 0) {
-			cumulScore(ScoreConstantes.CHARACTER_NUTRITIONIST);
-		} else if (character.getName().compareTo(Virus.NAME) == 0) {
-			cumulScore(ScoreConstantes.CHARACTER_VIRUS);
+		if (character.isDied()) {
+			if (character.getName().compareTo(Nutritionist.NAME) == 0) {
+				cumulScore(ScoreConstantes.CHARACTER_NUTRITIONIST);
+			} else if (character.getName().compareTo(Virus.NAME) == 0) {
+				cumulScore(ScoreConstantes.CHARACTER_VIRUS);
+			}
 		}
 	}
 	
@@ -208,7 +199,10 @@ public class RoundController {
 			} else if (keyCode == gamePad.getKeyMoveDown()) {
 				pig.move(Direction.DOWN);
 			} else if (keyCode == gamePad.getKeyPigAttak()) {
+				//TODO
 				
+				Nutritionist nutritionist = new Nutritionist();
+				pigAttak(nutritionist);
 			}
 		}
 	}

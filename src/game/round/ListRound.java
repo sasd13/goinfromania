@@ -7,8 +7,6 @@ public class ListRound {
 	private ArrayList<Round> list;
 	
 	public ListRound() {
-		super();
-		
 		this.list = new ArrayList<>();
 	}
 	

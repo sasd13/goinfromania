@@ -5,6 +5,8 @@ import game.round.Round;
 import game.round.RoundController;
 import game.round.RoundManager;
 import game.round.State;
+import game.setting.GamePad;
+import game.setting.SettingManager;
 import game.view.GameView;
 import game.view.RoundView;
 
@@ -89,7 +91,8 @@ public class GameController {
 		RoundController roundController = null;
 		
 		//ListSetting listSetting = SettingManager.loadAll();
-		
+		GamePad gamePad = (GamePad) SettingManager.load(GamePad.NAME);
+		this.game.setGamePad(gamePad);
 		this.game.getListRound().add(round);
 		
 		RoundView roundView = new RoundView();		

@@ -1,8 +1,6 @@
 package game.view;
 
 import game.Game;
-import game.setting.Setting;
-import game.setting.SettingViewListener;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -14,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class SettingView extends JFrame implements Observer {
+public abstract class SettingView extends JFrame implements Observer {
 
 	public static final String BUTTONCLOSE_NAME = "Close";
 	public static final String BUTTONRESET_NAME = "Reset";
@@ -44,17 +42,17 @@ public class SettingView extends JFrame implements Observer {
 		panel.add(this.buttonReset);
 	}
 	
+	public JButton getButtonClose() {
+		return this.buttonClose;
+	}
+	
+	public JButton getButtonReset() {
+		return this.buttonReset;
+	}
+	
 	@Override
 	public void update(Observable observable, Object arg) {
-		final Setting setting = (Setting) observable;
+		//TODO
 		
-		SettingViewListener listener = new SettingViewListener(setting, this);
-		if(this.buttonClose.getActionListeners().length == 0) {
-			this.buttonClose.addActionListener(listener);
-		}
-		
-		if(this.buttonReset.getActionListeners().length == 0) {
-			this.buttonReset.addActionListener(listener);
-		}
 	}
 }

@@ -4,6 +4,7 @@ import game.Game;
 import game.menu.GameMenu;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,6 +22,9 @@ public class GameView extends JFrame implements Observer {
 		super(Game.NAME);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setResizable(false);
+		Dimension dimension = new Dimension(DimensionConstants.FRAME_WIDTH_LARGE, DimensionConstants.FRAME_HEIGHT_LARGE);
+		setPreferredSize(dimension);
 		
 		this.gameMenu = new GameMenu();
 		setJMenuBar(this.gameMenu);

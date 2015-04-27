@@ -1,13 +1,13 @@
 package game.element.character;
 
+import game.element.character.power.MapPower;
+import game.element.character.power.Missile;
+import game.element.character.power.Paralyze;
+import game.element.character.power.Power;
+import game.element.character.power.SuperMissile;
 import game.element.draw.PigDrawing;
 import game.element.food.Cake;
 import game.element.food.Food;
-import game.element.power.MapPower;
-import game.element.power.Missile;
-import game.element.power.Power;
-import game.element.power.Paralyze;
-import game.element.power.SuperMissile;
 
 public class Pig extends Character {
 

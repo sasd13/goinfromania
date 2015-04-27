@@ -7,8 +7,6 @@ public class ListSetting {
 	private ArrayList<Setting> list;
 	
 	public ListSetting() {
-		super();
-		
 		this.list = new ArrayList<>();
 	}
 	

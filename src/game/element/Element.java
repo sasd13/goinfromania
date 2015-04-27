@@ -9,6 +9,12 @@ import game.setting.Direction;
 
 public abstract class Element extends Observable {
 	
+	public static final int POSITION_X_MIN = 0;
+	public static final int POSITION_X_MAX = 800; //Ne pas modifier
+	
+	public static final int POSITION_Y_MIN = 0;
+	public static final int POSITION_Y_MAX = -500; //Ne pas modifier
+	
 	public static final int SPEED_MIN = 0;
 	public static final int SPEED_MAX = 50;
 	
@@ -141,6 +147,18 @@ public abstract class Element extends Observable {
 			case DOWN :
 				nextPosition.y = this.position.y - this.speed;
 				break;
+		}
+		
+		if (nextPosition.x <= POSITION_X_MIN) {
+			nextPosition.x = POSITION_X_MIN;
+		} else if (nextPosition.x >= POSITION_X_MAX) {
+			nextPosition.x = POSITION_X_MAX;
+		}
+		
+		if (nextPosition.y >= POSITION_Y_MIN) {
+			nextPosition.y = POSITION_Y_MIN;
+		} else if (nextPosition.y <= POSITION_Y_MAX) {
+			nextPosition.y = POSITION_Y_MAX;
 		}
 		
 		return nextPosition;

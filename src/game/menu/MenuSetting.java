@@ -1,7 +1,7 @@
 package game.menu;
 
 import game.setting.GamePad;
-import game.setting.SettingLauncher;
+import game.setting.SettingController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +26,7 @@ public class MenuSetting extends JMenu implements ActionListener {
 		JMenuItem item = (JMenuItem) e.getSource();
 		
 		if (item.getText().compareTo(ITEM_GAMEPAD) == 0) {
-			SettingLauncher.launch(GamePad.NAME);
+			SettingController.launch(GamePad.NAME);
 		} else {
 			//Throw exception
 		}

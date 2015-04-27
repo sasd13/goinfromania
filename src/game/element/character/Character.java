@@ -1,7 +1,7 @@
 package game.element.character;
 
 import game.element.Element;
-import game.element.power.MapPower;
+import game.element.character.power.MapPower;
 
 public abstract class Character extends Element {
 	

@@ -1,8 +1,8 @@
 package game.element.character;
 
+import game.element.character.power.Diet;
+import game.element.character.power.MapPower;
 import game.element.draw.NutritionistDrawing;
-import game.element.power.Diet;
-import game.element.power.MapPower;
 
 public class Nutritionist extends Character {
 
