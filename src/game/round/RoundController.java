@@ -213,8 +213,6 @@ public class RoundController {
 				Nutritionist nutritionist = new Nutritionist();
 				pigAttak(nutritionist);
 			}
-			
-			System.out.println(pig.getPosition());
 		}
 	}
 }

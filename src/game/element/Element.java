@@ -132,7 +132,7 @@ public abstract class Element extends Observable {
 			return this.position;
 		}
 		
-		Point nextPosition = new Point();
+		Point nextPosition = new Point(this.position.x, this.position.y);
 		
 		switch (direction) {
 			case LEFT :
