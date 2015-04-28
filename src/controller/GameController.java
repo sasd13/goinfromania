@@ -1,14 +1,11 @@
-package game;
+package controller;
 
+import view.GameView;
+import view.RoundView;
+import db.RoundDAO;
+import game.Game;
 import game.round.ListRound;
 import game.round.Round;
-import game.round.RoundController;
-import game.round.RoundManager;
-import game.round.State;
-import game.setting.GamePad;
-import game.setting.SettingManager;
-import game.view.GameView;
-import game.view.RoundView;
 
 public class GameController {
 
@@ -33,7 +30,6 @@ public class GameController {
 	}
 	
 	public void play() {
-		loadSettings();
 		showListRounds();
 		
 		this.gameView.pack();
@@ -46,21 +42,14 @@ public class GameController {
 		this.gameView.dispose();
 	}
 	
-	private void loadSettings() {
-		//ListSetting listSetting = SettingManager.loadAll();
-		
-		GamePad gamePad = (GamePad) SettingManager.load(GamePad.NAME);
-		this.game.setGamePad(gamePad);
-	}
-	
 	private void loadRounds() {
-		ListRound listRound = RoundManager.loadAll();
+		ListRound listRound = RoundDAO.loadAll();
 		this.game.setListRound(listRound);
 	}
 	
 	private void saveRounds() {
 		ListRound listRound = this.game.getListRound();
-		RoundManager.saveAll(listRound);
+		RoundDAO.saveAll(listRound);
 	}
 	
 	public void showListRounds() {
@@ -86,11 +75,9 @@ public class GameController {
 	}
 	
 	public void closeRound(Round round) {
-		if (round.getState() == State.FINISHED) {
+		if (round.isFinished()) {
 			this.game.getListRound().remove(round);
 		}
-		
-		saveRounds();
 		
 		showListRounds();
 	}

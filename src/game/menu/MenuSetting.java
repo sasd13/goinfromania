@@ -1,13 +1,14 @@
 package game.menu;
 
 import game.setting.GamePad;
-import game.setting.SettingController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
+import controller.SettingController;
 
 public class MenuSetting extends JMenu implements ActionListener {
 
@@ -28,7 +29,7 @@ public class MenuSetting extends JMenu implements ActionListener {
 		if (item.getText().compareTo(ITEM_GAMEPAD) == 0) {
 			SettingController.launch(GamePad.NAME);
 		} else {
-			//Throw exception
+			//TODO Throw exception
 		}
 	}
 }

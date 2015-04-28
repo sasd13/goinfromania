@@ -1,6 +1,10 @@
-package game.setting;
+package db;
 
-public class SettingManager {
+import game.setting.GamePad;
+import game.setting.ListSetting;
+import game.setting.Setting;
+
+public class SettingDAO {
 
 	public static Setting load(String settingName) {
 		Setting setting = null;
@@ -9,6 +13,9 @@ public class SettingManager {
 		switch (settingName) {
 			case GamePad.NAME :
 				setting = new GamePad();
+				break;
+			default :
+				//TODO Throw exception
 				break;
 		}
 		

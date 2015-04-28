@@ -1,6 +1,5 @@
 package game.element.food;
 
-import game.element.Element;
 import game.element.character.Pig;
 import game.element.draw.CakeDrawing;
 
@@ -16,7 +15,7 @@ public class Cake extends Food {
 		setName(NAME);
 		setDrawing(new CakeDrawing());
 		setMovable(true);
-		setSpeed(Element.SPEED_LOW);
+		setSpeed(SPEED_LOW);
 		setEffectValue(VALUE_EVOLVE_PIG_ENERGY);
 	}
 	

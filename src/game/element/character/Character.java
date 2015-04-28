@@ -1,7 +1,7 @@
 package game.element.character;
 
 import game.element.Element;
-import game.element.character.power.MapPower;
+import game.element.power.MapPower;
 
 public abstract class Character extends Element {
 	
@@ -49,9 +49,9 @@ public abstract class Character extends Element {
 	}
 	
 	public void setLife(int life) {
-		if (life <= LIFE_MIN) {
+		if (life < LIFE_MIN) {
 			this.life = LIFE_MIN;
-		} else if (life >= LIFE_MAX) {
+		} else if (life > LIFE_MAX) {
 			this.life = LIFE_MAX;
 		} else {
 			this.life = life;

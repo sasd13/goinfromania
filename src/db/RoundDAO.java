@@ -1,6 +1,9 @@
-package game.round;
+package db;
 
-public class RoundManager {
+import game.round.ListRound;
+import game.round.Round;
+
+public class RoundDAO {
 
 	public static Round load(String roundId) {
 		Round round = null;

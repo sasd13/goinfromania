@@ -1,4 +1,4 @@
-package game.view;
+package view;
 
 import game.setting.GamePad;
 
@@ -32,12 +32,9 @@ public class GamePadView extends SettingView {
 		super();
 		
 		JPanel panelForm = new JPanel();
-		getContentPane().add(panelForm, BorderLayout.CENTER);
-		
-		panelForm.setBorder(BorderFactory.createTitledBorder(
-                "Set keyboard controller touchs"));
 		
 		panelForm.setLayout(new GridLayout(7, 2));
+		panelForm.setBorder(BorderFactory.createTitledBorder("Set keyboard controller touchs"));
 		
 		panelForm.add(new JLabel(LABEL_START));
 		this.textFieldKeyStart = new JTextField();
@@ -62,6 +59,8 @@ public class GamePadView extends SettingView {
 		panelForm.add(new JLabel(LABEL_PIGATTAK));
 		this.textFieldKeyPigAttak = new JTextField();
 		panelForm.add(this.textFieldKeyPigAttak);
+		
+		getContentPane().add(panelForm, BorderLayout.CENTER);
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package game.element.character.power;
+package game.element.power;
 
 import game.element.character.Character;
 
@@ -17,6 +17,8 @@ public class Missile extends Power {
 		super();
 		
 		setName(NAME);
+		setMovable(true);
+		setSpeed(SPEED_HIGH);
 		
 		this.value = VALUE_DECREASE_CHARACTER_LIFE;
 	}

@@ -1,4 +1,4 @@
-package game.element.character.power;
+package game.element.power;
 
 public class SuperMissile extends Missile {
 
@@ -13,6 +13,8 @@ public class SuperMissile extends Missile {
 		super();
 		
 		setName(NAME);
+		setMovable(true);
+		setSpeed(SPEED_LOW);
 		setValue(VALUE_DECREASE_CHARACTER_LIFE);
 	}
 }

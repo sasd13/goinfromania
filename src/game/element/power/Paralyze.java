@@ -1,4 +1,4 @@
-package game.element.character.power;
+package game.element.power;
 
 import java.util.Timer;
 import java.util.TimerTask;

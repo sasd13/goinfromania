@@ -11,16 +11,10 @@ public class ListRound {
 	}
 	
 	public boolean add(Round round) {
-		if (this.list.contains(round)) {
-			return false;
-		}
-		
 		return this.list.add(round);
 	}
 	
 	public boolean remove(Round round) {
-		round = get(round.getId());
-		
 		return this.list.remove(round);
 	}
 	

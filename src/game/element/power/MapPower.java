@@ -1,4 +1,4 @@
-package game.element.character.power;
+package game.element.power;
 
 import java.util.HashMap;
 
@@ -11,15 +11,11 @@ public class MapPower {
 	}
 	
 	public Power put(Power power) {
-		this.map.put(power.getName(), power);
-		
-		return power;
+		return this.map.put(power.getName(), power);
 	}
 	
 	public Power remove(Power power) {
-		power = this.map.remove(power);
-		
-		return power;
+		return this.map.remove(power);
 	}
 	
 	public Power get(String powerName) {

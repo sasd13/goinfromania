@@ -1,4 +1,4 @@
-package game.view;
+package view;
 
 import java.awt.BorderLayout;
 import java.util.Observable;

@@ -1,4 +1,4 @@
-package game.element.character.power;
+package game.element.power;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -76,11 +76,11 @@ public class Diet extends Power {
 		this.timerEnergy = new Timer();
 		
 		pig.setGreedy(false);
-		startEnergyAct(pig);
-		endEatAct(pig);
+		startDietAct(pig);
+		endDietAct(pig);
 	}
 	
-	private synchronized void startEnergyAct(final Pig pig) {
+	private synchronized void startDietAct(final Pig pig) {
 		this.timerEnergy.cancel();
 		this.timerEnergy = new Timer();
 		
@@ -103,7 +103,7 @@ public class Diet extends Power {
 		this.timerEnergy.schedule(task, getPeriod(), getPeriod());
 	}
 	
-	private synchronized void endEatAct(final Pig pig) {
+	private synchronized void endDietAct(final Pig pig) {
 		this.timerEat.cancel();
 		this.timerEat = new Timer();
 		

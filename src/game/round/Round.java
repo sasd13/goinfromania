@@ -18,6 +18,7 @@ public class Round extends Observable {
 	private int number;
 	private Level level;
 	private State state;
+	private boolean finished;
 	private Result result;
 	private int score;
 	private Pig pig;
@@ -67,6 +68,17 @@ public class Round extends Observable {
 	
 	public void setState(State state) {
 		this.state = state;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public boolean isFinished() {
+		return this.finished;
+	}
+	
+	public void setFinished(boolean finished) {
+		this.finished = finished;
 		
 		setChanged();
 		notifyObservers();

@@ -1,12 +1,12 @@
 package game.menu;
 
-import game.GameController;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
+import controller.GameController;
 
 public class MenuFile extends JMenu implements ActionListener {
 
@@ -59,7 +59,7 @@ public class MenuFile extends JMenu implements ActionListener {
 		} else if (item.getText().compareTo(ITEM_EXIT) == 0) {
 			GameController.getInstance().exit();
 		} else {
-			//Throw exception
+			//TODO Throw exception
 		}
 	}
 }

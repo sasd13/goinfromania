@@ -4,16 +4,20 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.util.Observable;
 
+import view.DimensionConstants;
 import game.element.draw.Drawing;
 import game.setting.Direction;
 
 public abstract class Element extends Observable {
 	
 	public static final int POSITION_X_MIN = 0;
-	public static final int POSITION_X_MAX = 800; //Ne pas modifier
+	public static final int POSITION_X_MAX = DimensionConstants.GRID_WIDTH;
 	
-	public static final int POSITION_Y_MIN = 0;
-	public static final int POSITION_Y_MAX = -500; //Ne pas modifier
+	/*
+	 * Ordonnée inversée
+	 */
+	public static final int POSITION_Y_MAX = 0;
+	public static final int POSITION_Y_MIN = 0 - DimensionConstants.GRID_HEIGHT;
 	
 	public static final int SPEED_MIN = 0;
 	public static final int SPEED_MAX = 50;
@@ -76,7 +80,7 @@ public abstract class Element extends Observable {
 		return this.position;
 	}
 	
-	private void setPosition(Point position) {
+	public void setPosition(Point position) {
 		this.position = position;
 		
 		setChanged();
@@ -121,7 +125,13 @@ public abstract class Element extends Observable {
 	}
 	
 	public void setSpeed(int speed) {
-		this.speed = speed;
+		if (speed < SPEED_MIN) {
+			this.speed = SPEED_MIN;
+		} else if (speed > SPEED_MAX) {
+			this.speed = SPEED_MAX;
+		} else {
+			this.speed = speed;
+		}
 		
 		setChanged();
 		notifyObservers();
@@ -147,18 +157,24 @@ public abstract class Element extends Observable {
 			case DOWN :
 				nextPosition.y = this.position.y - this.speed;
 				break;
+			default :
+				//TODO Throw exception
+				break;
 		}
 		
-		if (nextPosition.x <= POSITION_X_MIN) {
+		/*
+		 * Recadrage
+		 */
+		if (nextPosition.x < POSITION_X_MIN) {
 			nextPosition.x = POSITION_X_MIN;
-		} else if (nextPosition.x >= POSITION_X_MAX) {
-			nextPosition.x = POSITION_X_MAX;
+		} else if ((nextPosition.x + this.dimension.width) > POSITION_X_MAX) {
+			nextPosition.x = POSITION_X_MAX - this.dimension.width;
 		}
 		
-		if (nextPosition.y >= POSITION_Y_MIN) {
-			nextPosition.y = POSITION_Y_MIN;
-		} else if (nextPosition.y <= POSITION_Y_MAX) {
+		if (nextPosition.y > POSITION_Y_MAX) {
 			nextPosition.y = POSITION_Y_MAX;
+		} else if ((nextPosition.y - this.dimension.height) < POSITION_Y_MIN) {
+			nextPosition.y = POSITION_Y_MIN + this.dimension.height;
 		}
 		
 		return nextPosition;
