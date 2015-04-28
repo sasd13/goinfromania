@@ -4,7 +4,7 @@ import view.GameView;
 import view.RoundView;
 import db.RoundDAO;
 import game.Game;
-import game.round.ListRound;
+import game.round.ListRounds;
 import game.round.Round;
 
 public class GameController {
@@ -43,13 +43,13 @@ public class GameController {
 	}
 	
 	private void loadRounds() {
-		ListRound listRound = RoundDAO.loadAll();
-		this.game.setListRound(listRound);
+		ListRounds listRounds = RoundDAO.loadAll();
+		this.game.setListRound(listRounds);
 	}
 	
 	private void saveRounds() {
-		ListRound listRound = this.game.getListRound();
-		RoundDAO.saveAll(listRound);
+		ListRounds listRounds = this.game.getListRound();
+		RoundDAO.saveAll(listRounds);
 	}
 	
 	public void showListRounds() {

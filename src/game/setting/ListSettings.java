@@ -2,11 +2,11 @@ package game.setting;
 
 import java.util.ArrayList;
 
-public class ListSetting {
+public class ListSettings {
 	
 	private ArrayList<Setting> list;
 	
-	public ListSetting() {
+	public ListSettings() {
 		this.list = new ArrayList<>();
 	}
 	
@@ -24,7 +24,7 @@ public class ListSetting {
 	
 	public Setting get(String settingName) {
 		for (Setting setting : this.list) {
-			if (setting.getId().compareTo(settingName) == 0) {
+			if (setting.getName().compareTo(settingName) == 0) {
 				return setting;
 			}
 		}

@@ -1,9 +1,10 @@
 package game.element.character;
 
-import game.element.draw.PigDrawing;
-import game.element.food.Cake;
-import game.element.food.Food;
-import game.element.power.MapPower;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+
+import game.element.ImageLoader;
+import game.element.power.ListPowers;
 import game.element.power.Missile;
 import game.element.power.Paralyze;
 import game.element.power.Power;
@@ -13,6 +14,7 @@ import game.element.power.SuperMissile;
 public class Pig extends Character {
 
 	public static final String NAME = "Pig";
+	public static final String IMAGE_PATH = IMAGE_DIR + "pig.png";
 	
 	public static final int ENERGY_MIN = 0;
 	public static final int ENERGY_MAX = 100;
@@ -29,15 +31,19 @@ public class Pig extends Character {
 		super();
 		
 		setName(NAME);
-		setDrawing(new PigDrawing());
+		setDimension(new Dimension(100, 100));
 		setPowerful(true);
 		
-		MapPower mapPower = new MapPower();
-		mapPower.put(new Run());
-		mapPower.put(new Paralyze());
-		mapPower.put(new Missile());
-		mapPower.put(new SuperMissile());
-		setMapPower(mapPower);
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_PATH);
+		setImage(image);
+		System.out.println(getDimension());
+		
+		ListPowers listPowers = new ListPowers();
+		listPowers.add(new Run());
+		listPowers.add(new Paralyze());
+		listPowers.add(new Missile());
+		listPowers.add(new SuperMissile());
+		setListPowers(listPowers);
 		
 		this.greedy = true;
 		this.energy = ENERGY_MIN;
@@ -76,37 +82,24 @@ public class Pig extends Character {
 		return this.countEatenCake;
 	}
 	
-	@Override
-	public void attak(Character character) {
-		if (isPowerful()) {
-			Power power = getPowerWithEnergy();
-			power.setPosition(getPosition());
-			power.act(character);
-		}
-	}
-	
-	public void eat(Food food) {
-		if (this.greedy) {
-			food.setEated(true);
-			food.act(this);
-			
-			if (food.getName().compareTo(Cake.NAME) == 0) {
-				this.countEatenCake++;
-			}
-		}
+	public void cakeEaten() {
+		this.countEatenCake++;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Power getPowerWithEnergy() {
 		Power power = null;
 		
 		if (this.energy == ENERGY_MAX) {
-			power = getMapPower().get(SuperMissile.NAME);
+			power = getListPowers().get(SuperMissile.NAME);
 		} else if (this.energy < ENERGY_MAX && this.energy >= ENERGY_MEDIUM) {
-			power = getMapPower().get(Missile.NAME);
+			power = getListPowers().get(Missile.NAME);
 		} else if (this.energy == ENERGY_MIN) {
-			power = getMapPower().get(Run.NAME);
+			power = getListPowers().get(Run.NAME);
 		} else {
-			power = getMapPower().get(Paralyze.NAME);
+			power = getListPowers().get(Paralyze.NAME);
 		}
 		
 		return power;

@@ -1,16 +1,21 @@
 package game.element.item;
 
+import java.awt.image.BufferedImage;
+
 import game.element.Element;
-import game.element.draw.WallDrawing;
+import game.element.ImageLoader;
 
 public class Wall extends Element {
 	
 	public static final String NAME = "Wall";
+	public static final String IMAGE_PATH = IMAGE_DIR + "wall.png";
 	
 	public Wall() {
 		super();
 		
 		setName(NAME);
-		setDrawing(new WallDrawing());
+		
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_PATH);
+		setImage(image);
 	}
 }

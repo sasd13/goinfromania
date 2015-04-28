@@ -1,32 +1,27 @@
 package game.element.character;
 
-import game.element.draw.NutritionistDrawing;
+import java.awt.image.BufferedImage;
+
+import game.element.ImageLoader;
 import game.element.power.Diet;
-import game.element.power.MapPower;
+import game.element.power.ListPowers;
 
 public class Nutritionist extends Character {
 
 	public static final String NAME = "Nutritionist";
+	public static final String IMAGE_PATH = IMAGE_DIR + "nutritionist.png";
 	
 	public Nutritionist() {
 		super();
 		
 		setName(NAME);
-		setDrawing(new NutritionistDrawing());
 		setPowerful(true);
 		
-		MapPower mapPower = new MapPower();
-		mapPower.put(new Diet());
-		setMapPower(mapPower);
-	}
-	
-	@Override
-	public void attak(Character character) {
-		if (isPowerful()) {
-			Pig pig = (Pig) character;
-			
-			Diet diet = (Diet) getMapPower().get(Diet.NAME);
-			diet.act(pig);
-		}
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_PATH);
+		setImage(image);
+		
+		ListPowers listPowers = new ListPowers();
+		listPowers.add(new Diet());
+		setListPowers(listPowers);
 	}
 }

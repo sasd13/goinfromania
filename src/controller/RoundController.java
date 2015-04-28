@@ -2,18 +2,21 @@ package controller;
 
 import javax.swing.JOptionPane;
 
-import view.GridView;
+import view.ArenaView;
 import view.RoundView;
 import db.RoundDAO;
 import db.SettingDAO;
 import game.element.Element;
-import game.element.ListElement;
+import game.element.ListElements;
 import game.element.character.Character;
 import game.element.character.Nutritionist;
 import game.element.character.Pig;
 import game.element.character.Virus;
 import game.element.food.Cake;
 import game.element.food.Food;
+import game.element.power.Diet;
+import game.element.power.Disease;
+import game.element.power.Power;
 import game.round.GamePadListener;
 import game.round.GridListener;
 import game.round.Level;
@@ -30,6 +33,7 @@ public class RoundController {
 	private RoundView roundView;
 	
 	private GamePad gamePad;
+	private ArenaView arenaView;
 	
 	public RoundController(Round round, RoundView roundView) {
 		this.round = round;
@@ -44,18 +48,22 @@ public class RoundController {
 		
 		this.gamePad = loadGamePad();
 		
-		GridView gridView = this.roundView.getGridView();
+		this.arenaView = this.roundView.getGridView();
+		
+		ListElements listElements = this.round.getListElement();
+		listElements.addObserver(this.arenaView);
+		this.arenaView.update(listElements, null);
 		
 		GamePadListener gamePadListener = new GamePadListener(this);
-		gridView.getPanelDraw().addKeyListener(gamePadListener);
-		gridView.getPanelDraw().setFocusable(true);
-		gridView.getPanelDraw().requestFocusInWindow();
+		this.arenaView.addKeyListener(gamePadListener);
+		this.arenaView.setFocusable(true);
+		this.arenaView.requestFocusInWindow();
 		
 		GridListener listener = new GridListener(this);
-		gridView.getButtonPigEatCake().addActionListener(listener);
-		gridView.getButtonPigEatPoisonCake().addActionListener(listener);
-		gridView.getButtonNutritionistAttak().addActionListener(listener);
-		gridView.getButtonVirusAttak().addActionListener(listener);
+		this.arenaView.getButtonPigEatCake().addActionListener(listener);
+		this.arenaView.getButtonPigEatPoisonCake().addActionListener(listener);
+		this.arenaView.getButtonNutritionistAttak().addActionListener(listener);
+		this.arenaView.getButtonVirusAttak().addActionListener(listener);
 	}
 	
 	public void resume() {
@@ -137,20 +145,26 @@ public class RoundController {
 	}
 	
 	public void checkListElement() {
-		ListElement listElement = this.round.getListElement();
+		ListElements listElements = this.round.getListElement();
 		
 		Element element;
-		for(int i=0; i<listElement.size(); i++) {
-			element = listElement.get(i);
+		for(int i=0; i<listElements.size(); i++) {
+			element = listElements.get(i);
 			
 			if (!element.isVisible()) {
-				listElement.remove(element);
+				listElements.remove(element);
 			}
 		}
 	}
 	
-	public void pigAttak(Character character) {
-		this.round.getPig().attak(character);
+	public void pigAttakEnemy(Character character) {
+		Pig pig = this.round.getPig();
+		
+		if (pig.isPowerful()) {
+			Power power = pig.getPowerWithEnergy();
+			power.setPosition(pig.getPosition());
+			power.act(character);
+		}
 		
 		if (character.isDied()) {
 			if (character.getName().compareTo(Nutritionist.NAME) == 0) {
@@ -161,17 +175,34 @@ public class RoundController {
 		}
 	}
 	
-	public void enemyAttak(Character character) {
-		character.attak(this.round.getPig());
-		
-		checkPigLife();
+	public void enemyAttakPig(Character character) {
+		if (character.isPowerful()) {
+			Pig pig = (Pig) this.round.getPig();
+			
+			String powerName = null;
+			if (character instanceof Nutritionist) {
+				powerName = Diet.NAME;
+			} else if (character instanceof Virus) {
+				powerName = Disease.NAME;
+			}
+			
+			Power power = character.getListPowers().get(powerName);
+			power.act(pig);
+			
+			checkPigLife();
+		}
 	}
 	
 	public void pigEat(Food food) {
-		this.round.getPig().eat(food);
+		Pig pig = this.round.getPig();
 		
-		if (food.getName().compareTo(Cake.NAME) == 0) {
-			cumulScore(ScoreConstantes.FOOD_CAKE);
+		if (pig.isGreedy()) {
+			food.setEated(true);
+			food.act(pig);
+			
+			if (food.getName().compareTo(Cake.NAME) == 0) {
+				cumulScore(ScoreConstantes.FOOD_CAKE);
+			}
 		}
 		
 		checkEatenCake();
@@ -220,12 +251,12 @@ public class RoundController {
 				//TODO
 				
 				Nutritionist nutritionist = new Nutritionist();
-				pigAttak(nutritionist);
+				pigAttakEnemy(nutritionist);
 			} else {
 				//TODO Throw exception
 			}
 			
-			System.out.println(pig.getPosition());
+			this.arenaView.repaint();
 		}
 	}
 }

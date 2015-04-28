@@ -2,11 +2,11 @@ package game.round;
 
 import java.util.ArrayList;
 
-public class ListRound {
+public class ListRounds {
 
 	private ArrayList<Round> list;
 	
-	public ListRound() {
+	public ListRounds() {
 		this.list = new ArrayList<>();
 	}
 	

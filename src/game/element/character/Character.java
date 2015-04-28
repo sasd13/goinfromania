@@ -1,7 +1,7 @@
 package game.element.character;
 
 import game.element.Element;
-import game.element.power.MapPower;
+import game.element.power.ListPowers;
 
 public abstract class Character extends Element {
 	
@@ -15,7 +15,7 @@ public abstract class Character extends Element {
 	private boolean died;
 	private int life;
 	private boolean powerful;
-	private MapPower mapPower;
+	private ListPowers listPowers;
 	
 	protected Character() {
 		super();
@@ -26,7 +26,7 @@ public abstract class Character extends Element {
 		this.died = false;
 		this.life = LIFE_MAX;
 		this.powerful = false;
-		this.mapPower = null;
+		this.listPowers = null;
 	}
 	
 	public boolean isDied() {
@@ -76,16 +76,14 @@ public abstract class Character extends Element {
 		notifyObservers();
 	}
 	
-	public MapPower getMapPower() {
-		return this.mapPower;
+	public ListPowers getListPowers() {
+		return this.listPowers;
 	}
 	
-	public void setMapPower(MapPower mapPower) {
-		this.mapPower = mapPower;
+	public void setListPowers(ListPowers listPowers) {
+		this.listPowers = listPowers;
 		
 		setChanged();
 		notifyObservers();
 	}
-	
-	public abstract void attak(Character character);
 }

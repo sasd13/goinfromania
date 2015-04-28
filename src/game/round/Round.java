@@ -1,7 +1,7 @@
 package game.round;
 
 import game.element.Element;
-import game.element.ListElement;
+import game.element.ListElements;
 import game.element.character.Pig;
 
 import java.awt.Point;
@@ -22,7 +22,7 @@ public class Round extends Observable {
 	private Result result;
 	private int score;
 	private Pig pig;
-	private ListElement listElement;
+	private ListElements listElements;
 	
 	public Round(int number) {
 		super();
@@ -33,7 +33,9 @@ public class Round extends Observable {
 		this.level = Level.EASY;
 		this.score = 0;
 		this.pig = new Pig();
-		this.listElement = new ListElement();
+		this.listElements = new ListElements();
+		
+		this.listElements.add(this.pig);
 	}
 	
 	public String getId() {
@@ -110,12 +112,12 @@ public class Round extends Observable {
 		return this.pig;
 	}
 	
-	public ListElement getListElement() {
-		return this.listElement;
+	public ListElements getListElement() {
+		return this.listElements;
 	}
 	
 	public boolean addElement(Element element) {
-		boolean added = this.listElement.add(element);
+		boolean added = this.listElements.add(element);
 		
 		setChanged();
 		notifyObservers();
@@ -124,7 +126,7 @@ public class Round extends Observable {
 	}
 	
 	public boolean removeElement(Element element) {
-		boolean removed = this.listElement.remove(element);
+		boolean removed = this.listElements.remove(element);
 		
 		setChanged();
 		notifyObservers();
@@ -135,8 +137,8 @@ public class Round extends Observable {
 	public Element getElement(String elementId) {
 		Element element = null;
 		
-		for (int i=0; i<this.listElement.size(); i++) {
-			element = this.listElement.get(i);
+		for (int i=0; i<this.listElements.size(); i++) {
+			element = this.listElements.get(i);
 			if (element.getId().compareTo(elementId) == 0) {
 				return element;
 			}
@@ -148,8 +150,8 @@ public class Round extends Observable {
 	public Element getElementAtPosition(Point position) {
 		Element element = null;
 		
-		for (int i=0; i<this.listElement.size(); i++) {
-			element = this.listElement.get(i);
+		for (int i=0; i<this.listElements.size(); i++) {
+			element = this.listElements.get(i);
 			if (element.getPosition().equals(position)) {
 				return element;
 			}

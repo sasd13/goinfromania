@@ -2,7 +2,7 @@ package game;
 
 import java.util.Observable;
 
-import game.round.ListRound;
+import game.round.ListRounds;
 
 public class Game extends Observable {
 
@@ -10,12 +10,12 @@ public class Game extends Observable {
 	
 	public static final String NAME = "Goinfr'o'mania";
 
-	private ListRound listRound;
+	private ListRounds listRounds;
 	
 	private Game() {
 		super();
 		
-		this.listRound = null;
+		this.listRounds = null;
 	}
 	
 	public static synchronized Game getInstance() {
@@ -26,12 +26,12 @@ public class Game extends Observable {
 		return instance;
 	}
 	
-	public ListRound getListRound() {
-		return this.listRound;
+	public ListRounds getListRound() {
+		return this.listRounds;
 	}
 	
-	public void setListRound(ListRound listRound) {
-		this.listRound = listRound;
+	public void setListRound(ListRounds listRounds) {
+		this.listRounds = listRounds;
 		
 		setChanged();
 		notifyObservers();

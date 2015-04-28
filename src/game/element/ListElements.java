@@ -1,21 +1,32 @@
 package game.element;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class ListElement {
+public class ListElements extends Observable {
 	
 	private ArrayList<Element> list;
 	
-	public ListElement() {
+	public ListElements() {
 		this.list = new ArrayList<>();
 	}
 	
 	public boolean add(Element element) {
-		return this.list.add(element);
+		boolean added = this.list.add(element);
+		
+		setChanged();
+		notifyObservers();
+		
+		return added;
 	}
 	
 	public boolean remove(Element element) {
-		return this.list.remove(element);
+		boolean removed = this.list.remove(element);
+		
+		setChanged();
+		notifyObservers();
+		
+		return removed;
 	}
 	
 	public Element get(String elementId) {

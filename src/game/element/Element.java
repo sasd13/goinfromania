@@ -2,10 +2,10 @@ package game.element;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.util.Observable;
 
 import view.DimensionConstants;
-import game.element.draw.Drawing;
 import game.setting.Direction;
 
 public abstract class Element extends Observable {
@@ -17,14 +17,16 @@ public abstract class Element extends Observable {
 	 * Ordonnée inversée
 	 */
 	public static final int POSITION_Y_MAX = 0;
-	public static final int POSITION_Y_MIN = 0 - DimensionConstants.GRID_HEIGHT;
+	public static final int POSITION_Y_MIN = DimensionConstants.GRID_HEIGHT;
+	
+	protected static final String IMAGE_DIR = "img/";
 	
 	public static final int SPEED_MIN = 0;
-	public static final int SPEED_MAX = 50;
+	public static final int SPEED_MAX = 100;
 	
-	public static final int SPEED_LOW = 10;
-	public static final int SPEED_MEDIUM = 25;
-	public static final int SPEED_HIGH = 40;
+	public static final int SPEED_LOW = 20;
+	public static final int SPEED_MEDIUM = 50;
+	public static final int SPEED_HIGH = 80;
 
 	private static int countElement;
 	private String id;
@@ -32,7 +34,7 @@ public abstract class Element extends Observable {
 	private boolean visible;
 	private Point position;
 	private Dimension dimension;
-	private Drawing drawing;
+	private BufferedImage image;
 	private boolean movable;
 	private int speed;
 	
@@ -45,7 +47,7 @@ public abstract class Element extends Observable {
 		this.visible = true;
 		this.position = new Point();
 		this.dimension = new Dimension();
-		this.drawing = null;
+		this.image = null;
 		this.movable = false;
 		this.speed = SPEED_MIN;
 	}
@@ -98,15 +100,18 @@ public abstract class Element extends Observable {
 		notifyObservers();
 	}
 	
-	public Drawing getDrawing() {
-		return this.drawing;
+	public BufferedImage getImage() {
+		return this.image;
 	}
 	
-	public void setDrawing(Drawing drawing) {
-		this.drawing = drawing;
+	public void setImage(BufferedImage image) {
+		this.image = image;
 		
 		setChanged();
 		notifyObservers();
+		
+		Dimension dimension = new Dimension(this.image.getWidth(), this.image.getHeight());
+		setDimension(dimension);
 	}
 	
 	public boolean isMovable() {
@@ -152,10 +157,10 @@ public abstract class Element extends Observable {
 				nextPosition.x = this.position.x + this.speed;
 				break;
 			case UP :
-				nextPosition.y = this.position.y + this.speed;
+				nextPosition.y = this.position.y - this.speed;
 				break;
 			case DOWN :
-				nextPosition.y = this.position.y - this.speed;
+				nextPosition.y = this.position.y + this.speed;
 				break;
 			default :
 				//TODO Throw exception
@@ -171,10 +176,10 @@ public abstract class Element extends Observable {
 			nextPosition.x = POSITION_X_MAX - this.dimension.width;
 		}
 		
-		if (nextPosition.y > POSITION_Y_MAX) {
+		if (nextPosition.y < POSITION_Y_MAX) {
 			nextPosition.y = POSITION_Y_MAX;
-		} else if ((nextPosition.y - this.dimension.height) < POSITION_Y_MIN) {
-			nextPosition.y = POSITION_Y_MIN + this.dimension.height;
+		} else if ((nextPosition.y + this.dimension.height) > POSITION_Y_MIN) {
+			nextPosition.y = POSITION_Y_MIN - this.dimension.height;
 		}
 		
 		return nextPosition;
