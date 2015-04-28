@@ -10,7 +10,7 @@ public class Cake extends Food {
 	public static final String NAME = "Cake";
 	
 	public static final int VALUE_EVOLVE_PIG_ENERGY = 15;
-	public static final String IMAGE_PATH = IMAGE_DIR + "cake.png";
+	public static final String IMAGE_PATH = IMAGE_DIR + "cake_1.png";
 	
 	public Cake() {
 		super();
