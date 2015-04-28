@@ -13,11 +13,8 @@ public abstract class Element extends Observable {
 	public static final int POSITION_X_MIN = 0;
 	public static final int POSITION_X_MAX = DimensionConstants.GRID_WIDTH;
 	
-	/*
-	 * Ordonnée inversée
-	 */
-	public static final int POSITION_Y_MAX = 0;
-	public static final int POSITION_Y_MIN = DimensionConstants.GRID_HEIGHT;
+	public static final int POSITION_Y_MIN = 0;
+	public static final int POSITION_Y_MAX = DimensionConstants.GRID_HEIGHT;
 	
 	protected static final String IMAGE_DIR = "img/";
 	
@@ -176,10 +173,10 @@ public abstract class Element extends Observable {
 			nextPosition.x = POSITION_X_MAX - this.dimension.width;
 		}
 		
-		if (nextPosition.y < POSITION_Y_MAX) {
-			nextPosition.y = POSITION_Y_MAX;
-		} else if ((nextPosition.y + this.dimension.height) > POSITION_Y_MIN) {
-			nextPosition.y = POSITION_Y_MIN - this.dimension.height;
+		if (nextPosition.y < POSITION_Y_MIN) {
+			nextPosition.y = POSITION_Y_MIN;
+		} else if ((nextPosition.y + this.dimension.height) > POSITION_Y_MAX) {
+			nextPosition.y = POSITION_Y_MAX - this.dimension.height;
 		}
 		
 		return nextPosition;

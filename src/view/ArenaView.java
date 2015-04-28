@@ -80,9 +80,7 @@ public class ArenaView extends JPanel implements Observer {
 	
 	@Override
 	public void update(Observable observable, Object arg) {
-		ListElements listElements = (ListElements) observable;
-		
-		this.listElements = listElements;
+		this.listElements = (ListElements) observable;
 		
 		repaint();
 	}

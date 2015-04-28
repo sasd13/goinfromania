@@ -4,6 +4,7 @@ import view.GameView;
 import view.RoundView;
 import db.RoundDAO;
 import game.Game;
+import game.menu.GameMenu;
 import game.round.ListRounds;
 import game.round.Round;
 
@@ -14,11 +15,15 @@ public class GameController {
 	private Game game;
 	private GameView gameView;
 	
+	private RoundController roundController;
+	
 	private GameController() {
 		this.game = Game.getInstance();
 		this.gameView = GameView.getInstance();
 		
 		this.game.addObserver(this.gameView);
+		
+		this.roundController = null;
 	}
 	
 	public static synchronized GameController getInstance() {
@@ -42,6 +47,10 @@ public class GameController {
 		this.gameView.dispose();
 	}
 	
+	public RoundController getRoundController() {
+		return this.roundController;
+	}
+	
 	private void loadRounds() {
 		ListRounds listRounds = RoundDAO.loadAll();
 		this.game.setListRound(listRounds);
@@ -55,23 +64,23 @@ public class GameController {
 	public void showListRounds() {
 		loadRounds();
 		
-		this.gameView.displayListRoundView();
+		this.gameView.displayListRoundsView();
 	}
 	
 	public void newRound() {
 		Round round = new Round(1);
-		RoundController roundController = configRound(round);
+		this.roundController = configRound(round);
 		
 		this.gameView.displayLiveRoundView();
-		roundController.start();
+		this.roundController.start();
 	}
 	
 	public void openRound(String roundId) {
 		Round round = this.game.getListRound().get(roundId);
-		RoundController roundController = configRound(round);
+		this.roundController = configRound(round);
 		
 		this.gameView.displayLiveRoundView();
-		roundController.start();
+		this.roundController.start();
 	}
 	
 	public void closeRound(Round round) {
@@ -91,6 +100,7 @@ public class GameController {
 		roundController = new RoundController(round, roundView);
 		
 		this.gameView.setLiveRoundView(roundView);
+		((GameMenu) this.gameView.getJMenuBar()).getMenuRound().setEnabled(true);
 		
 		return roundController;
 	}

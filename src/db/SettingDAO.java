@@ -9,7 +9,8 @@ public class SettingDAO {
 	public static Setting load(String settingName) {
 		Setting setting = null;
 		
-		//Database query
+		//TODO Database query
+		
 		switch (settingName) {
 			case GamePad.NAME :
 				setting = new GamePad();
@@ -25,21 +26,13 @@ public class SettingDAO {
 	public static ListSettings loadAll() {
 		ListSettings listSettings = new ListSettings();
 		
-		String[] tabSettingName = new String[1]; //Database query
-		
-		Setting setting;
-		for(String settingName : tabSettingName) {
-			setting = load(settingName);
-			if (setting != null) {
-				listSettings.add(setting);
-			}
-		}
+		//TODO Database query
 		
 		return listSettings;
 	}
 	
 	public static void save(Setting setting) {
-		//Database query
+		//TODO Database query
 	}
 	
 	public static void saveAll(ListSettings listSettings) {

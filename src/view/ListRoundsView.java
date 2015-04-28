@@ -9,9 +9,9 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
-public class ListRoundView extends JPanel implements Observer {
+public class ListRoundsView extends JPanel implements Observer {
 
-	public ListRoundView() {
+	public ListRoundsView() {
 		super();
 		
 		Dimension dimension = new Dimension(DimensionConstants.GRID_WIDTH, DimensionConstants.GRID_HEIGHT);

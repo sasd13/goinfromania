@@ -6,7 +6,6 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import game.element.character.Pig;
 import game.round.Round;
 
 public class RoundView extends JPanel implements Observer {
@@ -30,8 +29,16 @@ public class RoundView extends JPanel implements Observer {
 		add(this.arenaView, BorderLayout.CENTER);
 	}
 	
-	public ArenaView getGridView() {
+	public RoundStateView getRoundStateView() {
+		return this.roundStateView;
+	}
+	
+	public ArenaView getArenaView() {
 		return this.arenaView;
+	}
+	
+	public PigStateView getPigStateView() {
+		return this.pigStateView;
 	}
 	
 	@Override
@@ -40,9 +47,5 @@ public class RoundView extends JPanel implements Observer {
 		
 		this.roundStateView.getLabelRoundValue().setText(String.valueOf(round.getId()));
 		this.roundStateView.getLabelScoreValue().setText(String.valueOf(round.getScore()));
-		
-		Pig pig = round.getPig();
-		pig.addObserver(this.pigStateView);
-		this.pigStateView.update(pig, arg);
 	}
 }

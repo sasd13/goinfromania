@@ -6,9 +6,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import controller.GameController;
+import controller.RoundController;
+
 public class MenuRound extends JMenu implements ActionListener {
 
 	private final String ITEM_PAUSE = "Pause";
+	private final String ITEM_RESUME = "Resume";
 	private final String ITEM_RESTART = "Restart";
 	private final String ITEM_STOP = "Stop";
 	private final String ITEM_SAVE = "Save";
@@ -20,13 +24,19 @@ public class MenuRound extends JMenu implements ActionListener {
 		itemPause.addActionListener(this);
 		add(itemPause);
 		
-		JMenuItem itemRestart = new JMenuItem(ITEM_RESTART);
-		itemRestart.addActionListener(this);
-		add(itemRestart);
+		JMenuItem itemResume = new JMenuItem(ITEM_RESUME);
+		itemResume.addActionListener(this);
+		add(itemResume);
+		
+		addSeparator();
 		
 		JMenuItem itemStop = new JMenuItem(ITEM_STOP);
 		itemStop.addActionListener(this);
 		add(itemStop);
+		
+		JMenuItem itemRestart = new JMenuItem(ITEM_RESTART);
+		itemRestart.addActionListener(this);
+		add(itemRestart);
 		
 		addSeparator();
 		
@@ -39,14 +49,18 @@ public class MenuRound extends JMenu implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem item = (JMenuItem) e.getSource();
 		
+		RoundController roundController = (RoundController) GameController.getInstance().getRoundController();
+		
 		if (item.getText().compareTo(ITEM_PAUSE) == 0) {
-			
-		} else if (item.getText().compareTo(ITEM_RESTART) == 0) {
-			
+			roundController.pause();
+		} else if (item.getText().compareTo(ITEM_RESUME) == 0) {
+			roundController.resume();
 		} else if (item.getText().compareTo(ITEM_STOP) == 0) {
-			
+			roundController.stop();
+		} else if (item.getText().compareTo(ITEM_RESTART) == 0) {
+			roundController.restart();
 		} else if (item.getText().compareTo(ITEM_SAVE) == 0) {
-			
+			roundController.save();
 		} else {
 			//TODO Throw exception
 		}

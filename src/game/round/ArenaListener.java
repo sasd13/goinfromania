@@ -13,11 +13,11 @@ import javax.swing.JButton;
 
 import controller.RoundController;
 
-public class GridListener implements ActionListener {
+public class ArenaListener implements ActionListener {
 
 	private RoundController roundController;
 	
-	public GridListener(RoundController roundController) {
+	public ArenaListener(RoundController roundController) {
 		this.roundController = roundController;
 	}
 	

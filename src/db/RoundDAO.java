@@ -8,7 +8,7 @@ public class RoundDAO {
 	public static Round load(String roundId) {
 		Round round = null;
 		
-		//Database query
+		//TODO Database query
 		
 		return round;
 	}
@@ -16,21 +16,13 @@ public class RoundDAO {
 	public static ListRounds loadAll() {
 		ListRounds listRounds = new ListRounds();
 		
-		String[] tabRoundId = new String[1]; //Database query
-		
-		Round round;
-		for(String roundId : tabRoundId) {
-			round = load(roundId);
-			if (round != null) {
-				listRounds.add(round);
-			}
-		}
+		//TODO Database query
 		
 		return listRounds;
 	}
 	
 	public static void save(Round round) {
-		//Database query
+		//TODO Database query
 	}
 	
 	public static void saveAll(ListRounds listRounds) {

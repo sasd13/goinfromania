@@ -3,6 +3,7 @@ package controller;
 import javax.swing.JOptionPane;
 
 import view.ArenaView;
+import view.PigStateView;
 import view.RoundView;
 import db.RoundDAO;
 import db.SettingDAO;
@@ -18,7 +19,7 @@ import game.element.power.Diet;
 import game.element.power.Disease;
 import game.element.power.Power;
 import game.round.GamePadListener;
-import game.round.GridListener;
+import game.round.ArenaListener;
 import game.round.Level;
 import game.round.Result;
 import game.round.Round;
@@ -33,6 +34,7 @@ public class RoundController {
 	private RoundView roundView;
 	
 	private GamePad gamePad;
+	private PigStateView pigStateView;
 	private ArenaView arenaView;
 	
 	public RoundController(Round round, RoundView roundView) {
@@ -41,6 +43,16 @@ public class RoundController {
 		
 		this.round.addObserver(this.roundView);
 		this.roundView.update(this.round, null);
+		
+		this.arenaView = this.roundView.getArenaView();
+		ListElements listElements = this.round.getListElement();
+		listElements.addObserver(this.arenaView);
+		this.arenaView.update(listElements, null);
+		
+		this.pigStateView = this.roundView.getPigStateView();
+		Pig pig = this.round.getPig();
+		pig.addObserver(this.pigStateView);
+		this.pigStateView.update(pig, null);
 	}
 	
 	public void start() {
@@ -48,22 +60,22 @@ public class RoundController {
 		
 		this.gamePad = loadGamePad();
 		
-		this.arenaView = this.roundView.getGridView();
-		
-		ListElements listElements = this.round.getListElement();
-		listElements.addObserver(this.arenaView);
-		this.arenaView.update(listElements, null);
-		
 		GamePadListener gamePadListener = new GamePadListener(this);
 		this.arenaView.addKeyListener(gamePadListener);
 		this.arenaView.setFocusable(true);
 		this.arenaView.requestFocusInWindow();
 		
-		GridListener listener = new GridListener(this);
+		ArenaListener listener = new ArenaListener(this);
 		this.arenaView.getButtonPigEatCake().addActionListener(listener);
 		this.arenaView.getButtonPigEatPoisonCake().addActionListener(listener);
 		this.arenaView.getButtonNutritionistAttak().addActionListener(listener);
 		this.arenaView.getButtonVirusAttak().addActionListener(listener);
+	}
+	
+	public void restart() {
+		this.round.setState(State.STARTED);
+		
+		this.gamePad = loadGamePad();
 	}
 	
 	public void resume() {
@@ -89,7 +101,7 @@ public class RoundController {
 			int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_OPTION);
 			switch (selected) {
 				case JOptionPane.YES_OPTION :
-					saveRound();
+					save();
 					break;					
 			}
 		} else {
@@ -115,7 +127,7 @@ public class RoundController {
 		return gamePad;
 	}
 	
-	public void saveRound() {
+	public void save() {
 		if (!this.round.isFinished()) {
 			RoundDAO.save(this.round);
 		}

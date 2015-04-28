@@ -15,7 +15,7 @@ public class GameView extends JFrame implements Observer {
 	private static GameView instance = null;
 	
 	private GameMenu gameMenu;
-	private ListRoundView listRoundView;
+	private ListRoundsView listRoundsView;
 	private RoundView liveRoundView;
 	
 	private GameView() {
@@ -29,7 +29,7 @@ public class GameView extends JFrame implements Observer {
 		this.gameMenu = new GameMenu();
 		setJMenuBar(this.gameMenu);
 		
-		this.listRoundView = new ListRoundView();
+		this.listRoundsView = new ListRoundsView();
 		
 		this.liveRoundView = new RoundView();
 	}
@@ -40,14 +40,6 @@ public class GameView extends JFrame implements Observer {
 		}
 		
 		return instance;
-	}
-	
-	public ListRoundView getListRoundView() {
-		return this.listRoundView;
-	}
-	
-	public void setListRoundView(ListRoundView listRoundView) {
-		this.listRoundView = listRoundView;
 	}
 	
 	public RoundView getLiveRoundView() {
@@ -62,19 +54,19 @@ public class GameView extends JFrame implements Observer {
 	public void update(Observable observable, Object arg) {		
 		Game game = (Game) observable;
 		
-		this.listRoundView.update(game, arg);
+		//TODO SHow listRounds
 	}
 	
-	public void displayListRoundView() {		
+	public void displayListRoundsView() {		
 		getContentPane().remove(this.liveRoundView);
-		getContentPane().add(this.listRoundView, BorderLayout.CENTER);
+		getContentPane().add(this.listRoundsView, BorderLayout.CENTER);
 		
 		validate();
 		repaint();
 	}
 	
 	public void displayLiveRoundView() {
-		getContentPane().remove(this.listRoundView);
+		getContentPane().remove(this.listRoundsView);
 		getContentPane().add(this.liveRoundView, BorderLayout.CENTER);
 		
 		validate();
