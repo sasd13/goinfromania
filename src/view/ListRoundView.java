@@ -3,7 +3,6 @@ package view;
 import game.Game;
 import game.round.ListRounds;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;

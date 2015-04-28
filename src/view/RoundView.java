@@ -6,7 +6,6 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import game.element.ListElements;
 import game.element.character.Pig;
 import game.round.Round;
 

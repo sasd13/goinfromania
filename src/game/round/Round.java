@@ -3,7 +3,6 @@ package game.round;
 import game.element.Element;
 import game.element.ListElements;
 import game.element.character.Pig;
-import game.element.food.Cake;
 
 import java.awt.Point;
 import java.util.Observable;
@@ -35,9 +34,8 @@ public class Round extends Observable {
 		this.score = 0;
 		this.pig = new Pig();
 		this.listElements = new ListElements();
-		
+
 		this.listElements.add(this.pig);
-		this.listElements.add(new Cake());
 	}
 	
 	public String getId() {

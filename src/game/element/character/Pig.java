@@ -36,7 +36,6 @@ public class Pig extends Character {
 		
 		BufferedImage image = ImageLoader.loadFromPath(IMAGE_PATH);
 		setImage(image);
-		System.out.println(getDimension());
 		
 		ListPowers listPowers = new ListPowers();
 		listPowers.add(new Run());
