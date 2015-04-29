@@ -70,6 +70,8 @@ public class RoundController {
 		this.arenaView.getButtonPigEatPoisonCake().addActionListener(listener);
 		this.arenaView.getButtonNutritionistAttak().addActionListener(listener);
 		this.arenaView.getButtonVirusAttak().addActionListener(listener);
+		
+		this.arenaView.requestFocusInWindow();
 	}
 	
 	public void restart() {
@@ -86,6 +88,11 @@ public class RoundController {
 	
 	public void pause() {
 		this.round.setState(State.PAUSED);
+		
+		String title = "Round";
+		String message = "Paused";
+		
+		JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
 	}
 	
 	public void stop() {
@@ -226,28 +233,11 @@ public class RoundController {
 	
 	public void manageKeyCode(int keyCode) {
 		if (keyCode == this.gamePad.getKeyStart()) {
-			State state = this.round.getState();
-			
-			String title = "Round";
-			String message = null;
-			
-			switch (state) {
-				case STARTED :
-					pause();
-					
-					message = "Paused";
-					break;
-				case PAUSED :
-					resume();
-					
-					message = "Resumed";
-					break;
-				default :
-					//TODO Throw exception
-					break;
+			if (this.round.getState() == State.STARTED) {
+				pause();
+			} else if (this.round.getState() == State.PAUSED) {
+				resume();
 			}
-			
-			JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
 		} else {
 			Pig pig = this.round.getPig();
 			

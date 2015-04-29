@@ -12,7 +12,6 @@ import controller.RoundController;
 public class MenuRound extends JMenu implements ActionListener {
 
 	private final String ITEM_PAUSE = "Pause";
-	private final String ITEM_RESUME = "Resume";
 	private final String ITEM_RESTART = "Restart";
 	private final String ITEM_STOP = "Stop";
 	private final String ITEM_SAVE = "Save";
@@ -24,19 +23,15 @@ public class MenuRound extends JMenu implements ActionListener {
 		itemPause.addActionListener(this);
 		add(itemPause);
 		
-		JMenuItem itemResume = new JMenuItem(ITEM_RESUME);
-		itemResume.addActionListener(this);
-		add(itemResume);
+		JMenuItem itemRestart = new JMenuItem(ITEM_RESTART);
+		itemRestart.addActionListener(this);
+		add(itemRestart);
 		
 		addSeparator();
 		
 		JMenuItem itemStop = new JMenuItem(ITEM_STOP);
 		itemStop.addActionListener(this);
 		add(itemStop);
-		
-		JMenuItem itemRestart = new JMenuItem(ITEM_RESTART);
-		itemRestart.addActionListener(this);
-		add(itemRestart);
 		
 		addSeparator();
 		
@@ -53,8 +48,6 @@ public class MenuRound extends JMenu implements ActionListener {
 		
 		if (item.getText().compareTo(ITEM_PAUSE) == 0) {
 			roundController.pause();
-		} else if (item.getText().compareTo(ITEM_RESUME) == 0) {
-			roundController.resume();
 		} else if (item.getText().compareTo(ITEM_STOP) == 0) {
 			roundController.stop();
 		} else if (item.getText().compareTo(ITEM_RESTART) == 0) {

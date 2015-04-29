@@ -49,7 +49,7 @@ public class ArenaView extends JPanel implements Observer {
 		add(panelFoods, BorderLayout.SOUTH);
 		
 		JPanel panelEnemies = new JPanel();
-		panelEnemies.setLayout(new GridLayout(2, 1));
+		panelEnemies.setLayout(new GridLayout(1, 2));
 		
 		this.buttonNutritionistAttak = new JButton(Nutritionist.NAME);
 		this.buttonNutritionistAttak.setFocusable(false);
@@ -59,7 +59,7 @@ public class ArenaView extends JPanel implements Observer {
 		this.buttonVirusAttak.setFocusable(false);
 		panelEnemies.add(this.buttonVirusAttak);
 		
-		add(panelEnemies, BorderLayout.EAST);
+		add(panelEnemies, BorderLayout.NORTH);
 	}
 	
 	public JButton getButtonPigEatCake() {

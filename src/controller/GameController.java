@@ -88,6 +88,8 @@ public class GameController {
 			this.game.getListRound().remove(round);
 		}
 		
+		((GameMenu) this.gameView.getJMenuBar()).getMenuRound().setEnabled(false);
+		
 		showListRounds();
 	}
 	
