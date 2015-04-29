@@ -4,24 +4,23 @@ import java.awt.image.BufferedImage;
 
 import game.element.ImageLoader;
 import game.element.power.Diet;
-import game.element.power.ListPowers;
 
-public class Nutritionist extends Character {
+public class Nutritionist extends Enemy {
 
 	public static final String NAME = "Nutritionist";
-	public static final String IMAGE_PATH = IMAGE_DIR + "nutritionist.png";
+	public static final String IMAGE_NAME = "nutritionist.png";
+	public static final int LIFE_VALUE = 50;
+	public static final int SCORE_POINT = 200;
 	
 	public Nutritionist() {
 		super();
 		
 		setName(NAME);
-		setPowerful(true);
+		setLife(LIFE_VALUE);
+		setPower(new Diet());
+		setScorePoint(SCORE_POINT);
 		
-		BufferedImage image = ImageLoader.loadFromPath(IMAGE_PATH);
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImage(image);
-		
-		ListPowers listPowers = new ListPowers();
-		listPowers.add(new Diet());
-		setListPowers(listPowers);
 	}
 }

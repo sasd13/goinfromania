@@ -4,24 +4,23 @@ import java.awt.image.BufferedImage;
 
 import game.element.ImageLoader;
 import game.element.power.Disease;
-import game.element.power.ListPowers;
 
-public class Virus extends Character {
+public class Virus extends Enemy {
 
 	public static final String NAME = "Virus";
-	public static final String IMAGE_PATH = IMAGE_DIR + "virus.png";
+	public static final String IMAGE_NAME = "virus.png";
+	public static final int LIFE_VALUE = 100;
+	public static final int SCORE_POINT = 1000;
 	
 	public Virus() {
 		super();
 		
 		setName(NAME);
-		setPowerful(true);
+		setLife(LIFE_VALUE);
+		setPower(new Disease());
+		setScorePoint(SCORE_POINT);
 		
-		BufferedImage image = ImageLoader.loadFromPath(IMAGE_PATH);
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImage(image);
-		
-		ListPowers listPowers = new ListPowers();
-		listPowers.add(new Disease());
-		setListPowers(listPowers);
 	}
 }

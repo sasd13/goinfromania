@@ -1,5 +1,8 @@
 package game.element;
 
+import game.element.character.Pig;
+
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -45,5 +48,15 @@ public class ListElements extends Observable {
 	
 	public int size() {
 		return this.list.size();
+	}
+	
+	public Element getElementAtPosition(Point position) {
+		for (Element element : this.list) {
+			if (element.getPosition().equals(position) && !(element instanceof Pig)) {
+				return element;
+			}
+		}
+		
+		return null;
 	}
 }

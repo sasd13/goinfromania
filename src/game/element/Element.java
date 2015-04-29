@@ -16,8 +16,6 @@ public abstract class Element extends Observable {
 	public static final int POSITION_Y_MIN = 0;
 	public static final int POSITION_Y_MAX = DimensionConstants.GRID_HEIGHT;
 	
-	protected static final String IMAGE_DIR = "img/";
-	
 	public static final int SPEED_MIN = 0;
 	public static final int SPEED_MAX = 100;
 	

@@ -1,10 +1,8 @@
 package game.round;
 
-import game.element.Element;
 import game.element.ListElements;
 import game.element.character.Pig;
 
-import java.awt.Point;
 import java.util.Observable;
 
 public class Round extends Observable {
@@ -24,12 +22,12 @@ public class Round extends Observable {
 	private Pig pig;
 	private ListElements listElements;
 	
-	public Round(int number) {
+	public Round() {
 		super();
 		
 		countRound++;
 		this.id = "id-round-" + countRound;
-		this.number = number;
+		this.number = 0;
 		this.level = Level.EASY;
 		this.score = 0;
 		this.pig = new Pig();
@@ -112,51 +110,21 @@ public class Round extends Observable {
 		return this.pig;
 	}
 	
+	public void setPig(Pig pig) {
+		this.pig = pig;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
 	public ListElements getListElement() {
 		return this.listElements;
 	}
 	
-	public boolean addElement(Element element) {
-		boolean added = this.listElements.add(element);
+	public void setListElements(ListElements listElements) {
+		this.listElements = listElements;
 		
 		setChanged();
 		notifyObservers();
-		
-		return added;
-	}
-	
-	public boolean removeElement(Element element) {
-		boolean removed = this.listElements.remove(element);
-		
-		setChanged();
-		notifyObservers();
-		
-		return removed;
-	}
-	
-	public Element getElement(String elementId) {
-		Element element = null;
-		
-		for (int i=0; i<this.listElements.size(); i++) {
-			element = this.listElements.get(i);
-			if (element.getId().compareTo(elementId) == 0) {
-				return element;
-			}
-		}
-		
-		return null;
-	}
-	
-	public Element getElementAtPosition(Point position) {
-		Element element = null;
-		
-		for (int i=0; i<this.listElements.size(); i++) {
-			element = this.listElements.get(i);
-			if (element.getPosition().equals(position)) {
-				return element;
-			}
-		}
-		
-		return null;
 	}
 }

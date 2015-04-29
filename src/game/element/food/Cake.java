@@ -8,9 +8,10 @@ import game.element.character.Pig;
 public class Cake extends Food {
 
 	public static final String NAME = "Cake";
+	public static final int SCORE_POINT = 50;
 	
 	public static final int VALUE_EVOLVE_PIG_ENERGY = 15;
-	public static final String IMAGE_PATH = IMAGE_DIR + "cake_1.png";
+	public static final String IMAGE_NAME = "cake_1.png";
 	
 	public Cake() {
 		super();
@@ -19,8 +20,9 @@ public class Cake extends Food {
 		setMovable(true);
 		setSpeed(SPEED_LOW);
 		setEffectValue(VALUE_EVOLVE_PIG_ENERGY);
+		setScorePoint(SCORE_POINT);
 		
-		BufferedImage image = ImageLoader.loadFromPath(IMAGE_PATH);
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImage(image);
 	}
 	

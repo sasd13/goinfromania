@@ -7,9 +7,9 @@ public class Missile extends Power {
 	public static final String NAME = "Missile";
 	
 	/* 
-	 * Diminue la vie d'un personnage de 50
+	 * Diminue la vie d'un personnage de 25
 	 */	
-	public static final int VALUE_DECREASE_CHARACTER_LIFE = 50;
+	public static final int VALUE_DECREASE_CHARACTER_LIFE = 25;
 	
 	private int value;
 	

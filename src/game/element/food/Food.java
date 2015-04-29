@@ -7,12 +7,14 @@ public abstract class Food extends Element {
 
 	private boolean eated;
 	private int effectValue;
+	private int scorePoint;
 	
 	protected Food() {
 		super();
 		
 		this.eated = false;
 		this.effectValue = 0;
+		this.scorePoint = 0;
 	}
 	
 	public boolean isEated() {
@@ -36,6 +38,17 @@ public abstract class Food extends Element {
 	
 	public void setEffectValue(int effectValue) {
 		this.effectValue = effectValue;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public int getScorePoint() {
+		return this.scorePoint;
+	}
+	
+	public void setScorePoint(int scorePoint) {
+		this.scorePoint = scorePoint;
 		
 		setChanged();
 		notifyObservers();

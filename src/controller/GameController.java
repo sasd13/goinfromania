@@ -22,6 +22,7 @@ public class GameController {
 		this.gameView = GameView.getInstance();
 		
 		this.game.addObserver(this.gameView);
+		this.gameView.update(this.game, null);
 		
 		this.roundController = null;
 	}
@@ -32,6 +33,10 @@ public class GameController {
 		}
 		
 		return instance;
+	}
+	
+	public RoundController getRoundController() {
+		return this.roundController;
 	}
 	
 	public void play() {
@@ -47,20 +52,6 @@ public class GameController {
 		this.gameView.dispose();
 	}
 	
-	public RoundController getRoundController() {
-		return this.roundController;
-	}
-	
-	private void loadRounds() {
-		ListRounds listRounds = RoundDAO.loadAll();
-		this.game.setListRound(listRounds);
-	}
-	
-	private void saveRounds() {
-		ListRounds listRounds = this.game.getListRound();
-		RoundDAO.saveAll(listRounds);
-	}
-	
 	public void showListRounds() {
 		loadRounds();
 		
@@ -68,7 +59,7 @@ public class GameController {
 	}
 	
 	public void newRound() {
-		Round round = new Round(1);
+		Round round = new Round();
 		this.roundController = configRound(round);
 		
 		this.gameView.displayLiveRoundView();
@@ -88,22 +79,31 @@ public class GameController {
 			this.game.getListRound().remove(round);
 		}
 		
+		this.roundController = null;
+		
 		((GameMenu) this.gameView.getJMenuBar()).getMenuRound().setEnabled(false);
 		
 		showListRounds();
 	}
 	
 	private RoundController configRound(Round round) {
-		RoundController roundController = null;
-		
 		this.game.getListRound().add(round);
 		
-		RoundView roundView = new RoundView();		
-		roundController = new RoundController(round, roundView);
-		
+		RoundView roundView = new RoundView();
 		this.gameView.setLiveRoundView(roundView);
+		
 		((GameMenu) this.gameView.getJMenuBar()).getMenuRound().setEnabled(true);
 		
-		return roundController;
+		return new RoundController(round, roundView);
+	}
+	
+	private void loadRounds() {
+		ListRounds listRounds = RoundDAO.loadAll();
+		this.game.setListRound(listRounds);
+	}
+	
+	private void saveRounds() {
+		ListRounds listRounds = this.game.getListRound();
+		RoundDAO.saveAll(listRounds);
 	}
 }

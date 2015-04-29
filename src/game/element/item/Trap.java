@@ -8,14 +8,14 @@ import game.element.ImageLoader;
 public class Trap extends Element {
 
 	public static final String NAME = "Trap";
-	public static final String IMAGE_PATH = IMAGE_DIR + "poison_cake.png";
+	public static final String IMAGE_NAME = "trap.png";
 	
 	public Trap() {
 		super();
 		
 		setName(NAME);
 		
-		BufferedImage image = ImageLoader.loadFromPath(IMAGE_PATH);
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImage(image);
 	}
 }

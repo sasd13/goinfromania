@@ -1,7 +1,6 @@
 package game.element.character;
 
 import game.element.Element;
-import game.element.power.ListPowers;
 
 public abstract class Character extends Element {
 	
@@ -15,7 +14,6 @@ public abstract class Character extends Element {
 	private boolean died;
 	private int life;
 	private boolean powerful;
-	private ListPowers listPowers;
 	
 	protected Character() {
 		super();
@@ -26,7 +24,6 @@ public abstract class Character extends Element {
 		this.died = false;
 		this.life = LIFE_MAX;
 		this.powerful = false;
-		this.listPowers = null;
 	}
 	
 	public boolean isDied() {
@@ -71,17 +68,6 @@ public abstract class Character extends Element {
 	
 	public void setPowerful(boolean powerful) {
 		this.powerful = powerful;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public ListPowers getListPowers() {
-		return this.listPowers;
-	}
-	
-	public void setListPowers(ListPowers listPowers) {
-		this.listPowers = listPowers;
 		
 		setChanged();
 		notifyObservers();

@@ -14,7 +14,7 @@ import game.element.power.SuperMissile;
 public class Pig extends Character {
 
 	public static final String NAME = "Pig";
-	public static final String IMAGE_PATH = IMAGE_DIR + "pig.png";
+	public static final String IMAGE_NAME = "pig.png";
 	
 	public static final int ENERGY_MIN = 0;
 	public static final int ENERGY_MAX = 100;
@@ -23,6 +23,7 @@ public class Pig extends Character {
 	public static final int ENERGY_MEDIUM = 50;
 	public static final int ENERGY_HIGH = 80;
 	
+	private ListPowers listPowers;
 	private boolean greedy;
 	private int energy;
 	private int countEatenCake;
@@ -34,19 +35,31 @@ public class Pig extends Character {
 		setDimension(new Dimension(100, 100));
 		setPowerful(true);
 		
-		BufferedImage image = ImageLoader.loadFromPath(IMAGE_PATH);
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImage(image);
 		
-		ListPowers listPowers = new ListPowers();
-		listPowers.add(new Run());
-		listPowers.add(new Paralyze());
-		listPowers.add(new Missile());
-		listPowers.add(new SuperMissile());
-		setListPowers(listPowers);
+		this.listPowers = new ListPowers();
+		this.listPowers.add(new Run());
+		this.listPowers.add(new Paralyze());
+		this.listPowers.add(new Missile());
+		this.listPowers.add(new SuperMissile());
 		
 		this.greedy = true;
 		this.energy = ENERGY_MIN;
 		this.countEatenCake = 0;
+	}
+	
+
+	
+	public ListPowers getListPowers() {
+		return this.listPowers;
+	}
+	
+	public void setListPowers(ListPowers listPowers) {
+		this.listPowers = listPowers;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public boolean isGreedy() {
