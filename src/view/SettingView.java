@@ -1,6 +1,7 @@
 package view;
 
 import game.Game;
+import game.setting.SettingListener;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -31,14 +32,18 @@ public abstract class SettingView extends JFrame implements Observer {
 		panel.setLayout(new FlowLayout());
 		getContentPane().add(panel, BorderLayout.SOUTH);
 		
-		java.awt.Dimension dimen = new java.awt.Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
+		Dimension dimen = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
+		
+		SettingListener listener = new SettingListener();
 		
 		this.buttonClose = new JButton(BUTTONCLOSE_NAME);
 		this.buttonClose.setPreferredSize(dimen);
+		this.buttonClose.addActionListener(listener);
 		panel.add(this.buttonClose);
 		
 		this.buttonReset = new JButton(BUTTONRESET_NAME);
 		this.buttonReset.setPreferredSize(dimen);
+		this.buttonReset.addActionListener(listener);
 		panel.add(this.buttonReset);
 	}
 	

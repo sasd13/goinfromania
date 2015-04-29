@@ -1,6 +1,5 @@
 package game.element.character;
 
-import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
 import game.element.ImageLoader;
@@ -32,7 +31,6 @@ public class Pig extends Character {
 		super();
 		
 		setName(NAME);
-		setDimension(new Dimension(100, 100));
 		setPowerful(true);
 		
 		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);

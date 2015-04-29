@@ -13,6 +13,7 @@ public abstract class Enemy extends Character {
 		setPowerful(true);
 		
 		this.power = null;
+		this.scorePoint = 0;
 	}
 	
 	public Power getPower() {

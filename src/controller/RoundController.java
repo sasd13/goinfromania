@@ -34,7 +34,6 @@ public class RoundController {
 	
 	private GamePad gamePad;
 	private ArenaView arenaView;
-	private PigStateView pigStateView;
 	
 	public RoundController(Round round, RoundView roundView) {
 		this.round = round;
@@ -48,10 +47,10 @@ public class RoundController {
 		listElements.addObserver(this.arenaView);
 		this.arenaView.update(listElements, null);
 		
-		this.pigStateView = this.roundView.getPigStateView();
+		PigStateView pigStateView = this.roundView.getPigStateView();
 		Pig pig = this.round.getPig();
-		pig.addObserver(this.pigStateView);
-		this.pigStateView.update(pig, null);
+		pig.addObserver(pigStateView);
+		pigStateView.update(pig, null);
 	}
 	
 	public void start() {
@@ -190,11 +189,11 @@ public class RoundController {
 			Power power = pig.getPowerWithEnergy();
 			power.setPosition(pig.getPosition());
 			power.act(enemy);
-		}
-		
-		if (enemy.isDied()) {
-			this.round.getListElement().remove(enemy);
-			cumulScore(enemy.getScorePoint());
+			
+			if (enemy.isDied()) {
+				this.round.getListElement().remove(enemy);
+				cumulScore(enemy.getScorePoint());
+			}
 		}
 	}
 	
@@ -279,19 +278,6 @@ public class RoundController {
 			if (element instanceof Food) {
 				Food food = (Food) element;
 				actionPigEatFood(food);
-			}
-		}
-	}
-	
-	public void checkListElement() {
-		ListElements listElements = this.round.getListElement();
-		
-		Element element;
-		for(int i=0; i<listElements.size(); i++) {
-			element = listElements.get(i);
-			
-			if (!element.isVisible()) {
-				listElements.remove(element);
 			}
 		}
 	}

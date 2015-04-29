@@ -58,8 +58,8 @@ public class Disease extends Power {
 		
 		this.timerSpeed = new Timer();
 		
-		pig.setSpeed(SPEED_LOW);
 		pig.setLife(pig.getLife() - getValue());
+		pig.setSpeed(SPEED_LOW);
 		
 		endDiseaseAct(pig);
 	}

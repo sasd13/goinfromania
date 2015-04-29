@@ -11,14 +11,10 @@ public class ListSettings {
 	}
 	
 	public boolean add(Setting setting) {
-		setting = get(setting.getName());
-		
 		return this.list.add(setting);
 	}
 	
 	public boolean remove(Setting setting) {
-		setting = get(setting.getName());
-		
 		return this.list.remove(setting);
 	}
 	

@@ -27,7 +27,7 @@ public class MenuSetting extends JMenu implements ActionListener {
 		JMenuItem item = (JMenuItem) e.getSource();
 		
 		if (item.getText().compareTo(ITEM_GAMEPAD) == 0) {
-			SettingController.launch(GamePad.NAME);
+			SettingController.getInstance().open(GamePad.NAME);
 		} else {
 			//TODO Throw exception
 		}

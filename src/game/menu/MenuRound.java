@@ -23,15 +23,15 @@ public class MenuRound extends JMenu implements ActionListener {
 		itemPause.addActionListener(this);
 		add(itemPause);
 		
-		JMenuItem itemRestart = new JMenuItem(ITEM_RESTART);
-		itemRestart.addActionListener(this);
-		add(itemRestart);
-		
-		addSeparator();
-		
 		JMenuItem itemStop = new JMenuItem(ITEM_STOP);
 		itemStop.addActionListener(this);
 		add(itemStop);
+		
+		addSeparator();
+		
+		JMenuItem itemRestart = new JMenuItem(ITEM_RESTART);
+		itemRestart.addActionListener(this);
+		add(itemRestart);
 		
 		addSeparator();
 		

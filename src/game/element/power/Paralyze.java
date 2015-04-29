@@ -18,7 +18,7 @@ public class Paralyze extends Power {
 	
 	private int value;
 	
-	private Timer timerPower;
+	private Timer timerParalyze;
 	
 	public Paralyze() {
 		super();
@@ -44,7 +44,7 @@ public class Paralyze extends Power {
 		if (character.getName().compareTo(Nutritionist.NAME) == 0) {
 			Nutritionist nutritionist = (Nutritionist) character;
 			
-			this.timerPower = new Timer();
+			this.timerParalyze = new Timer();
 			
 			nutritionist.setMovable(false);
 			nutritionist.setPowerful(false);
@@ -53,8 +53,8 @@ public class Paralyze extends Power {
 	}
 	
 	private synchronized void endParalyzeAct(final Nutritionist nutritionist) {
-		this.timerPower.cancel();
-		this.timerPower = new Timer();
+		this.timerParalyze.cancel();
+		this.timerParalyze = new Timer();
 		
 		TimerTask task = new TimerTask() {
 			
@@ -65,6 +65,6 @@ public class Paralyze extends Power {
 			}
 		};
 		
-		this.timerPower.schedule(task, getValue());
+		this.timerParalyze.schedule(task, getValue());
 	}
 }
