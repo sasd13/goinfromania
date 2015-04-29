@@ -165,17 +165,7 @@ public abstract class Element extends Observable {
 		/*
 		 * Recadrage
 		 */
-		if (nextPosition.x < POSITION_X_MIN) {
-			nextPosition.x = POSITION_X_MIN;
-		} else if ((nextPosition.x + this.dimension.width) > POSITION_X_MAX) {
-			nextPosition.x = POSITION_X_MAX - this.dimension.width;
-		}
-		
-		if (nextPosition.y < POSITION_Y_MIN) {
-			nextPosition.y = POSITION_Y_MIN;
-		} else if ((nextPosition.y + this.dimension.height) > POSITION_Y_MAX) {
-			nextPosition.y = POSITION_Y_MAX - this.dimension.height;
-		}
+		nextPosition = cropping(nextPosition);
 		
 		return nextPosition;
 	}
@@ -185,5 +175,21 @@ public abstract class Element extends Observable {
 		setPosition(nextPosition);
 		
 		return nextPosition;
+	}
+	
+	private Point cropping(Point point) {
+		if (point.x < POSITION_X_MIN) {
+			point.x = POSITION_X_MIN;
+		} else if ((point.x + this.dimension.width) > POSITION_X_MAX) {
+			point.x = POSITION_X_MAX - this.dimension.width;
+		}
+		
+		if (point.y < POSITION_Y_MIN) {
+			point.y = POSITION_Y_MIN;
+		} else if ((point.y + this.dimension.height) > POSITION_Y_MAX) {
+			point.y = POSITION_Y_MAX - this.dimension.height;
+		}
+		
+		return point;
 	}
 }

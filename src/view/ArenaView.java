@@ -4,6 +4,7 @@ import game.element.Element;
 import game.element.ListElements;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Observable;
@@ -21,6 +22,8 @@ public class ArenaView extends JPanel implements Observer {
 		setLayout(new BorderLayout());
 		Dimension dimension = new Dimension(DimensionConstants.GRID_WIDTH, DimensionConstants.GRID_HEIGHT);
 		setPreferredSize(dimension);
+		
+		setBackground(Color.BLACK);
 		
 		this.listElements = new ListElements();
 	}
