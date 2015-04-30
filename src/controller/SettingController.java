@@ -60,12 +60,8 @@ public class SettingController {
 		String message = "Save modifications ?";
 		
 		int selected = JOptionPane.showConfirmDialog(this.settingView, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
-		switch (selected) {
-			case JOptionPane.YES_OPTION :
-				SettingDAO.save(this.setting);
-				break;
-			case JOptionPane.NO_OPTION :
-				break;					
+		if (selected == JOptionPane.YES_OPTION) {
+			SettingDAO.save(this.setting);
 		}
 		
 		dispose();
@@ -73,5 +69,11 @@ public class SettingController {
 	
 	public void reset() {
 		this.setting.reset();
+	}
+	
+	public GamePad loadGamePad() {
+		GamePad gamePad = (GamePad) SettingDAO.load(GamePad.NAME);
+		
+		return gamePad;
 	}
 }

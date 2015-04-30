@@ -8,7 +8,6 @@ import view.ArenaView;
 import view.PigStateView;
 import view.RoundView;
 import db.RoundDAO;
-import db.SettingDAO;
 import game.element.Element;
 import game.element.ListElements;
 import game.element.character.Enemy;
@@ -56,7 +55,7 @@ public class RoundController {
 	public void start() {
 		this.round.setState(State.STARTED);
 		
-		this.gamePad = loadGamePad();
+		loadGamePad();
 		
 		GamePadListener gamePadListener = new GamePadListener();
 		this.arenaView.addKeyListener(gamePadListener);
@@ -89,20 +88,20 @@ public class RoundController {
 	public void restart() {
 		this.round.setState(State.STARTED);
 		
-		this.gamePad = loadGamePad();
+		loadGamePad();
 	}
 	
 	public void resume() {
 		this.round.setState(State.STARTED);
 		
-		this.gamePad = loadGamePad();
+		loadGamePad();
 	}
 	
 	public void pause() {
 		this.round.setState(State.PAUSED);
 		
 		String title = "Round";
-		String message = "Paused";
+		String message = "Paused... Click \"OK\" to resume";
 		
 		JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
 	}
@@ -118,10 +117,8 @@ public class RoundController {
 			message = "Save your progress?";
 			
 			int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_OPTION);
-			switch (selected) {
-				case JOptionPane.YES_OPTION :
-					save();
-					break;					
+			if (selected == JOptionPane.YES_OPTION) {
+				save();
 			}
 		} else {
 			title = "Result";
@@ -140,16 +137,14 @@ public class RoundController {
 		GameController.getInstance().closeRound(this.round);
 	}
 	
-	private GamePad loadGamePad() {
-		GamePad gamePad = (GamePad) SettingDAO.load(GamePad.NAME);
-		
-		return gamePad;
-	}
-	
 	public void save() {
 		if (!this.round.isFinished()) {
 			RoundDAO.save(this.round);
 		}
+	}
+	
+	private void loadGamePad() {
+		this.gamePad = SettingController.getInstance().loadGamePad();
 	}
 	
 	public void actionGamePad(int keyCode) {
@@ -158,27 +153,25 @@ public class RoundController {
 				pause();
 			} else if (this.round.getState() == State.PAUSED) {
 				resume();
-			}
-		} else {
-			Pig pig = this.round.getPig();
-			
-			if (keyCode == this.gamePad.getKeyMoveLeft()) {
-				pig.move(Direction.LEFT);
-			} else if (keyCode == this.gamePad.getKeyMoveRight()) {
-				pig.move(Direction.RIGHT);
-			} else if (keyCode == this.gamePad.getKeyMoveUp()) {
-				pig.move(Direction.UP);
-			} else if (keyCode == this.gamePad.getKeyMoveDown()) {
-				pig.move(Direction.DOWN);
-			} else if (keyCode == this.gamePad.getKeyPigAttak()) {
-				//TODO
 			} else {
 				//TODO Throw exception
 			}
-			
-			checkElementAtPigPosition();
+		} else {
+			if (keyCode == this.gamePad.getKeyMoveLeft()) {
+				this.round.getPig().move(Direction.LEFT);
+			} else if (keyCode == this.gamePad.getKeyMoveRight()) {
+				this.round.getPig().move(Direction.RIGHT);
+			} else if (keyCode == this.gamePad.getKeyMoveUp()) {
+				this.round.getPig().move(Direction.UP);
+			} else if (keyCode == this.gamePad.getKeyMoveDown()) {
+				this.round.getPig().move(Direction.DOWN);
+			} else if (keyCode == this.gamePad.getKeyPigAttak()) {
+				//TODO
+			}
 			
 			this.arenaView.repaint();
+			
+			checkElementAtPigPosition();
 		}
 	}
 	
