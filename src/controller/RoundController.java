@@ -171,21 +171,13 @@ public class RoundController {
 				//TODO Throw exception
 			}
 		} else if (keyCode == this.gamePad.getKeyMoveLeft()) {
-			this.round.getPig().move(Direction.LEFT);
-			this.arenaView.repaint();
-			checkElementAtPigPosition();
+			initMove(Direction.LEFT);
 		} else if (keyCode == this.gamePad.getKeyMoveRight()) {
-			this.round.getPig().move(Direction.RIGHT);
-			this.arenaView.repaint();
-			checkElementAtPigPosition();
+			initMove(Direction.RIGHT);
 		} else if (keyCode == this.gamePad.getKeyMoveUp()) {
-			this.round.getPig().move(Direction.UP);
-			this.arenaView.repaint();
-			checkElementAtPigPosition();
+			initMove(Direction.UP);
 		} else if (keyCode == this.gamePad.getKeyMoveDown()) {
-			this.round.getPig().move(Direction.DOWN);
-			this.arenaView.repaint();
-			checkElementAtPigPosition();
+			initMove(Direction.DOWN);
 		} else if (keyCode == this.gamePad.getKeyPigAttak()) {
 			//TODO
 			this.arenaView.repaint();
@@ -193,20 +185,14 @@ public class RoundController {
 		}
 	}
 	
-	public void actionBeforeGamePad(int keyCode) {		
-		if (keyCode == this.gamePad.getKeyMoveLeft()) {
-			this.round.getPig().setMovable(true);
-			checkElementAtNextPigGravityPosition(Direction.LEFT);
-		} else if (keyCode == this.gamePad.getKeyMoveRight()) {
-			this.round.getPig().setMovable(true);
-			checkElementAtNextPigGravityPosition(Direction.RIGHT);
-		} else if (keyCode == this.gamePad.getKeyMoveUp()) {
-			this.round.getPig().setMovable(true);
-			checkElementAtNextPigGravityPosition(Direction.UP);
-		} else if (keyCode == this.gamePad.getKeyMoveDown()) {
-			this.round.getPig().setMovable(true);
-			checkElementAtNextPigGravityPosition(Direction.DOWN);
+	private void initMove(Direction direction) {
+		boolean canMove = canMove(direction);
+		if (canMove) {
+			this.round.getPig().move(direction);
 		}
+		
+		this.arenaView.repaint();
+		checkElementAtPigPosition();
 	}
 	
 	public void actionPigAttakEnemy(Enemy enemy) {
@@ -291,18 +277,21 @@ public class RoundController {
 		}
 	}
 	
-	public void checkElementAtPigExtendedPosition(Point position) {
-		Element element = getElementAtPosition(position);
+	public boolean canMove(Direction direction) {
+		ListElements listElements = getDetectedElementsAtNextPigGravityPosition(direction);
 		
-		if (element instanceof Wall) {
-			this.round.getPig().setMovable(false);
-		} else if (element instanceof Enemy) {
-			Enemy enemy = (Enemy) element;
-			actionEnemyAttakPig(enemy);
+		for (int i=0; i<listElements.size(); i++) {
+			if (listElements.get(i) instanceof Wall) {
+				return false;
+			}
 		}
+		
+		return true;
 	}
 	
-	public void checkElementAtNextPigGravityPosition(Direction direction) {
+	private ListElements getDetectedElementsAtNextPigGravityPosition(Direction direction) {
+		ListElements listDetectedElement = new ListElements();
+		
 		Pig pig = this.round.getPig();
 		Point nextPigPosition = pig.getNextPosition(direction);
 		Point nextPigGravityPosition = MathUtil.getGravityPosition(nextPigPosition, pig.getDimension());
@@ -315,12 +304,14 @@ public class RoundController {
 			if (!(element instanceof Pig)) {
 				Point elementGravityPosition = MathUtil.getGravityPosition(element.getPosition(), element.getDimension());
 				
-				boolean detected = detectCollision(nextPigGravityPosition, elementGravityPosition);
+				boolean detected = detectInsideCollision(nextPigGravityPosition, elementGravityPosition);
 				if (detected) {
-					checkElementAtPigExtendedPosition(element.getPosition());
+					listDetectedElement.add(element);
 				}
 			}
 		}
+		
+		return listDetectedElement;
 	}
 	
 	public Element getElementAtPosition(Point position) {
@@ -337,8 +328,16 @@ public class RoundController {
 		return null;
 	}
 	
-	private boolean detectCollision(Point gravityPosition1, Point gravityPosition2) {
+	private boolean detectInsideCollision(Point gravityPosition1, Point gravityPosition2) {
 		if (MathUtil.distance(gravityPosition1, gravityPosition2) < 100) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private boolean detectOutsideCollision(Point gravityPosition1, Point gravityPosition2) {
+		if (MathUtil.distance(gravityPosition1, gravityPosition2) < Math.sqrt(2*Math.pow(100, 2))) {
 			return true;
 		}
 		

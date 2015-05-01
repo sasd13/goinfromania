@@ -10,8 +10,8 @@ public class GamePadListener implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		RoundController roundController = GameController.getInstance().getRoundController();
-		roundController.actionBeforeGamePad(arg0.getKeyCode());		
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -22,6 +22,7 @@ public class GamePadListener implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		RoundController roundController = GameController.getInstance().getRoundController();
+		roundController.actionGamePad(arg0.getKeyCode());
 	}
 }
