@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import javax.swing.JOptionPane;
 
+import util.MathUtil;
 import view.ArenaView;
 import view.PigStateView;
 import view.RoundView;
@@ -17,6 +18,7 @@ import game.element.character.Virus;
 import game.element.food.Cake;
 import game.element.food.Food;
 import game.element.food.PoisonCake;
+import game.element.item.Wall;
 import game.element.power.Power;
 import game.round.GamePadListener;
 import game.round.Level;
@@ -69,7 +71,7 @@ public class RoundController {
 		ListElements listElements = this.round.getListElement();
 		
 		Cake cake = new Cake();
-		cake.setPosition(new Point(300, 100));
+		cake.setPosition(new Point(300, 0));
 		listElements.add(cake);
 		
 		Nutritionist nutritionist = new Nutritionist();
@@ -77,12 +79,24 @@ public class RoundController {
 		listElements.add(nutritionist);
 		
 		PoisonCake poisonCake = new PoisonCake();
-		poisonCake.setPosition(new Point(300, 300));
+		poisonCake.setPosition(new Point(300, 400));
 		listElements.add(poisonCake);
 		
 		Virus virus = new Virus();
 		virus.setPosition(new Point(500, 300));
 		listElements.add(virus);
+		
+		Wall wall1 = new Wall();
+		wall1.setPosition(new Point(300, 100));
+		listElements.add(wall1);
+		
+		Wall wall2 = new Wall();
+		wall2.setPosition(new Point(300, 200));
+		listElements.add(wall2);
+		
+		Wall wall3 = new Wall();
+		wall3.setPosition(new Point(300, 300));
+		listElements.add(wall3);
 	}
 	
 	public void restart() {
@@ -156,22 +170,42 @@ public class RoundController {
 			} else {
 				//TODO Throw exception
 			}
-		} else {
-			if (keyCode == this.gamePad.getKeyMoveLeft()) {
-				this.round.getPig().move(Direction.LEFT);
-			} else if (keyCode == this.gamePad.getKeyMoveRight()) {
-				this.round.getPig().move(Direction.RIGHT);
-			} else if (keyCode == this.gamePad.getKeyMoveUp()) {
-				this.round.getPig().move(Direction.UP);
-			} else if (keyCode == this.gamePad.getKeyMoveDown()) {
-				this.round.getPig().move(Direction.DOWN);
-			} else if (keyCode == this.gamePad.getKeyPigAttak()) {
-				//TODO
-			}
-			
+		} else if (keyCode == this.gamePad.getKeyMoveLeft()) {
+			this.round.getPig().move(Direction.LEFT);
 			this.arenaView.repaint();
-			
 			checkElementAtPigPosition();
+		} else if (keyCode == this.gamePad.getKeyMoveRight()) {
+			this.round.getPig().move(Direction.RIGHT);
+			this.arenaView.repaint();
+			checkElementAtPigPosition();
+		} else if (keyCode == this.gamePad.getKeyMoveUp()) {
+			this.round.getPig().move(Direction.UP);
+			this.arenaView.repaint();
+			checkElementAtPigPosition();
+		} else if (keyCode == this.gamePad.getKeyMoveDown()) {
+			this.round.getPig().move(Direction.DOWN);
+			this.arenaView.repaint();
+			checkElementAtPigPosition();
+		} else if (keyCode == this.gamePad.getKeyPigAttak()) {
+			//TODO
+			this.arenaView.repaint();
+			checkElementAtPigPosition();
+		}
+	}
+	
+	public void actionBeforeGamePad(int keyCode) {		
+		if (keyCode == this.gamePad.getKeyMoveLeft()) {
+			this.round.getPig().setMovable(true);
+			checkElementAtNextPigGravityPosition(Direction.LEFT);
+		} else if (keyCode == this.gamePad.getKeyMoveRight()) {
+			this.round.getPig().setMovable(true);
+			checkElementAtNextPigGravityPosition(Direction.RIGHT);
+		} else if (keyCode == this.gamePad.getKeyMoveUp()) {
+			this.round.getPig().setMovable(true);
+			checkElementAtNextPigGravityPosition(Direction.UP);
+		} else if (keyCode == this.gamePad.getKeyMoveDown()) {
+			this.round.getPig().setMovable(true);
+			checkElementAtNextPigGravityPosition(Direction.DOWN);
 		}
 	}
 	
@@ -242,9 +276,9 @@ public class RoundController {
 	
 	//Fonctionne a la position exacte du Pig
 	public void checkElementAtPigPosition() {
-		Pig pig = this.round.getPig();
+		Point position = this.round.getPig().getPosition();
 		
-		Element element = this.round.getListElement().getElementAtPosition(pig.getPosition());
+		Element element = getElementAtPosition(position);
 		
 		if (element != null) {
 			if (element instanceof Food) {
@@ -257,21 +291,57 @@ public class RoundController {
 		}
 	}
 	
-	//Doit fonctionner pour les positions aux alentours du Pig
-	public void checkElementAtExtendedPigPosition() {
-		//TODO
+	public void checkElementAtPigExtendedPosition(Point position) {
+		Element element = getElementAtPosition(position);
+		
+		if (element instanceof Wall) {
+			this.round.getPig().setMovable(false);
+		} else if (element instanceof Enemy) {
+			Enemy enemy = (Enemy) element;
+			actionEnemyAttakPig(enemy);
+		}
 	}
 	
-	public void checkElementAtNextPigPosition() {
+	public void checkElementAtNextPigGravityPosition(Direction direction) {
 		Pig pig = this.round.getPig();
+		Point nextPigPosition = pig.getNextPosition(direction);
+		Point nextPigGravityPosition = MathUtil.getGravityPosition(nextPigPosition, pig.getDimension());
+		ListElements listElements = this.round.getListElement();
 		
-		Element element = this.round.getListElement().getElementAtPosition(pig.getPosition());
-		
-		if (element != null) {
-			if (element instanceof Food) {
-				Food food = (Food) element;
-				actionPigEatFood(food);
+		Element element;
+		for (int i=0; i<listElements.size(); i++) {
+			element = listElements.get(i);
+			
+			if (!(element instanceof Pig)) {
+				Point elementGravityPosition = MathUtil.getGravityPosition(element.getPosition(), element.getDimension());
+				
+				boolean detected = detectCollision(nextPigGravityPosition, elementGravityPosition);
+				if (detected) {
+					checkElementAtPigExtendedPosition(element.getPosition());
+				}
 			}
 		}
+	}
+	
+	public Element getElementAtPosition(Point position) {
+		ListElements listElements = this.round.getListElement();
+		
+		Element element;
+		for (int i=0; i<listElements.size(); i++) {
+			element = listElements.get(i);
+			if (element.getPosition().equals(position) && !(element instanceof Pig)) {
+				return element;
+			}
+		}
+		
+		return null;
+	}
+	
+	private boolean detectCollision(Point gravityPosition1, Point gravityPosition2) {
+		if (MathUtil.distance(gravityPosition1, gravityPosition2) < 100) {
+			return true;
+		}
+		
+		return false;
 	}
 }

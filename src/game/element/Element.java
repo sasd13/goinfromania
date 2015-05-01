@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
+import util.MathUtil;
 import view.DimensionConstants;
 import game.setting.Direction;
 
@@ -137,11 +138,18 @@ public abstract class Element extends Observable {
 		notifyObservers();
 	}
 	
-	public Point getNextPosition(Direction direction) {
+	public Point move(Direction direction) {
 		if (!this.movable) {
 			return this.position;
 		}
 		
+		Point nextPosition = getNextPosition(direction);
+		setPosition(nextPosition);
+		
+		return nextPosition;
+	}
+	
+	public Point getNextPosition(Direction direction) {
 		Point nextPosition = new Point(this.position.x, this.position.y);
 		
 		switch (direction) {
@@ -162,19 +170,9 @@ public abstract class Element extends Observable {
 				break;
 		}
 		
-		/*
-		 * Recadrage
-		 */
-		nextPosition = cropping(nextPosition);
+		nextPosition = recalibration(nextPosition, direction); //Repositionnement
 		
-		return nextPosition;
-	}
-	
-	public Point move(Direction direction) {
-		Point nextPosition = getNextPosition(direction);
-		setPosition(nextPosition);
-		
-		return nextPosition;
+		return cropping(nextPosition); //Recadrage
 	}
 	
 	private Point cropping(Point point) {
@@ -191,5 +189,30 @@ public abstract class Element extends Observable {
 		}
 		
 		return point;
+	}
+	
+	private Point recalibration(Point position, Direction direction) {
+		if ((position.x % SPEED_MEDIUM != 0 || position.y % SPEED_MEDIUM != 0)
+				&& (this.speed == SPEED_MEDIUM || this.speed == SPEED_HIGH)) {
+			switch (direction) {
+				case LEFT :
+					position.x = (int) MathUtil.roundDown(position.x, SPEED_MEDIUM);
+					break;
+				case RIGHT :
+					position.x = (int) MathUtil.roundUp(position.x, SPEED_MEDIUM);
+					break;
+				case UP :
+					position.y = (int) MathUtil.roundDown(position.y, SPEED_MEDIUM);
+					break;
+				case DOWN :
+					position.y = (int) MathUtil.roundUp(position.y, SPEED_MEDIUM);
+					break;
+				default :
+					//TODO Throw exception
+					break;
+			}
+		}
+		
+		return position;
 	}
 }
