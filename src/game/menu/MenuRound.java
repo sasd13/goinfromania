@@ -11,13 +11,15 @@ import controller.RoundController;
 
 public class MenuRound extends JMenu implements ActionListener {
 
+	public static final String NAME = "Round";
+	
 	private final String ITEM_PAUSE = "Pause";
 	private final String ITEM_RESTART = "Restart";
 	private final String ITEM_STOP = "Stop";
 	private final String ITEM_SAVE = "Save";
 	
 	public MenuRound() {
-		super("Round");
+		super(NAME);
 		
 		JMenuItem itemPause = new JMenuItem(ITEM_PAUSE);
 		itemPause.addActionListener(this);

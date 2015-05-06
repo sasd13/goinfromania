@@ -1,6 +1,5 @@
 package game.element;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 public class ListElements {
@@ -31,16 +30,6 @@ public class ListElements {
 	
 	public Element get(int index) {
 		return this.list.get(index);
-	}
-	
-	public Element get(Point position) {
-		for (Element element : this.list) {
-			if (element.getPosition().equals(position)) {
-				return element;
-			}
-		}
-		
-		return null;
 	}
 	
 	public int size() {

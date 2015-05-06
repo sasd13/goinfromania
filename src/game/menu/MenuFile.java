@@ -10,14 +10,15 @@ import controller.GameController;
 
 public class MenuFile extends JMenu implements ActionListener {
 
+	public static final String NAME = "File";
+	
 	private final String ITEM_NEW = "New round";
 	private final String ITEM_OPEN = "Open round";
-	private final String ITEM_SAVE = "Save";
 	private final String ITEM_SCORES = "Show scores";
 	private final String ITEM_EXIT = "Exit";
 	
 	public MenuFile() {
-		super("File");
+		super(NAME);
 		
 		JMenuItem itemNew = new JMenuItem(ITEM_NEW);
 		itemNew.addActionListener(this);
@@ -26,12 +27,6 @@ public class MenuFile extends JMenu implements ActionListener {
 		JMenuItem itemOpen = new JMenuItem(ITEM_OPEN);
 		itemOpen.addActionListener(this);
 		add(itemOpen);
-		
-		addSeparator();
-		
-		JMenuItem itemSave = new JMenuItem(ITEM_SAVE);
-		itemSave.addActionListener(this);
-		add(itemSave);
 		
 		addSeparator();
 		

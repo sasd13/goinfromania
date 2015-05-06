@@ -23,4 +23,9 @@ public class Nutritionist extends Enemy {
 		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImage(image);
 	}
+	
+	public void pursuePig(Pig pig) {
+		//TODO Implementation
+		
+	}
 }

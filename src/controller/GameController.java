@@ -1,10 +1,14 @@
 package controller;
 
+import javax.swing.JMenu;
+
 import view.GameView;
 import view.RoundView;
 import db.RoundDAO;
 import game.Game;
-import game.menu.GameMenu;
+import game.menu.GameMenuBar;
+import game.menu.MenuRound;
+import game.menu.MenuSettings;
 import game.round.ListRounds;
 import game.round.Round;
 
@@ -80,7 +84,8 @@ public class GameController {
 		
 		this.roundController = null;
 		
-		((GameMenu) this.gameView.getJMenuBar()).getMenuRound().setEnabled(false);
+		setMenuEnabled(MenuRound.NAME, false);
+		setMenuEnabled(MenuSettings.NAME, true);
 		
 		showListRounds();
 	}
@@ -91,7 +96,8 @@ public class GameController {
 		RoundView roundView = new RoundView();
 		this.gameView.setLiveRoundView(roundView);
 		
-		((GameMenu) this.gameView.getJMenuBar()).getMenuRound().setEnabled(true);
+		setMenuEnabled(MenuRound.NAME, true);
+		setMenuEnabled(MenuSettings.NAME, false);
 		
 		return new RoundController(roundView, round);
 	}
@@ -104,5 +110,10 @@ public class GameController {
 	private void saveRounds() {
 		ListRounds listRounds = this.game.getListRound();
 		RoundDAO.saveAll(listRounds);
+	}
+	
+	private void setMenuEnabled(String menuName, boolean enabled) {
+		JMenu menu = ((GameMenuBar) this.gameView.getJMenuBar()).getMenu(menuName);
+		menu.setEnabled(enabled);
 	}
 }

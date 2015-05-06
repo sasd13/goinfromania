@@ -1,7 +1,7 @@
 package view;
 
 import game.Game;
-import game.menu.GameMenu;
+import game.menu.GameMenuBar;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -14,7 +14,7 @@ public class GameView extends JFrame implements Observer {
 	
 	private static GameView instance = null;
 	
-	private GameMenu gameMenu;
+	private GameMenuBar gameMenuBar;
 	private ListRoundsView listRoundsView;
 	private RoundView liveRoundView;
 	
@@ -26,8 +26,8 @@ public class GameView extends JFrame implements Observer {
 		Dimension dimension = new Dimension(DimensionConstants.FRAME_WIDTH_LARGE, DimensionConstants.FRAME_HEIGHT_LARGE);
 		setPreferredSize(dimension);
 		
-		this.gameMenu = new GameMenu();
-		setJMenuBar(this.gameMenu);
+		this.gameMenuBar = new GameMenuBar();
+		setJMenuBar(this.gameMenuBar);
 		
 		this.listRoundsView = new ListRoundsView();
 		

@@ -10,12 +10,14 @@ import javax.swing.JMenuItem;
 
 import controller.SettingController;
 
-public class MenuSetting extends JMenu implements ActionListener {
+public class MenuSettings extends JMenu implements ActionListener {
 
+	public static final String NAME = "Settings";
+	
 	private final String ITEM_GAMEPAD = "Gamepad";
 	
-	public MenuSetting() {
-		super("Settings");
+	public MenuSettings() {
+		super(NAME);
 		
 		JMenuItem itemGamePad = new JMenuItem(ITEM_GAMEPAD);
 		itemGamePad.addActionListener(this);

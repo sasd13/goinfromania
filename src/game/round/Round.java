@@ -1,5 +1,6 @@
 package game.round;
 
+import game.element.character.Pig;
 import game.round.arena.Arena;
 
 import java.util.Observable;
@@ -21,6 +22,7 @@ public class Round extends Observable {
 	private boolean finished;
 	private Result result;
 	private int score;
+	private Pig pig;
 	private Arena arena;
 	
 	public Round() {
@@ -32,7 +34,10 @@ public class Round extends Observable {
 		this.maxPlay = MAX_PLAY;
 		this.level = Level.EASY;
 		this.score = 0;
+		this.pig = new Pig();
 		this.arena = new Arena();
+		
+		this.arena.addElement(this.pig);
 	}
 	
 	public String getId() {
@@ -111,6 +116,17 @@ public class Round extends Observable {
 	
 	public void setScore(int score) {
 		this.score = score;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public Pig getPig() {
+		return this.pig;
+	}
+	
+	public void setPig(Pig pig) {
+		this.pig = pig;
 		
 		setChanged();
 		notifyObservers();
