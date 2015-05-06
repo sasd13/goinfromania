@@ -2,7 +2,7 @@ package game.element.food;
 
 import java.awt.image.BufferedImage;
 
-import game.element.ImageLoader;
+import util.ImageLoader;
 import game.element.character.Pig;
 
 public class Cake extends Food {

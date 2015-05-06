@@ -7,7 +7,6 @@ import java.util.Observable;
 
 import util.MathUtil;
 import view.DimensionConstants;
-import game.setting.Direction;
 
 public abstract class Element extends Observable {
 	

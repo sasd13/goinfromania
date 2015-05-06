@@ -1,4 +1,4 @@
-package game.setting;
+package game.element;
 
 public enum Direction {
 	LEFT,

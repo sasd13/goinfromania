@@ -1,11 +1,10 @@
 package view;
 
-import game.Game;
-import game.setting.SettingListener;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,7 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public abstract class SettingView extends JFrame implements Observer {
+import controller.SettingController;
+
+public abstract class SettingView extends JFrame implements Observer, ActionListener {
 
 	public static final String BUTTONCLOSE_NAME = "Close";
 	public static final String BUTTONRESET_NAME = "Reset";
@@ -26,7 +27,7 @@ public abstract class SettingView extends JFrame implements Observer {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setPreferredSize(new Dimension(DimensionConstants.FRAME_WIDTH_MEDIUM, DimensionConstants.FRAME_HEIGHT_MEDIUM));
 		
-		setTitle(Game.NAME);
+		setTitle("Settings");
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
@@ -34,16 +35,14 @@ public abstract class SettingView extends JFrame implements Observer {
 		
 		Dimension dimen = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		
-		SettingListener listener = new SettingListener();
-		
 		this.buttonClose = new JButton(BUTTONCLOSE_NAME);
 		this.buttonClose.setPreferredSize(dimen);
-		this.buttonClose.addActionListener(listener);
+		this.buttonClose.addActionListener(this);
 		panel.add(this.buttonClose);
 		
 		this.buttonReset = new JButton(BUTTONRESET_NAME);
 		this.buttonReset.setPreferredSize(dimen);
-		this.buttonReset.addActionListener(listener);
+		this.buttonReset.addActionListener(this);
 		panel.add(this.buttonReset);
 	}
 	
@@ -59,5 +58,18 @@ public abstract class SettingView extends JFrame implements Observer {
 	public void update(Observable observable, Object arg) {
 		//TODO
 		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		JButton button = (JButton) arg0.getSource();
+		
+		if (button == this.buttonClose) {
+			SettingController.getInstance().close();
+		} else if (button == this.buttonReset) {
+			SettingController.getInstance().reset();
+		} else {
+			//TODO Thrw exception
+		}
 	}
 }

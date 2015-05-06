@@ -1,7 +1,6 @@
 package db;
 
 import game.setting.GamePad;
-import game.setting.ListSettings;
 import game.setting.Setting;
 
 public class SettingDAO {
@@ -20,24 +19,12 @@ public class SettingDAO {
 				break;
 		}
 		
+		//End Database query
+		
 		return setting;
-	}
-	
-	public static ListSettings loadAll() {
-		ListSettings listSettings = new ListSettings();
-		
-		//TODO Database query
-		
-		return listSettings;
 	}
 	
 	public static void save(Setting setting) {
 		//TODO Database query
-	}
-	
-	public static void saveAll(ListSettings listSettings) {
-		for (int i=0; i<listSettings.size(); i++) {
-			save(listSettings.get(i));
-		}
 	}
 }

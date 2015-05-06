@@ -2,7 +2,7 @@ package game.element.character;
 
 import java.awt.image.BufferedImage;
 
-import game.element.ImageLoader;
+import util.ImageLoader;
 import game.element.power.Diet;
 
 public class Nutritionist extends Enemy {

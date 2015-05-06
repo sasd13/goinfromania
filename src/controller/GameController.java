@@ -12,15 +12,14 @@ public class GameController {
 
 	private static GameController instance = null;
 	
-	private Game game;
 	private GameView gameView;
+	private Game game;
 	
 	private RoundController roundController;
 	
 	private GameController() {
-		this.game = Game.getInstance();
 		this.gameView = GameView.getInstance();
-		
+		this.game = Game.getInstance();
 		this.game.addObserver(this.gameView);
 		this.gameView.update(this.game, null);
 		
@@ -94,7 +93,7 @@ public class GameController {
 		
 		((GameMenu) this.gameView.getJMenuBar()).getMenuRound().setEnabled(true);
 		
-		return new RoundController(round, roundView);
+		return new RoundController(roundView, round);
 	}
 	
 	private void loadRounds() {

@@ -1,4 +1,4 @@
-package game.round;
+package game.round.arena;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

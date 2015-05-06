@@ -1,9 +1,9 @@
 package game.element;
 
+import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Observable;
 
-public class ListElements extends Observable {
+public class ListElements {
 	
 	private ArrayList<Element> list;
 	
@@ -12,21 +12,11 @@ public class ListElements extends Observable {
 	}
 	
 	public boolean add(Element element) {
-		boolean added = this.list.add(element);
-		
-		setChanged();
-		notifyObservers();
-		
-		return added;
+		return this.list.add(element);
 	}
 	
 	public boolean remove(Element element) {
-		boolean removed = this.list.remove(element);
-		
-		setChanged();
-		notifyObservers();
-		
-		return removed;
+		return this.list.remove(element);
 	}
 	
 	public Element get(String elementId) {
@@ -41,6 +31,16 @@ public class ListElements extends Observable {
 	
 	public Element get(int index) {
 		return this.list.get(index);
+	}
+	
+	public Element get(Point position) {
+		for (Element element : this.list) {
+			if (element.getPosition().equals(position)) {
+				return element;
+			}
+		}
+		
+		return null;
 	}
 	
 	public int size() {

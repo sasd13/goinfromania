@@ -15,7 +15,7 @@ public class MenuSetting extends JMenu implements ActionListener {
 	private final String ITEM_GAMEPAD = "Gamepad";
 	
 	public MenuSetting() {
-		super("Setting");
+		super("Settings");
 		
 		JMenuItem itemGamePad = new JMenuItem(ITEM_GAMEPAD);
 		itemGamePad.addActionListener(this);

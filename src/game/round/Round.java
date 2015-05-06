@@ -1,51 +1,61 @@
 package game.round;
 
-import game.element.ListElements;
-import game.element.character.Pig;
+import game.round.arena.Arena;
 
 import java.util.Observable;
 
 public class Round extends Observable {
 
+	public static final int MAX_PLAY = 5;
+	
 	public static final int TOTAL_CAKE_TO_EAT_LEVEL_EASY = 10;
 	public static final int TOTAL_CAKE_TO_EAT_LEVEL_NORMAL = 20;
 	public static final int TOTAL_CAKE_TO_EAT_LEVEL_HARD = 30;
 	
 	private static int countRound = 0;
 	private String id;
-	private int number;
+	private int roundNumber;
+	private int maxPlay;
 	private Level level;
 	private State state;
 	private boolean finished;
 	private Result result;
 	private int score;
-	private Pig pig;
-	private ListElements listElements;
+	private Arena arena;
 	
 	public Round() {
 		super();
 		
 		countRound++;
 		this.id = "id-round-" + countRound;
-		this.number = 0;
+		this.roundNumber = 0;
+		this.maxPlay = MAX_PLAY;
 		this.level = Level.EASY;
 		this.score = 0;
-		this.pig = new Pig();
-		this.listElements = new ListElements();
-
-		this.listElements.add(this.pig);
+		this.arena = new Arena();
 	}
 	
 	public String getId() {
 		return this.id;
 	}
 	
-	public int getNumber() {
-		return this.number;
+	public int getRoundNumber() {
+		return this.roundNumber;
 	}
 	
-	public void setNumber(int number) {
-		this.number = number;
+	public void setRoundNumber(int roundNumber) {
+		this.roundNumber = roundNumber;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public int getMaxPlay() {
+		return this.maxPlay;
+	}
+	
+	public void setMaxPlay(int maxPlay) {
+		this.maxPlay = maxPlay;
 		
 		setChanged();
 		notifyObservers();
@@ -106,23 +116,12 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
-	public Pig getPig() {
-		return this.pig;
+	public Arena getArena() {
+		return this.arena;
 	}
 	
-	public void setPig(Pig pig) {
-		this.pig = pig;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public ListElements getListElement() {
-		return this.listElements;
-	}
-	
-	public void setListElements(ListElements listElements) {
-		this.listElements = listElements;
+	public void setArena(Arena arena) {
+		this.arena = arena;
 		
 		setChanged();
 		notifyObservers();

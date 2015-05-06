@@ -28,31 +28,15 @@ public class SettingController {
 		return instance;
 	}
 	
-	private void display() {
-		this.settingView.pack();
-		this.settingView.setVisible(true);
-	}
-	
-	private void dispose() {
-		this.setting = null;		
-		this.settingView.dispose();
-	}
-	
 	public void open(String settingName) {
-		switch (settingName) {
-			case GamePad.NAME :
-				this.settingView = new GamePadView();
-				break;
-			default :
-				//TODO Throw exception
-				break;
-		}
+		this.settingView = createView(settingName);
 		
 		this.setting = SettingDAO.load(settingName);
-		this.setting.addObserver(settingView);
-		this.settingView.update(setting, null);
+		this.setting.addObserver(this.settingView);
+		this.settingView.update(this.setting, null);
 		
-		display();
+		this.settingView.pack();
+		this.settingView.setVisible(true);
 	}
 	
 	public void close() {
@@ -64,11 +48,22 @@ public class SettingController {
 			SettingDAO.save(this.setting);
 		}
 		
-		dispose();
+		this.setting = null;		
+		this.settingView.dispose();
 	}
 	
 	public void reset() {
 		this.setting.reset();
+	}
+	
+	private SettingView createView(String settingName) {
+		switch (settingName) {
+			case GamePad.NAME :
+				return new GamePadView();
+			default :
+				//TODO Throw exception
+				return null;
+		}
 	}
 	
 	public GamePad loadGamePad() {
