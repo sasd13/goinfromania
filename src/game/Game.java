@@ -15,7 +15,7 @@ public class Game extends Observable {
 	private Game() {
 		super();
 		
-		this.listRounds = null;
+		this.listRounds = new ListRounds();
 	}
 	
 	public static synchronized Game getInstance() {
@@ -26,11 +26,11 @@ public class Game extends Observable {
 		return instance;
 	}
 	
-	public ListRounds getListRound() {
+	public ListRounds getListRounds() {
 		return this.listRounds;
 	}
 	
-	public void setListRound(ListRounds listRounds) {
+	public void setListRounds(ListRounds listRounds) {
 		this.listRounds = listRounds;
 		
 		setChanged();

@@ -11,17 +11,16 @@ import view.DimensionConstants;
 public abstract class Element extends Observable {
 	
 	public static final int POSITION_X_MIN = 0;
-	public static final int POSITION_X_MAX = DimensionConstants.GRID_WIDTH;
-	
+	public static final int POSITION_X_MAX = DimensionConstants.ARENA_WIDTH;
 	public static final int POSITION_Y_MIN = 0;
-	public static final int POSITION_Y_MAX = DimensionConstants.GRID_HEIGHT;
+	public static final int POSITION_Y_MAX = DimensionConstants.ARENA_HEIGHT;
 	
-	public static final int SPEED_MIN = 0;
-	public static final int SPEED_MAX = 100;
-	
+	public static final int SPEED_MIN = -100;
+	public static final int SPEED_NULL = 0;
 	public static final int SPEED_LOW = 20;
 	public static final int SPEED_MEDIUM = 50;
 	public static final int SPEED_HIGH = 80;
+	public static final int SPEED_MAX = 100;
 
 	private static int countElement;
 	private String id;
@@ -44,7 +43,7 @@ public abstract class Element extends Observable {
 		this.dimension = new Dimension();
 		this.image = null;
 		this.movable = false;
-		this.speed = SPEED_MIN;
+		this.speed = SPEED_NULL;
 	}
 	
 	public String getId() {
@@ -104,9 +103,6 @@ public abstract class Element extends Observable {
 		
 		setChanged();
 		notifyObservers();
-		
-		Dimension dimension = new Dimension(this.image.getWidth(), this.image.getHeight());
-		setDimension(dimension);
 	}
 	
 	public boolean isMovable() {
@@ -135,6 +131,16 @@ public abstract class Element extends Observable {
 		
 		setChanged();
 		notifyObservers();
+	}
+	
+	public Dimension setImageWithDimension(BufferedImage image) {
+		Dimension dimension = null;
+		
+		setImage(image);
+		dimension = new Dimension(this.image.getWidth(), this.image.getHeight());
+		setDimension(dimension);
+		
+		return dimension;
 	}
 	
 	public Point move(Direction direction) {
@@ -170,29 +176,14 @@ public abstract class Element extends Observable {
 		}
 		
 		nextPosition = recalibration(nextPosition, direction); //Repositionnement
+		nextPosition = cropping(nextPosition); //Recadrage
 		
-		return cropping(nextPosition); //Recadrage
-	}
-	
-	private Point cropping(Point point) {
-		if (point.x < POSITION_X_MIN) {
-			point.x = POSITION_X_MIN;
-		} else if ((point.x + this.dimension.width) > POSITION_X_MAX) {
-			point.x = POSITION_X_MAX - this.dimension.width;
-		}
-		
-		if (point.y < POSITION_Y_MIN) {
-			point.y = POSITION_Y_MIN;
-		} else if ((point.y + this.dimension.height) > POSITION_Y_MAX) {
-			point.y = POSITION_Y_MAX - this.dimension.height;
-		}
-		
-		return point;
+		return nextPosition;
 	}
 	
 	private Point recalibration(Point position, Direction direction) {
-		if ((position.x % SPEED_MEDIUM != 0 || position.y % SPEED_MEDIUM != 0)
-				&& (this.speed == SPEED_MEDIUM || this.speed == SPEED_HIGH)) {
+		if ((this.speed == SPEED_MEDIUM) 
+				&& (position.x % SPEED_MEDIUM != 0 || position.y % SPEED_MEDIUM != 0)) {
 			switch (direction) {
 				case LEFT :
 					position.x = (int) MathUtil.roundDown(position.x, SPEED_MEDIUM);
@@ -210,6 +201,22 @@ public abstract class Element extends Observable {
 					//TODO Throw exception
 					break;
 			}
+		}
+		
+		return position;
+	}
+	
+	private Point cropping(Point position) {
+		if (position.x < POSITION_X_MIN) {
+			position.x = POSITION_X_MIN;
+		} else if ((position.x + this.dimension.width) > POSITION_X_MAX) {
+			position.x = POSITION_X_MAX - this.dimension.width;
+		}
+		
+		if (position.y < POSITION_Y_MIN) {
+			position.y = POSITION_Y_MIN;
+		} else if ((position.y + this.dimension.height) > POSITION_Y_MAX) {
+			position.y = POSITION_Y_MAX - this.dimension.height;
 		}
 		
 		return position;

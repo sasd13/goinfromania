@@ -36,8 +36,6 @@ public class Round extends Observable {
 		this.score = 0;
 		this.pig = new Pig();
 		this.arena = new Arena();
-		
-		this.arena.addElement(this.pig);
 	}
 	
 	public String getId() {

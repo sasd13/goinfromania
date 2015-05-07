@@ -62,6 +62,9 @@ public class RoundController {
 		
 		loadGamePad();
 		
+		Arena arena = this.round.getArena();
+		arena.addElement(this.round.getPig());
+		
 		ArenaView arenaView = this.roundView.getArenaView();
 		arenaView.addKeyListener(new GamePadListener());
 		arenaView.setFocusable(true);

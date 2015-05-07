@@ -8,10 +8,9 @@ import game.element.character.Pig;
 public class Cake extends Food {
 
 	public static final String NAME = "Cake";
-	public static final int SCORE_POINT = 50;
-	
-	public static final int VALUE_EVOLVE_PIG_ENERGY = 15;
 	public static final String IMAGE_NAME = "cake_1.png";
+	public static final int VALUE_EVOLVE_PIG_ENERGY = 15;
+	public static final int SCORE_POINT = 50;
 	
 	public Cake() {
 		super();
@@ -30,5 +29,7 @@ public class Cake extends Food {
 	public void act(Pig pig) {
 		pig.setEnergy(pig.getEnergy() + getEffectValue());
 		pig.cakeEaten();
+		
+		super.act(pig);
 	}
 }

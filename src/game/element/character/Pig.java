@@ -15,12 +15,11 @@ public class Pig extends Character {
 	public static final String NAME = "Pig";
 	public static final String IMAGE_NAME = "pig.png";
 	
-	public static final int ENERGY_MIN = 0;
-	public static final int ENERGY_MAX = 100;
-	
+	public static final int ENERGY_MIN = 0;	
 	public static final int ENERGY_LOW = 20;
 	public static final int ENERGY_MEDIUM = 50;
 	public static final int ENERGY_HIGH = 80;
+	public static final int ENERGY_MAX = 100;
 	
 	private ListPowers listPowers;
 	private boolean greedy;
@@ -34,7 +33,7 @@ public class Pig extends Character {
 		setPowerful(true);
 		
 		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
-		setImage(image);
+		setImageWithDimension(image);
 		
 		this.listPowers = new ListPowers();
 		this.listPowers.add(new Run());
@@ -46,8 +45,6 @@ public class Pig extends Character {
 		this.energy = ENERGY_MIN;
 		this.countEatenCakes = 0;
 	}
-	
-
 	
 	public ListPowers getListPowers() {
 		return this.listPowers;
@@ -100,18 +97,14 @@ public class Pig extends Character {
 	}
 	
 	public Power getPowerWithEnergy() {
-		Power power = null;
-		
 		if (this.energy == ENERGY_MAX) {
-			power = getListPowers().get(SuperMissile.NAME);
+			return this.listPowers.get(SuperMissile.NAME);
 		} else if (this.energy < ENERGY_MAX && this.energy >= ENERGY_MEDIUM) {
-			power = getListPowers().get(Missile.NAME);
+			return this.listPowers.get(Missile.NAME);
 		} else if (this.energy == ENERGY_MIN) {
-			power = getListPowers().get(Run.NAME);
+			return this.listPowers.get(Run.NAME);
 		} else {
-			power = getListPowers().get(Paralyze.NAME);
+			return this.listPowers.get(Paralyze.NAME);
 		}
-		
-		return power;
 	}
 }

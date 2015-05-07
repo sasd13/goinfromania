@@ -21,7 +21,7 @@ public class Nutritionist extends Enemy {
 		setScorePoint(SCORE_POINT);
 		
 		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
-		setImage(image);
+		setImageWithDimension(image);
 	}
 	
 	public void pursuePig(Pig pig) {

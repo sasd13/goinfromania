@@ -24,10 +24,4 @@ public class RoundDAO {
 	public static void save(Round round) {
 		//TODO Database query
 	}
-	
-	public static void saveAll(ListRounds listRounds) {
-		for (int i=0; i<listRounds.size(); i++) {
-			save(listRounds.get(i));
-		}
-	}
 }

@@ -54,5 +54,7 @@ public abstract class Food extends Element {
 		notifyObservers();
 	}
 	
-	public abstract void act(Pig pig);
+	public void act(Pig pig) {
+		setEated(true);
+	}
 }

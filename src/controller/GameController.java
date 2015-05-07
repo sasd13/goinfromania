@@ -43,15 +43,11 @@ public class GameController {
 	}
 	
 	public void play() {
-		showListRounds();
-		
 		this.gameView.pack();
 		this.gameView.setVisible(true);
 	}
 	
 	public void exit() {
-		saveRounds();
-		
 		this.gameView.dispose();
 	}
 	
@@ -70,7 +66,7 @@ public class GameController {
 	}
 	
 	public void openRound(String roundId) {
-		Round round = this.game.getListRound().get(roundId);
+		Round round = this.game.getListRounds().get(roundId);
 		this.roundController = configRound(round);
 		
 		this.gameView.displayLiveRoundView();
@@ -79,7 +75,7 @@ public class GameController {
 	
 	public void closeRound(Round round) {
 		if (round.isFinished()) {
-			this.game.getListRound().remove(round);
+			this.game.getListRounds().remove(round);
 		}
 		
 		this.roundController = null;
@@ -87,11 +83,11 @@ public class GameController {
 		setMenuEnabled(MenuRound.NAME, false);
 		setMenuEnabled(MenuSettings.NAME, true);
 		
-		showListRounds();
+		this.gameView.displayHomeView();
 	}
 	
 	private RoundController configRound(Round round) {
-		this.game.getListRound().add(round);
+		this.game.getListRounds().add(round);
 		
 		RoundView roundView = new RoundView();
 		this.gameView.setLiveRoundView(roundView);
@@ -104,12 +100,7 @@ public class GameController {
 	
 	private void loadRounds() {
 		ListRounds listRounds = RoundDAO.loadAll();
-		this.game.setListRound(listRounds);
-	}
-	
-	private void saveRounds() {
-		ListRounds listRounds = this.game.getListRound();
-		RoundDAO.saveAll(listRounds);
+		this.game.setListRounds(listRounds);
 	}
 	
 	private void setMenuEnabled(String menuName, boolean enabled) {

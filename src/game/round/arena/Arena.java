@@ -6,7 +6,6 @@ import java.util.Observable;
 
 public class Arena extends Observable {
 
-	
 	private ListElements listElements;
 	
 	public Arena() {

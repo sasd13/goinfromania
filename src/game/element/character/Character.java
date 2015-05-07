@@ -5,11 +5,10 @@ import game.element.Element;
 public abstract class Character extends Element {
 	
 	public static final int LIFE_MIN = 0;
-	public static final int LIFE_MAX = 100;
-	
 	public static final int LIFE_LOW = 20;
 	public static final int LIFE_MEDIUM = 50;
 	public static final int LIFE_HIGH = 80;
+	public static final int LIFE_MAX = 100;
 	
 	private boolean died;
 	private int life;

@@ -1,6 +1,7 @@
 package game.element.power;
 
 import game.element.character.Character;
+import game.element.character.Enemy;
 
 public class Missile extends Power {
 
@@ -36,6 +37,8 @@ public class Missile extends Power {
 
 	@Override
 	public void act(Character character) {
-		character.setLife(character.getLife() - getValue());
+		Enemy enemy = (Enemy) character;
+		
+		enemy.setLife(enemy.getLife() - getValue());
 	}
 }

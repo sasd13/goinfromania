@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import game.element.character.Character;
+import game.element.character.Enemy;
 import game.element.character.Nutritionist;
 
 public class Paralyze extends Power {
@@ -41,15 +42,13 @@ public class Paralyze extends Power {
 
 	@Override
 	public void act(Character character) {
-		if (character.getName().compareTo(Nutritionist.NAME) == 0) {
-			Nutritionist nutritionist = (Nutritionist) character;
-			
-			this.timerParalyze = new Timer();
-			
-			nutritionist.setMovable(false);
-			nutritionist.setPowerful(false);
-			endParalyzeAct(nutritionist);
-		}
+		Nutritionist nutritionist = (Nutritionist) character;
+		
+		this.timerParalyze = new Timer();
+		
+		nutritionist.setMovable(false);
+		nutritionist.setPowerful(false);
+		endParalyzeAct(nutritionist);
 	}
 	
 	private synchronized void endParalyzeAct(final Nutritionist nutritionist) {

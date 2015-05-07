@@ -21,7 +21,7 @@ public class ArenaView extends JPanel implements Observer {
 		super();
 		
 		setLayout(new BorderLayout());
-		Dimension dimension = new Dimension(DimensionConstants.GRID_WIDTH, DimensionConstants.GRID_HEIGHT);
+		Dimension dimension = new Dimension(DimensionConstants.ARENA_WIDTH, DimensionConstants.ARENA_HEIGHT);
 		setPreferredSize(dimension);
 		
 		setBackground(Color.BLACK);
