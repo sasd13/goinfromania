@@ -4,7 +4,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import game.element.character.Character;
-import game.element.character.Enemy;
 import game.element.character.Nutritionist;
 
 public class Paralyze extends Power {
