@@ -2,6 +2,7 @@ package view;
 
 import game.Game;
 import game.menu.GameMenuBar;
+import game.round.ListRounds;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -34,7 +35,7 @@ public class GameView extends JFrame implements Observer {
 		add(this.homeView, BorderLayout.CENTER);
 		
 		this.listRoundsView = new ListRoundsView();
-		this.liveRoundView = new RoundView();
+		this.liveRoundView = null;
 	}
 	
 	public static synchronized GameView getInstance() {
@@ -57,7 +58,9 @@ public class GameView extends JFrame implements Observer {
 	public void update(Observable observable, Object arg) {		
 		Game game = (Game) observable;
 		
-		//TODO Show listRounds
+		ListRounds listRounds = game.getListRounds();
+		listRounds.addObserver(this.listRoundsView);
+		this.listRoundsView.update(listRounds, null);
 	}
 	
 	public void displayHomeView() {

@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
-import util.MathUtil;
+import util.ElementUtil;
 import view.DimensionConstants;
 
 public abstract class Element extends Observable {
@@ -175,50 +175,9 @@ public abstract class Element extends Observable {
 				break;
 		}
 		
-		nextPosition = recalibration(nextPosition, direction); //Repositionnement
-		nextPosition = cropping(nextPosition); //Recadrage
+		nextPosition = ElementUtil.recalibration(nextPosition, direction, this.speed); //Repositionnement
+		nextPosition = ElementUtil.cropping(nextPosition, this.dimension); //Recadrage
 		
 		return nextPosition;
-	}
-	
-	private Point recalibration(Point position, Direction direction) {
-		if ((this.speed == SPEED_MEDIUM) 
-				&& (position.x % SPEED_MEDIUM != 0 || position.y % SPEED_MEDIUM != 0)) {
-			switch (direction) {
-				case LEFT :
-					position.x = (int) MathUtil.roundDown(position.x, SPEED_MEDIUM);
-					break;
-				case RIGHT :
-					position.x = (int) MathUtil.roundUp(position.x, SPEED_MEDIUM);
-					break;
-				case UP :
-					position.y = (int) MathUtil.roundDown(position.y, SPEED_MEDIUM);
-					break;
-				case DOWN :
-					position.y = (int) MathUtil.roundUp(position.y, SPEED_MEDIUM);
-					break;
-				default :
-					//TODO Throw exception
-					break;
-			}
-		}
-		
-		return position;
-	}
-	
-	private Point cropping(Point position) {
-		if (position.x < POSITION_X_MIN) {
-			position.x = POSITION_X_MIN;
-		} else if ((position.x + this.dimension.width) > POSITION_X_MAX) {
-			position.x = POSITION_X_MAX - this.dimension.width;
-		}
-		
-		if (position.y < POSITION_Y_MIN) {
-			position.y = POSITION_Y_MIN;
-		} else if ((position.y + this.dimension.height) > POSITION_Y_MAX) {
-			position.y = POSITION_Y_MAX - this.dimension.height;
-		}
-		
-		return position;
 	}
 }

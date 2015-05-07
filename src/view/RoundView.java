@@ -6,6 +6,8 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
+import game.element.ListElements;
+import game.element.character.Pig;
 import game.round.Round;
 
 public class RoundView extends JPanel implements Observer {
@@ -26,26 +28,31 @@ public class RoundView extends JPanel implements Observer {
 		add(this.pigStateView, BorderLayout.NORTH);
 		
 		this.arenaView = new ArenaView();
+		this.arenaView.addKeyListener(new GamePadListener());
+		this.arenaView.setFocusable(true);
 		add(this.arenaView, BorderLayout.CENTER);
-	}
-	
-	public RoundStateView getRoundStateView() {
-		return this.roundStateView;
-	}
-	
-	public ArenaView getArenaView() {
-		return this.arenaView;
-	}
-	
-	public PigStateView getPigStateView() {
-		return this.pigStateView;
 	}
 	
 	@Override
 	public void update(Observable observable, Object arg) {
 		Round round = (Round) observable;
 		
-		this.roundStateView.getLabelRoundValue().setText(String.valueOf(round.getId()));
-		this.roundStateView.getLabelScoreValue().setText(String.valueOf(round.getScore()));
+		this.roundStateView.update(round, null);
+		
+		ListElements listElements = round.getListElements();
+		listElements.addObserver(this.arenaView);
+		this.arenaView.update(listElements, null);
+		
+		Pig pig = listElements.getPig();
+		pig.addObserver(this.pigStateView);
+		this.pigStateView.update(pig, null);
+	}
+	
+	public void focusArenaView() {
+		this.arenaView.requestFocusInWindow();
+	}
+	
+	public void repaintArenaView() {
+		this.arenaView.repaint();
 	}
 }

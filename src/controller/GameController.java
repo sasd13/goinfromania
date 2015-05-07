@@ -59,6 +59,7 @@ public class GameController {
 	
 	public void newRound() {
 		Round round = new Round();
+		round.setRoundNumber(1);
 		this.roundController = configRound(round);
 		
 		this.gameView.displayLiveRoundView();

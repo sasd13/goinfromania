@@ -2,7 +2,7 @@ package game.element.character;
 
 import java.awt.image.BufferedImage;
 
-import util.ImageLoader;
+import util.ElementUtil;
 import game.element.power.Diet;
 
 public class Nutritionist extends Enemy {
@@ -20,7 +20,7 @@ public class Nutritionist extends Enemy {
 		setPower(new Diet());
 		setScorePoint(SCORE_POINT);
 		
-		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
+		BufferedImage image = ElementUtil.loadFromPath(IMAGE_NAME);
 		setImageWithDimension(image);
 	}
 	

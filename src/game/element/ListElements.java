@@ -1,21 +1,38 @@
 package game.element;
 
-import java.util.ArrayList;
+import game.element.character.Pig;
 
-public class ListElements {
+import java.util.LinkedList;
+import java.util.Observable;
+
+public class ListElements extends Observable {
 	
-	private ArrayList<Element> list;
+	private LinkedList<Element> list;
 	
 	public ListElements() {
-		this.list = new ArrayList<>();
+		this.list = new LinkedList<>();
 	}
 	
-	public boolean add(Element element) {
-		return this.list.add(element);
+	public void add(Element element) {
+		if (element instanceof Pig) {
+			if (!this.list.isEmpty() && this.list.getFirst() instanceof Pig) {
+				//TODO Throw exception
+			} else {
+				this.list.addFirst(element);
+			}
+		} else {
+			this.list.add(element);
+		}
+		
+		setChanged();
+		notifyObservers();
 	}
 	
-	public boolean remove(Element element) {
-		return this.list.remove(element);
+	public void remove(Element element) {
+		this.list.remove(element);
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Element get(String elementId) {
@@ -30,6 +47,16 @@ public class ListElements {
 	
 	public Element get(int index) {
 		return this.list.get(index);
+	}
+	
+	public Pig getPig() {
+		Element element = this.list.getFirst();
+		
+		if (element instanceof Pig) {
+			return (Pig) element;
+		}
+		
+		return null;
 	}
 	
 	public int size() {

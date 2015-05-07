@@ -10,12 +10,12 @@ public class ListPowers {
 		this.list = new ArrayList<>();
 	}
 	
-	public boolean add(Power power) {
-		return this.list.add(power);
+	public void add(Power power) {
+		this.list.add(power);
 	}
 	
-	public boolean remove(Power power) {
-		return this.list.remove(power);
+	public void remove(Power power) {
+		this.list.remove(power);
 	}
 	
 	public Power get(String powerName) {

@@ -1,12 +1,16 @@
 package view;
 
+import game.round.Round;
+
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class RoundStateView extends JPanel {
+public class RoundStateView extends JPanel implements Observer {
 
 	private JLabel labelRound,
 		labelRoundValue,
@@ -38,12 +42,12 @@ public class RoundStateView extends JPanel {
 		
 		add(panelScore);
 	}
-	
-	public JLabel getLabelRoundValue() {
-		return this.labelRoundValue;
-	}
-	
-	public JLabel getLabelScoreValue() {
-		return this.labelScoreValue;
+
+	@Override
+	public void update(Observable observable, Object arg) {
+		Round round = (Round) observable;
+		
+		this.labelRoundValue.setText(String.valueOf(round.getRoundNumber()));
+		this.labelScoreValue.setText(String.valueOf(round.getScore()));
 	}
 }

@@ -1,21 +1,30 @@
 package game.round;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class ListRounds {
+public class ListRounds extends Observable {
 
 	private ArrayList<Round> list;
 	
 	public ListRounds() {
+		super();
+		
 		this.list = new ArrayList<>();
 	}
 	
-	public boolean add(Round round) {
-		return this.list.add(round);
+	public void add(Round round) {
+		this.list.add(round);
+		
+		setChanged();
+		notifyObservers();
 	}
 	
-	public boolean remove(Round round) {
-		return this.list.remove(round);
+	public void remove(Round round) {
+		this.list.remove(round);
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Round get(String roundId) {

@@ -2,7 +2,6 @@ package view;
 
 import game.element.Element;
 import game.element.ListElements;
-import game.round.arena.Arena;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,9 +30,7 @@ public class ArenaView extends JPanel implements Observer {
 	
 	@Override
 	public void update(Observable observable, Object arg) {
-		Arena arena = (Arena) observable;
-		
-		this.listElements = arena.getListElements();
+		this.listElements = (ListElements) observable;
 		
 		repaint();
 	}

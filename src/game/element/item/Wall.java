@@ -2,7 +2,7 @@ package game.element.item;
 
 import java.awt.image.BufferedImage;
 
-import util.ImageLoader;
+import util.ElementUtil;
 import game.element.Element;
 
 public class Wall extends Element {
@@ -15,7 +15,7 @@ public class Wall extends Element {
 		
 		setName(NAME);
 		
-		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
+		BufferedImage image = ElementUtil.loadFromPath(IMAGE_NAME);
 		setImage(image);
 	}
 }

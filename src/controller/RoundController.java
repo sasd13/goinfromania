@@ -1,12 +1,10 @@
 package controller;
 
+import java.awt.Dimension;
 import java.awt.Point;
 
 import javax.swing.JOptionPane;
 
-import util.MathUtil;
-import view.ArenaView;
-import view.PigStateView;
 import view.RoundView;
 import db.RoundDAO;
 import game.element.Direction;
@@ -25,8 +23,6 @@ import game.round.Level;
 import game.round.Result;
 import game.round.Round;
 import game.round.State;
-import game.round.arena.Arena;
-import game.round.arena.GamePadListener;
 import game.setting.GamePad;
 
 public class RoundController {
@@ -42,19 +38,7 @@ public class RoundController {
 		this.round.addObserver(this.roundView);
 		this.roundView.update(this.round, null);
 		
-		PigStateView pigStateView = this.roundView.getPigStateView();
-		Pig pig = this.round.getPig();
-		pig.addObserver(pigStateView);
-		pigStateView.update(pig, null);
-		
-		Arena arena = this.round.getArena();
-		ArenaView arenaView = this.roundView.getArenaView();
-		arena.addObserver(arenaView);
-		arenaView.update(arena, null);
-		
-		arenaView.addKeyListener(new GamePadListener());
-		arenaView.setFocusable(true);
-		arenaView.requestFocusInWindow();
+		this.gamePad = null;
 	}
 	
 	public void start() {
@@ -62,48 +46,40 @@ public class RoundController {
 		
 		loadGamePad();
 		
-		Arena arena = this.round.getArena();
-		arena.addElement(this.round.getPig());
-		
-		ArenaView arenaView = this.roundView.getArenaView();
-		arenaView.addKeyListener(new GamePadListener());
-		arenaView.setFocusable(true);
-		arenaView.requestFocusInWindow();
-		
 		testArena();
+		
+		this.roundView.focusArenaView();
 	}
 	
 	private void testArena() {
-		Arena arena = this.round.getArena();
-		
-		ListElements listElements = arena.getListElements();
+		ListElements listElements = this.round.getListElements();
 		
 		Cake cake = new Cake();
-		cake.setPosition(new Point(300, 0));
+		cake.setPosition(new Point(301, 1));
 		listElements.add(cake);
 		
 		Nutritionist nutritionist = new Nutritionist();
-		nutritionist.setPosition(new Point(500, 100));
+		nutritionist.setPosition(new Point(501, 101));
 		listElements.add(nutritionist);
 		
 		PoisonCake poisonCake = new PoisonCake();
-		poisonCake.setPosition(new Point(300, 400));
+		poisonCake.setPosition(new Point(301, 401));
 		listElements.add(poisonCake);
 		
 		Virus virus = new Virus();
-		virus.setPosition(new Point(500, 300));
+		virus.setPosition(new Point(501, 301));
 		listElements.add(virus);
 		
 		Wall wall1 = new Wall();
-		wall1.setPosition(new Point(300, 100));
+		wall1.setPosition(new Point(301, 101));
 		listElements.add(wall1);
 		
 		Wall wall2 = new Wall();
-		wall2.setPosition(new Point(300, 200));
+		wall2.setPosition(new Point(301, 201));
 		listElements.add(wall2);
 		
 		Wall wall3 = new Wall();
-		wall3.setPosition(new Point(300, 300));
+		wall3.setPosition(new Point(301, 301));
 		listElements.add(wall3);
 	}
 	
@@ -145,7 +121,7 @@ public class RoundController {
 		} else {
 			title = "Result";
 			
-			Pig pig = this.round.getPig();
+			Pig pig = this.round.getListElements().getPig();
 			if (pig.isDied()) {
 				this.round.setResult(Result.LOOSE);
 				message = "YOU LOOSE... :-(";
@@ -189,25 +165,92 @@ public class RoundController {
 			initMove(Direction.DOWN);
 		} else if (keyCode == this.gamePad.getKeyPigAttak()) {
 			//TODO
-			this.roundView.getArenaView().repaint();
+			this.roundView.repaintArenaView();
 			checkElementAtPigPosition();
 		}
 	}
 	
 	private void initMove(Direction direction) {
-		Pig pig = this.round.getPig();
-		
 		boolean canMove = canMove(direction);
+		
 		if (canMove) {
+			Pig pig = this.round.getListElements().getPig();
 			pig.move(direction);
+			
+			this.roundView.repaintArenaView();
+			checkElementAtPigPosition();
+		}
+	}
+	
+	public boolean canMove(Direction direction) {
+		ListElements listElements = getDetectedElementsAtNextPigPosition(direction);
+		
+		for (int i=0; i<listElements.size(); i++) {
+			if (listElements.get(i) instanceof Wall) {
+				return false;
+			}
 		}
 		
-		this.roundView.getArenaView().repaint();
-		checkElementAtPigPosition();
+		return true;
+	}
+	
+	private ListElements getDetectedElementsAtNextPigPosition(Direction direction) {
+		ListElements listDetectedElement = new ListElements();
+		
+		Pig pig = this.round.getListElements().getPig();
+		ListElements listElements = this.round.getListElements();
+		
+		Element element;
+		for (int i=0; i<listElements.size(); i++) {
+			element = listElements.get(i);
+			
+			if (!(element instanceof Pig)) {
+				boolean detected = detectCollision(pig.getNextPosition(direction), pig.getDimension(), element.getPosition(), element.getDimension());
+				if (detected) {
+					System.out.println("Detected :" + element.getName());
+					listDetectedElement.add(element);
+				}
+			}
+		}
+		
+		return listDetectedElement;
+	}
+	
+	public Element getElementAtPosition(Point position) {
+		ListElements listElements = this.round.getListElements();
+		
+		Element element;
+		for (int i=0; i<listElements.size(); i++) {
+			element = listElements.get(i);
+			if (element.getPosition().equals(position) && !(element instanceof Pig)) {
+				return element;
+			}
+		}
+		
+		return null;
+	}
+	
+	private boolean detectCollision(Point position1, Dimension dimension1, Point position2, Dimension dimension2) {
+		if (position1.equals(position2)) {
+			return true;
+		} else if (((position1.x > position2.x && position1.x < position2.x + dimension2.width && (position1.y == position2.y || position1.y == position2.y + dimension2.height)) 
+					|| (position1.y > position2.y && position1.y < position2.y + dimension2.height && (position1.x == position2.x || position1.x == position2.x + dimension2.width)))) {
+			return true;
+		} else if (((position2.x > position1.x && position2.x < position1.x + dimension1.width && (position2.y == position1.y || position2.y == position1.y + dimension1.height)) 
+				|| (position2.y > position1.y && position2.y < position1.y + dimension1.height && (position2.x == position1.x || position2.x == position1.x + dimension1.width)))) {
+			return true;
+		} else if ((position1.x < position2.x + dimension2.width)
+						&& (position2.x < position1.x + dimension1.width)
+						&& (position1.y < position2.y + dimension2.height)
+						&& (position2.y < position1.y + dimension1.height)) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public void actionPigAttakEnemy(Enemy enemy) {
-		Pig pig = this.round.getPig();
+		Pig pig = this.round.getListElements().getPig();
 		
 		if (pig.isPowerful()) {
 			Power power = pig.getPowerWithEnergy();
@@ -215,14 +258,14 @@ public class RoundController {
 			power.act(enemy);
 			
 			if (enemy.isDied()) {
-				this.round.getArena().getListElements().remove(enemy);
+				this.round.getListElements().remove(enemy);
 				cumulScore(enemy.getScorePoint());
 			}
 		}
 	}
 	
 	public void actionEnemyAttakPig(Enemy enemy) {
-		Pig pig = this.round.getPig();
+		Pig pig = this.round.getListElements().getPig();
 		
 		Power power = enemy.getPower();
 		power.act(pig);
@@ -231,13 +274,13 @@ public class RoundController {
 	}
 	
 	public void actionPigEatFood(Food food) {
-		Pig pig = this.round.getPig();
+		Pig pig = this.round.getListElements().getPig();
 		
 		if (pig.isGreedy()) {
 			food.setEated(true);
 			food.act(pig);
 			
-			this.round.getArena().getListElements().remove(food);
+			this.round.getListElements().remove(food);
 			cumulScore(food.getScorePoint());
 		}
 		
@@ -249,7 +292,7 @@ public class RoundController {
 	}
 	
 	public void checkPigLife() {
-		Pig pig = this.round.getPig();
+		Pig pig = this.round.getListElements().getPig();
 		
 		if (pig.isDied()) {
 			this.round.setFinished(true);
@@ -260,7 +303,7 @@ public class RoundController {
 	public void checkEatenCake() {
 		Level level = this.round.getLevel();
 		
-		Pig pig = this.round.getPig();
+		Pig pig = this.round.getListElements().getPig();
 		int countEatenCake = pig.getCountEatenCakes();
 		
 		if ((level == Level.EASY && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_EASY)
@@ -273,7 +316,7 @@ public class RoundController {
 	
 	//Fonctionne a la position exacte du Pig
 	public void checkElementAtPigPosition() {
-		Pig pig = this.round.getPig();
+		Pig pig = this.round.getListElements().getPig();
 		
 		Point position = pig.getPosition();
 		
@@ -288,72 +331,5 @@ public class RoundController {
 				actionEnemyAttakPig(enemy);
 			}
 		}
-	}
-	
-	public boolean canMove(Direction direction) {
-		ListElements listElements = getDetectedElementsAtNextPigGravityPosition(direction);
-		
-		for (int i=0; i<listElements.size(); i++) {
-			if (listElements.get(i) instanceof Wall) {
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
-	private ListElements getDetectedElementsAtNextPigGravityPosition(Direction direction) {
-		ListElements listDetectedElement = new ListElements();
-		
-		Pig pig = this.round.getPig();
-		Point nextPigPosition = pig.getNextPosition(direction);
-		Point nextPigGravityPosition = MathUtil.getGravityPosition(nextPigPosition, pig.getDimension());
-		ListElements listElements = this.round.getArena().getListElements();
-		
-		Element element;
-		for (int i=0; i<listElements.size(); i++) {
-			element = listElements.get(i);
-			
-			if (!(element instanceof Pig)) {
-				Point elementGravityPosition = MathUtil.getGravityPosition(element.getPosition(), element.getDimension());
-				
-				boolean detected = detectInsideCollision(nextPigGravityPosition, elementGravityPosition);
-				if (detected) {
-					listDetectedElement.add(element);
-				}
-			}
-		}
-		
-		return listDetectedElement;
-	}
-	
-	public Element getElementAtPosition(Point position) {
-		ListElements listElements = this.round.getArena().getListElements();
-		
-		Element element;
-		for (int i=0; i<listElements.size(); i++) {
-			element = listElements.get(i);
-			if (element.getPosition().equals(position) && !(element instanceof Pig)) {
-				return element;
-			}
-		}
-		
-		return null;
-	}
-	
-	private boolean detectInsideCollision(Point gravityPosition1, Point gravityPosition2) {
-		if (MathUtil.distance(gravityPosition1, gravityPosition2) < 100) {
-			return true;
-		}
-		
-		return false;
-	}
-	
-	private boolean detectOutsideCollision(Point gravityPosition1, Point gravityPosition2) {
-		if (MathUtil.distance(gravityPosition1, gravityPosition2) < Math.sqrt(2*Math.pow(100, 2))) {
-			return true;
-		}
-		
-		return false;
 	}
 }

@@ -1,8 +1,9 @@
 package game.round;
 
+import game.element.ListElements;
 import game.element.character.Pig;
-import game.round.arena.Arena;
 
+import java.time.ZonedDateTime;
 import java.util.Observable;
 
 public class Round extends Observable {
@@ -22,8 +23,9 @@ public class Round extends Observable {
 	private boolean finished;
 	private Result result;
 	private int score;
-	private Pig pig;
-	private Arena arena;
+	private ListElements listElements;
+	private ZonedDateTime createdAt;
+	private ZonedDateTime updatedAt;
 	
 	public Round() {
 		super();
@@ -34,8 +36,11 @@ public class Round extends Observable {
 		this.maxPlay = MAX_PLAY;
 		this.level = Level.EASY;
 		this.score = 0;
-		this.pig = new Pig();
-		this.arena = new Arena();
+		this.createdAt = ZonedDateTime.now();
+		this.updatedAt = null;
+		
+		this.listElements = new ListElements();
+		this.listElements.add(new Pig());
 	}
 	
 	public String getId() {
@@ -119,23 +124,31 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
-	public Pig getPig() {
-		return this.pig;
+	public ListElements getListElements() {
+		return this.listElements;
 	}
 	
-	public void setPig(Pig pig) {
-		this.pig = pig;
+	public void setListElements(ListElements listElements) {
+		this.listElements = listElements;
+	}
+	
+	public ZonedDateTime getCreatedAt() {
+		return this.createdAt;
+	}
+	
+	public void setCreatedAt(ZonedDateTime createdAt) {
+		this.createdAt = createdAt;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
-	public Arena getArena() {
-		return this.arena;
+	public ZonedDateTime getUpdatedAt() {
+		return this.updatedAt;
 	}
 	
-	public void setArena(Arena arena) {
-		this.arena = arena;
+	public void setUpdatedAt(ZonedDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 		
 		setChanged();
 		notifyObservers();
