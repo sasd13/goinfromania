@@ -22,7 +22,7 @@ public class Cake extends Food {
 		setScorePoint(SCORE_POINT);
 		
 		BufferedImage image = ElementUtil.loadFromPath(IMAGE_NAME);
-		setImage(image);
+		setImageWithDimension(image);
 	}
 	
 	@Override

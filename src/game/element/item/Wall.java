@@ -16,6 +16,6 @@ public class Wall extends Element {
 		setName(NAME);
 		
 		BufferedImage image = ElementUtil.loadFromPath(IMAGE_NAME);
-		setImage(image);
+		setImageWithDimension(image);
 	}
 }

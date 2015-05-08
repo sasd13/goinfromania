@@ -5,6 +5,7 @@ import java.awt.Point;
 
 import javax.swing.JOptionPane;
 
+import util.ArenaUtil;
 import view.RoundView;
 import db.RoundDAO;
 import game.element.Direction;
@@ -55,31 +56,31 @@ public class RoundController {
 		ListElements listElements = this.round.getListElements();
 		
 		Cake cake = new Cake();
-		cake.setPosition(new Point(301, 1));
+		cake.setPosition(new Point(300, 0));
 		listElements.add(cake);
 		
 		Nutritionist nutritionist = new Nutritionist();
-		nutritionist.setPosition(new Point(501, 101));
+		nutritionist.setPosition(new Point(500, 100));
 		listElements.add(nutritionist);
 		
 		PoisonCake poisonCake = new PoisonCake();
-		poisonCake.setPosition(new Point(301, 401));
+		poisonCake.setPosition(new Point(300, 400));
 		listElements.add(poisonCake);
 		
 		Virus virus = new Virus();
-		virus.setPosition(new Point(501, 301));
+		virus.setPosition(new Point(500, 300));
 		listElements.add(virus);
 		
 		Wall wall1 = new Wall();
-		wall1.setPosition(new Point(301, 101));
+		wall1.setPosition(new Point(300, 100));
 		listElements.add(wall1);
 		
 		Wall wall2 = new Wall();
-		wall2.setPosition(new Point(301, 201));
+		wall2.setPosition(new Point(300, 200));
 		listElements.add(wall2);
 		
 		Wall wall3 = new Wall();
-		wall3.setPosition(new Point(301, 301));
+		wall3.setPosition(new Point(300, 300));
 		listElements.add(wall3);
 	}
 	
@@ -182,11 +183,11 @@ public class RoundController {
 		}
 	}
 	
-	public boolean canMove(Direction direction) {
-		ListElements listElements = getDetectedElementsAtNextPigPosition(direction);
+	private boolean canMove(Direction direction) {
+		ListElements listDetectedElements = ArenaUtil.getDetectedElementsAtNextPigPosition(this.round.getListElements(), direction);
 		
-		for (int i=0; i<listElements.size(); i++) {
-			if (listElements.get(i) instanceof Wall) {
+		for (int i=0; i<listDetectedElements.size(); i++) {
+			if (listDetectedElements.get(i) instanceof Wall) {
 				return false;
 			}
 		}
@@ -194,55 +195,43 @@ public class RoundController {
 		return true;
 	}
 	
-	private ListElements getDetectedElementsAtNextPigPosition(Direction direction) {
-		ListElements listDetectedElement = new ListElements();
-		
-		Pig pig = this.round.getListElements().getPig();
-		ListElements listElements = this.round.getListElements();
+	public void checkElementAtPigPosition() {
+		ListElements listDetectedElements = ArenaUtil.getDetectedElementsAtPigPosition(this.round.getListElements());
 		
 		Element element;
-		for (int i=0; i<listElements.size(); i++) {
-			element = listElements.get(i);
+		for (int i=0; i<listDetectedElements.size(); i++) {
+			element = listDetectedElements.get(i);
 			
-			if (!(element instanceof Pig)) {
-				boolean detected = detectCollision(pig.getNextPosition(direction), pig.getDimension(), element.getPosition(), element.getDimension());
-				if (detected) {
-					System.out.println("Detected :" + element.getName());
-					listDetectedElement.add(element);
-				}
-			}
+			initAction(element);
 		}
-		
-		return listDetectedElement;
 	}
 	
-	public Element getElementAtPosition(Point position) {
-		ListElements listElements = this.round.getListElements();
+	public void initAction(Element element) {
+		boolean canAct = canAct(element);
 		
-		Element element;
-		for (int i=0; i<listElements.size(); i++) {
-			element = listElements.get(i);
-			if (element.getPosition().equals(position) && !(element instanceof Pig)) {
-				return element;
+		if (canAct) {
+			if (element instanceof Food) {
+				Food food = (Food) element;
+				actionPigEatFood(food);
+			} else if (element instanceof Enemy) {
+				Enemy enemy = (Enemy) element;
+				//actionEnemyAttakPig(enemy);
 			}
 		}
-		
-		return null;
 	}
 	
-	private boolean detectCollision(Point position1, Dimension dimension1, Point position2, Dimension dimension2) {
-		if (position1.equals(position2)) {
-			return true;
-		} else if (((position1.x > position2.x && position1.x < position2.x + dimension2.width && (position1.y == position2.y || position1.y == position2.y + dimension2.height)) 
-					|| (position1.y > position2.y && position1.y < position2.y + dimension2.height && (position1.x == position2.x || position1.x == position2.x + dimension2.width)))) {
-			return true;
-		} else if (((position2.x > position1.x && position2.x < position1.x + dimension1.width && (position2.y == position1.y || position2.y == position1.y + dimension1.height)) 
-				|| (position2.y > position1.y && position2.y < position1.y + dimension1.height && (position2.x == position1.x || position2.x == position1.x + dimension1.width)))) {
-			return true;
-		} else if ((position1.x < position2.x + dimension2.width)
-						&& (position2.x < position1.x + dimension1.width)
-						&& (position1.y < position2.y + dimension2.height)
-						&& (position2.y < position1.y + dimension1.height)) {
+	private boolean canAct(Element element) {
+		Pig pig = this.round.getListElements().getPig();
+		
+		Point position1 = pig.getPosition();
+		Dimension dimension1 = pig.getDimension();
+		
+		Point position2 = element.getPosition();
+		Dimension dimension2 = element.getDimension();
+		
+		double proportion = ArenaUtil.getProportionCollision(position1, dimension1, position2, dimension2);
+		
+		if (proportion > 50) {
 			return true;
 		}
 		
@@ -311,25 +300,6 @@ public class RoundController {
 				|| (level == Level.HARD && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_HARD)) {
 			this.round.setFinished(true);
 			stop();
-		}
-	}
-	
-	//Fonctionne a la position exacte du Pig
-	public void checkElementAtPigPosition() {
-		Pig pig = this.round.getListElements().getPig();
-		
-		Point position = pig.getPosition();
-		
-		Element element = getElementAtPosition(position);
-		
-		if (element != null) {
-			if (element instanceof Food) {
-				Food food = (Food) element;
-				actionPigEatFood(food);
-			} else if (element instanceof Enemy) {
-				Enemy enemy = (Enemy) element;
-				actionEnemyAttakPig(enemy);
-			}
 		}
 	}
 }

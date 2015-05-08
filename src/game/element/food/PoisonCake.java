@@ -20,6 +20,6 @@ public class PoisonCake extends Cake {
 		setScorePoint(SCORE_POINT);
 		
 		BufferedImage image = ElementUtil.loadFromPath(IMAGE_NAME);
-		setImage(image);
+		setImageWithDimension(image);
 	}
 }

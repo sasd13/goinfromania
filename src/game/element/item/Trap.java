@@ -16,6 +16,6 @@ public class Trap extends Element {
 		setName(NAME);
 		
 		BufferedImage image = ElementUtil.loadFromPath(IMAGE_NAME);
-		setImage(image);
+		setImageWithDimension(image);
 	}
 }
