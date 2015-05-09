@@ -35,4 +35,8 @@ public class ListPowers {
 	public int size() {
 		return this.list.size();
 	}
+	
+	public boolean isEmpty() {
+		return this.list.isEmpty();
+	}
 }

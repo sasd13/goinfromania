@@ -3,7 +3,6 @@ package util;
 import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
-import game.element.character.Pig;
 import game.element.item.Wall;
 
 import java.awt.Dimension;
@@ -12,10 +11,10 @@ import java.awt.Point;
 public class ArenaUtil {
 	
 	public static final double MINIMAL_PROPORTION_COLLISION = 0.5;
-	public static final double FACTOR_DISTANCE_NEXT_TO = 1;
+	public static final double FACTOR_DISTANCE_NEXT_TO = 0.8;
 
-	public static boolean canMove(Element element, Direction direction, ListElements listElements) {
-		ListElements listDetectedElements = ArenaUtil.getElementsAtNextPigPosition(listElements, direction);
+	public static boolean canMove(Element elementActor, Direction direction, ListElements listElements) {
+		ListElements listDetectedElements = getElementsAtNextPosition(elementActor, listElements, direction);
 		
 		for (int i=0; i<listDetectedElements.size(); i++) {
 			if (listDetectedElements.get(i) instanceof Wall) {
@@ -26,51 +25,25 @@ public class ArenaUtil {
 		return true;
 	}
 	
-	public static boolean canActInTouch(Element elementActor, Element elementToAct) {
-		Point position1 = elementActor.getPosition();
-		Dimension dimension1 = elementActor.getDimension();
+	public static ListElements getElementsAtNextPosition(Element elementActor, ListElements listElements, Direction direction) {
+		Point nextPosition = elementActor.getNextPosition(direction);
 		
-		Point position2 = elementToAct.getPosition();
-		Dimension dimension2 = elementToAct.getDimension();
-		
-		double proportion = ArenaUtil.getMinimalProportionCollision(position1, dimension1, position2, dimension2);
-		
-		if (proportion > MINIMAL_PROPORTION_COLLISION) {
-			return true;
-		}
-		
-		return false;
+		return detectElements(elementActor, nextPosition, listElements);
 	}
 	
-	public static ListElements getElementsInTouchWithPig(ListElements listElements) {
-		Pig pig = listElements.getPig();
-		
-		Point position = pig.getPosition();
-		
-		return detectElements(pig, position, listElements);
-	}
-	
-	public static ListElements getElementsAtNextPigPosition(ListElements listElements, Direction direction) {
-		Pig pig = listElements.getPig();
-		
-		Point nextPosition = pig.getNextPosition(direction);
-		
-		return detectElements(pig, nextPosition, listElements);
-	}
-	
-	public static ListElements detectElements(Element element, Point position, ListElements listElements) {
+	public static ListElements detectElements(Element elementActor, Point position, ListElements listElements) {
 		ListElements listDetectedElement = new ListElements();
 		
 		boolean detected;
 		
-		Element element_temp;
+		Element elementToAct;
 		for (int i=0; i<listElements.size(); i++) {
-			element_temp = listElements.get(i);
+			elementToAct = listElements.get(i);
 			
-			if (element_temp != element) {
-				detected = detectCollision(position, element.getDimension(), element_temp.getPosition(), element_temp.getDimension());
+			if (elementToAct != elementActor) {
+				detected = detectCollision(position, elementActor.getDimension(), elementToAct.getPosition(), elementToAct.getDimension());
 				if (detected) {
-					listDetectedElement.add(element_temp);
+					listDetectedElement.add(elementToAct);
 				}
 			}
 		}
@@ -84,6 +57,22 @@ public class ArenaUtil {
 						&& position2.x < position1.x + dimension1.width
 						&& position1.y < position2.y + dimension2.height
 						&& position2.y < position1.y + dimension1.height)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public static boolean canActInTouch(Element elementActor, Element elementToAct) {
+		Point position1 = elementActor.getPosition();
+		Dimension dimension1 = elementActor.getDimension();
+		
+		Point position2 = elementToAct.getPosition();
+		Dimension dimension2 = elementToAct.getDimension();
+		
+		double proportion = ArenaUtil.getMinimalProportionCollision(position1, dimension1, position2, dimension2);
+		
+		if (proportion > MINIMAL_PROPORTION_COLLISION) {
 			return true;
 		}
 		
@@ -130,10 +119,28 @@ public class ArenaUtil {
 		return (proportion1 < proportion2) ? proportion1 : proportion2;
 	}
 	
-	public static ListElements getElementsNextToPig(ListElements listElements) {
+	public static ListElements getElementsInTouch(Element elementActor, ListElements listElements) {
+		Point position = elementActor.getPosition();
+		
+		return detectElements(elementActor, position, listElements);
+	}
+	
+	public static ListElements getElementsNextTo(Element elementActor, ListElements listElements) {
 		ListElements listElementsNextTo = new ListElements();
 		
-		//TODO
+		boolean canAct;
+		
+		Element elementToAct;
+		for (int i=0; i<listElements.size(); i++) {
+			elementToAct = listElements.get(i);
+			
+			if (elementToAct != elementActor) {
+				canAct = canActNextTo(elementActor, elementToAct);
+				if (canAct) {
+					listElementsNextTo.add(elementToAct);
+				}
+			}
+		}
 		
 		return listElementsNextTo;
 	}

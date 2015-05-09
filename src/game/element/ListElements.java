@@ -73,4 +73,8 @@ public class ListElements extends Observable {
 	public int size() {
 		return this.list.size();
 	}
+	
+	public boolean isEmpty() {
+		return this.list.isEmpty();
+	}
 }
