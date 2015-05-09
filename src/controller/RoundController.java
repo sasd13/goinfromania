@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.Dimension;
 import java.awt.Point;
 
 import javax.swing.JOptionPane;
@@ -147,6 +146,33 @@ public class RoundController {
 		this.gamePad = SettingController.getInstance().loadGamePad();
 	}
 	
+	public void checkPigLife() {
+		Pig pig = this.round.getListElements().getPig();
+		
+		if (pig.isDied()) {
+			this.round.setFinished(true);
+			stop();
+		}
+	}
+	
+	public void checkEatenCakes() {
+		Level level = this.round.getLevel();
+		
+		Pig pig = this.round.getListElements().getPig();
+		int countEatenCake = pig.getCountEatenCakes();
+		
+		if ((level == Level.EASY && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_EASY)
+				|| (level == Level.NORMAL && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_NORMAL)
+				|| (level == Level.HARD && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_HARD)) {
+			this.round.setFinished(true);
+			stop();
+		}
+	}
+	
+	private void cumulScore(int scoreValue) {
+		this.round.setScore(this.round.getScore() + scoreValue);
+	}
+	
 	public void actionGamePad(int keyCode) {
 		if (keyCode == this.gamePad.getKeyStart()) {
 			if (this.round.getState() == State.STARTED) {
@@ -157,90 +183,105 @@ public class RoundController {
 				//TODO Throw exception
 			}
 		} else if (keyCode == this.gamePad.getKeyMoveLeft()) {
-			initMove(Direction.LEFT);
+			initPigMove(Direction.LEFT);
 		} else if (keyCode == this.gamePad.getKeyMoveRight()) {
-			initMove(Direction.RIGHT);
+			initPigMove(Direction.RIGHT);
 		} else if (keyCode == this.gamePad.getKeyMoveUp()) {
-			initMove(Direction.UP);
+			initPigMove(Direction.UP);
 		} else if (keyCode == this.gamePad.getKeyMoveDown()) {
-			initMove(Direction.DOWN);
+			initPigMove(Direction.DOWN);
 		} else if (keyCode == this.gamePad.getKeyPigAttak()) {
 			//TODO
 			this.roundView.repaintArenaView();
-			checkElementAtPigPosition();
 		}
 	}
 	
-	private void initMove(Direction direction) {
-		boolean canMove = canMove(direction);
+	private void initPigMove(Direction direction) {
+		ListElements listElements = this.round.getListElements();
+		Pig pig = listElements.getPig();
 		
-		if (canMove) {
-			Pig pig = this.round.getListElements().getPig();
+		boolean pigCanMove = ArenaUtil.canMove(pig, direction, listElements);
+		
+		if (pigCanMove) {
 			pig.move(direction);
 			
 			this.roundView.repaintArenaView();
-			checkElementAtPigPosition();
+			checkElementsInTouchWithPig();
 		}
 	}
 	
-	private boolean canMove(Direction direction) {
-		ListElements listDetectedElements = ArenaUtil.getDetectedElementsAtNextPigPosition(this.round.getListElements(), direction);
-		
-		for (int i=0; i<listDetectedElements.size(); i++) {
-			if (listDetectedElements.get(i) instanceof Wall) {
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
-	public void checkElementAtPigPosition() {
-		ListElements listDetectedElements = ArenaUtil.getDetectedElementsAtPigPosition(this.round.getListElements());
+	public void checkElementsInTouchWithPig() {
+		ListElements listElementsInTouch = ArenaUtil.getElementsInTouchWithPig(this.round.getListElements());
 		
 		Element element;
-		for (int i=0; i<listDetectedElements.size(); i++) {
-			element = listDetectedElements.get(i);
-			
-			initAction(element);
+		for (int i=0; i<listElementsInTouch.size(); i++) {
+			element = listElementsInTouch.get(i);
+			initPigActionInTouch(element);
 		}
 	}
 	
-	public void initAction(Element element) {
-		boolean canAct = canAct(element);
+	public void initPigActionInTouch(Element element) {
+		Pig pig = this.round.getListElements().getPig();
+		
+		boolean canAct = ArenaUtil.canActInTouch(pig, element);
 		
 		if (canAct) {
 			if (element instanceof Food) {
 				Food food = (Food) element;
-				actionPigEatFood(food);
-			} else if (element instanceof Enemy) {
-				Enemy enemy = (Enemy) element;
-				//actionEnemyAttakPig(enemy);
+				actionPigEatsFood(pig, food);
 			}
 		}
 	}
 	
-	private boolean canAct(Element element) {
-		Pig pig = this.round.getListElements().getPig();
+	public void pigAttak() {
+		boolean hasAttakNextTo = initPigAttakNextTo();
 		
-		Point position1 = pig.getPosition();
-		Dimension dimension1 = pig.getDimension();
+		if (!hasAttakNextTo) {
+			initPigAttakAfar();
+		}
+	}
+	
+	public boolean initPigAttakNextTo() {
+		ListElements listElements = this.round.getListElements();
+		Pig pig = listElements.getPig();
 		
-		Point position2 = element.getPosition();
-		Dimension dimension2 = element.getDimension();
+		ListElements listElementsNextTo = ArenaUtil.getElementsNextToPig(listElements);
 		
-		double proportion = ArenaUtil.getProportionCollision(position1, dimension1, position2, dimension2);
-		
-		if (proportion > 50) {
-			return true;
+		Element element;
+		for (int i=0; i<listElementsNextTo.size(); i++) {
+			element = listElementsNextTo.get(i);
+			
+			if (element instanceof Enemy) {
+				Enemy enemy = (Enemy) element;
+				actionPigAttaksEnemyNext(pig, enemy);
+				
+				return true;
+			}
 		}
 		
 		return false;
 	}
 	
-	public void actionPigAttakEnemy(Enemy enemy) {
+	public boolean initPigAttakAfar() {
 		Pig pig = this.round.getListElements().getPig();
 		
+		//TODO
+		
+		return false;
+	}
+	
+	public void actionPigEatsFood(Pig pig, Food food) {
+		if (pig.isGreedy()) {
+			food.setEated(true);
+			food.act(pig);
+			
+			this.round.getListElements().remove(food);
+			cumulScore(food.getScorePoint());
+			checkEatenCakes();
+		}
+	}
+	
+	public void actionPigAttaksEnemyNext(Pig pig, Enemy enemy) {
 		if (pig.isPowerful()) {
 			Power power = pig.getPowerWithEnergy();
 			power.setPosition(pig.getPosition());
@@ -253,53 +294,32 @@ public class RoundController {
 		}
 	}
 	
-	public void actionEnemyAttakPig(Enemy enemy) {
-		Pig pig = this.round.getListElements().getPig();
+	public void actionPigAttaksEnemyAfar(Pig pig) {
+		if (pig.isPowerful()) {
+			Power power = pig.getPowerWithEnergy();
+			power.setPosition(pig.getPosition());
+			
+			//TODO
+			
+			/*if (enemy.isDied()) {
+				this.round.getListElements().remove(enemy);
+				cumulScore(enemy.getScorePoint());
+			}*/
+		}
+	}
+	
+	public void initEnemyAction(Enemy enemy, Pig pig) {
+		boolean canAct = ArenaUtil.canActInTouch(enemy, pig);
 		
+		if (canAct) {
+			actionEnemyAttaksPig(enemy, pig);
+		}
+	}
+	
+	public void actionEnemyAttaksPig(Enemy enemy, Pig pig) {
 		Power power = enemy.getPower();
 		power.act(pig);
 		
 		checkPigLife();
-	}
-	
-	public void actionPigEatFood(Food food) {
-		Pig pig = this.round.getListElements().getPig();
-		
-		if (pig.isGreedy()) {
-			food.setEated(true);
-			food.act(pig);
-			
-			this.round.getListElements().remove(food);
-			cumulScore(food.getScorePoint());
-		}
-		
-		checkEatenCake();
-	}
-	
-	private void cumulScore(int scoreValue) {
-		this.round.setScore(this.round.getScore() + scoreValue);
-	}
-	
-	public void checkPigLife() {
-		Pig pig = this.round.getListElements().getPig();
-		
-		if (pig.isDied()) {
-			this.round.setFinished(true);
-			stop();
-		}
-	}
-	
-	public void checkEatenCake() {
-		Level level = this.round.getLevel();
-		
-		Pig pig = this.round.getListElements().getPig();
-		int countEatenCake = pig.getCountEatenCakes();
-		
-		if ((level == Level.EASY && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_EASY)
-				|| (level == Level.NORMAL && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_NORMAL)
-				|| (level == Level.HARD && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_HARD)) {
-			this.round.setFinished(true);
-			stop();
-		}
 	}
 }

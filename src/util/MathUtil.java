@@ -5,9 +5,16 @@ import java.awt.Point;
 
 public class MathUtil {
 
-	public static double distance (Point point1, Point point2) {
+	public static double distance(Point point1, Point point2) {
 		double distance = Math.sqrt(Math.pow((point1.x - point2.x), 2) + Math.pow((point1.y - point2.y), 2));
+		
 		return distance;
+	}
+	
+	public static double measureDiagonal(double width, double height) {
+		double diagonal = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
+		
+		return diagonal;
 	}
 	
 	public static Point getGravityPosition(Point position, Dimension dimension) {
