@@ -307,6 +307,7 @@ public class RoundController {
 	
 	private void actionPigAttaksEnemy(Pig pig, Enemy enemy, Power power) {
 		PigActions.pigAttaksEnemy(pig, enemy, power);
+		
 		RoundUtils.removeElementAndCumulScore(this.round, enemy);
 	}
 }
