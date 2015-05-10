@@ -3,7 +3,6 @@ package game.element.power;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import game.element.animation.ImageAnimation;
 import game.element.character.Character;
 import game.element.character.Nutritionist;
 
@@ -26,10 +25,6 @@ public class Paralyze extends Power {
 		super();
 		
 		setName(NAME);
-		
-		ImageAnimation animation = new ImageAnimation();
-		animation.setImageName(ANIMATION_IMAGE_PREFIX);
-		setAnimation(animation);
 		
 		this.value = VALUE_STOP_NUTRITIONIST_MOVE;
 	}
