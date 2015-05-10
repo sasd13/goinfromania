@@ -41,7 +41,7 @@ public class ArenaUtil {
 			elementToAct = listElements.get(i);
 			
 			if (elementToAct != elementActor) {
-				detected = detectCollision(position, elementActor.getDimension(), elementToAct.getPosition(), elementToAct.getDimension());
+				detected = isCollide(position, elementActor.getDimension(), elementToAct.getPosition(), elementToAct.getDimension());
 				if (detected) {
 					listDetectedElement.add(elementToAct);
 				}
@@ -51,7 +51,7 @@ public class ArenaUtil {
 		return listDetectedElement;
 	}
 	
-	public static boolean detectCollision(Point position1, Dimension dimension1, Point position2, Dimension dimension2) {
+	public static boolean isCollide(Point position1, Dimension dimension1, Point position2, Dimension dimension2) {
 		if (position1.equals(position2)
 				|| (position1.x < position2.x + dimension2.width
 						&& position2.x < position1.x + dimension1.width
@@ -80,7 +80,7 @@ public class ArenaUtil {
 	}
 	
 	public static double getMinimalProportionCollision(Point position1, Dimension dimension1, Point position2, Dimension dimension2) {
-		boolean detected = detectCollision(position1, dimension1, position2, dimension2);
+		boolean detected = isCollide(position1, dimension1, position2, dimension2);
 		
 		if (!detected) {
 			return 0;

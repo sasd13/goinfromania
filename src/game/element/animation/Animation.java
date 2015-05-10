@@ -6,41 +6,23 @@ import java.util.Timer;
 
 public abstract class Animation {
 	
-	public static final int DEFAULT_DELAY = 200;
+	public static final int DEFAULT_DURATION = 200;
 
-	private int delay;
-	private Element elementActor;
-	private Element elementToAct;
+	private int duration;
 	
 	protected Timer timer;
 	
 	protected Animation() {
-		this.delay = DEFAULT_DELAY;
+		this.duration = DEFAULT_DURATION;
 	}
 	
-	public int getDelay() {
-		return this.delay;
+	public int getDuration() {
+		return this.duration;
 	}
 	
-	public void setDelay(int delay) {
-		this.delay = delay;
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 	
-	public Element getElementActor() {
-		return this.elementActor;
-	}
-	
-	public void setElementActor(Element elementActor) {
-		this.elementActor = elementActor;
-	}
-	
-	public Element getElementToAct() {
-		return this.elementToAct;
-	}
-	
-	public void setElementToAct(Element elementToAct) {
-		this.elementToAct = elementToAct;
-	}
-	
-	public abstract void start();
+	public abstract void start(Element elementActor, Element elementToAct);
 }

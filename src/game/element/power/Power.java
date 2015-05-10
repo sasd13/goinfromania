@@ -27,10 +27,7 @@ public abstract class Power extends Element {
 	
 	public void act(Character character) {
 		if (this.animation != null) {
-			this.animation.setElementActor(this);
-			this.animation.setElementToAct(character);
-			
-			this.animation.start();
+			this.animation.start(this, character);
 		}
 	}
 }

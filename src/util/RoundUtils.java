@@ -4,7 +4,6 @@ import game.element.Element;
 import game.element.character.Enemy;
 import game.element.character.Pig;
 import game.element.food.Food;
-import game.element.power.Power;
 import game.round.Level;
 import game.round.Round;
 
@@ -40,9 +39,7 @@ public class RoundUtils {
 	}
 	
 	public static void removeElement(Round round, Element element) {
-		if (element instanceof Power) {
-			round.getListElements().remove(element);
-		}
+		round.getListElements().remove(element);
 	}
 	
 	public static void removeElementAndCumulScore(Round round, Element element) {

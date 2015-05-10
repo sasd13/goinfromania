@@ -18,7 +18,7 @@ public class GameView extends JFrame implements Observer {
 	private GameMenuBar gameMenuBar;
 	private HomeView homeView;
 	private ListRoundsView listRoundsView;
-	private RoundView liveRoundView;
+	private RoundView roundView;
 	
 	private GameView() {
 		super(Game.NAME);
@@ -35,7 +35,7 @@ public class GameView extends JFrame implements Observer {
 		add(this.homeView, BorderLayout.CENTER);
 		
 		this.listRoundsView = new ListRoundsView();
-		this.liveRoundView = null;
+		this.roundView = null;
 	}
 	
 	public static synchronized GameView getInstance() {
@@ -46,12 +46,12 @@ public class GameView extends JFrame implements Observer {
 		return instance;
 	}
 	
-	public RoundView getLiveRoundView() {
-		return this.liveRoundView;
+	public RoundView getRoundView() {
+		return this.roundView;
 	}
 	
-	public void setLiveRoundView(RoundView liveRoundView) {
-		this.liveRoundView = liveRoundView;
+	public void setRoundView(RoundView roundView) {
+		this.roundView = roundView;
 	}
 	
 	@Override
@@ -65,7 +65,7 @@ public class GameView extends JFrame implements Observer {
 	
 	public void displayHomeView() {
 		getContentPane().remove(this.listRoundsView);
-		getContentPane().remove(this.liveRoundView);
+		getContentPane().remove(this.roundView);
 		getContentPane().add(this.homeView, BorderLayout.CENTER);
 		
 		validate();
@@ -74,7 +74,7 @@ public class GameView extends JFrame implements Observer {
 	
 	public void displayListRoundsView() {
 		getContentPane().remove(this.homeView);
-		getContentPane().remove(this.liveRoundView);
+		getContentPane().remove(this.roundView);
 		getContentPane().add(this.listRoundsView, BorderLayout.CENTER);
 		
 		validate();
@@ -84,7 +84,7 @@ public class GameView extends JFrame implements Observer {
 	public void displayLiveRoundView() {
 		getContentPane().remove(this.homeView);
 		getContentPane().remove(this.listRoundsView);
-		getContentPane().add(this.liveRoundView, BorderLayout.CENTER);
+		getContentPane().add(this.roundView, BorderLayout.CENTER);
 		
 		validate();
 		repaint();

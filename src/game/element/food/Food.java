@@ -70,10 +70,7 @@ public abstract class Food extends Element {
 	
 	public void act(Pig pig) {
 		if (this.animation != null) {
-			this.animation.setElementActor(this);
-			this.animation.setElementToAct(pig);
-			
-			this.animation.start();
+			this.animation.start(this, pig);
 		}
 	}
 }

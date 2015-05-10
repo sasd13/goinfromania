@@ -91,7 +91,7 @@ public class GameController {
 		this.game.getListRounds().add(round);
 		
 		RoundView roundView = new RoundView();
-		this.gameView.setLiveRoundView(roundView);
+		this.gameView.setRoundView(roundView);
 		
 		setMenuEnabled(MenuRound.NAME, true);
 		setMenuEnabled(MenuSettings.NAME, false);

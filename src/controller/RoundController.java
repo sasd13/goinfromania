@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.Point;
+import java.time.ZonedDateTime;
 
 import javax.swing.JOptionPane;
 
@@ -162,6 +163,7 @@ public class RoundController {
 	
 	public void save() {
 		if (!this.round.isFinished()) {
+			this.round.setUpdatedAt(ZonedDateTime.now());
 			RoundDAO.save(this.round);
 		}
 	}

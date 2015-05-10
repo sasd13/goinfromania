@@ -20,7 +20,6 @@ public class EnemyActions {
 			power.act(pig);
 			
 			enemy.setPowerful(false);
-			
 			startDelay(enemy);
 		}
 	}

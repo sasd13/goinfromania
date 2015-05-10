@@ -85,7 +85,7 @@ public class Diet extends Power {
 		startDietAct(pig);
 		endDietAct(pig);
 		
-		getAnimation().setDelay(getDelay());
+		getAnimation().setDuration(getDelay());
 		
 		super.act(character);
 	}

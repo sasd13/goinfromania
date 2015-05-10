@@ -69,7 +69,7 @@ public class Disease extends Power {
 		
 		endDiseaseAct(pig);
 		
-		getAnimation().setDelay(getDelay());
+		getAnimation().setDuration(getDelay());
 		
 		super.act(character);
 	}

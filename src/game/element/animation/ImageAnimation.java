@@ -31,10 +31,8 @@ public class ImageAnimation extends Animation {
 	}
 	
 	@Override
-	public void start() {
+	public void start(Element elementActor, Element elementToAct) {
 		this.timer = new Timer();
-		
-		Element elementToAct = getElementToAct();
 		
 		BufferedImage originalImage = elementToAct.getImage();
 		BufferedImage image = ElementUtil.loadFromPath(this.imageName + elementToAct.getImageName());
@@ -61,6 +59,6 @@ public class ImageAnimation extends Animation {
 			}
 		};
 		
-		this.timer.schedule(task, getDelay());
+		this.timer.schedule(task, getDuration());
 	}
 }

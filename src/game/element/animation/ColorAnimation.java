@@ -1,5 +1,7 @@
 package game.element.animation;
 
+import game.element.Element;
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
@@ -28,10 +30,10 @@ public class ColorAnimation extends Animation {
 	}
 	
 	@Override
-	public void start() {
+	public void start(Element elementActor, Element elementToAct) {
 		this.timer = new Timer();
 		
-		BufferedImage image = getElementToAct().getImage();
+		BufferedImage image = elementToAct.getImage();
 		Raster raster = image.getData();
 		
 		int width = image.getWidth();
@@ -65,6 +67,6 @@ public class ColorAnimation extends Animation {
 			}
 		};
 		
-		this.timer.schedule(task, getDelay());
+		this.timer.schedule(task, getDuration());
 	}
 }
