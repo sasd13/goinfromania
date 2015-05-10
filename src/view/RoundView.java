@@ -52,7 +52,7 @@ public class RoundView extends JPanel implements Observer {
 		this.arenaView.requestFocusInWindow();
 	}
 	
-	public void repaintArenaView() {
-		this.arenaView.repaint();
+	public ArenaView getArenaView() {
+		return this.arenaView;
 	}
 }

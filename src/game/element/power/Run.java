@@ -30,6 +30,6 @@ public class Run extends Power {
 	
 	@Override
 	public void act(Character character) {
-		
+		super.act(character);
 	}
 }

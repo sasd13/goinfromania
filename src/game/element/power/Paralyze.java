@@ -3,12 +3,14 @@ package game.element.power;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import game.element.animation.ImageAnimation;
 import game.element.character.Character;
 import game.element.character.Nutritionist;
 
 public class Paralyze extends Power {
 
 	public static final String NAME = "Paralyze";
+	public static final String ANIMATION_IMAGE_PREFIX = "paralyze_";
 	
 	/*
 	 * Paralyse le nutritioniste pendant 5 secondes
@@ -24,6 +26,10 @@ public class Paralyze extends Power {
 		super();
 		
 		setName(NAME);
+		
+		ImageAnimation animation = new ImageAnimation();
+		animation.setImageName(ANIMATION_IMAGE_PREFIX);
+		setAnimation(animation);
 		
 		this.value = VALUE_STOP_NUTRITIONIST_MOVE;
 	}
@@ -41,13 +47,17 @@ public class Paralyze extends Power {
 
 	@Override
 	public void act(Character character) {
-		Nutritionist nutritionist = (Nutritionist) character;
-		
-		this.timerParalyze = new Timer();
-		
-		nutritionist.setMovable(false);
-		nutritionist.setPowerful(false);
-		endParalyzeAct(nutritionist);
+		if (character instanceof Nutritionist) {
+			Nutritionist nutritionist = (Nutritionist) character;
+			
+			this.timerParalyze = new Timer();
+			
+			nutritionist.setMovable(false);
+			nutritionist.setPowerful(false);
+			endParalyzeAct(nutritionist);
+			
+			super.act(character);
+		}
 	}
 	
 	private synchronized void endParalyzeAct(final Nutritionist nutritionist) {

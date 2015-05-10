@@ -166,6 +166,10 @@ public class RoundController {
 		}
 	}
 	
+	public void updateArena() {
+		this.roundView.getArenaView().repaint();
+	}
+	
 	private void loadGamePad() {
 		this.gamePad = SettingController.getInstance().loadGamePad();
 	}
@@ -204,7 +208,7 @@ public class RoundController {
 		if (canMove) {
 			elementActor.move(direction);
 			
-			this.roundView.repaintArenaView();
+			updateArena();
 			checkElementsInTouch(elementActor);
 		}
 	}
@@ -220,19 +224,18 @@ public class RoundController {
 	}
 	
 	private void actionInTouch(Element elementActor, Element elementToAct) {
-		boolean canAct = ArenaUtil.canActInTouch(elementActor, elementToAct);
+		Pig pig = (Pig) elementActor;
 		
+		boolean canAct = ArenaUtil.canActInTouch(elementActor, elementToAct);
 		if (canAct) {
-			if (elementActor instanceof Enemy) {
-				Enemy enemy = (Enemy) elementActor;
+			if (elementToAct instanceof Enemy) {
+				Enemy enemy = (Enemy) elementToAct;
 				
-				Pig pig = (Pig) elementToAct;
 				actionEnemyAttaksPig(enemy, pig);
 			} else if (elementActor instanceof Pig) {
-				Pig pig = (Pig) elementActor;
-				
 				if (elementToAct instanceof Food) {
 					Food food = (Food) elementToAct;
+					
 					actionPigEatsFood(pig, food);
 				}
 			}
@@ -240,25 +243,17 @@ public class RoundController {
 	}
 	
 	private void actionEnemyAttaksPig(Enemy enemy, Pig pig) {
-		boolean canAct = ArenaUtil.canActInTouch(enemy, pig);
+		EnemyActions.enemyAttaksPig(enemy, pig);
 		
-		if (canAct) {
-			EnemyActions.enemyAttaksPig(enemy, pig);
-			
-			boolean isOver = RoundUtils.isRoundOver(this.round);
-			if (isOver) {
-				stop();
-			}
+		boolean isOver = RoundUtils.isRoundOver(this.round);
+		if (isOver) {
+			stop();
 		}
 	}
 	
 	private void actionPigEatsFood(Pig pig, Food food) {
-		boolean canAct = ArenaUtil.canActInTouch(pig, food);
-		
-		if (canAct) {
-			PigActions.pigEatsFood(pig, food);
-			RoundUtils.removeElementAndCumulScore(this.round, food);
-		}
+		PigActions.pigEatsFood(pig, food);
+		RoundUtils.removeElementAndCumulScore(this.round, food);
 	}
 	
 	private void initPigAttak() {

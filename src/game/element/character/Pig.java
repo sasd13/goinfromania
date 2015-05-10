@@ -30,6 +30,7 @@ public class Pig extends Character {
 		super();
 		
 		setName(NAME);
+		setImageName(IMAGE_NAME);
 		setPowerful(true);
 		
 		BufferedImage image = ElementUtil.loadFromPath(IMAGE_NAME);

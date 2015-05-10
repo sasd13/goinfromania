@@ -16,6 +16,7 @@ public class Nutritionist extends Enemy {
 		super();
 		
 		setName(NAME);
+		setImageName(IMAGE_NAME);
 		setLife(LIFE_VALUE);
 		setPower(new Diet());
 		setScorePoint(SCORE_POINT);

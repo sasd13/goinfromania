@@ -16,6 +16,7 @@ public class PoisonCake extends Cake {
 		super();
 		
 		setName(NAME);
+		setImageName(IMAGE_NAME);
 		setEffectValue(VALUE_EVOLVE_PIG_ENERGY);
 		setScorePoint(SCORE_POINT);
 		

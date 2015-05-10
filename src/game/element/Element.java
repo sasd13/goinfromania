@@ -28,6 +28,7 @@ public abstract class Element extends Observable {
 	private boolean visible;
 	private Point position;
 	private Dimension dimension;
+	private String imageName;
 	private BufferedImage image;
 	private boolean movable;
 	private int speed;
@@ -89,6 +90,17 @@ public abstract class Element extends Observable {
 	
 	public void setDimension(Dimension dimension) {
 		this.dimension = dimension;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public String getImageName() {
+		return this.imageName;
+	}
+	
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 		
 		setChanged();
 		notifyObservers();
