@@ -1,11 +1,13 @@
 package game.element.power;
 
+import game.element.animation.ImageAnimation;
 import game.element.character.Character;
 import game.element.character.Enemy;
 
 public class Missile extends Power {
 
 	public static final String NAME = "Missile";
+	public static final String ANIMATION_IMAGE_PREFIX = "hit_";
 	
 	/* 
 	 * Diminue la vie d'un personnage de 25
@@ -20,6 +22,10 @@ public class Missile extends Power {
 		setName(NAME);
 		setMovable(true);
 		setSpeed(SPEED_HIGH);
+		
+		ImageAnimation animation = new ImageAnimation();
+		animation.setImageName(ANIMATION_IMAGE_PREFIX);
+		setAnimation(animation);
 		
 		this.value = VALUE_DECREASE_CHARACTER_LIFE;
 	}
@@ -40,5 +46,7 @@ public class Missile extends Power {
 		Enemy enemy = (Enemy) character;
 		
 		enemy.setLife(enemy.getLife() - getValue());
+		
+		super.act(character);
 	}
 }

@@ -16,6 +16,7 @@ public class Cake extends Food {
 		super();
 		
 		setName(NAME);
+		setImageName(IMAGE_NAME);
 		setMovable(true);
 		setSpeed(SPEED_LOW);
 		setEffectValue(VALUE_EVOLVE_PIG_ENERGY);

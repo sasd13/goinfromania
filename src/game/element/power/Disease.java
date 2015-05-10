@@ -3,12 +3,14 @@ package game.element.power;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import game.element.animation.ImageAnimation;
 import game.element.character.Character;
 import game.element.character.Pig;
 
 public class Disease extends Power {
 
 	public static final String NAME = "Disease";
+	public static final String ANIMATION_IMAGE_PREFIX = "disease_";
 	
 	/* 
 	 * Ralentit le goinfre pendant 10 secondes et diminue la vie du goinfre de 20
@@ -25,6 +27,10 @@ public class Disease extends Power {
 		super();
 		
 		setName(NAME);
+		
+		ImageAnimation animation = new ImageAnimation();
+		animation.setImageName(ANIMATION_IMAGE_PREFIX);
+		setAnimation(animation);
 		
 		this.delay = DELAY_DECREASE_PIG_SPEED;
 		this.value = VALUE_DECREASE_PIG_LIFE;
@@ -62,6 +68,10 @@ public class Disease extends Power {
 		pig.setSpeed(SPEED_LOW);
 		
 		endDiseaseAct(pig);
+		
+		getAnimation().setDelay(getDelay());
+		
+		super.act(character);
 	}
 	
 	private synchronized void endDiseaseAct(final Pig pig) {

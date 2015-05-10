@@ -3,12 +3,14 @@ package game.element.power;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import game.element.animation.ImageAnimation;
 import game.element.character.Character;
 import game.element.character.Pig;
 
 public class Diet extends Power {
 	
 	public static final String NAME = "Diet";
+	public static final String ANIMATION_IMAGE_PREFIX = "diet_";
 	
 	/*
 	 * Empeche le goinfre de manger pendant 10 secondes
@@ -29,6 +31,10 @@ public class Diet extends Power {
 		super();
 		
 		setName(NAME);
+		
+		ImageAnimation animation = new ImageAnimation();
+		animation.setImageName(ANIMATION_IMAGE_PREFIX);
+		setAnimation(animation);
 		
 		this.delay = DELAY_STOP_PIG_EAT;
 		this.period = PERIOD_DECREASE_PIG_ENERGY;
@@ -78,6 +84,10 @@ public class Diet extends Power {
 		pig.setGreedy(false);
 		startDietAct(pig);
 		endDietAct(pig);
+		
+		getAnimation().setDelay(getDelay());
+		
+		super.act(character);
 	}
 	
 	private synchronized void startDietAct(final Pig pig) {

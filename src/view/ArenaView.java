@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -42,7 +43,9 @@ public class ArenaView extends JPanel implements Observer {
 		Element element;
 		for (int i=0; i<this.listElements.size(); i++) {
 			element = this.listElements.get(i);
-			g.drawImage(element.getImage(), element.getPosition().x, element.getPosition().y, this);
+			Point position = element.getPosition();
+			
+			g.drawImage(element.getImage(), position.x, position.y, this);
 		}
 	}
 }
