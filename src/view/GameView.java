@@ -28,8 +28,6 @@ public class GameView extends JFrame implements Observer {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
-		Dimension dimension = new Dimension(DimensionConstants.FRAME_WIDTH_LARGE, DimensionConstants.FRAME_HEIGHT_LARGE);
-		setPreferredSize(dimension);
 		
 		this.gameMenuBar = new GameMenuBar();
 		setJMenuBar(this.gameMenuBar);

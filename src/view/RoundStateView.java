@@ -2,6 +2,7 @@ package view;
 
 import game.round.Round;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.Observable;
@@ -21,6 +22,7 @@ public class RoundStateView extends JPanel implements Observer {
 		super();
 		
 		setLayout(new GridLayout(1, 2));
+		setPreferredSize(new Dimension(DimensionConstants.PANEL_STATE_WIDTH, DimensionConstants.PANEL_STATE_HEIGHT));
 		
 		JPanel panelRound = new JPanel();
 		panelRound.setLayout(new FlowLayout());

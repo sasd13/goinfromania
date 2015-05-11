@@ -3,6 +3,7 @@ package view;
 import game.element.character.Character;
 import game.element.character.Pig;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.Observable;
@@ -21,6 +22,7 @@ public class PigStateView extends JPanel implements Observer {
 		super();
 		
 		setLayout(new GridLayout(1, 2));
+		setPreferredSize(new Dimension(DimensionConstants.PANEL_STATE_WIDTH, DimensionConstants.PANEL_STATE_HEIGHT));
 		
 		JPanel panelLife = new JPanel();
 		panelLife.setLayout(new FlowLayout());
