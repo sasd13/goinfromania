@@ -108,4 +108,12 @@ public class GameController {
 		JMenu menu = ((GameMenuBar) this.gameView.getJMenuBar()).getMenu(menuName);
 		menu.setEnabled(enabled);
 	}
+	
+	public void showRoundMenu() {
+		this.gameView.showRoundMenuView();
+	}
+	
+	public void hideRoundMenu() {
+		this.gameView.hideRoundMenuView();
+	}
 }

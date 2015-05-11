@@ -118,14 +118,20 @@ public class RoundController {
 	public void resume() {
 		this.round.setState(State.STARTED);
 		
+		GameController.getInstance().hideRoundMenu();
+		
 		loadGamePad();
 	}
 	
 	public void pause() {
+		if (this.round.getState() == State.PAUSED) {
+			resume();
+		}
+		
 		this.round.setState(State.PAUSED);
 		
-		RoundMenuView rmv = new RoundMenuView();
-		rmv.setVisible(true);
+		GameController.getInstance().showRoundMenu();
+		
 		/*
 		String title = "Round";
 		String message = "Paused... Click \"OK\" to resume";

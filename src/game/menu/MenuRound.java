@@ -13,7 +13,7 @@ public class MenuRound extends JMenu implements ActionListener {
 
 	public static final String NAME = "Round";
 	
-	private final String ITEM_PAUSE = "Pause";
+	private final String ITEM_PAUSE = "Pause/Resume";
 	private final String ITEM_STOP = "Stop";
 	private final String ITEM_RESTART = "Restart";
 	private final String ITEM_SAVE = "Save";
