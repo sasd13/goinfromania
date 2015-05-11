@@ -43,6 +43,7 @@ public class GameController {
 	}
 	
 	public void play() {
+		this.gameView.displayHomeView();
 		this.gameView.pack();
 		this.gameView.setVisible(true);
 	}
@@ -62,16 +63,16 @@ public class GameController {
 		round.setRoundNumber(1);
 		this.roundController = configRound(round);
 		
-		this.gameView.displayLiveRoundView();
+		this.gameView.displayRoundView();
 		this.roundController.start();
 	}
 	
 	public void openRound(String roundId) {
 		Round round = this.game.getListRounds().get(roundId);
 		this.roundController = configRound(round);
-		
-		this.gameView.displayLiveRoundView();
 		this.roundController.start();
+		
+		this.gameView.displayRoundView();
 	}
 	
 	public void closeRound(Round round) {
@@ -90,8 +91,7 @@ public class GameController {
 	private RoundController configRound(Round round) {
 		this.game.getListRounds().add(round);
 		
-		RoundView roundView = new RoundView();
-		this.gameView.setRoundView(roundView);
+		RoundView roundView = this.gameView.getRoundView();
 		
 		setMenuEnabled(MenuRound.NAME, true);
 		setMenuEnabled(MenuSettings.NAME, false);

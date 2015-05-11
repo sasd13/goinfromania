@@ -10,6 +10,9 @@ public class DimensionConstants {
 	public static final int FRAME_HEIGHT_MEDIUM = 500;
 	public static final int FRAME_HEIGHT_LARGE = 604; //Ne pas modifier
 	
+	public static final int PANEL_WIDTH = 800; //Ne pas modifier
+	public static final int PANEL_HEIGHT = 600; //Ne pas modifier
+	
 	public static final int ARENA_WIDTH = 800; //Ne pas modifier
 	public static final int ARENA_HEIGHT = 500; //Ne pas modifier
 	

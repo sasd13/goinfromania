@@ -9,6 +9,7 @@ import util.ArenaUtil;
 import util.EnemyActions;
 import util.PigActions;
 import util.RoundUtils;
+import view.RoundMenuView;
 import view.RoundView;
 import db.RoundDAO;
 import game.element.Direction;
@@ -123,10 +124,14 @@ public class RoundController {
 	public void pause() {
 		this.round.setState(State.PAUSED);
 		
+		RoundMenuView rmv = new RoundMenuView();
+		rmv.setVisible(true);
+		/*
 		String title = "Round";
 		String message = "Paused... Click \"OK\" to resume";
 		
 		JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
+		*/
 	}
 	
 	public void stop() {

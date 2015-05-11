@@ -9,12 +9,13 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controller.SettingController;
 
-public abstract class SettingView extends JFrame implements Observer, ActionListener {
+public abstract class SettingView extends JDialog implements Observer, ActionListener {
 
 	public static final String BUTTONCLOSE_NAME = "Close";
 	public static final String BUTTONRESET_NAME = "Reset";
@@ -25,6 +26,7 @@ public abstract class SettingView extends JFrame implements Observer, ActionList
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		setPreferredSize(new Dimension(DimensionConstants.FRAME_WIDTH_MEDIUM, DimensionConstants.FRAME_HEIGHT_MEDIUM));
 		
 		setTitle("Settings");

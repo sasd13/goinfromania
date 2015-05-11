@@ -1,6 +1,5 @@
 package view;
 
-import game.Game;
 import game.round.ListRounds;
 
 import java.awt.BorderLayout;
@@ -18,7 +17,7 @@ public class ListRoundsView extends JPanel implements Observer {
 		
 		setLayout(new BorderLayout());
 		
-		add(new JLabel(Game.NAME), BorderLayout.CENTER);
+		add(new JLabel("List rounds"), BorderLayout.CENTER);
 		setBackground(Color.BLUE);
 	}
 
