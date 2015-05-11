@@ -13,9 +13,8 @@ import javax.swing.JPanel;
 
 public class RoundStateView extends JPanel implements Observer {
 
-	private JLabel labelRound,
-		labelRoundValue,
-		labelScore,
+	private JLabel labelRoundValue,
+		labelCakesValue,
 		labelScoreValue;
 	
 	public RoundStateView() {
@@ -27,18 +26,25 @@ public class RoundStateView extends JPanel implements Observer {
 		JPanel panelRound = new JPanel();
 		panelRound.setLayout(new FlowLayout());
 		
-		this.labelRound = new JLabel("Round : ");
-		panelRound.add(this.labelRound);
+		panelRound.add(new JLabel("Round : "));
 		this.labelRoundValue = new JLabel();
 		panelRound.add(this.labelRoundValue);
 		
 		add(panelRound);
 		
-		JPanel panelScore = new JPanel();
-		panelRound.setLayout(new FlowLayout());
+		JPanel panelCakes = new JPanel();
+		panelCakes.setLayout(new FlowLayout());
 		
-		this.labelScore = new JLabel("Score : ");
-		panelScore.add(this.labelScore);
+		panelCakes.add(new JLabel("Cakes : "));
+		this.labelCakesValue = new JLabel();
+		panelCakes.add(this.labelCakesValue);
+		
+		add(panelCakes);
+		
+		JPanel panelScore = new JPanel();
+		panelScore.setLayout(new FlowLayout());
+		
+		panelScore.add(new JLabel("Score : "));
 		this.labelScoreValue = new JLabel();
 		panelScore.add(this.labelScoreValue);
 		
@@ -50,6 +56,7 @@ public class RoundStateView extends JPanel implements Observer {
 		Round round = (Round) observable;
 		
 		this.labelRoundValue.setText(String.valueOf(round.getRoundNumber()));
+		this.labelCakesValue.setText(round.getCountEatenCakes() + "/" + round.getMaxCountEatenCakes());
 		this.labelScoreValue.setText(String.valueOf(round.getScore()));
 	}
 }

@@ -51,9 +51,11 @@ public class RoundView extends JPanel implements Observer {
 		listElements.addObserver(this.arenaView);
 		this.arenaView.update(listElements, null);
 		
-		Pig pig = listElements.getPig();
-		pig.addObserver(this.pigStateView);
-		this.pigStateView.update(pig, null);
+		if (!listElements.isEmpty()) {
+			Pig pig = listElements.getPig();
+			pig.addObserver(this.pigStateView);
+			this.pigStateView.update(pig, null);
+		}
 	}
 	
 	public ArenaView getArenaView() {

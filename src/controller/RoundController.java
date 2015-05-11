@@ -16,6 +16,7 @@ import game.element.Element;
 import game.element.ListElements;
 import game.element.character.Enemy;
 import game.element.character.Pig;
+import game.element.food.Cake;
 import game.element.food.Food;
 import game.element.power.Missile;
 import game.element.power.Power;
@@ -38,22 +39,23 @@ public class RoundController {
 		this.round.addObserver(this.roundView);
 		this.roundView.update(this.round, null);
 		
-		RoundDAO.save(round);
-		
 		this.gamePad = null;
 	}
 	
 	public void startRound() {
 		this.round.setState(State.STARTED);
 		
+		saveRound();
 		loadGamePad();
 		
 		Test.testArena(this.round.getListElements());
+		
+		showStartRoundMessage();
 	}
 	
 	public void restartRound() {
 		this.round.deleteObservers();
-		this.round = RoundDAO.load(this.round.getId());
+		this.round = loadRound(this.round.getId());
 		this.round.addObserver(this.roundView);
 		this.roundView.update(this.round, null);
 		
@@ -84,12 +86,11 @@ public class RoundController {
 			int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
 			if (selected == JOptionPane.YES_OPTION) {
 				this.round.setState(State.STOPPED);
-				save();
+				saveRound();
 				GameController.getInstance().closeRound(this.round);
 			} else if (selected == JOptionPane.NO_OPTION) {
 				this.round.setState(State.STOPPED);
 				GameController.getInstance().closeRound(this.round);
-				GameController.getInstance().displayHome();
 			}
 		} else {
 			this.round.setState(State.STOPPED);
@@ -105,20 +106,28 @@ public class RoundController {
 		}
 	}
 	
+	private void showStartRoundMessage() {
+		String title = "Round " + round.getRoundNumber();
+		String message = "Start!";
+		
+		JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
+	}
+	
 	public void nextRound() {
 		GameController.getInstance().nextRound(this.round);
 	}
 	
-	public void finishRound() {
-		GameController.getInstance().closeRound(this.round);
-		GameController.getInstance().displayHome();
-	}
-	
-	public void save() {
+	public void saveRound() {
 		if (!this.round.isFinished()) {
 			this.round.setUpdatedAt(ZonedDateTime.now());
 			RoundDAO.save(this.round);
 		}
+	}
+	
+	private Round loadRound(String roundId) {
+		Round round = RoundDAO.load(roundId);
+		
+		return round;
 	}
 	
 	public void updateArena() {
@@ -212,6 +221,10 @@ public class RoundController {
 	private void actionPigEatsFood(Pig pig, Food food) {
 		PigAction.pigEatsFood(pig, food);
 		RoundUtils.removeElementAndCumulScore(round, food);
+		
+		if (food.getName().equals(Cake.NAME)) {
+			this.round.setCountEatenCakes(this.round.getCountEatenCakes() + 1);
+		}
 		
 		boolean isWon = RoundUtils.isRoundWon(round);
 		if (isWon) {

@@ -45,13 +45,18 @@ public class MenuFile extends JMenu implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem item = (JMenuItem) e.getSource();
 		
+		GameController gameController = GameController.getInstance();
+		
 		if (item.getText().compareTo(ITEM_NEW) == 0) {
-			GameController.getInstance().newRound();
+			gameController.closeRoundIfInProgress();
+			gameController.newRound();
 		} else if (item.getText().compareTo(ITEM_OPEN) == 0) {
+			gameController.closeRoundIfInProgress();
 			GameController.getInstance().displayListRounds();
 		} else if (item.getText().compareTo(ITEM_SCORES) == 0) {
-			
+			GameController.getInstance().displayListScores();
 		} else if (item.getText().compareTo(ITEM_EXIT) == 0) {
+			gameController.closeRoundIfInProgress();
 			GameController.getInstance().exitGame();
 		} else {
 			//TODO Throw exception

@@ -23,6 +23,7 @@ public class GameView extends JFrame implements Observer {
 	private HomeView homeView;
 	private ListRoundsView listRoundsView;
 	private RoundView roundView;
+	private ListScoresView listScoresView;
 	
 	private GameView() {
 		super(Game.NAME);
@@ -48,6 +49,10 @@ public class GameView extends JFrame implements Observer {
 		this.roundView.setBounds(0, 0, DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
 		this.layeredPane.add(this.roundView, JLayeredPane.DEFAULT_LAYER);
 		
+		this.listScoresView = new ListScoresView();
+		this.listScoresView.setBounds(0, 0, DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
+		this.layeredPane.add(this.listScoresView, JLayeredPane.DEFAULT_LAYER);
+		
 		getContentPane().add(this.layeredPane, BorderLayout.CENTER);
 	}
 	
@@ -68,8 +73,12 @@ public class GameView extends JFrame implements Observer {
 		Game game = (Game) observable;
 		
 		ListRounds listRounds = game.getListRounds();
+		
 		listRounds.addObserver(this.listRoundsView);
 		this.listRoundsView.update(listRounds, null);
+		
+		listRounds.addObserver(this.listScoresView);
+		this.listScoresView.update(listRounds, null);
 	}
 	
 	public void displayHomeView() {
@@ -78,6 +87,10 @@ public class GameView extends JFrame implements Observer {
 	
 	public void displayListRoundsView() {
 		this.layeredPane.moveToFront(this.listRoundsView);
+	}
+	
+	public void displayListScoresView() {
+		this.layeredPane.moveToFront(this.listScoresView);
 	}
 	
 	public void displayRoundView() {

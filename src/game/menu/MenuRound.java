@@ -46,7 +46,8 @@ public class MenuRound extends JMenu implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem item = (JMenuItem) e.getSource();
 		
-		RoundController roundController = (RoundController) GameController.getInstance().getRoundController();
+		GameController gameController = GameController.getInstance();
+		RoundController roundController = gameController.getRoundController();
 		
 		if (item.getText().compareTo(ITEM_PAUSE) == 0) {
 			roundController.pauseRound();
@@ -55,7 +56,7 @@ public class MenuRound extends JMenu implements ActionListener {
 		} else if (item.getText().compareTo(ITEM_RESTART) == 0) {
 			roundController.restartRound();
 		} else if (item.getText().compareTo(ITEM_SAVE) == 0) {
-			roundController.save();
+			roundController.saveRound();
 		} else {
 			//TODO Throw exception
 		}

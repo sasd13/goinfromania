@@ -1,6 +1,5 @@
 package game.menu;
 
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
 public class GameMenuBar extends JMenuBar {
@@ -23,17 +22,7 @@ public class GameMenuBar extends JMenuBar {
 		add(this.menuSettings);
 	}
 	
-	public JMenu getMenu(String menuName) {
-		switch (menuName) {
-			case MenuFile.NAME:
-				return this.menuFile;
-			case MenuRound.NAME:
-				return this.menuRound;
-			case MenuSettings.NAME:
-				return this.menuSettings;
-			default :
-				//TODO Throw exception
-				return null;
-		}
+	public void setMenuRoundEnabled(boolean enabled) {
+		this.menuRound.setEnabled(enabled);
 	}
 }

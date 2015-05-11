@@ -21,7 +21,7 @@ public class PigStateView extends JPanel implements Observer {
 	public PigStateView() {
 		super();
 		
-		setLayout(new GridLayout(1, 2));
+		setLayout(new GridLayout(1, 3));
 		setPreferredSize(new Dimension(DimensionConstants.PANEL_STATE_WIDTH, DimensionConstants.PANEL_STATE_HEIGHT));
 		
 		JPanel panelLife = new JPanel();

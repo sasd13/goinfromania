@@ -24,8 +24,7 @@ public class RoundUtils {
 	public static boolean isRoundWon(Round round) {
 		Level level = round.getLevel();
 		
-		Pig pig = round.getListElements().getPig();
-		int countEatenCake = pig.getCountEatenCakes();
+		int countEatenCake = round.getCountEatenCakes();
 		
 		if ((level == Level.EASY && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_EASY)
 				|| (level == Level.NORMAL && countEatenCake == Round.TOTAL_CAKE_TO_EAT_LEVEL_NORMAL)

@@ -24,7 +24,6 @@ public class Pig extends Character {
 	private ListPowers listPowers;
 	private boolean greedy;
 	private int energy;
-	private int countEatenCakes;
 	
 	public Pig() {
 		super();
@@ -44,7 +43,6 @@ public class Pig extends Character {
 		
 		this.greedy = true;
 		this.energy = ENERGY_MIN;
-		this.countEatenCakes = 0;
 	}
 	
 	public ListPowers getListPowers() {
@@ -81,17 +79,6 @@ public class Pig extends Character {
 		} else {
 			this.energy = energy;
 		}
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public int getCountEatenCakes() {
-		return this.countEatenCakes;
-	}
-	
-	public void cakeEaten() {
-		this.countEatenCakes++;
 		
 		setChanged();
 		notifyObservers();
