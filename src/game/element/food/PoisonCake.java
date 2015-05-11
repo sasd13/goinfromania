@@ -2,7 +2,7 @@ package game.element.food;
 
 import java.awt.image.BufferedImage;
 
-import util.ElementUtil;
+import util.ImageLoader;
 
 public class PoisonCake extends Cake {
 	
@@ -20,7 +20,7 @@ public class PoisonCake extends Cake {
 		setEffectValue(VALUE_EVOLVE_PIG_ENERGY);
 		setScorePoint(SCORE_POINT);
 		
-		BufferedImage image = ElementUtil.loadFromPath(IMAGE_NAME);
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImageWithDimension(image);
 	}
 }

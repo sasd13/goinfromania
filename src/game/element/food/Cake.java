@@ -2,7 +2,7 @@ package game.element.food;
 
 import java.awt.image.BufferedImage;
 
-import util.ElementUtil;
+import util.ImageLoader;
 import game.element.character.Pig;
 
 public class Cake extends Food {
@@ -22,7 +22,7 @@ public class Cake extends Food {
 		setEffectValue(VALUE_EVOLVE_PIG_ENERGY);
 		setScorePoint(SCORE_POINT);
 		
-		BufferedImage image = ElementUtil.loadFromPath(IMAGE_NAME);
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImageWithDimension(image);
 	}
 	

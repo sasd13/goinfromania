@@ -5,29 +5,8 @@ import game.element.Element;
 
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class ElementUtil {
-
-	private static final String IMAGE_DIR = "img/";
-
-	public static BufferedImage loadFromPath(String fileName) {
-		BufferedImage bufferedImage = null;
-		
-		File file = new File(IMAGE_DIR + fileName);
-		try {
-			bufferedImage = ImageIO.read(file);
-		} catch (IOException e) {
-			System.out.println("Error loading file : " + file.getAbsolutePath());
-			System.out.println(e.getMessage());
-		}
-		
-		return bufferedImage;
-	}
 	
 	public static Point recalibration(Point position, Direction direction, int speed) {
 		if ((speed == Element.SPEED_MEDIUM) 

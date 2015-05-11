@@ -2,7 +2,7 @@ package game.element.character;
 
 import java.awt.image.BufferedImage;
 
-import util.ElementUtil;
+import util.ImageLoader;
 import game.element.power.ListPowers;
 import game.element.power.Missile;
 import game.element.power.Paralyze;
@@ -32,7 +32,7 @@ public class Pig extends Character {
 		setImageName(IMAGE_NAME);
 		setPowerful(true);
 		
-		BufferedImage image = ElementUtil.loadFromPath(IMAGE_NAME);
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImageWithDimension(image);
 		
 		this.listPowers = new ListPowers();

@@ -1,21 +1,24 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
-import game.Game;
-
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import util.ImageLoader;
 
 public class HomeView extends JPanel {
 
 	public HomeView() {
 		super();
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		
-		setLayout(new BorderLayout());
+		BufferedImage image = ImageLoader.loadFromPath("home.png");
 		
-		add(new JLabel(Game.NAME), BorderLayout.CENTER);
-		setBackground(Color.PINK);
+		g.drawImage(image, 0, 0, this);
 	}
 }

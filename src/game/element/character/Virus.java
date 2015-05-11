@@ -2,7 +2,7 @@ package game.element.character;
 
 import java.awt.image.BufferedImage;
 
-import util.ElementUtil;
+import util.ImageLoader;
 import game.element.power.Disease;
 
 public class Virus extends Enemy {
@@ -21,7 +21,7 @@ public class Virus extends Enemy {
 		setPower(new Disease());
 		setScorePoint(SCORE_POINT);
 		
-		BufferedImage image = ElementUtil.loadFromPath(IMAGE_NAME);
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImageWithDimension(image);
 	}
 }

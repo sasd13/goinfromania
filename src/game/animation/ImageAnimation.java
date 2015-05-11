@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import util.ElementUtil;
+import util.ImageLoader;
 import controller.GameController;
 import controller.RoundController;
 
@@ -32,8 +32,8 @@ public class ImageAnimation extends Animation {
 	
 	@Override
 	public void start(Element elementActor, Element elementToAct) {		
-		BufferedImage originalImage = ElementUtil.loadFromPath(elementToAct.getImageName());
-		BufferedImage image = ElementUtil.loadFromPath(this.imageName + elementToAct.getImageName());
+		BufferedImage originalImage = ImageLoader.loadFromPath(elementToAct.getImageName());
+		BufferedImage image = ImageLoader.loadFromPath(this.imageName + elementToAct.getImageName());
 		
 		elementToAct.setImageWithDimension(image);
 		

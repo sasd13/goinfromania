@@ -2,7 +2,7 @@ package game.element.item;
 
 import java.awt.image.BufferedImage;
 
-import util.ElementUtil;
+import util.ImageLoader;
 import game.element.Element;
 
 public class Trap extends Element {
@@ -15,7 +15,7 @@ public class Trap extends Element {
 		
 		setName(NAME);
 		
-		BufferedImage image = ElementUtil.loadFromPath(IMAGE_NAME);
+		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImageWithDimension(image);
 	}
 }
