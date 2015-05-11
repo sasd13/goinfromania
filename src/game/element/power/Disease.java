@@ -1,9 +1,10 @@
 package game.element.power;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-import game.element.animation.ImageAnimation;
+import game.animation.ImageAnimation;
 import game.element.character.Character;
 import game.element.character.Pig;
 
@@ -21,7 +22,7 @@ public class Disease extends Power {
 	private int delay;
 	private int value;
 	
-	private Timer timerSpeed;
+	private ScheduledExecutorService scheduler;
 	
 	public Disease() {
 		super();
@@ -62,10 +63,10 @@ public class Disease extends Power {
 	public void act(Character character) {
 		Pig pig = (Pig) character;
 		
-		this.timerSpeed = new Timer();
-		
 		pig.setLife(pig.getLife() - getValue());
 		pig.setSpeed(SPEED_LOW);
+		
+		this.scheduler = Executors.newScheduledThreadPool(2);
 		
 		endDiseaseAct(pig);
 		
@@ -75,10 +76,7 @@ public class Disease extends Power {
 	}
 	
 	private synchronized void endDiseaseAct(final Pig pig) {
-		this.timerSpeed.cancel();
-		this.timerSpeed = new Timer();
-		
-		TimerTask task = new TimerTask() {
+		Runnable runnable = new Runnable() {
 			
 			@Override
 			public void run() {
@@ -86,6 +84,6 @@ public class Disease extends Power {
 			}
 		};
 		
-		this.timerSpeed.schedule(task, getDelay());
+		this.scheduler.schedule(runnable, getDelay(), TimeUnit.MILLISECONDS);
 	}
 }

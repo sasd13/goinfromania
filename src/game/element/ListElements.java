@@ -51,13 +51,9 @@ public class ListElements extends Observable {
 	}
 	
 	public Pig getPig() {
-		Element element = this.list.getFirst();
+		Pig pig = (Pig) this.list.getFirst();
 		
-		if (element instanceof Pig) {
-			return (Pig) element;
-		}
-		
-		return null;
+		return pig;
 	}
 	
 	public Element getElementAtPosition(Point position) {

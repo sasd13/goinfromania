@@ -1,7 +1,7 @@
 package game.element.power;
 
+import game.animation.Animation;
 import game.element.Element;
-import game.element.animation.Animation;
 import game.element.character.Character;
 
 public abstract class Power extends Element {

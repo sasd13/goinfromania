@@ -1,28 +1,22 @@
 package controller;
 
-import java.awt.Point;
 import java.time.ZonedDateTime;
 
 import javax.swing.JOptionPane;
 
+import main.Test;
 import util.ArenaUtil;
-import util.EnemyActions;
-import util.PigActions;
+import util.EnemyAction;
+import util.PigAction;
 import util.RoundUtils;
-import view.RoundMenuView;
 import view.RoundView;
 import db.RoundDAO;
 import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
 import game.element.character.Enemy;
-import game.element.character.Nutritionist;
 import game.element.character.Pig;
-import game.element.character.Virus;
-import game.element.food.Cake;
 import game.element.food.Food;
-import game.element.food.PoisonCake;
-import game.element.item.Wall;
 import game.element.power.Missile;
 import game.element.power.Power;
 import game.element.power.SuperMissile;
@@ -44,132 +38,80 @@ public class RoundController {
 		this.round.addObserver(this.roundView);
 		this.roundView.update(this.round, null);
 		
+		RoundDAO.save(round);
+		
 		this.gamePad = null;
 	}
 	
-	public void start() {
+	public void startRound() {
 		this.round.setState(State.STARTED);
 		
 		loadGamePad();
 		
-		testArena();
-		
-		this.roundView.focusArenaView();
+		Test.testArena(this.round.getListElements());
 	}
 	
-	private void testArena() {
-		ListElements listElements = this.round.getListElements();
+	public void restartRound() {
+		this.round.deleteObservers();
+		this.round = RoundDAO.load(this.round.getId());
+		this.round.addObserver(this.roundView);
+		this.roundView.update(this.round, null);
 		
-		PoisonCake poisonCake = new PoisonCake();
-		poisonCake.setPosition(new Point(200, 200));
-		listElements.add(poisonCake);
-		
-		Wall wall1 = new Wall();
-		wall1.setPosition(new Point(300, 100));
-		listElements.add(wall1);
-		
-		Wall wall2 = new Wall();
-		wall2.setPosition(new Point(300, 200));
-		listElements.add(wall2);
-		
-		Nutritionist nutritionist = new Nutritionist();
-		nutritionist.setPosition(new Point(300, 300));
-		listElements.add(nutritionist);
-		
-		Virus virus = new Virus();
-		virus.setPosition(new Point(300, 400));
-		listElements.add(virus);
-		
-		Cake cake1 = new Cake();
-		cake1.setPosition(new Point(100, 0));
-		listElements.add(cake1);
-		
-		Cake cake2 = new Cake();
-		cake2.setPosition(new Point(500, 0));
-		listElements.add(cake2);
-		
-		Cake cake3 = new Cake();
-		cake3.setPosition(new Point(500, 200));
-		listElements.add(cake3);
-		
-		Cake cake4 = new Cake();
-		cake4.setPosition(new Point(500, 400));
-		listElements.add(cake4);
-		
-		Cake cake5 = new Cake();
-		cake5.setPosition(new Point(700, 0));
-		listElements.add(cake5);
-		
-		Cake cake6 = new Cake();
-		cake6.setPosition(new Point(700, 200));
-		listElements.add(cake6);
-		
-		Cake cake7 = new Cake();
-		cake7.setPosition(new Point(700, 400));
-		listElements.add(cake7);
+		startRound();
 	}
 	
-	public void restart() {
+	public void resumeRound() {
 		this.round.setState(State.STARTED);
 		
 		loadGamePad();
+		
+		//TODO
 	}
 	
-	public void resume() {
-		this.round.setState(State.STARTED);
-		
-		GameController.getInstance().hideRoundMenu();
-		
-		loadGamePad();
-	}
-	
-	public void pause() {
-		if (this.round.getState() == State.PAUSED) {
-			resume();
-		}
-		
+	public void pauseRound() {
 		this.round.setState(State.PAUSED);
 		
-		GameController.getInstance().showRoundMenu();
+		//TODO
 		
-		/*
-		String title = "Round";
-		String message = "Paused... Click \"OK\" to resume";
-		
-		JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
-		*/
+		this.roundView.displayRoundMenuView();
 	}
 	
-	public void stop() {
-		this.round.setState(State.STOPPED);
-		
-		String title = null;
-		String message = null;
-		
+	public void stopRound() {
 		if (!this.round.isFinished()) {
-			title = "Exit round";
-			message = "Save your progress?";
+			String title = "Exit round";
+			String message = "Save your progress?";
 			
-			int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_OPTION);
+			int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
 			if (selected == JOptionPane.YES_OPTION) {
+				this.round.setState(State.STOPPED);
 				save();
+				GameController.getInstance().closeRound(this.round);
+			} else if (selected == JOptionPane.NO_OPTION) {
+				this.round.setState(State.STOPPED);
+				GameController.getInstance().closeRound(this.round);
+				GameController.getInstance().displayHome();
 			}
 		} else {
-			title = "Result";
+			this.round.setState(State.STOPPED);
 			
 			Pig pig = this.round.getListElements().getPig();
 			if (pig.isDied()) {
 				this.round.setResult(Result.LOOSE);
-				message = "YOU LOOSE... :-(";
 			} else {
 				this.round.setResult(Result.WIN);
-				message = "YOU WIN :-)!!! Score : " + this.round.getScore();
 			}
 			
-			JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
+			this.roundView.displayRoundResultView();
 		}
-		
+	}
+	
+	public void nextRound() {
+		GameController.getInstance().nextRound(this.round);
+	}
+	
+	public void finishRound() {
 		GameController.getInstance().closeRound(this.round);
+		GameController.getInstance().displayHome();
 	}
 	
 	public void save() {
@@ -190,10 +132,10 @@ public class RoundController {
 	public void actionGamePad(int keyCode) {
 		if (keyCode == this.gamePad.getKeyStart()) {
 			if (this.round.getState() == State.STARTED) {
-				pause();
+				pauseRound();
 			} else if (this.round.getState() == State.PAUSED) {
-				resume();
-			} else {
+				resumeRound();
+			}else {
 				//TODO Throw exception
 			}
 		} else {
@@ -209,6 +151,8 @@ public class RoundController {
 				actionMove(pig, Direction.DOWN);
 			} else if (keyCode == this.gamePad.getKeyPigAttak()) {
 				initPigAttak();
+			} else {
+				//TODO Throw exception
 			}
 		}
 	}
@@ -256,17 +200,23 @@ public class RoundController {
 	}
 	
 	private void actionEnemyAttaksPig(Enemy enemy, Pig pig) {
-		EnemyActions.enemyAttaksPig(enemy, pig);
+		EnemyAction enemyAction = new EnemyAction();
+		enemyAction.enemyAttaksPig(enemy, pig);
 		
-		boolean isOver = RoundUtils.isRoundOver(this.round);
+		boolean isOver = RoundUtils.isRoundOver(round);
 		if (isOver) {
-			stop();
+			stopRound();
 		}
 	}
 	
 	private void actionPigEatsFood(Pig pig, Food food) {
-		PigActions.pigEatsFood(pig, food);
-		RoundUtils.removeElementAndCumulScore(this.round, food);
+		PigAction.pigEatsFood(pig, food);
+		RoundUtils.removeElementAndCumulScore(round, food);
+		
+		boolean isWon = RoundUtils.isRoundWon(round);
+		if (isWon) {
+			stopRound();
+		}
 	}
 	
 	private void initPigAttak() {
@@ -278,7 +228,7 @@ public class RoundController {
 	}
 	
 	private boolean actionPigAttaksNextTo() {
-		ListElements listElements = this.round.getListElements();
+		ListElements listElements = round.getListElements();
 		Pig pig = listElements.getPig();
 		
 		ListElements listElementsNextTo = ArenaUtil.getElementsNextTo(pig, listElements);
@@ -303,7 +253,7 @@ public class RoundController {
 	}
 	
 	private void actionPigAttaksAfar() {
-		Pig pig = this.round.getListElements().getPig();
+		Pig pig = round.getListElements().getPig();
 		
 		Power power = pig.getPowerWithEnergy();
 		
@@ -317,8 +267,7 @@ public class RoundController {
 	}
 	
 	private void actionPigAttaksEnemy(Pig pig, Enemy enemy, Power power) {
-		PigActions.pigAttaksEnemy(pig, enemy, power);
-		
-		RoundUtils.removeElementAndCumulScore(this.round, enemy);
+		PigAction.pigAttaksEnemy(pig, enemy, power);
+		RoundUtils.removeElementAndCumulScore(round, enemy);
 	}
 }

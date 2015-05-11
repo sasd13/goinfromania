@@ -5,7 +5,7 @@ import game.element.character.Pig;
 import game.element.food.Food;
 import game.element.power.Power;
 
-public class PigActions {
+public class PigAction {
 
 	public static void pigEatsFood(Pig pig, Food food) {
 		if (pig.isGreedy()) {

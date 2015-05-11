@@ -35,6 +35,9 @@ public class Round extends Observable {
 		this.roundNumber = 0;
 		this.maxPlay = MAX_PLAY;
 		this.level = Level.EASY;
+		this.state = null;
+		this.finished = false;
+		this.result = null;
 		this.score = 0;
 		this.createdAt = ZonedDateTime.now();
 		this.updatedAt = null;

@@ -1,10 +1,10 @@
-package game.element.animation;
+package game.animation;
 
 import game.element.Element;
 
 import java.awt.image.BufferedImage;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import util.ElementUtil;
 import controller.GameController;
@@ -31,10 +31,8 @@ public class ImageAnimation extends Animation {
 	}
 	
 	@Override
-	public void start(Element elementActor, Element elementToAct) {
-		this.timer = new Timer();
-		
-		BufferedImage originalImage = elementToAct.getImage();
+	public void start(Element elementActor, Element elementToAct) {		
+		BufferedImage originalImage = ElementUtil.loadFromPath(elementToAct.getImageName());
 		BufferedImage image = ElementUtil.loadFromPath(this.imageName + elementToAct.getImageName());
 		
 		elementToAct.setImageWithDimension(image);
@@ -42,23 +40,22 @@ public class ImageAnimation extends Animation {
         RoundController roundController = GameController.getInstance().getRoundController();
         roundController.updateArena();
         
+        this.scheduler = Executors.newScheduledThreadPool(2);
         endAnimation(elementToAct, originalImage);
 	}
 	
 	private synchronized void endAnimation(final Element element, final BufferedImage image) {
-		this.timer.cancel();
-		this.timer = new Timer();
-		
-		TimerTask task = new TimerTask() {
+		Runnable runnable = new Runnable() {
 			
 			@Override
 			public void run() {
 				element.setImage(image);
 				RoundController roundController = GameController.getInstance().getRoundController();
 		        roundController.updateArena();
+		        scheduler.shutdown();
 			}
 		};
 		
-		this.timer.schedule(task, getDuration());
+		this.scheduler.schedule(runnable, getDuration(), TimeUnit.MILLISECONDS);
 	}
 }

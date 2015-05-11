@@ -13,7 +13,7 @@ public class MenuRound extends JMenu implements ActionListener {
 
 	public static final String NAME = "Round";
 	
-	private final String ITEM_PAUSE = "Pause/Resume";
+	private final String ITEM_PAUSE = "Pause";
 	private final String ITEM_STOP = "Stop";
 	private final String ITEM_RESTART = "Restart";
 	private final String ITEM_SAVE = "Save";
@@ -49,11 +49,11 @@ public class MenuRound extends JMenu implements ActionListener {
 		RoundController roundController = (RoundController) GameController.getInstance().getRoundController();
 		
 		if (item.getText().compareTo(ITEM_PAUSE) == 0) {
-			roundController.pause();
+			roundController.pauseRound();
 		} else if (item.getText().compareTo(ITEM_STOP) == 0) {
-			roundController.stop();
+			roundController.stopRound();
 		} else if (item.getText().compareTo(ITEM_RESTART) == 0) {
-			roundController.restart();
+			roundController.restartRound();
 		} else if (item.getText().compareTo(ITEM_SAVE) == 0) {
 			roundController.save();
 		} else {

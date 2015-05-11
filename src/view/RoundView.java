@@ -13,8 +13,10 @@ import game.round.Round;
 public class RoundView extends JPanel implements Observer {
 	
 	private RoundStateView roundStateView;
-	private PigStateView pigStateView;
+	private RoundMenuView roundMenuView;
+	private RoundResultView roundResultView;
 	private ArenaView arenaView;
+	private PigStateView pigStateView;
 	
 	public RoundView() {
 		super();
@@ -24,13 +26,17 @@ public class RoundView extends JPanel implements Observer {
 		this.roundStateView = new RoundStateView();
 		add(this.roundStateView, BorderLayout.SOUTH);
 		
-		this.pigStateView = new PigStateView();
-		add(this.pigStateView, BorderLayout.NORTH);
+		this.roundMenuView = new RoundMenuView();
+		this.roundResultView = new RoundResultView();
 		
 		this.arenaView = new ArenaView();
 		this.arenaView.addKeyListener(new GamePadListener());
 		this.arenaView.setFocusable(true);
+		this.arenaView.requestFocusInWindow();
 		add(this.arenaView, BorderLayout.CENTER);
+		
+		this.pigStateView = new PigStateView();
+		add(this.pigStateView, BorderLayout.NORTH);
 	}
 	
 	@Override
@@ -38,6 +44,8 @@ public class RoundView extends JPanel implements Observer {
 		Round round = (Round) observable;
 		
 		this.roundStateView.update(round, null);
+		this.roundMenuView.update(round, null);
+		this.roundResultView.update(round, null);
 		
 		ListElements listElements = round.getListElements();
 		listElements.addObserver(this.arenaView);
@@ -48,11 +56,17 @@ public class RoundView extends JPanel implements Observer {
 		this.pigStateView.update(pig, null);
 	}
 	
-	public void focusArenaView() {
-		this.arenaView.requestFocusInWindow();
-	}
-	
 	public ArenaView getArenaView() {
 		return this.arenaView;
+	}
+	
+	public void displayRoundMenuView() {
+		this.roundMenuView.setLocationRelativeTo(this);
+		this.roundMenuView.setVisible(true);
+	}
+	
+	public void displayRoundResultView() {
+		this.roundResultView.setLocationRelativeTo(this);
+		this.roundResultView.setVisible(true);
 	}
 }

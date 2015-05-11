@@ -42,37 +42,54 @@ public class GameController {
 		return this.roundController;
 	}
 	
-	public void play() {
+	public void playGame() {
 		this.gameView.displayHomeView();
 		this.gameView.pack();
 		this.gameView.setVisible(true);
 	}
 	
-	public void exit() {
+	public void exitGame() {
 		this.gameView.dispose();
 	}
 	
-	public void showListRounds() {
+	public void displayHome() {
+		this.gameView.displayHomeView();
+	}
+	
+	public void displayListRounds() {
 		loadRounds();
 		
 		this.gameView.displayListRoundsView();
 	}
 	
+	public void displayRound() {
+		this.gameView.displayRoundView();
+	}
+	
 	public void newRound() {
 		Round round = new Round();
 		round.setRoundNumber(1);
-		this.roundController = configRound(round);
-		
-		this.gameView.displayRoundView();
-		this.roundController.start();
+		openRound(round);
 	}
 	
-	public void openRound(String roundId) {
-		Round round = this.game.getListRounds().get(roundId);
+	public void openRound(Round round) {
 		this.roundController = configRound(round);
-		this.roundController.start();
+		this.roundController.startRound();
 		
-		this.gameView.displayRoundView();
+		displayRound();
+	}
+	
+	public void nextRound(Round round) {
+		if (!round.isFinished()) {
+			//Throw exception
+		}
+		
+		closeRound(round);
+		
+		Round nextRound = new Round();
+		nextRound.setRoundNumber(round.getRoundNumber() + 1);
+		
+		openRound(nextRound);
 	}
 	
 	public void closeRound(Round round) {
@@ -84,19 +101,18 @@ public class GameController {
 		
 		setMenuEnabled(MenuRound.NAME, false);
 		setMenuEnabled(MenuSettings.NAME, true);
-		
-		this.gameView.displayHomeView();
 	}
 	
 	private RoundController configRound(Round round) {
 		this.game.getListRounds().add(round);
 		
-		RoundView roundView = this.gameView.getRoundView();
-		
 		setMenuEnabled(MenuRound.NAME, true);
 		setMenuEnabled(MenuSettings.NAME, false);
 		
-		return new RoundController(roundView, round);
+		RoundView roundView = this.gameView.getRoundView();
+		RoundController roundController = new RoundController(roundView, round);
+		
+		return roundController;
 	}
 	
 	private void loadRounds() {
@@ -107,13 +123,5 @@ public class GameController {
 	private void setMenuEnabled(String menuName, boolean enabled) {
 		JMenu menu = ((GameMenuBar) this.gameView.getJMenuBar()).getMenu(menuName);
 		menu.setEnabled(enabled);
-	}
-	
-	public void showRoundMenu() {
-		this.gameView.showRoundMenuView();
-	}
-	
-	public void hideRoundMenu() {
-		this.gameView.hideRoundMenuView();
 	}
 }

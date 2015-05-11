@@ -14,9 +14,9 @@ public class DimensionConstants {
 	public static final int ARENA_WIDTH = 800; //Ne pas modifier
 	public static final int ARENA_HEIGHT = 550; //Ne pas modifier
 	
-	public static final int ROUND_MENU_WIDTH = 400;
-	public static final int ROUND_MENU_HEIGHT = 400;
+	public static final int ROUND_COMPONENT_WIDTH = 600;
+	public static final int ROUND_COMPONENT_HEIGHT = 400;
 	
-	public static final int BUTTON_WIDTH = 74;
+	public static final int BUTTON_WIDTH = 84;
 	public static final int BUTTON_HEIGHT = 26;
 }

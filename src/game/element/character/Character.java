@@ -34,10 +34,6 @@ public abstract class Character extends Element {
 		
 		setChanged();
 		notifyObservers();
-		
-		if (this.died) {
-			setVisible(false);
-		}
 	}
 	
 	public int getLife() {

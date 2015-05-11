@@ -1,6 +1,6 @@
 package game.element.power;
 
-import game.element.animation.ImageAnimation;
+import game.animation.ImageAnimation;
 import game.element.character.Character;
 import game.element.character.Enemy;
 

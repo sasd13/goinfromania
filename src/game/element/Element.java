@@ -25,7 +25,6 @@ public abstract class Element extends Observable {
 	private static int countElement;
 	private String id;
 	private String name;
-	private boolean visible;
 	private Point position;
 	private Dimension dimension;
 	private String imageName;
@@ -39,7 +38,6 @@ public abstract class Element extends Observable {
 		countElement++;
 		this.id = "id-element-" + countElement;
 		this.name = null;
-		this.visible = true;
 		this.position = new Point();
 		this.dimension = new Dimension();
 		this.image = null;
@@ -57,17 +55,6 @@ public abstract class Element extends Observable {
 	
 	public void setName(String name) {
 		this.name = name;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public boolean isVisible() {
-		return this.visible;
-	}
-	
-	public void setVisible(boolean visible) {
-		this.visible = visible;
 		
 		setChanged();
 		notifyObservers();
@@ -149,8 +136,7 @@ public abstract class Element extends Observable {
 		Dimension dimension = null;
 		
 		setImage(image);
-		dimension = new Dimension(this.image.getWidth(), this.image.getHeight());
-		setDimension(dimension);
+		setDimension(new Dimension(this.image.getWidth(), this.image.getHeight()));
 		
 		return dimension;
 	}

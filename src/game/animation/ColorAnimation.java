@@ -1,12 +1,12 @@
-package game.element.animation;
+package game.animation;
 
 import game.element.Element;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import controller.GameController;
 import controller.RoundController;
@@ -31,8 +31,6 @@ public class ColorAnimation extends Animation {
 	
 	@Override
 	public void start(Element elementActor, Element elementToAct) {
-		this.timer = new Timer();
-		
 		BufferedImage image = elementToAct.getImage();
 		Raster raster = image.getData();
 		
@@ -50,23 +48,22 @@ public class ColorAnimation extends Animation {
         RoundController roundController = GameController.getInstance().getRoundController();
         roundController.updateArena();
         
+        this.scheduler = Executors.newScheduledThreadPool(2);
         endHit(image, raster);
 	}
 	
 	private synchronized void endHit(final BufferedImage bufferedImage, final Raster raster) {
-		this.timer.cancel();
-		this.timer = new Timer();
-		
-		TimerTask task = new TimerTask() {
+		Runnable runable = new Runnable() {
 			
 			@Override
 			public void run() {
 				bufferedImage.setData(raster);
 				RoundController roundController = GameController.getInstance().getRoundController();
 		        roundController.updateArena();
+		        scheduler.shutdown();
 			}
 		};
 		
-		this.timer.schedule(task, getDuration());
+		this.scheduler.schedule(runable, getDuration(), TimeUnit.MILLISECONDS);
 	}
 }

@@ -1,7 +1,7 @@
 package game.element.food;
 
+import game.animation.Animation;
 import game.element.Element;
-import game.element.animation.Animation;
 import game.element.character.Pig;
 
 public abstract class Food extends Element {
@@ -29,10 +29,6 @@ public abstract class Food extends Element {
 		
 		setChanged();
 		notifyObservers();
-		
-		if (this.eated) {
-			setVisible(false);
-		}
 	}
 	
 	public int getEffectValue() {

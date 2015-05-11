@@ -11,19 +11,18 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 
 public class GameView extends JFrame implements Observer {
 	
 	private static GameView instance = null;
 	
 	private GameMenuBar gameMenuBar;
+	
 	private JLayeredPane layeredPane;
 	
 	private HomeView homeView;
 	private ListRoundsView listRoundsView;
 	private RoundView roundView;
-	private RoundMenuView roundMenuView;
 	
 	private GameView() {
 		super(Game.NAME);
@@ -35,7 +34,6 @@ public class GameView extends JFrame implements Observer {
 		setJMenuBar(this.gameMenuBar);
 		
 		this.layeredPane = new JLayeredPane();
-		this.layeredPane.setLayout(null);
 		this.layeredPane.setPreferredSize(new Dimension(DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT));
 		
 		this.homeView = new HomeView();
@@ -49,10 +47,6 @@ public class GameView extends JFrame implements Observer {
 		this.roundView = new RoundView();
 		this.roundView.setBounds(0, 0, DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
 		this.layeredPane.add(this.roundView, JLayeredPane.DEFAULT_LAYER);
-		
-		this.roundMenuView = new RoundMenuView();
-		this.roundMenuView.setBounds(200, 100, DimensionConstants.ROUND_MENU_WIDTH, DimensionConstants.ROUND_MENU_HEIGHT);
-		this.layeredPane.add(this.roundMenuView, JLayeredPane.DEFAULT_LAYER);
 		
 		getContentPane().add(this.layeredPane, BorderLayout.CENTER);
 	}
@@ -88,15 +82,5 @@ public class GameView extends JFrame implements Observer {
 	
 	public void displayRoundView() {
 		this.layeredPane.moveToFront(this.roundView);
-	}
-	
-	public void showRoundMenuView() {
-		this.layeredPane.setLayer(this.roundMenuView, JLayeredPane.POPUP_LAYER);
-		this.layeredPane.moveToFront(this.roundMenuView);
-	}
-	
-	public void hideRoundMenuView() {
-		this.layeredPane.setLayer(this.roundMenuView, JLayeredPane.DEFAULT_LAYER);
-		this.layeredPane.moveToBack(this.roundMenuView);
 	}
 }

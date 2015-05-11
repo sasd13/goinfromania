@@ -17,8 +17,8 @@ import controller.SettingController;
 
 public abstract class SettingView extends JDialog implements Observer, ActionListener {
 
-	public static final String BUTTONCLOSE_NAME = "Close";
-	public static final String BUTTONRESET_NAME = "Reset";
+	public static final String BUTTON_CLOSE_NAME = "Close";
+	public static final String BUTTON_RESET_NAME = "Reset";
 	
 	private JButton buttonClose, buttonReset;
 	
@@ -37,12 +37,12 @@ public abstract class SettingView extends JDialog implements Observer, ActionLis
 		
 		Dimension dimen = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		
-		this.buttonClose = new JButton(BUTTONCLOSE_NAME);
+		this.buttonClose = new JButton(BUTTON_CLOSE_NAME);
 		this.buttonClose.setPreferredSize(dimen);
 		this.buttonClose.addActionListener(this);
 		panel.add(this.buttonClose);
 		
-		this.buttonReset = new JButton(BUTTONRESET_NAME);
+		this.buttonReset = new JButton(BUTTON_RESET_NAME);
 		this.buttonReset.setPreferredSize(dimen);
 		this.buttonReset.addActionListener(this);
 		panel.add(this.buttonReset);
@@ -71,7 +71,7 @@ public abstract class SettingView extends JDialog implements Observer, ActionLis
 		} else if (button == this.buttonReset) {
 			SettingController.getInstance().reset();
 		} else {
-			//TODO Thrw exception
+			//TODO Throw exception
 		}
 	}
 }

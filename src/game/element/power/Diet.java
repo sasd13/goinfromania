@@ -1,9 +1,10 @@
 package game.element.power;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-import game.element.animation.ImageAnimation;
+import game.animation.ImageAnimation;
 import game.element.character.Character;
 import game.element.character.Pig;
 
@@ -24,8 +25,7 @@ public class Diet extends Power {
 	private int period;
 	private int value;
 	
-	private Timer timerEat;
-	private Timer timerEnergy;
+	private ScheduledExecutorService scheduler;
 	
 	public Diet() {
 		super();
@@ -77,11 +77,10 @@ public class Diet extends Power {
 	@Override
 	public void act(Character character) {
 		Pig pig = (Pig) character;
-		
-		this.timerEat = new Timer();
-		this.timerEnergy = new Timer();
-		
 		pig.setGreedy(false);
+		
+		this.scheduler = Executors.newScheduledThreadPool(4);
+		
 		startDietAct(pig);
 		endDietAct(pig);
 		
@@ -91,40 +90,32 @@ public class Diet extends Power {
 	}
 	
 	private synchronized void startDietAct(final Pig pig) {
-		this.timerEnergy.cancel();
-		this.timerEnergy = new Timer();
-		
-		TimerTask task = new TimerTask() {
+		Runnable runnable = new Runnable() {
 			
 			private int count = 0;
 			
 			@Override
 			public void run() {
-				if (count >= DELAY_STOP_PIG_EAT / PERIOD_DECREASE_PIG_ENERGY) {
-					timerEnergy.cancel();
-					timerEnergy.purge();
-					return;
+				if (count < DELAY_STOP_PIG_EAT / PERIOD_DECREASE_PIG_ENERGY) {
+					pig.setEnergy(pig.getEnergy() - getValue());
+					count++;
 				}
-				pig.setEnergy(pig.getEnergy() - getValue());
-				count++;
 			}
 		};
 		
-		this.timerEnergy.schedule(task, getPeriod(), getPeriod());
+		this.scheduler.scheduleWithFixedDelay(runnable, getPeriod(), getPeriod(), TimeUnit.MILLISECONDS);
 	}
 	
 	private synchronized void endDietAct(final Pig pig) {
-		this.timerEat.cancel();
-		this.timerEat = new Timer();
-		
-		TimerTask task = new TimerTask() {
+		Runnable runnable = new Runnable() {
 			
 			@Override
 			public void run() {
 				pig.setGreedy(true);
+				scheduler.shutdown();
 			}
 		};
 		
-		this.timerEat.schedule(task, getDelay());
+		this.scheduler.schedule(runnable, getDelay(), TimeUnit.MILLISECONDS);
 	}
 }

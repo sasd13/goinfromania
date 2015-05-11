@@ -1,8 +1,8 @@
-package game.element.animation;
+package game.animation;
 
 import game.element.Element;
 
-import java.util.Timer;
+import java.util.concurrent.ScheduledExecutorService;
 
 public abstract class Animation {
 	
@@ -10,7 +10,7 @@ public abstract class Animation {
 
 	private int duration;
 	
-	protected Timer timer;
+	protected ScheduledExecutorService scheduler;
 	
 	protected Animation() {
 		this.duration = DEFAULT_DURATION;
