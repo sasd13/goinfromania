@@ -1,4 +1,4 @@
-package view;
+package view.round;
 
 import game.round.Round;
 
@@ -10,6 +10,8 @@ import java.util.Observer;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import view.DimensionConstants;
 
 public class RoundStateView extends JPanel implements Observer {
 

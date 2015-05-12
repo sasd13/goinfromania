@@ -1,4 +1,4 @@
-package view;
+package view.setting;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -13,6 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import view.DimensionConstants;
 import controller.SettingController;
 
 public abstract class SettingView extends JDialog implements Observer, ActionListener {

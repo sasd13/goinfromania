@@ -1,4 +1,4 @@
-package view;
+package view.round;
 
 import game.element.character.Character;
 import game.element.character.Pig;
@@ -12,6 +12,8 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+
+import view.DimensionConstants;
 
 public class PigStateView extends JPanel implements Observer {
 

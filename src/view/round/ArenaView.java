@@ -1,17 +1,19 @@
-package view;
+package view.round;
 
 import game.element.Element;
 import game.element.ListElements;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
+
+import view.DimensionConstants;
 
 public class ArenaView extends JPanel implements Observer {
 
@@ -20,7 +22,8 @@ public class ArenaView extends JPanel implements Observer {
 	public ArenaView() {
 		super();
 		
-		setLayout(new BorderLayout());
+		setLayout(new FlowLayout());
+		
 		Dimension dimension = new Dimension(DimensionConstants.ARENA_WIDTH, DimensionConstants.ARENA_HEIGHT);
 		setPreferredSize(dimension);
 		

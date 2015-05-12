@@ -5,11 +5,7 @@ import java.time.ZonedDateTime;
 import javax.swing.JOptionPane;
 
 import main.Test;
-import util.ArenaUtil;
-import util.EnemyAction;
-import util.PigAction;
-import util.RoundUtils;
-import view.RoundView;
+import view.round.RoundView;
 import db.RoundDAO;
 import game.element.Direction;
 import game.element.Element;
@@ -25,6 +21,10 @@ import game.round.Result;
 import game.round.Round;
 import game.round.State;
 import game.setting.GamePad;
+import game.util.ArenaUtil;
+import game.util.EnemyAction;
+import game.util.PigAction;
+import game.util.RoundUtils;
 
 public class RoundController {
 
@@ -40,15 +40,18 @@ public class RoundController {
 		this.roundView.update(this.round, null);
 		
 		this.gamePad = null;
+		
+		//Sauvegarde
+		saveRound();
+		
+		//Remplissage
+		Test.testArena(this.round.getListElements());
 	}
 	
 	public void startRound() {
 		this.round.setState(State.STARTED);
 		
-		saveRound();
 		loadGamePad();
-		
-		Test.testArena(this.round.getListElements());
 		
 		showStartRoundMessage();
 	}
@@ -107,10 +110,11 @@ public class RoundController {
 	}
 	
 	private void showStartRoundMessage() {
-		String title = "Round " + round.getRoundNumber();
-		String message = "Start!";
-		
-		JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
+		if (this.round.getRoundNumber() == 1) {
+			this.roundView.showMessage(true);
+		} else {
+			this.roundView.showMessage(false);
+		}
 	}
 	
 	public void nextRound() {

@@ -1,4 +1,4 @@
-package util;
+package game.util;
 
 import game.element.character.Enemy;
 import game.element.character.Pig;

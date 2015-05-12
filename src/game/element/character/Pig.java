@@ -2,13 +2,13 @@ package game.element.character;
 
 import java.awt.image.BufferedImage;
 
-import util.ImageLoader;
 import game.element.power.ListPowers;
 import game.element.power.Missile;
 import game.element.power.Paralyze;
 import game.element.power.Power;
 import game.element.power.Run;
 import game.element.power.SuperMissile;
+import game.util.ImageLoader;
 
 public class Pig extends Character {
 

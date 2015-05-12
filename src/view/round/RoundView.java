@@ -1,9 +1,10 @@
-package view;
+package view.round;
 
 import java.awt.BorderLayout;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import game.element.ListElements;
@@ -11,23 +12,25 @@ import game.element.character.Pig;
 import game.round.Round;
 
 public class RoundView extends JPanel implements Observer {
-	
-	private RoundStateView roundStateView;
+
 	private RoundMenuView roundMenuView;
 	private RoundResultView roundResultView;
+	private RoundStateView roundStateView;
 	private ArenaView arenaView;
 	private PigStateView pigStateView;
+	
+	private RoundStartView roundStartView;
 	
 	public RoundView() {
 		super();
 		
 		setLayout(new BorderLayout());
 		
-		this.roundStateView = new RoundStateView();
-		add(this.roundStateView, BorderLayout.SOUTH);
-		
 		this.roundMenuView = new RoundMenuView();
 		this.roundResultView = new RoundResultView();
+		
+		this.roundStateView = new RoundStateView();
+		add(this.roundStateView, BorderLayout.SOUTH);
 		
 		this.arenaView = new ArenaView();
 		this.arenaView.addKeyListener(new GamePadListener());
@@ -37,15 +40,17 @@ public class RoundView extends JPanel implements Observer {
 		
 		this.pigStateView = new PigStateView();
 		add(this.pigStateView, BorderLayout.NORTH);
+		
+		this.roundStartView = new RoundStartView();
 	}
 	
 	@Override
 	public void update(Observable observable, Object arg) {
 		Round round = (Round) observable;
 		
-		this.roundStateView.update(round, null);
 		this.roundMenuView.update(round, null);
 		this.roundResultView.update(round, null);
+		this.roundStateView.update(round, null);
 		
 		ListElements listElements = round.getListElements();
 		listElements.addObserver(this.arenaView);
@@ -56,6 +61,8 @@ public class RoundView extends JPanel implements Observer {
 			pig.addObserver(this.pigStateView);
 			this.pigStateView.update(pig, null);
 		}
+		
+		this.roundStartView.update(round, null);
 	}
 	
 	public ArenaView getArenaView() {
@@ -70,5 +77,19 @@ public class RoundView extends JPanel implements Observer {
 	public void displayRoundResultView() {
 		this.roundResultView.setLocationRelativeTo(this);
 		this.roundResultView.setVisible(true);
+	}
+	
+	public void showMessage(boolean showRules) {
+		if (showRules) {
+			String title = "Rules";
+			String message = "Eat cakes to succed! Be careful from enemies and bad food...";
+			
+			int selected = JOptionPane.showConfirmDialog(this, message, title, JOptionPane.OK_OPTION);
+			if (selected == JOptionPane.OK_OPTION) {
+				this.roundStartView.anime();
+			}
+		} else {
+			this.roundStartView.anime();
+		}
 	}
 }

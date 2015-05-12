@@ -1,4 +1,4 @@
-package view;
+package view.round;
 
 import game.round.Result;
 import game.round.Round;
@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 
+import view.DimensionConstants;
 import controller.GameController;
 import controller.RoundController;
 
@@ -116,6 +117,8 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 		GameController gameController = GameController.getInstance();
 		RoundController roundController = gameController.getRoundController();
 		
+		dispose();
+		
 		if (button == this.buttonNext) {
 			roundController.nextRound();
 		} else if (button == this.buttonRestart) {
@@ -125,7 +128,5 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 		} else {
 			//TODO Throw exception
 		}
-		
-		dispose();
 	}
 }

@@ -1,4 +1,4 @@
-package view;
+package view.setting;
 
 import game.setting.GamePad;
 

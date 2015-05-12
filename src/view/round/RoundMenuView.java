@@ -1,11 +1,9 @@
-package view;
+package view.round;
 
 import game.round.Round;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Observable;
@@ -16,10 +14,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRootPane;
 
+import view.DimensionConstants;
 import controller.GameController;
 import controller.RoundController;
 
-public class RoundMenuView extends JDialog implements Observer, ActionListener, WindowListener {
+public class RoundMenuView extends JDialog implements Observer, WindowListener {
 
 	public RoundMenuView() {
 		super();
@@ -42,12 +41,6 @@ public class RoundMenuView extends JDialog implements Observer, ActionListener, 
 		Round round = (Round) observable;
 		
 		//TODO
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		dispose();
 	}
 
 	@Override

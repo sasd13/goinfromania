@@ -1,12 +1,12 @@
 package game.animation;
 
 import game.element.Element;
+import game.util.ImageLoader;
 
 import java.awt.image.BufferedImage;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import util.ImageLoader;
 import controller.GameController;
 import controller.RoundController;
 

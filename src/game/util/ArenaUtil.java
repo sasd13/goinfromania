@@ -1,4 +1,4 @@
-package util;
+package game.util;
 
 import game.element.Direction;
 import game.element.Element;

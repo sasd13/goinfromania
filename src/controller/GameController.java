@@ -1,7 +1,7 @@
 package controller;
 
 import view.GameView;
-import view.RoundView;
+import view.round.RoundView;
 import db.RoundDAO;
 import game.Game;
 import game.menu.GameMenuBar;
@@ -84,6 +84,11 @@ public class GameController {
 		displayRound();
 		
 		this.roundController.startRound();
+	}
+	
+	public void openRounds() {
+		loadRounds();
+		displayListRounds();
 	}
 	
 	public void nextRound(Round round) {

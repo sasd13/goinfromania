@@ -4,8 +4,8 @@ import javax.swing.JOptionPane;
 
 import game.setting.GamePad;
 import game.setting.Setting;
-import view.GamePadView;
-import view.SettingView;
+import view.setting.GamePadView;
+import view.setting.SettingView;
 import db.SettingDAO;
 
 public class SettingController {

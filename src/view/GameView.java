@@ -12,6 +12,8 @@ import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
+import view.round.RoundView;
+
 public class GameView extends JFrame implements Observer {
 	
 	private static GameView instance = null;
@@ -83,17 +85,37 @@ public class GameView extends JFrame implements Observer {
 	
 	public void displayHomeView() {
 		this.layeredPane.moveToFront(this.homeView);
+		this.homeView.setVisible(true);
+		
+		this.listRoundsView.setVisible(false);
+		this.listScoresView.setVisible(false);
+		this.roundView.setVisible(false);
 	}
 	
 	public void displayListRoundsView() {
 		this.layeredPane.moveToFront(this.listRoundsView);
+		this.listRoundsView.setVisible(true);
+		
+		this.homeView.setVisible(false);
+		this.listScoresView.setVisible(false);
+		this.roundView.setVisible(false);
 	}
 	
 	public void displayListScoresView() {
 		this.layeredPane.moveToFront(this.listScoresView);
+		this.listScoresView.setVisible(true);
+		
+		this.homeView.setVisible(false);
+		this.listRoundsView.setVisible(false);
+		this.roundView.setVisible(false);
 	}
 	
 	public void displayRoundView() {
 		this.layeredPane.moveToFront(this.roundView);
+		this.roundView.setVisible(true);
+		
+		this.homeView.setVisible(false);
+		this.listRoundsView.setVisible(false);
+		this.listScoresView.setVisible(false);
 	}
 }
