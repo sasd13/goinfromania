@@ -139,7 +139,7 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 		} else if (button == this.buttonRestart) {
 			roundController.restartRound();
 		} else if (button == this.buttonFinish) {
-			gameController.displayHome();
+			gameController.exitRound();
 		} else {
 			//TODO Throw exception
 		}

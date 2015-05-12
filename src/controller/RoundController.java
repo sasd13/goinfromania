@@ -47,6 +47,25 @@ public class RoundController {
 		}
 	}
 	
+	private void checkRound() {
+		boolean hasRoundError = false;
+		
+		if (this.round.getCountEatenCakes() > this.round.getMaxCountEatenCakes()) {
+			//Throw exception
+			hasRoundError = true;
+		}
+		
+		Pig pig = this.round.getListElements().getPig();
+		if (pig.isDied() && !round.isFinished()) {
+			//Throw exception
+			hasRoundError = true;
+		}
+		
+		if (hasRoundError) {
+			GameController.getInstance().exitRound();
+		}
+	}
+	
 	public void showStartRoundMessage() {
 		if (this.round.getRoundNumber() == 1) {
 			this.roundView.showStartRoundMessageWithRules(true);
