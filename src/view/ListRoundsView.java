@@ -1,29 +1,82 @@
 package view;
 
 import game.round.ListRounds;
+import game.round.Round;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class ListRoundsView extends JPanel implements Observer {
+public class ListRoundsView extends JSplitPane implements Observer, ListSelectionListener {
 
+	private final int LIST_WIDTH = 300;
+	
+	private ListRounds listRounds;
+	
+	private JList<String> listPane;
+	private DefaultListModel<String> listModel;
+	
+	private ListRoundsViewRoundPane roundPane;
+	
 	public ListRoundsView() {
-		super();
+		super(JSplitPane.HORIZONTAL_SPLIT);
 		
-		setLayout(new BorderLayout());
+		setDividerLocation(LIST_WIDTH);
 		
-		add(new JLabel("List rounds"), BorderLayout.CENTER);
-		setBackground(Color.BLUE);
+		this.listRounds = new ListRounds();
+		
+		this.listModel = new DefaultListModel<>();
+		
+		this.listPane = new JList<>(this.listModel);
+		this.listPane.addListSelectionListener(this);
+		
+		this.listPane.setLayoutOrientation(JList.VERTICAL);
+		this.listPane.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.listPane.setVisibleRowCount(-1);
+		
+		JScrollPane listScroller = new JScrollPane(this.listPane);
+		listScroller.setPreferredSize(new Dimension(LIST_WIDTH, DimensionConstants.PANEL_HEIGHT));
+		
+		add(listScroller);
+		
+		this.roundPane = new ListRoundsViewRoundPane();
+		
+		add(this.roundPane);
 	}
 
 	@Override
 	public void update(Observable observable, Object arg) {
-		ListRounds listRounds = (ListRounds) observable;
+		this.listRounds = (ListRounds) observable;
 		
+		String roundId;
+		for (int i=0; i<this.listRounds.size(); i++) {
+			roundId = this.listRounds.get(i).getId();
+			
+			if (!this.listModel.contains(roundId)) {
+				this.listModel.addElement(roundId);
+			}
+		}
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		if (e.getValueIsAdjusting() == false) {
+	        if (this.listPane.getSelectedIndex() == -1) {
+	        	this.roundPane.setVisible(false);
+	        } else {	        	
+	        	int index = this.listPane.getSelectedIndex();
+	        	Round round = this.listRounds.get(index);
+	        	this.roundPane.bind(round);
+	        	this.roundPane.setVisible(true);
+	        }
+	    }
 	}
 }

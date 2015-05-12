@@ -5,10 +5,8 @@ import view.round.RoundView;
 import db.RoundDAO;
 import game.Game;
 import game.menu.GameMenuBar;
-import game.round.Level;
 import game.round.ListRounds;
 import game.round.Round;
-import game.round.RoundFactory;
 
 public class GameController {
 
@@ -41,7 +39,7 @@ public class GameController {
 	}
 	
 	public void playGame() {
-		loadRounds();
+		loadListRounds();
 		this.gameView.displayHomeView();
 		
 		this.gameView.pack();
@@ -56,79 +54,73 @@ public class GameController {
 		this.gameView.displayHomeView();
 	}
 	
-	public void displayListRounds() {
-		this.gameView.displayListRoundsView();
+	public void displayRound() {
+		this.gameView.displayRoundView();
 	}
 	
 	public void displayListScores() {
 		this.gameView.displayListScoresView();
 	}
 	
-	public void displayRound() {
-		this.gameView.displayRoundView();
+	public void displayListRounds() {
+		this.gameView.displayListRoundsView();
 	}
 	
-	public void newRound() {
-		Round round = RoundFactory.createNewRound(Level.EASY);
-		round.setRoundNumber(1);
-		
-		openRound(round);
-	}
-	
-	private void openRound(Round round) {
-		this.game.getListRounds().add(round);
-		
-		this.roundController = createRoundController(round);		
-		
-		setMenuRoundEnabled(true);
-		displayRound();
-		
-		this.roundController.startRound();
-	}
-	
-	public void openRounds() {
-		loadRounds();
-		displayListRounds();
-	}
-	
-	public void nextRound(Round round) {
-		this.game.getListRounds().remove(round);
-		
-		Round nextRound = RoundFactory.createNextRound(round, false, true);
-		
-		openRound(nextRound);
-	}
-	
-	public void closeRound(Round round) {
-		if (round.isFinished()) {
-			this.game.getListRounds().remove(round);
-		}
-		
-		this.roundController = null;
-		
-		setMenuRoundEnabled(false);
-		displayHome();
-	}
-	
-	public void closeRoundIfInProgress() {
-		if (this.roundController != null) {
-			this.roundController.stopRound();
-		}
-	}
-	
-	private RoundController createRoundController(Round round) {		
-		RoundView roundView = this.gameView.getRoundView();
-		RoundController roundController = new RoundController(roundView, round);
-		
-		return roundController;
-	}
-	
-	private void loadRounds() {
+	private void loadListRounds() {
 		ListRounds listRounds = RoundDAO.loadAll();
 		this.game.setListRounds(listRounds);
 	}
 	
+	public void newRound() {
+		Round round = Round.getNewInstance();
+		
+		this.game.getListRounds().add(round);
+		
+		openRound(round);
+	}
+	
+	public void openRound(Round round) {		
+		RoundView roundView = this.gameView.getRoundView();
+		this.roundController = new RoundController(roundView, round);	
+		
+		setMenuRoundEnabled(true);
+		displayRound();
+		
+		this.roundController.showStartRoundMessage();
+		this.roundController.startRound();
+	}
+	
 	private void setMenuRoundEnabled(boolean enabled) {
 		((GameMenuBar) this.gameView.getJMenuBar()).setMenuRoundEnabled(enabled);
+	}
+	
+	public void nextRound(Round round) {
+		round = Round.createNextRound(round, false, true);
+		
+		openRound(round);
+	}
+	
+	public void closeRoundIfSttarted() {
+		if (this.roundController != null) {
+			this.roundController.stopRound();
+			
+			closeRound();
+		}
+	}
+	
+	public void closeRound() {
+		this.roundController = null;
+		
+		setMenuRoundEnabled(false);
+	}
+	
+	public void exitRound() {
+		closeRound();
+		displayHome();
+	}
+	
+	public void removeRound(Round round) {
+		this.game.getListRounds().remove(round);
+		RoundDAO.remove(round);
 	}
 }

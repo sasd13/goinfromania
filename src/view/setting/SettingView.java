@@ -36,15 +36,15 @@ public abstract class SettingView extends JDialog implements Observer, ActionLis
 		panel.setLayout(new FlowLayout());
 		getContentPane().add(panel, BorderLayout.SOUTH);
 		
-		Dimension dimen = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
+		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		
 		this.buttonClose = new JButton(BUTTON_CLOSE_NAME);
-		this.buttonClose.setPreferredSize(dimen);
+		this.buttonClose.setPreferredSize(dimension);
 		this.buttonClose.addActionListener(this);
 		panel.add(this.buttonClose);
 		
 		this.buttonReset = new JButton(BUTTON_RESET_NAME);
-		this.buttonReset.setPreferredSize(dimen);
+		this.buttonReset.setPreferredSize(dimension);
 		this.buttonReset.addActionListener(this);
 		panel.add(this.buttonReset);
 	}

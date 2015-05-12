@@ -79,15 +79,13 @@ public class RoundView extends JPanel implements Observer {
 		this.roundResultView.setVisible(true);
 	}
 	
-	public void showMessage(boolean showRules) {
+	public void showStartRoundMessageWithRules(boolean showRules) {
 		if (showRules) {
 			String title = "Rules";
-			String message = "Eat cakes to succed! Be careful from enemies and bad food...";
+			String message = "Eat cakes to succeed! Be careful from enemies and bad foods...";
 			
-			int selected = JOptionPane.showConfirmDialog(this, message, title, JOptionPane.OK_OPTION);
-			if (selected == JOptionPane.OK_OPTION) {
-				this.roundStartView.anime();
-			}
+			JOptionPane.showMessageDialog(this, message, title, JOptionPane.OK_OPTION);
+			this.roundStartView.anime();
 		} else {
 			this.roundStartView.anime();
 		}

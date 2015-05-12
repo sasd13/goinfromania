@@ -24,4 +24,8 @@ public class RoundDAO {
 	public static void save(Round round) {
 		//TODO Database query
 	}
+	
+	public static void remove(Round round) {
+		//TODO Database query
+	}
 }

@@ -17,12 +17,13 @@ public class RoundStateView extends JPanel implements Observer {
 
 	private JLabel labelRoundValue,
 		labelCakesValue,
+		labelEnemiesValue,
 		labelScoreValue;
 	
 	public RoundStateView() {
 		super();
 		
-		setLayout(new GridLayout(1, 2));
+		setLayout(new GridLayout(1, 4));
 		setPreferredSize(new Dimension(DimensionConstants.PANEL_STATE_WIDTH, DimensionConstants.PANEL_STATE_HEIGHT));
 		
 		JPanel panelRound = new JPanel();
@@ -43,6 +44,15 @@ public class RoundStateView extends JPanel implements Observer {
 		
 		add(panelCakes);
 		
+		JPanel panelEnemies = new JPanel();
+		panelEnemies.setLayout(new FlowLayout());
+		
+		panelEnemies.add(new JLabel("Enemies : "));
+		this.labelEnemiesValue = new JLabel();
+		panelEnemies.add(this.labelEnemiesValue);
+		
+		add(panelEnemies);
+		
 		JPanel panelScore = new JPanel();
 		panelScore.setLayout(new FlowLayout());
 		
@@ -59,6 +69,7 @@ public class RoundStateView extends JPanel implements Observer {
 		
 		this.labelRoundValue.setText(String.valueOf(round.getRoundNumber()));
 		this.labelCakesValue.setText(round.getCountEatenCakes() + "/" + round.getMaxCountEatenCakes());
+		this.labelEnemiesValue.setText(String.valueOf(round.getCountNutritionistKilled() + round.getCountVirusKilled()));
 		this.labelScoreValue.setText(String.valueOf(round.getScore()));
 	}
 }

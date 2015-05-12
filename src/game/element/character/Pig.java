@@ -2,6 +2,7 @@ package game.element.character;
 
 import java.awt.image.BufferedImage;
 
+import game.element.food.Food;
 import game.element.power.ListPowers;
 import game.element.power.Missile;
 import game.element.power.Paralyze;
@@ -93,6 +94,20 @@ public class Pig extends Character {
 			return this.listPowers.get(Run.NAME);
 		} else {
 			return this.listPowers.get(Paralyze.NAME);
+		}
+	}
+	
+	public void eatFood(Food food) {
+		if (this.greedy) {
+			food.setEated(true);
+			food.act(this);
+		}
+	}
+	
+	public void attakEnemy(Enemy enemy) {
+		if (isPowerful()) {
+			Power power = getPowerWithEnergy();
+			power.act(enemy);
 		}
 	}
 }

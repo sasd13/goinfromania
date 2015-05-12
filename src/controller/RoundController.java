@@ -11,7 +11,9 @@ import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
 import game.element.character.Enemy;
+import game.element.character.Nutritionist;
 import game.element.character.Pig;
+import game.element.character.Virus;
 import game.element.food.Cake;
 import game.element.food.Food;
 import game.element.power.Missile;
@@ -19,12 +21,10 @@ import game.element.power.Power;
 import game.element.power.SuperMissile;
 import game.round.Result;
 import game.round.Round;
+import game.round.RoundStats;
 import game.round.State;
 import game.setting.GamePad;
 import game.util.ArenaUtil;
-import game.util.EnemyAction;
-import game.util.PigAction;
-import game.util.RoundUtils;
 
 public class RoundController {
 
@@ -41,24 +41,33 @@ public class RoundController {
 		
 		this.gamePad = null;
 		
-		//Sauvegarde
-		saveRound();
-		
 		//Remplissage
-		Test.testArena(this.round.getListElements());
+		if (this.round.getUpdatedAt() == null) {
+			Test.testArena(this.round.getListElements());
+		}
+	}
+	
+	public void showStartRoundMessage() {
+		if (this.round.getRoundNumber() == 1) {
+			this.roundView.showStartRoundMessageWithRules(true);
+		} else {
+			this.roundView.showStartRoundMessageWithRules(false);
+		}
 	}
 	
 	public void startRound() {
 		this.round.setState(State.STARTED);
 		
 		loadGamePad();
-		
-		showStartRoundMessage();
+	}
+	
+	private void loadGamePad() {
+		this.gamePad = SettingController.getInstance().loadGamePad();
 	}
 	
 	public void restartRound() {
 		this.round.deleteObservers();
-		this.round = loadRound(this.round.getId());
+		this.round = RoundDAO.load(this.round.getId());
 		this.round.addObserver(this.roundView);
 		this.roundView.update(this.round, null);
 		
@@ -83,18 +92,7 @@ public class RoundController {
 	
 	public void stopRound() {
 		if (!this.round.isFinished()) {
-			String title = "Exit round";
-			String message = "Save your progress?";
-			
-			int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
-			if (selected == JOptionPane.YES_OPTION) {
-				this.round.setState(State.STOPPED);
-				saveRound();
-				GameController.getInstance().closeRound(this.round);
-			} else if (selected == JOptionPane.NO_OPTION) {
-				this.round.setState(State.STOPPED);
-				GameController.getInstance().closeRound(this.round);
-			}
+			showExitRoundMessage();
 		} else {
 			this.round.setState(State.STOPPED);
 			
@@ -109,11 +107,18 @@ public class RoundController {
 		}
 	}
 	
-	private void showStartRoundMessage() {
-		if (this.round.getRoundNumber() == 1) {
-			this.roundView.showMessage(true);
-		} else {
-			this.roundView.showMessage(false);
+	public void showExitRoundMessage() {
+		String title = "Exit round";
+		String message = "Save your progress?";
+		
+		int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
+		if (selected == JOptionPane.YES_OPTION) {
+			this.round.setState(State.STOPPED);
+			saveRound();
+			GameController.getInstance().exitRound();
+		} else if (selected == JOptionPane.NO_OPTION) {
+			this.round.setState(State.STOPPED);
+			GameController.getInstance().exitRound();
 		}
 	}
 	
@@ -122,24 +127,12 @@ public class RoundController {
 	}
 	
 	public void saveRound() {
-		if (!this.round.isFinished()) {
-			this.round.setUpdatedAt(ZonedDateTime.now());
-			RoundDAO.save(this.round);
-		}
-	}
-	
-	private Round loadRound(String roundId) {
-		Round round = RoundDAO.load(roundId);
-		
-		return round;
+		this.round.setUpdatedAt(ZonedDateTime.now());
+		RoundDAO.save(this.round);
 	}
 	
 	public void updateArena() {
 		this.roundView.getArenaView().repaint();
-	}
-	
-	private void loadGamePad() {
-		this.gamePad = SettingController.getInstance().loadGamePad();
 	}
 	
 	public void actionGamePad(int keyCode) {
@@ -148,7 +141,7 @@ public class RoundController {
 				pauseRound();
 			} else if (this.round.getState() == State.PAUSED) {
 				resumeRound();
-			}else {
+			} else {
 				//TODO Throw exception
 			}
 		} else {
@@ -164,8 +157,6 @@ public class RoundController {
 				actionMove(pig, Direction.DOWN);
 			} else if (keyCode == this.gamePad.getKeyPigAttak()) {
 				initPigAttak();
-			} else {
-				//TODO Throw exception
 			}
 		}
 	}
@@ -179,60 +170,58 @@ public class RoundController {
 			elementActor.move(direction);
 			
 			updateArena();
-			checkElementsInTouch(elementActor);
-		}
-	}
-	
-	public void checkElementsInTouch(Element elementActor) {
-		ListElements listElementsInTouch = ArenaUtil.getElementsInTouch(elementActor, this.round.getListElements());
-		
-		Element elementToAct;
-		for (int i=0; i<listElementsInTouch.size(); i++) {
-			elementToAct = listElementsInTouch.get(i);
-			actionInTouch(elementActor, elementToAct);
+			
+			ListElements listElementsInTouch = ArenaUtil.getElementsInTouch(elementActor, this.round.getListElements());
+			
+			Element elementToAct;
+			for (int i=0; i<listElementsInTouch.size(); i++) {
+				elementToAct = listElementsInTouch.get(i);
+				actionInTouch(elementActor, elementToAct);
+			}
 		}
 	}
 	
 	private void actionInTouch(Element elementActor, Element elementToAct) {
-		Pig pig = (Pig) elementActor;
-		
 		boolean canAct = ArenaUtil.canActInTouch(elementActor, elementToAct);
 		if (canAct) {
 			if (elementToAct instanceof Enemy) {
 				Enemy enemy = (Enemy) elementToAct;
-				
-				actionEnemyAttaksPig(enemy, pig);
+				actionEnemyAttaksPig(enemy);
 			} else if (elementActor instanceof Pig) {
 				if (elementToAct instanceof Food) {
 					Food food = (Food) elementToAct;
-					
-					actionPigEatsFood(pig, food);
+					actionPigEatsFood(food);
 				}
 			}
 		}
 	}
 	
-	private void actionEnemyAttaksPig(Enemy enemy, Pig pig) {
-		EnemyAction enemyAction = new EnemyAction();
-		enemyAction.enemyAttaksPig(enemy, pig);
+	private void actionEnemyAttaksPig(Enemy enemy) {
+		Pig pig = this.round.getListElements().getPig();
 		
-		boolean isOver = RoundUtils.isRoundOver(round);
-		if (isOver) {
+		enemy.attakPig(pig);
+		
+		if (pig.isDied()) {
+			this.round.setFinished(true);
 			stopRound();
 		}
 	}
 	
-	private void actionPigEatsFood(Pig pig, Food food) {
-		PigAction.pigEatsFood(pig, food);
-		RoundUtils.removeElementAndCumulScore(round, food);
+	private void actionPigEatsFood(Food food) {
+		Pig pig = this.round.getListElements().getPig();
 		
-		if (food.getName().equals(Cake.NAME)) {
-			this.round.setCountEatenCakes(this.round.getCountEatenCakes() + 1);
-		}
+		pig.eatFood(food);
 		
-		boolean isWon = RoundUtils.isRoundWon(round);
-		if (isWon) {
-			stopRound();
+		if (food.isEated()) {
+			removeElement(food);
+			cumuleStats(food);
+			
+			if (food.getName().equals(Cake.NAME)) {
+				if (this.round.getCountEatenCakes() == this.round.getMaxCountEatenCakes()) {
+					this.round.setFinished(true);
+					stopRound();
+				}
+			}
 		}
 	}
 	
@@ -245,7 +234,7 @@ public class RoundController {
 	}
 	
 	private boolean actionPigAttaksNextTo() {
-		ListElements listElements = round.getListElements();
+		ListElements listElements = this.round.getListElements();
 		Pig pig = listElements.getPig();
 		
 		ListElements listElementsNextTo = ArenaUtil.getElementsNextTo(pig, listElements);
@@ -260,9 +249,7 @@ public class RoundController {
 			
 			if (elementNextTo instanceof Enemy) {
 				Enemy enemy = (Enemy) elementNextTo;
-				Power power = pig.getPowerWithEnergy();
-				
-				actionPigAttaksEnemy(pig, enemy, power);
+				actionPigAttaksEnemy(enemy);
 			}
 		}
 		
@@ -283,8 +270,48 @@ public class RoundController {
 		}
 	}
 	
-	private void actionPigAttaksEnemy(Pig pig, Enemy enemy, Power power) {
-		PigAction.pigAttaksEnemy(pig, enemy, power);
-		RoundUtils.removeElementAndCumulScore(round, enemy);
+	private void actionPigAttaksEnemy(Enemy enemy) {
+		Pig pig = this.round.getListElements().getPig();
+		
+		pig.attakEnemy(enemy);
+		
+		if (enemy.isDied()) {
+			removeElement(enemy);
+			cumuleStats(enemy);
+		}
+	}
+	
+	public void removeElement(Element element) {
+		this.round.getListElements().remove(element);
+	}
+	
+	public void cumuleStats(Element element) {
+		RoundStats roundStats = this.round.getRoundStats();
+		
+		int scoreValue = 0;
+		
+		if (element instanceof Food) {
+			Food food = (Food) element;
+			scoreValue = food.getScorePoint();
+			
+			if (food.getName().equals(Cake.NAME)) {
+				this.round.setCountEatenCakes(this.round.getCountEatenCakes() + 1);
+				roundStats.setTotalCountEatenCakes(roundStats.getTotalCountEatenCakes() + 1);
+			}
+		} else if (element instanceof Enemy) {
+			Enemy enemy = (Enemy) element;
+			scoreValue = enemy.getScorePoint();
+			
+			if (enemy.getName().equals(Nutritionist.NAME)) {
+				this.round.setCountNutritionistKilled(this.round.getCountNutritionistKilled() + 1);
+				roundStats.setTotalCountNutritionistKilled(roundStats.getTotalCountNutritionistKilled() + 1);
+			} else if (enemy.getName().equals(Virus.NAME)) {
+				this.round.setCountVirusKilled(this.round.getCountVirusKilled() + 1);
+				roundStats.setTotalCountVirusKilled(roundStats.getTotalCountVirusKilled() + 1);
+			}
+		}
+		
+		this.round.setScore(this.round.getScore() + scoreValue);
+		roundStats.setTotalScore(roundStats.getTotalScore() + scoreValue);
 	}
 }
