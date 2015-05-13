@@ -2,11 +2,9 @@ package view.round;
 
 import game.round.Result;
 import game.round.Round;
-import game.round.RoundStats;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,10 +24,6 @@ import controller.RoundController;
 
 public class RoundResultView extends JDialog implements Observer, ActionListener {
 
-	public static final String BUTTON_NEXT_NAME = "Next";
-	public static final String BUTTON_RESTART_NAME = "Restart";
-	public static final String BUTTON_FINISH_NAME = "Finish";
-	
 	private JLabel labelMessage,
 		labelTotalScoreValue,
 		labelTotalFoodEatedValue,
@@ -40,6 +34,7 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 	public RoundResultView() {
 		super();
 		
+		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setSize(new Dimension(DimensionConstants.ROUND_COMPONENT_WIDTH, DimensionConstants.ROUND_COMPONENT_HEIGHT));
@@ -47,56 +42,44 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 		setUndecorated(true);
 		getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
 		
-		setLayout(new BorderLayout());
-		
 		JPanel panelMessage = new JPanel();
-		add(panelMessage, BorderLayout.NORTH);
+		getContentPane().add(panelMessage, BorderLayout.NORTH);
 		
-		this.labelMessage = new JLabel();
-		this.labelMessage.setText("Message");
+		this.labelMessage = new JLabel("Message");
 		panelMessage.add(this.labelMessage);
 		
-		JPanel panelResult = new JPanel();
-		panelResult.setLayout(new GridLayout(3, 2));
+		JPanel panelResult = new JPanel(new GridLayout(3, 2));
+		getContentPane().add(panelResult, BorderLayout.CENTER);
 		
-		JLabel labelScore = new JLabel("Total score : ");
-		panelResult.add(labelScore);
-		
+		panelResult.add(new JLabel("Total score : "));
 		this.labelTotalScoreValue = new JLabel();
 		panelResult.add(this.labelTotalScoreValue);
 		
-		JLabel labelTotalFoodEated = new JLabel("Total foods eated : ");
-		panelResult.add(labelTotalFoodEated);
-		
+		panelResult.add(new JLabel("Total foods eated : "));
 		this.labelTotalFoodEatedValue = new JLabel();
 		panelResult.add(this.labelTotalFoodEatedValue);
 		
-		JLabel labelEnemyKilled = new JLabel("Total enemies killed : ");
-		panelResult.add(labelEnemyKilled);
-		
+		panelResult.add(new JLabel("Total enemies killed : "));
 		this.labelTotalEnemyKilledValue = new JLabel();
 		panelResult.add(this.labelTotalEnemyKilledValue);
 		
-		getContentPane().add(panelResult, BorderLayout.CENTER);
-		
 		JPanel panelButton = new JPanel();
-		panelButton.setLayout(new FlowLayout());
 		getContentPane().add(panelButton, BorderLayout.SOUTH);
 		
-		Dimension dimen = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
+		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		
-		this.buttonNext = new JButton(BUTTON_NEXT_NAME);
-		this.buttonNext.setPreferredSize(dimen);
+		this.buttonNext = new JButton("Next");
+		this.buttonNext.setPreferredSize(dimension);
 		this.buttonNext.addActionListener(this);
 		panelButton.add(this.buttonNext);
 		
-		this.buttonRestart = new JButton(BUTTON_RESTART_NAME);
-		this.buttonRestart.setPreferredSize(dimen);
+		this.buttonRestart = new JButton("Restart");
+		this.buttonRestart.setPreferredSize(dimension);
 		this.buttonRestart.addActionListener(this);
 		panelButton.add(this.buttonRestart);
 		
-		this.buttonFinish = new JButton(BUTTON_FINISH_NAME);
-		this.buttonFinish.setPreferredSize(dimen);
+		this.buttonFinish = new JButton("Finish");
+		this.buttonFinish.setPreferredSize(dimension);
 		this.buttonFinish.addActionListener(this);
 		panelButton.add(this.buttonFinish);
 	}
@@ -105,32 +88,23 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 	public void update(Observable observable, Object arg) {
 		Round round = (Round) observable;
 		
-		Result result = round.getResult();
-		RoundStats roundStats = round.getRoundStats();
-		
-		switch (result) {
-			case WIN :
-				this.labelMessage.setText("YOU WIN!!!");
-				break;
-			case LOOSE:
-				this.labelMessage.setText("YOU LOOSE...");
-				this.buttonNext.setEnabled(false);
-				break;
-			default :
-				break;
+		if (round.getResult() == Result.WIN) {
+			this.labelMessage.setText("YOU WIN!!!");
+		} else if (round.getResult() == Result.LOOSE) {
+			this.labelMessage.setText("YOU LOOSE...");
+			this.buttonNext.setEnabled(false);
 		}
 
-		this.labelTotalScoreValue.setText(String.valueOf(roundStats.getTotalScore()));
-		this.labelTotalFoodEatedValue.setText(String.valueOf(roundStats.getTotalFoodEated()));
-		this.labelTotalEnemyKilledValue.setText(String.valueOf(roundStats.getTotalEnemyKilled()));
+		this.labelTotalScoreValue.setText(String.valueOf(round.getRoundCumulatedStatistics().getTotalScore()));
+		this.labelTotalFoodEatedValue.setText(String.valueOf(round.getRoundCumulatedStatistics().getTotalFoodEated()));
+		this.labelTotalEnemyKilledValue.setText(String.valueOf(round.getRoundCumulatedStatistics().getTotalEnemyKilled()));
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		JButton button = (JButton) arg0.getSource();
 		
-		GameController gameController = GameController.getInstance();
-		RoundController roundController = gameController.getRoundController();
+		RoundController roundController = GameController.getInstance().getRoundController();
 		
 		dispose();
 		
@@ -139,9 +113,7 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 		} else if (button == this.buttonRestart) {
 			roundController.restartRound();
 		} else if (button == this.buttonFinish) {
-			gameController.exitRound();
-		} else {
-			//TODO Throw exception
+			roundController.exitRound();
 		}
 	}
 }

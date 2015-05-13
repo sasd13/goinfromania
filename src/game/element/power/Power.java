@@ -6,12 +6,25 @@ import game.element.character.Character;
 
 public abstract class Power extends Element {
 
+	private boolean afar;
 	private Animation animation;
 	
 	protected Power() {
 		super();
 		
+		this.afar = false;
 		this.animation = null;
+	}
+	
+	public boolean isAfar() {
+		return this.afar;
+	}
+	
+	public void setAfar(boolean afar) {
+		this.afar = afar;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Animation getAnimation() {

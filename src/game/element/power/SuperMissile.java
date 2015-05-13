@@ -15,6 +15,7 @@ public class SuperMissile extends Missile {
 		setName(NAME);
 		setMovable(true);
 		setSpeed(SPEED_LOW);
+		setAfar(true);
 		setValue(VALUE_DECREASE_CHARACTER_LIFE);
 	}
 }

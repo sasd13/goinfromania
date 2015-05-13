@@ -16,7 +16,6 @@ import controller.GameController;
 
 public class HomeView extends JPanel implements ActionListener {
 
-	private JPanel panelButton;
 	private JButton buttonPlay, buttonContinue;
 	
 	public HomeView() {
@@ -24,23 +23,22 @@ public class HomeView extends JPanel implements ActionListener {
 		
 		setLayout(null);
 		
-		this.panelButton = new JPanel(new BorderLayout());
-		this.panelButton.setOpaque(false);
-		this.panelButton.setBounds(320, 480, 150, 90);
+		JPanel panelButton = new JPanel(new BorderLayout());
+		panelButton.setOpaque(false);
+		panelButton.setBounds(320, 480, 150, 90);
+		add(panelButton);
 		
 		Dimension dimension = new Dimension(150, 40);
 		
 		this.buttonPlay = new JButton("PLAY");
 		this.buttonPlay.setPreferredSize(dimension);
 		this.buttonPlay.addActionListener(this);
-		this.panelButton.add(this.buttonPlay, BorderLayout.NORTH);
+		panelButton.add(this.buttonPlay, BorderLayout.NORTH);
 		
 		this.buttonContinue = new JButton("CONTINUE");
 		this.buttonContinue.setPreferredSize(dimension);
 		this.buttonContinue.addActionListener(this);
-		this.panelButton.add(this.buttonContinue, BorderLayout.SOUTH);
-		
-		add(this.panelButton);
+		panelButton.add(this.buttonContinue, BorderLayout.SOUTH);
 	}
 	
 	@Override

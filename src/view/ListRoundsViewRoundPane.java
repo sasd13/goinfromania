@@ -30,65 +30,48 @@ public class ListRoundsViewRoundPane extends JPanel implements ActionListener {
 	private JButton buttonContinue, buttonRemove;
 	
 	public ListRoundsViewRoundPane() {
-		super();
-		
-		setLayout(new BorderLayout());
+		super(new BorderLayout());
 		
 		this.round = null;
 		
 		JPanel panelProgression = new JPanel();
-		JLabel labelProgression = new JLabel("Progression");
-		labelProgression.setAlignmentX(CENTER_ALIGNMENT);
-		panelProgression.add(labelProgression);
 		add(panelProgression, BorderLayout.NORTH);
 		
-		JPanel panel = new JPanel(new GridLayout(7, 2));
+		panelProgression.add(new JLabel("Progression"));
 		
-		JLabel labelRoundNumber = new JLabel("Round number : ");
-		panel.add(labelRoundNumber);
+		JPanel panelRound = new JPanel(new GridLayout(7, 2));
+		add(panelRound, BorderLayout.CENTER);
 		
+		panelRound.add(new JLabel("Round number : "));
 		this.labelRoundNumberValue = new JLabel();
-		panel.add(this.labelRoundNumberValue);
+		panelRound.add(this.labelRoundNumberValue);
 		
-		JLabel labelLevel = new JLabel("Level : ");
-		panel.add(labelLevel);
-		
+		panelRound.add(new JLabel("Level : "));
 		this.labelLevelValue = new JLabel();
-		panel.add(this.labelLevelValue);
+		panelRound.add(this.labelLevelValue);
 		
-		JLabel labelCakes = new JLabel("Cakes : ");
-		panel.add(labelCakes);
-		
+		panelRound.add(new JLabel("Cakes : "));
 		this.labelCakesValue = new JLabel();
-		panel.add(this.labelCakesValue);
+		panelRound.add(this.labelCakesValue);
 		
-		JLabel labelScore = new JLabel("Score : ");
-		panel.add(labelScore);
-		
+		panelRound.add(new JLabel("Score : "));
 		this.labelScoreValue = new JLabel();
-		panel.add(this.labelScoreValue);
+		panelRound.add(this.labelScoreValue);
 		
-		JLabel labelDateUpdated = new JLabel("Updated : ");
-		panel.add(labelDateUpdated);
-		
+		panelRound.add(new JLabel("Updated : "));
 		this.labelDateUpdatedValue = new JLabel();
-		panel.add(this.labelDateUpdatedValue);
+		panelRound.add(this.labelDateUpdatedValue);
 		
-		JLabel labelPigLife = new JLabel("Pig life : ");
-		panel.add(labelPigLife);
-		
+		panelRound.add(new JLabel("Pig life : "));
 		this.labelPigLifeValue = new JLabel();
-		panel.add(this.labelPigLifeValue);
+		panelRound.add(this.labelPigLifeValue);
 		
-		JLabel labelPigEnergy = new JLabel("Pig energy : ");
-		panel.add(labelPigEnergy);
-		
+		panelRound.add(new JLabel("Pig energy : "));
 		this.labelPigEnergyValue = new JLabel();
-		panel.add(this.labelPigEnergyValue);
-		
-		add(panel, BorderLayout.CENTER);
+		panelRound.add(this.labelPigEnergyValue);
 		
 		JPanel panelButton = new JPanel();
+		add(panelButton, BorderLayout.SOUTH);
 		
 		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		
@@ -101,8 +84,6 @@ public class ListRoundsViewRoundPane extends JPanel implements ActionListener {
 		this.buttonRemove.setPreferredSize(dimension);
 		this.buttonRemove.addActionListener(this);
 		panelButton.add(this.buttonRemove);
-		
-		add(panelButton, BorderLayout.SOUTH);
 	}
 	
 	public void bind(Round round) {

@@ -1,31 +1,32 @@
 package view.round;
 
 import java.awt.BorderLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import controller.GameController;
+import controller.RoundController;
 import game.element.ListElements;
 import game.element.character.Pig;
 import game.round.Round;
 
-public class RoundView extends JPanel implements Observer {
+public class RoundView extends JPanel implements Observer, KeyListener {
 
+	private RoundStartView roundStartView;
 	private RoundMenuView roundMenuView;
 	private RoundResultView roundResultView;
 	private RoundStateView roundStateView;
 	private ArenaView arenaView;
 	private PigStateView pigStateView;
 	
-	private RoundStartView roundStartView;
-	
 	public RoundView() {
-		super();
+		super(new BorderLayout());
 		
-		setLayout(new BorderLayout());
-		
+		this.roundStartView = new RoundStartView();
 		this.roundMenuView = new RoundMenuView();
 		this.roundResultView = new RoundResultView();
 		
@@ -33,21 +34,19 @@ public class RoundView extends JPanel implements Observer {
 		add(this.roundStateView, BorderLayout.SOUTH);
 		
 		this.arenaView = new ArenaView();
-		this.arenaView.addKeyListener(new GamePadListener());
+		this.arenaView.addKeyListener(this);
 		this.arenaView.setFocusable(true);
-		this.arenaView.requestFocusInWindow();
 		add(this.arenaView, BorderLayout.CENTER);
 		
 		this.pigStateView = new PigStateView();
 		add(this.pigStateView, BorderLayout.NORTH);
-		
-		this.roundStartView = new RoundStartView();
 	}
 	
 	@Override
 	public void update(Observable observable, Object arg) {
 		Round round = (Round) observable;
 		
+		this.roundStartView.update(round, null);
 		this.roundMenuView.update(round, null);
 		this.roundResultView.update(round, null);
 		this.roundStateView.update(round, null);
@@ -61,12 +60,14 @@ public class RoundView extends JPanel implements Observer {
 			pig.addObserver(this.pigStateView);
 			this.pigStateView.update(pig, null);
 		}
-		
-		this.roundStartView.update(round, null);
 	}
 	
-	public ArenaView getArenaView() {
-		return this.arenaView;
+	public void updateArenaView() {
+		this.arenaView.repaint();
+	}
+	
+	public void requestFocusOnArenaView() {
+		this.arenaView.requestFocusInWindow();
 	}
 	
 	public void displayRoundMenuView() {
@@ -79,15 +80,25 @@ public class RoundView extends JPanel implements Observer {
 		this.roundResultView.setVisible(true);
 	}
 	
-	public void showStartRoundMessageWithRules(boolean showRules) {
-		if (showRules) {
-			String title = "Rules";
-			String message = "Eat cakes to succeed! Be careful from enemies and bad foods...";
-			
-			JOptionPane.showMessageDialog(this, message, title, JOptionPane.OK_OPTION);
-			this.roundStartView.anime();
-		} else {
-			this.roundStartView.anime();
-		}
+	public void displayRoundStartView() {
+		this.roundStartView.anime();
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		RoundController roundController = GameController.getInstance().getRoundController();
+		roundController.actionGamePad(e.getKeyCode());
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		RoundController roundController = GameController.getInstance().getRoundController();
+		roundController.actionGamePad(e.getKeyCode());
 	}
 }

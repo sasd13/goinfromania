@@ -14,13 +14,6 @@ import javax.swing.JTextField;
 
 public class GamePadView extends SettingView {
 	
-	private final String LABEL_START = "Start",
-		LABEL_MOVELEFT = "Left",
-		LABEL_MOVERIGHT = "Right",
-		LABEL_MOVEUP = "Up",
-		LABEL_MOVEDOWN = "Down",
-		LABEL_PIGATTAK = "Pig attak";
-	
 	private JTextField textFieldKeyStart,
 		textFieldKeyMoveLeft,
 		textFieldKeyMoveRight,
@@ -31,36 +24,33 @@ public class GamePadView extends SettingView {
 	public GamePadView() {
 		super();
 		
-		JPanel panelForm = new JPanel();
-		
-		panelForm.setLayout(new GridLayout(7, 2));
+		JPanel panelForm = new JPanel(new GridLayout(7, 2));
 		panelForm.setBorder(BorderFactory.createTitledBorder("Set keyboard controller touchs"));
+		getContentPane().add(panelForm, BorderLayout.CENTER);
 		
-		panelForm.add(new JLabel(LABEL_START));
+		panelForm.add(new JLabel("Start"));
 		this.textFieldKeyStart = new JTextField();
 		panelForm.add(this.textFieldKeyStart);
 		
-		panelForm.add(new JLabel(LABEL_MOVELEFT));
+		panelForm.add(new JLabel("Move Left"));
 		this.textFieldKeyMoveLeft = new JTextField();
 		panelForm.add(this.textFieldKeyMoveLeft);
 		
-		panelForm.add(new JLabel(LABEL_MOVERIGHT));
+		panelForm.add(new JLabel("Move Right"));
 		this.textFieldKeyMoveRight = new JTextField();
 		panelForm.add(this.textFieldKeyMoveRight);
 		
-		panelForm.add(new JLabel(LABEL_MOVEUP));
+		panelForm.add(new JLabel("Move Up"));
 		this.textFieldKeyMoveUp = new JTextField();
 		panelForm.add(this.textFieldKeyMoveUp);
 		
-		panelForm.add(new JLabel(LABEL_MOVEDOWN));
+		panelForm.add(new JLabel("Move Down"));
 		this.textFieldKeyMoveDown = new JTextField();
 		panelForm.add(this.textFieldKeyMoveDown);
 		
-		panelForm.add(new JLabel(LABEL_PIGATTAK));
+		panelForm.add(new JLabel("Pig Attak"));
 		this.textFieldKeyPigAttak = new JTextField();
 		panelForm.add(this.textFieldKeyPigAttak);
-		
-		getContentPane().add(panelForm, BorderLayout.CENTER);
 	}
 	
 	@Override

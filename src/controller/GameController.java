@@ -38,15 +38,21 @@ public class GameController {
 		return this.roundController;
 	}
 	
-	public void playGame() {
+	public void startGame() {
 		loadListRounds();
-		this.gameView.displayHomeView();
 		
+		this.gameView.displayHomeView();
 		this.gameView.pack();
 		this.gameView.setVisible(true);
 	}
 	
+	private void loadListRounds() {
+		ListRounds listRounds = RoundDAO.loadAll();
+		this.game.setListRounds(listRounds);
+	}
+	
 	public void exitGame() {
+		this.game.deleteObservers();
 		this.gameView.dispose();
 	}
 	
@@ -58,39 +64,35 @@ public class GameController {
 		this.gameView.displayRoundView();
 	}
 	
-	public void displayListScores() {
-		this.gameView.displayListScoresView();
-	}
-	
 	public void displayListRounds() {
 		this.gameView.displayListRoundsView();
 	}
 	
-	private void loadListRounds() {
-		ListRounds listRounds = RoundDAO.loadAll();
-		this.game.setListRounds(listRounds);
+	public void displayListScores() {
+		this.gameView.displayListScoresView();
 	}
 	
 	public void newRound() {
 		Round round = Round.getNewInstance();
 		
-		this.game.getListRounds().add(round);
-		
 		openRound(round);
 	}
 	
-	public void openRound(Round round) {		
+	public void openRound(Round round) {
 		RoundView roundView = this.gameView.getRoundView();
 		this.roundController = new RoundController(roundView, round);	
 		
 		setMenuRoundEnabled(true);
 		displayRound();
 		
-		this.roundController.showStartRoundMessage();
+		if (round.getRoundNumber() == 1) {
+			this.roundController.showRoundRulesMessage();
+		}
+		this.roundController.displayRoundStart();
 		this.roundController.startRound();
 	}
 	
-	private void setMenuRoundEnabled(boolean enabled) {
+	public void setMenuRoundEnabled(boolean enabled) {
 		((GameMenuBar) this.gameView.getJMenuBar()).setMenuRoundEnabled(enabled);
 	}
 	
@@ -100,27 +102,21 @@ public class GameController {
 		openRound(round);
 	}
 	
-	public void closeRoundIfSttarted() {
-		if (this.roundController != null) {
-			this.roundController.stopRound();
-			
-			closeRound();
-		}
-	}
-	
-	public void closeRound() {
-		this.roundController = null;
-		
-		setMenuRoundEnabled(false);
-	}
-	
-	public void exitRound() {
-		closeRound();
-		displayHome();
+	public void saveRound(Round round) {
+		this.game.getListRounds().add(round);
+		RoundDAO.save(round);
 	}
 	
 	public void removeRound(Round round) {
 		this.game.getListRounds().remove(round);
 		RoundDAO.remove(round);
+	}
+	
+	public boolean stopRoundIfStarted() {
+		if (this.roundController != null && !this.roundController.isRoundStopped()) {
+			return this.roundController.showStopRoundMessage();
+		}
+		
+		return true;
 	}
 }

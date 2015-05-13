@@ -2,31 +2,17 @@ package game.round;
 
 import java.util.Observable;
 
-public class RoundStats extends Observable {
+public class RoundCumulatedStatistics extends Observable {
 	
-	private int totalScore;
 	private int totalCountEatenCakes;
 	private int totalCountNutritionistKilled;
 	private int totalCountVirusKilled;
+	private int totalScore;
 	
-	public RoundStats() {
+	public RoundCumulatedStatistics() {
 		super();
 		
-		this.totalScore = 0;
-		this.totalCountEatenCakes = 0;
-		this.totalCountNutritionistKilled = 0;
-		this.totalCountVirusKilled = 0;
-	}
-	
-	public int getTotalScore() {
-		return this.totalScore;
-	}
-	
-	public void setTotalScore(int totalScore) {
-		this.totalScore = totalScore;
-		
-		setChanged();
-		notifyObservers();
+		resetStatistics();
 	}
 	
 	public int getTotalCountEatenCakes() {
@@ -68,5 +54,23 @@ public class RoundStats extends Observable {
 	
 	public int getTotalEnemyKilled() {
 		return this.totalCountNutritionistKilled + this.totalCountVirusKilled;
+	}
+	
+	public int getTotalScore() {
+		return this.totalScore;
+	}
+	
+	public void setTotalScore(int totalScore) {
+		this.totalScore = totalScore;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void resetStatistics() {
+		setTotalCountEatenCakes(0);
+		setTotalCountNutritionistKilled(0);
+		setTotalCountVirusKilled(0);
+		setTotalScore(0);
 	}
 }

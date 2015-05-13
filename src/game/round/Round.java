@@ -18,15 +18,15 @@ public class Round extends Observable {
 	private int roundNumber;
 	private Level level;
 	private ListElements listElements;
-	private int countEatenCakes;
 	private int maxCountEatenCakes;
+	private int countEatenCakes;
 	private int countNutritionistKilled;
 	private int countVirusKilled;
 	private int score;
 	private State state;
 	private boolean finished;
 	private Result result;
-	private RoundStats roundStats;
+	private RoundCumulatedStatistics roundCumulatedStatistics;
 	private ZonedDateTime createdAt;
 	private ZonedDateTime updatedAt;
 	
@@ -38,17 +38,15 @@ public class Round extends Observable {
 		this.roundNumber = 0;
 		this.level = Level.EASY;
 		this.listElements = new ListElements();
-		this.countEatenCakes = 0;
 		this.maxCountEatenCakes = TOTAL_CAKE_TO_EAT_LEVEL_EASY;
-		this.countNutritionistKilled = 0;
-		this.countVirusKilled = 0;
-		this.score = 0;
 		this.state = null;
 		this.finished = false;
 		this.result = Result.PROGRESS;
-		this.roundStats = new RoundStats();
+		this.roundCumulatedStatistics = new RoundCumulatedStatistics();
 		this.createdAt = ZonedDateTime.now();
 		this.updatedAt = null;
+		
+		resetStatistics();
 	}
 	
 	public static Round getNewInstance() {
@@ -81,10 +79,7 @@ public class Round extends Observable {
 		}
 		
 		round.setRoundNumber(round.getRoundNumber() + 1);
-		round.setCountEatenCakes(0);
-		round.setCountNutritionistKilled(0);
-		round.setCountVirusKilled(0);
-		round.setScore(0);
+		round.resetStatistics();
 		
 		Pig pig = round.getListElements().getPig();
 		if (resetPigPosition) {
@@ -146,23 +141,23 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
-	public int getCountEatenCakes() {
-		return this.countEatenCakes;
-	}
-	
-	public void setCountEatenCakes(int countEatenCakes) {
-		this.countEatenCakes = countEatenCakes;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
 	public int getMaxCountEatenCakes() {
 		return this.maxCountEatenCakes;
 	}
 	
 	public void setMaxCountEatenCakes(int maxCountEatenCakes) {
 		this.maxCountEatenCakes = maxCountEatenCakes;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public int getCountEatenCakes() {
+		return this.countEatenCakes;
+	}
+	
+	public void setCountEatenCakes(int countEatenCakes) {
+		this.countEatenCakes = countEatenCakes;
 		
 		setChanged();
 		notifyObservers();
@@ -234,12 +229,12 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
-	public RoundStats getRoundStats() {
-		return this.roundStats;
+	public RoundCumulatedStatistics getRoundCumulatedStatistics() {
+		return this.roundCumulatedStatistics;
 	}
 	
-	public void setRoundStats(RoundStats roundStats) {
-		this.roundStats = roundStats;
+	public void setRoundCumulatedStatistics(RoundCumulatedStatistics roundCumulatedStatistics) {
+		this.roundCumulatedStatistics = roundCumulatedStatistics;
 		
 		setChanged();
 		notifyObservers();
@@ -265,5 +260,16 @@ public class Round extends Observable {
 		
 		setChanged();
 		notifyObservers();
+	}
+	
+	public int getCountEnemyKilled() {
+		return this.countNutritionistKilled + this.countVirusKilled;
+	}
+	
+	public void resetStatistics() {
+		setCountEatenCakes(0);
+		setCountNutritionistKilled(0);
+		setCountVirusKilled(0);
+		setScore(0);
 	}
 }

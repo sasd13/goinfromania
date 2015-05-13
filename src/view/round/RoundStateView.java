@@ -3,7 +3,6 @@ package view.round;
 import game.round.Round;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
@@ -21,46 +20,37 @@ public class RoundStateView extends JPanel implements Observer {
 		labelScoreValue;
 	
 	public RoundStateView() {
-		super();
+		super(new GridLayout(1, 4));
 		
-		setLayout(new GridLayout(1, 4));
 		setPreferredSize(new Dimension(DimensionConstants.PANEL_STATE_WIDTH, DimensionConstants.PANEL_STATE_HEIGHT));
 		
 		JPanel panelRound = new JPanel();
-		panelRound.setLayout(new FlowLayout());
+		add(panelRound);
 		
 		panelRound.add(new JLabel("Round : "));
 		this.labelRoundValue = new JLabel();
 		panelRound.add(this.labelRoundValue);
 		
-		add(panelRound);
-		
 		JPanel panelCakes = new JPanel();
-		panelCakes.setLayout(new FlowLayout());
+		add(panelCakes);
 		
 		panelCakes.add(new JLabel("Cakes : "));
 		this.labelCakesValue = new JLabel();
 		panelCakes.add(this.labelCakesValue);
 		
-		add(panelCakes);
-		
 		JPanel panelEnemies = new JPanel();
-		panelEnemies.setLayout(new FlowLayout());
+		add(panelEnemies);
 		
 		panelEnemies.add(new JLabel("Enemies : "));
 		this.labelEnemiesValue = new JLabel();
 		panelEnemies.add(this.labelEnemiesValue);
 		
-		add(panelEnemies);
-		
 		JPanel panelScore = new JPanel();
-		panelScore.setLayout(new FlowLayout());
+		add(panelScore);
 		
 		panelScore.add(new JLabel("Score : "));
 		this.labelScoreValue = new JLabel();
 		panelScore.add(this.labelScoreValue);
-		
-		add(panelScore);
 	}
 
 	@Override
@@ -69,7 +59,7 @@ public class RoundStateView extends JPanel implements Observer {
 		
 		this.labelRoundValue.setText(String.valueOf(round.getRoundNumber()));
 		this.labelCakesValue.setText(round.getCountEatenCakes() + "/" + round.getMaxCountEatenCakes());
-		this.labelEnemiesValue.setText(String.valueOf(round.getCountNutritionistKilled() + round.getCountVirusKilled()));
+		this.labelEnemiesValue.setText(String.valueOf(round.getCountEnemyKilled()));
 		this.labelScoreValue.setText(String.valueOf(round.getScore()));
 	}
 }

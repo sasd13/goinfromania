@@ -19,13 +19,12 @@ public class GameView extends JFrame implements Observer {
 	private static GameView instance = null;
 	
 	private GameMenuBar gameMenuBar;
+	private HomeView homeView;
+	private RoundView roundView;
+	private ListRoundsView listRoundsView;
+	private ListScoresView listScoresView;
 	
 	private JLayeredPane layeredPane;
-	
-	private HomeView homeView;
-	private ListRoundsView listRoundsView;
-	private RoundView roundView;
-	private ListScoresView listScoresView;
 	
 	private GameView() {
 		super(Game.NAME);
@@ -38,6 +37,7 @@ public class GameView extends JFrame implements Observer {
 		
 		this.layeredPane = new JLayeredPane();
 		this.layeredPane.setPreferredSize(new Dimension(DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT));
+		getContentPane().add(this.layeredPane, BorderLayout.CENTER);
 		
 		this.homeView = new HomeView();
 		this.homeView.setBounds(0, 0, DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
@@ -54,8 +54,6 @@ public class GameView extends JFrame implements Observer {
 		this.listScoresView = new ListScoresView();
 		this.listScoresView.setBounds(0, 0, DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
 		this.layeredPane.add(this.listScoresView, JLayeredPane.DEFAULT_LAYER);
-		
-		getContentPane().add(this.layeredPane, BorderLayout.CENTER);
 	}
 	
 	public static synchronized GameView getInstance() {
@@ -84,38 +82,38 @@ public class GameView extends JFrame implements Observer {
 	}
 	
 	public void displayHomeView() {
-		this.layeredPane.moveToFront(this.homeView);
 		this.homeView.setVisible(true);
+		this.layeredPane.moveToFront(this.homeView);
 		
+		this.roundView.setVisible(false);
 		this.listRoundsView.setVisible(false);
 		this.listScoresView.setVisible(false);
-		this.roundView.setVisible(false);
-	}
-	
-	public void displayListRoundsView() {
-		this.layeredPane.moveToFront(this.listRoundsView);
-		this.listRoundsView.setVisible(true);
-		
-		this.homeView.setVisible(false);
-		this.listScoresView.setVisible(false);
-		this.roundView.setVisible(false);
-	}
-	
-	public void displayListScoresView() {
-		this.layeredPane.moveToFront(this.listScoresView);
-		this.listScoresView.setVisible(true);
-		
-		this.homeView.setVisible(false);
-		this.listRoundsView.setVisible(false);
-		this.roundView.setVisible(false);
 	}
 	
 	public void displayRoundView() {
-		this.layeredPane.moveToFront(this.roundView);
 		this.roundView.setVisible(true);
+		this.layeredPane.moveToFront(this.roundView);
 		
 		this.homeView.setVisible(false);
 		this.listRoundsView.setVisible(false);
 		this.listScoresView.setVisible(false);
+	}
+	
+	public void displayListRoundsView() {
+		this.listRoundsView.setVisible(true);
+		this.layeredPane.moveToFront(this.listRoundsView);
+		
+		this.homeView.setVisible(false);
+		this.roundView.setVisible(false);
+		this.listScoresView.setVisible(false);
+	}
+	
+	public void displayListScoresView() {
+		this.listScoresView.setVisible(true);
+		this.layeredPane.moveToFront(this.listScoresView);
+		
+		this.homeView.setVisible(false);
+		this.roundView.setVisible(false);
+		this.listRoundsView.setVisible(false);
 	}
 }

@@ -13,12 +13,11 @@ import javax.swing.JPanel;
 public class ListScoresView extends JPanel implements Observer {
 
 	public ListScoresView() {
-		super();
+		super(new BorderLayout());
 		
-		setLayout(new BorderLayout());
+		setBackground(Color.GREEN);
 		
 		add(new JLabel("List scores"), BorderLayout.CENTER);
-		setBackground(Color.GREEN);
 	}
 
 	@Override

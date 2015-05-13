@@ -1,7 +1,6 @@
 package view;
 
 import game.round.ListRounds;
-import game.round.Round;
 
 import java.awt.Dimension;
 import java.util.Observable;
@@ -36,19 +35,16 @@ public class ListRoundsView extends JSplitPane implements Observer, ListSelectio
 		this.listModel = new DefaultListModel<>();
 		
 		this.listPane = new JList<>(this.listModel);
-		this.listPane.addListSelectionListener(this);
-		
 		this.listPane.setLayoutOrientation(JList.VERTICAL);
 		this.listPane.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.listPane.setVisibleRowCount(-1);
+		this.listPane.addListSelectionListener(this);
 		
 		JScrollPane listScroller = new JScrollPane(this.listPane);
 		listScroller.setPreferredSize(new Dimension(LIST_WIDTH, DimensionConstants.PANEL_HEIGHT));
-		
 		add(listScroller);
 		
 		this.roundPane = new ListRoundsViewRoundPane();
-		
 		add(this.roundPane);
 	}
 
@@ -69,12 +65,9 @@ public class ListRoundsView extends JSplitPane implements Observer, ListSelectio
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		if (e.getValueIsAdjusting() == false) {
-	        if (this.listPane.getSelectedIndex() == -1) {
-	        	this.roundPane.setVisible(false);
-	        } else {	        	
+	        if (this.listPane.getSelectedIndex() >= 0) {
 	        	int index = this.listPane.getSelectedIndex();
-	        	Round round = this.listRounds.get(index);
-	        	this.roundPane.bind(round);
+	        	this.roundPane.bind(this.listRounds.get(index));
 	        	this.roundPane.setVisible(true);
 	        }
 	    }

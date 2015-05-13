@@ -28,7 +28,7 @@ public class SettingController {
 		return instance;
 	}
 	
-	public void open(String settingName) {
+	public void openSetting(String settingName) {
 		this.settingView = createView(settingName);
 		
 		this.setting = SettingDAO.load(settingName);
@@ -39,7 +39,7 @@ public class SettingController {
 		this.settingView.setVisible(true);
 	}
 	
-	public void close() {
+	public void closeSetting() {
 		String title = "Confirmation";
 		String message = "Save modifications ?";
 		
@@ -48,11 +48,11 @@ public class SettingController {
 			SettingDAO.save(this.setting);
 		}
 		
-		this.setting = null;		
+		this.setting.deleteObservers();		
 		this.settingView.dispose();
 	}
 	
-	public void reset() {
+	public void resetSetting() {
 		this.setting.reset();
 	}
 	

@@ -13,6 +13,7 @@ public abstract class Animation {
 	protected ScheduledExecutorService scheduler;
 	
 	protected Animation() {
+		this.scheduler = null;
 		this.duration = DEFAULT_DURATION;
 	}
 	

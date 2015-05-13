@@ -5,9 +5,7 @@ import game.element.ListElements;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -22,11 +20,8 @@ public class ArenaView extends JPanel implements Observer {
 	public ArenaView() {
 		super();
 		
-		setLayout(new FlowLayout());
-		
-		Dimension dimension = new Dimension(DimensionConstants.ARENA_WIDTH, DimensionConstants.ARENA_HEIGHT);
-		setPreferredSize(dimension);
-		
+		setLayout(null);
+		setPreferredSize(new Dimension(DimensionConstants.ARENA_WIDTH, DimensionConstants.ARENA_HEIGHT));
 		setBackground(Color.BLACK);
 		
 		this.listElements = new ListElements();
@@ -46,9 +41,8 @@ public class ArenaView extends JPanel implements Observer {
 		Element element;
 		for (int i=0; i<this.listElements.size(); i++) {
 			element = this.listElements.get(i);
-			Point position = element.getPosition();
 			
-			g.drawImage(element.getImage(), position.x, position.y, this);
+			g.drawImage(element.getImage(), element.getPosition().x, element.getPosition().y, this);
 		}
 	}
 }

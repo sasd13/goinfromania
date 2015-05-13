@@ -22,6 +22,7 @@ public class Missile extends Power {
 		setName(NAME);
 		setMovable(true);
 		setSpeed(SPEED_HIGH);
+		setAfar(true);
 		
 		ImageAnimation animation = new ImageAnimation();
 		animation.setImageName(ANIMATION_IMAGE_PREFIX);

@@ -23,14 +23,13 @@ public class RoundMenuView extends JDialog implements Observer, WindowListener {
 	public RoundMenuView() {
 		super();
 		
+		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setSize(new Dimension(DimensionConstants.ROUND_COMPONENT_WIDTH, DimensionConstants.ROUND_COMPONENT_HEIGHT));
 		setResizable(false);
 		setUndecorated(true);
 		getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
-		
-		setLayout(new BorderLayout());
 		
 		add(new JLabel("Jeu en pause"), BorderLayout.CENTER);
 		addWindowListener(this);
@@ -52,7 +51,7 @@ public class RoundMenuView extends JDialog implements Observer, WindowListener {
 	@Override
 	public void windowClosed(WindowEvent e) {
 		RoundController roundController = (RoundController) GameController.getInstance().getRoundController();
-		roundController.resumeRound();
+		roundController.startRound();
 	}
 
 	@Override

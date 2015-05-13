@@ -4,7 +4,6 @@ import game.element.character.Character;
 import game.element.character.Pig;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
@@ -17,36 +16,26 @@ import view.DimensionConstants;
 
 public class PigStateView extends JPanel implements Observer {
 
-	private JLabel labelLife, labelEnergy;
 	private JProgressBar progressBarLifeValue, progressBarEnergyValue;
 	
 	public PigStateView() {
-		super();
+		super(new GridLayout(1, 3));
 		
-		setLayout(new GridLayout(1, 3));
 		setPreferredSize(new Dimension(DimensionConstants.PANEL_STATE_WIDTH, DimensionConstants.PANEL_STATE_HEIGHT));
 		
 		JPanel panelLife = new JPanel();
-		panelLife.setLayout(new FlowLayout());
+		add(panelLife);
 		
-		this.labelLife = new JLabel("Life : ");
-		panelLife.add(this.labelLife);
-		
+		panelLife.add(new JLabel("Life : "));
 		this.progressBarLifeValue = new JProgressBar(Character.LIFE_MIN, Character.LIFE_MAX);
 		panelLife.add(this.progressBarLifeValue);
 		
-		add(panelLife);
-		
 		JPanel panelEnergy = new JPanel();
-		panelEnergy.setLayout(new FlowLayout());
+		add(panelEnergy);
 		
-		this.labelEnergy = new JLabel("Energy : ");
-		panelEnergy.add(this.labelEnergy);
-		
+		panelEnergy.add(new JLabel("Energy : "));
 		this.progressBarEnergyValue = new JProgressBar(Pig.ENERGY_MIN, Pig.ENERGY_MAX);
 		panelEnergy.add(this.progressBarEnergyValue);
-		
-		add(panelEnergy);
 	}
 	
 	@Override
