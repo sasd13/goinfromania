@@ -16,7 +16,7 @@ import game.round.Round;
 
 public class RoundView extends JPanel implements Observer, KeyListener {
 
-	private RoundStartView roundStartView;
+	private RoundStarterView roundStarterView;
 	private RoundMenuView roundMenuView;
 	private RoundResultView roundResultView;
 	private RoundStateView roundStateView;
@@ -26,7 +26,7 @@ public class RoundView extends JPanel implements Observer, KeyListener {
 	public RoundView() {
 		super(new BorderLayout());
 		
-		this.roundStartView = new RoundStartView();
+		this.roundStarterView = new RoundStarterView();
 		this.roundMenuView = new RoundMenuView();
 		this.roundResultView = new RoundResultView();
 		
@@ -46,7 +46,7 @@ public class RoundView extends JPanel implements Observer, KeyListener {
 	public void update(Observable observable, Object arg) {
 		Round round = (Round) observable;
 		
-		this.roundStartView.update(round, null);
+		this.roundStarterView.update(round, null);
 		this.roundMenuView.update(round, null);
 		this.roundResultView.update(round, null);
 		this.roundStateView.update(round, null);
@@ -80,8 +80,8 @@ public class RoundView extends JPanel implements Observer, KeyListener {
 		this.roundResultView.setVisible(true);
 	}
 	
-	public void displayRoundStartView() {
-		this.roundStartView.anime();
+	public void displayRoundStarterView() {
+		this.roundStarterView.anime();
 	}
 	
 	@Override

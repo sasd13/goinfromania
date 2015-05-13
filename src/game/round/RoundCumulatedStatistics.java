@@ -4,9 +4,10 @@ import java.util.Observable;
 
 public class RoundCumulatedStatistics extends Observable {
 	
-	private int totalCountEatenCakes;
-	private int totalCountNutritionistKilled;
-	private int totalCountVirusKilled;
+	private int totalEatenCakes;
+	private int totalEatenPoisonCakes;
+	private int totalNutritionistKilled;
+	private int totalVirusKilled;
 	private int totalScore;
 	
 	public RoundCumulatedStatistics() {
@@ -15,45 +16,56 @@ public class RoundCumulatedStatistics extends Observable {
 		resetStatistics();
 	}
 	
-	public int getTotalCountEatenCakes() {
-		return this.totalCountEatenCakes;
+	public int getTotalEatenCakes() {
+		return this.totalEatenCakes;
 	}
 	
-	public void setTotalCountEatenCakes(int totalCountEatenCakes) {
-		this.totalCountEatenCakes = totalCountEatenCakes;
+	public void setTotalEatenCakes(int totalEatenCakes) {
+		this.totalEatenCakes = totalEatenCakes;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
-	public int getTotalCountNutritionistKilled() {
-		return this.totalCountNutritionistKilled;
+	public int getTotalEatenPoisonCakes() {
+		return this.totalEatenPoisonCakes;
 	}
 	
-	public void setTotalCountNutritionistKilled(int totalCountNutritionistKilled) {
-		this.totalCountNutritionistKilled = totalCountNutritionistKilled;
+	public void setTotalEatenPoisonCakes(int totalEatenPoisonCakes) {
+		this.totalEatenPoisonCakes = totalEatenPoisonCakes;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
-	public int getTotalCountVirusKilled() {
-		return this.totalCountVirusKilled;
+	public int getTotalNutritionistKilled() {
+		return this.totalNutritionistKilled;
 	}
 	
-	public void setTotalCountVirusKilled(int totalCountVirusKilled) {
-		this.totalCountVirusKilled = totalCountVirusKilled;
+	public void setTotalNutritionistKilled(int totalNutritionistKilled) {
+		this.totalNutritionistKilled = totalNutritionistKilled;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public int getTotalVirusKilled() {
+		return this.totalVirusKilled;
+	}
+	
+	public void setTotalVirusKilled(int totalVirusKilled) {
+		this.totalVirusKilled = totalVirusKilled;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
 	public int getTotalFoodEated() {
-		return this.totalCountEatenCakes;
+		return this.totalEatenCakes + this.totalEatenPoisonCakes;
 	}
 	
 	public int getTotalEnemyKilled() {
-		return this.totalCountNutritionistKilled + this.totalCountVirusKilled;
+		return this.totalNutritionistKilled + this.totalVirusKilled;
 	}
 	
 	public int getTotalScore() {
@@ -68,9 +80,10 @@ public class RoundCumulatedStatistics extends Observable {
 	}
 	
 	public void resetStatistics() {
-		setTotalCountEatenCakes(0);
-		setTotalCountNutritionistKilled(0);
-		setTotalCountVirusKilled(0);
+		setTotalEatenCakes(0);
+		setTotalEatenPoisonCakes(0);
+		setTotalNutritionistKilled(0);
+		setTotalVirusKilled(0);
 		setTotalScore(0);
 	}
 }

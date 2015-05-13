@@ -44,16 +44,12 @@ public abstract class Enemy extends Character {
 		notifyObservers();
 	}
 	
-	public void attakPig(Pig pig) {
-		if (isPowerful()) {
-			this.power.act(pig);
-			
-			setPowerful(false);
-			startDelay();
-		}
+	public void setPowerlessForDelay() {
+		setPowerful(false);
+		startDelay();
 	}
 	
-	private synchronized void startDelay() {
+	private synchronized void startDelay() {		
 		final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 		
 		Runnable runnable = new Runnable() {
@@ -61,6 +57,7 @@ public abstract class Enemy extends Character {
 			@Override
 			public void run() {
 				setPowerful(true);
+				scheduler.shutdown();
 			}
 		};
 		

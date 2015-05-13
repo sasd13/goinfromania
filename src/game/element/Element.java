@@ -41,6 +41,7 @@ public abstract class Element extends Observable {
 		this.name = null;
 		this.position = new Point();
 		this.dimension = new Dimension();
+		this.imageName = null;
 		this.image = null;
 		this.movable = false;
 		this.speed = SPEED_NULL;

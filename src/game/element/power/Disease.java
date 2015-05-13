@@ -81,6 +81,7 @@ public class Disease extends Power {
 			@Override
 			public void run() {
 				pig.setSpeed(SPEED_MEDIUM);
+				scheduler.shutdown();
 			}
 		};
 		

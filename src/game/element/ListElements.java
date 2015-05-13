@@ -50,9 +50,7 @@ public class ListElements extends Observable {
 	}
 	
 	public Pig getPig() {
-		Pig pig = (Pig) this.list.getFirst();
-		
-		return pig;
+		return (Pig) this.list.getFirst();
 	}
 	
 	public int size() {

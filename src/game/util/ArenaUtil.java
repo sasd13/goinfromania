@@ -14,9 +14,7 @@ public class ArenaUtil {
 	public static final double FACTOR_DISTANCE_NEXT_TO = 0.8;
 
 	public static ListElements getElementsInTouch(Element elementActor, ListElements listElements) {
-		Point position = elementActor.getPosition();
-		
-		return detectElements(elementActor, position, listElements);
+		return detectElements(elementActor, elementActor.getPosition(), listElements);
 	}
 	
 	public static boolean canMove(Element elementActor, Direction direction, ListElements listElements) {
@@ -32,9 +30,7 @@ public class ArenaUtil {
 	}
 	
 	public static ListElements getElementsAtNextPosition(Element elementActor, Direction direction, ListElements listElements) {
-		Point nextPosition = elementActor.getNextPosition(direction);
-		
-		return detectElements(elementActor, nextPosition, listElements);
+		return detectElements(elementActor, elementActor.getNextPosition(direction), listElements);
 	}
 	
 	public static ListElements detectElements(Element elementActor, Point position, ListElements listElements) {
@@ -65,7 +61,6 @@ public class ArenaUtil {
 		Dimension dimension2 = elementToAct.getDimension();
 		
 		double proportion = MathUtil.getMinimalProportionCollision(position1, dimension1, position2, dimension2);
-		
 		if (proportion > MINIMAL_PROPORTION_COLLISION) {
 			return true;
 		}
@@ -100,9 +95,7 @@ public class ArenaUtil {
 		Point position2 = elementToAct.getPosition();
 		Dimension dimension2 = elementToAct.getDimension();
 		
-		boolean isNextTo = isNextTo(position1, dimension1, position2, dimension2);
-		
-		return isNextTo;
+		return isNextTo(position1, dimension1, position2, dimension2);
 	}
 	
 	public static boolean isNextTo(Point position1, Dimension dimension1, Point position2, Dimension dimension2) {

@@ -1,7 +1,8 @@
 package game.element.power;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import game.element.character.Character;
 import game.element.character.Nutritionist;
@@ -18,8 +19,6 @@ public class Paralyze extends Power {
 	public static final int VALUE_STOP_NUTRITIONIST_MOVE = 5;
 	
 	private int value;
-	
-	private Timer timerParalyze;
 	
 	public Paralyze() {
 		super();
@@ -45,8 +44,6 @@ public class Paralyze extends Power {
 		if (character instanceof Nutritionist) {
 			Nutritionist nutritionist = (Nutritionist) character;
 			
-			this.timerParalyze = new Timer();
-			
 			nutritionist.setMovable(false);
 			nutritionist.setPowerful(false);
 			endParalyzeAct(nutritionist);
@@ -56,18 +53,18 @@ public class Paralyze extends Power {
 	}
 	
 	private synchronized void endParalyzeAct(final Nutritionist nutritionist) {
-		this.timerParalyze.cancel();
-		this.timerParalyze = new Timer();
+		final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
 		
-		TimerTask task = new TimerTask() {
+		Runnable runnable = new Runnable() {
 			
 			@Override
 			public void run() {
 				nutritionist.setMovable(true);
 				nutritionist.setPowerful(true);
+				scheduler.shutdown();
 			}
 		};
 		
-		this.timerParalyze.schedule(task, getValue());
+		scheduler.schedule(runnable, getValue(), TimeUnit.MILLISECONDS);
 	}
 }

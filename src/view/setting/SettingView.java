@@ -23,7 +23,6 @@ public abstract class SettingView extends JDialog implements Observer, ActionLis
 		super();
 		
 		setTitle("Settings");
-		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setPreferredSize(new Dimension(DimensionConstants.FRAME_WIDTH, DimensionConstants.FRAME_HEIGHT));

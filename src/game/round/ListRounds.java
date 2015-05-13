@@ -44,4 +44,8 @@ public class ListRounds extends Observable {
 	public int size() {
 		return this.list.size();
 	}
+	
+	public boolean isEmpty() {
+		return this.list.isEmpty();
+	}
 }

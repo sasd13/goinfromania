@@ -20,6 +20,7 @@ public class Round extends Observable {
 	private ListElements listElements;
 	private int maxCountEatenCakes;
 	private int countEatenCakes;
+	private int countEatenPoisonCakes;
 	private int countNutritionistKilled;
 	private int countVirusKilled;
 	private int score;
@@ -163,6 +164,17 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
+	public int getCountEatenPoisonCakes() {
+		return this.countEatenPoisonCakes;
+	}
+	
+	public void setCountEatenPoisonCakes(int countEatenPoisonCakes) {
+		this.countEatenPoisonCakes = countEatenPoisonCakes;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
 	public int getCountNutritionistKilled() {
 		return this.countNutritionistKilled;
 	}
@@ -262,12 +274,17 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
+	public int getFoodEated() {
+		return this.countEatenCakes + this.countEatenPoisonCakes;
+	}
+	
 	public int getCountEnemyKilled() {
 		return this.countNutritionistKilled + this.countVirusKilled;
 	}
 	
 	public void resetStatistics() {
 		setCountEatenCakes(0);
+		setCountEatenPoisonCakes(0);
 		setCountNutritionistKilled(0);
 		setCountVirusKilled(0);
 		setScore(0);

@@ -104,9 +104,9 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 	public void actionPerformed(ActionEvent arg0) {
 		JButton button = (JButton) arg0.getSource();
 		
-		RoundController roundController = GameController.getInstance().getRoundController();
-		
 		dispose();
+		
+		RoundController roundController = GameController.getInstance().getRoundController();
 		
 		if (button == this.buttonNext) {
 			roundController.nextRound();

@@ -14,15 +14,11 @@ public class MathUtil {
 	}
 	
 	public static double distance(Point point1, Point point2) {
-		double distance = Math.sqrt(Math.pow((point1.x - point2.x), 2) + Math.pow((point1.y - point2.y), 2));
-		
-		return distance;
+		return Math.sqrt(Math.pow((point1.x - point2.x), 2) + Math.pow((point1.y - point2.y), 2));
 	}
 	
 	public static double measureDiagonal(double width, double height) {
-		double diagonal = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-		
-		return diagonal;
+		return Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
 	}
 	
 	public static Point getGravityPosition(Point position, Dimension dimension) {
@@ -48,29 +44,28 @@ public class MathUtil {
 	
 	public static double getMinimalProportionCollision(Point position1, Dimension dimension1, Point position2, Dimension dimension2) {
 		boolean detected = MathUtil.isCollide(position1, dimension1, position2, dimension2);
-		
 		if (!detected) {
 			return 0;
 		}
 		
-		int widthCollision = 0, heightCollision = 0;
+		Dimension dimensionCollision = new Dimension();
 		
 		if (position1.x > position2.x && position1.x + dimension1.width < position2.x + dimension2.width) {
-			widthCollision = dimension1.width;
+			dimensionCollision.width = dimension1.width;
 		} else if (position2.x > position1.x && position2.x + dimension2.width < position1.x + dimension1.width) {
-			widthCollision = dimension2.width;
+			dimensionCollision.width = dimension2.width;
 		} else {
-			widthCollision = (position1.x < position2.x)
+			dimensionCollision.width = (position1.x < position2.x)
 					? position1.x + dimension1.width - position2.x
 					: position2.x + dimension2.width - position1.x;
 		}
 		
 		if (position1.y > position2.y && position1.y + dimension1.height < position2.y + dimension2.height) {
-			widthCollision = dimension1.height;
+			dimensionCollision.height = dimension1.height;
 		} else if (position2.y > position1.y && position2.y + dimension2.height < position1.y + dimension1.height) {
-			heightCollision = dimension2.height;
+			dimensionCollision.height = dimension2.height;
 		} else {
-			heightCollision = (position1.y < position2.y)
+			dimensionCollision.height = (position1.y < position2.y)
 					? position1.y + dimension1.height - position2.y
 					: position2.y + dimension2.height - position1.y;
 		}
@@ -78,7 +73,7 @@ public class MathUtil {
 		double area1, area2, areaCollision, proportion1, proportion2;
 		area1 = dimension1.width*dimension1.height;
 		area2 = dimension2.width*dimension2.height;
-		areaCollision = widthCollision*heightCollision;
+		areaCollision = dimensionCollision.width*dimensionCollision.height;
 		
 		proportion1 = areaCollision/area1;
 		proportion2 = areaCollision/area2;

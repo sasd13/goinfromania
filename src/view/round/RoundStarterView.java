@@ -20,14 +20,14 @@ import javax.swing.JRootPane;
 import view.DimensionConstants;
 import view.GameView;
 
-public class RoundStartView extends JDialog implements Observer {
+public class RoundStarterView extends JDialog implements Observer {
 
 	private JLayeredPane layeredPane;
 	
 	private JPanel panelRoundNumber, panelRoundGo;
 	private JLabel labelRoundNumber;
 	
-	public RoundStartView() {
+	public RoundStarterView() {
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -66,8 +66,7 @@ public class RoundStartView extends JDialog implements Observer {
 	public void anime() {
 		final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
 		
-		final int firstDelay = 200;
-		final int secondDelay = 1200;
+		final int period = 1200;
 		
 		Runnable runnable = new Runnable() {
 			
@@ -92,11 +91,11 @@ public class RoundStartView extends JDialog implements Observer {
 			}
 		};
 		
-		scheduler.scheduleAtFixedRate(runnable, firstDelay, secondDelay, TimeUnit.MILLISECONDS);
-		
-		ThreadSleeper.defaultSleep();
+		scheduler.scheduleAtFixedRate(runnable, 0, period, TimeUnit.MILLISECONDS);
 		
 		setLocationRelativeTo(GameView.getInstance().getRoundView());
+		
+		ThreadSleeper.defaultSleep();
 		setVisible(true);
 	}
 }

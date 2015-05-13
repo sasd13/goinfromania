@@ -1,5 +1,7 @@
 package controller;
 
+import java.time.ZonedDateTime;
+
 import view.GameView;
 import view.round.RoundView;
 import db.RoundDAO;
@@ -39,16 +41,13 @@ public class GameController {
 	}
 	
 	public void startGame() {
-		loadListRounds();
-		
-		this.gameView.displayHomeView();
-		this.gameView.pack();
-		this.gameView.setVisible(true);
-	}
-	
-	private void loadListRounds() {
 		ListRounds listRounds = RoundDAO.loadAll();
 		this.game.setListRounds(listRounds);
+		
+		displayHome();
+		
+		this.gameView.pack();
+		this.gameView.setVisible(true);
 	}
 	
 	public void exitGame() {
@@ -86,9 +85,9 @@ public class GameController {
 		displayRound();
 		
 		if (round.getRoundNumber() == 1) {
-			this.roundController.showRoundRulesMessage();
+			this.roundController.showDialogRoundRules();
 		}
-		this.roundController.displayRoundStart();
+		this.roundController.displayRoundStarter();
 		this.roundController.startRound();
 	}
 	
@@ -103,6 +102,7 @@ public class GameController {
 	}
 	
 	public void saveRound(Round round) {
+		round.setUpdatedAt(ZonedDateTime.now());
 		this.game.getListRounds().add(round);
 		RoundDAO.save(round);
 	}
@@ -114,7 +114,7 @@ public class GameController {
 	
 	public boolean stopRoundIfStarted() {
 		if (this.roundController != null && !this.roundController.isRoundStopped()) {
-			return this.roundController.showStopRoundMessage();
+			return this.roundController.showDialogConfirmStopRound();
 		}
 		
 		return true;
