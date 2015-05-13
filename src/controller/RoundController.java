@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 
 import main.Test;
 import view.round.RoundView;
-import db.RoundDAO;
 import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
@@ -23,6 +22,7 @@ import game.round.RoundCumulatedStatistics;
 import game.round.State;
 import game.setting.GamePad;
 import game.util.ArenaUtil;
+import game.util.ThreadSleeper;
 
 public class RoundController {
 
@@ -40,7 +40,7 @@ public class RoundController {
 		this.gamePad = null;
 		
 		//Sauvegarde
-		saveRound();
+		saveRoundInCache();
 		
 		//Remplissage
 		if (this.round.getUpdatedAt() == null) {
@@ -79,6 +79,7 @@ public class RoundController {
 		String title = "Round Rules";
 		String message = "Eat cakes to succeed! Be careful from enemies and bad foods...";
 		
+		ThreadSleeper.defaultSleep();
 		JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
 	}
 	
@@ -100,7 +101,7 @@ public class RoundController {
 	
 	public void restartRound() {
 		this.round.deleteObservers();
-		this.round = RoundDAO.load(this.round.getId());
+		this.round = loadRoundFromCache(this.round.getId());
 		this.round.addObserver(this.roundView);
 		this.roundView.update(this.round, null);
 		
@@ -117,16 +118,11 @@ public class RoundController {
 	
 	public boolean showStopRoundMessage() {
 		String title = "Exit round";
-		String message = "Confirm ?";
+		String message = "Confirm exit ?";
 		
+		ThreadSleeper.defaultSleep();
 		int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				System.out.println(e.getMessage());
-			}
-			
 			stopRound();
 			return true;
 		}
@@ -154,13 +150,12 @@ public class RoundController {
 	
 	public void showExitRoundSaveMessage() {
 		String title = "Exit round";
-		String message = "A round is in progress. Save ?";
+		String message = "Save progress ?";
 		
+		ThreadSleeper.defaultSleep();
 		int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
 			saveRound();
-		} else {
-			removeRound();
 		}
 		
 		exitRound();
@@ -169,6 +164,18 @@ public class RoundController {
 	public void saveRound() {
 		this.round.setUpdatedAt(ZonedDateTime.now());
 		GameController.getInstance().saveRound(this.round);
+	}
+	
+	public Round loadRoundFromCache(String roundId) {
+		Round round = null;
+		
+		//TODO Implementation
+		
+		return round;
+	}
+	
+	public void saveRoundInCache() {
+		//TODO Implementation
 	}
 	
 	public void removeRound() {

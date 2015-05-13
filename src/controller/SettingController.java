@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import game.setting.GamePad;
 import game.setting.Setting;
+import game.util.ThreadSleeper;
 import view.setting.GamePadView;
 import view.setting.SettingView;
 import db.SettingDAO;
@@ -43,6 +44,7 @@ public class SettingController {
 		String title = "Confirmation";
 		String message = "Save modifications ?";
 		
+		ThreadSleeper.defaultSleep();
 		int selected = JOptionPane.showConfirmDialog(this.settingView, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
 			SettingDAO.save(this.setting);

@@ -6,15 +6,18 @@ import game.round.ListRounds;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
+import controller.GameController;
 import view.round.RoundView;
 
-public class GameView extends JFrame implements Observer {
+public class GameView extends JFrame implements Observer, WindowListener {
 	
 	private static GameView instance = null;
 	
@@ -29,7 +32,7 @@ public class GameView extends JFrame implements Observer {
 	private GameView() {
 		super(Game.NAME);
 		
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
 		
 		this.gameMenuBar = new GameMenuBar();
@@ -54,6 +57,8 @@ public class GameView extends JFrame implements Observer {
 		this.listScoresView = new ListScoresView();
 		this.listScoresView.setBounds(0, 0, DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
 		this.layeredPane.add(this.listScoresView, JLayeredPane.DEFAULT_LAYER);
+		
+		addWindowListener(this);
 	}
 	
 	public static synchronized GameView getInstance() {
@@ -115,5 +120,50 @@ public class GameView extends JFrame implements Observer {
 		this.homeView.setVisible(false);
 		this.roundView.setVisible(false);
 		this.listRoundsView.setVisible(false);
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		boolean stopped = GameController.getInstance().stopRoundIfStarted();
+		
+		if (stopped) {
+			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		}
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
