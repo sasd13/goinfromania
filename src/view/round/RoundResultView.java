@@ -29,7 +29,7 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 		labelTotalFoodEatedValue,
 		labelTotalEnemyKilledValue;
 	
-	private JButton buttonNext, buttonRestart, buttonFinish;
+	private JButton buttonNext, buttonFinish;
 	
 	public RoundResultView() {
 		super();
@@ -73,11 +73,6 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 		this.buttonNext.addActionListener(this);
 		panelButton.add(this.buttonNext);
 		
-		this.buttonRestart = new JButton("Restart");
-		this.buttonRestart.setPreferredSize(dimension);
-		this.buttonRestart.addActionListener(this);
-		panelButton.add(this.buttonRestart);
-		
 		this.buttonFinish = new JButton("Finish");
 		this.buttonFinish.setPreferredSize(dimension);
 		this.buttonFinish.addActionListener(this);
@@ -109,11 +104,9 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 		RoundController roundController = GameController.getInstance().getRoundController();
 		
 		if (button == this.buttonNext) {
-			roundController.nextRound();
-		} else if (button == this.buttonRestart) {
-			roundController.restartRound();
+			roundController.openNextRound();
 		} else if (button == this.buttonFinish) {
-			roundController.exitRound();
+			roundController.finishResultAndDisplayHome();
 		}
 	}
 }

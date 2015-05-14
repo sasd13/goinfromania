@@ -56,7 +56,7 @@ public class MenuFile extends JMenu implements ActionListener {
 			} else if (item.getText().compareTo(ITEM_SCORES) == 0) {
 				gameController.displayListScores();
 			} else if (item.getText().compareTo(ITEM_EXIT) == 0) {
-				gameController.exitGame();
+				gameController.showDialogConfirmExitGame();
 			}
 		}
 	}

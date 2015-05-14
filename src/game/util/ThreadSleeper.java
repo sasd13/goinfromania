@@ -3,7 +3,7 @@ package game.util;
 public class ThreadSleeper {
 
 	public static void defaultSleep() {
-		sleep(300);
+		sleep(200);
 	}
 	
 	public static void sleep(long millisecond) {

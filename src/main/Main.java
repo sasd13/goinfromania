@@ -1,10 +1,18 @@
 package main;
 
+import javax.swing.SwingUtilities;
+
 import controller.GameController;
 
 public class Main {
 
 	public static void main(String[] args) {
-		GameController.getInstance().startGame();
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				GameController.getInstance().startGame();
+			}
+		});
 	}
 }

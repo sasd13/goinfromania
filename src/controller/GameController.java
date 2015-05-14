@@ -2,6 +2,8 @@ package controller;
 
 import java.time.ZonedDateTime;
 
+import javax.swing.JOptionPane;
+
 import view.GameView;
 import view.round.RoundView;
 import db.RoundDAO;
@@ -47,12 +49,38 @@ public class GameController {
 		displayHome();
 		
 		this.gameView.pack();
+		//To center the frame on screen, must be called after pack()
+		this.gameView.setLocationRelativeTo(null);
 		this.gameView.setVisible(true);
 	}
 	
-	public void exitGame() {
+	public void showDialogConfirmExitGame() {
+		String title = Game.NAME;
+		String message = "Confirm exit game ?";
+		
+		int selected = JOptionPane.showConfirmDialog(this.gameView, message, title, JOptionPane.YES_NO_OPTION);
+		if (selected == JOptionPane.YES_OPTION) {
+			exitGame();
+		}
+	}
+	
+	private void exitGame() {
+		if (this.roundController != null && !this.roundController.isRoundStopped()) {
+			this.roundController.showDialogConfirmSaveRound();
+		}
+		
 		this.game.deleteObservers();
 		this.gameView.dispose();
+	}
+	
+	public boolean stopRoundIfStarted() {
+		if (this.roundController == null || this.roundController.isRoundStopped()) {
+			return true;
+		}
+		
+		this.roundController.showDialogConfirmStopRound();
+		
+		return this.roundController.isRoundStopped();
 	}
 	
 	public void displayHome() {
@@ -95,12 +123,6 @@ public class GameController {
 		((GameMenuBar) this.gameView.getJMenuBar()).setMenuRoundEnabled(enabled);
 	}
 	
-	public void nextRound(Round round) {
-		round = Round.createNextRound(round, false, true);
-		
-		openRound(round);
-	}
-	
 	public void saveRound(Round round) {
 		round.setUpdatedAt(ZonedDateTime.now());
 		this.game.getListRounds().add(round);
@@ -110,13 +132,5 @@ public class GameController {
 	public void removeRound(Round round) {
 		this.game.getListRounds().remove(round);
 		RoundDAO.remove(round);
-	}
-	
-	public boolean stopRoundIfStarted() {
-		if (this.roundController != null && !this.roundController.isRoundStopped()) {
-			return this.roundController.showDialogConfirmStopRound();
-		}
-		
-		return true;
 	}
 }

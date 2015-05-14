@@ -18,11 +18,20 @@ public class ArenaUtil {
 	}
 	
 	public static boolean canMove(Element elementActor, Direction direction, ListElements listElements) {
-		ListElements listDetectedElements = getElementsAtNextPosition(elementActor, direction, listElements);
+		Point position = elementActor.getNextPosition(direction);
 		
-		for (int i=0; i<listDetectedElements.size(); i++) {
-			if (listDetectedElements.get(i) instanceof Wall) {
-				return false;
+		if ((direction == Direction.LEFT && position.x < Element.POSITION_X_MIN) 
+				|| (direction == Direction.RIGHT && position.x > Element.POSITION_X_MAX)
+				|| (direction == Direction.UP && position.y < Element.POSITION_Y_MIN)
+				|| (direction == Direction.DOWN && position.y > Element.POSITION_Y_MAX)) {
+			return false;
+		} else {
+			ListElements listDetectedElements = getElementsAtNextPosition(elementActor, direction, listElements);
+			
+			for (int i=0; i<listDetectedElements.size(); i++) {
+				if (listDetectedElements.get(i) instanceof Wall) {
+					return false;
+				}
 			}
 		}
 		
@@ -114,5 +123,64 @@ public class ArenaUtil {
 		}
 		
 		return distanceGravities <= distanceNextTo;
+	}
+	
+	public static Direction draw(Element element, ListElements listElements) {
+		Direction direction = null;
+		
+		Point position = element.getPosition();
+		
+		double tokenLeft, tokenRight, tokenUp, tokenDown, tokenX, tokenY, token;
+		
+		tokenLeft = 1000*position.x / Element.POSITION_X_MAX;
+		tokenRight = 1000 - tokenLeft;
+		
+		tokenUp = 1000*position.y / Element.POSITION_Y_MAX;
+		tokenDown = 1000 - tokenUp;
+		
+		double randomLeft, randomRight, randomUp, randomDown, randomX, randomY, random;
+		
+		randomLeft = Math.random()*tokenLeft;
+		randomRight = Math.random()*tokenRight;
+		randomUp = Math.random()*tokenUp;
+		randomDown = Math.random()*tokenDown;
+		
+		randomX = (randomLeft < randomRight) ? randomLeft : randomRight;
+		randomY = (randomUp < randomDown) ? randomUp : randomDown;
+		random = (randomX < randomY) ? randomX : randomY;
+		
+		if (random == randomLeft) {
+			direction = Direction.RIGHT;
+		} else if (random == randomRight) {
+			direction = Direction.LEFT;
+		} else if (random == randomUp) {
+			direction = Direction.DOWN;
+		} else {
+			direction = Direction.UP;
+		}
+		
+		boolean canMove = canMove(element, direction, listElements);
+		
+		if (!canMove) {
+			return getOpositeDirection(direction);
+		}
+		
+		return direction;
+	}
+	
+	public static Direction getOpositeDirection(Direction direction) {
+		switch (direction) {
+			case LEFT:
+				return Direction.RIGHT;
+			case RIGHT:
+				return Direction.LEFT;
+			case UP:
+				return Direction.DOWN;
+			case DOWN:
+				return Direction.UP;
+			default:
+				//TODO Throw exception
+				return null;
+		}
 	}
 }

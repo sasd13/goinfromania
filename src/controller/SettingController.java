@@ -4,7 +4,6 @@ import javax.swing.JOptionPane;
 
 import game.setting.GamePad;
 import game.setting.Setting;
-import game.util.ThreadSleeper;
 import view.setting.GamePadView;
 import view.setting.SettingView;
 import db.SettingDAO;
@@ -37,6 +36,8 @@ public class SettingController {
 		this.settingView.update(this.setting, null);
 		
 		this.settingView.pack();
+		//To center the frame on screen, must be called after pack()
+		this.settingView.setLocationRelativeTo(null);
 		this.settingView.setVisible(true);
 	}
 	
@@ -44,7 +45,6 @@ public class SettingController {
 		String title = "Confirmation";
 		String message = "Save modifications ?";
 		
-		ThreadSleeper.defaultSleep();
 		int selected = JOptionPane.showConfirmDialog(this.settingView, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
 			SettingDAO.save(this.setting);

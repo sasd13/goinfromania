@@ -1,7 +1,6 @@
 package view.round;
 
 import game.round.Round;
-import game.util.ThreadSleeper;
 
 import java.awt.Dimension;
 import java.util.Observable;
@@ -94,8 +93,6 @@ public class RoundStarterView extends JDialog implements Observer {
 		scheduler.scheduleAtFixedRate(runnable, 0, period, TimeUnit.MILLISECONDS);
 		
 		setLocationRelativeTo(GameView.getInstance().getRoundView());
-		
-		ThreadSleeper.defaultSleep();
 		setVisible(true);
 	}
 }

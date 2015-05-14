@@ -1,9 +1,15 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import main.Test;
 import view.round.RoundView;
+import game.animation.MoveListener;
 import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
@@ -47,14 +53,6 @@ public class RoundController {
 		}
 	}
 	
-	public boolean isRoundStopped() {
-		if (this.round.getState() == State.STOPPED) {
-			return true;
-		}
-		
-		return false;
-	}
-	
 	private void checkRound() {
 		boolean hasRoundError = false;
 		
@@ -81,7 +79,6 @@ public class RoundController {
 		String title = "Round Rules";
 		String message = "Eat cakes to succeed! Be careful from enemies and bad foods...";
 		
-		ThreadSleeper.defaultSleep();
 		JOptionPane.showMessageDialog(this.roundView, message, title, JOptionPane.OK_OPTION);
 	}
 	
@@ -95,15 +92,33 @@ public class RoundController {
 		this.gamePad = SettingController.getInstance().loadGamePad();
 		
 		this.roundView.requestFocusOnArenaView();
+		
+		Pig pig = this.round.getListElements().getPig();
+		startMoveAnimation(pig);
 	}
 	
-	public void restartRound() {
-		this.round.deleteObservers();
+	public void showDialogConfirmRestartRound() {
+		String title = "Round";
+		String message = "Restart round ?";
+		
+		int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_OPTION);
+		if (selected == JOptionPane.YES_OPTION) {
+			restartRound();
+		}
+	}
+	
+	private void restartRound() {
+		endUpdateRoundObservers();
+		
 		this.round = loadRoundFromCache(this.round.getId());
 		this.round.addObserver(this.roundView);
 		this.roundView.update(this.round, null);
 		
 		startRound();
+	}
+	
+	private void endUpdateRoundObservers() {
+		this.round.deleteObservers();
 	}
 	
 	public void pauseRound() {
@@ -114,37 +129,44 @@ public class RoundController {
 		this.roundView.displayRoundMenuView();
 	}
 	
-	public boolean showDialogConfirmStopRound() {
-		String title = "Exit round";
-		String message = "Confirm exit ?";
+	public void showDialogConfirmStopRound() {
+		String title = "Round";
+		String message = "Confirm stop round ?";
 		
-		ThreadSleeper.defaultSleep();
 		int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
 			stopRound();
-			
-			return true;
 		}
-		
-		return false;
 	}
 	
-	public void stopRound() {
+	private void stopRound() {
 		this.round.setState(State.STOPPED);
 		
+		//TODO Implementation
+		
 		if (!this.round.isFinished()) {
+			endUpdateRoundObservers();
+			
 			showDialogConfirmSaveRound();
 			exitRound();
 		} else {
-			finishRoundAndDisplayResult();
+			Pig pig = this.round.getListElements().getPig();
+			if (pig.isDied()) {
+				this.round.setResult(Result.LOOSE);
+			} else {
+				this.round.setResult(Result.WIN);
+			}
+			
+			endUpdateRoundObservers();
+			
+			displayRoundResult();
 		}
 	}
 	
 	public void showDialogConfirmSaveRound() {
-		String title = "Exit round";
+		String title = "Round";
 		String message = "Save progress ?";
 		
-		ThreadSleeper.defaultSleep();
 		int selected = JOptionPane.showConfirmDialog(this.roundView, message, title, JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
 			saveRound();
@@ -155,23 +177,39 @@ public class RoundController {
 		GameController.getInstance().saveRound(this.round);
 	}
 	
-	public void exitRound() {
-		this.round.deleteObservers();
+	private void exitRound() {
 		GameController.getInstance().setMenuRoundEnabled(false);
 		GameController.getInstance().displayHome();
 	}
 	
-	private void finishRoundAndDisplayResult() {
-		Pig pig = this.round.getListElements().getPig();
-		if (pig.isDied()) {
-			this.round.setResult(Result.LOOSE);
-		} else {
-			this.round.setResult(Result.WIN);
+	private void displayRoundResult() {		
+		this.roundView.displayRoundResultView();
+	}
+	
+	public boolean isRoundStopped() {
+		if (this.round.getState() == State.STOPPED) {
+			return true;
 		}
 		
-		saveRound();
+		return false;
+	}
+	
+	public void openNextRound() {
+		this.round = Round.createNextRound(this.round, false, true);
 		
-		this.roundView.displayRoundResultView();
+		showDialogConfirmSaveRound();
+		
+		GameController.getInstance().openRound(this.round);
+	}
+	
+	public void finishResultAndDisplayHome() {
+		if (this.round.getResult() == Result.WIN) {
+			this.round = Round.createNextRound(this.round, false, true);
+			
+			showDialogConfirmSaveRound();
+		}
+		
+		exitRound();
 	}
 	
 	private Round loadRoundFromCache(String roundId) {
@@ -184,11 +222,6 @@ public class RoundController {
 	
 	private void saveRoundInCache() {
 		//TODO Implementation
-	}
-	
-	public void nextRound() {
-		this.round.deleteObservers();
-		GameController.getInstance().nextRound(this.round);
 	}
 	
 	public void updateArena() {
@@ -221,13 +254,12 @@ public class RoundController {
 		}
 	}
 	
-	private void actionMove(Element elementActor, Direction direction) {
+	public void actionMove(Element elementActor, Direction direction) {
 		ListElements listElements = this.round.getListElements();
 		
 		boolean canMove = ArenaUtil.canMove(elementActor, direction, listElements);
 		if (canMove) {
 			elementActor.move(direction);
-			
 			updateArena();
 			
 			ListElements listElementsInTouch = ArenaUtil.getElementsInTouch(elementActor, this.round.getListElements());
@@ -277,11 +309,6 @@ public class RoundController {
 			this.round.setFinished(true);
 			stopRound();
 		}
-	}
-	
-	private void actionEnemyPursuePig(Enemy enemy) {		
-		//TODO Implementation
-		
 	}
 	
 	private void actionPigEatsFood(Food food) {
@@ -388,5 +415,16 @@ public class RoundController {
 		
 		this.round.setScore(this.round.getScore() + scoreValue);
 		roundCumulatedStatistics.setTotalScore(roundCumulatedStatistics.getTotalScore() + scoreValue);
+	}
+	
+	public void startMoveAnimation(Element element) {
+		Timer timer = new Timer(0, new MoveListener(this, element, this.round.getListElements()));
+		
+		timer.setDelay(500);
+		timer.start();
+	}
+	
+	private void startEnemyPursuePig(Enemy enemy) {		
+		
 	}
 }

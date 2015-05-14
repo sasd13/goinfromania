@@ -51,9 +51,9 @@ public class MenuRound extends JMenu implements ActionListener {
 		if (item.getText().compareTo(ITEM_PAUSE) == 0) {
 			roundController.pauseRound();
 		} else if (item.getText().compareTo(ITEM_STOP) == 0) {
-			roundController.stopRound();
+			roundController.showDialogConfirmStopRound();
 		} else if (item.getText().compareTo(ITEM_RESTART) == 0) {
-			roundController.restartRound();
+			roundController.showDialogConfirmRestartRound();
 		} else if (item.getText().compareTo(ITEM_SAVE) == 0) {
 			roundController.saveRound();
 		}

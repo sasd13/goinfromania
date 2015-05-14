@@ -136,10 +136,7 @@ public class GameView extends JFrame implements Observer, WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		boolean stopped = GameController.getInstance().stopRoundIfStarted();
-		if (stopped) {
-			GameController.getInstance().exitGame();
-		}
+		GameController.getInstance().showDialogConfirmExitGame();
 	}
 
 	@Override
