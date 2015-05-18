@@ -8,8 +8,7 @@ import java.awt.image.Raster;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import controller.GameController;
-import controller.RoundController;
+import controller.ArenaController;
 
 public class ColorAnimation extends Animation {
 	
@@ -45,8 +44,7 @@ public class ColorAnimation extends Animation {
             }
         }
         
-        RoundController roundController = GameController.getInstance().getRoundController();
-        roundController.updateArena();
+        ArenaController.repaintArena();
         
         this.scheduler = Executors.newScheduledThreadPool(2);
         endHit(image, raster);
@@ -58,8 +56,7 @@ public class ColorAnimation extends Animation {
 			@Override
 			public void run() {
 				bufferedImage.setData(raster);
-				RoundController roundController = GameController.getInstance().getRoundController();
-		        roundController.updateArena();
+				ArenaController.repaintArena();
 		        scheduler.shutdown();
 			}
 		};

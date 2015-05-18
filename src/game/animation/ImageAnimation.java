@@ -7,8 +7,7 @@ import java.awt.image.BufferedImage;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import controller.GameController;
-import controller.RoundController;
+import controller.ArenaController;
 
 public class ImageAnimation extends Animation {
 
@@ -37,8 +36,7 @@ public class ImageAnimation extends Animation {
 		
 		elementToAct.setImageWithDimension(image);
 		
-        RoundController roundController = GameController.getInstance().getRoundController();
-        roundController.updateArena();
+		ArenaController.repaintArena();
         
         this.scheduler = Executors.newScheduledThreadPool(2);
         endAnimation(elementToAct, originalImage);
@@ -50,8 +48,7 @@ public class ImageAnimation extends Animation {
 			@Override
 			public void run() {
 				element.setImage(image);
-				RoundController roundController = GameController.getInstance().getRoundController();
-		        roundController.updateArena();
+				ArenaController.repaintArena();
 		        scheduler.shutdown();
 			}
 		};

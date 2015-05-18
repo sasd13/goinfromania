@@ -87,6 +87,11 @@ public class Round extends Observable {
 			pig.setPosition(new Point());
 		}
 		
+		ListElements listElements = new ListElements();
+		listElements.add(pig);
+		
+		round.setListElements(listElements);
+		
 		return round;
 	}
 	

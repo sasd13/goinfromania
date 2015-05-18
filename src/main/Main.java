@@ -11,7 +11,8 @@ public class Main {
 			
 			@Override
 			public void run() {
-				GameController.getInstance().startGame();
+				GameController.initialize();
+				GameController.startGame();
 			}
 		});
 	}

@@ -10,55 +10,40 @@ import db.SettingDAO;
 
 public class SettingController {
 
-	private static SettingController instance = null;
+	private static Setting setting;
+	private static SettingView settingView;
 	
-	private Setting setting;
-	private SettingView settingView;
-	
-	private SettingController() {
-		this.setting = null;
-		this.settingView = null;
-	}
-	
-	public static synchronized SettingController getInstance() {
-		if (instance == null) {
-			instance = new SettingController();
-		}
+	public static void openSetting(String settingName) {
+		settingView = createView(settingName);
 		
-		return instance;
-	}
-	
-	public void openSetting(String settingName) {
-		this.settingView = createView(settingName);
+		setting = SettingDAO.load(settingName);
+		setting.addObserver(settingView);
+		settingView.update(setting, null);
 		
-		this.setting = SettingDAO.load(settingName);
-		this.setting.addObserver(this.settingView);
-		this.settingView.update(this.setting, null);
-		
-		this.settingView.pack();
+		settingView.pack();
 		//To center the frame on screen, must be called after pack()
-		this.settingView.setLocationRelativeTo(null);
-		this.settingView.setVisible(true);
+		settingView.setLocationRelativeTo(null);
+		settingView.setVisible(true);
 	}
 	
-	public void closeSetting() {
+	public static void closeSetting() {
 		String title = "Confirmation";
 		String message = "Save modifications ?";
 		
-		int selected = JOptionPane.showConfirmDialog(this.settingView, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
+		int selected = JOptionPane.showConfirmDialog(settingView, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
-			SettingDAO.save(this.setting);
+			SettingDAO.save(setting);
 		}
 		
-		this.setting.deleteObservers();		
-		this.settingView.dispose();
+		setting.deleteObservers();		
+		settingView.dispose();
 	}
 	
-	public void resetSetting() {
-		this.setting.reset();
+	public static void resetSetting() {
+		setting.reset();
 	}
 	
-	private SettingView createView(String settingName) {
+	private static SettingView createView(String settingName) {
 		switch (settingName) {
 			case GamePad.NAME :
 				return new GamePadView();
@@ -68,7 +53,7 @@ public class SettingController {
 		}
 	}
 	
-	public GamePad loadGamePad() {
+	public static GamePad loadGamePad() {
 		GamePad gamePad = (GamePad) SettingDAO.load(GamePad.NAME);
 		
 		return gamePad;

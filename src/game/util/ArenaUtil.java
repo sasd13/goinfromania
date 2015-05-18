@@ -3,6 +3,8 @@ package game.util;
 import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
+import game.element.character.Enemy;
+import game.element.character.Pig;
 import game.element.item.Wall;
 
 import java.awt.Dimension;
@@ -182,5 +184,13 @@ public class ArenaUtil {
 				//TODO Throw exception
 				return null;
 		}
+	}
+	
+	public static Direction pursuePig(Enemy enemy, Pig pig) {	
+		Direction direction = Direction.LEFT;
+		
+		//TODO
+		
+		return direction;		
 	}
 }

@@ -136,7 +136,7 @@ public class GameView extends JFrame implements Observer, WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		GameController.getInstance().showDialogConfirmExitGame();
+		GameController.showDialogConfirmExitGame();
 	}
 
 	@Override

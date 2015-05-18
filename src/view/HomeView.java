@@ -55,9 +55,9 @@ public class HomeView extends JPanel implements ActionListener {
 		JButton button = (JButton) e.getSource();
 		
 		if (button == this.buttonPlay) {
-			GameController.getInstance().newRound();
+			GameController.newRound();
 		} else if (button == this.buttonContinue) {
-			GameController.getInstance().displayListRounds();
+			GameController.displayListRounds();
 		}
 	}
 }

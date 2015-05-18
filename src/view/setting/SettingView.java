@@ -54,9 +54,9 @@ public abstract class SettingView extends JDialog implements Observer, ActionLis
 		JButton button = (JButton) arg0.getSource();
 		
 		if (button == this.buttonClose) {
-			SettingController.getInstance().closeSetting();
+			SettingController.closeSetting();
 		} else if (button == this.buttonReset) {
-			SettingController.getInstance().resetSetting();
+			SettingController.resetSetting();
 		}
 	}
 }

@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JRootPane;
 
 import view.DimensionConstants;
-import controller.GameController;
 import controller.RoundController;
 
 public class RoundMenuView extends JDialog implements Observer, WindowListener {
@@ -50,8 +49,7 @@ public class RoundMenuView extends JDialog implements Observer, WindowListener {
 
 	@Override
 	public void windowClosed(WindowEvent e) {
-		RoundController roundController = (RoundController) GameController.getInstance().getRoundController();
-		roundController.startRound();
+		RoundController.startRound();
 	}
 
 	@Override

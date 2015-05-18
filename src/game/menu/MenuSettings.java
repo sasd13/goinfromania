@@ -29,7 +29,7 @@ public class MenuSettings extends JMenu implements ActionListener {
 		JMenuItem item = (JMenuItem) e.getSource();
 		
 		if (item.getText().compareTo(ITEM_GAMEPAD) == 0) {
-			SettingController.getInstance().openSetting(GamePad.NAME);
+			SettingController.openSetting(GamePad.NAME);
 		}
 	}
 }

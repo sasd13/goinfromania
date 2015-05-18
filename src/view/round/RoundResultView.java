@@ -101,12 +101,10 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 		
 		dispose();
 		
-		RoundController roundController = GameController.getInstance().getRoundController();
-		
 		if (button == this.buttonNext) {
-			roundController.openNextRound();
+			RoundController.openNextRound();
 		} else if (button == this.buttonFinish) {
-			roundController.finishResultAndDisplayHome();
+			RoundController.finishResultAndDisplayHome();
 		}
 	}
 }

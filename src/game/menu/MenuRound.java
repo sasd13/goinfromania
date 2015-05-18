@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import controller.GameController;
 import controller.RoundController;
 
 public class MenuRound extends JMenu implements ActionListener {
@@ -46,16 +45,14 @@ public class MenuRound extends JMenu implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem item = (JMenuItem) e.getSource();
 		
-		RoundController roundController = GameController.getInstance().getRoundController();
-		
 		if (item.getText().compareTo(ITEM_PAUSE) == 0) {
-			roundController.pauseRound();
+			RoundController.pauseRound();
 		} else if (item.getText().compareTo(ITEM_STOP) == 0) {
-			roundController.showDialogConfirmStopRound();
+			RoundController.showDialogConfirmStopRound();
 		} else if (item.getText().compareTo(ITEM_RESTART) == 0) {
-			roundController.showDialogConfirmRestartRound();
+			RoundController.showDialogConfirmRestartRound();
 		} else if (item.getText().compareTo(ITEM_SAVE) == 0) {
-			roundController.saveRound();
+			RoundController.saveRound();
 		}
 	}
 }

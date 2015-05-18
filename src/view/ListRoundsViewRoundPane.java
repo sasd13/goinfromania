@@ -106,9 +106,9 @@ public class ListRoundsViewRoundPane extends JPanel implements ActionListener {
 		JButton button = (JButton) e.getSource();
 		
 		if (button == this.buttonContinue) {
-			GameController.getInstance().openRound(this.round);
+			GameController.openRound(this.round);
 		} else if (button == this.buttonRemove) {
-			GameController.getInstance().removeRound(this.round);
+			GameController.removeRound(this.round);
 		}
 	}
 }

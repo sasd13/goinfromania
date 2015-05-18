@@ -14,123 +14,108 @@ import game.round.Round;
 
 public class GameController {
 
-	private static GameController instance = null;
+	private static GameView gameView;
+	private static Game game;
 	
-	private GameView gameView;
-	private Game game;
-	
-	private RoundController roundController;
-	
-	private GameController() {
-		this.gameView = GameView.getInstance();
-		this.game = Game.getInstance();
-		this.game.addObserver(this.gameView);
-		this.gameView.update(this.game, null);
-		
-		this.roundController = null;
+	public static void initialize() {
+		gameView = GameView.getInstance();
+		game = Game.getInstance();
+		game.addObserver(gameView);
+		gameView.update(game, null);
 	}
 	
-	public static synchronized GameController getInstance() {
-		if (instance == null) {
-			instance = new GameController();
-		}
-		
-		return instance;
-	}
-	
-	public RoundController getRoundController() {
-		return this.roundController;
-	}
-	
-	public void startGame() {
+	public static void startGame() {
 		ListRounds listRounds = RoundDAO.loadAll();
-		this.game.setListRounds(listRounds);
+		game.setListRounds(listRounds);
 		
 		displayHome();
 		
-		this.gameView.pack();
+		gameView.pack();
 		//To center the frame on screen, must be called after pack()
-		this.gameView.setLocationRelativeTo(null);
-		this.gameView.setVisible(true);
+		gameView.setLocationRelativeTo(null);
+		gameView.setVisible(true);
 	}
 	
-	public void showDialogConfirmExitGame() {
+	public static void showDialogConfirmExitGame() {
 		String title = Game.NAME;
 		String message = "Confirm exit game ?";
 		
-		int selected = JOptionPane.showConfirmDialog(this.gameView, message, title, JOptionPane.YES_NO_OPTION);
+		int selected = JOptionPane.showConfirmDialog(gameView, message, title, JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
 			exitGame();
 		}
 	}
 	
-	private void exitGame() {
-		if (this.roundController != null && !this.roundController.isRoundStopped()) {
-			this.roundController.showDialogConfirmSaveRound();
+	private static void exitGame() {
+		boolean roundStopped = RoundController.hasRoundStopped();
+		if (!roundStopped) {
+			RoundController.stopRoundOnly();
+			RoundController.showDialogConfirmSaveRound();
 		}
 		
-		this.game.deleteObservers();
-		this.gameView.dispose();
+		game.deleteObservers();
+		gameView.dispose();
 	}
 	
-	public boolean stopRoundIfStarted() {
-		if (this.roundController == null || this.roundController.isRoundStopped()) {
+	public static boolean stopRoundIfStarted() {
+		boolean roundStopped = RoundController.hasRoundStopped();
+		if (roundStopped) {
 			return true;
 		}
 		
-		this.roundController.showDialogConfirmStopRound();
+		RoundController.showDialogConfirmStopRound();
 		
-		return this.roundController.isRoundStopped();
+		return RoundController.hasRoundStopped();
 	}
 	
-	public void displayHome() {
-		this.gameView.displayHomeView();
+	public static void displayHome() {
+		gameView.displayHomeView();
 	}
 	
-	public void displayRound() {
-		this.gameView.displayRoundView();
+	public static void displayRound() {
+		gameView.displayRoundView();
 	}
 	
-	public void displayListRounds() {
-		this.gameView.displayListRoundsView();
+	public static void displayListRounds() {
+		gameView.displayListRoundsView();
 	}
 	
-	public void displayListScores() {
-		this.gameView.displayListScoresView();
+	public static void displayListScores() {
+		gameView.displayListScoresView();
 	}
 	
-	public void newRound() {
+	public static void newRound() {
 		Round round = Round.getNewInstance();
 		
 		openRound(round);
 	}
 	
-	public void openRound(Round round) {
-		RoundView roundView = this.gameView.getRoundView();
-		this.roundController = new RoundController(roundView, round);	
+	public static void openRound(Round round) {
+		RoundView roundView = gameView.getRoundView();
+		RoundController.initialize(roundView, round);
 		
 		setMenuRoundEnabled(true);
 		displayRound();
 		
 		if (round.getRoundNumber() == 1) {
-			this.roundController.showDialogRoundRules();
+			RoundController.showDialogRoundRules();
 		}
-		this.roundController.displayRoundStarter();
-		this.roundController.startRound();
+		RoundController.displayRoundStarter();
+		RoundController.startRound();
 	}
 	
-	public void setMenuRoundEnabled(boolean enabled) {
-		((GameMenuBar) this.gameView.getJMenuBar()).setMenuRoundEnabled(enabled);
+	public static void setMenuRoundEnabled(boolean enabled) {
+		((GameMenuBar) gameView.getJMenuBar()).setMenuRoundEnabled(enabled);
 	}
 	
-	public void saveRound(Round round) {
+	public static void saveRound(Round round) {
 		round.setUpdatedAt(ZonedDateTime.now());
-		this.game.getListRounds().add(round);
+		game.getListRounds().add(round);
 		RoundDAO.save(round);
 	}
 	
-	public void removeRound(Round round) {
-		this.game.getListRounds().remove(round);
+	public static void removeRound(Round round) {
+		game.getListRounds().remove(round);
 		RoundDAO.remove(round);
 	}
 }

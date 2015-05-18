@@ -8,7 +8,6 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import controller.GameController;
 import controller.RoundController;
 import game.element.ListElements;
 import game.element.character.Pig;
@@ -62,12 +61,8 @@ public class RoundView extends JPanel implements Observer, KeyListener {
 		}
 	}
 	
-	public void updateArenaView() {
-		this.arenaView.repaint();
-	}
-	
-	public void requestFocusOnArenaView() {
-		this.arenaView.requestFocusInWindow();
+	public ArenaView getArenaView() {
+		return this.arenaView;
 	}
 	
 	public void displayRoundMenuView() {
@@ -92,13 +87,11 @@ public class RoundView extends JPanel implements Observer, KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		RoundController roundController = GameController.getInstance().getRoundController();
-		roundController.actionGamePad(e.getKeyCode());
+		RoundController.actionGamePad(e.getKeyCode());
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		RoundController roundController = GameController.getInstance().getRoundController();
-		roundController.actionGamePad(e.getKeyCode());
+		RoundController.actionGamePad(e.getKeyCode());
 	}
 }
