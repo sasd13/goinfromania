@@ -1,12 +1,12 @@
-package game.animation;
+package gamex.animation;
 
 import game.element.Element;
-import game.util.ImageLoader;
 
 import java.awt.image.BufferedImage;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import util.ImageLoader;
 import controller.ArenaController;
 
 public class ImageAnimation extends Animation {

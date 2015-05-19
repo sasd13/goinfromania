@@ -96,8 +96,6 @@ public class RoundController {
 		round.deleteObservers();
 		
 		round = loadRoundFromCache(round.getId());
-		round.addObserver(roundView);
-		roundView.update(round, null);
 		
 		initialize(roundView, round);
 		startRound();
@@ -121,32 +119,34 @@ public class RoundController {
 		}
 	}
 	
-	public static void stopRoundOnly() {
+	private static void stopRound() {
 		round.setState(State.STOPPED);
 		
 		ArenaController.stop();
 	}
 	
-	private static void stopRound() {
-		stopRoundOnly();
+	public static void stopRoundAndDisplayResult() {
+		stopRound();
 		
-		if (!round.isFinished()) {
-			round.deleteObservers();
-			
-			showDialogConfirmSaveRound();
-			exitRound();
+		Pig pig = round.getListElements().getPig();
+		if (pig.isDied()) {
+			round.setResult(Result.LOOSE);
 		} else {
-			Pig pig = round.getListElements().getPig();
-			if (pig.isDied()) {
-				round.setResult(Result.LOOSE);
-			} else {
-				round.setResult(Result.WIN);
-			}
-			
-			round.deleteObservers();
-			
-			displayRoundResult();
+			round.setResult(Result.WIN);
 		}
+		
+		round.deleteObservers();
+		
+		displayRoundResult();
+	}
+	
+	public static void stopRoundWithoutResultAndExit() {
+		stopRound();
+		
+		round.deleteObservers();
+		
+		showDialogConfirmSaveRound();
+		exitRound();
 	}
 	
 	public static boolean hasRoundStopped() {
@@ -160,7 +160,7 @@ public class RoundController {
 	public static void checkEatenCakes() {
 		if (round.getCountEatenCakes() == round.getMaxCountEatenCakes()) {
 			round.setFinished(true);
-			stopRound();
+			stopRoundAndDisplayResult();
 		}
 	}
 	
@@ -169,7 +169,7 @@ public class RoundController {
 		
 		if (pig.isDied()) {
 			round.setFinished(true);
-			stopRound();
+			stopRoundAndDisplayResult();
 		}
 	}
 	
@@ -252,34 +252,36 @@ public class RoundController {
 		}
 	}
 	
-	public static void cumuleStatistics(Element element) {
+	public static void cumuleFoodStatistics(Food food) {
 		RoundCumulatedStatistics roundCumulatedStatistics = round.getRoundCumulatedStatistics();
 		
-		int scoreValue = 0;
-		
-		if (element instanceof Food) {
-			Food food = (Food) element;
-			scoreValue = food.getScorePoint();
-			
-			if (food.getName().equals(Cake.NAME)) {
-				round.setCountEatenCakes(round.getCountEatenCakes() + 1);
-				roundCumulatedStatistics.setTotalEatenCakes(roundCumulatedStatistics.getTotalEatenCakes() + 1);
-			} else if (food.getName().equals(PoisonCake.NAME)) {
-				round.setCountEatenPoisonCakes(round.getCountEatenPoisonCakes() + 1);
-				roundCumulatedStatistics.setTotalEatenPoisonCakes(roundCumulatedStatistics.getTotalEatenPoisonCakes() + 1);
-			}
-		} else if (element instanceof Enemy) {
-			Enemy enemy = (Enemy) element;
-			scoreValue = enemy.getScorePoint();
-			
-			if (enemy.getName().equals(Nutritionist.NAME)) {
-				round.setCountNutritionistKilled(round.getCountNutritionistKilled() + 1);
-				roundCumulatedStatistics.setTotalNutritionistKilled(roundCumulatedStatistics.getTotalNutritionistKilled() + 1);
-			} else if (enemy.getName().equals(Virus.NAME)) {
-				round.setCountVirusKilled(round.getCountVirusKilled() + 1);
-				roundCumulatedStatistics.setTotalVirusKilled(roundCumulatedStatistics.getTotalVirusKilled() + 1);
-			}
+		if (food.getName().equals(Cake.NAME)) {
+			round.setCountEatenCakes(round.getCountEatenCakes() + 1);
+			roundCumulatedStatistics.setTotalEatenCakes(roundCumulatedStatistics.getTotalEatenCakes() + 1);
+		} else if (food.getName().equals(PoisonCake.NAME)) {
+			round.setCountEatenPoisonCakes(round.getCountEatenPoisonCakes() + 1);
+			roundCumulatedStatistics.setTotalEatenPoisonCakes(roundCumulatedStatistics.getTotalEatenPoisonCakes() + 1);
 		}
+		
+		cumuleScoreStatistics(food.getScorePoint());
+	}
+	
+	public static void cumuleEnemyStatistics(Enemy enemy) {
+		RoundCumulatedStatistics roundCumulatedStatistics = round.getRoundCumulatedStatistics();
+		
+		if (enemy.getName().equals(Nutritionist.NAME)) {
+			round.setCountNutritionistKilled(round.getCountNutritionistKilled() + 1);
+			roundCumulatedStatistics.setTotalNutritionistKilled(roundCumulatedStatistics.getTotalNutritionistKilled() + 1);
+		} else if (enemy.getName().equals(Virus.NAME)) {
+			round.setCountVirusKilled(round.getCountVirusKilled() + 1);
+			roundCumulatedStatistics.setTotalVirusKilled(roundCumulatedStatistics.getTotalVirusKilled() + 1);
+		}
+		
+		cumuleScoreStatistics(enemy.getScorePoint());
+	}
+	
+	private static void cumuleScoreStatistics(int scoreValue) {
+		RoundCumulatedStatistics roundCumulatedStatistics = round.getRoundCumulatedStatistics();
 		
 		round.setScore(round.getScore() + scoreValue);
 		roundCumulatedStatistics.setTotalScore(roundCumulatedStatistics.getTotalScore() + scoreValue);

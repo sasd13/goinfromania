@@ -1,8 +1,8 @@
 package game.element.food;
 
-import game.animation.Animation;
 import game.element.Element;
 import game.element.character.Pig;
+import gamex.animation.Animation;
 
 public abstract class Food extends Element {
 

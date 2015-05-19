@@ -4,9 +4,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import game.animation.ImageAnimation;
 import game.element.character.Character;
 import game.element.character.Pig;
+import gamex.animation.ImageAnimation;
 
 public class Diet extends Power {
 	

@@ -7,9 +7,9 @@ import game.element.character.Enemy;
 import game.element.character.Pig;
 import game.element.food.Food;
 import game.element.power.Power;
-import game.timer.AppearanceScheduler;
-import game.timer.MoveScheduler;
-import game.util.ArenaUtil;
+import util.ArenaUtil;
+import util.timer.AppearanceScheduler;
+import util.timer.MoveScheduler;
 import view.round.ArenaView;
 
 public class ArenaController {
@@ -103,7 +103,7 @@ public class ArenaController {
 		food.act(pig);
 		
 		listElements.remove(food);
-		RoundController.cumuleStatistics(food);
+		RoundController.cumuleFoodStatistics(food);
 		RoundController.checkEatenCakes();
 	}
 	
@@ -156,7 +156,7 @@ public class ArenaController {
 		
 		if (enemy.isDied()) {
 			listElements.remove(enemy);
-			RoundController.cumuleStatistics(enemy);
+			RoundController.cumuleEnemyStatistics(enemy);
 		}
 	}
 }

@@ -1,12 +1,11 @@
 package game.element;
 
-import game.util.ElementUtil;
-
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
+import util.ElementUtil;
 import view.DimensionConstants;
 
 public abstract class Element extends Observable {

@@ -2,8 +2,8 @@ package game.element.character;
 
 import java.awt.image.BufferedImage;
 
+import util.ImageLoader;
 import game.element.power.Disease;
-import game.util.ImageLoader;
 
 public class Virus extends Enemy {
 

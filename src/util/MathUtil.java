@@ -1,4 +1,4 @@
-package game.util;
+package util;
 
 import java.awt.Dimension;
 import java.awt.Point;

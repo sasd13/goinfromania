@@ -1,6 +1,6 @@
 package controller;
 
-import java.time.ZonedDateTime;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -49,8 +49,7 @@ public class GameController {
 	private static void exitGame() {
 		boolean roundStopped = RoundController.hasRoundStopped();
 		if (!roundStopped) {
-			RoundController.stopRoundOnly();
-			RoundController.showDialogConfirmSaveRound();
+			RoundController.stopRoundWithoutResultAndExit();
 		}
 		
 		game.deleteObservers();
@@ -109,7 +108,7 @@ public class GameController {
 	}
 	
 	public static void saveRound(Round round) {
-		round.setUpdatedAt(ZonedDateTime.now());
+		round.setUpdatedAt(new Date(System.currentTimeMillis()));
 		game.getListRounds().add(round);
 		RoundDAO.save(round);
 	}

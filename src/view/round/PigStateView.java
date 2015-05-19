@@ -19,7 +19,7 @@ public class PigStateView extends JPanel implements Observer {
 	private JProgressBar progressBarLifeValue, progressBarEnergyValue;
 	
 	public PigStateView() {
-		super(new GridLayout(1, 3));
+		super(new GridLayout(1, 2));
 		
 		setPreferredSize(new Dimension(DimensionConstants.PANEL_STATE_WIDTH, DimensionConstants.PANEL_STATE_HEIGHT));
 		

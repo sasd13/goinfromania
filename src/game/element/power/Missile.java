@@ -1,8 +1,8 @@
 package game.element.power;
 
-import game.animation.ImageAnimation;
 import game.element.character.Character;
 import game.element.character.Enemy;
+import gamex.animation.ImageAnimation;
 
 public class Missile extends Power {
 

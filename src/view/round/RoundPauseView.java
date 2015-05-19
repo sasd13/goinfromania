@@ -17,9 +17,9 @@ import javax.swing.JRootPane;
 import view.DimensionConstants;
 import controller.RoundController;
 
-public class RoundMenuView extends JDialog implements Observer, WindowListener {
+public class RoundPauseView extends JDialog implements Observer, WindowListener {
 
-	public RoundMenuView() {
+	public RoundPauseView() {
 		super();
 		
 		setLayout(new BorderLayout());

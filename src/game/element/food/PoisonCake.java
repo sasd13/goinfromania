@@ -1,8 +1,8 @@
 package game.element.food;
 
-import game.util.ImageLoader;
-
 import java.awt.image.BufferedImage;
+
+import util.ImageLoader;
 
 public class PoisonCake extends Cake {
 	

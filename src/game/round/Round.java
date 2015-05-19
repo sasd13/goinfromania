@@ -4,7 +4,7 @@ import game.element.ListElements;
 import game.element.character.Pig;
 
 import java.awt.Point;
-import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.Observable;
 
 public class Round extends Observable {
@@ -28,8 +28,8 @@ public class Round extends Observable {
 	private boolean finished;
 	private Result result;
 	private RoundCumulatedStatistics roundCumulatedStatistics;
-	private ZonedDateTime createdAt;
-	private ZonedDateTime updatedAt;
+	private Date createdAt;
+	private Date updatedAt;
 	
 	protected Round() {
 		super();
@@ -44,7 +44,7 @@ public class Round extends Observable {
 		this.finished = false;
 		this.result = Result.PROGRESS;
 		this.roundCumulatedStatistics = new RoundCumulatedStatistics();
-		this.createdAt = ZonedDateTime.now();
+		this.createdAt = new Date(System.currentTimeMillis());
 		this.updatedAt = null;
 		
 		resetStatistics();
@@ -257,22 +257,22 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
-	public ZonedDateTime getCreatedAt() {
+	public Date getCreatedAt() {
 		return this.createdAt;
 	}
 	
-	public void setCreatedAt(ZonedDateTime createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
-	public ZonedDateTime getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return this.updatedAt;
 	}
 	
-	public void setUpdatedAt(ZonedDateTime updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 		
 		setChanged();
