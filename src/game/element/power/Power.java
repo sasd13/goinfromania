@@ -6,12 +6,14 @@ import game.element.character.Character;
 public abstract class Power extends Element {
 
 	private boolean afar;
+	private boolean used;
 	private int powerValue;
 	
 	protected Power() {
 		super();
 		
 		this.afar = false;
+		this.used = false;
 		this.powerValue = 0;
 	}
 	
@@ -21,6 +23,17 @@ public abstract class Power extends Element {
 	
 	public void setAfar(boolean afar) {
 		this.afar = afar;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
+	public boolean isUsed() {
+		return this.used;
+	}
+	
+	public void setUsed(boolean used) {
+		this.used = used;
 		
 		setChanged();
 		notifyObservers();

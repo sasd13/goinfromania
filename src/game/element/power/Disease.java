@@ -58,7 +58,7 @@ public class Disease extends Power {
 		diseaseAnimation.setDelay(DURATION_DECREASE_PIG_SPEED);
 		diseaseAnimation.start();
 		
-		ImageAnimation imageAnimation = new ImageAnimation(pig, ANIMATION_IMAGE_PREFIX);
+		ImageAnimation imageAnimation = new ImageAnimation(pig, ANIMATION_IMAGE_PREFIX + pig.getImageName());
 		imageAnimation.setDelay(DURATION_DECREASE_PIG_SPEED);
 		imageAnimation.start();
 	}

@@ -1,6 +1,8 @@
 package util.animation;
 
 import game.element.Element;
+import game.element.ListElements;
+import game.element.power.Power;
 
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
@@ -8,18 +10,24 @@ import java.awt.image.BufferedImage;
 import util.ImageLoader;
 import controller.ArenaController;
 
-public class ImageAnimation extends Animation {
+public class BoomAnimation extends Animation {
 
-	private Element element;
-	private BufferedImage originalImage;
-	private String imageName;
+	public static final int BOOM_DELAY = 700;
 	
-	public ImageAnimation(Element element, String imageName) {
+	private Element elementToAct;
+	private Power power;
+	private String imageName;
+	private ListElements listElements;
+	
+	public BoomAnimation(Element elementToAct, Power power, String imageName, ListElements listElements) {
 		super();
 		
-		this.element = element;
-		this.originalImage = ImageLoader.loadFromPath(this.element.getImageName());
+		setDelay(BOOM_DELAY);
+		
+		this.elementToAct = elementToAct;
+		this.power = power;
 		this.imageName = imageName;
+		this.listElements = listElements;
 	}
 	
 	public String getImageName() {
@@ -36,9 +44,10 @@ public class ImageAnimation extends Animation {
 		
 		if (count == 0) {
 			BufferedImage image = ImageLoader.loadFromPath(this.imageName);
-			this.element.setImageWithDimension(image);
+			this.elementToAct.setImageWithDimension(image);
+			this.listElements.remove(this.power);
 		} else {
-			this.element.setImageWithDimension(this.originalImage);
+			this.listElements.remove(this.elementToAct);
 			timer.stop();
 		}
 		

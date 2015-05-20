@@ -2,6 +2,7 @@ package game.element.power;
 
 import java.awt.event.ActionEvent;
 
+import util.animation.BoomAnimation;
 import util.animation.ImageAnimation;
 import util.animation.PowerAnimation;
 import game.element.Element;
@@ -12,7 +13,9 @@ import game.element.character.Pig;
 public class Missile extends Power {
 
 	public static final String NAME = "Missile";
-	public static final String ANIMATION_IMAGE_PREFIX = "hit_";
+	public static final String IMAGENAME = "missile.png";
+	public static final String ANIMATION_HIT_IMAGE_PREFIX = "hit_";
+	public static final String ANIMATION_BOOM_IMAGE_PREFIX = "boom_";
 	
 	/* 
 	 * Diminue la vie d'un personnage de 25
@@ -38,8 +41,9 @@ public class Missile extends Power {
 		setName(NAME);
 		setMovable(true);
 		setSpeed(SPEED_HIGH);
-		setPowerValue(VALUE_DECREASE_CHARACTER_LIFE);
+		setImageName(IMAGENAME);
 		setAfar(true);
+		setPowerValue(VALUE_DECREASE_CHARACTER_LIFE);
 	}
 
 	@Override
@@ -49,7 +53,7 @@ public class Missile extends Power {
 		
 		enemy.setLife(enemy.getLife() - getPowerValue());
 		
-		ImageAnimation imageAnimation = new ImageAnimation(enemy, ANIMATION_IMAGE_PREFIX);
+		ImageAnimation imageAnimation = new ImageAnimation(enemy, ANIMATION_HIT_IMAGE_PREFIX + enemy.getImageName());
 		imageAnimation.start();
 	}
 }

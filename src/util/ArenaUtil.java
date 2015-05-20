@@ -3,8 +3,6 @@ package util;
 import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
-import game.element.character.Enemy;
-import game.element.character.Pig;
 import game.element.item.Wall;
 
 import java.awt.Dimension;
@@ -13,7 +11,7 @@ import java.awt.Point;
 public class ArenaUtil {
 	
 	public static final double MINIMAL_PROPORTION_COLLISION_TO_ACT = 0.5;
-	public static final double FACTOR_DISTANCE_NEXT_TO = 0.8;
+	public static final double FACTOR_DISTANCE_NEXT_TO = 1;
 
 	public static ListElements getElementsInTouch(Element elementActor, ListElements listElements) {
 		return detectElements(elementActor, elementActor.getPosition(), listElements);
@@ -180,10 +178,50 @@ public class ArenaUtil {
 		}
 	}
 	
-	public static Direction pursuePig(Enemy enemy, Pig pig) {	
+	public static Point getPositionNextTo(Element elementActor, Element elementToAct) {
+		Point position = new Point();
+		
+		int distanceX, distanceY;
+		
+		distanceX = elementActor.getPosition().x - elementToAct.getPosition().x;
+		distanceY = elementActor.getPosition().y - elementToAct.getPosition().y;
+		
+		if (distanceX > distanceY) {
+			position.x = elementToAct.getPosition().x;
+			position.y = elementActor.getPosition().y;
+		} else {
+			position.x = elementActor.getPosition().x;
+			position.y = elementToAct.getPosition().y;
+		}
+		
+		return position;
+	}
+	
+	public static Direction pursue(Element elementActor, Element elementToAct) {	
 		Direction direction = Direction.LEFT;
 		
-		//TODO
+		Direction directionX, directionY;
+		int distanceX, distanceY;
+		
+		distanceX = elementActor.getPosition().x - elementToAct.getPosition().x;
+		if (distanceX < 0) {
+			directionX = Direction.RIGHT;
+		} else {
+			directionX = Direction.LEFT;
+		}
+		
+		distanceY = elementActor.getPosition().y - elementToAct.getPosition().y;
+		if (distanceY < 0) {
+			directionY = Direction.DOWN;
+		} else {
+			directionY = Direction.UP;
+		}
+		
+		if (Math.abs(distanceX) > Math.abs(distanceY)) {
+			direction = directionX;
+		} else {
+			direction = directionY;
+		}
 		
 		return direction;		
 	}

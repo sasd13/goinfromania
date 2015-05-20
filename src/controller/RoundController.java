@@ -172,6 +172,13 @@ public class RoundController {
 		}
 	}
 	
+	public static void checkListElementsSize() {
+		if (round.getListElements().size() == round.MAX_ELEMENT) {
+			round.setFinished(true);
+			stopRoundAndDisplayResult();
+		}
+	}
+	
 	public static void showDialogConfirmSaveRound() {
 		String title = "Round";
 		String message = "Save progress ?";

@@ -61,7 +61,7 @@ public class Diet extends Power {
 		dietAnimation.setDuration(DURATION_STOP_PIG_EAT);
 		dietAnimation.start();
 		
-		ImageAnimation imageAnimation = new ImageAnimation(pig, ANIMATION_IMAGE_PREFIX);
+		ImageAnimation imageAnimation = new ImageAnimation(pig, ANIMATION_IMAGE_PREFIX + pig.getImageName());
 		imageAnimation.setDelay(DURATION_STOP_PIG_EAT);
 		imageAnimation.start();
 	}

@@ -57,7 +57,7 @@ public class Paralyze extends Power {
 		paralyzeAnimation.setDelay(DURATION_STOP_NUTRITIONIST_MOVE);
 		paralyzeAnimation.start();
 		
-		ImageAnimation imageAnimation = new ImageAnimation(enemy, ANIMATION_IMAGE_PREFIX);
+		ImageAnimation imageAnimation = new ImageAnimation(enemy, ANIMATION_IMAGE_PREFIX + enemy.getImageName());
 		imageAnimation.setDelay(DURATION_STOP_NUTRITIONIST_MOVE);
 		imageAnimation.start();
 	}

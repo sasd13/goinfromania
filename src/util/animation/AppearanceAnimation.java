@@ -1,7 +1,10 @@
 package util.animation;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.util.concurrent.ExecutionException;
 
+import controller.RoundController;
 import game.element.Element;
 import game.element.ListElements;
 import game.element.character.Nutritionist;
@@ -140,8 +143,19 @@ public class AppearanceAnimation extends Animation {
 			element = new Nutritionist();
 		} else {
 			element = new Wall();
-		} 
+		}
 		
-		new AppearancePositionWorker(element, this.listElements).execute();
+		AppearancePositionWorker appearancePositionWorker = new AppearancePositionWorker(element, this.listElements);
+		appearancePositionWorker.execute();
+		
+		try {
+			Point position = (Point) appearancePositionWorker.get();
+			element.setPosition(position);
+			
+			this.listElements.add(element);
+			RoundController.checkListElementsSize();
+		} catch (InterruptedException | ExecutionException e) {
+			e.printStackTrace();
+		}
 	}
 }

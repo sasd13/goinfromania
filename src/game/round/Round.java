@@ -10,6 +10,7 @@ import java.util.Observable;
 public class Round extends Observable {
 	
 	public static final int INCREMENTAL_CAKE_TO_EAT = 3;
+	public final int MAX_ELEMENT = 50;
 	
 	private static int countRound = 0;
 	private String id;
@@ -36,7 +37,7 @@ public class Round extends Observable {
 		this.id = "id-round-" + countRound;
 		this.roundNumber = 0;
 		this.level = Level.EASY;
-		this.listElements = new ListElements();
+		this.listElements = new ListElements(MAX_ELEMENT);
 		this.maxCountEatenCakes = INCREMENTAL_CAKE_TO_EAT;
 		this.state = null;
 		this.finished = false;

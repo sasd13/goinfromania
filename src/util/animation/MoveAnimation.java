@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
-import game.element.character.Enemy;
 import game.element.character.Nutritionist;
 import game.element.character.Pig;
 import game.element.character.Virus;
@@ -15,14 +14,14 @@ import controller.ArenaController;
 
 public class MoveAnimation extends Animation {
 
-	public static final int DEFAULT_DELAY = 800;
+	public static final int DELAY_MOVE = 700;
 	
 	private ListElements listElements;
 	
 	public MoveAnimation(ListElements listElements) {
 		this.listElements = listElements;
 		
-		setDelay(DEFAULT_DELAY);
+		setDelay(DELAY_MOVE);
 	}
 
 	@Override
@@ -36,17 +35,18 @@ public class MoveAnimation extends Animation {
 			if (element instanceof Pig || element instanceof Wall) {
 				continue;
 			} else if (element instanceof Nutritionist || element instanceof Virus) {
-				direction = ArenaUtil.pursuePig((Enemy) element, this.listElements.getPig());
+				direction = ArenaUtil.pursue(element, this.listElements.getPig());
+				ArenaController.actionMove(element, direction);
 			} else {
 				direction = ArenaUtil.getRandomDirection(element);
 				
 				boolean canMove = ArenaUtil.canMoveInDirection(element, direction, this.listElements);
 				if (!canMove) {
 					direction = ArenaUtil.getOpositeDirection(direction);
-				}	
-			}
+				}
 				
-			ArenaController.actionMove(element, direction);
+				ArenaController.actionMove(element, direction);
+			}
 		}
 	}
 }
