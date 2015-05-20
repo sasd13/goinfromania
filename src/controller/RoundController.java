@@ -4,7 +4,6 @@ import javax.swing.JOptionPane;
 
 import view.round.RoundView;
 import game.element.Direction;
-import game.element.Element;
 import game.element.character.Enemy;
 import game.element.character.Nutritionist;
 import game.element.character.Pig;
@@ -33,7 +32,7 @@ public class RoundController {
 		
 		gamePad = null;
 		
-		ArenaController.initialize(roundView.getArenaView(), round.getListElements());
+		ArenaController.initialize(roundView.getArenaView(), round);
 		
 		//Sauvegarde
 		saveRoundInCache();
@@ -115,7 +114,7 @@ public class RoundController {
 		
 		int selected = JOptionPane.showConfirmDialog(roundView, message, title, JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
-			stopRound();
+			stopRoundWithoutResultAndExit();
 		}
 	}
 	
@@ -198,8 +197,6 @@ public class RoundController {
 	
 	public static void openNextRound() {
 		round = Round.createNextRound(round, false, true);
-		
-		showDialogConfirmSaveRound();
 		
 		GameController.openRound(round);
 	}

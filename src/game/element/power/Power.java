@@ -2,18 +2,17 @@ package game.element.power;
 
 import game.element.Element;
 import game.element.character.Character;
-import gamex.animation.Animation;
 
 public abstract class Power extends Element {
 
 	private boolean afar;
-	private Animation animation;
+	private int powerValue;
 	
 	protected Power() {
 		super();
 		
 		this.afar = false;
-		this.animation = null;
+		this.powerValue = 0;
 	}
 	
 	public boolean isAfar() {
@@ -27,20 +26,16 @@ public abstract class Power extends Element {
 		notifyObservers();
 	}
 	
-	public Animation getAnimation() {
-		return this.animation;
+	public int getPowerValue() {
+		return this.powerValue;
 	}
 	
-	public void setAnimation(Animation animation) {
-		this.animation = animation;
+	public void setPowerValue(int powerValue) {
+		this.powerValue = powerValue;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
-	public void act(Character character) {
-		if (this.animation != null) {
-			this.animation.start(this, character);
-		}
-	}
+	public abstract void act(Character characterActor, Character characterToAct);
 }

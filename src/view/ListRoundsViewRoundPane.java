@@ -39,7 +39,7 @@ public class ListRoundsViewRoundPane extends JPanel implements ActionListener {
 		
 		panelProgression.add(new JLabel("Progression"));
 		
-		JPanel panelRound = new JPanel(new GridLayout(7, 2));
+		JPanel panelRound = new JPanel(new GridLayout(8, 2));
 		add(panelRound, BorderLayout.CENTER);
 		
 		panelRound.add(new JLabel("Round number : "));

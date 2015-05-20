@@ -27,9 +27,10 @@ public class Run extends Power {
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	@Override
-	public void act(Character character) {
-		super.act(character);
+	public void act(Character characterActor, Character characterToAct) {
+		// TODO Auto-generated method stub
+		
 	}
 }

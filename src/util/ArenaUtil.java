@@ -12,14 +12,14 @@ import java.awt.Point;
 
 public class ArenaUtil {
 	
-	public static final double MINIMAL_PROPORTION_COLLISION = 0.5;
+	public static final double MINIMAL_PROPORTION_COLLISION_TO_ACT = 0.5;
 	public static final double FACTOR_DISTANCE_NEXT_TO = 0.8;
 
 	public static ListElements getElementsInTouch(Element elementActor, ListElements listElements) {
 		return detectElements(elementActor, elementActor.getPosition(), listElements);
 	}
 	
-	public static boolean canMove(Element elementActor, Direction direction, ListElements listElements) {
+	public static boolean canMoveInDirection(Element elementActor, Direction direction, ListElements listElements) {
 		Point position = elementActor.getNextPosition(direction);
 		
 		if ((direction == Direction.LEFT && position.x < Element.POSITION_X_MIN) 
@@ -28,10 +28,10 @@ public class ArenaUtil {
 				|| (direction == Direction.DOWN && position.y > Element.POSITION_Y_MAX)) {
 			return false;
 		} else {
-			ListElements listDetectedElements = getElementsAtNextPosition(elementActor, direction, listElements);
+			ListElements listElementsAtNextPosition = getElementsAtNextPosition(elementActor, direction, listElements);
 			
-			for (int i=0; i<listDetectedElements.size(); i++) {
-				if (listDetectedElements.get(i) instanceof Wall) {
+			for (int i=0; i<listElementsAtNextPosition.size(); i++) {
+				if (listElementsAtNextPosition.get(i) instanceof Wall) {
 					return false;
 				}
 			}
@@ -72,7 +72,7 @@ public class ArenaUtil {
 		Dimension dimension2 = elementToAct.getDimension();
 		
 		double proportion = MathUtil.getMinimalProportionCollision(position1, dimension1, position2, dimension2);
-		if (proportion > MINIMAL_PROPORTION_COLLISION) {
+		if (proportion > MINIMAL_PROPORTION_COLLISION_TO_ACT) {
 			return true;
 		}
 		
@@ -127,7 +127,7 @@ public class ArenaUtil {
 		return distanceGravities <= distanceNextTo;
 	}
 	
-	public static Direction draw(Element element, ListElements listElements) {
+	public static Direction getRandomDirection(Element element) {
 		Direction direction = null;
 		
 		Point position = element.getPosition();
@@ -159,12 +159,6 @@ public class ArenaUtil {
 			direction = Direction.DOWN;
 		} else {
 			direction = Direction.UP;
-		}
-		
-		boolean canMove = canMove(element, direction, listElements);
-		
-		if (!canMove) {
-			return getOpositeDirection(direction);
 		}
 		
 		return direction;

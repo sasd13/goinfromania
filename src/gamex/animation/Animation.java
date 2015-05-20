@@ -1,20 +1,38 @@
 package gamex.animation;
 
-import game.element.Element;
+import java.awt.event.ActionListener;
 
-import java.util.concurrent.ScheduledExecutorService;
+import javax.swing.Timer;
 
-public abstract class Animation {
+public abstract class Animation implements ActionListener {
 	
-	public static final int DEFAULT_DURATION = 200;
+	public static final int DEFAULT_DELAY = 200;
 
-	private int duration;
+	private int initialDelay, delay, duration;
 	
-	protected ScheduledExecutorService scheduler;
+	protected int count = -1;
+	protected Timer timer;
 	
 	protected Animation() {
-		this.scheduler = null;
-		this.duration = DEFAULT_DURATION;
+		this.initialDelay = 0;
+		this.delay = DEFAULT_DELAY;
+		this.duration = 0;
+	}
+	
+	public int getInitialDelay() {
+		return this.initialDelay;
+	}
+	
+	public void setInitialDelay(int initialDelay) {
+		this.initialDelay = initialDelay;
+	}
+	
+	public int getDelay() {
+		return this.delay;
+	}
+	
+	public void setDelay(int delay) {
+		this.delay = delay;
 	}
 	
 	public int getDuration() {
@@ -25,5 +43,9 @@ public abstract class Animation {
 		this.duration = duration;
 	}
 	
-	public abstract void start(Element elementActor, Element elementToAct);
+	public void start() {
+		this.timer = new Timer(this.initialDelay, this);
+		this.timer.setDelay(this.delay);
+		this.timer.start();
+	}
 }

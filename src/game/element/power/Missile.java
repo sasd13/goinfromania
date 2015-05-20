@@ -1,8 +1,13 @@
 package game.element.power;
 
+import java.awt.event.ActionEvent;
+
+import game.element.Element;
 import game.element.character.Character;
 import game.element.character.Enemy;
+import game.element.character.Pig;
 import gamex.animation.ImageAnimation;
+import gamex.animation.PowerAnimation;
 
 public class Missile extends Power {
 
@@ -14,7 +19,18 @@ public class Missile extends Power {
 	 */	
 	public static final int VALUE_DECREASE_CHARACTER_LIFE = 25;
 	
-	private int value;
+	public class MissileAnimation extends PowerAnimation {
+
+		protected MissileAnimation(Element elementActor, Element elementToAct) {
+			super(elementActor, elementToAct);
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
 	
 	public Missile() {
 		super();
@@ -22,32 +38,18 @@ public class Missile extends Power {
 		setName(NAME);
 		setMovable(true);
 		setSpeed(SPEED_HIGH);
+		setPowerValue(VALUE_DECREASE_CHARACTER_LIFE);
 		setAfar(true);
-		
-		ImageAnimation animation = new ImageAnimation();
-		animation.setImageName(ANIMATION_IMAGE_PREFIX);
-		setAnimation(animation);
-		
-		this.value = VALUE_DECREASE_CHARACTER_LIFE;
-	}
-	
-	public int getValue() {
-		return this.value;
-	}
-	
-	public void setValue(int value) {
-		this.value = value;
-		
-		setChanged();
-		notifyObservers();
 	}
 
 	@Override
-	public void act(Character character) {
-		Enemy enemy = (Enemy) character;
+	public void act(Character characterActor, Character characterToAct) {
+		Pig pig = (Pig) characterActor;
+		Enemy enemy = (Enemy) characterToAct;
 		
-		enemy.setLife(enemy.getLife() - getValue());
+		enemy.setLife(enemy.getLife() - getPowerValue());
 		
-		super.act(character);
+		ImageAnimation imageAnimation = new ImageAnimation(enemy, ANIMATION_IMAGE_PREFIX);
+		imageAnimation.start();
 	}
 }

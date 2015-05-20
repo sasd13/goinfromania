@@ -1,12 +1,13 @@
 package game.element.power;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.awt.event.ActionEvent;
 
+import game.element.Element;
 import game.element.character.Character;
+import game.element.character.Enemy;
 import game.element.character.Pig;
 import gamex.animation.ImageAnimation;
+import gamex.animation.PowerAnimation;
 
 public class Disease extends Power {
 
@@ -14,77 +15,51 @@ public class Disease extends Power {
 	public static final String ANIMATION_IMAGE_PREFIX = "disease_";
 	
 	/* 
-	 * Ralentit le goinfre pendant 10 secondes et diminue la vie du goinfre de 20
+	 * Ralentit le goinfre pendant 8 secondes et diminue la vie du goinfre de 20
 	 */
-	public static final int DELAY_DECREASE_PIG_SPEED = 10000;
+	public static final int DURATION_DECREASE_PIG_SPEED = 8000;
 	public static final int VALUE_DECREASE_PIG_LIFE = 20;
 	
-	private int delay;
-	private int value;
-	
-	private ScheduledExecutorService scheduler;
+	private class DiseaseAnimation extends PowerAnimation {
+		
+		public DiseaseAnimation(Enemy enemy, Pig pig) {
+			super(enemy, pig);
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			count++;
+			
+			Pig pig = (Pig) getElementToAct();
+			
+			if (count == 0) {
+				pig.setLife(pig.getLife() - getPowerValue());
+				pig.setSpeed(SPEED_LOW);
+			} else {
+				pig.setSpeed(Element.SPEED_MEDIUM);
+				timer.stop();
+			}
+		}
+	}
 	
 	public Disease() {
 		super();
 		
 		setName(NAME);
-		
-		ImageAnimation animation = new ImageAnimation();
-		animation.setImageName(ANIMATION_IMAGE_PREFIX);
-		setAnimation(animation);
-		
-		this.delay = DELAY_DECREASE_PIG_SPEED;
-		this.value = VALUE_DECREASE_PIG_LIFE;
-	}
-	
-	public int getDelay() {
-		return this.delay;
-	}
-	
-	public void setDelay(int delay) {
-		this.delay = delay;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
-	public int getValue() {
-		return this.value;
-	}
-	
-	public void setValue(int value) {
-		this.value = value;
-		
-		setChanged();
-		notifyObservers();
+		setPowerValue(VALUE_DECREASE_PIG_LIFE);
 	}
 	
 	@Override
-	public void act(Character character) {
-		Pig pig = (Pig) character;
+	public void act(Character characterActor, Character characterToAct) {
+		Enemy enemy = (Enemy) characterActor;
+		Pig pig = (Pig) characterToAct;
 		
-		pig.setLife(pig.getLife() - getValue());
-		pig.setSpeed(SPEED_LOW);
+		DiseaseAnimation diseaseAnimation = new DiseaseAnimation(enemy, pig);
+		diseaseAnimation.setDelay(DURATION_DECREASE_PIG_SPEED);
+		diseaseAnimation.start();
 		
-		this.scheduler = Executors.newScheduledThreadPool(2);
-		
-		endDiseaseAct(pig);
-		
-		getAnimation().setDuration(getDelay());
-		
-		super.act(character);
-	}
-	
-	private synchronized void endDiseaseAct(final Pig pig) {
-		Runnable runnable = new Runnable() {
-			
-			@Override
-			public void run() {
-				pig.setSpeed(SPEED_MEDIUM);
-				scheduler.shutdown();
-			}
-		};
-		
-		this.scheduler.schedule(runnable, getDelay(), TimeUnit.MILLISECONDS);
+		ImageAnimation imageAnimation = new ImageAnimation(pig, ANIMATION_IMAGE_PREFIX);
+		imageAnimation.setDelay(DURATION_DECREASE_PIG_SPEED);
+		imageAnimation.start();
 	}
 }

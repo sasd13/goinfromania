@@ -9,6 +9,7 @@ import view.round.RoundView;
 import db.RoundDAO;
 import game.Game;
 import game.menu.GameMenuBar;
+import game.round.Level;
 import game.round.ListRounds;
 import game.round.Round;
 
@@ -86,7 +87,27 @@ public class GameController {
 	public static void newRound() {
 		Round round = Round.getNewInstance();
 		
-		openRound(round);
+		showDialogChooseRoundLevel(round);
+	}
+	
+	public static void showDialogChooseRoundLevel(Round round) {
+		String title = "New round";
+		String message = "Choose your level :";
+		
+		int selected = JOptionPane.showOptionDialog(null, message, title, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, Level.values(), Level.EASY);
+		if (selected == JOptionPane.CLOSED_OPTION) {
+			displayHome();
+		} else {
+			if (selected == 2) {
+				round.setLevel(Level.HARD);
+			} else if (selected == 1) {
+				round.setLevel(Level.NORMAL);
+			} else {
+				round.setLevel(Level.EASY);
+			}
+			
+			openRound(round);
+		}
 	}
 	
 	public static void openRound(Round round) {

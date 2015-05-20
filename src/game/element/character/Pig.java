@@ -3,7 +3,6 @@ package game.element.character;
 import java.awt.image.BufferedImage;
 
 import util.ImageLoader;
-import game.element.power.ListPowers;
 import game.element.power.Missile;
 import game.element.power.Paralyze;
 import game.element.power.Power;
@@ -21,7 +20,6 @@ public class Pig extends Character {
 	public static final int ENERGY_HIGH = 80;
 	public static final int ENERGY_MAX = 100;
 	
-	private ListPowers listPowers;
 	private boolean greedy;
 	private int energy;
 	
@@ -35,25 +33,8 @@ public class Pig extends Character {
 		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImageWithDimension(image);
 		
-		this.listPowers = new ListPowers();
-		this.listPowers.add(new Run());
-		this.listPowers.add(new Paralyze());
-		this.listPowers.add(new Missile());
-		this.listPowers.add(new SuperMissile());
-		
 		this.greedy = true;
 		this.energy = ENERGY_MIN;
-	}
-	
-	public ListPowers getListPowers() {
-		return this.listPowers;
-	}
-	
-	public void setListPowers(ListPowers listPowers) {
-		this.listPowers = listPowers;
-		
-		setChanged();
-		notifyObservers();
 	}
 	
 	public boolean isGreedy() {
@@ -86,13 +67,13 @@ public class Pig extends Character {
 	
 	public Power getPowerWithEnergy() {
 		if (this.energy == ENERGY_MAX) {
-			return this.listPowers.get(SuperMissile.NAME);
+			return new SuperMissile();
 		} else if (this.energy < ENERGY_MAX && this.energy >= ENERGY_MEDIUM) {
-			return this.listPowers.get(Missile.NAME);
+			return new Missile();
 		} else if (this.energy == ENERGY_MIN) {
-			return this.listPowers.get(Run.NAME);
+			return new Run();
 		} else {
-			return this.listPowers.get(Paralyze.NAME);
+			return new Paralyze();
 		}
 	}
 }

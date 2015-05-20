@@ -7,6 +7,7 @@ import game.element.character.Enemy;
 import game.element.character.Pig;
 import game.element.food.Food;
 import game.element.power.Power;
+import game.round.Round;
 import util.ArenaUtil;
 import util.timer.AppearanceScheduler;
 import util.timer.MoveScheduler;
@@ -20,11 +21,11 @@ public class ArenaController {
 	private static AppearanceScheduler appearanceScheduler;
 	private static MoveScheduler moveScheduler;
 	
-	public static void initialize(ArenaView myArenaView, ListElements myListElements) {
+	public static void initialize(ArenaView myArenaView, Round round) {
 		arenaView = myArenaView;
-		listElements = myListElements;
+		listElements = round.getListElements();
 		
-		appearanceScheduler = new AppearanceScheduler(listElements);
+		appearanceScheduler = new AppearanceScheduler(listElements, round.getLevel());
 		moveScheduler = new MoveScheduler(listElements);
 	}
 	
@@ -45,7 +46,7 @@ public class ArenaController {
 	}
 	
 	public static void actionMove(Element elementActor, Direction direction) {
-		boolean canMove = ArenaUtil.canMove(elementActor, direction, listElements);
+		boolean canMove = ArenaUtil.canMoveInDirection(elementActor, direction, listElements);
 		if (canMove) {
 			elementActor.move(direction);
 			repaintArena();
@@ -90,7 +91,7 @@ public class ArenaController {
 	private static void actionEnemyAttaksPig(Enemy enemy, Power power) {		
 		Pig pig = listElements.getPig();
 		
-		power.act(pig);
+		power.act(enemy, pig);
 		enemy.setPowerlessForDelay();
 		
 		RoundController.checkPigLife();
@@ -152,7 +153,9 @@ public class ArenaController {
 	}
 	
 	private static void actionPigAttaksEnemy(Enemy enemy, Power power) {
-		power.act(enemy);
+		Pig pig = listElements.getPig();
+		
+		power.act(pig, enemy);
 		
 		if (enemy.isDied()) {
 			listElements.remove(enemy);

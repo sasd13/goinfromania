@@ -9,9 +9,7 @@ import java.util.Observable;
 
 public class Round extends Observable {
 	
-	public static final int TOTAL_CAKE_TO_EAT_LEVEL_EASY = 10;
-	public static final int TOTAL_CAKE_TO_EAT_LEVEL_NORMAL = 20;
-	public static final int TOTAL_CAKE_TO_EAT_LEVEL_HARD = 30;
+	public static final int INCREMENTAL_CAKE_TO_EAT = 3;
 	
 	private static int countRound = 0;
 	private String id;
@@ -39,7 +37,7 @@ public class Round extends Observable {
 		this.roundNumber = 0;
 		this.level = Level.EASY;
 		this.listElements = new ListElements();
-		this.maxCountEatenCakes = TOTAL_CAKE_TO_EAT_LEVEL_EASY;
+		this.maxCountEatenCakes = INCREMENTAL_CAKE_TO_EAT;
 		this.state = null;
 		this.finished = false;
 		this.result = Result.PROGRESS;
@@ -80,6 +78,7 @@ public class Round extends Observable {
 		}
 		
 		round.setRoundNumber(round.getRoundNumber() + 1);
+		round.setMaxCountEatenCakes(round.getMaxCountEatenCakes() + INCREMENTAL_CAKE_TO_EAT);
 		round.resetStatistics();
 		
 		Pig pig = round.getListElements().getPig();
@@ -119,21 +118,6 @@ public class Round extends Observable {
 		
 		setChanged();
 		notifyObservers();
-		
-		switch (level) {
-			case EASY :
-				setMaxCountEatenCakes(TOTAL_CAKE_TO_EAT_LEVEL_EASY);
-				break;
-			case NORMAL :
-				setMaxCountEatenCakes(TOTAL_CAKE_TO_EAT_LEVEL_NORMAL);
-				break;
-			case HARD :
-				setMaxCountEatenCakes(TOTAL_CAKE_TO_EAT_LEVEL_HARD);
-				break;
-			default :
-				//TODO Throw exception
-				break;
-		}
 	}
 	
 	public ListElements getListElements() {

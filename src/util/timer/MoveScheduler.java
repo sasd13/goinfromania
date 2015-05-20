@@ -83,7 +83,12 @@ public class MoveScheduler implements ActionListener {
 				Direction direction = Direction.LEFT;
 				
 				if (element instanceof Cake) {
-					direction = ArenaUtil.draw(element, this.listElements);
+					direction = ArenaUtil.getRandomDirection(element);
+					
+					boolean canMove = ArenaUtil.canMoveInDirection(element, direction, this.listElements);
+					if (!canMove) {
+						direction = ArenaUtil.getOpositeDirection(direction);
+					}
 				} else if (element instanceof Nutritionist
 						|| element instanceof Virus) {
 					direction = ArenaUtil.pursuePig((Enemy) element, this.listElements.getPig());

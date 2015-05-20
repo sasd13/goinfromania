@@ -29,7 +29,5 @@ public class Cake extends Food {
 	@Override
 	public void act(Pig pig) {
 		pig.setEnergy(pig.getEnergy() + getEffectValue());
-		
-		super.act(pig);
 	}
 }

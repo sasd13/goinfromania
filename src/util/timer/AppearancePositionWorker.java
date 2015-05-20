@@ -29,11 +29,11 @@ public class AppearancePositionWorker extends SwingWorker<Point, Point> {
 		
 		boolean isNextTo = false;
 		do {
-			position.x = (int) (Math.random()*Element.POSITION_X_MAX + Element.POSITION_X_MIN);
-			position.y = (int) (Math.random()*Element.POSITION_Y_MAX + Element.POSITION_Y_MIN);
+			position.x = (int) (Math.random()*(Element.POSITION_X_MAX-51) + Element.POSITION_X_MIN);
+			position.y = (int) (Math.random()*(Element.POSITION_Y_MAX-51) + Element.POSITION_Y_MIN);
 			
-			position.x = (int) MathUtil.roundDown(position.x, 100);
-			position.y = (int) MathUtil.roundDown(position.y, 100);
+			position.x = (int) MathUtil.roundDown(position.x, 50);
+			position.y = (int) MathUtil.roundDown(position.y, 50);
 		
 			Element elementNextTo;
 			for (int i=0; i<this.listElements.size(); i++) {
@@ -50,9 +50,9 @@ public class AppearancePositionWorker extends SwingWorker<Point, Point> {
 		
 		this.element.setPosition(position);
 		
-		Element elementAtSamePosition = this.listElements.get(position);
+		ListElements listElementsInTouch = ArenaUtil.getElementsInTouch(this.element, this.listElements);
 		
-		if (elementAtSamePosition == null) {
+		if (listElementsInTouch.isEmpty()) {
 			this.listElements.add(this.element);
 		}
 		
