@@ -2,12 +2,12 @@ package game.element.power;
 
 import java.awt.event.ActionEvent;
 
+import util.animation.ImageAnimation;
+import util.animation.PowerAnimation;
 import game.element.Element;
 import game.element.character.Character;
 import game.element.character.Enemy;
 import game.element.character.Pig;
-import gamex.animation.ImageAnimation;
-import gamex.animation.PowerAnimation;
 
 public class Disease extends Power {
 

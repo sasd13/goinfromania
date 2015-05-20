@@ -6,7 +6,6 @@ import util.ImageLoader;
 import game.element.power.Missile;
 import game.element.power.Paralyze;
 import game.element.power.Power;
-import game.element.power.Run;
 import game.element.power.SuperMissile;
 
 public class Pig extends Character {
@@ -66,12 +65,10 @@ public class Pig extends Character {
 	}
 	
 	public Power getPowerWithEnergy() {
-		if (this.energy == ENERGY_MAX) {
+		if (this.energy >= ENERGY_HIGH) {
 			return new SuperMissile();
-		} else if (this.energy < ENERGY_MAX && this.energy >= ENERGY_MEDIUM) {
+		} else if (this.energy < ENERGY_HIGH && this.energy >= ENERGY_LOW) {
 			return new Missile();
-		} else if (this.energy == ENERGY_MIN) {
-			return new Run();
 		} else {
 			return new Paralyze();
 		}

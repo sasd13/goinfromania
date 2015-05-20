@@ -9,8 +9,8 @@ import game.element.food.Food;
 import game.element.power.Power;
 import game.round.Round;
 import util.ArenaUtil;
-import util.timer.AppearanceScheduler;
-import util.timer.MoveScheduler;
+import util.animation.AppearanceAnimation;
+import util.animation.MoveAnimation;
 import view.round.ArenaView;
 
 public class ArenaController {
@@ -18,27 +18,27 @@ public class ArenaController {
 	private static ArenaView arenaView;
 	private static ListElements listElements;
 	
-	private static AppearanceScheduler appearanceScheduler;
-	private static MoveScheduler moveScheduler;
+	private static AppearanceAnimation appearanceAnimation;
+	private static MoveAnimation moveAnimation;
 	
 	public static void initialize(ArenaView myArenaView, Round round) {
 		arenaView = myArenaView;
 		listElements = round.getListElements();
 		
-		appearanceScheduler = new AppearanceScheduler(listElements, round.getLevel());
-		moveScheduler = new MoveScheduler(listElements);
+		appearanceAnimation = new AppearanceAnimation(listElements, round.getLevel());
+		moveAnimation = new MoveAnimation(listElements);
 	}
 	
 	public static void start() {		
 		arenaView.requestFocusInWindow();
 		
-		appearanceScheduler.start();
-		moveScheduler.start();
+		appearanceAnimation.start();
+		moveAnimation.start();
 	}
 	
 	public static void stop() {
-		appearanceScheduler.stop();
-		moveScheduler.stop();
+		appearanceAnimation.stop();
+		moveAnimation.stop();
 	}
 	
 	public static void repaintArena() {

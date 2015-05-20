@@ -1,4 +1,4 @@
-package gamex.animation;
+package util.animation;
 
 import game.element.Element;
 
@@ -12,14 +12,22 @@ public class ImageAnimation extends Animation {
 
 	private Element element;
 	private BufferedImage originalImage;
-	private String prefix;
+	private String imagePrefix;
 	
-	public ImageAnimation(Element element, String prefix) {
+	public ImageAnimation(Element element, String imagePrefix) {
 		super();
 		
 		this.element = element;
 		this.originalImage = ImageLoader.loadFromPath(this.element.getImageName());
-		this.prefix = prefix;
+		this.imagePrefix = imagePrefix;
+	}
+	
+	public String getImagePrefix() {
+		return this.imagePrefix;
+	}
+	
+	public void setImagePrefix(String imagePrefix) {
+		this.imagePrefix = imagePrefix;
 	}
 	
 	@Override
@@ -27,11 +35,11 @@ public class ImageAnimation extends Animation {
 		count++;
 		
 		if (count == 0) {
-			BufferedImage image = ImageLoader.loadFromPath(this.prefix + this.element.getImageName());
+			BufferedImage image = ImageLoader.loadFromPath(this.imagePrefix + this.element.getImageName());
 			this.element.setImageWithDimension(image);
 		} else {
 			this.element.setImageWithDimension(this.originalImage);
-			this.timer.stop();
+			timer.stop();
 		}
 		
 		ArenaController.repaintArena();

@@ -252,10 +252,10 @@ public class RoundController {
 	public static void cumuleFoodStatistics(Food food) {
 		RoundCumulatedStatistics roundCumulatedStatistics = round.getRoundCumulatedStatistics();
 		
-		if (food.getName().equals(Cake.NAME)) {
+		if (food instanceof Cake) {
 			round.setCountEatenCakes(round.getCountEatenCakes() + 1);
 			roundCumulatedStatistics.setTotalEatenCakes(roundCumulatedStatistics.getTotalEatenCakes() + 1);
-		} else if (food.getName().equals(PoisonCake.NAME)) {
+		} else if (food instanceof PoisonCake) {
 			round.setCountEatenPoisonCakes(round.getCountEatenPoisonCakes() + 1);
 			roundCumulatedStatistics.setTotalEatenPoisonCakes(roundCumulatedStatistics.getTotalEatenPoisonCakes() + 1);
 		}

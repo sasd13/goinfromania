@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 
 import view.DimensionConstants;
-import controller.GameController;
 import controller.RoundController;
 
 public class RoundResultView extends JDialog implements Observer, ActionListener {

@@ -2,10 +2,11 @@ package game.element.power;
 
 import java.awt.event.ActionEvent;
 
+import util.animation.ImageAnimation;
+import util.animation.PowerAnimation;
 import game.element.character.Character;
 import game.element.character.Enemy;
 import game.element.character.Pig;
-import gamex.animation.PowerAnimation;
 
 public class Paralyze extends Power {
 
@@ -54,6 +55,10 @@ public class Paralyze extends Power {
 		
 		ParalyzeAnimation paralyzeAnimation = new ParalyzeAnimation(pig, enemy);
 		paralyzeAnimation.setDelay(DURATION_STOP_NUTRITIONIST_MOVE);
-		paralyzeAnimation.start();		
+		paralyzeAnimation.start();
+		
+		ImageAnimation imageAnimation = new ImageAnimation(enemy, ANIMATION_IMAGE_PREFIX);
+		imageAnimation.setDelay(DURATION_STOP_NUTRITIONIST_MOVE);
+		imageAnimation.start();
 	}
 }

@@ -132,7 +132,7 @@ public class ArenaUtil {
 		
 		Point position = element.getPosition();
 		
-		double tokenLeft, tokenRight, tokenUp, tokenDown, tokenX, tokenY, token;
+		double tokenLeft, tokenRight, tokenUp, tokenDown;
 		
 		tokenLeft = 1000*position.x / Element.POSITION_X_MAX;
 		tokenRight = 1000 - tokenLeft;

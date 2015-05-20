@@ -1,4 +1,4 @@
-package gamex.animation;
+package util.animation;
 
 import java.awt.event.ActionListener;
 
@@ -47,5 +47,13 @@ public abstract class Animation implements ActionListener {
 		this.timer = new Timer(this.initialDelay, this);
 		this.timer.setDelay(this.delay);
 		this.timer.start();
+	}
+	
+	public void restart() {
+		this.timer.restart();
+	}
+	
+	public void stop() {
+		this.timer.stop();
 	}
 }

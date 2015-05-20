@@ -1,26 +1,21 @@
 package game.element.food;
 
-import java.awt.image.BufferedImage;
+import game.element.character.Pig;
 
-import util.ImageLoader;
+public class PoisonCake extends Food {
 
-public class PoisonCake extends Cake {
-	
-	public static final String NAME = "PoisonCake";
-	public static final String IMAGE_NAME = "cake_2.png";
+	public static final int VALUE_DECREASE_PIG_ENERGY = Cake.VALUE_INCREASE_PIG_ENERGY;
 	public static final int SCORE_POINT = 0 - Cake.SCORE_POINT;
 	
-	public static final int VALUE_EVOLVE_PIG_ENERGY = 0 - Cake.VALUE_EVOLVE_PIG_ENERGY;
-	
-	public PoisonCake() {
+	protected PoisonCake() {
 		super();
 		
-		setName(NAME);
-		setImageName(IMAGE_NAME);
-		setEffectValue(VALUE_EVOLVE_PIG_ENERGY);
+		setEffectValue(VALUE_DECREASE_PIG_ENERGY);
 		setScorePoint(SCORE_POINT);
-		
-		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
-		setImageWithDimension(image);
+	}
+
+	@Override
+	public void act(Pig pig) {
+		pig.setEnergy(pig.getEnergy() - getEffectValue());
 	}
 }

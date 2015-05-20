@@ -1,4 +1,4 @@
-package gamex.animation;
+package util.animation;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -7,14 +7,14 @@ import java.awt.image.Raster;
 
 import controller.ArenaController;
 
-public class ColorAnimation extends Animation {
+public class ColorImageAnimation extends Animation {
 	
 	private Color color;
 	
 	private BufferedImage image;
 	private Raster raster;
 	
-	public ColorAnimation(BufferedImage image) {
+	public ColorImageAnimation(BufferedImage image) {
 		super();
 		
 		this.color = Color.RED;
@@ -23,7 +23,7 @@ public class ColorAnimation extends Animation {
 		this.raster = this.image.getData();
 	}
 	
-	public ColorAnimation(BufferedImage image, Color color) {
+	public ColorImageAnimation(BufferedImage image, Color color) {
 		this(image);
 		
 		setColor(color);

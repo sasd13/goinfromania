@@ -1,8 +1,7 @@
-package util.timer;
+package util.animation;
 
 import game.element.Element;
 import game.element.ListElements;
-import game.element.character.Pig;
 
 import util.ArenaUtil;
 import util.MathUtil;
@@ -24,8 +23,6 @@ public class AppearancePositionWorker extends SwingWorker<Point, Point> {
 	@Override
 	protected Point doInBackground() throws Exception {
 		Point position = new Point();
-		
-		Pig pig = this.listElements.getPig();
 		
 		boolean isNextTo = false;
 		do {

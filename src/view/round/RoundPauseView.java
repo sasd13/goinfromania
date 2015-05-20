@@ -12,6 +12,7 @@ import java.util.Observer;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JRootPane;
 
 import view.DimensionConstants;
@@ -29,9 +30,12 @@ public class RoundPauseView extends JDialog implements Observer, WindowListener 
 		setResizable(false);
 		setUndecorated(true);
 		getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
-		
-		add(new JLabel("Jeu en pause"), BorderLayout.CENTER);
 		addWindowListener(this);
+		
+		JPanel panelPause = new JPanel();
+		getContentPane().add(panelPause);
+		
+		panelPause.add(new JLabel("Jeu en pause"), BorderLayout.CENTER);
 	}
 	
 	@Override

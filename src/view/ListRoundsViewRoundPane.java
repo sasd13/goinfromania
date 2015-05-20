@@ -22,7 +22,7 @@ public class ListRoundsViewRoundPane extends JPanel implements ActionListener {
 	private JLabel labelRoundNumberValue,
 		labelLevelValue,
 		labelCakesValue,
-		labelScoreValue,
+		labelCumulatedScoreValue,
 		labelDateUpdatedValue,
 		labelPigLifeValue,
 		labelPigEnergyValue;
@@ -54,14 +54,6 @@ public class ListRoundsViewRoundPane extends JPanel implements ActionListener {
 		this.labelCakesValue = new JLabel();
 		panelRound.add(this.labelCakesValue);
 		
-		panelRound.add(new JLabel("Score : "));
-		this.labelScoreValue = new JLabel();
-		panelRound.add(this.labelScoreValue);
-		
-		panelRound.add(new JLabel("Updated : "));
-		this.labelDateUpdatedValue = new JLabel();
-		panelRound.add(this.labelDateUpdatedValue);
-		
 		panelRound.add(new JLabel("Pig life : "));
 		this.labelPigLifeValue = new JLabel();
 		panelRound.add(this.labelPigLifeValue);
@@ -69,6 +61,14 @@ public class ListRoundsViewRoundPane extends JPanel implements ActionListener {
 		panelRound.add(new JLabel("Pig energy : "));
 		this.labelPigEnergyValue = new JLabel();
 		panelRound.add(this.labelPigEnergyValue);
+		
+		panelRound.add(new JLabel("Cumulated score : "));
+		this.labelCumulatedScoreValue = new JLabel();
+		panelRound.add(this.labelCumulatedScoreValue);
+		
+		panelRound.add(new JLabel("Updated : "));
+		this.labelDateUpdatedValue = new JLabel();
+		panelRound.add(this.labelDateUpdatedValue);
 		
 		JPanel panelButton = new JPanel();
 		add(panelButton, BorderLayout.SOUTH);
@@ -92,7 +92,7 @@ public class ListRoundsViewRoundPane extends JPanel implements ActionListener {
 		this.labelRoundNumberValue.setText(String.valueOf(round.getRoundNumber()));
 		this.labelLevelValue.setText(String.valueOf(round.getLevel()));
 		this.labelCakesValue.setText(round.getCountEatenCakes() + "/" + round.getMaxCountEatenCakes());
-		this.labelScoreValue.setText(String.valueOf(round.getScore()));
+		this.labelCumulatedScoreValue.setText(String.valueOf(round.getScore()));
 		this.labelDateUpdatedValue.setText(String.valueOf(round.getUpdatedAt()));
 		
 		Pig pig = round.getListElements().getPig();

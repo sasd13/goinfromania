@@ -1,4 +1,4 @@
-package gamex.animation;
+package util.animation;
 
 import game.element.Element;
 

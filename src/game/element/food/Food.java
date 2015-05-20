@@ -12,6 +12,9 @@ public abstract class Food extends Element {
 	protected Food() {
 		super();
 		
+		setMovable(true);
+		setSpeed(SPEED_LOW);
+		
 		this.eated = false;
 		this.effectValue = 0;
 		this.scorePoint = 0;

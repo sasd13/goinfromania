@@ -34,6 +34,7 @@ public class GameView extends JFrame implements Observer, WindowListener {
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
+		addWindowListener(this);
 		
 		this.gameMenuBar = new GameMenuBar();
 		setJMenuBar(this.gameMenuBar);
@@ -57,8 +58,6 @@ public class GameView extends JFrame implements Observer, WindowListener {
 		this.listScoresView = new ListScoresView();
 		this.listScoresView.setBounds(0, 0, DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
 		this.layeredPane.add(this.listScoresView, JLayeredPane.DEFAULT_LAYER);
-		
-		addWindowListener(this);
 	}
 	
 	public static synchronized GameView getInstance() {

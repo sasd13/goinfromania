@@ -10,7 +10,7 @@ public class Virus extends Enemy {
 	public static final String NAME = "Virus";
 	public static final String IMAGE_NAME = "virus.png";
 	public static final int LIFE_VALUE = 100;
-	public static final int SCORE_POINT = 1000;
+	public static final int SCORE_POINT = 500;
 	
 	public Virus() {
 		super();
