@@ -2,7 +2,7 @@ package controller;
 
 import anim.power.DietAnimation;
 import anim.power.DiseaseAnimation;
-import anim.power.EnemyPowerlessAnimation;
+import anim.power.PowerlessAnimation;
 import game.element.character.Enemy;
 import game.element.character.Nutritionist;
 import game.element.character.Pig;
@@ -12,6 +12,8 @@ import game.element.power.Disease;
 import game.element.power.Power;
 
 public class EnemyController {
+	
+	private static final int DELAY_BEFORE_ENEMY_ATTAK_AGAIN = 2000;
 
 	public static void actionEnemyAttaksPig(Power power, Enemy enemy, Pig pig) {
 		power.setUsed(true);
@@ -38,7 +40,8 @@ public class EnemyController {
 	}
 	
 	private static void makePowerlessForDuration(Enemy enemy) {
-		EnemyPowerlessAnimation enemyPowerlessAnimation = new EnemyPowerlessAnimation(enemy);
-		enemyPowerlessAnimation.start();
+		PowerlessAnimation powerlessAnimation = new PowerlessAnimation(enemy);
+		powerlessAnimation.setDelay(DELAY_BEFORE_ENEMY_ATTAK_AGAIN);
+		powerlessAnimation.start();
 	}
 }

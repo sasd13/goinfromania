@@ -24,6 +24,14 @@ public class BoomAnimation extends Animation {
 		this.power = power;
 	}
 	
+	public Power getPower() {
+		return this.power;
+	}
+	
+	public void setPower(Power power) {
+		this.power = power;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		count++;
