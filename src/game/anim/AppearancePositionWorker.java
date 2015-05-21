@@ -1,9 +1,8 @@
-package anim;
+package game.anim;
 
 import game.element.Element;
 import game.element.ListElements;
-
-import util.MathUtil;
+import game.util.MathUtil;
 
 import java.awt.Point;
 

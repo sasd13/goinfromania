@@ -2,8 +2,8 @@ package game.element.character;
 
 import java.awt.image.BufferedImage;
 
-import util.ImageLoader;
 import game.element.power.Diet;
+import game.util.ImageLoader;
 
 public class Nutritionist extends Enemy {
 

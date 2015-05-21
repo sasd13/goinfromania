@@ -1,12 +1,15 @@
 package game.element.character;
 
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-import util.ImageLoader;
+import game.element.Direction;
 import game.element.power.Missile;
 import game.element.power.Paralyze;
 import game.element.power.Power;
 import game.element.power.SuperMissile;
+import game.util.ElementUtil;
+import game.util.ImageLoader;
 
 public class Pig extends Character {
 
@@ -18,6 +21,13 @@ public class Pig extends Character {
 	public static final int ENERGY_MEDIUM = 50;
 	public static final int ENERGY_HIGH = 80;
 	public static final int ENERGY_MAX = 100;
+	
+	public static final int SPEED_MIN = -100;
+	public static final int SPEED_NULL = 0;
+	public static final int SPEED_LOW = 20;
+	public static final int SPEED_MEDIUM = 50;
+	public static final int SPEED_HIGH = 80;
+	public static final int SPEED_MAX = 100;
 	
 	private boolean greedy;
 	private int energy;
@@ -35,6 +45,15 @@ public class Pig extends Character {
 		
 		this.greedy = true;
 		this.energy = ENERGY_MIN;
+	}
+	
+	@Override
+	public Point getNextPosition(Direction direction) {
+		Point nextPosition = super.getNextPosition(direction);
+		
+		nextPosition = ElementUtil.recalibration(nextPosition, direction, getSpeed()); //Repositionnement
+		
+		return nextPosition;
 	}
 	
 	public boolean isGreedy() {

@@ -33,7 +33,7 @@ public class RoundPauseView extends JDialog implements Observer, WindowListener 
 		addWindowListener(this);
 		
 		JPanel panelPause = new JPanel();
-		getContentPane().add(panelPause);
+		getContentPane().add(panelPause, BorderLayout.CENTER);
 		
 		panelPause.add(new JLabel("Jeu en pause"), BorderLayout.CENTER);
 	}

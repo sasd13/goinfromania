@@ -1,25 +1,25 @@
-package anim;
+package game.anim;
 
 import game.element.Element;
+import game.util.ImageLoader;
 
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
-import util.ImageLoader;
 import controller.ArenaController;
 
 public class ImageAnimation extends Animation {
 
-	private Element element;
-	private BufferedImage originalImage;
 	private String imageName;
+	private Element elementToAct;
+	private BufferedImage originalImage;
 	
-	public ImageAnimation(Element element, String imageName) {
+	public ImageAnimation(String imageName, Element elementToAct) {
 		super();
 		
-		this.element = element;
-		this.originalImage = ImageLoader.loadFromPath(this.element.getImageName());
 		this.imageName = imageName;
+		this.elementToAct = elementToAct;
+		this.originalImage = ImageLoader.loadFromPath(this.elementToAct.getImageName());
 	}
 	
 	public String getImageName() {
@@ -30,15 +30,23 @@ public class ImageAnimation extends Animation {
 		this.imageName = imageName;
 	}
 	
+	public Element getElementToAct() {
+		return this.elementToAct;
+	}
+	
+	public void setElementToAct(Element elementToAct) {
+		this.elementToAct = elementToAct;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		count++;
 		
 		if (count == 0) {
 			BufferedImage image = ImageLoader.loadFromPath(this.imageName);
-			this.element.setImageWithDimension(image);
+			this.elementToAct.setImageWithDimension(image);
 		} else {
-			this.element.setImageWithDimension(this.originalImage);
+			this.elementToAct.setImageWithDimension(this.originalImage);
 			timer.stop();
 		}
 		

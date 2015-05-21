@@ -1,7 +1,6 @@
 package game.element.power;
 
 import game.element.Element;
-import game.element.character.Character;
 
 public abstract class Power extends Element {
 
@@ -49,6 +48,4 @@ public abstract class Power extends Element {
 		setChanged();
 		notifyObservers();
 	}
-	
-	public abstract void act(Character characterActor, Character characterToAct);
 }

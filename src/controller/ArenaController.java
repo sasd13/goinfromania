@@ -1,15 +1,9 @@
 package controller;
 
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.Timer;
-
-import anim.AppearanceAnimation;
-import anim.MoveAnimation;
-import anim.power.BoomAnimation;
-import anim.power.MissileNextAnimation;
+import game.anim.AppearanceAnimation;
+import game.anim.ImageAnimation;
+import game.anim.MoveAnimation;
+import game.anim.power.MissileAnimation;
 import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
@@ -19,7 +13,7 @@ import game.element.food.Food;
 import game.element.power.Missile;
 import game.element.power.Power;
 import game.round.Round;
-import util.ArenaUtil;
+import game.util.ArenaUtil;
 import view.round.ArenaView;
 
 public class ArenaController {
@@ -54,6 +48,14 @@ public class ArenaController {
 		arenaView.repaint();
 	}
 	
+	public static void addElement(Element element) {
+		listElements.add(element);
+	}
+	
+	public static void removeElement(Element element) {
+		listElements.remove(element);
+	}
+	
 	public static void actionMove(Element elementActor, Direction direction) {
 		boolean canMove = ArenaUtil.canMoveInDirection(elementActor, direction, listElements);
 		if (canMove) {
@@ -82,61 +84,29 @@ public class ArenaController {
 					Enemy enemy = (Enemy) elementInTouch;
 					
 					if (enemy.isPowerful()) {
-						actionEnemyAttaksPig(enemy, enemy.getPower());
+						EnemyController.actionEnemyAttaksPig(enemy.getPower(), enemy, pig);
 					}
 				} else if (elementInTouch instanceof Food) {
+					Food food = (Food) elementInTouch;
+					
 					if (pig.isGreedy()) {
-						actionPigEatsFood((Food) elementInTouch);
+						FoodController.actionPigEatsFood(food, pig);
 					}
 				}
-			} else if (elementActor instanceof Enemy) {
+			} else if (elementActor instanceof Enemy && elementInTouch instanceof Pig) {
 				Enemy enemy = (Enemy) elementActor;
 				
-				if (elementInTouch instanceof Pig) {
-					if (enemy.isPowerful()) {
-						actionEnemyAttaksPig(enemy, enemy.getPower());
-					}
+				if (enemy.isPowerful()) {
+					EnemyController.actionEnemyAttaksPig(enemy.getPower(), enemy, (Pig) elementInTouch);
 				}
 			}
 		}
 	}
 	
-	public static void actionEnemyAttaksPig(Enemy enemy, Power power) {		
-		Pig pig = listElements.getPig();
-		
-		power.act(enemy, pig);
-		power.setUsed(true);
-		enemy.setPowerlessForDelay();
-		
-		RoundController.checkPigLife();
-	}
-	
-	public static void actionPigEatsFood(Food food) {
-		Pig pig = listElements.getPig();
-		
-		food.act(pig);
-		
-		food.setEated(true);
-		listElements.remove(food);
-		
-		RoundController.cumuleFoodStatistics(food);
-		RoundController.checkEatenCakes();
-	}
-	
 	public static void initPigAttak() {
-		boolean hasAttakedNextTo = actionPigAttaksNextTo();
-		if (!hasAttakedNextTo) {
-			actionPigAttaksAfar();
-		}
-	}
-	
-	private static boolean actionPigAttaksNextTo() {
 		Pig pig = listElements.getPig();
 		
 		ListElements listElementsNextTo = ArenaUtil.getElementsNextTo(pig, listElements);
-		if (listElementsNextTo.isEmpty()) {
-			return false;
-		}
 		
 		Element elementNextTo;
 		for (int i=0; i<listElementsNextTo.size(); i++) {
@@ -150,50 +120,18 @@ public class ArenaController {
 					missile.setPosition(pig.getPosition());
 					
 					listElements.add(missile);
-					MissileNextAnimation missileNextAnimation = new MissileNextAnimation(missile, pig, (Enemy) elementNextTo);
-					missileNextAnimation.start();
+					
+					MissileAnimation missileAnimation = new MissileAnimation(missile, pig, (Enemy) elementNextTo);
+					missileAnimation.start();
 				} else {
-					actionPigAttaksEnemy((Enemy) elementNextTo, power);
+					PigController.actionPigAttaksEnemy(power, pig, (Enemy) elementNextTo);
 				}
 			}
 		}
-		
-		return true;
 	}
 	
-	private static boolean actionPigAttaksAfar() {
-		Pig pig = listElements.getPig();
-		
-		Power power = pig.getPowerWithEnergy();
-		if (power.isAfar()) {
-			power.setPosition(pig.getPosition());
-			
-			//TODO Start animation
-			//TODO Get enemy if power touched it
-			//actionPigAttaksEnemy(enemy, power);
-			
-			return true;
-		}
-		
-		return false;
-	}
-	
-	public static void actionPigAttaksEnemy(Enemy enemy, final Power power) {
-		Pig pig = listElements.getPig();
-		
-		power.act(pig, enemy);
-		
-		power.setUsed(true);
-		
-		if (enemy.isDied()) {
-			if (power instanceof Missile) {
-				Missile missile = (Missile) power;
-				BoomAnimation boomAnimation = new BoomAnimation(enemy, missile, missile.ANIMATION_BOOM_IMAGE_PREFIX + missile.getImageName(), listElements);
-				boomAnimation.start();
-			}
-			RoundController.cumuleEnemyStatistics(enemy);
-		} else {
-			listElements.remove(power);
-		}
+	public static void startImageAnim(String imageName, Element elementToAct) {
+		ImageAnimation imageAnimation = new ImageAnimation(imageName, elementToAct);
+		imageAnimation.start();
 	}
 }

@@ -2,8 +2,8 @@ package game.element.item;
 
 import java.awt.image.BufferedImage;
 
-import util.ImageLoader;
 import game.element.Element;
+import game.util.ImageLoader;
 
 public class Wall extends Element {
 	

@@ -1,4 +1,4 @@
-package anim;
+package game.anim;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;

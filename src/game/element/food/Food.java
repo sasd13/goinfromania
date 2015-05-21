@@ -1,7 +1,6 @@
 package game.element.food;
 
 import game.element.Element;
-import game.element.character.Pig;
 
 public abstract class Food extends Element {
 
@@ -51,6 +50,4 @@ public abstract class Food extends Element {
 		setChanged();
 		notifyObservers();
 	}
-	
-	public abstract void act(Pig pig);
 }

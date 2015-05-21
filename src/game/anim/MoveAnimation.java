@@ -1,4 +1,4 @@
-package anim;
+package game.anim;
 
 import java.awt.event.ActionEvent;
 
@@ -9,7 +9,7 @@ import game.element.character.Nutritionist;
 import game.element.character.Pig;
 import game.element.character.Virus;
 import game.element.item.Wall;
-import util.ArenaUtil;
+import game.util.ArenaUtil;
 import controller.ArenaController;
 
 public class MoveAnimation extends Animation {

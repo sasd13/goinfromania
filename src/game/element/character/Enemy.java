@@ -1,14 +1,8 @@
 package game.element.character;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import game.element.power.Power;
 
 public abstract class Enemy extends Character {
-
-	private static final int DELAY_BEFORE_ENEMY_ATTAK_AGAIN = 2000;
 	
 	private Power power;
 	private int scorePoint;
@@ -42,25 +36,5 @@ public abstract class Enemy extends Character {
 		
 		setChanged();
 		notifyObservers();
-	}
-	
-	public void setPowerlessForDelay() {
-		setPowerful(false);
-		startDelay();
-	}
-	
-	private synchronized void startDelay() {		
-		final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-		
-		Runnable runnable = new Runnable() {
-			
-			@Override
-			public void run() {
-				setPowerful(true);
-				scheduler.shutdown();
-			}
-		};
-		
-		scheduler.schedule(runnable, DELAY_BEFORE_ENEMY_ATTAK_AGAIN, TimeUnit.MILLISECONDS);
 	}
 }

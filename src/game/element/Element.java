@@ -1,11 +1,12 @@
 package game.element;
 
+import game.util.ElementUtil;
+
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
-import util.ElementUtil;
 import view.DimensionConstants;
 
 public abstract class Element extends Observable {
@@ -15,12 +16,7 @@ public abstract class Element extends Observable {
 	public static final int POSITION_Y_MIN = 0;
 	public static final int POSITION_Y_MAX = DimensionConstants.ARENA_HEIGHT;
 	
-	public static final int SPEED_MIN = -100;
-	public static final int SPEED_NULL = 0;
-	public static final int SPEED_LOW = 20;
-	public static final int SPEED_MEDIUM = 50;
-	public static final int SPEED_HIGH = 80;
-	public static final int SPEED_MAX = 100;
+	public static final int SPEED_DEFAULT = 1;
 
 	private static int countElement;
 	private String id;
@@ -43,7 +39,7 @@ public abstract class Element extends Observable {
 		this.imageName = null;
 		this.image = null;
 		this.movable = false;
-		this.speed = 1;
+		this.speed = SPEED_DEFAULT;
 	}
 	
 	public String getId() {
@@ -121,13 +117,7 @@ public abstract class Element extends Observable {
 	}
 	
 	public void setSpeed(int speed) {
-		if (speed < SPEED_MIN) {
-			this.speed = SPEED_MIN;
-		} else if (speed > SPEED_MAX) {
-			this.speed = SPEED_MAX;
-		} else {
-			this.speed = speed;
-		}
+		this.speed = speed;
 		
 		setChanged();
 		notifyObservers();
@@ -174,7 +164,6 @@ public abstract class Element extends Observable {
 				break;
 		}
 		
-		nextPosition = ElementUtil.recalibration(nextPosition, direction, this.speed); //Repositionnement
 		nextPosition = ElementUtil.cropping(nextPosition, this.dimension); //Recadrage
 		
 		return nextPosition;

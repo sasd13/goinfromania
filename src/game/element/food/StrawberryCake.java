@@ -1,8 +1,8 @@
 package game.element.food;
 
-import java.awt.image.BufferedImage;
+import game.util.ImageLoader;
 
-import util.ImageLoader;
+import java.awt.image.BufferedImage;
 
 public class StrawberryCake extends Cake {
 
