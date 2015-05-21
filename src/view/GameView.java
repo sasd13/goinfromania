@@ -1,7 +1,6 @@
 package view;
 
 import game.Game;
-import game.menu.GameMenuBar;
 import game.round.ListRounds;
 
 import java.awt.BorderLayout;
@@ -15,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
 import controller.GameController;
+import view.menu.GameMenuBar;
 import view.round.RoundView;
 
 public class GameView extends JFrame implements Observer, WindowListener {
