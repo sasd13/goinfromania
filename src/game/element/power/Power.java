@@ -4,27 +4,14 @@ import game.element.Element;
 
 public abstract class Power extends Element {
 
-	private boolean afar;
 	private boolean used;
 	private int powerValue;
 	
 	protected Power() {
 		super();
 		
-		this.afar = false;
 		this.used = false;
 		this.powerValue = 0;
-	}
-	
-	public boolean isAfar() {
-		return this.afar;
-	}
-	
-	public void setAfar(boolean afar) {
-		this.afar = afar;
-		
-		setChanged();
-		notifyObservers();
 	}
 	
 	public boolean isUsed() {

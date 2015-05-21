@@ -1,12 +1,13 @@
-package game.anim.power;
+package anim.power;
 
 import game.element.character.Enemy;
 import game.element.character.Pig;
 import game.element.power.Paralyze;
-import game.util.ImageLoader;
 
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+
+import util.ImageLoader;
 
 public class ParalyzeAnimation extends PowerAnimation {
 
@@ -27,15 +28,14 @@ public class ParalyzeAnimation extends PowerAnimation {
 		count++;
 		
 		Enemy enemy = (Enemy) getElementToAct();
-		
 		BufferedImage image;
 		
 		if (count == 0) {
-			enemy.setMovable(false);
-			enemy.setPowerful(false);
-			
 			image = ImageLoader.loadFromPath(ANIMATION_IMAGE_PREFIX + enemy.getImageName());
 			enemy.setImageWithDimension(image);
+			
+			enemy.setMovable(false);
+			enemy.setPowerful(false);
 		} else {
 			timer.stop();
 			

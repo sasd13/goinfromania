@@ -1,10 +1,10 @@
-package game.anim;
+package anim;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.util.concurrent.ExecutionException;
 
-import controller.RoundController;
+import controller.ArenaController;
 import game.element.Element;
 import game.element.ListElements;
 import game.element.character.Nutritionist;
@@ -18,7 +18,7 @@ import game.element.food.StrawberryCake;
 import game.element.item.Wall;
 import game.round.Level;
 
-public class AppearanceAnimation extends Animation {
+public class AutoAppearanceAnimation extends Animation {
 
 	private final int FACTOR_STRAWBERRYCAKE_APPEARANCE_LEVEL_EASY = 0;
 	private final int FACTOR_STRAWBERRYCAKE_APPEARANCE_LEVEL_NORMAL = 0;
@@ -72,12 +72,14 @@ public class AppearanceAnimation extends Animation {
 		factorVirusAppearance,
 		factorWallAppearance;
 	
-	public AppearanceAnimation(ListElements listElements, Level level) {
+	public AutoAppearanceAnimation(ListElements listElements, Level level) {
 		this.listElements = listElements;
 		this.level = level;
 		
 		switch (this.level) {
 			case EASY :
+				setDelay(DELAY_LEVEL_EASY);
+				
 				this.factorStrawberryCakeAppearance = FACTOR_STRAWBERRYCAKE_APPEARANCE_LEVEL_EASY;
 				this.factorChocolateCakeAppearance = FACTOR_CHOCOLATECAKE_APPEARANCE_LEVEL_EASY;
 				this.factorCherryCakeAppearance = FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_EASY;
@@ -87,10 +89,10 @@ public class AppearanceAnimation extends Animation {
 				this.factorVirusAppearance = FACTOR_VIRUS_APPEARANCE_LEVEL_EASY;
 				this.factorNutritionistAppearance = FACTOR_NUTRITIONIST_APPEARANCE_LEVEL_EASY;
 				this.factorWallAppearance = FACTOR_WALL_APPEARANCE_LEVEL_EASY;
-				
-				setDelay(DELAY_LEVEL_EASY);
 				break;
 			case NORMAL :
+				setDelay(DELAY_LEVEL_NORMAL);
+				
 				this.factorStrawberryCakeAppearance = FACTOR_STRAWBERRYCAKE_APPEARANCE_LEVEL_NORMAL;
 				this.factorChocolateCakeAppearance = FACTOR_CHOCOLATECAKE_APPEARANCE_LEVEL_NORMAL;
 				this.factorCherryCakeAppearance = FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_NORMAL;
@@ -100,10 +102,10 @@ public class AppearanceAnimation extends Animation {
 				this.factorVirusAppearance = FACTOR_VIRUS_APPEARANCE_LEVEL_NORMAL;
 				this.factorNutritionistAppearance = FACTOR_NUTRITIONIST_APPEARANCE_LEVEL_NORMAL;
 				this.factorWallAppearance = FACTOR_WALL_APPEARANCE_LEVEL_NORMAL;
-				
-				setDelay(DELAY_LEVEL_NORMAL);
 				break;
 			case HARD :
+				setDelay(DELAY_LEVEL_HARD);
+				
 				this.factorStrawberryCakeAppearance = FACTOR_STRAWBERRYCAKE_APPEARANCE_LEVEL_HARD;
 				this.factorChocolateCakeAppearance = FACTOR_CHOCOLATECAKE_APPEARANCE_LEVEL_HARD;
 				this.factorCherryCakeAppearance = FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_HARD;
@@ -113,8 +115,6 @@ public class AppearanceAnimation extends Animation {
 				this.factorVirusAppearance = FACTOR_VIRUS_APPEARANCE_LEVEL_HARD;
 				this.factorNutritionistAppearance = FACTOR_NUTRITIONIST_APPEARANCE_LEVEL_HARD;
 				this.factorWallAppearance = FACTOR_WALL_APPEARANCE_LEVEL_HARD;
-				
-				setDelay(DELAY_LEVEL_HARD);
 				break;
 		}
 	}
@@ -145,15 +145,14 @@ public class AppearanceAnimation extends Animation {
 			element = new Wall();
 		}
 		
-		AppearancePositionWorker appearancePositionWorker = new AppearancePositionWorker(element, this.listElements);
-		appearancePositionWorker.execute();
+		AutoAppearancePositionWorker autoAppearancePositionWorker = new AutoAppearancePositionWorker(element, this.listElements);
+		autoAppearancePositionWorker.execute();
 		
 		try {
-			Point position = (Point) appearancePositionWorker.get();
+			Point position = (Point) autoAppearancePositionWorker.get();
 			element.setPosition(position);
 			
-			this.listElements.add(element);
-			RoundController.checkListElementsSize();
+			ArenaController.addElement(element);
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}

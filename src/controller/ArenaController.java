@@ -1,9 +1,11 @@
 package controller;
 
-import game.anim.AppearanceAnimation;
-import game.anim.ImageAnimation;
-import game.anim.MoveAnimation;
-import game.anim.power.MissileAnimation;
+import java.awt.Point;
+
+import anim.AutoAppearanceAnimation;
+import anim.ImageAnimation;
+import anim.AutoMoveAnimation;
+import anim.power.MissileAnimation;
 import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
@@ -13,7 +15,7 @@ import game.element.food.Food;
 import game.element.power.Missile;
 import game.element.power.Power;
 import game.round.Round;
-import game.util.ArenaUtil;
+import util.ArenaUtil;
 import view.round.ArenaView;
 
 public class ArenaController {
@@ -21,27 +23,27 @@ public class ArenaController {
 	private static ArenaView arenaView;
 	private static ListElements listElements;
 	
-	private static AppearanceAnimation appearanceAnimation;
-	private static MoveAnimation moveAnimation;
+	private static AutoAppearanceAnimation autoAppearanceAnimation;
+	private static AutoMoveAnimation autoMoveAnimation;
 	
 	public static void initialize(ArenaView myArenaView, Round round) {
 		arenaView = myArenaView;
 		listElements = round.getListElements();
 		
-		appearanceAnimation = new AppearanceAnimation(listElements, round.getLevel());
-		moveAnimation = new MoveAnimation(listElements);
+		autoAppearanceAnimation = new AutoAppearanceAnimation(listElements, round.getLevel());
+		autoMoveAnimation = new AutoMoveAnimation(listElements);
 	}
 	
 	public static void start() {		
 		arenaView.requestFocusInWindow();
 		
-		appearanceAnimation.start();
-		moveAnimation.start();
+		autoAppearanceAnimation.start();
+		autoMoveAnimation.start();
 	}
 	
 	public static void stop() {
-		appearanceAnimation.stop();
-		moveAnimation.stop();
+		autoAppearanceAnimation.stop();
+		autoMoveAnimation.stop();
 	}
 	
 	public static void repaintArena() {
@@ -50,6 +52,8 @@ public class ArenaController {
 	
 	public static void addElement(Element element) {
 		listElements.add(element);
+		
+		RoundController.checkListElementsSize();
 	}
 	
 	public static void removeElement(Element element) {
@@ -59,10 +63,17 @@ public class ArenaController {
 	public static void actionMove(Element elementActor, Direction direction) {
 		boolean canMove = ArenaUtil.canMoveInDirection(elementActor, direction, listElements);
 		if (canMove) {
-			elementActor.move(direction);
-			repaintArena();
-			
+			moveElement(elementActor, direction);
 			checkElementsInTouch(elementActor, listElements);
+		}
+	}
+	
+	private static void moveElement(Element element, Direction direction) {
+		if (element.isMovable()) {
+			Point nextPosition = element.getNextPosition(direction);
+			element.setPosition(nextPosition);
+			
+			repaintArena();
 		}
 	}
 	
@@ -78,27 +89,35 @@ public class ArenaController {
 		boolean canAct = ArenaUtil.canActInTouch(elementActor, elementInTouch);
 		if (canAct) {
 			if (elementActor instanceof Pig) {
-				Pig pig = (Pig) elementActor;
-				
-				if (elementInTouch instanceof Enemy) {
-					Enemy enemy = (Enemy) elementInTouch;
-					
-					if (enemy.isPowerful()) {
-						EnemyController.actionEnemyAttaksPig(enemy.getPower(), enemy, pig);
-					}
-				} else if (elementInTouch instanceof Food) {
-					Food food = (Food) elementInTouch;
-					
-					if (pig.isGreedy()) {
-						FoodController.actionPigEatsFood(food, pig);
-					}
-				}
-			} else if (elementActor instanceof Enemy && elementInTouch instanceof Pig) {
-				Enemy enemy = (Enemy) elementActor;
-				
-				if (enemy.isPowerful()) {
-					EnemyController.actionEnemyAttaksPig(enemy.getPower(), enemy, (Pig) elementInTouch);
-				}
+				actionPigInTouch((Pig) elementActor, elementInTouch);
+			} else if (elementActor instanceof Enemy) {
+				actionEnemyInTouch((Enemy) elementActor, elementInTouch);
+			}
+		}
+	}
+	
+	private static void actionPigInTouch(Pig pig, Element elementInTouch) {
+		if (elementInTouch instanceof Enemy) {
+			Enemy enemy = (Enemy) elementInTouch;
+			
+			if (enemy.isPowerful()) {
+				EnemyController.actionEnemyAttaksPig(enemy.getPower(), enemy, pig);
+			}
+		} else if (elementInTouch instanceof Food) {
+			Food food = (Food) elementInTouch;
+			
+			if (pig.isGreedy()) {
+				FoodController.actionPigEatsFood(food, pig);
+			}
+		}
+	}
+	
+	private static void actionEnemyInTouch(Enemy enemy, Element elementInTouch) {
+		if (elementInTouch instanceof Pig) {
+			Pig pig = (Pig) elementInTouch;
+			
+			if (enemy.isPowerful()) {
+				EnemyController.actionEnemyAttaksPig(enemy.getPower(), enemy, pig);
 			}
 		}
 	}
@@ -119,7 +138,7 @@ public class ArenaController {
 					Missile missile = (Missile) power;
 					missile.setPosition(pig.getPosition());
 					
-					listElements.add(missile);
+					addElement(missile);
 					
 					MissileAnimation missileAnimation = new MissileAnimation(missile, pig, (Enemy) elementNextTo);
 					missileAnimation.start();

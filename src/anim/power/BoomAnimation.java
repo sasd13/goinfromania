@@ -1,12 +1,12 @@
-package game.anim.power;
+package anim.power;
 
-import game.anim.Animation;
 import game.element.power.Power;
-import game.util.ImageLoader;
 
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
+import util.ImageLoader;
+import anim.Animation;
 import controller.ArenaController;
 
 public class BoomAnimation extends Animation {

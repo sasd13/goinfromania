@@ -1,15 +1,15 @@
-package game.anim.power;
+package anim.power;
 
 import game.element.Direction;
 import game.element.character.Enemy;
 import game.element.character.Pig;
 import game.element.power.Missile;
-import game.util.ArenaUtil;
-import game.util.ImageLoader;
 
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
+import util.ArenaUtil;
+import util.ImageLoader;
 import controller.ArenaController;
 import controller.PigController;
 
@@ -26,14 +26,13 @@ public class MissileAnimation extends PowerAnimation {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Missile missile = (Missile) getPower();
-		Pig pig = (Pig) getElementActor();
 		Enemy enemy = (Enemy) getElementToAct();
 		
 		boolean canActInTouch = ArenaUtil.canActInTouch(missile, enemy);
 		if (canActInTouch) {
 			timer.stop();
 			
-			PigController.actionPigAttaksEnemy(missile, pig, enemy);
+			PigController.actionPigAttaksEnemy(missile, (Pig) getElementActor(), enemy);
 		} else {
 			Direction direction = ArenaUtil.pursue(missile, enemy);
 			
@@ -56,7 +55,5 @@ public class MissileAnimation extends PowerAnimation {
 			
 			ArenaController.actionMove(missile, direction);
 		}
-
 	}
-
 }

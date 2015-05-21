@@ -173,7 +173,7 @@ public class RoundController {
 	}
 	
 	public static void checkListElementsSize() {
-		if (round.getListElements().size() == round.MAX_ELEMENT) {
+		if (round.getListElements().size() == Round.MAX_ELEMENT) {
 			round.setFinished(true);
 			stopRoundAndDisplayResult();
 		}

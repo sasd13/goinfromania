@@ -2,13 +2,13 @@ package game.element.food;
 
 public class PoisonCake extends Food {
 
-	public static final int VALUE_DECREASE_PIG_ENERGY = Cake.VALUE_INCREASE_PIG_ENERGY;
-	public static final int SCORE_POINT = 0 - Cake.SCORE_POINT;
+	public static final int EFFECT_VALUE_DECREASE_PIG_ENERGY = Cake.EFFECT_VALUE_DEFAULT;
+	public static final int SCORE_POINT = 0 - Cake.SCORE_POINT_DEFAULT;
 	
 	protected PoisonCake() {
 		super();
 		
-		setEffectValue(VALUE_DECREASE_PIG_ENERGY);
+		setEffectValue(EFFECT_VALUE_DECREASE_PIG_ENERGY);
 		setScorePoint(SCORE_POINT);
 	}
 }

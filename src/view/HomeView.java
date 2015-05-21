@@ -1,7 +1,5 @@
 package view;
 
-import game.util.ImageLoader;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -12,6 +10,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import util.ImageLoader;
 import controller.GameController;
 
 public class HomeView extends JPanel implements ActionListener {

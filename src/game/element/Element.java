@@ -1,12 +1,11 @@
 package game.element;
 
-import game.util.ElementUtil;
-
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
+import util.ElementUtil;
 import view.DimensionConstants;
 
 public abstract class Element extends Observable {
@@ -130,17 +129,6 @@ public abstract class Element extends Observable {
 		setDimension(new Dimension(this.image.getWidth(), this.image.getHeight()));
 		
 		return dimension;
-	}
-	
-	public Point move(Direction direction) {
-		if (!this.movable) {
-			return this.position;
-		}
-		
-		Point nextPosition = getNextPosition(direction);
-		setPosition(nextPosition);
-		
-		return nextPosition;
 	}
 	
 	public Point getNextPosition(Direction direction) {

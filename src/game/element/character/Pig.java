@@ -3,13 +3,13 @@ package game.element.character;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
+import util.ElementUtil;
+import util.ImageLoader;
 import game.element.Direction;
 import game.element.power.Missile;
 import game.element.power.Paralyze;
 import game.element.power.Power;
 import game.element.power.SuperMissile;
-import game.util.ElementUtil;
-import game.util.ImageLoader;
 
 public class Pig extends Character {
 
@@ -22,8 +22,7 @@ public class Pig extends Character {
 	public static final int ENERGY_HIGH = 80;
 	public static final int ENERGY_MAX = 100;
 	
-	public static final int SPEED_MIN = -100;
-	public static final int SPEED_NULL = 0;
+	public static final int SPEED_MIN = 0;
 	public static final int SPEED_LOW = 20;
 	public static final int SPEED_MEDIUM = 50;
 	public static final int SPEED_HIGH = 80;

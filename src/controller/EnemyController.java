@@ -1,7 +1,8 @@
 package controller;
 
-import game.anim.power.DietAnimation;
-import game.anim.power.DiseaseAnimation;
+import anim.power.DietAnimation;
+import anim.power.DiseaseAnimation;
+import anim.power.EnemyPowerlessAnimation;
 import game.element.character.Enemy;
 import game.element.character.Nutritionist;
 import game.element.character.Pig;
@@ -21,16 +22,23 @@ public class EnemyController {
 			actionDisease((Disease) power, (Virus) enemy, pig);
 		}
 		
+		makePowerlessForDuration(enemy);
+		
 		RoundController.checkPigLife();
 	}
 	
-	private static void actionDiet(Diet diet, Nutritionist nutritionist, Pig pig) {
+	private static void actionDiet(Diet diet, Nutritionist nutritionist, Pig pig) {		
 		DietAnimation dietAnimation = new DietAnimation(diet, nutritionist, pig);
 		dietAnimation.start();
 	}
 	
-	private static void actionDisease(Disease disease, Virus virus, Pig pig) {
+	private static void actionDisease(Disease disease, Virus virus, Pig pig) {		
 		DiseaseAnimation diseaseAnimation = new DiseaseAnimation(disease, virus, pig);
 		diseaseAnimation.start();
+	}
+	
+	private static void makePowerlessForDuration(Enemy enemy) {
+		EnemyPowerlessAnimation enemyPowerlessAnimation = new EnemyPowerlessAnimation(enemy);
+		enemyPowerlessAnimation.start();
 	}
 }

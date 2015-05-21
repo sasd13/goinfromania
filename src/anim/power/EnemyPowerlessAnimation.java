@@ -1,17 +1,18 @@
-package game.anim.power;
+package anim.power;
 
-import game.anim.Animation;
 import game.element.character.Enemy;
 
 import java.awt.event.ActionEvent;
 
-public class EnemyAnimation extends Animation {
+import anim.Animation;
+
+public class EnemyPowerlessAnimation extends Animation {
 
 	private static final int DELAY_BEFORE_ENEMY_ATTAK_AGAIN = 2000;
 	
 	private Enemy enemy;
 	
-	public EnemyAnimation(Enemy enemy) {
+	public EnemyPowerlessAnimation(Enemy enemy) {
 		super();
 		
 		setDelay(DELAY_BEFORE_ENEMY_ATTAK_AGAIN);
@@ -26,8 +27,9 @@ public class EnemyAnimation extends Animation {
 		if (count == 0) {
 			this.enemy.setPowerful(false);
 		} else {
-			this.enemy.setPowerful(true);
 			timer.stop();
+			
+			this.enemy.setPowerful(true);
 		}
 	}
 }

@@ -1,6 +1,6 @@
-package game.anim.power;
+package anim.power;
 
-import game.anim.ImageAnimation;
+import anim.ImageAnimation;
 import game.element.Element;
 
 public class HitAnimation extends ImageAnimation {

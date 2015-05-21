@@ -1,19 +1,20 @@
-package game.anim;
+package anim;
 
 import game.element.Element;
 import game.element.ListElements;
-import game.util.MathUtil;
 
 import java.awt.Point;
 
 import javax.swing.SwingWorker;
 
-public class AppearancePositionWorker extends SwingWorker<Point, Point> {
+import util.MathUtil;
+
+public class AutoAppearancePositionWorker extends SwingWorker<Point, Point> {
 
 	private Element element;
 	private ListElements listElements;
 	
-	public AppearancePositionWorker(Element element, ListElements listElements) {
+	public AutoAppearancePositionWorker(Element element, ListElements listElements) {
 		this.element = element;
 		this.listElements = listElements;
 	}

@@ -1,8 +1,8 @@
 package controller;
 
-import game.anim.power.BoomAnimation;
-import game.anim.power.HitAnimation;
-import game.anim.power.ParalyzeAnimation;
+import anim.power.BoomAnimation;
+import anim.power.HitAnimation;
+import anim.power.ParalyzeAnimation;
 import game.element.character.Enemy;
 import game.element.character.Pig;
 import game.element.power.Missile;
@@ -23,7 +23,7 @@ public class PigController {
 		}
 	}
 	
-	private static void actionParalyze(Paralyze paralyze, Pig pig, Enemy enemy) {
+	private static void actionParalyze(Paralyze paralyze, Pig pig, Enemy enemy) {		
 		ParalyzeAnimation paralyzeAnimation = new ParalyzeAnimation(paralyze, pig, enemy);
 		paralyzeAnimation.start();
 	}
@@ -36,9 +36,7 @@ public class PigController {
 			
 			ArenaController.removeElement(missile);
 		} else {
-			missile.setMovable(false);
-			
-			startBoomAnimation(missile, pig, enemy);
+			startBoomAnimation(missile);
 			
 			ArenaController.removeElement(enemy);
 			RoundController.cumuleEnemyStatistics(enemy);
@@ -50,7 +48,7 @@ public class PigController {
 		hitAnimation.start();
 	}
 	
-	private static void startBoomAnimation(Missile missile, Pig pig, Enemy enemy) {
+	private static void startBoomAnimation(Missile missile) {
 		BoomAnimation boomAnimation = new BoomAnimation(missile);
 		boomAnimation.start();
 	}

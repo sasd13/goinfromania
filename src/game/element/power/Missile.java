@@ -3,7 +3,7 @@ package game.element.power;
 public class Missile extends Power {
 
 	public static final String NAME = "Missile";
-	public static final String IMAGENAME = "missile.png";
+	public static final String IMAGE_NAME = "missile.png";
 	public static final int VALUE_DECREASE_CHARACTER_LIFE = 25;
 	
 	public Missile() {
@@ -12,8 +12,7 @@ public class Missile extends Power {
 		setName(NAME);
 		setMovable(true);
 		setSpeed(2);
-		setImageName(IMAGENAME);
-		setAfar(true);
+		setImageName(IMAGE_NAME);
 		setPowerValue(VALUE_DECREASE_CHARACTER_LIFE);
 	}
 }

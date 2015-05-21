@@ -2,8 +2,8 @@ package game.element.item;
 
 import java.awt.image.BufferedImage;
 
+import util.ImageLoader;
 import game.element.Element;
-import game.util.ImageLoader;
 
 public class Wall extends Element {
 	
@@ -14,6 +14,8 @@ public class Wall extends Element {
 		super();
 		
 		setName(NAME);
+		setImageName(IMAGE_NAME);
+		setSpeed(0);
 		
 		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);
 		setImageWithDimension(image);

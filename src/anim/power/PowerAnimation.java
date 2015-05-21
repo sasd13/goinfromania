@@ -1,6 +1,6 @@
-package game.anim.power;
+package anim.power;
 
-import game.anim.Animation;
+import anim.Animation;
 import game.element.Element;
 import game.element.power.Power;
 

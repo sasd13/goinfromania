@@ -1,25 +1,23 @@
-package game.anim;
+package anim;
 
 import game.element.Element;
-import game.util.ImageLoader;
 
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
+import util.ImageLoader;
 import controller.ArenaController;
 
 public class ImageAnimation extends Animation {
 
 	private String imageName;
 	private Element elementToAct;
-	private BufferedImage originalImage;
 	
 	public ImageAnimation(String imageName, Element elementToAct) {
 		super();
 		
 		this.imageName = imageName;
 		this.elementToAct = elementToAct;
-		this.originalImage = ImageLoader.loadFromPath(this.elementToAct.getImageName());
 	}
 	
 	public String getImageName() {
@@ -42,12 +40,16 @@ public class ImageAnimation extends Animation {
 	public void actionPerformed(ActionEvent e) {
 		count++;
 		
+		BufferedImage image;
+		
 		if (count == 0) {
-			BufferedImage image = ImageLoader.loadFromPath(this.imageName);
+			image = ImageLoader.loadFromPath(this.imageName);
 			this.elementToAct.setImageWithDimension(image);
 		} else {
-			this.elementToAct.setImageWithDimension(this.originalImage);
 			timer.stop();
+			
+			image = ImageLoader.loadFromPath(this.elementToAct.getImageName());
+			this.elementToAct.setImageWithDimension(image);
 		}
 		
 		ArenaController.repaintArena();

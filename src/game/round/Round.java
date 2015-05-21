@@ -10,7 +10,7 @@ import java.util.Observable;
 public class Round extends Observable {
 	
 	public static final int INCREMENTAL_CAKE_TO_EAT = 3;
-	public final int MAX_ELEMENT = 50;
+	public static final int MAX_ELEMENT = 50;
 	
 	private static int countRound = 0;
 	private String id;

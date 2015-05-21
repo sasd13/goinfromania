@@ -1,4 +1,4 @@
-package game.anim;
+package anim;
 
 import java.awt.event.ActionListener;
 

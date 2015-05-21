@@ -1,12 +1,13 @@
-package game.anim.power;
+package anim.power;
 
 import game.element.character.Enemy;
 import game.element.character.Pig;
 import game.element.power.Disease;
-import game.util.ImageLoader;
 
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+
+import util.ImageLoader;
 
 public class DiseaseAnimation extends PowerAnimation {
 	
@@ -27,15 +28,14 @@ public class DiseaseAnimation extends PowerAnimation {
 		count++;
 		
 		Pig pig = (Pig) getElementToAct();
-		
 		BufferedImage image;
 		
 		if (count == 0) {
-			pig.setLife(pig.getLife() - getPower().getPowerValue());
-			pig.setSpeed(Pig.SPEED_LOW);
-			
 			image = ImageLoader.loadFromPath(ANIMATION_IMAGE_PREFIX + pig.getImageName());
 			pig.setImageWithDimension(image);
+			
+			pig.setLife(pig.getLife() - getPower().getPowerValue());
+			pig.setSpeed(Pig.SPEED_LOW);
 		} else {
 			timer.stop();
 			
