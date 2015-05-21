@@ -12,7 +12,7 @@ import controller.ArenaController;
 public class BoomAnimation extends Animation {
 
 	public static final String ANIMATION_IMAGE_PREFIX = "boom_";
-	public static final int BOOM_DELAY = 1000;
+	public static final int BOOM_DELAY = 700;
 	
 	private Power power;
 	
