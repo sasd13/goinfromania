@@ -13,7 +13,6 @@ public abstract class Food extends Element {
 		super();
 		
 		setMovable(true);
-		setSpeed(SPEED_LOW);
 		
 		this.eated = false;
 		this.effectValue = 0;

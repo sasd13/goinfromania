@@ -1,9 +1,7 @@
 package game.element.power;
 
-import java.awt.event.ActionEvent;
-
-import util.animation.ImageAnimation;
-import util.animation.PowerAnimation;
+import anim.ImageAnimation;
+import anim.power.DietAnimation;
 import game.element.character.Character;
 import game.element.character.Enemy;
 import game.element.character.Pig;
@@ -21,29 +19,6 @@ public class Diet extends Power {
 	public static final int DELAY_DECREASE_PIG_ENERGY = 2000;
 	public static final int DURATION_STOP_PIG_EAT = 8000;
 	
-	private class DietAnimation extends PowerAnimation {
-		
-		public DietAnimation(Enemy enemy, Pig pig) {
-			super(enemy, pig);
-		}
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			count++;
-			
-			Pig pig = (Pig) getElementToAct();
-			
-			if (count == 0) {
-				pig.setGreedy(false);
-			} else if (count >= getDuration() / getDelay()) {
-				pig.setGreedy(true);
-				timer.stop();
-			} else {
-				pig.setEnergy(pig.getEnergy() - getPowerValue());
-			}
-		}
-	}
-	
 	public Diet() {
 		super();
 		
@@ -56,7 +31,7 @@ public class Diet extends Power {
 		Enemy enemy = (Enemy) characterActor;
 		Pig pig = (Pig) characterToAct;
 		
-		DietAnimation dietAnimation = new DietAnimation(enemy, pig);
+		DietAnimation dietAnimation = new DietAnimation(this, enemy, pig);
 		dietAnimation.setDelay(DELAY_DECREASE_PIG_ENERGY);
 		dietAnimation.setDuration(DURATION_STOP_PIG_EAT);
 		dietAnimation.start();

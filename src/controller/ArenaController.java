@@ -6,6 +6,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
+import anim.AppearanceAnimation;
+import anim.MoveAnimation;
+import anim.power.BoomAnimation;
+import anim.power.MissileNextAnimation;
 import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
@@ -16,10 +20,6 @@ import game.element.power.Missile;
 import game.element.power.Power;
 import game.round.Round;
 import util.ArenaUtil;
-import util.animation.AppearanceAnimation;
-import util.animation.BoomAnimation;
-import util.animation.MissileNextAnimation;
-import util.animation.MoveAnimation;
 import view.round.ArenaView;
 
 public class ArenaController {
@@ -146,13 +146,11 @@ public class ArenaController {
 				Power power = pig.getPowerWithEnergy();
 				
 				if (power instanceof Missile) {
-					Point position = ArenaUtil.getPositionNextTo(pig, elementNextTo);
-					
 					Missile missile = (Missile) power;
-					missile.setPosition(position);
+					missile.setPosition(pig.getPosition());
 					
 					listElements.add(missile);
-					MissileNextAnimation missileNextAnimation = new MissileNextAnimation(missile, (Enemy) elementNextTo);
+					MissileNextAnimation missileNextAnimation = new MissileNextAnimation(missile, pig, (Enemy) elementNextTo);
 					missileNextAnimation.start();
 				} else {
 					actionPigAttaksEnemy((Enemy) elementNextTo, power);
@@ -194,6 +192,8 @@ public class ArenaController {
 				boomAnimation.start();
 			}
 			RoundController.cumuleEnemyStatistics(enemy);
+		} else {
+			listElements.remove(power);
 		}
 	}
 }

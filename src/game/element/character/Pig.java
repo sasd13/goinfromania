@@ -27,6 +27,7 @@ public class Pig extends Character {
 		
 		setName(NAME);
 		setImageName(IMAGE_NAME);
+		setSpeed(SPEED_MEDIUM);
 		setPowerful(true);
 		
 		BufferedImage image = ImageLoader.loadFromPath(IMAGE_NAME);

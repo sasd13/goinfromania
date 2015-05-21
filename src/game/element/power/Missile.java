@@ -1,14 +1,8 @@
 package game.element.power;
 
-import java.awt.event.ActionEvent;
-
-import util.animation.BoomAnimation;
-import util.animation.ImageAnimation;
-import util.animation.PowerAnimation;
-import game.element.Element;
+import anim.ImageAnimation;
 import game.element.character.Character;
 import game.element.character.Enemy;
-import game.element.character.Pig;
 
 public class Missile extends Power {
 
@@ -22,25 +16,12 @@ public class Missile extends Power {
 	 */	
 	public static final int VALUE_DECREASE_CHARACTER_LIFE = 25;
 	
-	public class MissileAnimation extends PowerAnimation {
-
-		protected MissileAnimation(Element elementActor, Element elementToAct) {
-			super(elementActor, elementToAct);
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-	}
-	
 	public Missile() {
 		super();
 		
 		setName(NAME);
 		setMovable(true);
-		setSpeed(SPEED_HIGH);
+		setSpeed(2);
 		setImageName(IMAGENAME);
 		setAfar(true);
 		setPowerValue(VALUE_DECREASE_CHARACTER_LIFE);
@@ -48,7 +29,6 @@ public class Missile extends Power {
 
 	@Override
 	public void act(Character characterActor, Character characterToAct) {
-		Pig pig = (Pig) characterActor;
 		Enemy enemy = (Enemy) characterToAct;
 		
 		enemy.setLife(enemy.getLife() - getPowerValue());

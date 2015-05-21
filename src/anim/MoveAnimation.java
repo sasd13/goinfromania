@@ -1,4 +1,4 @@
-package util.animation;
+package anim;
 
 import java.awt.event.ActionEvent;
 
@@ -14,7 +14,7 @@ import controller.ArenaController;
 
 public class MoveAnimation extends Animation {
 
-	public static final int DELAY_MOVE = 700;
+	public static final int DELAY_MOVE = 70;
 	
 	private ListElements listElements;
 	

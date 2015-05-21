@@ -1,4 +1,4 @@
-package util.animation;
+package anim;
 
 import game.element.Element;
 import game.element.ListElements;

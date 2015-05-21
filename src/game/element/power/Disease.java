@@ -1,10 +1,7 @@
 package game.element.power;
 
-import java.awt.event.ActionEvent;
-
-import util.animation.ImageAnimation;
-import util.animation.PowerAnimation;
-import game.element.Element;
+import anim.ImageAnimation;
+import anim.power.DiseaseAnimation;
 import game.element.character.Character;
 import game.element.character.Enemy;
 import game.element.character.Pig;
@@ -20,28 +17,6 @@ public class Disease extends Power {
 	public static final int DURATION_DECREASE_PIG_SPEED = 8000;
 	public static final int VALUE_DECREASE_PIG_LIFE = 20;
 	
-	private class DiseaseAnimation extends PowerAnimation {
-		
-		public DiseaseAnimation(Enemy enemy, Pig pig) {
-			super(enemy, pig);
-		}
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			count++;
-			
-			Pig pig = (Pig) getElementToAct();
-			
-			if (count == 0) {
-				pig.setLife(pig.getLife() - getPowerValue());
-				pig.setSpeed(SPEED_LOW);
-			} else {
-				pig.setSpeed(Element.SPEED_MEDIUM);
-				timer.stop();
-			}
-		}
-	}
-	
 	public Disease() {
 		super();
 		
@@ -54,7 +29,7 @@ public class Disease extends Power {
 		Enemy enemy = (Enemy) characterActor;
 		Pig pig = (Pig) characterToAct;
 		
-		DiseaseAnimation diseaseAnimation = new DiseaseAnimation(enemy, pig);
+		DiseaseAnimation diseaseAnimation = new DiseaseAnimation(this, enemy, pig);
 		diseaseAnimation.setDelay(DURATION_DECREASE_PIG_SPEED);
 		diseaseAnimation.start();
 		

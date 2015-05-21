@@ -1,7 +1,8 @@
-package util.animation;
+package anim.power;
 
 import game.element.Direction;
 import game.element.character.Enemy;
+import game.element.character.Pig;
 import game.element.power.Missile;
 
 import java.awt.event.ActionEvent;
@@ -13,17 +14,17 @@ import util.ImageLoader;
 
 public class MissileNextAnimation extends PowerAnimation {
 
-	public static final int DELAY_MOVE = 200;
+	public static final int DELAY_MOVE = 10;
 	
-	public MissileNextAnimation(Missile missile, Enemy enemy) {
-		super(missile, enemy);
+	public MissileNextAnimation(Missile missile, Pig pig, Enemy enemy) {
+		super(missile, pig, enemy);
 		
 		setDelay(DELAY_MOVE);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		Missile missile = (Missile) getElementActor();
+		Missile missile = (Missile) getPower();
 		Enemy enemy = (Enemy) getElementToAct();
 		
 		boolean canActInTouch = ArenaUtil.canActInTouch(missile, enemy);

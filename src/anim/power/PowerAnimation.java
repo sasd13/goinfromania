@@ -1,16 +1,28 @@
-package util.animation;
+package anim.power;
 
+import anim.Animation;
 import game.element.Element;
+import game.element.power.Power;
 
 public abstract class PowerAnimation extends Animation {
 
+	private Power power;
 	private Element elementActor, elementToAct;
 	
-	protected PowerAnimation(Element elementActor, Element elementToAct) {
+	protected PowerAnimation(Power power, Element elementActor, Element elementToAct) {
 		super();
 		
+		this.power = power;
 		this.elementActor = elementActor;
 		this.elementToAct = elementToAct;
+	}
+	
+	public Power getPower() {
+		return this.power;
+	}
+	
+	public void setPower(Power power) {
+		this.power = power;
 	}
 	
 	public Element getElementActor() {

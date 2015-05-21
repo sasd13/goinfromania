@@ -4,6 +4,7 @@ import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
 import game.element.item.Wall;
+import game.element.power.Power;
 
 import java.awt.Dimension;
 import java.awt.Point;
@@ -11,7 +12,7 @@ import java.awt.Point;
 public class ArenaUtil {
 	
 	public static final double MINIMAL_PROPORTION_COLLISION_TO_ACT = 0.5;
-	public static final double FACTOR_DISTANCE_NEXT_TO = 1;
+	public static final double FACTOR_DISTANCE_NEXT_TO = 1.5;
 
 	public static ListElements getElementsInTouch(Element elementActor, ListElements listElements) {
 		return detectElements(elementActor, elementActor.getPosition(), listElements);
@@ -19,6 +20,10 @@ public class ArenaUtil {
 	
 	public static boolean canMoveInDirection(Element elementActor, Direction direction, ListElements listElements) {
 		Point position = elementActor.getNextPosition(direction);
+		
+		if (elementActor instanceof Power) {
+			return true;
+		}
 		
 		if ((direction == Direction.LEFT && position.x < Element.POSITION_X_MIN) 
 				|| (direction == Direction.RIGHT && position.x > Element.POSITION_X_MAX)
@@ -176,25 +181,6 @@ public class ArenaUtil {
 				//TODO Throw exception
 				return null;
 		}
-	}
-	
-	public static Point getPositionNextTo(Element elementActor, Element elementToAct) {
-		Point position = new Point();
-		
-		int distanceX, distanceY;
-		
-		distanceX = elementActor.getPosition().x - elementToAct.getPosition().x;
-		distanceY = elementActor.getPosition().y - elementToAct.getPosition().y;
-		
-		if (distanceX > distanceY) {
-			position.x = elementToAct.getPosition().x;
-			position.y = elementActor.getPosition().y;
-		} else {
-			position.x = elementActor.getPosition().x;
-			position.y = elementToAct.getPosition().y;
-		}
-		
-		return position;
 	}
 	
 	public static Direction pursue(Element elementActor, Element elementToAct) {	

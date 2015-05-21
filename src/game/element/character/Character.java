@@ -18,7 +18,6 @@ public abstract class Character extends Element {
 		super();
 		
 		setMovable(true);
-		setSpeed(SPEED_MEDIUM);
 		
 		this.died = false;
 		this.life = LIFE_MAX;

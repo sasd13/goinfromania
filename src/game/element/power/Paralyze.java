@@ -1,9 +1,7 @@
 package game.element.power;
 
-import java.awt.event.ActionEvent;
-
-import util.animation.ImageAnimation;
-import util.animation.PowerAnimation;
+import anim.ImageAnimation;
+import anim.power.ParalyzeAnimation;
 import game.element.character.Character;
 import game.element.character.Enemy;
 import game.element.character.Pig;
@@ -19,29 +17,6 @@ public class Paralyze extends Power {
 	 */
 	public static final int DURATION_STOP_NUTRITIONIST_MOVE = 8000;
 	
-	private class ParalyzeAnimation extends PowerAnimation {
-		
-		public ParalyzeAnimation(Pig pig, Enemy enemy) {
-			super(pig, enemy);
-		}
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			count++;
-			
-			Enemy enemy = (Enemy) getElementToAct();
-			
-			if (count == 0) {
-				enemy.setMovable(false);
-				enemy.setPowerful(false);
-			} else {
-				enemy.setMovable(true);
-				enemy.setPowerful(true);
-				timer.stop();
-			}
-		}
-	}
-	
 	public Paralyze() {
 		super();
 		
@@ -53,7 +28,7 @@ public class Paralyze extends Power {
 		Pig pig = (Pig) characterActor;
 		Enemy enemy = (Enemy) characterToAct;
 		
-		ParalyzeAnimation paralyzeAnimation = new ParalyzeAnimation(pig, enemy);
+		ParalyzeAnimation paralyzeAnimation = new ParalyzeAnimation(this, pig, enemy);
 		paralyzeAnimation.setDelay(DURATION_STOP_NUTRITIONIST_MOVE);
 		paralyzeAnimation.start();
 		

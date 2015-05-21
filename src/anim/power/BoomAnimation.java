@@ -1,4 +1,4 @@
-package util.animation;
+package anim.power;
 
 import game.element.Element;
 import game.element.ListElements;
@@ -7,12 +7,13 @@ import game.element.power.Power;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
+import anim.Animation;
 import util.ImageLoader;
 import controller.ArenaController;
 
 public class BoomAnimation extends Animation {
 
-	public static final int BOOM_DELAY = 700;
+	public static final int BOOM_DELAY = 1000;
 	
 	private Element elementToAct;
 	private Power power;
@@ -44,13 +45,12 @@ public class BoomAnimation extends Animation {
 		
 		if (count == 0) {
 			BufferedImage image = ImageLoader.loadFromPath(this.imageName);
-			this.elementToAct.setImageWithDimension(image);
-			this.listElements.remove(this.power);
-		} else {
+			this.power.setImageWithDimension(image);
+			this.power.setMovable(false);
 			this.listElements.remove(this.elementToAct);
+		} else {
+			this.listElements.remove(this.power);
 			timer.stop();
 		}
-		
-		ArenaController.repaintArena();
 	}
 }

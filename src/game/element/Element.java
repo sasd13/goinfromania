@@ -43,7 +43,7 @@ public abstract class Element extends Observable {
 		this.imageName = null;
 		this.image = null;
 		this.movable = false;
-		this.speed = SPEED_NULL;
+		this.speed = 1;
 	}
 	
 	public String getId() {
