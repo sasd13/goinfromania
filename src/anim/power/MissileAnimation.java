@@ -29,11 +29,7 @@ public class MissileAnimation extends PowerAnimation {
 		Enemy enemy = (Enemy) getElementToAct();
 		
 		boolean canActInTouch = ArenaUtil.canActInTouch(missile, enemy);
-		if (canActInTouch) {
-			timer.stop();
-			
-			PigController.actionPigAttaksEnemy(missile, (Pig) getElementActor(), enemy);
-		} else {
+		if (!canActInTouch) {
 			Direction direction = ArenaUtil.pursue(missile, enemy);
 			
 			BufferedImage image;
@@ -54,6 +50,10 @@ public class MissileAnimation extends PowerAnimation {
 			missile.setImageWithDimension(image);
 			
 			ArenaController.actionMove(missile, direction);
+		} else {
+			timer.stop();
+			
+			PigController.actionPigAttaksEnemy(missile, (Pig) getElementActor(), enemy);
 		}
 	}
 }

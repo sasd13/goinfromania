@@ -17,8 +17,7 @@ public class ImageLoader {
 		try {
 			bufferedImage = ImageIO.read(file);
 		} catch (IOException e) {
-			System.out.println("Error loading file : " + file.getAbsolutePath());
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		
 		return bufferedImage;

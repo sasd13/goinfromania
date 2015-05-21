@@ -36,32 +36,33 @@ public class AutoAppearanceAnimation extends Animation {
 	private final int FACTOR_RAISINCAKE_APPEARANCE_LEVEL_NORMAL = 24;
 	private final int FACTOR_RAISINCAKE_APPEARANCE_LEVEL_HARD = 36;
 	
-	private final int FACTOR_KIWICAKE_APPEARANCE_LEVEL_EASY = 16;
-	private final int FACTOR_KIWICAKE_APPEARANCE_LEVEL_NORMAL = 32;
-	private final int FACTOR_KIWICAKE_APPEARANCE_LEVEL_HARD = 48;
+	private final int FACTOR_KIWICAKE_APPEARANCE_LEVEL_EASY = 14;
+	private final int FACTOR_KIWICAKE_APPEARANCE_LEVEL_NORMAL = 28;
+	private final int FACTOR_KIWICAKE_APPEARANCE_LEVEL_HARD = 42;
 	
-	private final int FACTOR_MOUSSECAKE_APPEARANCE_LEVEL_EASY = 22;
-	private final int FACTOR_MOUSSECAKE_APPEARANCE_LEVEL_NORMAL = 46;
-	private final int FACTOR_MOUSSECAKE_APPEARANCE_LEVEL_HARD = 64;
+	private final int FACTOR_MOUSSECAKE_APPEARANCE_LEVEL_EASY = 20;
+	private final int FACTOR_MOUSSECAKE_APPEARANCE_LEVEL_NORMAL = 36;
+	private final int FACTOR_MOUSSECAKE_APPEARANCE_LEVEL_HARD = 54;
 	
-	private final int FACTOR_VIRUS_APPEARANCE_LEVEL_EASY = 26;
-	private final int FACTOR_VIRUS_APPEARANCE_LEVEL_NORMAL = 54;
-	private final int FACTOR_VIRUS_APPEARANCE_LEVEL_HARD = 76;
+	private final int FACTOR_VIRUS_APPEARANCE_LEVEL_EASY = 22;
+	private final int FACTOR_VIRUS_APPEARANCE_LEVEL_NORMAL = 40;
+	private final int FACTOR_VIRUS_APPEARANCE_LEVEL_HARD = 60;
 	
-	private final int FACTOR_NUTRITIONIST_APPEARANCE_LEVEL_EASY = 32;
-	private final int FACTOR_NUTRITIONIST_APPEARANCE_LEVEL_NORMAL = 66;
-	private final int FACTOR_NUTRITIONIST_APPEARANCE_LEVEL_HARD = 94;
+	private final int FACTOR_NUTRITIONIST_APPEARANCE_LEVEL_EASY = 26;
+	private final int FACTOR_NUTRITIONIST_APPEARANCE_LEVEL_NORMAL = 48;
+	private final int FACTOR_NUTRITIONIST_APPEARANCE_LEVEL_HARD = 72;
 	
-	private final int FACTOR_WALL_APPEARANCE_LEVEL_EASY = 36;
-	private final int FACTOR_WALL_APPEARANCE_LEVEL_NORMAL = 74;
-	private final int FACTOR_WALL_APPEARANCE_LEVEL_HARD = 106;
+	private final int FACTOR_WALL_APPEARANCE_LEVEL_EASY = 28;
+	private final int FACTOR_WALL_APPEARANCE_LEVEL_NORMAL = 52;
+	private final int FACTOR_WALL_APPEARANCE_LEVEL_HARD = 78;
 	
 	public static final int DELAY_LEVEL_EASY = 3600;
 	public static final int DELAY_LEVEL_NORMAL = 2400;
 	public static final int DELAY_LEVEL_HARD = 1200;
 	
-	private ListElements listElements;
 	private Level level;
+	private ListElements listElements;
+	
 	private int factorRaisinCakeAppearance,
 		factorCherryCakeAppearance,
 		factorChocolateCakeAppearance,
@@ -72,11 +73,32 @@ public class AutoAppearanceAnimation extends Animation {
 		factorVirusAppearance,
 		factorWallAppearance;
 	
-	public AutoAppearanceAnimation(ListElements listElements, Level level) {
+	public AutoAppearanceAnimation(Level level, ListElements listElements) {
+		setLevel(level);
+		
 		this.listElements = listElements;
+	}
+	
+	public Level getLevel() {
+		return this.level;
+	}
+	
+	public void setLevel(Level level) {
 		this.level = level;
 		
-		switch (this.level) {
+		setParameters(level);
+	}
+	
+	public ListElements getListElements() {
+		return this.listElements;
+	}
+	
+	public void setListElements(ListElements listElements) {
+		this.listElements = listElements;
+	}
+	
+	private void setParameters(Level level) {
+		switch (level) {
 			case EASY :
 				setDelay(DELAY_LEVEL_EASY);
 				

@@ -14,10 +14,6 @@ public class ArenaUtil {
 	public static final double MINIMAL_PROPORTION_COLLISION_TO_ACT = 0.5;
 	public static final double FACTOR_DISTANCE_NEXT_TO = 1.5;
 
-	public static ListElements getElementsInTouch(Element elementActor, ListElements listElements) {
-		return detectElements(elementActor, elementActor.getPosition(), listElements);
-	}
-	
 	public static boolean canMoveInDirection(Element elementActor, Direction direction, ListElements listElements) {
 		Point position = elementActor.getNextPosition(direction);
 		
@@ -41,6 +37,10 @@ public class ArenaUtil {
 		}
 		
 		return true;
+	}
+	
+	public static ListElements getElementsInTouch(Element elementActor, ListElements listElements) {
+		return detectElements(elementActor, elementActor.getPosition(), listElements);
 	}
 	
 	public static ListElements getElementsAtNextPosition(Element elementActor, Direction direction, ListElements listElements) {
@@ -75,11 +75,8 @@ public class ArenaUtil {
 		Dimension dimension2 = elementToAct.getDimension();
 		
 		double proportion = MathUtil.getMinimalProportionCollision(position1, dimension1, position2, dimension2);
-		if (proportion > MINIMAL_PROPORTION_COLLISION_TO_ACT) {
-			return true;
-		}
 		
-		return false;
+		return proportion > MINIMAL_PROPORTION_COLLISION_TO_ACT;
 	}
 	
 	public static ListElements getElementsNextTo(Element elementActor, ListElements listElements) {
@@ -184,8 +181,6 @@ public class ArenaUtil {
 	}
 	
 	public static Direction pursue(Element elementActor, Element elementToAct) {	
-		Direction direction = Direction.LEFT;
-		
 		Direction directionX, directionY;
 		int distanceX, distanceY;
 		
@@ -203,12 +198,6 @@ public class ArenaUtil {
 			directionY = Direction.UP;
 		}
 		
-		if (Math.abs(distanceX) > Math.abs(distanceY)) {
-			direction = directionX;
-		} else {
-			direction = directionY;
-		}
-		
-		return direction;		
+		return (Math.abs(distanceX) > Math.abs(distanceY)) ? directionX : directionY;		
 	}
 }

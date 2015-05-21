@@ -30,7 +30,7 @@ public class ArenaController {
 		arenaView = myArenaView;
 		listElements = round.getListElements();
 		
-		autoAppearanceAnimation = new AutoAppearanceAnimation(listElements, round.getLevel());
+		autoAppearanceAnimation = new AutoAppearanceAnimation(round.getLevel(), listElements);
 		autoMoveAnimation = new AutoMoveAnimation(listElements);
 	}
 	
@@ -61,20 +61,20 @@ public class ArenaController {
 	}
 	
 	public static void actionMove(Element elementActor, Direction direction) {
-		boolean canMove = ArenaUtil.canMoveInDirection(elementActor, direction, listElements);
-		if (canMove) {
-			moveElement(elementActor, direction);
-			checkElementsInTouch(elementActor, listElements);
+		if (elementActor.isMovable()) {
+			boolean canMove = ArenaUtil.canMoveInDirection(elementActor, direction, listElements);
+			if (canMove) {
+				moveElement(elementActor, direction);
+				checkElementsInTouch(elementActor, listElements);
+			}
 		}
 	}
 	
 	private static void moveElement(Element element, Direction direction) {
-		if (element.isMovable()) {
-			Point nextPosition = element.getNextPosition(direction);
-			element.setPosition(nextPosition);
-			
-			repaintArena();
-		}
+		Point nextPosition = element.getNextPosition(direction);
+		element.setPosition(nextPosition);
+		
+		repaintArena();
 	}
 	
 	private static void checkElementsInTouch(Element elementActor, ListElements listElements) {
