@@ -1,10 +1,8 @@
-package anim.power;
+package anim;
 
 import game.element.character.Character;
 
 import java.awt.event.ActionEvent;
-
-import anim.Animation;
 
 public class PowerlessAnimation extends Animation {
 	
@@ -31,7 +29,7 @@ public class PowerlessAnimation extends Animation {
 		if (count == 0) {
 			this.character.setPowerful(false);
 		} else {
-			timer.stop();
+			stop();
 			
 			this.character.setPowerful(true);
 		}

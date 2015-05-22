@@ -59,7 +59,7 @@ public class RoundStateView extends JPanel implements Observer {
 		
 		this.labelRoundValue.setText(String.valueOf(round.getRoundNumber()));
 		this.labelCakesValue.setText(round.getCountEatenCakes() + "/" + round.getMaxCountEatenCakes());
-		this.labelEnemiesValue.setText(String.valueOf(round.getCountEnemyKilled()));
+		this.labelEnemiesValue.setText(String.valueOf(round.getCountKilledEnemies()));
 		this.labelScoreValue.setText(String.valueOf(round.getScore()));
 	}
 }

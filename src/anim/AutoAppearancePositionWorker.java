@@ -15,6 +15,8 @@ public class AutoAppearancePositionWorker extends SwingWorker<Point, Point> {
 	private ListElements listElements;
 	
 	public AutoAppearancePositionWorker(Element element, ListElements listElements) {
+		super();
+		
 		this.element = element;
 		this.listElements = listElements;
 	}

@@ -39,7 +39,7 @@ public class DietAnimation extends PowerAnimation {
 			
 			pig.setGreedy(false);
 		} else if (count >= getDuration() / getDelay()) {
-			timer.stop();
+			stop();
 			
 			image = ImageLoader.loadFromPath(pig.getImageName());
 			pig.setImageWithDimension(image);

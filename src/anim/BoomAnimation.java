@@ -1,4 +1,4 @@
-package anim.power;
+package anim;
 
 import game.element.power.Power;
 
@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
 import util.ImageLoader;
-import anim.Animation;
 import controller.ArenaController;
 
 public class BoomAnimation extends Animation {
@@ -40,7 +39,7 @@ public class BoomAnimation extends Animation {
 			BufferedImage image = ImageLoader.loadFromPath(ANIMATION_IMAGE_PREFIX + this.power.getImageName());
 			this.power.setImageWithDimension(image);
 		} else {
-			timer.stop();
+			stop();
 			
 			ArenaController.removeElement(this.power);
 		}

@@ -64,7 +64,7 @@ public class RoundController {
 		String title = "Round Rules";
 		String message = "Eat cakes to succeed! Be careful from enemies and bad foods...";
 		
-		JOptionPane.showMessageDialog(roundView, message, title, JOptionPane.OK_OPTION);
+		JOptionPane.showMessageDialog(roundView, message, title, JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public static void displayRoundStarter() {
@@ -274,11 +274,11 @@ public class RoundController {
 		RoundCumulatedStatistics roundCumulatedStatistics = round.getRoundCumulatedStatistics();
 		
 		if (enemy.getName().equals(Nutritionist.NAME)) {
-			round.setCountNutritionistKilled(round.getCountNutritionistKilled() + 1);
-			roundCumulatedStatistics.setTotalNutritionistKilled(roundCumulatedStatistics.getTotalNutritionistKilled() + 1);
+			round.setCountKilledNutritionists(round.getCountKilledNutritionists() + 1);
+			roundCumulatedStatistics.setTotalKilledNutritionists(roundCumulatedStatistics.getTotalKilledNutritionists() + 1);
 		} else if (enemy.getName().equals(Virus.NAME)) {
-			round.setCountVirusKilled(round.getCountVirusKilled() + 1);
-			roundCumulatedStatistics.setTotalVirusKilled(roundCumulatedStatistics.getTotalVirusKilled() + 1);
+			round.setCountKilledViruses(round.getCountKilledViruses() + 1);
+			roundCumulatedStatistics.setTotalKilledViruses(roundCumulatedStatistics.getTotalKilledViruses() + 1);
 		}
 		
 		cumuleScoreStatistics(enemy.getScorePoint());

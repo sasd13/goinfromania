@@ -31,11 +31,13 @@ public class HomeView extends JPanel implements ActionListener {
 		
 		this.buttonPlay = new JButton("PLAY");
 		this.buttonPlay.setPreferredSize(dimension);
+		this.buttonPlay.setFocusable(false);
 		this.buttonPlay.addActionListener(this);
 		panelButton.add(this.buttonPlay, BorderLayout.NORTH);
 		
 		this.buttonContinue = new JButton("CONTINUE");
 		this.buttonContinue.setPreferredSize(dimension);
+		this.buttonContinue.setFocusable(false);
 		this.buttonContinue.addActionListener(this);
 		panelButton.add(this.buttonContinue, BorderLayout.SOUTH);
 	}

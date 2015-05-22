@@ -51,7 +51,7 @@ public class MissileAnimation extends PowerAnimation {
 			
 			ArenaController.actionMove(missile, direction);
 		} else {
-			timer.stop();
+			stop();
 			
 			PigController.actionPigAttaksEnemy(missile, (Pig) getElementActor(), enemy);
 		}

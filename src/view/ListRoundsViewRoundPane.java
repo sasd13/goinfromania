@@ -77,11 +77,13 @@ public class ListRoundsViewRoundPane extends JPanel implements ActionListener {
 		
 		this.buttonContinue = new JButton("Continue");
 		this.buttonContinue.setPreferredSize(dimension);
+		this.buttonContinue.setFocusable(false);
 		this.buttonContinue.addActionListener(this);
 		panelButton.add(this.buttonContinue);
 		
 		this.buttonRemove = new JButton("Remove");
 		this.buttonRemove.setPreferredSize(dimension);
+		this.buttonRemove.setFocusable(false);
 		this.buttonRemove.addActionListener(this);
 		panelButton.add(this.buttonRemove);
 	}

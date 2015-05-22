@@ -7,32 +7,31 @@ import javax.swing.Timer;
 public abstract class Animation implements ActionListener {
 	
 	public static final int DEFAULT_DELAY = 200;
-
-	private int initialDelay, delay, duration;
 	
 	protected int count = -1;
-	protected Timer timer;
+	private Timer timer;
+	private int duration;
 	
 	protected Animation() {
-		this.initialDelay = 0;
-		this.delay = DEFAULT_DELAY;
+		this.timer = new Timer(0, this);
+		this.timer.setDelay(DEFAULT_DELAY);
 		this.duration = 0;
 	}
 	
 	public int getInitialDelay() {
-		return this.initialDelay;
+		return this.timer.getInitialDelay();
 	}
 	
 	public void setInitialDelay(int initialDelay) {
-		this.initialDelay = initialDelay;
+		this.timer.setInitialDelay(initialDelay);
 	}
 	
 	public int getDelay() {
-		return this.delay;
+		return this.timer.getDelay();
 	}
 	
 	public void setDelay(int delay) {
-		this.delay = delay;
+		this.timer.setDelay(delay);
 	}
 	
 	public int getDuration() {
@@ -44,8 +43,6 @@ public abstract class Animation implements ActionListener {
 	}
 	
 	public void start() {
-		this.timer = new Timer(this.initialDelay, this);
-		this.timer.setDelay(this.delay);
 		this.timer.start();
 	}
 	

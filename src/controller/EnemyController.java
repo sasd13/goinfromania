@@ -1,8 +1,8 @@
 package controller;
 
+import anim.PowerlessAnimation;
 import anim.power.DietAnimation;
 import anim.power.DiseaseAnimation;
-import anim.power.PowerlessAnimation;
 import game.element.character.Enemy;
 import game.element.character.Nutritionist;
 import game.element.character.Pig;

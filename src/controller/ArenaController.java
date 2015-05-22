@@ -3,8 +3,9 @@ package controller;
 import java.awt.Point;
 
 import anim.AutoAppearanceAnimation;
+import anim.EnemyAutoMoveAnimation;
 import anim.ImageAnimation;
-import anim.AutoMoveAnimation;
+import anim.FoodAutoMoveAnimation;
 import anim.power.MissileAnimation;
 import game.element.Direction;
 import game.element.Element;
@@ -14,6 +15,7 @@ import game.element.character.Pig;
 import game.element.food.Food;
 import game.element.power.Missile;
 import game.element.power.Power;
+import game.round.Level;
 import game.round.Round;
 import util.ArenaUtil;
 import view.round.ArenaView;
@@ -24,26 +26,38 @@ public class ArenaController {
 	private static ListElements listElements;
 	
 	private static AutoAppearanceAnimation autoAppearanceAnimation;
-	private static AutoMoveAnimation autoMoveAnimation;
+	private static FoodAutoMoveAnimation foodAutoMoveAnimation;
+	private static EnemyAutoMoveAnimation enemyAutoMoveAnimation;
 	
 	public static void initialize(ArenaView myArenaView, Round round) {
 		arenaView = myArenaView;
 		listElements = round.getListElements();
 		
-		autoAppearanceAnimation = new AutoAppearanceAnimation(round.getLevel(), listElements);
-		autoMoveAnimation = new AutoMoveAnimation(listElements);
+		Level level = round.getLevel();
+		autoAppearanceAnimation = new AutoAppearanceAnimation(level, listElements);
+		foodAutoMoveAnimation = new FoodAutoMoveAnimation(level, listElements);
+		enemyAutoMoveAnimation = new EnemyAutoMoveAnimation(level, listElements);
+		
+		//Décrémente les "delay" tous les deux tours
+		int decreaseValue = round.getRoundNumber()/2 - (round.getRoundNumber() - 1)%2;
+		
+		autoAppearanceAnimation.setDelay(autoAppearanceAnimation.getDelay() - decreaseValue);
+		foodAutoMoveAnimation.setDelay(foodAutoMoveAnimation.getDelay() - decreaseValue);
+		enemyAutoMoveAnimation.setDelay(enemyAutoMoveAnimation.getDelay() - decreaseValue);
 	}
 	
 	public static void start() {		
 		arenaView.requestFocusInWindow();
 		
 		autoAppearanceAnimation.start();
-		autoMoveAnimation.start();
+		foodAutoMoveAnimation.start();
+		enemyAutoMoveAnimation.start();
 	}
 	
 	public static void stop() {
 		autoAppearanceAnimation.stop();
-		autoMoveAnimation.stop();
+		foodAutoMoveAnimation.stop();
+		enemyAutoMoveAnimation.stop();
 	}
 	
 	public static void repaintArena() {

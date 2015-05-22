@@ -74,6 +74,8 @@ public class AutoAppearanceAnimation extends Animation {
 		factorWallAppearance;
 	
 	public AutoAppearanceAnimation(Level level, ListElements listElements) {
+		super();
+		
 		setLevel(level);
 		
 		this.listElements = listElements;

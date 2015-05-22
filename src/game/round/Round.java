@@ -20,8 +20,8 @@ public class Round extends Observable {
 	private int maxCountEatenCakes;
 	private int countEatenCakes;
 	private int countEatenPoisonCakes;
-	private int countNutritionistKilled;
-	private int countVirusKilled;
+	private int countKilledNutritionists;
+	private int countKilledViruses;
 	private int score;
 	private State state;
 	private boolean finished;
@@ -165,23 +165,23 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
-	public int getCountNutritionistKilled() {
-		return this.countNutritionistKilled;
+	public int getCountKilledNutritionists() {
+		return this.countKilledNutritionists;
 	}
 	
-	public void setCountNutritionistKilled(int countNutritionistKilled) {
-		this.countNutritionistKilled = countNutritionistKilled;
+	public void setCountKilledNutritionists(int countKilledNutritionists) {
+		this.countKilledNutritionists = countKilledNutritionists;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
-	public int getCountVirusKilled() {
-		return this.countVirusKilled;
+	public int getCountKilledViruses() {
+		return this.countKilledViruses;
 	}
 	
-	public void setCountVirusKilled(int countVirusKilled) {
-		this.countVirusKilled = countVirusKilled;
+	public void setCountKilledViruses(int countKilledViruses) {
+		this.countKilledViruses = countKilledViruses;
 		
 		setChanged();
 		notifyObservers();
@@ -264,19 +264,19 @@ public class Round extends Observable {
 		notifyObservers();
 	}
 	
-	public int getFoodEated() {
+	public int getEatedFoods() {
 		return this.countEatenCakes + this.countEatenPoisonCakes;
 	}
 	
-	public int getCountEnemyKilled() {
-		return this.countNutritionistKilled + this.countVirusKilled;
+	public int getCountKilledEnemies() {
+		return this.countKilledNutritionists + this.countKilledViruses;
 	}
 	
 	public void resetStatistics() {
 		setCountEatenCakes(0);
 		setCountEatenPoisonCakes(0);
-		setCountNutritionistKilled(0);
-		setCountVirusKilled(0);
+		setCountKilledNutritionists(0);
+		setCountKilledViruses(0);
 		setScore(0);
 	}
 }

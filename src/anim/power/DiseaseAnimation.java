@@ -37,7 +37,7 @@ public class DiseaseAnimation extends PowerAnimation {
 			pig.setLife(pig.getLife() - getPower().getPowerValue());
 			pig.setSpeed(Pig.SPEED_LOW);
 		} else {
-			timer.stop();
+			stop();
 			
 			image = ImageLoader.loadFromPath(pig.getImageName());
 			pig.setImageWithDimension(image);

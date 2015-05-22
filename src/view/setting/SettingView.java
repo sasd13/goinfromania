@@ -34,11 +34,13 @@ public abstract class SettingView extends JDialog implements Observer, ActionLis
 		
 		this.buttonClose = new JButton("Close");
 		this.buttonClose.setPreferredSize(dimension);
+		this.buttonClose.setFocusable(false);
 		this.buttonClose.addActionListener(this);
 		panel.add(this.buttonClose);
 		
 		this.buttonReset = new JButton("Reset");
 		this.buttonReset.setPreferredSize(dimension);
+		this.buttonReset.setFocusable(false);
 		this.buttonReset.addActionListener(this);
 		panel.add(this.buttonReset);
 	}

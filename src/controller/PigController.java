@@ -1,7 +1,7 @@
 package controller;
 
-import anim.power.BoomAnimation;
-import anim.power.HitAnimation;
+import anim.BoomAnimation;
+import anim.HitAnimation;
 import anim.power.ParalyzeAnimation;
 import game.element.character.Enemy;
 import game.element.character.Pig;

@@ -46,7 +46,7 @@ public class ImageAnimation extends Animation {
 			image = ImageLoader.loadFromPath(this.imageName);
 			this.elementToAct.setImageWithDimension(image);
 		} else {
-			timer.stop();
+			stop();
 			
 			image = ImageLoader.loadFromPath(this.elementToAct.getImageName());
 			this.elementToAct.setImageWithDimension(image);

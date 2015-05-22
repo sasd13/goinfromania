@@ -37,7 +37,7 @@ public class ParalyzeAnimation extends PowerAnimation {
 			enemy.setMovable(false);
 			enemy.setPowerful(false);
 		} else {
-			timer.stop();
+			stop();
 			
 			image = ImageLoader.loadFromPath(enemy.getImageName());
 			enemy.setImageWithDimension(image);

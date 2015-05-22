@@ -69,11 +69,13 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 		
 		this.buttonNext = new JButton("Next");
 		this.buttonNext.setPreferredSize(dimension);
+		this.buttonNext.setFocusable(false);
 		this.buttonNext.addActionListener(this);
 		panelButton.add(this.buttonNext);
 		
 		this.buttonFinish = new JButton("Finish");
 		this.buttonFinish.setPreferredSize(dimension);
+		this.buttonFinish.setFocusable(false);
 		this.buttonFinish.addActionListener(this);
 		panelButton.add(this.buttonFinish);
 	}

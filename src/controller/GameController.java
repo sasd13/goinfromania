@@ -94,7 +94,7 @@ public class GameController {
 		String title = "New round";
 		String message = "Choose your level :";
 		
-		int selected = JOptionPane.showOptionDialog(null, message, title, JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, Level.values(), Level.EASY);
+		int selected = JOptionPane.showOptionDialog(gameView, message, title, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, Level.values(), Level.EASY);
 		if (selected == JOptionPane.CLOSED_OPTION) {
 			displayHome();
 		} else {
