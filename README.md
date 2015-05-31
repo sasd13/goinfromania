@@ -1,2 +1,2 @@
-# j-goinfromania
+# goinfromania
 Java game : Goinfr'o'mania
