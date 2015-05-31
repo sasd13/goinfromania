@@ -38,7 +38,7 @@ public class ArenaController {
 		foodAutoMoveAnimation = new FoodAutoMoveAnimation(level, listElements);
 		enemyAutoMoveAnimation = new EnemyAutoMoveAnimation(level, listElements);
 		
-		//Décrémente les "delay" tous les deux tours
+		//Decremente les "delay" tous les deux tours
 		int decreaseValue = round.getRoundNumber()/2 - (round.getRoundNumber() - 1)%2;
 		
 		autoAppearanceAnimation.setDelay(autoAppearanceAnimation.getDelay() - decreaseValue);

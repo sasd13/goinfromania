@@ -62,19 +62,17 @@ public class RoundController {
 		
 		int selected = JOptionPane.showConfirmDialog(roundView, message, title, JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
+			stopRound();
 			restartRound();
 		}
 	}
 	
 	private static void restartRound() {
-		ArenaController.stop();
-		
 		round.deleteObservers();
 		
 		round = loadRoundFromCache(round.getId());
 		
-		initialize(roundView, round);
-		startRound();
+		GameController.openRound(round);
 	}
 	
 	public static void pauseRound() {

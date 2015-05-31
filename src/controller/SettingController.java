@@ -21,7 +21,6 @@ public class SettingController {
 		settingView.update(setting, null);
 		
 		settingView.pack();
-		//To center the frame on screen, must be called after pack()
 		settingView.setLocationRelativeTo(null);
 		settingView.setVisible(true);
 	}
@@ -54,8 +53,6 @@ public class SettingController {
 	}
 	
 	public static GamePad loadGamePad() {
-		GamePad gamePad = (GamePad) SettingDAO.load(GamePad.NAME);
-		
-		return gamePad;
+		return (GamePad) SettingDAO.load(GamePad.NAME);
 	}
 }

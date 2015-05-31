@@ -88,6 +88,13 @@ public class Round extends Observable {
 		return this.id;
 	}
 	
+	protected void setId(String id) {
+		this.id = id;
+		
+		setChanged();
+		notifyObservers();
+	}
+	
 	public int getRoundNumber() {
 		return this.roundNumber;
 	}
