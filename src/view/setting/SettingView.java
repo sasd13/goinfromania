@@ -1,5 +1,7 @@
 package view.setting;
 
+import game.setting.Setting;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -10,6 +12,7 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import view.DimensionConstants;
@@ -17,13 +20,14 @@ import controller.SettingController;
 
 public abstract class SettingView extends JDialog implements Observer, ActionListener {
 
+	protected Setting setting;
 	private JButton buttonClose, buttonReset;
 	
 	public SettingView() {
 		super();
 		
 		setTitle("Settings");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setPreferredSize(new Dimension(DimensionConstants.FRAME_WIDTH, DimensionConstants.FRAME_HEIGHT));
 		
@@ -47,16 +51,22 @@ public abstract class SettingView extends JDialog implements Observer, ActionLis
 	
 	@Override
 	public void update(Observable observable, Object arg) {
-		//TODO
-		
+		this.setting = (Setting) observable;
 	}
+	
+	protected abstract boolean editChanges();
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		JButton button = (JButton) arg0.getSource();
 		
 		if (button == this.buttonClose) {
-			SettingController.closeSetting();
+			boolean changed = editChanges();
+			if (changed) {
+				SettingController.closeSetting();
+			} else {
+				JOptionPane.showMessageDialog(this, "Touches invalides. Vous devez les corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
+			}
 		} else if (button == this.buttonReset) {
 			SettingController.resetSetting();
 		}

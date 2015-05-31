@@ -32,10 +32,13 @@ public class SettingController {
 		int selected = JOptionPane.showConfirmDialog(settingView, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
 			SettingDAO.save(setting);
+			
+			setting.deleteObservers();		
+			settingView.dispose();
+		} else if (selected == JOptionPane.NO_OPTION) {
+			setting.deleteObservers();		
+			settingView.dispose();
 		}
-		
-		setting.deleteObservers();		
-		settingView.dispose();
 	}
 	
 	public static void resetSetting() {

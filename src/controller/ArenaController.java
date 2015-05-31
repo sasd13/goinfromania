@@ -40,7 +40,6 @@ public class ArenaController {
 		
 		//Decremente les "delay" tous les deux tours
 		int decreaseValue = round.getRoundNumber()/2 - (round.getRoundNumber() - 1)%2;
-		
 		autoAppearanceAnimation.setDelay(autoAppearanceAnimation.getDelay() - decreaseValue);
 		foodAutoMoveAnimation.setDelay(foodAutoMoveAnimation.getDelay() - decreaseValue);
 		enemyAutoMoveAnimation.setDelay(enemyAutoMoveAnimation.getDelay() - decreaseValue);
