@@ -34,17 +34,17 @@ public class MissileAnimation extends PowerAnimation {
 			
 			BufferedImage image;
 			switch(direction) {
-				case RIGHT :
-					image = ImageLoader.loadFromPath("right_" + missile.getImageName());
+				case NORTH:
+					image = ImageLoader.loadFromPath("north_" + missile.getImageName());
 					break;
-				case UP :
-					image = ImageLoader.loadFromPath("up_" + missile.getImageName());
+				case SOUTH:
+					image = ImageLoader.loadFromPath("south_" + missile.getImageName());
 					break;
-				case DOWN :
-					image = ImageLoader.loadFromPath("down_" + missile.getImageName());
+				case WEST:
+					image = ImageLoader.loadFromPath("west_" + missile.getImageName());
 					break;
-				case LEFT : default :
-					image = ImageLoader.loadFromPath("left_" + missile.getImageName());
+				case EAST: default:
+					image = ImageLoader.loadFromPath("east_" + missile.getImageName());
 					break;
 			}
 			missile.setImageWithDimension(image);

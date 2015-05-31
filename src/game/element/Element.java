@@ -135,20 +135,17 @@ public abstract class Element extends Observable {
 		Point nextPosition = new Point(this.position.x, this.position.y);
 		
 		switch (direction) {
-			case LEFT :
-				nextPosition.x = this.position.x - this.speed;
-				break;
-			case RIGHT :
-				nextPosition.x = this.position.x + this.speed;
-				break;
-			case UP :
+			case NORTH :
 				nextPosition.y = this.position.y - this.speed;
 				break;
-			case DOWN :
+			case SOUTH :
 				nextPosition.y = this.position.y + this.speed;
 				break;
-			default :
-				//TODO Throw exception
+			case WEST :
+				nextPosition.x = this.position.x - this.speed;
+				break;
+			case EAST :
+				nextPosition.x = this.position.x + this.speed;
 				break;
 		}
 		

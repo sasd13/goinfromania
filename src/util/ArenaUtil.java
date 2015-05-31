@@ -21,10 +21,10 @@ public class ArenaUtil {
 			return true;
 		}
 		
-		if ((direction == Direction.LEFT && position.x < Element.POSITION_X_MIN) 
-				|| (direction == Direction.RIGHT && position.x > Element.POSITION_X_MAX)
-				|| (direction == Direction.UP && position.y < Element.POSITION_Y_MIN)
-				|| (direction == Direction.DOWN && position.y > Element.POSITION_Y_MAX)) {
+		if ((direction == Direction.WEST && position.x < Element.POSITION_X_MIN) 
+				|| (direction == Direction.EAST && position.x > Element.POSITION_X_MAX)
+				|| (direction == Direction.NORTH && position.y < Element.POSITION_Y_MIN)
+				|| (direction == Direction.SOUTH && position.y > Element.POSITION_Y_MAX)) {
 			return false;
 		} else {
 			ListElements listElementsAtNextPosition = getElementsAtNextPosition(elementActor, direction, listElements);
@@ -152,13 +152,13 @@ public class ArenaUtil {
 		random = (randomX < randomY) ? randomX : randomY;
 		
 		if (random == randomLeft) {
-			direction = Direction.RIGHT;
+			direction = Direction.EAST;
 		} else if (random == randomRight) {
-			direction = Direction.LEFT;
+			direction = Direction.WEST;
 		} else if (random == randomUp) {
-			direction = Direction.DOWN;
+			direction = Direction.SOUTH;
 		} else {
-			direction = Direction.UP;
+			direction = Direction.NORTH;
 		}
 		
 		return direction;
@@ -166,14 +166,14 @@ public class ArenaUtil {
 	
 	public static Direction getOpositeDirection(Direction direction) {
 		switch (direction) {
-			case LEFT:
-				return Direction.RIGHT;
-			case RIGHT:
-				return Direction.LEFT;
-			case UP:
-				return Direction.DOWN;
-			case DOWN:
-				return Direction.UP;
+			case WEST:
+				return Direction.EAST;
+			case EAST:
+				return Direction.WEST;
+			case NORTH:
+				return Direction.SOUTH;
+			case SOUTH:
+				return Direction.NORTH;
 			default:
 				//TODO Throw exception
 				return null;
@@ -186,16 +186,16 @@ public class ArenaUtil {
 		
 		distanceX = elementActor.getPosition().x - elementToAct.getPosition().x;
 		if (distanceX < 0) {
-			directionX = Direction.RIGHT;
+			directionX = Direction.EAST;
 		} else {
-			directionX = Direction.LEFT;
+			directionX = Direction.WEST;
 		}
 		
 		distanceY = elementActor.getPosition().y - elementToAct.getPosition().y;
 		if (distanceY < 0) {
-			directionY = Direction.DOWN;
+			directionY = Direction.SOUTH;
 		} else {
-			directionY = Direction.UP;
+			directionY = Direction.NORTH;
 		}
 		
 		return (Math.abs(distanceX) > Math.abs(distanceY)) ? directionX : directionY;		

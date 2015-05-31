@@ -13,16 +13,16 @@ public class ElementUtil {
 		if ((speed == Pig.SPEED_MEDIUM) 
 				&& (position.x % Pig.SPEED_MEDIUM != 0 || position.y % Pig.SPEED_MEDIUM != 0)) {
 			switch (direction) {
-				case LEFT :
+				case WEST :
 					position.x = (int) MathUtil.roundDown(position.x, Pig.SPEED_MEDIUM);
 					break;
-				case RIGHT :
+				case EAST :
 					position.x = (int) MathUtil.roundUp(position.x, Pig.SPEED_MEDIUM);
 					break;
-				case UP :
+				case NORTH :
 					position.y = (int) MathUtil.roundDown(position.y, Pig.SPEED_MEDIUM);
 					break;
-				case DOWN :
+				case SOUTH :
 					position.y = (int) MathUtil.roundUp(position.y, Pig.SPEED_MEDIUM);
 					break;
 				default :

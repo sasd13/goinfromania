@@ -7,10 +7,10 @@ public class GamePad extends Setting {
 	public static final String NAME = "GamePad";
 	
 	private int keyStart;
-	private int keyMoveLeft;
-	private int keyMoveRight;
-	private int keyMoveUp;
-	private int keyMoveDown;
+	private int keyMoveNorth;
+	private int keyMoveSouth;
+	private int keyMoveWest;
+	private int keyMoveEast;
 	private int keyPigAttak;
 	
 	public GamePad() {
@@ -32,45 +32,45 @@ public class GamePad extends Setting {
 		notifyObservers();
 	}
 	
-	public int getKeyMoveLeft() {
-		return this.keyMoveLeft;
+	public int getKeyMoveNorth() {
+		return this.keyMoveNorth;
 	}
 	
-	public void setKeyMoveLeft(int keyMoveLeft) {
-		this.keyMoveLeft = keyMoveLeft;
+	public void setKeyMoveNorth(int keyMoveNorth) {
+		this.keyMoveNorth = keyMoveNorth;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
-	public int getKeyMoveRight() {
-		return this.keyMoveRight;
+	public int getKeyMoveSouth() {
+		return this.keyMoveSouth;
 	}
 	
-	public void setKeyMoveRight(int keyMoveRight) {
-		this.keyMoveRight = keyMoveRight;
+	public void setKeyMoveSouth(int keyMoveSouth) {
+		this.keyMoveSouth = keyMoveSouth;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
-	public int getKeyMoveUp() {
-		return this.keyMoveUp;
+	public int getKeyMoveWest() {
+		return this.keyMoveWest;
 	}
 	
-	public void setKeyMoveUp(int keyMoveUp) {
-		this.keyMoveUp = keyMoveUp;
+	public void setKeyMoveWest(int keyMoveWest) {
+		this.keyMoveWest = keyMoveWest;
 		
 		setChanged();
 		notifyObservers();
 	}
 	
-	public int getKeyMoveDown() {
-		return this.keyMoveDown;
+	public int getKeyMoveEast() {
+		return this.keyMoveEast;
 	}
 	
-	public void setKeyMoveDown(int keyMoveDown) {
-		this.keyMoveDown = keyMoveDown;
+	public void setKeyMoveEast(int keyMoveEast) {
+		this.keyMoveEast = keyMoveEast;
 		
 		setChanged();
 		notifyObservers();
@@ -90,10 +90,10 @@ public class GamePad extends Setting {
 	@Override
 	public void reset() {		
 		setKeyStart(KeyEvent.VK_ENTER);
-		setKeyMoveLeft(KeyEvent.VK_LEFT);
-		setKeyMoveRight(KeyEvent.VK_RIGHT);
-		setKeyMoveUp(KeyEvent.VK_UP);
-		setKeyMoveDown(KeyEvent.VK_DOWN);
+		setKeyMoveNorth(KeyEvent.VK_UP);
+		setKeyMoveSouth(KeyEvent.VK_DOWN);
+		setKeyMoveWest(KeyEvent.VK_LEFT);
+		setKeyMoveEast(KeyEvent.VK_RIGHT);
 		setKeyPigAttak(KeyEvent.VK_SPACE);
 	}
 }

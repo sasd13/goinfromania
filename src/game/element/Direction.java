@@ -1,8 +1,8 @@
 package game.element;
 
 public enum Direction {
-	LEFT,
-	RIGHT,
-	UP,
-	DOWN
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST,
 }

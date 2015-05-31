@@ -15,10 +15,10 @@ import javax.swing.JTextField;
 public class GamePadView extends SettingView {
 	
 	private JTextField textFieldKeyStart,
-		textFieldKeyMoveLeft,
-		textFieldKeyMoveRight,
-		textFieldKeyMoveUp,
-		textFieldKeyMoveDown,
+		textFieldKeyMoveNorth,
+		textFieldKeyMoveSouth,
+		textFieldKeyMoveWest,
+		textFieldKeyMoveEast,
 		textFieldKeyPigAttak;
 	
 	public GamePadView() {
@@ -32,21 +32,21 @@ public class GamePadView extends SettingView {
 		this.textFieldKeyStart = new JTextField();
 		panelForm.add(this.textFieldKeyStart);
 		
-		panelForm.add(new JLabel("Move Left"));
-		this.textFieldKeyMoveLeft = new JTextField();
-		panelForm.add(this.textFieldKeyMoveLeft);
+		panelForm.add(new JLabel("Move North"));
+		this.textFieldKeyMoveNorth = new JTextField();
+		panelForm.add(this.textFieldKeyMoveNorth);
 		
-		panelForm.add(new JLabel("Move Right"));
-		this.textFieldKeyMoveRight = new JTextField();
-		panelForm.add(this.textFieldKeyMoveRight);
+		panelForm.add(new JLabel("Move South"));
+		this.textFieldKeyMoveSouth = new JTextField();
+		panelForm.add(this.textFieldKeyMoveSouth);
 		
-		panelForm.add(new JLabel("Move Up"));
-		this.textFieldKeyMoveUp = new JTextField();
-		panelForm.add(this.textFieldKeyMoveUp);
+		panelForm.add(new JLabel("Move West"));
+		this.textFieldKeyMoveWest = new JTextField();
+		panelForm.add(this.textFieldKeyMoveWest);
 		
-		panelForm.add(new JLabel("Move Down"));
-		this.textFieldKeyMoveDown = new JTextField();
-		panelForm.add(this.textFieldKeyMoveDown);
+		panelForm.add(new JLabel("Move Eastt"));
+		this.textFieldKeyMoveEast = new JTextField();
+		panelForm.add(this.textFieldKeyMoveEast);
 		
 		panelForm.add(new JLabel("Pig Attak"));
 		this.textFieldKeyPigAttak = new JTextField();
@@ -58,10 +58,10 @@ public class GamePadView extends SettingView {
 		GamePad gamePad = (GamePad) observable;
 		
 		this.textFieldKeyStart.setText(KeyEvent.getKeyText(gamePad.getKeyStart()));
-		this.textFieldKeyMoveLeft.setText(KeyEvent.getKeyText(gamePad.getKeyMoveLeft()));
-		this.textFieldKeyMoveRight.setText(KeyEvent.getKeyText(gamePad.getKeyMoveRight()));
-		this.textFieldKeyMoveUp.setText(KeyEvent.getKeyText(gamePad.getKeyMoveUp()));
-		this.textFieldKeyMoveDown.setText(KeyEvent.getKeyText(gamePad.getKeyMoveDown()));
+		this.textFieldKeyMoveNorth.setText(KeyEvent.getKeyText(gamePad.getKeyMoveNorth()));
+		this.textFieldKeyMoveSouth.setText(KeyEvent.getKeyText(gamePad.getKeyMoveSouth()));
+		this.textFieldKeyMoveWest.setText(KeyEvent.getKeyText(gamePad.getKeyMoveWest()));
+		this.textFieldKeyMoveEast.setText(KeyEvent.getKeyText(gamePad.getKeyMoveEast()));
 		this.textFieldKeyPigAttak.setText(KeyEvent.getKeyText(gamePad.getKeyPigAttak()));
 		
 		super.update(observable, arg);

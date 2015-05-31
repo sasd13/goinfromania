@@ -216,17 +216,17 @@ public class RoundController {
 			} else {
 				//TODO Throw exception
 			}
-		} else {
+		} else if (round.getState() == State.STARTED) {
 			Pig pig = round.getListElements().getPig();
 			
-			if (keyCode == gamePad.getKeyMoveLeft()) {
-				ArenaController.actionMove(pig, Direction.LEFT);
-			} else if (keyCode == gamePad.getKeyMoveRight()) {
-				ArenaController.actionMove(pig, Direction.RIGHT);
-			} else if (keyCode == gamePad.getKeyMoveUp()) {
-				ArenaController.actionMove(pig, Direction.UP);
-			} else if (keyCode == gamePad.getKeyMoveDown()) {
-				ArenaController.actionMove(pig, Direction.DOWN);
+			if (keyCode == gamePad.getKeyMoveNorth()) {
+				ArenaController.actionMove(pig, Direction.NORTH);
+			} else if (keyCode == gamePad.getKeyMoveSouth()) {
+				ArenaController.actionMove(pig, Direction.SOUTH);
+			} else if (keyCode == gamePad.getKeyMoveWest()) {
+				ArenaController.actionMove(pig, Direction.WEST);
+			} else if (keyCode == gamePad.getKeyMoveEast()) {
+				ArenaController.actionMove(pig, Direction.EAST);
 			} else if (keyCode == gamePad.getKeyPigAttak()) {
 				ArenaController.initPigAttak();
 			}

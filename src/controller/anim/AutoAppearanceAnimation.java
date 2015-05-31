@@ -12,7 +12,6 @@ import game.element.character.Virus;
 import game.element.food.CherryCake;
 import game.element.food.ChocolateCake;
 import game.element.food.KiwiCake;
-import game.element.food.MousseCake;
 import game.element.food.RaisinCake;
 import game.element.food.StrawberryCake;
 import game.element.item.Wall;
@@ -28,21 +27,17 @@ public class AutoAppearanceAnimation extends Animation {
 	private final int FACTOR_CHOCOLATECAKE_APPEARANCE_LEVEL_NORMAL = 4;
 	private final int FACTOR_CHOCOLATECAKE_APPEARANCE_LEVEL_HARD = 6;
 	
-	private final int FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_EASY = 6;
-	private final int FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_NORMAL = 12;
-	private final int FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_HARD = 18;
-	
 	private final int FACTOR_RAISINCAKE_APPEARANCE_LEVEL_EASY = 12;
 	private final int FACTOR_RAISINCAKE_APPEARANCE_LEVEL_NORMAL = 24;
 	private final int FACTOR_RAISINCAKE_APPEARANCE_LEVEL_HARD = 36;
 	
+	private final int FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_EASY = 6;
+	private final int FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_NORMAL = 12;
+	private final int FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_HARD = 18;
+	
 	private final int FACTOR_KIWICAKE_APPEARANCE_LEVEL_EASY = 14;
 	private final int FACTOR_KIWICAKE_APPEARANCE_LEVEL_NORMAL = 28;
 	private final int FACTOR_KIWICAKE_APPEARANCE_LEVEL_HARD = 42;
-	
-	private final int FACTOR_MOUSSECAKE_APPEARANCE_LEVEL_EASY = 20;
-	private final int FACTOR_MOUSSECAKE_APPEARANCE_LEVEL_NORMAL = 36;
-	private final int FACTOR_MOUSSECAKE_APPEARANCE_LEVEL_HARD = 54;
 	
 	private final int FACTOR_VIRUS_APPEARANCE_LEVEL_EASY = 22;
 	private final int FACTOR_VIRUS_APPEARANCE_LEVEL_NORMAL = 40;
@@ -64,10 +59,9 @@ public class AutoAppearanceAnimation extends Animation {
 	private ListElements listElements;
 	
 	private int factorRaisinCakeAppearance,
-		factorCherryCakeAppearance,
 		factorChocolateCakeAppearance,
 		factorStrawberryCakeAppearance,
-		factorMousseCakeAppearance,
+		factorCherryCakeAppearance,
 		factorKiwiCakeAppearance,
 		factorNutritionistAppearance,
 		factorVirusAppearance,
@@ -106,10 +100,9 @@ public class AutoAppearanceAnimation extends Animation {
 				
 				this.factorStrawberryCakeAppearance = FACTOR_STRAWBERRYCAKE_APPEARANCE_LEVEL_EASY;
 				this.factorChocolateCakeAppearance = FACTOR_CHOCOLATECAKE_APPEARANCE_LEVEL_EASY;
-				this.factorCherryCakeAppearance = FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_EASY;
 				this.factorRaisinCakeAppearance = FACTOR_RAISINCAKE_APPEARANCE_LEVEL_EASY;
+				this.factorCherryCakeAppearance = FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_EASY;
 				this.factorKiwiCakeAppearance = FACTOR_KIWICAKE_APPEARANCE_LEVEL_EASY;
-				this.factorMousseCakeAppearance = FACTOR_MOUSSECAKE_APPEARANCE_LEVEL_EASY;
 				this.factorVirusAppearance = FACTOR_VIRUS_APPEARANCE_LEVEL_EASY;
 				this.factorNutritionistAppearance = FACTOR_NUTRITIONIST_APPEARANCE_LEVEL_EASY;
 				this.factorWallAppearance = FACTOR_WALL_APPEARANCE_LEVEL_EASY;
@@ -119,10 +112,9 @@ public class AutoAppearanceAnimation extends Animation {
 				
 				this.factorStrawberryCakeAppearance = FACTOR_STRAWBERRYCAKE_APPEARANCE_LEVEL_NORMAL;
 				this.factorChocolateCakeAppearance = FACTOR_CHOCOLATECAKE_APPEARANCE_LEVEL_NORMAL;
-				this.factorCherryCakeAppearance = FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_NORMAL;
 				this.factorRaisinCakeAppearance = FACTOR_RAISINCAKE_APPEARANCE_LEVEL_NORMAL;
+				this.factorCherryCakeAppearance = FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_NORMAL;
 				this.factorKiwiCakeAppearance = FACTOR_KIWICAKE_APPEARANCE_LEVEL_NORMAL;
-				this.factorMousseCakeAppearance = FACTOR_MOUSSECAKE_APPEARANCE_LEVEL_NORMAL;
 				this.factorVirusAppearance = FACTOR_VIRUS_APPEARANCE_LEVEL_NORMAL;
 				this.factorNutritionistAppearance = FACTOR_NUTRITIONIST_APPEARANCE_LEVEL_NORMAL;
 				this.factorWallAppearance = FACTOR_WALL_APPEARANCE_LEVEL_NORMAL;
@@ -132,10 +124,9 @@ public class AutoAppearanceAnimation extends Animation {
 				
 				this.factorStrawberryCakeAppearance = FACTOR_STRAWBERRYCAKE_APPEARANCE_LEVEL_HARD;
 				this.factorChocolateCakeAppearance = FACTOR_CHOCOLATECAKE_APPEARANCE_LEVEL_HARD;
-				this.factorCherryCakeAppearance = FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_HARD;
 				this.factorRaisinCakeAppearance = FACTOR_RAISINCAKE_APPEARANCE_LEVEL_HARD;
+				this.factorCherryCakeAppearance = FACTOR_CHERRYCAKE_APPEARANCE_LEVEL_HARD;
 				this.factorKiwiCakeAppearance = FACTOR_KIWICAKE_APPEARANCE_LEVEL_HARD;
-				this.factorMousseCakeAppearance = FACTOR_MOUSSECAKE_APPEARANCE_LEVEL_HARD;
 				this.factorVirusAppearance = FACTOR_VIRUS_APPEARANCE_LEVEL_HARD;
 				this.factorNutritionistAppearance = FACTOR_NUTRITIONIST_APPEARANCE_LEVEL_HARD;
 				this.factorWallAppearance = FACTOR_WALL_APPEARANCE_LEVEL_HARD;
@@ -153,14 +144,12 @@ public class AutoAppearanceAnimation extends Animation {
 			element = new StrawberryCake();
 		} else if (random <= this.factorChocolateCakeAppearance) {
 			element = new ChocolateCake();
-		} else if (random <= this.factorCherryCakeAppearance) {
-			element = new CherryCake();
 		} else if (random <= this.factorRaisinCakeAppearance) {
 			element = new RaisinCake();
+		} else if (random <= this.factorCherryCakeAppearance) {
+			element = new CherryCake();
 		} else if (random <= this.factorKiwiCakeAppearance) {
 			element = new KiwiCake();
-		} else if (random <= this.factorMousseCakeAppearance) {
-			element = new MousseCake();
 		} else if (random <= this.factorVirusAppearance) {
 			element = new Virus();
 		} else if (random <= this.factorNutritionistAppearance) {
