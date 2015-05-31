@@ -4,10 +4,10 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
+import pattern.dao.RoundDAO;
 import view.GameView;
 import view.menu.GameMenuBar;
 import view.round.RoundView;
-import db.RoundDAO;
 import game.Game;
 import game.round.Level;
 import game.round.ListRounds;
@@ -23,16 +23,15 @@ public class GameController {
 		game = Game.getInstance();
 		game.addObserver(gameView);
 		gameView.update(game, null);
-	}
-	
-	public static void startGame() {
+		
 		ListRounds listRounds = RoundDAO.loadAll();
 		game.setListRounds(listRounds);
-		
+	}
+	
+	public static void startGame() {		
 		displayHome();
 		
 		gameView.pack();
-		//To center the frame on screen, must be called after pack()
 		gameView.setLocationRelativeTo(null);
 		gameView.setVisible(true);
 	}
@@ -48,22 +47,20 @@ public class GameController {
 	}
 	
 	private static void exitGame() {
-		boolean roundStopped = RoundController.hasRoundStopped();
-		if (!roundStopped) {
+		if (!RoundController.hasRoundStopped()) {
 			RoundController.stopRoundWithoutResultAndExit();
 		}
 		
 		game.deleteObservers();
 		gameView.dispose();
+		
+		System.exit(0);
 	}
 	
 	public static boolean stopRoundIfStarted() {
-		boolean roundStopped = RoundController.hasRoundStopped();
-		if (roundStopped) {
-			return true;
+		if (!RoundController.hasRoundStopped()) {
+			RoundController.showDialogConfirmStopRound();
 		}
-		
-		RoundController.showDialogConfirmStopRound();
 		
 		return RoundController.hasRoundStopped();
 	}
@@ -95,9 +92,7 @@ public class GameController {
 		String message = "Choose your level :";
 		
 		int selected = JOptionPane.showOptionDialog(gameView, message, title, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, Level.values(), Level.EASY);
-		if (selected == JOptionPane.CLOSED_OPTION) {
-			displayHome();
-		} else {
+		if (selected != JOptionPane.CLOSED_OPTION) {
 			if (selected == 2) {
 				round.setLevel(Level.HARD);
 			} else if (selected == 1) {
@@ -129,13 +124,15 @@ public class GameController {
 	}
 	
 	public static void saveRound(Round round) {
-		round.setUpdatedAt(new Date(System.currentTimeMillis()));
+		round.setDateUpdated(new Date(System.currentTimeMillis()));
 		game.getListRounds().add(round);
+		
 		RoundDAO.save(round);
 	}
 	
 	public static void removeRound(Round round) {
 		game.getListRounds().remove(round);
+		
 		RoundDAO.remove(round);
 	}
 }

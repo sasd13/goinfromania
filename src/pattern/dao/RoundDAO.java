@@ -1,4 +1,4 @@
-package db;
+package pattern.dao;
 
 import game.round.ListRounds;
 import game.round.Round;

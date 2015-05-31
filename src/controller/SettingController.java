@@ -2,11 +2,11 @@ package controller;
 
 import javax.swing.JOptionPane;
 
+import pattern.dao.SettingDAO;
 import game.setting.GamePad;
 import game.setting.Setting;
 import view.setting.GamePadView;
 import view.setting.SettingView;
-import db.SettingDAO;
 
 public class SettingController {
 

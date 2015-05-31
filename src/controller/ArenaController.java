@@ -2,11 +2,11 @@ package controller;
 
 import java.awt.Point;
 
-import anim.AutoAppearanceAnimation;
-import anim.EnemyAutoMoveAnimation;
-import anim.ImageAnimation;
-import anim.FoodAutoMoveAnimation;
-import anim.power.MissileAnimation;
+import controller.anim.AutoAppearanceAnimation;
+import controller.anim.EnemyAutoMoveAnimation;
+import controller.anim.FoodAutoMoveAnimation;
+import controller.anim.ImageAnimation;
+import controller.anim.power.MissileAnimation;
 import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
@@ -46,8 +46,10 @@ public class ArenaController {
 		enemyAutoMoveAnimation.setDelay(enemyAutoMoveAnimation.getDelay() - decreaseValue);
 	}
 	
-	public static void start() {		
+	public static void start() {
 		arenaView.requestFocusInWindow();
+		
+		listElements.getPig().setMovable(true);
 		
 		autoAppearanceAnimation.start();
 		foodAutoMoveAnimation.start();
@@ -55,6 +57,8 @@ public class ArenaController {
 	}
 	
 	public static void stop() {
+		listElements.getPig().setMovable(false);
+		
 		autoAppearanceAnimation.stop();
 		foodAutoMoveAnimation.stop();
 		enemyAutoMoveAnimation.stop();

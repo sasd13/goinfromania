@@ -1,4 +1,4 @@
-package db;
+package pattern.dao;
 
 import game.setting.GamePad;
 import game.setting.Setting;

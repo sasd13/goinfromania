@@ -2,6 +2,7 @@ package view.round;
 
 import game.round.Result;
 import game.round.Round;
+import game.round.Statistics;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -91,9 +92,10 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 			this.buttonNext.setEnabled(false);
 		}
 
-		this.labelTotalScoreValue.setText(String.valueOf(round.getRoundCumulatedStatistics().getTotalScore()));
-		this.labelTotalFoodEatedValue.setText(String.valueOf(round.getRoundCumulatedStatistics().getTotalFoodEated()));
-		this.labelTotalEnemyKilledValue.setText(String.valueOf(round.getRoundCumulatedStatistics().getTotalEnemyKilled()));
+		Statistics statistics = round.getStatistics();
+		this.labelTotalScoreValue.setText(String.valueOf(statistics.getTotalScore()));
+		this.labelTotalFoodEatedValue.setText(String.valueOf(statistics.getTotalFoodEated()));
+		this.labelTotalEnemyKilledValue.setText(String.valueOf(statistics.getTotalEnemyKilled()));
 	}
 	
 	@Override

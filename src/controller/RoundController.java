@@ -13,7 +13,7 @@ import game.element.food.Food;
 import game.element.food.PoisonCake;
 import game.round.Result;
 import game.round.Round;
-import game.round.RoundCumulatedStatistics;
+import game.round.Statistics;
 import game.round.State;
 import game.setting.GamePad;
 
@@ -32,32 +32,9 @@ public class RoundController {
 		
 		gamePad = null;
 		
-		ArenaController.initialize(roundView.getArenaView(), round);
-		
-		//Sauvegarde
 		saveRoundInCache();
-	}
-	
-	public static void checkRound() {
-		boolean hasRoundError = false;
 		
-		if (round.getCountEatenCakes() > round.getMaxCountEatenCakes()) {
-			hasRoundError = true;
-			
-			//TODO Throw exception
-		}
-		
-		Pig pig = round.getListElements().getPig();
-		
-		if (pig.isDied() && !round.isFinished()) {
-			hasRoundError = true;
-			
-			//TODO Throw exception
-		}
-		
-		if (hasRoundError) {
-			exitRound();
-		}
+		ArenaController.initialize(roundView.getArenaView(), round);
 	}
 	
 	public static void showDialogRoundRules() {
@@ -104,8 +81,6 @@ public class RoundController {
 		round.setState(State.PAUSED);
 		
 		ArenaController.stop();
-		
-		roundView.displayRoundMenuView();
 	}
 	
 	public static void showDialogConfirmStopRound() {
@@ -157,7 +132,9 @@ public class RoundController {
 	}
 	
 	public static void checkEatenCakes() {
-		if (round.getCountEatenCakes() == round.getMaxCountEatenCakes()) {
+		Statistics statistics = round.getStatistics();
+		
+		if (statistics.getCountEatenCakes() == statistics.getMaxCakesToEat()) {
 			round.setFinished(true);
 			stopRoundAndDisplayResult();
 		}
@@ -257,37 +234,37 @@ public class RoundController {
 	}
 	
 	public static void cumuleFoodStatistics(Food food) {
-		RoundCumulatedStatistics roundCumulatedStatistics = round.getRoundCumulatedStatistics();
+		Statistics statistics = round.getStatistics();
 		
 		if (food instanceof Cake) {
-			round.setCountEatenCakes(round.getCountEatenCakes() + 1);
-			roundCumulatedStatistics.setTotalEatenCakes(roundCumulatedStatistics.getTotalEatenCakes() + 1);
+			statistics.setCountEatenCakes(statistics.getCountEatenCakes() + 1);
+			statistics.setTotalEatenCakes(statistics.getTotalEatenCakes() + 1);
 		} else if (food instanceof PoisonCake) {
-			round.setCountEatenPoisonCakes(round.getCountEatenPoisonCakes() + 1);
-			roundCumulatedStatistics.setTotalEatenPoisonCakes(roundCumulatedStatistics.getTotalEatenPoisonCakes() + 1);
+			statistics.setCountEatenPoisonCakes(statistics.getCountEatenPoisonCakes() + 1);
+			statistics.setTotalEatenPoisonCakes(statistics.getTotalEatenPoisonCakes() + 1);
 		}
 		
 		cumuleScoreStatistics(food.getScorePoint());
 	}
 	
 	public static void cumuleEnemyStatistics(Enemy enemy) {
-		RoundCumulatedStatistics roundCumulatedStatistics = round.getRoundCumulatedStatistics();
+		Statistics statistics = round.getStatistics();
 		
 		if (enemy.getName().equals(Nutritionist.NAME)) {
-			round.setCountKilledNutritionists(round.getCountKilledNutritionists() + 1);
-			roundCumulatedStatistics.setTotalKilledNutritionists(roundCumulatedStatistics.getTotalKilledNutritionists() + 1);
+			statistics.setCountKilledNutritionists(statistics.getCountKilledNutritionists() + 1);
+			statistics.setTotalKilledNutritionists(statistics.getTotalKilledNutritionists() + 1);
 		} else if (enemy.getName().equals(Virus.NAME)) {
-			round.setCountKilledViruses(round.getCountKilledViruses() + 1);
-			roundCumulatedStatistics.setTotalKilledViruses(roundCumulatedStatistics.getTotalKilledViruses() + 1);
+			statistics.setCountKilledViruses(statistics.getCountKilledViruses() + 1);
+			statistics.setTotalKilledViruses(statistics.getTotalKilledViruses() + 1);
 		}
 		
 		cumuleScoreStatistics(enemy.getScorePoint());
 	}
 	
 	private static void cumuleScoreStatistics(int scoreValue) {
-		RoundCumulatedStatistics roundCumulatedStatistics = round.getRoundCumulatedStatistics();
+		Statistics statistics = round.getStatistics();
 		
-		round.setScore(round.getScore() + scoreValue);
-		roundCumulatedStatistics.setTotalScore(roundCumulatedStatistics.getTotalScore() + scoreValue);
+		statistics.setScore(statistics.getScore() + scoreValue);
+		statistics.setTotalScore(statistics.getTotalScore() + scoreValue);
 	}
 }

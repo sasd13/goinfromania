@@ -1,8 +1,8 @@
 package controller;
 
-import anim.BoomAnimation;
-import anim.HitAnimation;
-import anim.power.ParalyzeAnimation;
+import controller.anim.BoomAnimation;
+import controller.anim.HitAnimation;
+import controller.anim.power.ParalyzeAnimation;
 import game.element.character.Enemy;
 import game.element.character.Pig;
 import game.element.power.Missile;
@@ -11,11 +11,7 @@ import game.element.power.Power;
 
 public class PigController {
 	
-	public static final String ANIMATION_HIT_IMAGE_PREFIX = "hit_";
-	
 	public static void actionPigAttaksEnemy(Power power, Pig pig, Enemy enemy) {
-		power.setUsed(true);
-		
 		if (power instanceof Paralyze) {
 			actionParalyze((Paralyze) power, pig, enemy);
 		} else if (power instanceof Missile) {

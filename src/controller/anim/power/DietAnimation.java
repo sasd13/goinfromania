@@ -1,4 +1,4 @@
-package anim.power;
+package controller.anim.power;
 
 import game.element.character.Enemy;
 import game.element.character.Pig;

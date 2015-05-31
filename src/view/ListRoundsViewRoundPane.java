@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import game.element.character.Pig;
 import game.round.Round;
+import game.round.Statistics;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -93,9 +94,15 @@ public class ListRoundsViewRoundPane extends JPanel implements ActionListener {
 		
 		this.labelRoundNumberValue.setText(String.valueOf(round.getRoundNumber()));
 		this.labelLevelValue.setText(String.valueOf(round.getLevel()));
-		this.labelCakesValue.setText(round.getCountEatenCakes() + "/" + round.getMaxCountEatenCakes());
-		this.labelCumulatedScoreValue.setText(String.valueOf(round.getScore()));
-		this.labelDateUpdatedValue.setText(String.valueOf(round.getUpdatedAt()));
+		if (round.getDateUpdated() == null) {
+			this.labelDateUpdatedValue.setText("");
+		} else {
+			this.labelDateUpdatedValue.setText(String.valueOf(round.getDateUpdated()));
+		}
+		
+		Statistics statistics = round.getStatistics();
+		this.labelCakesValue.setText(statistics.getCountEatenCakes() + "/" + statistics.getMaxCakesToEat());
+		this.labelCumulatedScoreValue.setText(String.valueOf(statistics.getScore()));
 		
 		Pig pig = round.getListElements().getPig();
 		

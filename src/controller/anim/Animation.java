@@ -1,4 +1,4 @@
-package anim;
+package controller.anim;
 
 import java.awt.event.ActionListener;
 

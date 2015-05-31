@@ -1,8 +1,8 @@
 package controller;
 
-import anim.PowerlessAnimation;
-import anim.power.DietAnimation;
-import anim.power.DiseaseAnimation;
+import controller.anim.PowerlessAnimation;
+import controller.anim.power.DietAnimation;
+import controller.anim.power.DiseaseAnimation;
 import game.element.character.Enemy;
 import game.element.character.Nutritionist;
 import game.element.character.Pig;
@@ -16,8 +16,6 @@ public class EnemyController {
 	private static final int DELAY_BEFORE_ENEMY_ATTAK_AGAIN = 2000;
 
 	public static void actionEnemyAttaksPig(Power power, Enemy enemy, Pig pig) {
-		power.setUsed(true);
-		
 		if (enemy instanceof Nutritionist) {
 			actionDiet((Diet) power, (Nutritionist) enemy, pig);
 		} else if (enemy instanceof Virus) {
