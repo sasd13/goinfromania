@@ -29,7 +29,7 @@ public abstract class HelpView extends JDialog implements ActionListener {
 		
 		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		
-		this.buttonClose = new JButton("Close");
+		this.buttonClose = new JButton("Fermer");
 		this.buttonClose.setPreferredSize(dimension);
 		this.buttonClose.setFocusable(false);
 		this.buttonClose.addActionListener(this);

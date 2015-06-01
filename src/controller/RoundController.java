@@ -174,6 +174,8 @@ public class RoundController {
 	}
 	
 	public static void openNextRound() {
+		GameController.removeRound(round);
+		
 		round = Round.createNextRound(round);
 		
 		GameController.openRound(round);

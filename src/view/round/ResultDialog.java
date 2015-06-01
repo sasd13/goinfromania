@@ -34,9 +34,9 @@ public class ResultDialog extends JDialog implements Observer, ActionListener {
 	private JPanel panelResult, panelStatistics;
 	
 	private JLabel labelResult,
-		labelTotalScoreValue,
-		labelTotalFoodEatedValue,
-		labelTotalEnemyKilledValue;
+		labelScore,
+		labelTotalFoodEated,
+		labelTotalEnemyKilled;
 	
 	private JButton buttonNext, buttonFinish;
 	
@@ -47,15 +47,14 @@ public class ResultDialog extends JDialog implements Observer, ActionListener {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
+		setResizable(false);
+		setUndecorated(true);
 		
 		Dimension dimension = new Dimension(DimensionConstants.ROUND_COMPONENT_WIDTH, DimensionConstants.ROUND_COMPONENT_HEIGHT);
 		setSize(dimension);
 		
-		setResizable(false);
-		setUndecorated(true);
-		
 		this.layeredPane = new JLayeredPane();
-		getContentPane().add(this.layeredPane);
+		setContentPane(this.layeredPane);
 		
 		this.panelResult = new JPanel(new BorderLayout());
 		this.panelResult.setBackground(Color.BLACK);
@@ -63,7 +62,7 @@ public class ResultDialog extends JDialog implements Observer, ActionListener {
 		this.layeredPane.add(this.panelResult, JLayeredPane.DEFAULT_LAYER);
 		
 		Font font = new Font(
-				getContentPane().getFont().getName(),
+				Font.SANS_SERIF,
 				Font.BOLD | Font.ITALIC, 
 				96);
 		
@@ -82,30 +81,30 @@ public class ResultDialog extends JDialog implements Observer, ActionListener {
 		JPanel panelTotals = new JPanel(new GridLayout(3, 2));
 		this.panelStatistics.add(panelTotals, BorderLayout.CENTER);
 		
-		panelTotals.add(new JLabel("Total score : "));
-		this.labelTotalScoreValue = new JLabel();
-		panelTotals.add(this.labelTotalScoreValue);
+		panelTotals.add(new JLabel("Score : "));
+		this.labelScore = new JLabel();
+		panelTotals.add(this.labelScore);
 		
-		panelTotals.add(new JLabel("Total foods eated : "));
-		this.labelTotalFoodEatedValue = new JLabel();
-		panelTotals.add(this.labelTotalFoodEatedValue);
+		panelTotals.add(new JLabel("Total gateau mangés : "));
+		this.labelTotalFoodEated = new JLabel();
+		panelTotals.add(this.labelTotalFoodEated);
 		
-		panelTotals.add(new JLabel("Total enemies killed : "));
-		this.labelTotalEnemyKilledValue = new JLabel();
-		panelTotals.add(this.labelTotalEnemyKilledValue);
+		panelTotals.add(new JLabel("Total ennemis éliminés : "));
+		this.labelTotalEnemyKilled = new JLabel();
+		panelTotals.add(this.labelTotalEnemyKilled);
 		
 		JPanel panelButton = new JPanel();
 		this.panelStatistics.add(panelButton, BorderLayout.SOUTH);
 		
 		Dimension dimensionButton = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		
-		this.buttonNext = new JButton("Next");
+		this.buttonNext = new JButton("Suivant");
 		this.buttonNext.setPreferredSize(dimensionButton);
 		this.buttonNext.setFocusable(false);
 		this.buttonNext.addActionListener(this);
 		panelButton.add(this.buttonNext);
 		
-		this.buttonFinish = new JButton("Finish");
+		this.buttonFinish = new JButton("Terminer");
 		this.buttonFinish.setPreferredSize(dimensionButton);
 		this.buttonFinish.setFocusable(false);
 		this.buttonFinish.addActionListener(this);
@@ -125,9 +124,9 @@ public class ResultDialog extends JDialog implements Observer, ActionListener {
 		}
 
 		Statistics statistics = round.getStatistics();
-		this.labelTotalScoreValue.setText(String.valueOf(statistics.getScore()));
-		this.labelTotalFoodEatedValue.setText(String.valueOf(statistics.getTotalFoodEated()));
-		this.labelTotalEnemyKilledValue.setText(String.valueOf(statistics.getTotalEnemyKilled()));
+		this.labelScore.setText(String.valueOf(statistics.getScore()));
+		this.labelTotalFoodEated.setText(String.valueOf(statistics.getTotalFoodEated()));
+		this.labelTotalEnemyKilled.setText(String.valueOf(statistics.getTotalEnemyKilled()));
 	}
 	
 	@Override

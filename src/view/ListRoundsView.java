@@ -1,6 +1,7 @@
 package view;
 
 import game.round.ListRounds;
+import game.round.Round;
 
 import java.awt.Dimension;
 import java.util.Observable;
@@ -52,6 +53,9 @@ public class ListRoundsView extends JSplitPane implements Observer, ListSelectio
 	public void update(Observable observable, Object arg) {
 		this.listRounds = (ListRounds) observable;
 		
+		this.listModel.clear();
+		this.roundPane.clear();
+		
 		String roundId;
 		for (int i=0; i<this.listRounds.size(); i++) {
 			roundId = this.listRounds.get(i).getId();
@@ -66,9 +70,8 @@ public class ListRoundsView extends JSplitPane implements Observer, ListSelectio
 	public void valueChanged(ListSelectionEvent e) {
 		if (e.getValueIsAdjusting() == false) {
 	        if (this.listPane.getSelectedIndex() >= 0) {
-	        	int index = this.listPane.getSelectedIndex();
-	        	this.roundPane.bind(this.listRounds.get(index));
-	        	this.roundPane.setVisible(true);
+	        	Round round = this.listRounds.get(this.listPane.getSelectedIndex());
+	        	this.roundPane.bind(round);
 	        }
 	    }
 	}

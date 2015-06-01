@@ -15,7 +15,7 @@ public class GameHelpView extends HelpView {
 		setPreferredSize(new Dimension(DimensionConstants.FRAME_WIDTH, DimensionConstants.FRAME_HEIGHT));
 		
 		Font font = new Font(
-				getContentPane().getFont().getName(),
+				Font.SANS_SERIF,
 				Font.PLAIN,
 				getContentPane().getFont().getSize());
 		

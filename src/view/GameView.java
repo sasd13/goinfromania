@@ -3,7 +3,6 @@ package view;
 import game.Game;
 import game.round.ListRounds;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -42,7 +41,7 @@ public class GameView extends JFrame implements Observer, WindowListener {
 		
 		this.layeredPane = new JLayeredPane();
 		this.layeredPane.setPreferredSize(dimension);
-		getContentPane().add(this.layeredPane, BorderLayout.CENTER);
+		setContentPane(this.layeredPane);
 		
 		this.homeView = new HomeView();
 		this.homeView.setBounds(0, 0, dimension.width, dimension.height);

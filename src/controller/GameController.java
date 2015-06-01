@@ -24,6 +24,10 @@ public class GameController {
 		game.addObserver(gameView);
 		gameView.update(game, null);
 		
+		loadListRounds();
+	}
+	
+	public static void loadListRounds() {
 		ListRounds listRounds = RoundDAO.loadAll();
 		game.setListRounds(listRounds);
 	}

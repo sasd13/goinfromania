@@ -19,7 +19,7 @@ public class GamePadHelpView extends HelpView {
 		setPreferredSize(new Dimension(DimensionConstants.FRAME_WIDTH, DimensionConstants.FRAME_HEIGHT));
 		
 		Font fontPane = new Font(
-				getContentPane().getFont().getName(),
+				Font.SANS_SERIF,
 				Font.BOLD | Font.ITALIC,
 				20);
 		
@@ -31,7 +31,7 @@ public class GamePadHelpView extends HelpView {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		
 		Font font = new Font(
-				getContentPane().getFont().getName(),
+				Font.SANS_SERIF,
 				Font.PLAIN,
 				getContentPane().getFont().getSize());
 		

@@ -26,14 +26,14 @@ public class PigStateView extends JPanel implements Observer {
 		JPanel panelLife = new JPanel();
 		add(panelLife);
 		
-		panelLife.add(new JLabel("Life : "));
+		panelLife.add(new JLabel("Vie : "));
 		this.progressBarLifeValue = new JProgressBar(Character.LIFE_MIN, Character.LIFE_MAX);
 		panelLife.add(this.progressBarLifeValue);
 		
 		JPanel panelEnergy = new JPanel();
 		add(panelEnergy);
 		
-		panelEnergy.add(new JLabel("Energy : "));
+		panelEnergy.add(new JLabel("Energie : "));
 		this.progressBarEnergyValue = new JProgressBar(Pig.ENERGY_MIN, Pig.ENERGY_MAX);
 		panelEnergy.add(this.progressBarEnergyValue);
 	}

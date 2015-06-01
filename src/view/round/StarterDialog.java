@@ -41,7 +41,7 @@ public class StarterDialog extends JDialog implements Observer {
 		
 		this.layeredPane = new JLayeredPane();
 		this.layeredPane.setPreferredSize(new Dimension(DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT));
-		getContentPane().add(this.layeredPane);
+		setContentPane(this.layeredPane);
 		
 		this.panelRoundNumber = new JPanel();
 		this.panelRoundNumber.setBackground(Color.BLACK);
@@ -49,10 +49,9 @@ public class StarterDialog extends JDialog implements Observer {
 		this.layeredPane.add(this.panelRoundNumber, JLayeredPane.DEFAULT_LAYER);
 		
 		Font font = new Font(
-				getContentPane().getFont().getName(),
+				Font.SANS_SERIF,
 				Font.BOLD | Font.ITALIC, 
-				96
-				);
+				96);
 		
 		this.labelRoundNumber = new JLabel("Partie");
 		this.labelRoundNumber.setFont(font);
