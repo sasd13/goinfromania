@@ -6,7 +6,6 @@ import controller.anim.AnimationHandler;
 import controller.anim.arena.AutoAppearanceAnimation;
 import controller.anim.arena.EnemyAutoMoveAnimation;
 import controller.anim.arena.FoodAutoMoveAnimation;
-import controller.anim.element.ImageAnimation;
 import controller.anim.element.MissileAnimation;
 import game.element.Direction;
 import game.element.Element;
@@ -192,10 +191,5 @@ public class ArenaController {
 				}
 			}
 		}
-	}
-	
-	public static void startImageAnim(String imageName, Element elementToAct) {
-		ImageAnimation imageAnimation = new ImageAnimation(imageName, elementToAct);
-		AnimationHandler.start(imageAnimation);
 	}
 }

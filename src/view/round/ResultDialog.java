@@ -50,7 +50,7 @@ public class ResultDialog extends JDialog implements Observer, ActionListener {
 		setResizable(false);
 		setUndecorated(true);
 		
-		Dimension dimension = new Dimension(DimensionConstants.ROUND_COMPONENT_WIDTH, DimensionConstants.ROUND_COMPONENT_HEIGHT);
+		Dimension dimension = new Dimension(DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT);
 		setSize(dimension);
 		
 		this.layeredPane = new JLayeredPane();
@@ -85,7 +85,7 @@ public class ResultDialog extends JDialog implements Observer, ActionListener {
 		this.labelScore = new JLabel();
 		panelTotals.add(this.labelScore);
 		
-		panelTotals.add(new JLabel("Total gateau mangés : "));
+		panelTotals.add(new JLabel("Total gâteaux mangés : "));
 		this.labelTotalFoodEated = new JLabel();
 		panelTotals.add(this.labelTotalFoodEated);
 		

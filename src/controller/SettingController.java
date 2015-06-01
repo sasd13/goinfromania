@@ -14,21 +14,25 @@ public class SettingController {
 	private static SettingView settingView;
 	
 	public static void openSetting(String settingName) {
-		settingView = createView(settingName);
-		
-		setting = SettingDAO.load(settingName);
-		setting.addObserver(settingView);
-		settingView.update(setting, null);
-		
-		settingView.pack();
-		settingView.setLocationRelativeTo(null);
-		settingView.setVisible(true);
+		try {
+			settingView = createView(settingName);
+			
+			setting = SettingDAO.load(settingName);
+			setting.addObserver(settingView);
+			settingView.update(setting, null);
+			
+			settingView.pack();
+			settingView.setLocationRelativeTo(null);
+			settingView.setVisible(true);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void closeSetting(Setting newSetting) {
 		if (!setting.equals(newSetting)) {
-			String title = "Confirmation";
-			String message = "Save modifications ?";
+			String title = "Configuration";
+			String message = "Enregistrer les modifications ?";
 			
 			int selected = JOptionPane.showConfirmDialog(settingView, message, title, JOptionPane.YES_NO_OPTION);
 			if (selected == JOptionPane.YES_OPTION) {

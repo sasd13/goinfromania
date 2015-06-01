@@ -42,7 +42,7 @@ public class GameController {
 	
 	public static void showDialogConfirmExitGame() {
 		String title = Game.NAME;
-		String message = "Confirm exit game ?";
+		String message = "Quitter le jeu ?";
 		
 		int selected = JOptionPane.showConfirmDialog(gameView, message, title, JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
@@ -88,8 +88,8 @@ public class GameController {
 	}
 	
 	public static void showDialogChooseRoundLevel(Round round) {
-		String title = "New round";
-		String message = "Choose your level :";
+		String title = "Nouvelle partie";
+		String message = "Choisir le niveau";
 		
 		int selected = JOptionPane.showOptionDialog(gameView, message, title, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, Level.values(), Level.EASY);
 		if (selected != JOptionPane.CLOSED_OPTION) {

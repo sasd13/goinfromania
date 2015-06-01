@@ -68,6 +68,8 @@ public class AutoAppearanceAnimation extends Animation {
 		factorAppearanceVirus,
 		factorAppearanceWall;
 	
+	private AutoAppearancePositionWorker autoAppearancePositionWorker;
+	
 	public AutoAppearanceAnimation(Level level, ListElements listElements) {
 		super();
 		
@@ -159,11 +161,11 @@ public class AutoAppearanceAnimation extends Animation {
 			element = new Wall();
 		}
 		
-		AutoAppearancePositionWorker autoPositionWorker = new AutoAppearancePositionWorker(element, this.listElements);
-		autoPositionWorker.execute();
+		this.autoAppearancePositionWorker = new AutoAppearancePositionWorker(element, this.listElements);
+		this.autoAppearancePositionWorker.execute();
 		
 		try {
-			Point position = (Point) autoPositionWorker.get();
+			Point position = (Point) this.autoAppearancePositionWorker.get();
 			element.setPosition(position);
 			
 			ArenaController.addElement(element);

@@ -17,8 +17,8 @@ public class DimensionConstants {
 	public static final int ROUND_COMPONENT_WIDTH = 600;
 	public static final int ROUND_COMPONENT_HEIGHT = 400;
 	
-	public static final int ROUND_POPUP_WIDTH = 400;
-	public static final int ROUND_POPUP_HEIGHT = 150;
+	public static final int ROUND_POPUP_WIDTH = 500;
+	public static final int ROUND_POPUP_HEIGHT = 200;
 	
 	public static final int BUTTON_WIDTH = 100;
 	public static final int BUTTON_HEIGHT = 30;

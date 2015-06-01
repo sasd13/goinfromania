@@ -52,8 +52,8 @@ public class RoundController {
 	}
 	
 	public static void showDialogConfirmRestartRound() {
-		String title = "Round";
-		String message = "Restart round ?";
+		String title = "Partie";
+		String message = "Recommencer la partie ?";
 		
 		int selected = JOptionPane.showConfirmDialog(roundView, message, title, JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
@@ -77,8 +77,8 @@ public class RoundController {
 	}
 	
 	public static void showDialogConfirmStopRound() {
-		String title = "Round";
-		String message = "Confirm stop round ?";
+		String title = "Partie";
+		String message = "Arrêter la partie ?";
 		
 		int selected = JOptionPane.showConfirmDialog(roundView, message, title, JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
@@ -150,8 +150,8 @@ public class RoundController {
 	}
 	
 	public static void showDialogConfirmSaveRound() {
-		String title = "Round";
-		String message = "Save progress ?";
+		String title = "Partie";
+		String message = "Sauvegarder la progression ?";
 		
 		int selected = JOptionPane.showConfirmDialog(roundView, message, title, JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
