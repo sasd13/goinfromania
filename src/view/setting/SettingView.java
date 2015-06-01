@@ -21,7 +21,6 @@ import controller.SettingController;
 
 public abstract class SettingView extends JDialog implements Observer, ActionListener {
 
-	protected Setting setting;
 	private JButton buttonClose, buttonReset;
 	
 	public SettingView() {
@@ -50,22 +49,22 @@ public abstract class SettingView extends JDialog implements Observer, ActionLis
 	}
 	
 	@Override
-	public void update(Observable observable, Object arg) {
-		this.setting = (Setting) observable;
-	}
+	public void update(Observable observable, Object arg) {}
 	
-	protected abstract boolean editChanges();
+	protected abstract boolean checkChanges();
+	
+	protected abstract Setting editChanges();
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		JButton button = (JButton) arg0.getSource();
 		
 		if (button == this.buttonClose) {
-			boolean edited = editChanges();
-			if (edited) {
-				SettingController.closeSetting();
+			boolean checked = checkChanges();
+			if (checked) {
+				SettingController.closeSetting(editChanges());
 			} else {
-				JOptionPane.showMessageDialog(this, "Touches invalides. Vous devez les corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Configuration erronée. Vous devez corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
 			}
 		} else if (button == this.buttonReset) {
 			SettingController.resetSetting();

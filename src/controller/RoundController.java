@@ -30,18 +30,10 @@ public class RoundController {
 		round.addObserver(roundView);
 		roundView.update(round, null);
 		
-		gamePad = null;
-		
 		saveRoundInCache();
+		loadGamePad();
 		
 		ArenaController.initialize(roundView.getRoundArenaView(), round.getListElements(), round.getLevel(), round.getRoundNumber());
-	}
-	
-	public static void showDialogRoundRules() {
-		String title = "Round Rules";
-		String message = "Eat cakes to succeed! Be careful from enemies and bad foods...";
-		
-		JOptionPane.showMessageDialog(roundView, message, title, JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public static void displayRoundStarter() {
@@ -51,9 +43,11 @@ public class RoundController {
 	public static void startRound() {
 		round.setState(State.START);
 		
-		gamePad = SettingController.loadGamePad();
-		
 		ArenaController.start();
+	}
+	
+	public static void loadGamePad() {
+		gamePad = SettingController.loadGamePad();
 	}
 	
 	public static void showDialogConfirmRestartRound() {

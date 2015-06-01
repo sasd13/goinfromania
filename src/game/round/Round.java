@@ -41,30 +41,24 @@ public class Round extends Observable {
 	}
 	
 	public static Round createNextRound(Round round) {
-		round.setRoundNumber(round.getRoundNumber() + 1);
+		Round nextRound = new Round();
+		
+		nextRound.setRoundNumber(round.getRoundNumber() + 1);
+		nextRound.setLevel(round.getLevel());
+		nextRound.setDateCreated(round.getDateCreated());
 		
 		Pig pig = round.getListElements().getPig();
 		pig.setPosition(new Point());
-		
-		round.getListElements().clear();
-		round.getListElements().add(pig);
+		nextRound.getListElements().add(pig);
 		
 		Statistics statistics = round.getStatistics();
-		statistics.setMaxCakesToEat(statistics.getMaxCakesToEat() + Statistics.INCREMENTAL_CAKES_TO_EAT);
-		statistics.reset();
+		nextRound.getStatistics().setMaxCakesToEat(statistics.getMaxCakesToEat() + Statistics.INCREMENTAL_CAKES_TO_EAT);
 		
-		return round;
+		return nextRound;
 	}
 	
 	public String getId() {
 		return this.id;
-	}
-	
-	protected void setId(String id) {
-		this.id = id;
-		
-		setChanged();
-		notifyObservers();
 	}
 	
 	public int getRoundNumber() {

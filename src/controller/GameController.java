@@ -112,9 +112,6 @@ public class GameController {
 		setMenuRoundEnabled(true);
 		displayRound();
 		
-		if (round.getRoundNumber() == 1) {
-			RoundController.showDialogRoundRules();
-		}
 		RoundController.displayRoundStarter();
 		RoundController.startRound();
 	}

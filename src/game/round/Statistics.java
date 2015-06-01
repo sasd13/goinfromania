@@ -26,7 +26,7 @@ public class Statistics extends Observable {
 		
 		this.maxCakesToEat = DEFAULT_MAX_CAKES_TO_EAT;
 		
-		reset();
+		resetCounts();
 		resetTotals();
 	}
 	
@@ -167,7 +167,7 @@ public class Statistics extends Observable {
 		return this.countKilledNutritionists + this.countKilledViruses;
 	}
 	
-	public void reset() {
+	public void resetCounts() {
 		setCountEatenCakes(0);
 		setCountEatenPoisonCakes(0);
 		setCountKilledNutritionists(0);

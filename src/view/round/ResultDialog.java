@@ -87,6 +87,7 @@ public class ResultDialog extends JDialog implements Observer, ActionListener {
 		
 		if (round.getResult() == Result.WIN) {
 			this.labelMessage.setText("YOU WIN!!!");
+			this.buttonNext.setEnabled(true);
 		} else if (round.getResult() == Result.LOOSE) {
 			this.labelMessage.setText("YOU LOOSE...");
 			this.buttonNext.setEnabled(false);

@@ -1,6 +1,7 @@
 package view.setting;
 
 import game.setting.GamePad;
+import game.setting.Setting;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -28,7 +29,7 @@ public class GamePadView extends SettingView {
 		
 		setPreferredSize(new Dimension(DimensionConstants.FRAME_WIDTH, DimensionConstants.FRAME_HEIGHT));
 		
-		JPanel panelForm = new JPanel(new GridLayout(7, 2));
+		JPanel panelForm = new JPanel(new GridLayout(6, 2));
 		panelForm.setBorder(BorderFactory.createTitledBorder("Configurer les touches du clavier"));
 		getContentPane().add(panelForm, BorderLayout.CENTER);
 		
@@ -83,9 +84,25 @@ public class GamePadView extends SettingView {
 	}
 	
 	@Override
-	protected boolean editChanges() {
-		GamePad gamePad = (GamePad) setting;
+	protected Setting editChanges() {
+		GamePad gamePad = new GamePad();
 		
+		gamePad.setKeyStart(this.textFieldKeyStart.getKeyCode());
+		gamePad.setKeyMoveNorth(this.textFieldKeyMoveNorth.getKeyCode());
+		gamePad.setKeyMoveSouth(this.textFieldKeyMoveSouth.getKeyCode());
+		gamePad.setKeyMoveWest(this.textFieldKeyMoveWest.getKeyCode());
+		gamePad.setKeyMoveEast(this.textFieldKeyMoveEast.getKeyCode());
+		gamePad.setKeyPigAttak(this.textFieldKeyPigAttak.getKeyCode());
+		
+		return gamePad;
+	}
+	
+	@Override
+	protected boolean checkChanges() {
+		return checkUndefined() && checkDuplicates();
+	}
+	
+	private boolean checkUndefined() {
 		if (this.textFieldKeyStart.getKeyCode() == KeyEvent.VK_UNDEFINED
 				|| this.textFieldKeyMoveNorth.getKeyCode() == KeyEvent.VK_UNDEFINED
 				|| this.textFieldKeyMoveSouth.getKeyCode() == KeyEvent.VK_UNDEFINED
@@ -95,12 +112,32 @@ public class GamePadView extends SettingView {
 			return false;
 		}
 		
-		gamePad.setKeyStart(this.textFieldKeyStart.getKeyCode());
-		gamePad.setKeyMoveNorth(this.textFieldKeyMoveNorth.getKeyCode());
-		gamePad.setKeyMoveSouth(this.textFieldKeyMoveSouth.getKeyCode());
-		gamePad.setKeyMoveWest(this.textFieldKeyMoveWest.getKeyCode());
-		gamePad.setKeyMoveEast(this.textFieldKeyMoveEast.getKeyCode());
-		gamePad.setKeyPigAttak(this.textFieldKeyPigAttak.getKeyCode());
+		return true;
+	}
+	
+	private boolean checkDuplicates() {
+		GamePadTextField[] tabFields = {
+				this.textFieldKeyStart,
+				this.textFieldKeyMoveNorth,
+				this.textFieldKeyMoveSouth,
+				this.textFieldKeyMoveWest,
+				this.textFieldKeyMoveEast,
+				this.textFieldKeyPigAttak
+		};
+		
+		int keyCode1, keyCode2;
+		
+		for (int i=0; i<tabFields.length; i++) {
+			keyCode1 = tabFields[i].getKeyCode();
+			
+			for (int j=i+1; j<tabFields.length; j++) {
+				keyCode2 = tabFields[j].getKeyCode();
+				
+				if (keyCode1 == keyCode2) {
+					return false;
+				}
+			}
+		}
 		
 		return true;
 	}

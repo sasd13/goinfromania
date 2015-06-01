@@ -25,19 +25,28 @@ public class SettingController {
 		settingView.setVisible(true);
 	}
 	
-	public static void closeSetting() {
-		String title = "Confirmation";
-		String message = "Save modifications ?";
-		
-		int selected = JOptionPane.showConfirmDialog(settingView, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
-		if (selected == JOptionPane.YES_OPTION) {
-			SettingDAO.save(setting);
+	public static void closeSetting(Setting newSetting) {
+		if (!setting.equals(newSetting)) {
+			String title = "Confirmation";
+			String message = "Save modifications ?";
 			
-			setting.deleteObservers();		
+			int selected = JOptionPane.showConfirmDialog(settingView, message, title, JOptionPane.YES_NO_OPTION);
+			if (selected == JOptionPane.YES_OPTION) {
+				SettingDAO.save(newSetting);
+				
+				if (!RoundController.hasRoundStopped()) {
+					reloadSettingForRound(newSetting);
+				}
+			}
+			
+			setting.deleteObserver(settingView);
 			settingView.dispose();
-		} else if (selected == JOptionPane.NO_OPTION) {
-			setting.deleteObservers();		
-			settingView.dispose();
+		}
+	}
+	
+	private static void reloadSettingForRound(Setting setting) {
+		if (setting.getName().equals(GamePad.NAME)) {
+			RoundController.loadGamePad();
 		}
 	}
 	

@@ -1,8 +1,9 @@
 package game.setting;
 
+import java.io.Serializable;
 import java.util.Observable;
 
-public abstract class Setting extends Observable {
+public abstract class Setting extends Observable implements Serializable {
 	
 	private String name;
 	
