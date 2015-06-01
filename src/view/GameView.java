@@ -25,7 +25,6 @@ public class GameView extends JFrame implements Observer, WindowListener {
 	private HomeView homeView;
 	private RoundView roundView;
 	private ListRoundsView listRoundsView;
-	private ListScoresView listScoresView;
 	
 	private JLayeredPane layeredPane;
 	
@@ -39,25 +38,23 @@ public class GameView extends JFrame implements Observer, WindowListener {
 		this.gameMenuBar = new GameMenuBar();
 		setJMenuBar(this.gameMenuBar);
 		
+		Dimension dimension = new Dimension(DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
+		
 		this.layeredPane = new JLayeredPane();
-		this.layeredPane.setPreferredSize(new Dimension(DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT));
+		this.layeredPane.setPreferredSize(dimension);
 		getContentPane().add(this.layeredPane, BorderLayout.CENTER);
 		
 		this.homeView = new HomeView();
-		this.homeView.setBounds(0, 0, DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
+		this.homeView.setBounds(0, 0, dimension.width, dimension.height);
 		this.layeredPane.add(this.homeView, JLayeredPane.DEFAULT_LAYER);
 		
 		this.listRoundsView = new ListRoundsView();
-		this.listRoundsView.setBounds(0, 0, DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
+		this.listRoundsView.setBounds(0, 0, dimension.width, dimension.height);
 		this.layeredPane.add(this.listRoundsView, JLayeredPane.DEFAULT_LAYER);
 		
 		this.roundView = new RoundView();
-		this.roundView.setBounds(0, 0, DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
+		this.roundView.setBounds(0, 0, dimension.width, dimension.height);
 		this.layeredPane.add(this.roundView, JLayeredPane.DEFAULT_LAYER);
-		
-		this.listScoresView = new ListScoresView();
-		this.listScoresView.setBounds(0, 0, DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
-		this.layeredPane.add(this.listScoresView, JLayeredPane.DEFAULT_LAYER);
 	}
 	
 	public static synchronized GameView getInstance() {
@@ -80,9 +77,6 @@ public class GameView extends JFrame implements Observer, WindowListener {
 		
 		listRounds.addObserver(this.listRoundsView);
 		this.listRoundsView.update(listRounds, null);
-		
-		listRounds.addObserver(this.listScoresView);
-		this.listScoresView.update(listRounds, null);
 	}
 	
 	public void displayHomeView() {
@@ -91,7 +85,6 @@ public class GameView extends JFrame implements Observer, WindowListener {
 		
 		this.roundView.setVisible(false);
 		this.listRoundsView.setVisible(false);
-		this.listScoresView.setVisible(false);
 	}
 	
 	public void displayRoundView() {
@@ -100,7 +93,6 @@ public class GameView extends JFrame implements Observer, WindowListener {
 		
 		this.homeView.setVisible(false);
 		this.listRoundsView.setVisible(false);
-		this.listScoresView.setVisible(false);
 	}
 	
 	public void displayListRoundsView() {
@@ -109,16 +101,6 @@ public class GameView extends JFrame implements Observer, WindowListener {
 		
 		this.homeView.setVisible(false);
 		this.roundView.setVisible(false);
-		this.listScoresView.setVisible(false);
-	}
-	
-	public void displayListScoresView() {
-		this.listScoresView.setVisible(true);
-		this.layeredPane.moveToFront(this.listScoresView);
-		
-		this.homeView.setVisible(false);
-		this.roundView.setVisible(false);
-		this.listRoundsView.setVisible(false);
 	}
 
 	@Override

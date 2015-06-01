@@ -2,6 +2,7 @@ package controller;
 
 import javax.swing.JOptionPane;
 
+import pattern.dao.SettingDAO;
 import view.round.RoundView;
 import game.element.Direction;
 import game.element.character.Enemy;
@@ -47,7 +48,7 @@ public class RoundController {
 	}
 	
 	public static void loadGamePad() {
-		gamePad = SettingController.loadGamePad();
+		gamePad = (GamePad) SettingDAO.load(GamePad.NAME);
 	}
 	
 	public static void showDialogConfirmRestartRound() {
@@ -116,11 +117,11 @@ public class RoundController {
 	}
 	
 	public static boolean hasRoundStopped() {
-		if (round != null && round.getState() != State.STOP) {
-			return false;
+		if (round == null || round.getState() == State.STOP) {
+			return true;
 		}
 		
-		return true;
+		return false;
 	}
 	
 	public static void checkEatenCakes() {
@@ -163,6 +164,7 @@ public class RoundController {
 	}
 	
 	private static void exitRound() {
+		round = null;
 		GameController.setMenuRoundEnabled(false);
 		GameController.displayHome();
 	}
@@ -257,6 +259,5 @@ public class RoundController {
 		Statistics statistics = round.getStatistics();
 		
 		statistics.setScore(statistics.getScore() + scoreValue);
-		statistics.setTotalScore(statistics.getTotalScore() + scoreValue);
 	}
 }

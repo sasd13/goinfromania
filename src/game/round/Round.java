@@ -3,7 +3,6 @@ package game.round;
 import game.element.ListElements;
 import game.element.character.Pig;
 
-import java.awt.Point;
 import java.util.Date;
 import java.util.Observable;
 
@@ -48,11 +47,14 @@ public class Round extends Observable {
 		nextRound.setDateCreated(round.getDateCreated());
 		
 		Pig pig = round.getListElements().getPig();
-		pig.setPosition(new Point());
-		nextRound.getListElements().add(pig);
+		Pig newPig = new Pig();
+		newPig.setLife(pig.getLife());
+		newPig.setEnergy(pig.getEnergy());
+		nextRound.getListElements().add(newPig);
 		
 		Statistics statistics = round.getStatistics();
-		nextRound.getStatistics().setMaxCakesToEat(statistics.getMaxCakesToEat() + Statistics.INCREMENTAL_CAKES_TO_EAT);
+		statistics.resetCounts();
+		nextRound.setStatistics(statistics);
 		
 		return nextRound;
 	}

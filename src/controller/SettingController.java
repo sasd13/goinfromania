@@ -63,8 +63,4 @@ public class SettingController {
 				return null;
 		}
 	}
-	
-	public static GamePad loadGamePad() {
-		return (GamePad) SettingDAO.load(GamePad.NAME);
-	}
 }

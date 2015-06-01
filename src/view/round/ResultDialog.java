@@ -5,7 +5,9 @@ import game.round.Round;
 import game.round.Statistics;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,66 +18,95 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.JRootPane;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 import view.DimensionConstants;
+import view.GameView;
 import controller.RoundController;
 
 public class ResultDialog extends JDialog implements Observer, ActionListener {
 
-	private JLabel labelMessage,
+	private JLayeredPane layeredPane;
+	
+	private JPanel panelResult, panelStatistics;
+	
+	private JLabel labelResult,
 		labelTotalScoreValue,
 		labelTotalFoodEatedValue,
 		labelTotalEnemyKilledValue;
 	
 	private JButton buttonNext, buttonFinish;
 	
+	private Timer timer;
+	
 	public ResultDialog() {
 		super();
 		
-		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
-		setSize(new Dimension(DimensionConstants.ROUND_COMPONENT_WIDTH, DimensionConstants.ROUND_COMPONENT_HEIGHT));
+		
+		Dimension dimension = new Dimension(DimensionConstants.ROUND_COMPONENT_WIDTH, DimensionConstants.ROUND_COMPONENT_HEIGHT);
+		setSize(dimension);
+		
 		setResizable(false);
 		setUndecorated(true);
-		getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
 		
-		JPanel panelMessage = new JPanel();
-		getContentPane().add(panelMessage, BorderLayout.NORTH);
+		this.layeredPane = new JLayeredPane();
+		getContentPane().add(this.layeredPane);
 		
-		this.labelMessage = new JLabel("Message");
-		panelMessage.add(this.labelMessage);
+		this.panelResult = new JPanel(new BorderLayout());
+		this.panelResult.setBackground(Color.BLACK);
+		this.panelResult.setBounds(0, 0, dimension.width, dimension.height);
+		this.layeredPane.add(this.panelResult, JLayeredPane.DEFAULT_LAYER);
 		
-		JPanel panelResult = new JPanel(new GridLayout(3, 2));
-		getContentPane().add(panelResult, BorderLayout.CENTER);
+		Font font = new Font(
+				getContentPane().getFont().getName(),
+				Font.BOLD | Font.ITALIC, 
+				96);
 		
-		panelResult.add(new JLabel("Total score : "));
+		this.labelResult = new JLabel("", SwingConstants.HORIZONTAL);
+		this.labelResult.setFont(font);
+		this.labelResult.setForeground(Color.PINK);
+		this.panelResult.add(this.labelResult, BorderLayout.CENTER);
+		
+		this.panelStatistics = new JPanel(new BorderLayout());
+		this.panelStatistics.setBounds(0, 0, dimension.width, dimension.height);
+		this.layeredPane.add(this.panelStatistics, JLayeredPane.DEFAULT_LAYER);
+		
+		JLabel labelStatistics = new JLabel("Statistiques", SwingConstants.HORIZONTAL);
+		this.panelStatistics.add(labelStatistics, BorderLayout.NORTH);
+		
+		JPanel panelTotals = new JPanel(new GridLayout(3, 2));
+		this.panelStatistics.add(panelTotals, BorderLayout.CENTER);
+		
+		panelTotals.add(new JLabel("Total score : "));
 		this.labelTotalScoreValue = new JLabel();
-		panelResult.add(this.labelTotalScoreValue);
+		panelTotals.add(this.labelTotalScoreValue);
 		
-		panelResult.add(new JLabel("Total foods eated : "));
+		panelTotals.add(new JLabel("Total foods eated : "));
 		this.labelTotalFoodEatedValue = new JLabel();
-		panelResult.add(this.labelTotalFoodEatedValue);
+		panelTotals.add(this.labelTotalFoodEatedValue);
 		
-		panelResult.add(new JLabel("Total enemies killed : "));
+		panelTotals.add(new JLabel("Total enemies killed : "));
 		this.labelTotalEnemyKilledValue = new JLabel();
-		panelResult.add(this.labelTotalEnemyKilledValue);
+		panelTotals.add(this.labelTotalEnemyKilledValue);
 		
 		JPanel panelButton = new JPanel();
-		getContentPane().add(panelButton, BorderLayout.SOUTH);
+		this.panelStatistics.add(panelButton, BorderLayout.SOUTH);
 		
-		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
+		Dimension dimensionButton = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		
 		this.buttonNext = new JButton("Next");
-		this.buttonNext.setPreferredSize(dimension);
+		this.buttonNext.setPreferredSize(dimensionButton);
 		this.buttonNext.setFocusable(false);
 		this.buttonNext.addActionListener(this);
 		panelButton.add(this.buttonNext);
 		
 		this.buttonFinish = new JButton("Finish");
-		this.buttonFinish.setPreferredSize(dimension);
+		this.buttonFinish.setPreferredSize(dimensionButton);
 		this.buttonFinish.setFocusable(false);
 		this.buttonFinish.addActionListener(this);
 		panelButton.add(this.buttonFinish);
@@ -86,15 +117,15 @@ public class ResultDialog extends JDialog implements Observer, ActionListener {
 		Round round = (Round) observable;
 		
 		if (round.getResult() == Result.WIN) {
-			this.labelMessage.setText("YOU WIN!!!");
+			this.labelResult.setText("Gagné!!!");
 			this.buttonNext.setEnabled(true);
 		} else if (round.getResult() == Result.LOOSE) {
-			this.labelMessage.setText("YOU LOOSE...");
+			this.labelResult.setText("Perdu...");
 			this.buttonNext.setEnabled(false);
 		}
 
 		Statistics statistics = round.getStatistics();
-		this.labelTotalScoreValue.setText(String.valueOf(statistics.getTotalScore()));
+		this.labelTotalScoreValue.setText(String.valueOf(statistics.getScore()));
 		this.labelTotalFoodEatedValue.setText(String.valueOf(statistics.getTotalFoodEated()));
 		this.labelTotalEnemyKilledValue.setText(String.valueOf(statistics.getTotalEnemyKilled()));
 	}
@@ -110,5 +141,37 @@ public class ResultDialog extends JDialog implements Observer, ActionListener {
 		} else if (button == this.buttonFinish) {
 			RoundController.finishResultAndDisplayHome();
 		}
+	}
+	
+	public void anime() {
+		ActionListener listener = new ActionListener() {
+			
+			private int count = -1;
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				count++;
+				
+				if (count == 0) {
+					panelResult.setVisible(true);
+					layeredPane.moveToFront(panelResult);
+					panelStatistics.setVisible(false);
+				} else {
+					timer.stop();
+					
+					panelStatistics.setVisible(true);
+					layeredPane.moveToFront(panelStatistics);
+					panelResult.setVisible(false);
+				}
+			}
+		};
+		
+		timer = new Timer(0, listener);
+		timer.setDelay(1700);
+		
+		setLocationRelativeTo(GameView.getInstance().getRoundView());
+		
+		timer.start();
+		setVisible(true);
 	}
 }

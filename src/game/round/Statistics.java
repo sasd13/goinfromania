@@ -13,13 +13,13 @@ public class Statistics extends Observable {
 	private int countEatenPoisonCakes;
 	private int countKilledNutritionists;
 	private int countKilledViruses;
-	private int score;
 	
 	private int totalEatenCakes;
 	private int totalEatenPoisonCakes;
 	private int totalKilledNutritionists;
 	private int totalKilledViruses;
-	private int totalScore;
+	
+	private int score;
 	
 	public Statistics() {
 		super();
@@ -28,6 +28,7 @@ public class Statistics extends Observable {
 		
 		resetCounts();
 		resetTotals();
+		resetScore();
 	}
 	
 	public int getMaxCakesToEat() {
@@ -148,17 +149,6 @@ public class Statistics extends Observable {
 		return this.totalKilledNutritionists + this.totalKilledViruses;
 	}
 	
-	public int getTotalScore() {
-		return this.totalScore;
-	}
-	
-	public void setTotalScore(int totalScore) {
-		this.totalScore = totalScore;
-		
-		setChanged();
-		notifyObservers();
-	}
-	
 	public int getEatedFoods() {
 		return this.countEatenCakes + this.countEatenPoisonCakes;
 	}
@@ -172,7 +162,6 @@ public class Statistics extends Observable {
 		setCountEatenPoisonCakes(0);
 		setCountKilledNutritionists(0);
 		setCountKilledViruses(0);
-		setScore(0);
 	}
 	
 	public void resetTotals() {
@@ -180,6 +169,9 @@ public class Statistics extends Observable {
 		setTotalEatenPoisonCakes(0);
 		setTotalKilledNutritionists(0);
 		setTotalKilledViruses(0);
-		setTotalScore(0);
+	}
+	
+	public void resetScore() {
+		setScore(0);
 	}
 }

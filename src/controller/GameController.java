@@ -77,10 +77,6 @@ public class GameController {
 		gameView.displayListRoundsView();
 	}
 	
-	public static void displayListScores() {
-		gameView.displayListScoresView();
-	}
-	
 	public static void newRound() {
 		Round round = new Round();
 		

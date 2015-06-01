@@ -3,7 +3,6 @@ package pattern.factory;
 import game.setting.GamePad;
 import game.setting.Setting;
 
-import java.awt.event.KeyEvent;
 import java.util.prefs.Preferences;
 
 public class GamePadPreferences implements SettingPreferences {
@@ -21,23 +20,9 @@ public class GamePadPreferences implements SettingPreferences {
 	public Preferences getPreferences() {
 		return Preferences.userRoot().node(CLASS_NAME);
 	}
-
+	
 	@Override
-	public void save(Setting setting) {
-		Preferences prefs = getPreferences();
-		
-		GamePad gamePad = (GamePad) setting;
-		
-		prefs.putInt(KEY_START, gamePad.getKeyStart());
-		prefs.putInt(KEY_MOVE_NORTH, gamePad.getKeyMoveNorth());
-		prefs.putInt(KEY_MOVE_SOUTH, gamePad.getKeyMoveSouth());
-		prefs.putInt(KEY_MOVE_WEST, gamePad.getKeyMoveWest());
-		prefs.putInt(KEY_MOVE_EAST, gamePad.getKeyMoveEast());
-		prefs.putInt(KEY_PIG_ATTAK, gamePad.getKeyPigAttak());
-	}
-
-	@Override
-	public Setting load() {
+	public Setting get() {
 		GamePad gamePad = new GamePad();
 		
 		Preferences prefs = getPreferences();
@@ -50,5 +35,19 @@ public class GamePadPreferences implements SettingPreferences {
 		gamePad.setKeyPigAttak(prefs.getInt(KEY_PIG_ATTAK, gamePad.getKeyPigAttak()));
 		
 		return gamePad;
+	}
+
+	@Override
+	public void put(Setting setting) {
+		GamePad gamePad = (GamePad) setting;
+		
+		Preferences prefs = getPreferences();
+		
+		prefs.putInt(KEY_START, gamePad.getKeyStart());
+		prefs.putInt(KEY_MOVE_NORTH, gamePad.getKeyMoveNorth());
+		prefs.putInt(KEY_MOVE_SOUTH, gamePad.getKeyMoveSouth());
+		prefs.putInt(KEY_MOVE_WEST, gamePad.getKeyMoveWest());
+		prefs.putInt(KEY_MOVE_EAST, gamePad.getKeyMoveEast());
+		prefs.putInt(KEY_PIG_ATTAK, gamePad.getKeyPigAttak());
 	}
 }

@@ -16,7 +16,6 @@ public class MenuFile extends JMenu implements ActionListener {
 	
 	private final String ITEM_NEW = "Nouvelle partie";
 	private final String ITEM_OPEN = "Ovrir une partie...";
-	private final String ITEM_SCORES = "Afficher les scores";
 	private final String ITEM_EXIT = "Quitter";
 	
 	public MenuFile() {
@@ -33,13 +32,6 @@ public class MenuFile extends JMenu implements ActionListener {
 		itemOpen.addActionListener(this);
 		itemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 		add(itemOpen);
-		
-		addSeparator();
-		
-		JMenuItem itemScores = new JMenuItem(ITEM_SCORES);
-		itemScores.addActionListener(this);
-		itemScores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
-		add(itemScores);
 		
 		addSeparator();
 		
@@ -60,8 +52,6 @@ public class MenuFile extends JMenu implements ActionListener {
 				GameController.newRound();
 			} else if (item.getText().compareTo(ITEM_OPEN) == 0) {
 				GameController.displayListRounds();
-			} else if (item.getText().compareTo(ITEM_SCORES) == 0) {
-				GameController.displayListScores();
 			} else if (item.getText().compareTo(ITEM_EXIT) == 0) {
 				GameController.showDialogConfirmExitGame();
 			}

@@ -10,7 +10,7 @@ public interface SettingPreferences {
 	
 	public Preferences getPreferences();
 	
-	public void save(Setting setting);
+	public Setting get();
 	
-	public Setting load();
+	public void put(Setting setting);
 }

@@ -63,8 +63,7 @@ public class RoundView extends JPanel implements Observer, KeyListener {
 	}
 	
 	public void displayRoundResultView() {
-		this.resultDialog.setLocationRelativeTo(this);
-		this.resultDialog.setVisible(true);
+		this.resultDialog.anime();
 	}
 	
 	public void displayRoundStarterView() {

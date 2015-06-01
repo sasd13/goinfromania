@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import game.round.Statistics;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import controller.GameController;
 
@@ -20,13 +22,13 @@ public class RoundPane extends JPanel implements ActionListener {
 
 	private Round round;
 	
-	private JLabel labelRoundNumberValue,
-		labelLevelValue,
-		labelCakesValue,
-		labelCumulatedScoreValue,
-		labelDateUpdatedValue,
-		labelPigLifeValue,
-		labelPigEnergyValue;
+	private JLabel labelRoundNumber,
+		labelLevel,
+		labelCakes,
+		labelTotalScore,
+		labelDateUpdated,
+		labelPigLife,
+		labelPigEnergy;
 	
 	private JButton buttonContinue, buttonRemove;
 	
@@ -35,41 +37,50 @@ public class RoundPane extends JPanel implements ActionListener {
 		
 		this.round = null;
 		
-		JPanel panelProgression = new JPanel();
-		add(panelProgression, BorderLayout.NORTH);
+		add(new JLabel("Progression", SwingConstants.CENTER), BorderLayout.NORTH);
 		
-		panelProgression.add(new JLabel("Progression"));
+		Font font = new Font(
+				getFont().getName(),
+				Font.PLAIN,
+				getFont().getSize());
 		
 		JPanel panelRound = new JPanel(new GridLayout(8, 2));
 		add(panelRound, BorderLayout.CENTER);
 		
 		panelRound.add(new JLabel("Round number : "));
-		this.labelRoundNumberValue = new JLabel();
-		panelRound.add(this.labelRoundNumberValue);
+		this.labelRoundNumber = new JLabel();
+		this.labelRoundNumber.setFont(font);
+		panelRound.add(this.labelRoundNumber);
 		
 		panelRound.add(new JLabel("Level : "));
-		this.labelLevelValue = new JLabel();
-		panelRound.add(this.labelLevelValue);
+		this.labelLevel = new JLabel();
+		this.labelLevel.setFont(font);
+		panelRound.add(this.labelLevel);
 		
 		panelRound.add(new JLabel("Cakes : "));
-		this.labelCakesValue = new JLabel();
-		panelRound.add(this.labelCakesValue);
+		this.labelCakes = new JLabel();
+		this.labelCakes.setFont(font);
+		panelRound.add(this.labelCakes);
 		
 		panelRound.add(new JLabel("Pig life : "));
-		this.labelPigLifeValue = new JLabel();
-		panelRound.add(this.labelPigLifeValue);
+		this.labelPigLife = new JLabel();
+		this.labelPigLife.setFont(font);
+		panelRound.add(this.labelPigLife);
 		
 		panelRound.add(new JLabel("Pig energy : "));
-		this.labelPigEnergyValue = new JLabel();
-		panelRound.add(this.labelPigEnergyValue);
+		this.labelPigEnergy = new JLabel();
+		this.labelPigEnergy.setFont(font);
+		panelRound.add(this.labelPigEnergy);
 		
-		panelRound.add(new JLabel("Cumulated score : "));
-		this.labelCumulatedScoreValue = new JLabel();
-		panelRound.add(this.labelCumulatedScoreValue);
+		panelRound.add(new JLabel("Total score : "));
+		this.labelTotalScore = new JLabel();
+		this.labelRoundNumber.setFont(font);
+		panelRound.add(this.labelTotalScore);
 		
-		panelRound.add(new JLabel("Updated : "));
-		this.labelDateUpdatedValue = new JLabel();
-		panelRound.add(this.labelDateUpdatedValue);
+		panelRound.add(new JLabel("Date updated : "));
+		this.labelDateUpdated = new JLabel();
+		this.labelRoundNumber.setFont(font);
+		panelRound.add(this.labelDateUpdated);
 		
 		JPanel panelButton = new JPanel();
 		add(panelButton, BorderLayout.SOUTH);
@@ -92,22 +103,22 @@ public class RoundPane extends JPanel implements ActionListener {
 	public void bind(Round round) {
 		this.round = round;
 		
-		this.labelRoundNumberValue.setText(String.valueOf(round.getRoundNumber()));
-		this.labelLevelValue.setText(String.valueOf(round.getLevel()));
+		this.labelRoundNumber.setText(String.valueOf(round.getRoundNumber()));
+		this.labelLevel.setText(String.valueOf(round.getLevel()));
 		if (round.getDateUpdated() == null) {
-			this.labelDateUpdatedValue.setText("");
+			this.labelDateUpdated.setText("");
 		} else {
-			this.labelDateUpdatedValue.setText(String.valueOf(round.getDateUpdated()));
+			this.labelDateUpdated.setText(String.valueOf(round.getDateUpdated()));
 		}
 		
 		Statistics statistics = round.getStatistics();
-		this.labelCakesValue.setText(statistics.getCountEatenCakes() + "/" + statistics.getMaxCakesToEat());
-		this.labelCumulatedScoreValue.setText(String.valueOf(statistics.getScore()));
+		this.labelCakes.setText(statistics.getCountEatenCakes() + "/" + statistics.getMaxCakesToEat());
+		this.labelTotalScore.setText(String.valueOf(statistics.getScore()));
 		
 		Pig pig = round.getListElements().getPig();
 		
-		this.labelPigLifeValue.setText(String.valueOf(pig.getLife()));
-		this.labelPigEnergyValue.setText(String.valueOf(pig.getEnergy()));
+		this.labelPigLife.setText(String.valueOf(pig.getLife()));
+		this.labelPigEnergy.setText(String.valueOf(pig.getEnergy()));
 	}
 	
 	@Override
