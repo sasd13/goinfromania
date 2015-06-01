@@ -6,7 +6,8 @@ public class GameMenuBar extends JMenuBar {
 
 	private MenuFile menuFile;
 	private MenuRound menuRound;
-	private MenuSettings menuSettings;
+	private MenuSetting menuSetting;
+	private MenuHelp menuHelp;
 	
 	public GameMenuBar() {
 		super();
@@ -18,8 +19,11 @@ public class GameMenuBar extends JMenuBar {
 		this.menuRound.setEnabled(false);
 		add(this.menuRound);
 		
-		this.menuSettings = new MenuSettings();
-		add(this.menuSettings);
+		this.menuSetting = new MenuSetting();
+		add(this.menuSetting);
+		
+		this.menuHelp = new MenuHelp();
+		add(this.menuHelp);
 	}
 	
 	public void setMenuRoundEnabled(boolean enabled) {

@@ -70,6 +70,7 @@ public class Round extends Observable {
 		
 		Statistics statistics = round.getStatistics();
 		statistics.setMaxCakesToEat(statistics.getMaxCakesToEat() + Statistics.INCREMENTAL_CAKES_TO_EAT);
+		statistics.reset();
 		
 		Pig pig = round.getListElements().getPig();
 		if (resetPigPosition) {

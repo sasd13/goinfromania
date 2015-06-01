@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import view.DimensionConstants;
+import view.menu.MenuSetting;
 import controller.SettingController;
 
 public abstract class SettingView extends JDialog implements Observer, ActionListener {
@@ -26,10 +27,9 @@ public abstract class SettingView extends JDialog implements Observer, ActionLis
 	public SettingView() {
 		super();
 		
-		setTitle("Settings");
+		setTitle(MenuSetting.NAME);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
-		setPreferredSize(new Dimension(DimensionConstants.FRAME_WIDTH, DimensionConstants.FRAME_HEIGHT));
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.SOUTH);
@@ -61,8 +61,8 @@ public abstract class SettingView extends JDialog implements Observer, ActionLis
 		JButton button = (JButton) arg0.getSource();
 		
 		if (button == this.buttonClose) {
-			boolean changed = editChanges();
-			if (changed) {
+			boolean edited = editChanges();
+			if (edited) {
 				SettingController.closeSetting();
 			} else {
 				JOptionPane.showMessageDialog(this, "Touches invalides. Vous devez les corriger", "Erreur", JOptionPane.ERROR_MESSAGE);

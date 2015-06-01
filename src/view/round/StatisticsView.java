@@ -9,13 +9,13 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class RoundStatisticsView extends JPanel implements Observer {
+public class StatisticsView extends JPanel implements Observer {
 
 	private JLabel labelCakesValue,
 		labelEnemiesValue,
 		labelScoreValue;
 	
-	public RoundStatisticsView() {
+	public StatisticsView() {
 		super(new GridLayout(1, 3));
 		
 		JPanel panelCakes = new JPanel();

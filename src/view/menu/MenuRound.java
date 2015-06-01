@@ -2,42 +2,44 @@ package view.menu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
 import controller.RoundController;
 
 public class MenuRound extends JMenu implements ActionListener {
 
-	public static final String NAME = "Round";
+	public static final String NAME = "Partie";
 	
-	private final String ITEM_PAUSE = "Pause";
-	private final String ITEM_STOP = "Stop";
-	private final String ITEM_RESTART = "Restart";
-	private final String ITEM_SAVE = "Save";
+	private final String ITEM_STOP = "Stopper";
+	private final String ITEM_RESTART = "Recommencer";
+	private final String ITEM_SAVE = "Sauvegarder";
 	
 	public MenuRound() {
 		super(NAME);
 		
-		JMenuItem itemPause = new JMenuItem(ITEM_PAUSE);
-		itemPause.addActionListener(this);
-		add(itemPause);
+		setMnemonic(KeyEvent.VK_P);
 		
 		JMenuItem itemStop = new JMenuItem(ITEM_STOP);
 		itemStop.addActionListener(this);
+		itemStop.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
 		add(itemStop);
 		
 		addSeparator();
 		
 		JMenuItem itemRestart = new JMenuItem(ITEM_RESTART);
 		itemRestart.addActionListener(this);
+		itemRestart.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));
 		add(itemRestart);
 		
 		addSeparator();
 		
 		JMenuItem itemSave = new JMenuItem(ITEM_SAVE);
 		itemSave.addActionListener(this);
+		itemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		add(itemSave);
 	}
 	
@@ -45,9 +47,7 @@ public class MenuRound extends JMenu implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem item = (JMenuItem) e.getSource();
 		
-		if (item.getText().compareTo(ITEM_PAUSE) == 0) {
-			RoundController.pauseRound();
-		} else if (item.getText().compareTo(ITEM_STOP) == 0) {
+		if (item.getText().compareTo(ITEM_STOP) == 0) {
 			RoundController.showDialogConfirmStopRound();
 		} else if (item.getText().compareTo(ITEM_RESTART) == 0) {
 			RoundController.showDialogConfirmRestartRound();

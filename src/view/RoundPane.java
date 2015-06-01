@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 import controller.GameController;
 
-public class ListRoundsViewRoundPane extends JPanel implements ActionListener {
+public class RoundPane extends JPanel implements ActionListener {
 
 	private Round round;
 	
@@ -30,7 +30,7 @@ public class ListRoundsViewRoundPane extends JPanel implements ActionListener {
 	
 	private JButton buttonContinue, buttonRemove;
 	
-	public ListRoundsViewRoundPane() {
+	public RoundPane() {
 		super(new BorderLayout());
 		
 		this.round = null;

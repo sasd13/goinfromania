@@ -14,14 +14,14 @@ import javax.swing.JPanel;
 
 import view.DimensionConstants;
 
-public class RoundStateBarView extends JPanel implements Observer {
+public class StateBarView extends JPanel implements Observer {
 
 	private JLabel labelRoundNumber,
 		labelRoundState;
 	
-	private RoundStatisticsView roundStatisticsView;
+	private StatisticsView statisticsView;
 	
-	public RoundStateBarView() {
+	public StateBarView() {
 		super(new GridLayout(1, 2));
 		
 		setPreferredSize(new Dimension(DimensionConstants.PANEL_STATE_WIDTH, DimensionConstants.PANEL_STATE_HEIGHT));
@@ -42,8 +42,8 @@ public class RoundStateBarView extends JPanel implements Observer {
 		this.labelRoundState = new JLabel();
 		panelRoundState.add(this.labelRoundState);
 		
-		this.roundStatisticsView = new RoundStatisticsView();
-		add(this.roundStatisticsView);
+		this.statisticsView = new StatisticsView();
+		add(this.statisticsView);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class RoundStateBarView extends JPanel implements Observer {
 		}
 		
 		Statistics statistics = round.getStatistics();
-		statistics.addObserver(this.roundStatisticsView);
-		this.roundStatisticsView.update(statistics, null);
+		statistics.addObserver(this.statisticsView);
+		this.statisticsView.update(statistics, null);
 	}
 }

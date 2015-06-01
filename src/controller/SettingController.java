@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import pattern.dao.SettingDAO;
 import game.setting.GamePad;
 import game.setting.Setting;
+import view.help.GameHelpView;
 import view.setting.GamePadView;
 import view.setting.SettingView;
 

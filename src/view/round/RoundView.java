@@ -15,20 +15,20 @@ import game.round.Round;
 
 public class RoundView extends JPanel implements Observer, KeyListener {
 
-	private RoundStarterView roundStarterView;
-	private RoundResultView roundResultView;
-	private RoundStateBarView roundStateBarView;
+	private StarterDialog starterDialog;
+	private ResultDialog resultDialog;
+	private StateBarView stateBarView;
 	private ArenaView arenaView;
 	private PigStateView pigStateView;
 	
 	public RoundView() {
 		super(new BorderLayout());
 		
-		this.roundStarterView = new RoundStarterView();
-		this.roundResultView = new RoundResultView();
+		this.starterDialog = new StarterDialog();
+		this.resultDialog = new ResultDialog();
 		
-		this.roundStateBarView = new RoundStateBarView();
-		add(this.roundStateBarView, BorderLayout.SOUTH);
+		this.stateBarView = new StateBarView();
+		add(this.stateBarView, BorderLayout.SOUTH);
 		
 		this.arenaView = new ArenaView();
 		this.arenaView.addKeyListener(this);
@@ -43,9 +43,9 @@ public class RoundView extends JPanel implements Observer, KeyListener {
 	public void update(Observable observable, Object arg) {
 		Round round = (Round) observable;
 		
-		this.roundStarterView.update(round, null);
-		this.roundResultView.update(round, null);
-		this.roundStateBarView.update(round, null);
+		this.starterDialog.update(round, null);
+		this.resultDialog.update(round, null);
+		this.stateBarView.update(round, null);
 		
 		ListElements listElements = round.getListElements();
 		listElements.addObserver(this.arenaView);
@@ -58,17 +58,17 @@ public class RoundView extends JPanel implements Observer, KeyListener {
 		}
 	}
 	
-	public ArenaView getArenaView() {
+	public ArenaView getRoundArenaView() {
 		return this.arenaView;
 	}
 	
 	public void displayRoundResultView() {
-		this.roundResultView.setLocationRelativeTo(this);
-		this.roundResultView.setVisible(true);
+		this.resultDialog.setLocationRelativeTo(this);
+		this.resultDialog.setVisible(true);
 	}
 	
 	public void displayRoundStarterView() {
-		this.roundStarterView.anime();
+		this.starterDialog.anime();
 	}
 	
 	@Override

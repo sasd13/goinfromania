@@ -34,7 +34,7 @@ public class RoundController {
 		
 		saveRoundInCache();
 		
-		ArenaController.initialize(roundView.getArenaView(), round);
+		ArenaController.initialize(roundView.getRoundArenaView(), round);
 	}
 	
 	public static void showDialogRoundRules() {

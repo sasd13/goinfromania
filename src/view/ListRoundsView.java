@@ -23,7 +23,7 @@ public class ListRoundsView extends JSplitPane implements Observer, ListSelectio
 	private JList<String> listPane;
 	private DefaultListModel<String> listModel;
 	
-	private ListRoundsViewRoundPane roundPane;
+	private RoundPane roundPane;
 	
 	public ListRoundsView() {
 		super(JSplitPane.HORIZONTAL_SPLIT);
@@ -44,7 +44,7 @@ public class ListRoundsView extends JSplitPane implements Observer, ListSelectio
 		listScroller.setPreferredSize(new Dimension(LIST_WIDTH, DimensionConstants.PANEL_HEIGHT));
 		add(listScroller);
 		
-		this.roundPane = new ListRoundsViewRoundPane();
+		this.roundPane = new RoundPane();
 		add(this.roundPane);
 	}
 

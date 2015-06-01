@@ -22,7 +22,7 @@ import javax.swing.JRootPane;
 import view.DimensionConstants;
 import controller.RoundController;
 
-public class RoundResultView extends JDialog implements Observer, ActionListener {
+public class ResultDialog extends JDialog implements Observer, ActionListener {
 
 	private JLabel labelMessage,
 		labelTotalScoreValue,
@@ -31,7 +31,7 @@ public class RoundResultView extends JDialog implements Observer, ActionListener
 	
 	private JButton buttonNext, buttonFinish;
 	
-	public RoundResultView() {
+	public ResultDialog() {
 		super();
 		
 		setLayout(new BorderLayout());

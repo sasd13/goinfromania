@@ -3,6 +3,7 @@ package view.setting;
 import game.setting.GamePad;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
@@ -10,6 +11,8 @@ import java.util.Observable;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import view.DimensionConstants;
 
 public class GamePadView extends SettingView {
 	
@@ -22,6 +25,8 @@ public class GamePadView extends SettingView {
 	
 	public GamePadView() {
 		super();
+		
+		setPreferredSize(new Dimension(DimensionConstants.FRAME_WIDTH, DimensionConstants.FRAME_HEIGHT));
 		
 		JPanel panelForm = new JPanel(new GridLayout(7, 2));
 		panelForm.setBorder(BorderFactory.createTitledBorder("Set keyboard controller touchs"));
@@ -53,9 +58,7 @@ public class GamePadView extends SettingView {
 	}
 	
 	@Override
-	public void update(Observable observable, Object arg) {
-		super.update(observable, arg);
-		
+	public void update(Observable observable, Object arg) {		
 		GamePad gamePad = (GamePad) observable;
 		
 		this.textFieldKeyStart.setText(KeyEvent.getKeyText(gamePad.getKeyStart()));
@@ -75,6 +78,8 @@ public class GamePadView extends SettingView {
 		
 		this.textFieldKeyPigAttak.setText(KeyEvent.getKeyText(gamePad.getKeyPigAttak()));
 		this.textFieldKeyPigAttak.setKeyCode(gamePad.getKeyPigAttak());
+		
+		super.update(observable, arg);
 	}
 	
 	@Override

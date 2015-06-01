@@ -19,14 +19,14 @@ import javax.swing.JRootPane;
 import view.DimensionConstants;
 import view.GameView;
 
-public class RoundStarterView extends JDialog implements Observer {
+public class StarterDialog extends JDialog implements Observer {
 
 	private JLayeredPane layeredPane;
 	
 	private JPanel panelRoundNumber, panelRoundGo;
 	private JLabel labelRoundNumber;
 	
-	public RoundStarterView() {
+	public StarterDialog() {
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
