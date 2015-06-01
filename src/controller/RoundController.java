@@ -34,7 +34,7 @@ public class RoundController {
 		
 		saveRoundInCache();
 		
-		ArenaController.initialize(roundView.getRoundArenaView(), round);
+		ArenaController.initialize(roundView.getRoundArenaView(), round.getListElements(), round.getLevel(), round.getRoundNumber());
 	}
 	
 	public static void showDialogRoundRules() {
@@ -49,7 +49,7 @@ public class RoundController {
 	}
 	
 	public static void startRound() {
-		round.setState(State.STARTED);
+		round.setState(State.START);
 		
 		gamePad = SettingController.loadGamePad();
 		
@@ -76,9 +76,9 @@ public class RoundController {
 	}
 	
 	public static void pauseRound() {
-		round.setState(State.PAUSED);
+		round.setState(State.PAUSE);
 		
-		ArenaController.stop();
+		ArenaController.pause();
 	}
 	
 	public static void showDialogConfirmStopRound() {
@@ -92,7 +92,7 @@ public class RoundController {
 	}
 	
 	private static void stopRound() {
-		round.setState(State.STOPPED);
+		round.setState(State.STOP);
 		
 		ArenaController.stop();
 	}
@@ -122,7 +122,7 @@ public class RoundController {
 	}
 	
 	public static boolean hasRoundStopped() {
-		if (round != null && round.getState() != State.STOPPED) {
+		if (round != null && round.getState() != State.STOP) {
 			return false;
 		}
 		
@@ -178,14 +178,14 @@ public class RoundController {
 	}
 	
 	public static void openNextRound() {
-		round = Round.createNextRound(round, false, true);
+		round = Round.createNextRound(round);
 		
 		GameController.openRound(round);
 	}
 	
 	public static void finishResultAndDisplayHome() {
 		if (round.getResult() == Result.WIN) {
-			round = Round.createNextRound(round, false, true);
+			round = Round.createNextRound(round);
 			
 			showDialogConfirmSaveRound();
 		}
@@ -207,14 +207,14 @@ public class RoundController {
 	
 	public static void actionGamePad(int keyCode) {
 		if (keyCode == gamePad.getKeyStart()) {
-			if (round.getState() == State.STARTED) {
+			if (round.getState() == State.START) {
 				pauseRound();
-			} else if (round.getState() == State.PAUSED) {
+			} else if (round.getState() == State.PAUSE) {
 				startRound();
 			} else {
 				//TODO Throw exception
 			}
-		} else if (round.getState() == State.STARTED) {
+		} else if (round.getState() == State.START) {
 			Pig pig = round.getListElements().getPig();
 			
 			if (keyCode == gamePad.getKeyMoveNorth()) {

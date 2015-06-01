@@ -1,4 +1,4 @@
-package controller.anim;
+package controller.anim.arena;
 
 import java.awt.event.ActionEvent;
 
@@ -6,20 +6,21 @@ import util.ArenaUtil;
 import game.element.Direction;
 import game.element.Element;
 import game.element.ListElements;
-import game.element.character.Enemy;
+import game.element.food.Food;
 import game.round.Level;
 import controller.ArenaController;
+import controller.anim.Animation;
 
-public class EnemyAutoMoveAnimation extends Animation {
+public class FoodAutoMoveAnimation extends Animation {
 
-	public static final int DELAY_LEVEL_EASY = 32;
-	public static final int DELAY_LEVEL_NORMAL = 16;
-	public static final int DELAY_LEVEL_HARD = 8;
+	public static final int DELAY_LEVEL_EASY = 64;
+	public static final int DELAY_LEVEL_NORMAL = 32;
+	public static final int DELAY_LEVEL_HARD = 16;
 	
 	private Level level;
 	private ListElements listElements;
 	
-	public EnemyAutoMoveAnimation(Level level, ListElements listElements) {
+	public FoodAutoMoveAnimation(Level level, ListElements listElements) {
 		super();
 		
 		setLevel(level);
@@ -67,8 +68,13 @@ public class EnemyAutoMoveAnimation extends Animation {
 		for (int i=0; i<this.listElements.size(); i++) {
 			element = this.listElements.get(i);
 			
-			if (element instanceof Enemy) {
-				direction = ArenaUtil.pursue(element, this.listElements.getPig());
+			if (element instanceof Food) {
+				direction = ArenaUtil.getRandomDirection(element);
+				
+				boolean canMove = ArenaUtil.canMoveInDirection(element, direction, this.listElements);
+				if (!canMove) {
+					direction = ArenaUtil.getOpositeDirection(direction);
+				}
 				
 				ArenaController.actionMove(element, direction);
 			}

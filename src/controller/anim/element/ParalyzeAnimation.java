@@ -1,4 +1,4 @@
-package controller.anim.power;
+package controller.anim.element;
 
 import game.element.character.Enemy;
 import game.element.character.Pig;
@@ -7,6 +7,7 @@ import game.element.power.Paralyze;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
+import controller.anim.AnimationHandler;
 import util.ImageLoader;
 
 public class ParalyzeAnimation extends PowerAnimation {
@@ -37,13 +38,13 @@ public class ParalyzeAnimation extends PowerAnimation {
 			enemy.setMovable(false);
 			enemy.setPowerful(false);
 		} else {
-			stop();
-			
 			image = ImageLoader.loadFromPath(enemy.getImageName());
 			enemy.setImageWithDimension(image);
 			
 			enemy.setMovable(true);
 			enemy.setPowerful(true);
+			
+			AnimationHandler.stop(this);
 		}
 	}
 }

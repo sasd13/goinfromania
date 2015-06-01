@@ -1,4 +1,4 @@
-package controller.anim.power;
+package controller.anim.element;
 
 import game.element.character.Enemy;
 import game.element.character.Pig;
@@ -7,6 +7,7 @@ import game.element.power.Diet;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
+import controller.anim.AnimationHandler;
 import util.ImageLoader;
 
 public class DietAnimation extends PowerAnimation {
@@ -38,13 +39,13 @@ public class DietAnimation extends PowerAnimation {
 			pig.setImageWithDimension(image);
 			
 			pig.setGreedy(false);
-		} else if (count >= getDuration() / getDelay()) {
-			stop();
-			
+		} else if (count >= getDuration() / getDelay()) {			
 			image = ImageLoader.loadFromPath(pig.getImageName());
 			pig.setImageWithDimension(image);
 			
 			pig.setGreedy(true);
+			
+			AnimationHandler.stop(this);
 		} else {
 			pig.setEnergy(pig.getEnergy() - getPower().getPowerValue());
 		}

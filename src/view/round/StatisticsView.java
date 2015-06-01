@@ -21,14 +21,14 @@ public class StatisticsView extends JPanel implements Observer {
 		JPanel panelCakes = new JPanel();
 		add(panelCakes);
 		
-		panelCakes.add(new JLabel("Cakes : "));
+		panelCakes.add(new JLabel("Gâteaux : "));
 		this.labelCakesValue = new JLabel();
 		panelCakes.add(this.labelCakesValue);
 		
 		JPanel panelEnemies = new JPanel();
 		add(panelEnemies);
 		
-		panelEnemies.add(new JLabel("Enemies : "));
+		panelEnemies.add(new JLabel("Ennemis : "));
 		this.labelEnemiesValue = new JLabel();
 		panelEnemies.add(this.labelEnemiesValue);
 		

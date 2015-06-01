@@ -82,7 +82,7 @@ public class GameController {
 	}
 	
 	public static void newRound() {
-		Round round = Round.getNewInstance();
+		Round round = new Round();
 		
 		showDialogChooseRoundLevel(round);
 	}

@@ -29,30 +29,30 @@ public class GamePadView extends SettingView {
 		setPreferredSize(new Dimension(DimensionConstants.FRAME_WIDTH, DimensionConstants.FRAME_HEIGHT));
 		
 		JPanel panelForm = new JPanel(new GridLayout(7, 2));
-		panelForm.setBorder(BorderFactory.createTitledBorder("Set keyboard controller touchs"));
+		panelForm.setBorder(BorderFactory.createTitledBorder("Configurer les touches du clavier"));
 		getContentPane().add(panelForm, BorderLayout.CENTER);
 		
 		panelForm.add(new JLabel("Start"));
 		this.textFieldKeyStart = new GamePadTextField();
 		panelForm.add(this.textFieldKeyStart);
 		
-		panelForm.add(new JLabel("Move North"));
+		panelForm.add(new JLabel("Direction Nord"));
 		this.textFieldKeyMoveNorth = new GamePadTextField();
 		panelForm.add(this.textFieldKeyMoveNorth);
 		
-		panelForm.add(new JLabel("Move South"));
+		panelForm.add(new JLabel("Direcion Sud"));
 		this.textFieldKeyMoveSouth = new GamePadTextField();
 		panelForm.add(this.textFieldKeyMoveSouth);
 		
-		panelForm.add(new JLabel("Move West"));
+		panelForm.add(new JLabel("Direction Ouest"));
 		this.textFieldKeyMoveWest = new GamePadTextField();
 		panelForm.add(this.textFieldKeyMoveWest);
 		
-		panelForm.add(new JLabel("Move Eastt"));
+		panelForm.add(new JLabel("Direction Est"));
 		this.textFieldKeyMoveEast = new GamePadTextField();
 		panelForm.add(this.textFieldKeyMoveEast);
 		
-		panelForm.add(new JLabel("Pig Attak"));
+		panelForm.add(new JLabel("Attaque Goinfre"));
 		this.textFieldKeyPigAttak = new GamePadTextField();
 		panelForm.add(this.textFieldKeyPigAttak);
 	}

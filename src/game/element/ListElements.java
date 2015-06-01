@@ -67,4 +67,8 @@ public class ListElements extends Observable {
 	public boolean isEmpty() {
 		return this.list.isEmpty();
 	}
+	
+	public void clear() {
+		this.list.clear();
+	}
 }

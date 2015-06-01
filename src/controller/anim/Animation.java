@@ -10,7 +10,7 @@ public abstract class Animation implements ActionListener {
 	
 	protected int count = -1;
 	private Timer timer;
-	private int duration;
+	protected int duration;
 	
 	protected Animation() {
 		this.timer = new Timer(0, this);
@@ -42,15 +42,11 @@ public abstract class Animation implements ActionListener {
 		this.duration = duration;
 	}
 	
-	public void start() {
+	void start() {
 		this.timer.start();
 	}
 	
-	public void restart() {
-		this.timer.restart();
-	}
-	
-	public void stop() {
+	void stop() {
 		this.timer.stop();
 	}
 }

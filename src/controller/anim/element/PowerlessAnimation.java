@@ -1,8 +1,11 @@
-package controller.anim;
+package controller.anim.element;
 
 import game.element.character.Character;
 
 import java.awt.event.ActionEvent;
+
+import controller.anim.Animation;
+import controller.anim.AnimationHandler;
 
 public class PowerlessAnimation extends Animation {
 	
@@ -29,9 +32,9 @@ public class PowerlessAnimation extends Animation {
 		if (count == 0) {
 			this.character.setPowerful(false);
 		} else {
-			stop();
-			
 			this.character.setPowerful(true);
+			
+			AnimationHandler.finish(this);
 		}
 	}
 }

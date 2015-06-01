@@ -16,9 +16,7 @@ import view.DimensionConstants;
 
 public class StateBarView extends JPanel implements Observer {
 
-	private JLabel labelRoundNumber,
-		labelRoundState;
-	
+	private JLabel labelRoundNumber, labelRoundState;
 	private StatisticsView statisticsView;
 	
 	public StateBarView() {
@@ -32,7 +30,7 @@ public class StateBarView extends JPanel implements Observer {
 		JPanel panelRoundNumber = new JPanel();
 		panelRound.add(panelRoundNumber);
 		
-		panelRoundNumber.add(new JLabel("Round : "));
+		panelRoundNumber.add(new JLabel("Partie : "));
 		this.labelRoundNumber = new JLabel();
 		panelRoundNumber.add(this.labelRoundNumber);
 		
@@ -51,7 +49,7 @@ public class StateBarView extends JPanel implements Observer {
 		Round round = (Round) observable;
 		
 		this.labelRoundNumber.setText(String.valueOf(round.getRoundNumber()));
-		if (round.getState() == State.PAUSED) {
+		if (round.getState() == State.PAUSE) {
 			this.labelRoundState.setText(String.valueOf(round.getState()));
 		} else {
 			this.labelRoundState.setText("");

@@ -1,4 +1,4 @@
-package controller.anim.power;
+package controller.anim.element;
 
 import controller.anim.Animation;
 import game.element.Element;

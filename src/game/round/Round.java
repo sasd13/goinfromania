@@ -23,12 +23,12 @@ public class Round extends Observable {
 	private Date dateCreated;
 	private Date dateUpdated;
 	
-	protected Round() {
+	public Round() {
 		super();
 		
 		countRound++;
 		this.id = "id-round-" + countRound;
-		this.roundNumber = 0;
+		this.roundNumber = 1;
 		this.level = Level.EASY;
 		this.listElements = new ListElements(MAX_ELEMENT);
 		this.statistics = new Statistics();
@@ -40,47 +40,18 @@ public class Round extends Observable {
 		this.dateUpdated = null;
 	}
 	
-	public static Round getNewInstance() {
-		Round round = new Round();
-		round.setRoundNumber(1);
-		
-		Pig pig = new Pig();
-		round.getListElements().add(pig);
-		
-		return round;
-	}
-	
-	public static Round createNextRound(Round round, boolean nextLevel, boolean resetPigPosition) {
-		round.setFinished(false);
-		
-		Level level = round.getLevel();
-		
-		if (nextLevel) {
-			switch (level) {
-				case EASY :
-					round.setLevel(Level.NORMAL);
-					break;
-				case NORMAL : case HARD :
-					round.setLevel(Level.HARD);
-					break;
-			}
-		}
-		
+	public static Round createNextRound(Round round) {
 		round.setRoundNumber(round.getRoundNumber() + 1);
+		
+		Pig pig = round.getListElements().getPig();
+		pig.setPosition(new Point());
+		
+		round.getListElements().clear();
+		round.getListElements().add(pig);
 		
 		Statistics statistics = round.getStatistics();
 		statistics.setMaxCakesToEat(statistics.getMaxCakesToEat() + Statistics.INCREMENTAL_CAKES_TO_EAT);
 		statistics.reset();
-		
-		Pig pig = round.getListElements().getPig();
-		if (resetPigPosition) {
-			pig.setPosition(new Point());
-		}
-		
-		ListElements listElements = new ListElements();
-		listElements.add(pig);
-		
-		round.setListElements(listElements);
 		
 		return round;
 	}

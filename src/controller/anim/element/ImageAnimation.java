@@ -1,4 +1,4 @@
-package controller.anim;
+package controller.anim.element;
 
 import game.element.Element;
 
@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 
 import util.ImageLoader;
 import controller.ArenaController;
+import controller.anim.Animation;
+import controller.anim.AnimationHandler;
 
 public class ImageAnimation extends Animation {
 
@@ -45,11 +47,11 @@ public class ImageAnimation extends Animation {
 		if (count == 0) {
 			image = ImageLoader.loadFromPath(this.imageName);
 			this.elementToAct.setImageWithDimension(image);
-		} else {
-			stop();
-			
+		} else {			
 			image = ImageLoader.loadFromPath(this.elementToAct.getImageName());
 			this.elementToAct.setImageWithDimension(image);
+			
+			AnimationHandler.finish(this);
 		}
 		
 		ArenaController.repaintArena();

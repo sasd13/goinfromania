@@ -1,4 +1,4 @@
-package controller.anim.power;
+package controller.anim.element;
 
 import game.element.Direction;
 import game.element.character.Enemy;
@@ -12,6 +12,7 @@ import util.ArenaUtil;
 import util.ImageLoader;
 import controller.ArenaController;
 import controller.PigController;
+import controller.anim.AnimationHandler;
 
 public class MissileAnimation extends PowerAnimation {
 
@@ -51,9 +52,9 @@ public class MissileAnimation extends PowerAnimation {
 			
 			ArenaController.actionMove(missile, direction);
 		} else {
-			stop();
-			
 			PigController.actionPigAttaksEnemy(missile, (Pig) getElementActor(), enemy);
+			
+			AnimationHandler.finish(this);
 		}
 	}
 }

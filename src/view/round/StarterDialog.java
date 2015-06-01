@@ -2,19 +2,20 @@ package view.round;
 
 import game.round.Round;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.JRootPane;
+import javax.swing.Timer;
 
 import view.DimensionConstants;
 import view.GameView;
@@ -26,6 +27,8 @@ public class StarterDialog extends JDialog implements Observer {
 	private JPanel panelRoundNumber, panelRoundGo;
 	private JLabel labelRoundNumber;
 	
+	private Timer timer;
+	
 	public StarterDialog() {
 		super();
 		
@@ -34,65 +37,77 @@ public class StarterDialog extends JDialog implements Observer {
 		setSize(new Dimension(DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT));
 		setResizable(false);
 		setUndecorated(true);
-		setOpacity(1);
-		getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
+		setBackground(Color.BLACK);
 		
 		this.layeredPane = new JLayeredPane();
 		this.layeredPane.setPreferredSize(new Dimension(DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT));
 		getContentPane().add(this.layeredPane);
 		
 		this.panelRoundNumber = new JPanel();
+		this.panelRoundNumber.setBackground(Color.BLACK);
 		this.panelRoundNumber.setBounds(0, 0, DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT);
 		this.layeredPane.add(this.panelRoundNumber, JLayeredPane.DEFAULT_LAYER);
 		
-		this.labelRoundNumber = new JLabel("Round");
+		Font font = new Font(
+				getContentPane().getFont().getName(),
+				Font.BOLD | Font.ITALIC, 
+				96
+				);
+		
+		this.labelRoundNumber = new JLabel("Partie");
+		this.labelRoundNumber.setFont(font);
+		this.labelRoundNumber.setForeground(Color.PINK);
 		this.panelRoundNumber.add(this.labelRoundNumber);
 		
 		this.panelRoundGo = new JPanel();
+		this.panelRoundGo.setBackground(Color.BLACK);
 		this.panelRoundGo.setBounds(0, 0, DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT);
 		this.layeredPane.add(this.panelRoundGo, JLayeredPane.DEFAULT_LAYER);
 		
-		this.panelRoundGo.add(new JLabel("Go!"));
+		JLabel labelRoundGo = new JLabel("Go !");
+		labelRoundGo.setFont(font);
+		labelRoundGo.setForeground(Color.PINK);
+		this.panelRoundGo.add(labelRoundGo);
 	}
 	
 	@Override
 	public void update(Observable observable, Object arg) {
 		Round round = (Round) observable;
 		
-		this.labelRoundNumber.setText("Round " + round.getRoundNumber());
+		this.labelRoundNumber.setText("Partie " + round.getRoundNumber());
 	}
 	
 	public void anime() {
-		final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
-		
-		final int period = 1200;
-		
-		Runnable runnable = new Runnable() {
+		ActionListener listener = new ActionListener() {
 			
-			private int i=0;
+			private int count = -1;
 			
 			@Override
-			public void run() {
-				if (i == 0) {
+			public void actionPerformed(ActionEvent arg0) {
+				count++;
+				
+				if (count == 0) {
 					panelRoundNumber.setVisible(true);
 					layeredPane.moveToFront(panelRoundNumber);
 					panelRoundGo.setVisible(false);
-					i++;
-				} else if (i == 1) {
+				} else if (count == 1) {
 					panelRoundGo.setVisible(true);
 					layeredPane.moveToFront(panelRoundGo);
 					panelRoundNumber.setVisible(false);
-					i++;
 				} else {
+					timer.stop();
+					
 					dispose();
-					scheduler.shutdown();
 				}
 			}
 		};
 		
-		scheduler.scheduleAtFixedRate(runnable, 0, period, TimeUnit.MILLISECONDS);
+		timer = new Timer(0, listener);
+		timer.setDelay(1200);
 		
 		setLocationRelativeTo(GameView.getInstance().getRoundView());
+		
+		timer.start();
 		setVisible(true);
 	}
 }

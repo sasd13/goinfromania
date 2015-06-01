@@ -1,8 +1,9 @@
 package controller;
 
-import controller.anim.BoomAnimation;
-import controller.anim.HitAnimation;
-import controller.anim.power.ParalyzeAnimation;
+import controller.anim.AnimationHandler;
+import controller.anim.element.BoomAnimation;
+import controller.anim.element.HitAnimation;
+import controller.anim.element.ParalyzeAnimation;
 import game.element.character.Enemy;
 import game.element.character.Pig;
 import game.element.power.Missile;
@@ -21,7 +22,7 @@ public class PigController {
 	
 	private static void actionParalyze(Paralyze paralyze, Pig pig, Enemy enemy) {		
 		ParalyzeAnimation paralyzeAnimation = new ParalyzeAnimation(paralyze, pig, enemy);
-		paralyzeAnimation.start();
+		AnimationHandler.start(paralyzeAnimation);
 	}
 	
 	private static void actionMissile(Missile missile, Pig pig, Enemy enemy) {
@@ -41,11 +42,11 @@ public class PigController {
 	
 	private static void startHitAnimation(Enemy enemy) {
 		HitAnimation hitAnimation = new HitAnimation(enemy);
-		hitAnimation.start();
+		AnimationHandler.start(hitAnimation);
 	}
 	
 	private static void startBoomAnimation(Missile missile) {
 		BoomAnimation boomAnimation = new BoomAnimation(missile);
-		boomAnimation.start();
+		AnimationHandler.start(boomAnimation);
 	}
 }

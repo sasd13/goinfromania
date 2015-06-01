@@ -84,12 +84,12 @@ public class Pig extends Character {
 	}
 	
 	public Power getPowerWithEnergy() {
-		if (this.energy >= ENERGY_HIGH) {
-			return new SuperMissile();
-		} else if (this.energy < ENERGY_HIGH && this.energy >= ENERGY_LOW) {
+		if (this.energy < ENERGY_MEDIUM) {
+			return new Paralyze();
+		} else if (this.energy < ENERGY_MAX) {
 			return new Missile();
 		} else {
-			return new Paralyze();
+			return new SuperMissile();
 		}
 	}
 }

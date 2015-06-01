@@ -1,4 +1,4 @@
-package controller.anim;
+package controller.anim.element;
 
 import game.element.Element;
 

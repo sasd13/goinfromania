@@ -1,8 +1,9 @@
 package controller;
 
-import controller.anim.PowerlessAnimation;
-import controller.anim.power.DietAnimation;
-import controller.anim.power.DiseaseAnimation;
+import controller.anim.AnimationHandler;
+import controller.anim.element.DietAnimation;
+import controller.anim.element.DiseaseAnimation;
+import controller.anim.element.PowerlessAnimation;
 import game.element.character.Enemy;
 import game.element.character.Nutritionist;
 import game.element.character.Pig;
@@ -29,17 +30,17 @@ public class EnemyController {
 	
 	private static void actionDiet(Diet diet, Nutritionist nutritionist, Pig pig) {		
 		DietAnimation dietAnimation = new DietAnimation(diet, nutritionist, pig);
-		dietAnimation.start();
+		AnimationHandler.start(dietAnimation);
 	}
 	
 	private static void actionDisease(Disease disease, Virus virus, Pig pig) {		
 		DiseaseAnimation diseaseAnimation = new DiseaseAnimation(disease, virus, pig);
-		diseaseAnimation.start();
+		AnimationHandler.start(diseaseAnimation);
 	}
 	
 	private static void makePowerlessForDuration(Enemy enemy) {
 		PowerlessAnimation powerlessAnimation = new PowerlessAnimation(enemy);
 		powerlessAnimation.setDelay(DELAY_BEFORE_ENEMY_ATTAK_AGAIN);
-		powerlessAnimation.start();
+		AnimationHandler.start(powerlessAnimation);
 	}
 }

@@ -1,4 +1,4 @@
-package controller.anim.power;
+package controller.anim.element;
 
 import game.element.character.Enemy;
 import game.element.character.Pig;
@@ -7,6 +7,7 @@ import game.element.power.Disease;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
+import controller.anim.AnimationHandler;
 import util.ImageLoader;
 
 public class DiseaseAnimation extends PowerAnimation {
@@ -37,12 +38,12 @@ public class DiseaseAnimation extends PowerAnimation {
 			pig.setLife(pig.getLife() - getPower().getPowerValue());
 			pig.setSpeed(Pig.SPEED_LOW);
 		} else {
-			stop();
-			
 			image = ImageLoader.loadFromPath(pig.getImageName());
 			pig.setImageWithDimension(image);
 			
 			pig.setSpeed(Pig.SPEED_MEDIUM);
+			
+			AnimationHandler.stop(this);
 		}
 	}
 }

@@ -1,10 +1,11 @@
-package controller.anim;
+package controller.anim.arena;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.util.concurrent.ExecutionException;
 
 import controller.ArenaController;
+import controller.anim.Animation;
 import game.element.Element;
 import game.element.ListElements;
 import game.element.character.Nutritionist;
