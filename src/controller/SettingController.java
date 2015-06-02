@@ -30,26 +30,27 @@ public class SettingController {
 	}
 	
 	public static void closeSetting(Setting newSetting) {
-		if (!setting.equals(newSetting)) {
-			String title = "Configuration";
-			String message = "Enregistrer les modifications ?";
+		String title = "Configuration";
+		String message = "Enregistrer les modifications ?";
+		
+		int selected = JOptionPane.showConfirmDialog(settingView, message, title, JOptionPane.YES_NO_CANCEL_OPTION);
+		if (selected == JOptionPane.YES_OPTION) {
+			SettingDAO.save(newSetting);
 			
-			int selected = JOptionPane.showConfirmDialog(settingView, message, title, JOptionPane.YES_NO_OPTION);
-			if (selected == JOptionPane.YES_OPTION) {
-				SettingDAO.save(newSetting);
-				
-				if (!RoundController.hasRoundStopped()) {
-					reloadSettingForRound(newSetting);
-				}
+			setting.deleteObserver(settingView);
+			settingView.dispose();
+			
+			if (!RoundController.hasRoundStopped()) {
+				reloadSettingForRound(newSetting);
 			}
-			
+		} else if (selected == JOptionPane.NO_OPTION) {
 			setting.deleteObserver(settingView);
 			settingView.dispose();
 		}
 	}
 	
 	private static void reloadSettingForRound(Setting setting) {
-		if (setting.getName().equals(GamePad.NAME)) {
+		if (setting.getName().compareTo(GamePad.NAME) == 0) {
 			RoundController.loadGamePad();
 		}
 	}

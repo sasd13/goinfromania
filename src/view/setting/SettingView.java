@@ -62,7 +62,9 @@ public abstract class SettingView extends JDialog implements Observer, ActionLis
 		if (button == this.buttonClose) {
 			boolean checked = checkChanges();
 			if (checked) {
-				SettingController.closeSetting(editChanges());
+				Setting newSetting = editChanges();
+				
+				SettingController.closeSetting(newSetting);
 			} else {
 				JOptionPane.showMessageDialog(this, "Configuration erronée. Vous devez corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
 			}

@@ -176,14 +176,35 @@ public class RoundController {
 	public static void openNextRound() {
 		GameController.removeRound(round);
 		
-		round = Round.createNextRound(round);
+		round = createNextRound(round);
 		
 		GameController.openRound(round);
 	}
 	
+	private static Round createNextRound(Round round) {
+		Round nextRound = new Round();
+		
+		nextRound.setRoundNumber(round.getRoundNumber() + 1);
+		nextRound.setLevel(round.getLevel());
+		nextRound.setDateCreated(round.getDateCreated());
+		
+		Pig pig = round.getListElements().getPig();
+		Pig newPig = new Pig();
+		newPig.setLife(pig.getLife());
+		newPig.setEnergy(pig.getEnergy());
+		nextRound.getListElements().add(newPig);
+		
+		Statistics statistics = round.getStatistics();
+		statistics.resetCounts();
+		statistics.setMaxCakesToEat(statistics.getMaxCakesToEat() + Statistics.INCREMENTAL_CAKES_TO_EAT);
+		nextRound.setStatistics(statistics);
+		
+		return nextRound;
+	}
+	
 	public static void finishResultAndDisplayHome() {
 		if (round.getResult() == Result.WIN) {
-			round = Round.createNextRound(round);
+			round = createNextRound(round);
 			
 			showDialogConfirmSaveRound();
 		}

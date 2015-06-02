@@ -1,7 +1,6 @@
 package game.round;
 
 import game.element.ListElements;
-import game.element.character.Pig;
 
 import java.util.Date;
 import java.util.Observable;
@@ -37,26 +36,6 @@ public class Round extends Observable {
 		this.statistics = new Statistics();
 		this.dateCreated = new Date(System.currentTimeMillis());
 		this.dateUpdated = null;
-	}
-	
-	public static Round createNextRound(Round round) {
-		Round nextRound = new Round();
-		
-		nextRound.setRoundNumber(round.getRoundNumber() + 1);
-		nextRound.setLevel(round.getLevel());
-		nextRound.setDateCreated(round.getDateCreated());
-		
-		Pig pig = round.getListElements().getPig();
-		Pig newPig = new Pig();
-		newPig.setLife(pig.getLife());
-		newPig.setEnergy(pig.getEnergy());
-		nextRound.getListElements().add(newPig);
-		
-		Statistics statistics = round.getStatistics();
-		statistics.resetCounts();
-		nextRound.setStatistics(statistics);
-		
-		return nextRound;
 	}
 	
 	public String getId() {

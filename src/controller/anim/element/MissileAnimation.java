@@ -16,7 +16,7 @@ import controller.anim.AnimationHandler;
 
 public class MissileAnimation extends PowerAnimation {
 
-	public static final int DELAY_MOVE = 10;
+	public static final int DELAY_MOVE = 7;
 	
 	public MissileAnimation(Missile missile, Pig pig, Enemy enemy) {
 		super(missile, pig, enemy);

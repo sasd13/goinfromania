@@ -166,7 +166,7 @@ public class ResultDialog extends JDialog implements Observer, ActionListener {
 		};
 		
 		timer = new Timer(0, listener);
-		timer.setDelay(1700);
+		timer.setDelay(2400);
 		
 		setLocationRelativeTo(GameView.getInstance().getRoundView());
 		

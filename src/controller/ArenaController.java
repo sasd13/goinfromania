@@ -50,6 +50,7 @@ public class ArenaController {
 		foodAutoMoveAnimation.setDelay(foodAutoMoveAnimation.getDelay() - decreaseValue);
 		enemyAutoMoveAnimation.setDelay(enemyAutoMoveAnimation.getDelay() - decreaseValue);
 		
+		//Planifie les animations pour etre lance ulterieurement
 		AnimationHandler.prepare(autoAppearanceAnimation);
 		AnimationHandler.prepare(foodAutoMoveAnimation);
 		AnimationHandler.prepare(enemyAutoMoveAnimation);
@@ -141,13 +142,7 @@ public class ArenaController {
 	}
 	
 	private static void actionPigInTouch(Pig pig, Element elementInTouch) {
-		if (elementInTouch instanceof Enemy) {
-			Enemy enemy = (Enemy) elementInTouch;
-			
-			if (enemy.isPowerful()) {
-				EnemyController.actionEnemyAttaksPig(enemy.getPower(), enemy, pig);
-			}
-		} else if (elementInTouch instanceof Food) {
+		if (elementInTouch instanceof Food) {
 			Food food = (Food) elementInTouch;
 			
 			if (pig.isGreedy()) {
