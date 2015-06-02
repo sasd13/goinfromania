@@ -34,7 +34,9 @@ public class ArenaController {
 		arenaView = myArenaView;
 		listElements = myListElements;
 		
-		initializeElements(roundNumber);
+		if (listElements.isEmpty()) {
+			initializeElements(roundNumber);
+		}
 		
 		autoAppearanceAnimation = new AutoAppearanceAnimation(level, listElements);
 		foodAutoMoveAnimation = new FoodAutoMoveAnimation(level, listElements);
