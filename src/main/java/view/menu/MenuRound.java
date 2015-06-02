@@ -29,8 +29,6 @@ public class MenuRound extends JMenu implements ActionListener {
 		
 		addSeparator();
 		
-		addSeparator();
-		
 		JMenuItem itemSave = new JMenuItem(ITEM_SAVE);
 		itemSave.addActionListener(this);
 		itemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
