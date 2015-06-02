@@ -42,10 +42,10 @@ public class GamePadHelpView extends HelpView {
 		labelDescriptionStart.setFont(font);
 		panel.add(labelDescriptionStart);
 		
-		JLabel labelTitleMove = new JLabel("Direction Nord/Sud/Est/West");
+		JLabel labelTitleMove = new JLabel("Directions Nord/Sud/Est/West");
 		panel.add(labelTitleMove);
 		
-		JLabel labelDescriptionMove = new JLabel("Déplacer du goinfre dans les quatres directions");
+		JLabel labelDescriptionMove = new JLabel("Déplacer le goinfre dans les quatres directions");
 		labelDescriptionMove.setFont(font);
 		panel.add(labelDescriptionMove);
 		

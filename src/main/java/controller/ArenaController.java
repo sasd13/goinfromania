@@ -34,16 +34,9 @@ public class ArenaController {
 		arenaView = myArenaView;
 		listElements = myListElements;
 		
-		if (listElements.isEmpty()) {
-			initializeElements(roundNumber);
-		}
-		
 		autoAppearanceAnimation = new AutoAppearanceAnimation(level, listElements);
 		foodAutoMoveAnimation = new FoodAutoMoveAnimation(level, listElements);
 		enemyAutoMoveAnimation = new EnemyAutoMoveAnimation(level, listElements);
-		
-		//Delay avant premiere apparition
-		autoAppearanceAnimation.setInitialDelay(5000);
 		
 		//Decremente les "delay" tous les deux tours
 		//Augmente progressivement la difficulte
@@ -56,9 +49,16 @@ public class ArenaController {
 		AnimationHandler.prepare(autoAppearanceAnimation);
 		AnimationHandler.prepare(foodAutoMoveAnimation);
 		AnimationHandler.prepare(enemyAutoMoveAnimation);
+		
+		if (listElements.isEmpty()) {
+			//Delay avant premiere apparition
+			autoAppearanceAnimation.setInitialDelay(5000);
+			
+			initializeElements(roundNumber);
+		}
 	}
 	
-	private static void initializeElements(int roundNumber) {
+	private static void initializeElements(int roundNumber) {		
 		if (roundNumber == 1) {
 			listElements.add(new Pig());
 		}
