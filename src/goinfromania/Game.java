@@ -2,8 +2,9 @@ package goinfromania;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Observable;
 
-public class Game {
+public class Game extends Observable {
 	
 	public static final String NAME = "Goinfr'o'mania";
 

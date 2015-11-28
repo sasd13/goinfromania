@@ -1,0 +1,48 @@
+package goinfromania.view.menubar;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
+
+public class MenuFile extends JMenu implements ActionListener {
+
+	private static final String NAME = "Fichier";
+	
+	private final String ITEM_NEW = "Nouvelle partie";
+	private final String ITEM_OPEN = "Ovrir une partie...";
+	private final String ITEM_EXIT = "Quitter";
+	
+	public MenuFile() {
+		super(NAME);
+		
+		setMnemonic(KeyEvent.VK_F);
+		
+		JMenuItem itemNew = new JMenuItem(ITEM_NEW);
+		itemNew.addActionListener(this);
+		itemNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+		add(itemNew);
+		
+		JMenuItem itemOpen = new JMenuItem(ITEM_OPEN);
+		itemOpen.addActionListener(this);
+		itemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+		add(itemOpen);
+		
+		addSeparator();
+		
+		JMenuItem itemExit = new JMenuItem(ITEM_EXIT);
+		itemExit.addActionListener(this);
+		itemExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
+		add(itemExit);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JMenuItem item = (JMenuItem) e.getSource();
+		
+		//TODO
+	}
+}
