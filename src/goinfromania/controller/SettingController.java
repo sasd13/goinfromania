@@ -1,7 +1,7 @@
 package goinfromania.controller;
 
-import goinfromania.preference.SettingPreferences;
-import goinfromania.preference.SettingPreferencesFactory;
+import goinfromania.preferences.SettingPreferences;
+import goinfromania.preferences.SettingPreferencesFactory;
 import goinfromania.setting.Setting;
 import goinfromania.view.dialog.SettingDialog;
 

@@ -1,6 +1,6 @@
 package goinfromania.view.frame;
 
-import goinfromania.Game;
+import goinfromania.game.Game;
 import goinfromania.view.DimensionConstants;
 import goinfromania.view.dialog.GameDialog;
 import goinfromania.view.dialog.ResultDialog;

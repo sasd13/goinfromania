@@ -1,8 +1,8 @@
 package goinfromania.game.character;
 
-import goinfromania.Direction;
-import goinfromania.Element;
-import goinfromania.IMovable;
+import goinfromania.game.Direction;
+import goinfromania.game.Element;
+import goinfromania.game.IMovable;
 
 public abstract class Power extends Element implements IMovable {
 

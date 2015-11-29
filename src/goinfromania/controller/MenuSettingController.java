@@ -1,15 +1,14 @@
 package goinfromania.controller;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import goinfromania.preference.SettingPreferences;
-import goinfromania.preference.SettingPreferencesFactory;
+import goinfromania.preferences.SettingPreferences;
+import goinfromania.preferences.SettingPreferencesFactory;
 import goinfromania.setting.Setting;
 import goinfromania.view.dialog.SettingDialog;
 import goinfromania.view.dialog.SettingDialogFactory;
 
-public class MenuSettingController implements ActionListener {
+public class MenuSettingController extends MenuController {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {

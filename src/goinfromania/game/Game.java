@@ -1,4 +1,4 @@
-package goinfromania;
+package goinfromania.game;
 
 import java.sql.Timestamp;
 import java.util.List;

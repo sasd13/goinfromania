@@ -1,10 +1,9 @@
 package goinfromania.controller;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class MenuEditController implements ActionListener {
-
+public class MenuEditController extends MenuController {
+	
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();

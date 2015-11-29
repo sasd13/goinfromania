@@ -1,8 +1,8 @@
 package goinfromania.game.character;
 
-import goinfromania.Direction;
-import goinfromania.Element;
-import goinfromania.IMovable;
+import goinfromania.game.Direction;
+import goinfromania.game.Element;
+import goinfromania.game.IMovable;
 
 public abstract class Character extends Element implements ILiveable, IMovable, IEnergetic, IPowerful {
 	

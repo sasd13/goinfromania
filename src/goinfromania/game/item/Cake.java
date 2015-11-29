@@ -1,9 +1,9 @@
 package goinfromania.game.item;
 
-import goinfromania.Direction;
-import goinfromania.Element;
-import goinfromania.IEatable;
-import goinfromania.IMovable;
+import goinfromania.game.Direction;
+import goinfromania.game.Element;
+import goinfromania.game.IEatable;
+import goinfromania.game.IMovable;
 
 public class Cake extends Element implements IMovable, IEatable {
 

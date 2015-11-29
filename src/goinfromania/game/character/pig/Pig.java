@@ -1,6 +1,6 @@
 package goinfromania.game.character.pig;
 
-import goinfromania.IEatable;
+import goinfromania.game.IEatable;
 import goinfromania.game.character.Character;
 import goinfromania.game.character.Power;
 import goinfromania.game.character.enemy.Enemy;

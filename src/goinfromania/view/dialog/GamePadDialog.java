@@ -75,8 +75,10 @@ public class GamePadDialog extends SettingDialog {
 		
 		String label = "Label";
 		
-		int indice = 0;
+		int indice = -1;
 		for (GamePadTextField gamePadTextField : this.gamePadTextFields) {
+			indice++;
+			
 			switch (indice) {
 				case 0:
 					label = "Start";

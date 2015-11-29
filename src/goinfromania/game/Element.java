@@ -1,4 +1,4 @@
-package goinfromania;
+package goinfromania.game;
 
 import java.awt.Dimension;
 import java.awt.Point;

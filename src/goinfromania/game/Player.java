@@ -1,4 +1,4 @@
-package goinfromania;
+package goinfromania.game;
 
 public class Player {
 

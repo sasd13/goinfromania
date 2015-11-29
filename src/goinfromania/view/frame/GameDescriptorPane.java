@@ -1,7 +1,7 @@
 package goinfromania.view.frame;
 
-import goinfromania.Element;
-import goinfromania.Game;
+import goinfromania.game.Element;
+import goinfromania.game.Game;
 import goinfromania.game.character.pig.Pig;
 import goinfromania.view.DimensionConstants;
 

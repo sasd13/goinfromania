@@ -1,7 +1,7 @@
 package goinfromania.view.frame;
 
-import goinfromania.Game;
 import goinfromania.db.GameDAO;
+import goinfromania.game.Game;
 import goinfromania.view.DimensionConstants;
 
 import java.awt.Dimension;

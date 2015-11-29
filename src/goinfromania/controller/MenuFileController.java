@@ -1,9 +1,8 @@
 package goinfromania.controller;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class MenuFileController implements ActionListener {
+public class MenuFileController extends MenuController {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {

@@ -1,7 +1,7 @@
 package goinfromania.view.dialog;
 
-import goinfromania.Game;
-import goinfromania.Result;
+import goinfromania.game.Game;
+import goinfromania.game.Result;
 import goinfromania.view.DimensionConstants;
 
 import java.awt.BorderLayout;

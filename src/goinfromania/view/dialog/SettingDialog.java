@@ -54,8 +54,10 @@ public abstract class SettingDialog extends JDialog implements Observer {
 		
 		String command = "Command";
 		
-		int indice = 0;
+		int indice = -1;
 		for (JButton button : buttons) {
+			indice++;
+			
 			switch (indice) {
 				case 0:
 					command = "CLOSE";

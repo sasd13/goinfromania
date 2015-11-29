@@ -3,7 +3,7 @@ package goinfromania.db;
 import java.util.ArrayList;
 import java.util.List;
 
-import goinfromania.Game;
+import goinfromania.game.Game;
 
 public class GameDAO {
 	

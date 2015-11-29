@@ -1,4 +1,4 @@
-package goinfromania.preference;
+package goinfromania.preferences;
 
 import goinfromania.setting.GamePad;
 import goinfromania.setting.Setting;

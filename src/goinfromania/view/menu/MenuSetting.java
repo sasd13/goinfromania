@@ -1,34 +1,45 @@
 package goinfromania.view.menu;
 
+import goinfromania.controller.MenuSettingController;
+
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-public class MenuSetting extends JMenu implements ActionListener {
+public class MenuSetting extends GameMenu {
 
-	private static final String NAME = "Options";
-	
-	private final String ITEM_GAMEPAD = "Clavier";
-	
 	public MenuSetting() {
-		super(NAME);
-		
-		setMnemonic(KeyEvent.VK_C);
-		
-		JMenuItem itemGamePad = new JMenuItem(ITEM_GAMEPAD);
-		itemGamePad.addActionListener(this);
-		itemGamePad.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
-		add(itemGamePad);
+		super("Options", new MenuSettingController());
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		JMenuItem item = (JMenuItem) e.getSource();
+	protected void prepareMenu() {
+		setMnemonic(KeyEvent.VK_O);
+	}
+	
+	@Override
+	protected void addMenuItems() {
+		JMenuItem[] menuItems = {
+				new JMenuItem("Clavier")
+		};
 		
-		//TODO
+		KeyStroke keyStroke = null;
+		
+		int indice = 0;
+		for (JMenuItem menuItem : menuItems) {
+			indice++;
+			
+			switch (indice) {
+				case 0:
+					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK);
+					break;
+			}
+			menuItem.addActionListener(this.menuController);
+			menuItem.setAccelerator(keyStroke);
+			
+			add(menuItem);
+		}
 	}
 }

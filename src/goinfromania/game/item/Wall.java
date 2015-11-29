@@ -1,6 +1,6 @@
 package goinfromania.game.item;
 
-import goinfromania.Element;
+import goinfromania.game.Element;
 
 public class Wall extends Element {
 

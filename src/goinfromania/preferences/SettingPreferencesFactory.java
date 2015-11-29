@@ -1,4 +1,4 @@
-package goinfromania.preference;
+package goinfromania.preferences;
 
 public class SettingPreferencesFactory {
 
