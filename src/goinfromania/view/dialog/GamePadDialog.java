@@ -32,13 +32,6 @@ public class GamePadDialog extends SettingDialog {
 			this.textFieldKeyPigAttak
 	};
 	
-	public GamePadDialog() {
-		super();
-		
-		prepareDialog();
-		prepareForm();
-	}
-	
 	@Override
 	public void update(Observable observable, Object arg) {
 		GamePad gamePad = (GamePad) observable;
@@ -64,14 +57,17 @@ public class GamePadDialog extends SettingDialog {
 		super.update(observable, arg);
 	}
 	
-	private void prepareDialog() {
+	@Override
+	protected void prepareDialog() {
+		super.prepareDialog();
+		
 		setPreferredSize(new Dimension(DimensionConstants.FRAME_WIDTH, DimensionConstants.FRAME_HEIGHT));
 	}
 	
-	private void prepareForm() {
+	@Override
+	protected void createForm() {
 		JPanel panelForm = new JPanel(new GridLayout(6, 2));
 		panelForm.setBorder(BorderFactory.createTitledBorder("Configurer les touches du clavier"));
-		getContentPane().add(panelForm, BorderLayout.CENTER);
 		
 		String label = "Label";
 		
@@ -105,6 +101,8 @@ public class GamePadDialog extends SettingDialog {
 			panelForm.add(new JLabel(label));
 			panelForm.add(gamePadTextField);
 		}
+		
+		getContentPane().add(panelForm, BorderLayout.CENTER);
 	}
 	
 	@Override

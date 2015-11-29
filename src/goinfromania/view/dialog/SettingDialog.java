@@ -18,14 +18,17 @@ public abstract class SettingDialog extends JDialog implements Observer {
 
 	private SettingController settingController;
 	
-	public SettingDialog() {
+	protected SettingDialog() {
 		super();
 		
 		this.settingController = new SettingController(this);
 		
 		prepareDialog();
-		prepareButtons();
+		createForm();
+		createDialogButtons();
 	}
+	
+	protected abstract void createForm();
 	
 	public abstract boolean isFormValid();
 	
@@ -38,13 +41,13 @@ public abstract class SettingDialog extends JDialog implements Observer {
 		this.settingController.setSetting((Setting) observable);
 	}
 	
-	private void prepareDialog() {
+	protected void prepareDialog() {
 		setTitle("Option");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 	}
 	
-	private void prepareButtons() {
+	private void createDialogButtons() {
 		JPanel panelButtons = new JPanel();
 		
 		JButton[] buttons = {
@@ -52,8 +55,8 @@ public abstract class SettingDialog extends JDialog implements Observer {
 				new JButton("Reset")
 		};
 		
-		String command = null;
 		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
+		String command = null;
 		
 		int indice = -1;
 		for (JButton button : buttons) {
@@ -70,8 +73,8 @@ public abstract class SettingDialog extends JDialog implements Observer {
 			
 			button.setPreferredSize(dimension);
 			button.setFocusable(false);
-			button.addActionListener(this.settingController);
 			button.setActionCommand(command);
+			button.addActionListener(this.settingController);
 			
 			panelButtons.add(button);
 		}

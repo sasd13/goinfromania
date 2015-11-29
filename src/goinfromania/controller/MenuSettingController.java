@@ -14,10 +14,10 @@ public class MenuSettingController extends MenuController {
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
 		
+		SettingDialog settingDialog = SettingDialogFactory.get(command);
+		
 		SettingPreferences settingPreferences = SettingPreferencesFactory.get(command);
 		Setting setting = settingPreferences.pull();
-		
-		SettingDialog settingDialog = SettingDialogFactory.get(command);
 		setting.addObserver(settingDialog);
 		
 		settingDialog.update(setting, null);

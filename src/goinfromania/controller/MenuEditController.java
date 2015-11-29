@@ -9,11 +9,11 @@ public class MenuEditController extends MenuController {
 		String command = event.getActionCommand();
 		
 		if ("PAUSE".equalsIgnoreCase(command)) {
-			//TODO New game
+			//TODO Pause game
 		} else if ("STOP".equalsIgnoreCase(command)){
-			//TODO List games
+			//TODO Stop game
 		} else if ("SAVE".equalsIgnoreCase(command)) {
-			//TODO Exit game
+			//TODO Save game
 		}
 	}
 }

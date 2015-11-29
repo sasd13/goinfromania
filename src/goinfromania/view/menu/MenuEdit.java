@@ -11,7 +11,7 @@ import javax.swing.KeyStroke;
 public class MenuEdit extends GameMenu {
 	
 	public MenuEdit() {
-		super("Parie", new MenuEditController());
+		super("Partie", new MenuEditController());
 	}
 	
 	@Override
@@ -30,7 +30,7 @@ public class MenuEdit extends GameMenu {
 		String command = null;
 		KeyStroke keyStroke = null;
 		
-		int indice = 0;
+		int indice = -1;
 		for (JMenuItem menuItem : menuItems) {
 			indice++;
 			

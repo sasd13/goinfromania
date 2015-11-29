@@ -30,7 +30,7 @@ public class MenuFile extends GameMenu {
 		String command = null;
 		KeyStroke keyStroke = null;
 		
-		int indice = 0;
+		int indice = -1;
 		for (JMenuItem menuItem : menuItems) {
 			indice++;
 			
