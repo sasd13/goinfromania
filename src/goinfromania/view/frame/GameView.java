@@ -1,4 +1,4 @@
-package goinfromania.view;
+package goinfromania.view.frame;
 
 import goinfromania.Element;
 import goinfromania.Game;
@@ -14,16 +14,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-public class ArenaView extends JPanel implements Observer, KeyListener {
+public class GameView extends JPanel implements Observer, KeyListener {
 
-	private ArenaViewPanel arenaViewPanel;
+	private ArenaView arenaView;
 	private JProgressBar progressBarLife, progressBarEnergy;
 	
-	public ArenaView() {
+	public GameView() {
 		super(new BorderLayout());
 		
-		this.arenaViewPanel = new ArenaViewPanel();
-		add(this.arenaViewPanel, BorderLayout.CENTER);
+		this.arenaView = new ArenaView();
+		add(this.arenaView, BorderLayout.CENTER);
 		
 		JPanel panelPig = new JPanel();
 		add(panelPig, BorderLayout.NORTH);

@@ -1,7 +1,8 @@
-package goinfromania.view;
+package goinfromania.view.dialog;
 
 import goinfromania.Game;
 import goinfromania.Result;
+import goinfromania.view.DimensionConstants;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,7 +19,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class GameDialogResult extends GameDialog implements Observer, ActionListener {
+public class ResultDialog extends GameDialog implements Observer, ActionListener {
 
 	private JLayeredPane layeredPane;
 	
@@ -26,7 +27,7 @@ public class GameDialogResult extends GameDialog implements Observer, ActionList
 	private JLabel labelResult, labelScore;
 	private JButton buttonNew, buttonFinish;
 	
-	public GameDialogResult() {
+	public ResultDialog() {
 		super();
 		
 		Dimension dimension = new Dimension(DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT);

@@ -1,8 +1,9 @@
-package goinfromania.view;
+package goinfromania.view.frame;
 
 import goinfromania.Element;
 import goinfromania.Game;
 import goinfromania.game.character.pig.Pig;
+import goinfromania.view.DimensionConstants;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -16,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class GamesViewGamePane extends JPanel implements ActionListener {
+public class GameDescriptorPane extends JPanel implements ActionListener {
 
 	private Game game;
 	
@@ -29,7 +30,7 @@ public class GamesViewGamePane extends JPanel implements ActionListener {
 	
 	private JButton buttonContinue, buttonRemove;
 	
-	public GamesViewGamePane() {
+	public GameDescriptorPane() {
 		super(new BorderLayout());
 		
 		this.game = null;

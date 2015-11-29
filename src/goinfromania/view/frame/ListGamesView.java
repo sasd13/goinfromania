@@ -1,7 +1,8 @@
-package goinfromania.view;
+package goinfromania.view.frame;
 
 import goinfromania.Game;
-import goinfromania.data.dao.GameDAO;
+import goinfromania.db.GameDAO;
+import goinfromania.view.DimensionConstants;
 
 import java.awt.Dimension;
 import java.util.List;
@@ -14,17 +15,17 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-public class GamesView extends JSplitPane implements ListSelectionListener {
+public class ListGamesView extends JSplitPane implements ListSelectionListener {
 
 	private final int LIST_WIDTH = 300;
 	
 	private JList<String> listPane;
 	private DefaultListModel<String> listModel;
-	private GamesViewGamePane gamePane;
+	private GameDescriptorPane gamePane;
 
 	private List<Game> games;
 	
-	public GamesView() {
+	public ListGamesView() {
 		super(JSplitPane.HORIZONTAL_SPLIT);
 		
 		setDividerLocation(LIST_WIDTH);
@@ -41,7 +42,7 @@ public class GamesView extends JSplitPane implements ListSelectionListener {
 		listScroller.setPreferredSize(new Dimension(LIST_WIDTH, DimensionConstants.PANEL_HEIGHT));
 		add(listScroller);
 		
-		this.gamePane = new GamesViewGamePane();
+		this.gamePane = new GameDescriptorPane();
 		add(this.gamePane);
 		
 		this.games = GameDAO.loadAll();

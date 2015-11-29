@@ -1,7 +1,8 @@
-package goinfromania.view;
+package goinfromania.view.frame;
 
 import goinfromania.Element;
 import goinfromania.Game;
+import goinfromania.view.DimensionConstants;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,11 +13,11 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
-public class ArenaViewPanel extends JPanel implements Observer {
+public class ArenaView extends JPanel implements Observer {
 
 	private Game game;
 	
-	public ArenaViewPanel() {
+	public ArenaView() {
 		super(new BorderLayout());
 		
 		setLayout(null);

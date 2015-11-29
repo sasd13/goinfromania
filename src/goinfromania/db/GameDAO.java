@@ -1,4 +1,4 @@
-package goinfromania.data.dao;
+package goinfromania.db;
 
 import java.util.ArrayList;
 import java.util.List;

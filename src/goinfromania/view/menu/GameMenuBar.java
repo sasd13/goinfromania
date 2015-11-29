@@ -1,4 +1,4 @@
-package goinfromania.view.menubar;
+package goinfromania.view.menu;
 
 import javax.swing.JMenuBar;
 

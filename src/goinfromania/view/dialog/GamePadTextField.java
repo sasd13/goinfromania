@@ -1,4 +1,4 @@
-package goinfromania.view;
+package goinfromania.view.dialog;
 
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;

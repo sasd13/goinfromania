@@ -1,7 +1,11 @@
-package goinfromania.view;
+package goinfromania.view.frame;
 
 import goinfromania.Game;
-import goinfromania.view.menubar.GameMenuBar;
+import goinfromania.view.DimensionConstants;
+import goinfromania.view.dialog.GameDialog;
+import goinfromania.view.dialog.ResultDialog;
+import goinfromania.view.dialog.StarterDialog;
+import goinfromania.view.menu.GameMenuBar;
 
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;
@@ -12,24 +16,24 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 
-public class GameView extends JFrame implements WindowListener {
+public class Frame extends JFrame implements WindowListener {
 	
 	private static final String GAMEDIALOG_STARTER = "STARTER";
 	private static final String GAMEDIALOG_RESULT = "RESULT";
 	
-	private static GameView instance = null;
+	private static Frame instance = null;
 	
 	private GameMenuBar gameMenuBar;
 	
 	private JLayeredPane layeredPane;
 	private HomeView homeView;
-	private GamesView gamesView;
-	private ArenaView arenaView;
+	private ListGamesView listGamesView;
+	private GameView gameView;
 	private Map<String, GameDialog> mapDialogs;
 	
 	private Game game;
 	
-	private GameView() {
+	private Frame() {
 		super(Game.NAME);
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -48,23 +52,23 @@ public class GameView extends JFrame implements WindowListener {
 		this.homeView.setBounds(0, 0, dimension.width, dimension.height);
 		this.layeredPane.add(this.homeView, JLayeredPane.DEFAULT_LAYER);
 		
-		this.gamesView = new GamesView();
-		this.gamesView.setBounds(0, 0, dimension.width, dimension.height);
-		this.layeredPane.add(this.gamesView, JLayeredPane.DEFAULT_LAYER);
+		this.listGamesView = new ListGamesView();
+		this.listGamesView.setBounds(0, 0, dimension.width, dimension.height);
+		this.layeredPane.add(this.listGamesView, JLayeredPane.DEFAULT_LAYER);
 		
-		this.arenaView = new ArenaView();
-		this.arenaView.setBounds(0, 0, dimension.width, dimension.height);
-		this.layeredPane.add(this.arenaView, JLayeredPane.DEFAULT_LAYER);
+		this.gameView = new GameView();
+		this.gameView.setBounds(0, 0, dimension.width, dimension.height);
+		this.layeredPane.add(this.gameView, JLayeredPane.DEFAULT_LAYER);
 		
 		getContentPane().add(this.layeredPane);
 		
-		this.mapDialogs.put(GAMEDIALOG_STARTER, new GameDialogStarter());
-		this.mapDialogs.put(GAMEDIALOG_RESULT, new GameDialogResult());
+		this.mapDialogs.put(GAMEDIALOG_STARTER, new StarterDialog());
+		this.mapDialogs.put(GAMEDIALOG_RESULT, new ResultDialog());
 	}
 	
-	public static synchronized GameView getInstance() {
+	public static synchronized Frame getInstance() {
 		if (instance == null) {
-			instance = new GameView();
+			instance = new Frame();
 		}
 		
 		return instance;
@@ -74,24 +78,24 @@ public class GameView extends JFrame implements WindowListener {
 		this.homeView.setVisible(true);
 		this.layeredPane.moveToFront(this.homeView);
 		
-		this.arenaView.setVisible(false);
-		this.gamesView.setVisible(false);
+		this.gameView.setVisible(false);
+		this.listGamesView.setVisible(false);
 	}
 	
 	public void displayRoundView() {
-		this.arenaView.setVisible(true);
-		this.layeredPane.moveToFront(this.arenaView);
+		this.gameView.setVisible(true);
+		this.layeredPane.moveToFront(this.gameView);
 		
 		this.homeView.setVisible(false);
-		this.gamesView.setVisible(false);
+		this.listGamesView.setVisible(false);
 	}
 	
 	public void displayListRoundsView() {
-		this.gamesView.setVisible(true);
-		this.layeredPane.moveToFront(this.gamesView);
+		this.listGamesView.setVisible(true);
+		this.layeredPane.moveToFront(this.listGamesView);
 		
 		this.homeView.setVisible(false);
-		this.arenaView.setVisible(false);
+		this.gameView.setVisible(false);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package goinfromania.view;
+package goinfromania.view.frame;
 
 import goinfromania.util.ImageLoader;
 
