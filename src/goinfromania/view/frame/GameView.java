@@ -24,7 +24,7 @@ public class GameView extends JPanel implements Observer {
 		
 		createArena();
 		createPanelPig();
-		createPanelPlayer();
+		createPanelGame();
 	}
 
 	private void createArena() {
@@ -61,25 +61,33 @@ public class GameView extends JPanel implements Observer {
 		panelPig.add(panelEnergy);
 	}
 	
-	private void createPanelPlayer() {
-		JPanel panelPlayer = new JPanel(new GridLayout(1, 2));
+	private void createPanelGame() {
+		JPanel panelGame = new JPanel(new GridLayout(1, 2));
 		
-		addLabelPlayer(panelPlayer);
-		addLabelScore(panelPlayer);
+		addLabelPlayer(panelGame);
+		addLabelScore(panelGame);
 		
-		add(panelPlayer, BorderLayout.SOUTH);
+		add(panelGame, BorderLayout.SOUTH);
 	}
 	
-	private void addLabelPlayer(JPanel panelPlayer) {
+	private void addLabelPlayer(JPanel panelGame) {
+		JPanel panelPlayer = new JPanel();
+		
 		panelPlayer.add(new JLabel("Joueur : "));
 		this.labelPlayer = new JLabel();
 		panelPlayer.add(this.labelPlayer);
+		
+		panelGame.add(panelPlayer);
 	}
 	
-	private void addLabelScore(JPanel panelPlayer) {
-		panelPlayer.add(new JLabel("Score : "));
+	private void addLabelScore(JPanel panelGame) {
+		JPanel panelScore = new JPanel();
+		
+		panelScore.add(new JLabel("Score : "));
 		this.labelScore = new JLabel();
-		panelPlayer.add(this.labelScore);
+		panelScore.add(this.labelScore);
+		
+		panelGame.add(panelScore);
 	}
 	
 	@Override

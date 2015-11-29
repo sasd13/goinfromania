@@ -89,10 +89,24 @@ public class ResultDialog extends GameDialog {
 		};
 		
 		Dimension dimensionButton = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
+		String command = null;
 		
+		int indice = -1;
 		for (JButton button : buttons) {
+			indice++;
+			
+			switch (indice) {
+				case 0:
+					command = "NEW";
+					break;
+				case 1:
+					command = "STOP";
+					break;
+			}
+			
 			button.setPreferredSize(dimensionButton);
 			button.setFocusable(false);
+			button.setActionCommand(command);
 			button.addActionListener(this.gameController);
 			
 			panelButtons.add(button);

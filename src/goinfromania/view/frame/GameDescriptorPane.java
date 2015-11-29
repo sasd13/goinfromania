@@ -1,5 +1,6 @@
 package goinfromania.view.frame;
 
+import goinfromania.controller.GameController;
 import goinfromania.game.Element;
 import goinfromania.game.Game;
 import goinfromania.game.character.pig.Pig;
@@ -9,98 +10,124 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class GameDescriptorPane extends JPanel implements ActionListener {
+public class GameDescriptorPane extends JPanel {
 
-	private Game game;
+	private GameController gameController;
 	
 	private JLabel labelLevel,
 		labelScore,
-		labelDateCreation,
-		labelDateLastUpdate,
 		labelPigLife,
-		labelPigEnergy;
+		labelPigEnergy,
+		labelDateCreation,
+		labelDateLastUpdate;
 	
-	private JButton buttonContinue, buttonRemove;
+	private JLabel[] labels;
 	
 	public GameDescriptorPane() {
 		super(new BorderLayout());
 		
-		this.game = null;
+		this.gameController = GameController.getInstance();
 		
+		addLabelProgress();
+		addPanelDescription();
+		addButtons();
+	}
+	
+	private void addLabelProgress() {
 		add(new JLabel("Progression", SwingConstants.CENTER), BorderLayout.NORTH);
+	}
+	
+	private void addPanelDescription() {
+		this.labels = new JLabel[6];
 		
+		JPanel panelGame = new JPanel(new GridLayout(this.labels.length, 2));
+		
+		String label = null;
 		Font font = new Font(Font.SANS_SERIF, Font.PLAIN, getFont().getSize());
 		
-		JPanel panelGame = new JPanel(new GridLayout(6, 2));
+		for (int i=0; i<this.labels.length; i++) {
+			switch (i) {
+				case 0:
+					label = "Niveau :";
+					
+					this.labelLevel = new JLabel();
+					this.labels[i] = this.labelLevel;
+					break;
+				case 1:
+					label = "Score :";
+					
+					this.labelScore = new JLabel();
+					this.labels[i] = this.labelScore;
+					break;
+				case 2:
+					label = "Vie :";
+					
+					this.labelPigLife = new JLabel();
+					this.labels[i] = this.labelPigLife;
+					break;
+				case 3:
+					label = "Energie :";
+					
+					this.labelPigEnergy = new JLabel();
+					this.labels[i] = this.labelPigEnergy;
+					break;
+				case 4:
+					label = "Date creation :";
+					
+					this.labelDateCreation = new JLabel();
+					this.labels[i] = this.labelDateCreation;
+					break;
+				case 5:
+					label = "Date mise à jour :";
+					
+					this.labelDateLastUpdate = new JLabel();
+					this.labels[i] = this.labelDateLastUpdate;
+					break;
+			}
+			
+			this.labels[i].setFont(font);
+			
+			panelGame.add(new JLabel(label));
+			panelGame.add(this.labels[i]);
+		}
+		
 		add(panelGame, BorderLayout.CENTER);
-		
-		panelGame.add(new JLabel("Niveau : "));
-		this.labelLevel = new JLabel();
-		this.labelLevel.setFont(font);
-		panelGame.add(this.labelLevel);
-		
-		panelGame.add(new JLabel("Score : "));
-		this.labelScore = new JLabel();
-		this.labelScore.setFont(font);
-		panelGame.add(this.labelScore);
-		
-		panelGame.add(new JLabel("Vie : "));
-		this.labelPigLife = new JLabel();
-		this.labelPigLife.setFont(font);
-		panelGame.add(this.labelPigLife);
-		
-		panelGame.add(new JLabel("Energie : "));
-		this.labelPigEnergy = new JLabel();
-		this.labelPigEnergy.setFont(font);
-		panelGame.add(this.labelPigEnergy);
-		
-		panelGame.add(new JLabel("Création : "));
-		this.labelDateCreation = new JLabel();
-		this.labelDateCreation.setFont(font);
-		panelGame.add(this.labelDateCreation);
-		
-		panelGame.add(new JLabel("Mise à jour : "));
-		this.labelDateLastUpdate = new JLabel();
-		this.labelDateLastUpdate.setFont(font);
-		panelGame.add(this.labelDateLastUpdate);
-		
+	}
+
+	private void addButtons() {
 		JPanel panelButton = new JPanel();
-		add(panelButton, BorderLayout.SOUTH);
+		
+		JButton[] buttons = {
+				new JButton("Continuer"),
+				new JButton("Supprimer")
+		};
 		
 		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		
-		this.buttonContinue = new JButton("Continuer");
-		this.buttonContinue.setPreferredSize(dimension);
-		this.buttonContinue.setFocusable(false);
-		this.buttonContinue.addActionListener(this);
-		panelButton.add(this.buttonContinue);
+		for (JButton button : buttons) {
+			button.setPreferredSize(dimension);
+			button.setFocusable(false);
+			button.addActionListener(this.gameController);
+			
+			panelButton.add(button);
+		}
 		
-		this.buttonRemove = new JButton("Supprimer");
-		this.buttonRemove.setPreferredSize(dimension);
-		this.buttonRemove.setFocusable(false);
-		this.buttonRemove.addActionListener(this);
-		panelButton.add(this.buttonRemove);
+		add(panelButton, BorderLayout.SOUTH);
 	}
 	
 	public void bind(Game game) {
-		this.game = game;
-		
 		this.labelLevel.setText(String.valueOf(game.getLevel()));
 		this.labelScore.setText(String.valueOf(game.getScore()));
 		for (Element element : game.getElements()) {
-			if ("PIG".equalsIgnoreCase(element.getClass().getSimpleName())) {
-				Pig pig = (Pig) element;
-				
-				this.labelPigLife.setText(String.valueOf(pig.getLife()));
-				this.labelPigEnergy.setText(String.valueOf(pig.getEnergy()));
+			if ("PIG".equalsIgnoreCase(element.getName())) {
+				this.labelPigLife.setText(String.valueOf(((Pig) element).getLife()));
+				this.labelPigEnergy.setText(String.valueOf(((Pig) element).getEnergy()));
 				
 				break;
 			}
@@ -110,20 +137,8 @@ public class GameDescriptorPane extends JPanel implements ActionListener {
 	}
 	
 	public void clear() {
-		this.game = null;
-		
-		this.labelLevel.setText("");
-		this.labelScore.setText("");
-		this.labelPigLife.setText("");
-		this.labelPigEnergy.setText("");
-		this.labelDateLastUpdate.setText("");
-		this.labelDateCreation.setText("");
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JButton button = (JButton) e.getSource();
-		
-		//TODO
+		for (JLabel label : this.labels) {
+			label.setText("");
+		}
 	}
 }

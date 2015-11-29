@@ -43,7 +43,7 @@ public abstract class SettingDialog extends JDialog implements Observer {
 	
 	protected void prepareDialog() {
 		setTitle("Option");
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 	}
 	
@@ -52,6 +52,7 @@ public abstract class SettingDialog extends JDialog implements Observer {
 		
 		JButton[] buttons = {
 				new JButton("Fermer"),
+				new JButton("Appliquer"),
 				new JButton("Reset")
 		};
 		
@@ -67,6 +68,9 @@ public abstract class SettingDialog extends JDialog implements Observer {
 					command = "CLOSE";
 					break;
 				case 1:
+					command = "SAVE";
+					break;
+				case 2:
 					command = "RESET";
 					break;
 			}

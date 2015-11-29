@@ -81,7 +81,7 @@ public class StarterDialog extends GameDialog implements ActionListener {
 		this.panelGo.add(labelGo);
 	}
 	
-	public void show() {
+	public void display() {
 		this.count = 0;
 		
 		this.timer = new Timer(0, this);

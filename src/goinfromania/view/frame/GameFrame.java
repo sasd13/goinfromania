@@ -31,6 +31,7 @@ public class GameFrame extends JFrame {
 		createGameMenuBar();
 		createLayers();
 		
+		this.gameController.setListGamesView(this.listGamesView);
 		this.gameController.setGameView(this.gameView);
 	}
 	
@@ -84,7 +85,7 @@ public class GameFrame extends JFrame {
 		this.layeredPane.add(this.gameView, JLayeredPane.DEFAULT_LAYER);
 	}
 	
-	public void show() {
+	public void displayFrame() {
 		displayHomeView();
 		pack();
 		

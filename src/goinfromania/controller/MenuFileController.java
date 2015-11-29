@@ -6,14 +6,6 @@ public class MenuFileController extends MenuController {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		String command = event.getActionCommand();
-		
-		if ("NEW".equalsIgnoreCase(command)) {
-			//TODO New game
-		} else if ("OPEN".equalsIgnoreCase(command)){
-			//TODO List games
-		} else if ("EXIT".equalsIgnoreCase(command)) {
-			//TODO Exit game
-		}
+		GameController.getInstance().dispatch("menufile", event);
 	}
 }

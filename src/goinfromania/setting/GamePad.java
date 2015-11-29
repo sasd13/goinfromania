@@ -32,6 +32,9 @@ public class GamePad extends Setting {
 	
 	public void setKeyStart(int keyStart) {
 		this.keyStart = keyStart;
+		
+		setChanged();
+		notifyObservers();		
 	}
 	
 	public int getKeyMoveNorth() {
@@ -40,6 +43,9 @@ public class GamePad extends Setting {
 	
 	public void setKeyMoveNorth(int keyMoveNorth) {
 		this.keyMoveNorth = keyMoveNorth;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public int getKeyMoveSouth() {
@@ -48,6 +54,9 @@ public class GamePad extends Setting {
 	
 	public void setKeyMoveSouth(int keyMoveSouth) {
 		this.keyMoveSouth = keyMoveSouth;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public int getKeyMoveWest() {
@@ -56,6 +65,9 @@ public class GamePad extends Setting {
 	
 	public void setKeyMoveWest(int keyMoveWest) {
 		this.keyMoveWest = keyMoveWest;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public int getKeyMoveEast() {
@@ -64,6 +76,9 @@ public class GamePad extends Setting {
 	
 	public void setKeyMoveEast(int keyMoveEast) {
 		this.keyMoveEast = keyMoveEast;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public int getKeyPigAttak() {
@@ -72,5 +87,8 @@ public class GamePad extends Setting {
 	
 	public void setKeyPigAttak(int keyPigAttak) {
 		this.keyPigAttak = keyPigAttak;
+		
+		setChanged();
+		notifyObservers();
 	}
 }

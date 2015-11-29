@@ -6,6 +6,10 @@ public class Player {
 	private Game[] games;
 	
 	public Player() {}
+	
+	public Player(String name) {
+		setName(name);
+	}
 
 	public String getName() {
 		return name;

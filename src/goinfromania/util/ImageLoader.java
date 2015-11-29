@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 public class ImageLoader {
 	
-	private static final String IMAGE_DIR = "main/res/";
+	private static final String IMAGE_DIR = "goinfromania/res/";
 
 	public static BufferedImage loadFromPath(String fileName) {
 		BufferedImage bufferedImage = null;

@@ -1,6 +1,7 @@
 package goinfromania.game;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -16,7 +17,9 @@ public class Game extends Observable {
 	private Player player;
 	private List<Element> elements;
 	
-	public Game() {}
+	public Game() {
+		this.elements = new ArrayList<Element>();
+	}
 
 	public State getState() {
 		return state;
@@ -24,6 +27,9 @@ public class Game extends Observable {
 
 	public void setState(State state) {
 		this.state = state;
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	public Level getLevel() {
@@ -32,6 +38,9 @@ public class Game extends Observable {
 
 	public void setLevel(Level level) {
 		this.level = level;
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	public Result getResult() {
@@ -40,6 +49,9 @@ public class Game extends Observable {
 
 	public void setResult(Result result) {
 		this.result = result;
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	public int getScore() {
@@ -48,6 +60,9 @@ public class Game extends Observable {
 
 	public void setScore(int score) {
 		this.score = score;
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	public Timestamp getDateCreation() {
@@ -56,6 +71,9 @@ public class Game extends Observable {
 
 	public void setDateCreation(Timestamp dateCreation) {
 		this.dateCreation = dateCreation;
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	public Timestamp getDateLastUpdate() {
@@ -64,6 +82,9 @@ public class Game extends Observable {
 
 	public void setDateLastUpdate(Timestamp dateLastUpdate) {
 		this.dateLastUpdate = dateLastUpdate;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Player getPlayer() {
@@ -72,14 +93,23 @@ public class Game extends Observable {
 	
 	public void setPlayer(Player player) {
 		this.player = player;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void addElement(Element element) {
 		this.elements.add(element);
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void removeElement(Element element) {
 		this.elements.remove(element);
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Element[] getElements() {
