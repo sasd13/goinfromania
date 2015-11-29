@@ -111,7 +111,7 @@ public class GamePadDialog extends SettingDialog {
 	}
 	
 	@Override
-	public void editChanges(Setting setting) {
+	public void editSettingWithForm(Setting setting) {
 		GamePad gamePad = (GamePad) setting;
 		
 		GamePad gamePadFromForm = (GamePad) getSettingFromForm();

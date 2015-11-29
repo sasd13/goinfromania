@@ -4,11 +4,11 @@ import goinfromania.setting.Setting;
 
 import java.util.prefs.Preferences;
 
-public interface SettingPreferences {
+public abstract class SettingPreferences {
 	
-	public Preferences getPreferences();
+	protected abstract Preferences getPreferences();
 	
-	public Setting get();
+	public abstract Setting pull();
 	
-	public void put(Setting setting);
+	public abstract void push(Setting setting);
 }

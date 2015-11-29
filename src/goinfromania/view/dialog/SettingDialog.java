@@ -29,7 +29,7 @@ public abstract class SettingDialog extends JDialog implements Observer {
 	
 	public abstract boolean isFormValid();
 	
-	public abstract void editChanges(Setting setting);
+	public abstract void editSettingWithForm(Setting setting);
 	
 	protected abstract Setting getSettingFromForm();
 	

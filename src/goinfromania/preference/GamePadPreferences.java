@@ -5,7 +5,7 @@ import goinfromania.setting.Setting;
 
 import java.util.prefs.Preferences;
 
-public class GamePadPreferences implements SettingPreferences {
+public class GamePadPreferences extends SettingPreferences {
 	
 	private static final String CLASS_NAME = GamePad.class.getName();
 	
@@ -22,7 +22,7 @@ public class GamePadPreferences implements SettingPreferences {
 	}
 	
 	@Override
-	public Setting get() {
+	public Setting pull() {
 		GamePad gamePad = new GamePad();
 		
 		Preferences prefs = getPreferences();
@@ -38,7 +38,7 @@ public class GamePadPreferences implements SettingPreferences {
 	}
 
 	@Override
-	public void put(Setting setting) {
+	public void push(Setting setting) {
 		GamePad gamePad = (GamePad) setting;
 		
 		Preferences prefs = getPreferences();

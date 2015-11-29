@@ -1,5 +1,6 @@
 package goinfromania.controller;
 
+import goinfromania.preference.SettingPreferences;
 import goinfromania.preference.SettingPreferencesFactory;
 import goinfromania.setting.Setting;
 import goinfromania.view.dialog.SettingDialog;
@@ -35,12 +36,19 @@ public class SettingController implements ActionListener {
 
 	private void actionClose() {
 		if (this.settingDialog.isFormValid()) {
-			this.settingDialog.editChanges(this.setting);
+			performEditAndSave();
 			
-			SettingPreferencesFactory.get(this.setting.getClass().getSimpleName()).put(this.setting);
+			this.settingDialog.dispose();
 		} else {
 			JOptionPane.showMessageDialog(this.settingDialog, "Configuration erronée. Vous devez corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	private void performEditAndSave() {
+		this.settingDialog.editSettingWithForm(this.setting);
+		
+		SettingPreferences settingPreferences = SettingPreferencesFactory.get(this.setting.getClass().getSimpleName());
+		settingPreferences.push(this.setting);
 	}
 	
 	private void actionReset() {
