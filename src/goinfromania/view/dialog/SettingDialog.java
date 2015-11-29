@@ -52,7 +52,8 @@ public abstract class SettingDialog extends JDialog implements Observer {
 				new JButton("Reset")
 		};
 		
-		String command = "Command";
+		String command = null;
+		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		
 		int indice = -1;
 		for (JButton button : buttons) {
@@ -67,7 +68,7 @@ public abstract class SettingDialog extends JDialog implements Observer {
 					break;
 			}
 			
-			button.setPreferredSize(new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT));
+			button.setPreferredSize(dimension);
 			button.setFocusable(false);
 			button.addActionListener(this.settingController);
 			button.setActionCommand(command);

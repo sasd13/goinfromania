@@ -25,6 +25,7 @@ public class MenuSetting extends GameMenu {
 				new JMenuItem("Clavier")
 		};
 		
+		String command = null;
 		KeyStroke keyStroke = null;
 		
 		int indice = 0;
@@ -33,11 +34,13 @@ public class MenuSetting extends GameMenu {
 			
 			switch (indice) {
 				case 0:
+					command = "GAMEPAD";
 					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK);
 					break;
 			}
-			menuItem.addActionListener(this.menuController);
+			menuItem.setActionCommand(command);
 			menuItem.setAccelerator(keyStroke);
+			menuItem.addActionListener(this.menuController);
 			
 			add(menuItem);
 		}

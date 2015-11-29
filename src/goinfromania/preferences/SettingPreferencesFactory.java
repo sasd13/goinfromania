@@ -2,8 +2,8 @@ package goinfromania.preferences;
 
 public class SettingPreferencesFactory {
 
-	public static SettingPreferences get(String className) {
-		if ("GAMEPAD".equalsIgnoreCase(className)) {
+	public static SettingPreferences get(String name) {
+		if ("GAMEPAD".equalsIgnoreCase(name)) {
 			return new GamePadPreferences();
 		}
 		

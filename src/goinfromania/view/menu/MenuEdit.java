@@ -27,6 +27,7 @@ public class MenuEdit extends GameMenu {
 				new JMenuItem("Sauvegarder")
 		};
 		
+		String command = null;
 		KeyStroke keyStroke = null;
 		
 		int indice = 0;
@@ -35,19 +36,23 @@ public class MenuEdit extends GameMenu {
 			
 			switch (indice) {
 				case 0:
+					command = "PAUSE";
 					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK);
 					break;
 				case 1:
+					command = "STOP";
 					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK);
 					break;
 				case 2:
 					addSeparator();
 					
+					command = "SAVE";
 					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK);
 					break;
 			}
-			menuItem.addActionListener(this.menuController);
+			menuItem.setActionCommand(command);
 			menuItem.setAccelerator(keyStroke);
+			menuItem.addActionListener(this.menuController);
 			
 			add(menuItem);
 		}

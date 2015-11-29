@@ -27,6 +27,7 @@ public class MenuFile extends GameMenu {
 				new JMenuItem("Quitter")
 		};
 		
+		String command = null;
 		KeyStroke keyStroke = null;
 		
 		int indice = 0;
@@ -35,19 +36,23 @@ public class MenuFile extends GameMenu {
 			
 			switch (indice) {
 				case 0:
+					command = "NEW";
 					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK);
 					break;
 				case 1:
+					command = "OPEN";
 					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK);
 					break;
 				case 2:
 					addSeparator();
 					
+					command = "EXIT";
 					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK);
 					break;
 			}
-			menuItem.addActionListener(this.menuController);
+			menuItem.setActionCommand(command);
 			menuItem.setAccelerator(keyStroke);
+			menuItem.addActionListener(this.menuController);
 			
 			add(menuItem);
 		}

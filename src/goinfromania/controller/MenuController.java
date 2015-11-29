@@ -7,6 +7,6 @@ public abstract class MenuController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//TODO
+		//Do nothing
 	}
 }
