@@ -3,12 +3,8 @@ package goinfromania.util;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import main.java.game.element.Direction;
-import main.java.game.element.Element;
-import main.java.game.element.character.Pig;
-
 public class ElementUtil {
-	
+	/*
 	public static Point recalibration(Point position, Direction direction, int speed) {
 		if ((speed == Pig.SPEED_MEDIUM) 
 				&& (position.x % Pig.SPEED_MEDIUM != 0 || position.y % Pig.SPEED_MEDIUM != 0)) {
@@ -49,4 +45,5 @@ public class ElementUtil {
 		
 		return position;
 	}
+	*/
 }

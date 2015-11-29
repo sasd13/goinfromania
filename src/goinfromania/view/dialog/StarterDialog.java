@@ -2,7 +2,7 @@ package goinfromania.view.dialog;
 
 import goinfromania.controller.GameController;
 import goinfromania.view.DimensionConstants;
-import goinfromania.view.frame.Frame;
+import goinfromania.view.frame.GameFrame;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -87,7 +87,7 @@ public class StarterDialog extends GameDialog implements ActionListener {
 		this.timer = new Timer(0, this);
 		this.timer.setDelay(1200);
 		
-		setLocationRelativeTo(Frame.getInstance());
+		setLocationRelativeTo(GameFrame.getInstance());
 		
 		this.timer.start();
 		setVisible(true);

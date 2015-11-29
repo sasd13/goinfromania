@@ -1,8 +1,8 @@
 package main.java;
 
-import javax.swing.SwingUtilities;
+import goinfromania.view.frame.GameFrame;
 
-import main.java.controller.GameController;
+import javax.swing.SwingUtilities;
 
 public class Main {
 
@@ -11,8 +11,7 @@ public class Main {
 			
 			@Override
 			public void run() {
-				GameFrontController.initialize();
-				GameFrontController.startGame();
+				GameFrame.getInstance().show();
 			}
 		});
 	}

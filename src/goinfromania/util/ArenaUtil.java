@@ -3,14 +3,8 @@ package goinfromania.util;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import main.java.game.element.Direction;
-import main.java.game.element.Element;
-import main.java.game.element.ListElements;
-import main.java.game.element.item.Wall;
-import main.java.game.element.power.Power;
-
 public class ArenaUtil {
-	
+	/*
 	public static final double MINIMAL_PROPORTION_COLLISION_TO_ACT = 0.5;
 	public static final double FACTOR_DISTANCE_NEXT_TO = 1.5;
 
@@ -200,4 +194,5 @@ public class ArenaUtil {
 		
 		return (Math.abs(distanceX) > Math.abs(distanceY)) ? directionX : directionY;		
 	}
+	*/
 }

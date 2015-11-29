@@ -4,7 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import goinfromania.controller.GameController;
-import goinfromania.game.Game;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -30,6 +29,6 @@ public abstract class GameDialog extends JDialog implements Observer {
 	
 	@Override
 	public void update(Observable observable, Object arg) {
-		this.gameController.setGame((Game) observable);
+		//Do nothing
 	}
 }
