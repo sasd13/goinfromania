@@ -41,10 +41,8 @@ public class MenuSettingController implements ActionListener {
 		Setting setting;
 		
 		if ("GAMEPAD".equalsIgnoreCase(command)) {
-			GameEngine gameEngine = GameEngine.getInstance();
-			
-			if (gameEngine.hasGameInProgress()) {
-				setting = gameEngine.getGame().getGamePad();
+			if (GameEngine.hasGameInProgress()) {
+				setting = GameEngine.getGame().getGamePad();
 			} else {
 				setting = SettingPreferencesFactory.get(command).pull();
 			}

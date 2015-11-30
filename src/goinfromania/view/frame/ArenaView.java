@@ -18,6 +18,8 @@ public class ArenaView extends JPanel implements Observer {
 
 	private Game game;
 	
+	private ArenaController arenaController;
+	
 	public ArenaView() {
 		super(new BorderLayout());
 		
@@ -26,7 +28,9 @@ public class ArenaView extends JPanel implements Observer {
 		setBackground(Color.BLACK);
 		setFocusable(true);
 		
-		addKeyListener(new ArenaController(this));
+		this.arenaController = new ArenaController(this);
+		
+		addKeyListener(this.arenaController);
 	}
 	
 	@Override

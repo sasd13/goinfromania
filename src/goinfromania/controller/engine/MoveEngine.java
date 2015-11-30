@@ -9,8 +9,6 @@ import goinfromania.game.IMovable;
 
 public class MoveEngine {
 
-	private MoveEngine() {}
-	
 	public static void move(IMovable movable, Direction direction) {
 		Element element = (Element) movable;
 		

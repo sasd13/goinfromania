@@ -25,14 +25,12 @@ public class GameDescriptorController implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
 		
-		GameEngine gameEngine = GameEngine.getInstance();
-		
 		if ("CONTINUE".equalsIgnoreCase(command)) {
-			gameEngine.actionContinue(this.game);
+			GameEngine.actionContinue(this.game);
 		} else if ("DELETE".equalsIgnoreCase(command)) {
 			this.gameDescriptorPane.clear();
 			
-			gameEngine.actionDelete(this.game);
+			GameEngine.actionDelete(this.game);
 		}
 	}
 }

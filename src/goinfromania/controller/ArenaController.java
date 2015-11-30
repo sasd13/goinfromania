@@ -12,9 +12,6 @@ import java.awt.event.KeyListener;
 
 public class ArenaController implements KeyListener {
 	
-	private GamePad gamePad;
-	private Pig pig;
-	
 	private ArenaView arenaView;
 	
 	public ArenaController(ArenaView arenaView) {
@@ -38,22 +35,20 @@ public class ArenaController implements KeyListener {
 	}
 	
 	public void actionGamePad(int keyCode) {
-		GameEngine gameEngine = GameEngine.getInstance();
+		GamePad gamePad = GameEngine.getGame().getGamePad();
+		Pig pig = GameEngine.getGame().getPig();
 		
-		this.gamePad = gameEngine.getGame().getGamePad();
-		this.pig = gameEngine.getGame().getPig();
-		
-		if (keyCode == this.gamePad.getKeyStart()) {
-			gameEngine.actionPause();
-		} else if (keyCode == this.gamePad.getKeyMoveNorth()) {
-			MoveEngine.move(this.pig, Direction.NORTH);
-		} else if (keyCode == this.gamePad.getKeyMoveSouth()) {
-			MoveEngine.move(this.pig, Direction.SOUTH);
-		} else if (keyCode == this.gamePad.getKeyMoveWest()) {
-			MoveEngine.move(this.pig, Direction.WEST);
-		} else if (keyCode == this.gamePad.getKeyMoveEast()) {
-			MoveEngine.move(this.pig, Direction.EAST);
-		} else if (keyCode == this.gamePad.getKeyPigAttak()) {
+		if (keyCode == gamePad.getKeyStart()) {
+			GameEngine.actionPause();
+		} else if (keyCode == gamePad.getKeyMoveNorth()) {
+			MoveEngine.move(pig, Direction.NORTH);
+		} else if (keyCode == gamePad.getKeyMoveSouth()) {
+			MoveEngine.move(pig, Direction.SOUTH);
+		} else if (keyCode == gamePad.getKeyMoveWest()) {
+			MoveEngine.move(pig, Direction.WEST);
+		} else if (keyCode == gamePad.getKeyMoveEast()) {
+			MoveEngine.move(pig, Direction.EAST);
+		} else if (keyCode == gamePad.getKeyPigAttak()) {
 			//TODO
 		}
 	}

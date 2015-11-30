@@ -2,27 +2,21 @@ package goinfromania.controller;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.List;
 
 import goinfromania.controller.engine.GameEngine;
+import goinfromania.db.GameDAO;
+import goinfromania.game.Game;
 import goinfromania.view.frame.Frame;
 
 public class FrameController implements WindowListener {
 	
 	private Frame frame;
 	
-	private GameEngine gameEngine;
-	
 	public FrameController(Frame frame) {
 		this.frame = frame;
 		
-		setGameEngine();
-	}
-
-	private void setGameEngine() {
-		this.gameEngine = GameEngine.getInstance();
-		this.gameEngine.setFrameController(this);
-		this.gameEngine.setGameView(this.frame.getGameView());
-		this.gameEngine.setListGamesView(this.frame.getListGamesView());
+		GameEngine.setFrameController(this);
 	}
 	
 	public void displayHome() {
@@ -30,10 +24,16 @@ public class FrameController implements WindowListener {
 	}
 	
 	public void displayListGames() {
+		List<Game> games = GameDAO.loadAll();
+		
+		this.frame.getListGamesView().setGames(games);
 		this.frame.displayListGamesView();
 	}
 	
-	public void displayGame() {
+	public void displayGame(Game game) {
+		game.addObserver(this.frame.getGameView());
+		game.addObserver(this.frame.getGameView().getArenaView());
+		
 		this.frame.displayGameView();
 	}
 	
@@ -51,8 +51,8 @@ public class FrameController implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent event) {
-		if (this.gameEngine.closeIfHasGameInProgress()) {
-			this.gameEngine.actionExit();
+		if (GameEngine.closeIfHasGameInProgress()) {
+			GameEngine.actionExit();
 		}
 	}
 

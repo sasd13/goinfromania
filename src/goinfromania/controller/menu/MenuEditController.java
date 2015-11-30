@@ -11,14 +11,12 @@ public class MenuEditController implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
 		
-		GameEngine gameEngine = GameEngine.getInstance();
-		
 		if ("PAUSE".equalsIgnoreCase(command)) {
-			gameEngine.actionPause();
+			GameEngine.actionPause();
 		} else if ("STOP".equalsIgnoreCase(command)) {
-			gameEngine.actionStop();
+			GameEngine.actionStop();
 		} else if ("SAVE".equalsIgnoreCase(command)) {
-			gameEngine.actionSave();
+			GameEngine.actionSave();
 		}
 	}
 }

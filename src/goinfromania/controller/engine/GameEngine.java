@@ -1,7 +1,5 @@
 package goinfromania.controller.engine;
 
-import java.util.List;
-
 import javax.swing.JOptionPane;
 
 import goinfromania.controller.FrameController;
@@ -9,47 +7,22 @@ import goinfromania.db.GameDAO;
 import goinfromania.game.Game;
 import goinfromania.preferences.SettingPreferencesFactory;
 import goinfromania.setting.GamePad;
-import goinfromania.view.frame.GameView;
-import goinfromania.view.frame.ListGamesView;
 
 public class GameEngine {
 	
-	private static GameEngine instance = null;
+	private static Game game;
 	
-	private Game game;
+	private static FrameController frameController;
 	
-	private GameView gameView;
-	private ListGamesView listGamesView;
-	
-	private FrameController frameController;
-	
-	private GameEngine() {}
-	
-	public static synchronized GameEngine getInstance() {
-		if (instance == null) {
-			instance = new GameEngine();
-		}
-		
-		return instance;
-	}
-	
-	public Game getGame() {
+	public static Game getGame() {
 		return game;
 	}
 	
-	public void setGameView(GameView gameView) {
-		this.gameView = gameView;
+	public static void setFrameController(FrameController frameController) {
+		GameEngine.frameController = frameController;
 	}
 	
-	public void setListGamesView(ListGamesView listGamesView) {
-		this.listGamesView = listGamesView;
-	}
-	
-	public void setFrameController(FrameController frameController) {
-		this.frameController = frameController;
-	}
-	
-	public boolean closeIfHasGameInProgress() {
+	public static boolean closeIfHasGameInProgress() {
 		if (hasGameInProgress()) {
 			return close();
 		}
@@ -57,14 +30,14 @@ public class GameEngine {
 		return true;
 	}
 	
-	public boolean hasGameInProgress() {
-		return this.game != null;
+	public static boolean hasGameInProgress() {
+		return game != null;
 	}
 	
-	private boolean close() {
+	private static boolean close() {
 		String message = "Sauvegarder la partie ?";
 		
-		int selected = JOptionPane.showConfirmDialog(this.gameView, message, "Partie", JOptionPane.YES_NO_CANCEL_OPTION);
+		int selected = JOptionPane.showConfirmDialog(null, message, "Partie", JOptionPane.YES_NO_CANCEL_OPTION);
 		
 		switch (selected) {
 			case JOptionPane.YES_OPTION:
@@ -79,18 +52,18 @@ public class GameEngine {
 		}
 	}
 	
-	private void performSave() {
-		GameDAO.update(this.game);
+	private static void performSave() {
+		GameDAO.update(game);
 	}
 	
-	private void performClose() {
-		this.game.deleteObservers();
-		this.game = null;
+	private static void performClose() {
+		game.deleteObservers();
+		game = null;
 		
-		this.frameController.displayHome();
+		frameController.displayHome();
 	}
 	
-	public void actionNew() {
+	public static void actionNew() {
 		GamePad gamePad = (GamePad) SettingPreferencesFactory.get("GAMEPAD").pull();
 		
 		Game game = new Game(gamePad);
@@ -98,29 +71,23 @@ public class GameEngine {
 		open(game);
 	}
 	
-	private void open(Game game) {
-		this.game = game;
-		this.game.addObserver(this.gameView);
-		this.game.addObserver(this.gameView.getArenaView());
+	private static void open(Game game) {
+		GameEngine.game = game;
 		
-		this.frameController.displayGame();
+		frameController.displayGame(game);
 		
 		start();
 	}
 	
-	private void start() {
+	private static void start() {
 		
 	}
 	
-	public void actionList() {
-		List<Game> games = GameDAO.loadAll();
-		
-		this.listGamesView.setGames(games);
-		
-		this.frameController.displayListGames();
+	public static void actionList() {
+		frameController.displayListGames();
 	}
 	
-	public void actionExit() {
+	public static void actionExit() {
 		String message = "Quitter le jeu ?";
 		
 		int selected = JOptionPane.showConfirmDialog(null, message, Game.NAME, JOptionPane.YES_NO_OPTION);
@@ -129,25 +96,25 @@ public class GameEngine {
 		}
 	}
 	
-	public void actionPause() {
+	public static void actionPause() {
 		//TODO
 	}
 	
-	public void actionStop() {
+	public static void actionStop() {
 		if (closeIfHasGameInProgress()) {
-			this.frameController.displayHome();
+			frameController.displayHome();
 		}
 	}
 	
-	public void actionSave() {
+	public static void actionSave() {
 		performSave();
 	}
 	
-	public void actionContinue(Game game) {
+	public static void actionContinue(Game game) {
 		open(game);
 	}
 	
-	public void actionDelete(Game game) {
+	public static void actionDelete(Game game) {
 		GameDAO.delete(game);
 		
 		actionList();
