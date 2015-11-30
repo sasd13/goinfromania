@@ -21,30 +21,12 @@ public class Frame extends JFrame {
 	public Frame() {
 		super(Game.NAME);
 		
-		prepareFrame();
-		createGameMenuBar();
-		createLayers();
-	}
-	
-	public JLayeredPane getLayersPane() {
-		return layersPane;
-	}
-	
-	public GameMenuBar getGameMenuBar() {
-		return gameMenuBar;
-	}
-	
-	public ListGamesView getListGamesView() {
-		return listGamesView;
-	}
-	
-	public GameView getGameView() {
-		return gameView;
-	}
-
-	private void prepareFrame() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
+		
+		createGameMenuBar();
+		createLayers();
+		
 		addWindowListener(new FrameController(this));
 	}
 	
@@ -84,6 +66,14 @@ public class Frame extends JFrame {
 		this.layersPane.add(this.gameView, JLayeredPane.DEFAULT_LAYER);
 	}
 	
+	public ListGamesView getListGamesView() {
+		return listGamesView;
+	}
+	
+	public GameView getGameView() {
+		return gameView;
+	}
+	
 	public void displayHomeView() {
 		this.homeView.setVisible(true);
 		this.layersPane.moveToFront(this.homeView);
@@ -106,5 +96,9 @@ public class Frame extends JFrame {
 		
 		this.homeView.setVisible(false);
 		this.listGamesView.setVisible(false);
+	}
+	
+	public void setMenuEditEnabled(boolean enabled) {
+		this.gameMenuBar.setMenuEditEnabled(enabled);
 	}
 }

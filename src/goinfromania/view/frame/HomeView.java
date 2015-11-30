@@ -14,9 +14,9 @@ public class HomeView extends JPanel {
 	public HomeView() {
 		super();
 		
-		setLayout(null);
-		
 		this.image = ImageLoader.loadFromPath("home.png");
+		
+		setLayout(null);
 	}
 	
 	@Override

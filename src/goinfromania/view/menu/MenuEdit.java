@@ -12,21 +12,22 @@ public class MenuEdit extends GameMenu {
 	
 	public MenuEdit() {
 		super("Partie", "MENUEDIT");
-	}
-	
-	@Override
-	protected void prepareMenu() {
+		
 		setMnemonic(KeyEvent.VK_P);
 	}
 
 	@Override
-	protected void addMenuItems() {
+	protected void createMenuItems() {
 		JMenuItem[] menuItems = {
 				new JMenuItem("Pause"),
 				new JMenuItem("Stop"),
 				new JMenuItem("Sauvegarder")
 		};
 		
+		addMenuItemsToMenu(menuItems);
+	}
+
+	private void addMenuItemsToMenu(JMenuItem[] menuItems) {
 		String command = null;
 		KeyStroke keyStroke = null;
 		

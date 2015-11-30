@@ -17,10 +17,6 @@ public abstract class GameDialog extends JDialog implements Observer {
 		
 		this.gameView = gameView;
 		
-		prepareDialog();
-	}
-	
-	protected void prepareDialog() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setResizable(false);
@@ -28,7 +24,7 @@ public abstract class GameDialog extends JDialog implements Observer {
 	}
 	
 	@Override
-	public void update(Observable observable, Object arg) {
+	public void update(Observable o, Object arg) {
 		//Do nothing
 	}
 }

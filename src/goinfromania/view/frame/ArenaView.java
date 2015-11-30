@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 public class ArenaView extends JPanel implements Observer {
 
-	private Game model;
+	private Game game;
 	
 	public ArenaView() {
 		super(new BorderLayout());
@@ -25,12 +25,13 @@ public class ArenaView extends JPanel implements Observer {
 		setPreferredSize(new Dimension(DimensionConstants.ARENA_WIDTH, DimensionConstants.ARENA_HEIGHT));
 		setBackground(Color.BLACK);
 		setFocusable(true);
+		
 		addKeyListener(new ArenaController(this));
 	}
 	
 	@Override
 	public void update(Observable observable, Object arg) {
-		this.model = (Game) observable;
+		this.game = (Game) observable;
 		
 		repaint();
 	}
@@ -39,8 +40,8 @@ public class ArenaView extends JPanel implements Observer {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		if (this.model != null) {
-			for (Element element : this.model.getElements()) {
+		if (this.game != null) {
+			for (Element element : this.game.getElements()) {
 				//TODO g.drawImage(element.getImage(), element.getPosition().x, element.getPosition().y, this);
 			}
 		}

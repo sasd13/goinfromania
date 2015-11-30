@@ -1,6 +1,5 @@
 package goinfromania.view.frame;
 
-import goinfromania.controller.GameManager;
 import goinfromania.controller.GameDescriptorController;
 import goinfromania.game.Element;
 import goinfromania.game.Game;
@@ -11,8 +10,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -35,20 +32,26 @@ public class GameDescriptorPane extends JPanel {
 	public GameDescriptorPane() {
 		super(new BorderLayout());
 		
-		addLabelProgress();
-		addPanelDescription();
-		addButtons();
+		createLabelProgress();
+		createPanelDescription();
+		createPanelButtons();
 	}
 	
-	private void addLabelProgress() {
+	private void createLabelProgress() {
 		add(new JLabel("Progression", SwingConstants.CENTER), BorderLayout.NORTH);
 	}
 	
-	private void addPanelDescription() {
+	private void createPanelDescription() {
 		this.labels = new JLabel[6];
 		
 		JPanel panelGame = new JPanel(new GridLayout(this.labels.length, 2));
 		
+		addLabelsToPanelGame(panelGame);
+		
+		add(panelGame, BorderLayout.CENTER);
+	}
+
+	private void addLabelsToPanelGame(JPanel panelGame) {
 		String label = null;
 		Font font = new Font(Font.SANS_SERIF, Font.PLAIN, getFont().getSize());
 		
@@ -97,11 +100,9 @@ public class GameDescriptorPane extends JPanel {
 			panelGame.add(new JLabel(label));
 			panelGame.add(this.labels[i]);
 		}
-		
-		add(panelGame, BorderLayout.CENTER);
 	}
 
-	private void addButtons() {
+	private void createPanelButtons() {
 		JPanel panelButton = new JPanel();
 		
 		JButton[] buttons = {
@@ -109,6 +110,12 @@ public class GameDescriptorPane extends JPanel {
 				new JButton("Supprimer")
 		};
 		
+		addButtonsToPanelButton(panelButton, buttons);
+		
+		add(panelButton, BorderLayout.SOUTH);
+	}
+
+	private void addButtonsToPanelButton(JPanel panelButton, JButton[] buttons) {
 		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		String command = null;
 		this.gameDescriptorController = new GameDescriptorController();
@@ -133,13 +140,12 @@ public class GameDescriptorPane extends JPanel {
 			
 			panelButton.add(button);
 		}
-		
-		add(panelButton, BorderLayout.SOUTH);
 	}
 	
 	public void bind(Game game) {
 		this.labelLevel.setText(String.valueOf(game.getLevel()));
 		this.labelScore.setText(String.valueOf(game.getScore()));
+		
 		for (Element element : game.getElements()) {
 			if ("PIG".equalsIgnoreCase(element.getName())) {
 				this.labelPigLife.setText(String.valueOf(((Pig) element).getLife()));
@@ -148,6 +154,7 @@ public class GameDescriptorPane extends JPanel {
 				break;
 			}
 		}
+		
 		this.labelDateCreation.setText(String.valueOf(game.getDateLastUpdate()));
 		this.labelDateLastUpdate.setText(String.valueOf(game.getDateLastUpdate()));
 		

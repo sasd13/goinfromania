@@ -16,34 +16,17 @@ import javax.swing.JPanel;
 
 public abstract class SettingDialog extends JDialog implements Observer {
 
-	protected SettingController controller;
-	
 	protected SettingDialog() {
 		super();
 		
-		prepareDialog();
+		setTitle("Option");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		createForm();
 		createDialogButtons();
 	}
 	
 	protected abstract void createForm();
-	
-	public abstract boolean isFormValid();
-	
-	public abstract void editSettingWithForm(Setting setting);
-	
-	protected abstract Setting getSettingFromForm();
-	
-	@Override
-	public void update(Observable observable, Object arg) {
-		//Do nothing
-	}
-	
-	protected void prepareDialog() {
-		setTitle("Option");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setModalityType(ModalityType.APPLICATION_MODAL);
-	}
 	
 	private void createDialogButtons() {
 		JPanel panelButtons = new JPanel();
@@ -54,8 +37,15 @@ public abstract class SettingDialog extends JDialog implements Observer {
 				new JButton("Reset")
 		};
 		
+		addButtonsToPanelButton(panelButtons, buttons);
+		
+		getContentPane().add(panelButtons, BorderLayout.SOUTH);
+	}
+
+	private void addButtonsToPanelButton(JPanel panelButtons, JButton[] buttons) {
 		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		String command = null;
+		SettingController settingController = new SettingController(this);
 		
 		int indice = -1;
 		for (JButton button : buttons) {
@@ -76,11 +66,20 @@ public abstract class SettingDialog extends JDialog implements Observer {
 			button.setPreferredSize(dimension);
 			button.setFocusable(false);
 			button.setActionCommand(command);
-			button.addActionListener(this.controller);
+			button.addActionListener(settingController);
 			
 			panelButtons.add(button);
 		}
-		
-		getContentPane().add(panelButtons, BorderLayout.SOUTH);
+	}
+	
+	public abstract boolean isFormValid();
+	
+	public abstract void editSettingWithForm(Setting setting);
+	
+	protected abstract Setting getSettingFromForm();
+	
+	@Override
+	public void update(Observable observable, Object arg) {
+		//Do nothing
 	}
 }

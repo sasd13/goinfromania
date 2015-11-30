@@ -1,7 +1,5 @@
 package goinfromania.view.dialog;
 
-import goinfromania.view.frame.Frame;
-
 public class SettingDialogFactory {
 
 	private SettingDialogFactory() {}

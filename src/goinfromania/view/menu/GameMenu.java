@@ -8,11 +8,8 @@ public abstract class GameMenu extends JMenu {
 		super(name);
 		
 		setActionCommand(command);
-		prepareMenu();
-		addMenuItems();
+		createMenuItems();
 	}
 	
-	protected abstract void prepareMenu();
-	
-	protected abstract void addMenuItems();
+	protected abstract void createMenuItems();
 }

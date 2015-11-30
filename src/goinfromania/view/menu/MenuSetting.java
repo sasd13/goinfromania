@@ -12,19 +12,20 @@ public class MenuSetting extends GameMenu {
 
 	public MenuSetting() {
 		super("Options", "MENUSETTING");
-	}
-	
-	@Override
-	protected void prepareMenu() {
+		
 		setMnemonic(KeyEvent.VK_O);
 	}
 	
 	@Override
-	protected void addMenuItems() {
+	protected void createMenuItems() {
 		JMenuItem[] menuItems = {
 				new JMenuItem("Clavier")
 		};
 		
+		addMenuItemsToMenu(menuItems);
+	}
+
+	private void addMenuItemsToMenu(JMenuItem[] menuItems) {
 		String command = null;
 		KeyStroke keyStroke = null;
 		

@@ -23,37 +23,26 @@ public class GameDialogResult extends GameDialog {
 	
 	public GameDialogResult(GameView gameView) {
 		super(gameView);
-	}
-	
-	@Override
-	protected void prepareDialog() {
-		super.prepareDialog();
+		
+		setContentPane(new JLayeredPane());
 		
 		Dimension dimension = new Dimension(DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT);
 		
 		setSize(dimension);
-		setContentPane(new JLayeredPane());
-		
-		Font font = new Font(Font.SANS_SERIF, Font.BOLD | Font.ITALIC, 96);
-		
-		createLayerResult(dimension, font);
-		createLayerScore(dimension);
+		createLayers(dimension);
 	}
 
+	private void createLayers(Dimension dimension) {
+		createLayerResult(dimension, new Font(Font.SANS_SERIF, Font.BOLD | Font.ITALIC, 96));
+		createLayerScore(dimension);
+	}
+	
 	private void createLayerResult(Dimension dimension, Font font) {
 		JPanel panelResult = makeNewPanel(dimension);
 		
 		createLabelOfLayerResult(font, panelResult);
 		
 		getContentPane().add(panelResult, JLayeredPane.DEFAULT_LAYER);
-	}
-
-	private void createLabelOfLayerResult(Font font, JPanel panelResult) {
-		this.labelResult = new JLabel("", SwingConstants.HORIZONTAL);
-		this.labelResult.setFont(font);
-		this.labelResult.setForeground(Color.PINK);
-		
-		panelResult.add(this.labelResult, BorderLayout.CENTER);
 	}
 	
 	private JPanel makeNewPanel(Dimension dimension) {
@@ -62,6 +51,14 @@ public class GameDialogResult extends GameDialog {
 		panel.setBounds(0, 0, dimension.width, dimension.height);
 		
 		return panel;
+	}
+
+	private void createLabelOfLayerResult(Font font, JPanel panelResult) {
+		this.labelResult = new JLabel("", SwingConstants.HORIZONTAL);
+		this.labelResult.setFont(font);
+		this.labelResult.setForeground(Color.PINK);
+		
+		panelResult.add(this.labelResult, BorderLayout.CENTER);
 	}
 
 	private void createLayerScore(Dimension dimension) {
@@ -88,8 +85,15 @@ public class GameDialogResult extends GameDialog {
 				new JButton("Terminer")
 		};
 		
+		addButtonsToPanelButton(panelButtons, buttons);
+		
+		panelScore.add(panelButtons, BorderLayout.SOUTH);
+	}
+
+	private void addButtonsToPanelButton(JPanel panelButtons, JButton[] buttons) {
 		Dimension dimensionButton = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		String command = null;
+		GameResultController gameResultController = new GameResultController();
 		
 		int indice = -1;
 		for (JButton button : buttons) {
@@ -107,12 +111,10 @@ public class GameDialogResult extends GameDialog {
 			button.setPreferredSize(dimensionButton);
 			button.setFocusable(false);
 			button.setActionCommand(command);
-			button.addActionListener(new GameResultController());
+			button.addActionListener(gameResultController);
 			
 			panelButtons.add(button);
 		}
-		
-		panelScore.add(panelButtons, BorderLayout.SOUTH);
 	}
 	
 	@Override
@@ -128,7 +130,5 @@ public class GameDialogResult extends GameDialog {
 				break;
 		}
 		this.labelScore.setText(String.valueOf(game.getScore()));
-		
-		super.update(observable, arg);
 	}
 }

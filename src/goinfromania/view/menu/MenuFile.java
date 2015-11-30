@@ -12,21 +12,22 @@ public class MenuFile extends GameMenu {
 
 	public MenuFile() {
 		super("Fichier", "MENUFILE");
-	}
-	
-	@Override
-	protected void prepareMenu() {
+		
 		setMnemonic(KeyEvent.VK_F);
 	}
 	
 	@Override
-	protected void addMenuItems() {
+	protected void createMenuItems() {
 		JMenuItem[] menuItems = {
 				new JMenuItem("Nouveau"),
 				new JMenuItem("Ouvrir..."),
 				new JMenuItem("Quitter")
 		};
 		
+		addMenuItemsToMenu(menuItems);
+	}
+
+	private void addMenuItemsToMenu(JMenuItem[] menuItems) {
 		String command = null;
 		KeyStroke keyStroke = null;
 		
@@ -40,7 +41,7 @@ public class MenuFile extends GameMenu {
 					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK);
 					break;
 				case 1:
-					command = "OPEN";
+					command = "LIST";
 					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK);
 					break;
 				case 2:

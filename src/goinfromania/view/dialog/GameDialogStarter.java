@@ -24,20 +24,16 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 	
 	public GameDialogStarter(GameView gameView) {
 		super(gameView);
-	}
-	
-	@Override
-	protected void prepareDialog() {
-		super.prepareDialog();
 		
 		this.layeredPane = new JLayeredPane();
 		
-		Dimension dimension = new Dimension(DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT);
-		
-		setSize(dimension);
 		setContentPane(this.layeredPane);
+		setSize(new Dimension(DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT));
 		setBackground(Color.BLACK);
-		
+		createLayers();
+	}
+
+	private void createLayers() {
 		Font font = new Font(Font.SANS_SERIF, Font.BOLD | Font.ITALIC, 96);
 		
 		createLayerReady(font);
@@ -83,13 +79,16 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 	public void display() {
 		this.count = 0;
 		
-		this.timer = new Timer(0, this);
-		this.timer.setDelay(1200);
-		
+		setTimer();
 		setLocationRelativeTo(this.gameView);
+		setVisible(true);
 		
 		this.timer.start();
-		setVisible(true);
+	}
+
+	private void setTimer() {
+		this.timer = new Timer(0, this);
+		this.timer.setDelay(1200);
 	}
 	
 	@Override
@@ -97,17 +96,27 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 		this.count++;
 		
 		if (this.count == 0) {
-			this.panelReady.setVisible(true);
-			this.layeredPane.moveToFront(this.panelReady);
-			this.panelGo.setVisible(false);
+			displayReady();
 		} else if (count == 1) {
-			this.panelGo.setVisible(true);
-			this.layeredPane.moveToFront(this.panelGo);
-			this.panelReady.setVisible(false);
+			displayGo();
 		} else {
 			this.timer.stop();
 			
 			dispose();
 		}
+	}
+
+	private void displayReady() {
+		this.panelReady.setVisible(true);
+		this.layeredPane.moveToFront(this.panelReady);
+		
+		this.panelGo.setVisible(false);
+	}
+
+	private void displayGo() {
+		this.panelGo.setVisible(true);
+		this.layeredPane.moveToFront(this.panelGo);
+		
+		this.panelReady.setVisible(false);
 	}
 }

@@ -17,10 +17,12 @@ public class GameDescriptorController implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
 		
+		GameEngine gameEngine = GameEngine.getInstance();
+		
 		if ("CONTINUE".equalsIgnoreCase(command)) {
-			
+			gameEngine.actionContinue(this.game);
 		} else if ("DELETE".equalsIgnoreCase(command)) {
-			
+			gameEngine.actionDelete(this.game);
 		}
 	}
 }

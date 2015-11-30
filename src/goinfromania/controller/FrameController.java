@@ -3,32 +3,21 @@ package goinfromania.controller;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.swing.JOptionPane;
-
-import goinfromania.game.Game;
 import goinfromania.view.frame.Frame;
 
 public class FrameController implements WindowListener {
 	
 	private Frame frame;
 	
-	private GameManager gameManager;
+	private GameEngine gameEngine;
 	
 	public FrameController(Frame frame) {
 		this.frame = frame;
 		
-		this.gameManager = GameManager.getInstance();
-		this.gameManager.setFrameController(this);
-		this.gameManager.setGameView(this.frame.getGameView());
-		this.gameManager.setListGamesView(this.frame.getListGamesView());
-	}
-	
-	public void displayFrame() {
-		displayHome();
-		
-		this.frame.pack();
-		this.frame.setLocationRelativeTo(null);
-		this.frame.setVisible(true);
+		this.gameEngine = GameEngine.getInstance();
+		this.gameEngine.setFrameController(this);
+		this.gameEngine.setGameView(this.frame.getGameView());
+		this.gameEngine.setListGamesView(this.frame.getListGamesView());
 	}
 	
 	public void displayHome() {
@@ -41,15 +30,6 @@ public class FrameController implements WindowListener {
 	
 	public void displayGame() {
 		this.frame.displayGameView();
-	}
-	
-	public void actionExit() {
-		String message = "Quitter le jeu ?";
-		
-		int selected = JOptionPane.showConfirmDialog(this.frame, message, Game.NAME, JOptionPane.YES_NO_OPTION);
-		if (selected == JOptionPane.YES_OPTION) {
-			System.exit(0);
-		}
 	}
 	
 	@Override
@@ -66,8 +46,8 @@ public class FrameController implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent event) {
-		if (this.gameManager.closeIfHasGameInProgress()) {
-			actionExit();
+		if (this.gameEngine.closeIfHasGameInProgress()) {
+			this.gameEngine.actionExit();
 		}
 	}
 
