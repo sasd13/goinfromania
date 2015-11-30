@@ -45,11 +45,17 @@ public class SettingController implements ActionListener {
 		if (this.settingDialog.isFormValid()) {
 			this.settingDialog.editSettingWithForm(this.setting);
 			
-			SettingPreferences settingPreferences = SettingPreferencesFactory.get(this.setting.getClass().getSimpleName());
-			settingPreferences.push(this.setting);
+			performSave();
+			
+			JOptionPane.showMessageDialog(this.settingDialog, "Enregitsré", this.setting.getName(), JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(this.settingDialog, "Configuration erronée. Vous devez corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+
+	private void performSave() {
+		SettingPreferences settingPreferences = SettingPreferencesFactory.get(this.setting.getClass().getSimpleName());
+		settingPreferences.push(this.setting);
 	}
 	
 	private void actionReset() {
