@@ -14,6 +14,10 @@ public class FrameController implements WindowListener {
 	public FrameController(Frame frame) {
 		this.frame = frame;
 		
+		setGameEngine();
+	}
+
+	private void setGameEngine() {
 		this.gameEngine = GameEngine.getInstance();
 		this.gameEngine.setFrameController(this);
 		this.gameEngine.setGameView(this.frame.getGameView());

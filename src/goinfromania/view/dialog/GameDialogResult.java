@@ -93,7 +93,7 @@ public class GameDialogResult extends GameDialog {
 	private void addButtonsToPanelButton(JPanel panelButtons, JButton[] buttons) {
 		Dimension dimensionButton = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		String command = null;
-		GameResultController gameResultController = new GameResultController();
+		GameResultController gameResultController = new GameResultController(this);
 		
 		int indice = -1;
 		for (JButton button : buttons) {

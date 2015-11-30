@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public abstract class SettingDialog extends JDialog implements Observer {
+	
+	private SettingController settingController;
 
 	protected SettingDialog() {
 		super();
@@ -45,7 +47,7 @@ public abstract class SettingDialog extends JDialog implements Observer {
 	private void addButtonsToPanelButton(JPanel panelButtons, JButton[] buttons) {
 		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		String command = null;
-		SettingController settingController = new SettingController(this);
+		this.settingController = new SettingController(this);
 		
 		int indice = -1;
 		for (JButton button : buttons) {
@@ -66,7 +68,7 @@ public abstract class SettingDialog extends JDialog implements Observer {
 			button.setPreferredSize(dimension);
 			button.setFocusable(false);
 			button.setActionCommand(command);
-			button.addActionListener(settingController);
+			button.addActionListener(this.settingController);
 			
 			panelButtons.add(button);
 		}
@@ -80,6 +82,6 @@ public abstract class SettingDialog extends JDialog implements Observer {
 	
 	@Override
 	public void update(Observable observable, Object arg) {
-		//Do nothing
+		this.settingController.setSetting((Setting) observable);
 	}
 }

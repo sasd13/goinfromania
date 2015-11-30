@@ -45,13 +45,13 @@ public class GameEngine {
 	
 	public boolean closeIfHasGameInProgress() {
 		if (this.game != null) {
-			return actionClose();
+			return close();
 		}
 		
 		return true;
 	}
 	
-	private boolean actionClose() {
+	private boolean close() {
 		String message = "Sauvegarder la partie ?";
 		
 		int selected = JOptionPane.showConfirmDialog(this.gameView, message, "Partie", JOptionPane.YES_NO_CANCEL_OPTION);
@@ -81,10 +81,19 @@ public class GameEngine {
 	}
 	
 	public void actionNew() {
-		Player player = new Player("Joueur");
+		Game game = new Game();
 		
-		this.game = new Game();
-		this.game.setPlayer(player);
+		setPlayer(game);
+		open(game);
+	}
+
+	private void setPlayer(Game game) {
+		Player player = new Player();
+		game.setPlayer(player);
+	}
+	
+	private void open(Game game) {
+		this.game = game;
 		this.game.addObserver(this.gameView);
 		
 		this.gameView.update(this.game, null);
@@ -114,7 +123,9 @@ public class GameEngine {
 	}
 	
 	public void actionStop() {
-		actionClose();
+		if (closeIfHasGameInProgress()) {
+			this.frameController.displayHome();
+		}
 	}
 	
 	public void actionSave() {
@@ -122,11 +133,7 @@ public class GameEngine {
 	}
 	
 	public void actionContinue(Game game) {
-		List<Game> games = GameDAO.loadAll();
-		
-		this.listGamesView.setGames(games);
-		
-		this.frameController.displayListGames();
+		open(game);
 	}
 	
 	public void actionDelete(Game game) {
