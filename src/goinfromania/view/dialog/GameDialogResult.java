@@ -132,7 +132,5 @@ public class GameDialogResult extends GameDialog {
 				break;
 		}
 		this.labelScore.setText(String.valueOf(game.getScore()));
-		
-		this.gameResultController.setGame(game);
 	}
 }

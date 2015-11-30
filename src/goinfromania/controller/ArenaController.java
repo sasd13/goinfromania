@@ -5,19 +5,12 @@ import goinfromania.controller.engine.MoveEngine;
 import goinfromania.game.Direction;
 import goinfromania.game.character.pig.Pig;
 import goinfromania.setting.GamePad;
-import goinfromania.view.frame.ArenaView;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class ArenaController implements KeyListener {
 	
-	private ArenaView arenaView;
-	
-	public ArenaController(ArenaView arenaView) {
-		this.arenaView = arenaView;
-	}
-
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
