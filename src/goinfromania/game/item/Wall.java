@@ -4,10 +4,13 @@ import goinfromania.game.Element;
 
 public class Wall extends Element {
 
-	public Wall() {}
-	
 	@Override
 	public boolean isCrossable() {
 		return false;
+	}
+	
+	@Override
+	public String getName() {
+		return "WALL";
 	}
 }

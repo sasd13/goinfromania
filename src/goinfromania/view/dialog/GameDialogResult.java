@@ -21,6 +21,8 @@ public class GameDialogResult extends GameDialog {
 
 	private JLabel labelResult, labelScore;
 	
+	private GameResultController gameResultController;
+	
 	public GameDialogResult(GameView gameView) {
 		super(gameView);
 		
@@ -93,7 +95,7 @@ public class GameDialogResult extends GameDialog {
 	private void addButtonsToPanelButton(JPanel panelButtons, JButton[] buttons) {
 		Dimension dimensionButton = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		String command = null;
-		GameResultController gameResultController = new GameResultController(this);
+		this.gameResultController = new GameResultController(this);
 		
 		int indice = -1;
 		for (JButton button : buttons) {
@@ -111,7 +113,7 @@ public class GameDialogResult extends GameDialog {
 			button.setPreferredSize(dimensionButton);
 			button.setFocusable(false);
 			button.setActionCommand(command);
-			button.addActionListener(gameResultController);
+			button.addActionListener(this.gameResultController);
 			
 			panelButtons.add(button);
 		}
@@ -130,5 +132,7 @@ public class GameDialogResult extends GameDialog {
 				break;
 		}
 		this.labelScore.setText(String.valueOf(game.getScore()));
+		
+		this.gameResultController.setGame(game);
 	}
 }

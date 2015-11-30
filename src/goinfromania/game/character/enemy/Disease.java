@@ -5,8 +5,9 @@ import goinfromania.game.character.Power;
 
 public class Disease extends Power {
 	
-	public Disease() {
-		// TODO Auto-generated constructor stub
+	@Override
+	public String getName() {
+		return "DISEASE";
 	}
 
 	@Override

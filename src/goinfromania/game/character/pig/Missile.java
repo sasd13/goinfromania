@@ -10,6 +10,11 @@ public class Missile extends Power {
 	}
 	
 	@Override
+	public String getName() {
+		return "MISSILE";
+	}
+	
+	@Override
 	public void act(Character character) {
 		// TODO Auto-generated method stub
 		

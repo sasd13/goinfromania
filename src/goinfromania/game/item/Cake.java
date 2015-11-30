@@ -1,6 +1,5 @@
 package goinfromania.game.item;
 
-import goinfromania.game.Direction;
 import goinfromania.game.Element;
 import goinfromania.game.IEatable;
 import goinfromania.game.IMovable;
@@ -15,6 +14,11 @@ public class Cake extends Element implements IMovable, IEatable {
 	@Override
 	public boolean isCrossable() {
 		return true;
+	}
+	
+	@Override
+	public String getName() {
+		return "CAKE";
 	}
 
 	@Override
@@ -38,11 +42,6 @@ public class Cake extends Element implements IMovable, IEatable {
 	@Override
 	public boolean isMovable() {
 		return true;
-	}
-	
-	@Override
-	public void move(Direction direction) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override

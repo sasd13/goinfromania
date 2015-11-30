@@ -10,6 +10,11 @@ public class Paralyze extends Power {
 	}
 	
 	@Override
+	public String getName() {
+		return "PARALYZE";
+	}
+	
+	@Override
 	public void act(Character character) {
 		// TODO Auto-generated method stub
 

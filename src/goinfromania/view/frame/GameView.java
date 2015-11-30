@@ -1,6 +1,5 @@
 package goinfromania.view.frame;
 
-import goinfromania.game.Element;
 import goinfromania.game.Game;
 import goinfromania.game.character.pig.Pig;
 
@@ -17,7 +16,7 @@ public class GameView extends JPanel implements Observer {
 
 	private ArenaView arenaView;
 	private JProgressBar progressBarLife, progressBarEnergy;
-	private JLabel labelPlayer, labelScore;
+	private JLabel labelScore;
 	
 	public GameView() {
 		super(new BorderLayout());
@@ -64,20 +63,9 @@ public class GameView extends JPanel implements Observer {
 	private void createPanelGame() {
 		JPanel panelGame = new JPanel(new GridLayout(1, 2));
 		
-		addLabelPlayer(panelGame);
 		addLabelScore(panelGame);
 		
 		add(panelGame, BorderLayout.SOUTH);
-	}
-	
-	private void addLabelPlayer(JPanel panelGame) {
-		JPanel panelPlayer = new JPanel();
-		
-		panelPlayer.add(new JLabel("Joueur : "));
-		this.labelPlayer = new JLabel();
-		panelPlayer.add(this.labelPlayer);
-		
-		panelGame.add(panelPlayer);
 	}
 	
 	private void addLabelScore(JPanel panelGame) {
@@ -90,18 +78,16 @@ public class GameView extends JPanel implements Observer {
 		panelGame.add(panelScore);
 	}
 	
+	public ArenaView getArenaView() {
+		return arenaView;
+	}
+	
 	@Override
 	public void update(Observable observable, Object arg) {
 		Game game = (Game) observable;
 		
-		this.labelPlayer.setText(game.getPlayer().getName());
 		this.labelScore.setText(String.valueOf(game.getScore()));
-		
-		for (Element element : game.getElements()) {
-			if ("PIG".equalsIgnoreCase(element.getName())) {
-				this.progressBarLife.setValue(((Pig) element).getLife());
-				this.progressBarEnergy.setValue(((Pig) element).getEnergy());
-			}
-		}
+		this.progressBarLife.setValue(game.getPig().getLife());
+		this.progressBarEnergy.setValue(game.getPig().getEnergy());
 	}
 }

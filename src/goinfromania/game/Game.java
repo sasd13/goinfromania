@@ -1,5 +1,8 @@
 package goinfromania.game;
 
+import goinfromania.game.character.pig.Pig;
+import goinfromania.setting.GamePad;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +17,14 @@ public class Game extends Observable {
 	private Result result;
 	private int score;
 	private Timestamp dateCreation, dateLastUpdate;
-	private Player player;
+	private GamePad gamePad;
 	private List<Element> elements;
 	
-	public Game() {
+	public Game(GamePad gamePad) {
+		this.gamePad = gamePad;
 		this.elements = new ArrayList<Element>();
+		
+		addElement(new Pig());
 	}
 
 	public State getState() {
@@ -87,15 +93,8 @@ public class Game extends Observable {
 		notifyObservers();
 	}
 	
-	public Player getPlayer() {
-		return player;
-	}
-	
-	public void setPlayer(Player player) {
-		this.player = player;
-		
-		setChanged();
-		notifyObservers();
+	public GamePad getGamePad() {
+		return gamePad;
 	}
 	
 	public void addElement(Element element) {
@@ -114,5 +113,15 @@ public class Game extends Observable {
 	
 	public Element[] getElements() {
 		return this.elements.toArray(new Element[this.elements.size()]);
+	}
+	
+	public Pig getPig() {
+		for (Element element : this.elements) {
+			if ("PIG".equalsIgnoreCase(element.getName())) {
+				return (Pig) element;
+			}
+		}
+		
+		return null;
 	}
 }

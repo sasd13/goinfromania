@@ -5,8 +5,9 @@ import goinfromania.game.character.Power;
 
 public class Diet extends Power {
 	
-	public Diet() {
-		super();
+	@Override
+	public String getName() {
+		return "DIET";
 	}
 	
 	@Override

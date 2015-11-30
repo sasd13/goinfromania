@@ -3,6 +3,7 @@ package goinfromania.controller;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import goinfromania.controller.engine.GameEngine;
 import goinfromania.view.frame.Frame;
 
 public class FrameController implements WindowListener {

@@ -1,11 +1,8 @@
 package goinfromania.game;
 
-
 public interface IMovable {
 
 	boolean isMovable();
-	
-	void move(Direction direction);
 	
 	int getSpeed();
 	

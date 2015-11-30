@@ -1,9 +1,7 @@
 package goinfromania.view.frame;
 
 import goinfromania.controller.GameDescriptorController;
-import goinfromania.game.Element;
 import goinfromania.game.Game;
-import goinfromania.game.character.pig.Pig;
 import goinfromania.view.DimensionConstants;
 
 import java.awt.BorderLayout;
@@ -118,7 +116,7 @@ public class GameDescriptorPane extends JPanel {
 	private void addButtonsToPanelButton(JPanel panelButton, JButton[] buttons) {
 		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		String command = null;
-		this.gameDescriptorController = new GameDescriptorController();
+		this.gameDescriptorController = new GameDescriptorController(this);
 		
 		int indice = -1;
 		for (JButton button : buttons) {
@@ -145,16 +143,8 @@ public class GameDescriptorPane extends JPanel {
 	public void bind(Game game) {
 		this.labelLevel.setText(String.valueOf(game.getLevel()));
 		this.labelScore.setText(String.valueOf(game.getScore()));
-		
-		for (Element element : game.getElements()) {
-			if ("PIG".equalsIgnoreCase(element.getName())) {
-				this.labelPigLife.setText(String.valueOf(((Pig) element).getLife()));
-				this.labelPigEnergy.setText(String.valueOf(((Pig) element).getEnergy()));
-				
-				break;
-			}
-		}
-		
+		this.labelPigLife.setText(String.valueOf(game.getPig().getLife()));
+		this.labelPigEnergy.setText(String.valueOf(game.getPig().getEnergy()));
 		this.labelDateCreation.setText(String.valueOf(game.getDateLastUpdate()));
 		this.labelDateLastUpdate.setText(String.valueOf(game.getDateLastUpdate()));
 		

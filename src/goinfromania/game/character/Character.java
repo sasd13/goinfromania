@@ -1,6 +1,5 @@
 package goinfromania.game.character;
 
-import goinfromania.game.Direction;
 import goinfromania.game.Element;
 import goinfromania.game.IMovable;
 
@@ -14,6 +13,11 @@ public abstract class Character extends Element implements ILiveable, IMovable, 
 	@Override
 	public boolean isCrossable() {
 		return true;
+	}
+	
+	@Override
+	public String getName() {
+		return "CHARACTER";
 	}
 	
 	@Override
@@ -34,11 +38,6 @@ public abstract class Character extends Element implements ILiveable, IMovable, 
 	@Override
 	public boolean isMovable() {
 		return movable;
-	}
-	
-	@Override
-	public void move(Direction direction) {
-		//TODO
 	}
 	
 	public void setMovable(boolean movable) {

@@ -11,6 +11,11 @@ public class Pig extends Character {
 	
 	public Pig() {}
 	
+	@Override
+	public String getName() {
+		return "PIG";
+	}
+	
 	public boolean isGreedy() {
 		return greedy;
 	}

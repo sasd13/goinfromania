@@ -1,25 +1,25 @@
 package goinfromania.game;
 
+import goinfromania.view.DimensionConstants;
+
 import java.awt.Dimension;
 import java.awt.Point;
 
 public abstract class Element {
+	
+	public static final int POSITION_X_MIN = 0;
+	public static final int POSITION_X_MAX = DimensionConstants.ARENA_WIDTH;
+	public static final int POSITION_Y_MIN = 0;
+	public static final int POSITION_Y_MAX = DimensionConstants.ARENA_HEIGHT;
 
-	private String name;
 	private Point position;
 	private Dimension dimension;
 	
-	public Element() {}
+	protected Element() {}
 	
 	public abstract boolean isCrossable();
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	public abstract String getName();
 
 	public Point getPosition() {
 		return position;

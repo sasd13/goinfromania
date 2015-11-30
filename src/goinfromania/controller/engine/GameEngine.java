@@ -1,12 +1,14 @@
-package goinfromania.controller;
+package goinfromania.controller.engine;
 
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import goinfromania.controller.FrameController;
 import goinfromania.db.GameDAO;
 import goinfromania.game.Game;
-import goinfromania.game.Player;
+import goinfromania.preferences.SettingPreferencesFactory;
+import goinfromania.setting.GamePad;
 import goinfromania.view.frame.GameView;
 import goinfromania.view.frame.ListGamesView;
 
@@ -31,6 +33,10 @@ public class GameEngine {
 		return instance;
 	}
 	
+	public Game getGame() {
+		return game;
+	}
+	
 	public void setGameView(GameView gameView) {
 		this.gameView = gameView;
 	}
@@ -44,11 +50,15 @@ public class GameEngine {
 	}
 	
 	public boolean closeIfHasGameInProgress() {
-		if (this.game != null) {
+		if (hasGameInProgress()) {
 			return close();
 		}
 		
 		return true;
+	}
+	
+	public boolean hasGameInProgress() {
+		return this.game != null;
 	}
 	
 	private boolean close() {
@@ -81,24 +91,25 @@ public class GameEngine {
 	}
 	
 	public void actionNew() {
-		Game game = new Game();
+		GamePad gamePad = (GamePad) SettingPreferencesFactory.get("GAMEPAD").pull();
 		
-		setPlayer(game);
+		Game game = new Game(gamePad);
+		
 		open(game);
-	}
-
-	private void setPlayer(Game game) {
-		Player player = new Player();
-		game.setPlayer(player);
 	}
 	
 	private void open(Game game) {
 		this.game = game;
 		this.game.addObserver(this.gameView);
-		
-		this.gameView.update(this.game, null);
+		this.game.addObserver(this.gameView.getArenaView());
 		
 		this.frameController.displayGame();
+		
+		start();
+	}
+	
+	private void start() {
+		
 	}
 	
 	public void actionList() {

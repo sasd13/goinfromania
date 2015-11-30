@@ -1,8 +1,5 @@
 package goinfromania.util;
 
-import java.awt.Dimension;
-import java.awt.Point;
-
 public class ElementUtil {
 	/*
 	public static Point recalibration(Point position, Direction direction, int speed) {
@@ -28,22 +25,7 @@ public class ElementUtil {
 		}
 		
 		return position;
-	}
+	}*/
 	
-	public static Point cropping(Point position, Dimension dimension) {
-		if (position.x < Element.POSITION_X_MIN) {
-			position.x = Element.POSITION_X_MIN;
-		} else if ((position.x + dimension.width) > Element.POSITION_X_MAX) {
-			position.x = Element.POSITION_X_MAX - dimension.width;
-		}
-		
-		if (position.y < Element.POSITION_Y_MIN) {
-			position.y = Element.POSITION_Y_MIN;
-		} else if ((position.y + dimension.height) > Element.POSITION_Y_MAX) {
-			position.y = Element.POSITION_Y_MAX - dimension.height;
-		}
-		
-		return position;
-	}
-	*/
+	
 }

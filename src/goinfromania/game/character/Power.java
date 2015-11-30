@@ -1,6 +1,5 @@
 package goinfromania.game.character;
 
-import goinfromania.game.Direction;
 import goinfromania.game.Element;
 import goinfromania.game.IMovable;
 
@@ -8,9 +7,14 @@ public abstract class Power extends Element implements IMovable {
 
 	private int value, speed;
 	
-	public Power() {}
+	protected Power() {}
 	
 	public abstract void act(Character character);
+	
+	@Override
+	public String getName() {
+		return "POWER";
+	}
 	
 	public int getValue() {
 		return value;
@@ -28,11 +32,6 @@ public abstract class Power extends Element implements IMovable {
 	@Override
 	public boolean isMovable() {
 		return true;
-	}
-	
-	@Override
-	public void move(Direction direction) {
-		//TODO
 	}
 	
 	@Override
