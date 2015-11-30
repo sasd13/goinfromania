@@ -16,12 +16,10 @@ import javax.swing.JPanel;
 
 public abstract class SettingDialog extends JDialog implements Observer {
 
-	private SettingController settingController;
+	protected SettingController controller;
 	
 	protected SettingDialog() {
 		super();
-		
-		this.settingController = new SettingController(this);
 		
 		prepareDialog();
 		createForm();
@@ -38,7 +36,7 @@ public abstract class SettingDialog extends JDialog implements Observer {
 	
 	@Override
 	public void update(Observable observable, Object arg) {
-		this.settingController.setSetting((Setting) observable);
+		//Do nothing
 	}
 	
 	protected void prepareDialog() {
@@ -78,7 +76,7 @@ public abstract class SettingDialog extends JDialog implements Observer {
 			button.setPreferredSize(dimension);
 			button.setFocusable(false);
 			button.setActionCommand(command);
-			button.addActionListener(this.settingController);
+			button.addActionListener(this.controller);
 			
 			panelButtons.add(button);
 		}

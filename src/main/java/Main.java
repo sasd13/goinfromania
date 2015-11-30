@@ -1,6 +1,6 @@
 package main.java;
 
-import goinfromania.view.frame.GameFrame;
+import goinfromania.view.frame.Frame;
 
 import javax.swing.SwingUtilities;
 
@@ -11,7 +11,11 @@ public class Main {
 			
 			@Override
 			public void run() {
-				GameFrame.getInstance().displayFrame();
+				Frame frame = new Frame();
+				
+				frame.pack();
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
 			}
 		});
 	}

@@ -1,6 +1,6 @@
 package goinfromania.view.menu;
 
-import goinfromania.controller.MenuEditController;
+import goinfromania.controller.menu.MenuEditController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -11,7 +11,7 @@ import javax.swing.KeyStroke;
 public class MenuEdit extends GameMenu {
 	
 	public MenuEdit() {
-		super("Partie", new MenuEditController());
+		super("Partie", "MENUEDIT");
 	}
 	
 	@Override
@@ -52,7 +52,7 @@ public class MenuEdit extends GameMenu {
 			}
 			menuItem.setActionCommand(command);
 			menuItem.setAccelerator(keyStroke);
-			menuItem.addActionListener(this.menuController);
+			menuItem.addActionListener(new MenuEditController());
 			
 			add(menuItem);
 		}

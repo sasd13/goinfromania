@@ -1,9 +1,9 @@
 package goinfromania.view.dialog;
 
-import goinfromania.controller.GameController;
+import goinfromania.controller.GameResultController;
 import goinfromania.game.Game;
-import goinfromania.game.Result;
 import goinfromania.view.DimensionConstants;
+import goinfromania.view.frame.GameView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,12 +17,12 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class ResultDialog extends GameDialog {
+public class GameDialogResult extends GameDialog {
 
 	private JLabel labelResult, labelScore;
 	
-	public ResultDialog() {
-		super(GameController.getInstance());
+	public GameDialogResult(GameView gameView) {
+		super(gameView);
 	}
 	
 	@Override
@@ -97,17 +97,17 @@ public class ResultDialog extends GameDialog {
 			
 			switch (indice) {
 				case 0:
-					command = "NEW";
+					command = "REPLAY";
 					break;
 				case 1:
-					command = "STOP";
+					command = "END";
 					break;
 			}
 			
 			button.setPreferredSize(dimensionButton);
 			button.setFocusable(false);
 			button.setActionCommand(command);
-			button.addActionListener(this.gameController);
+			button.addActionListener(new GameResultController());
 			
 			panelButtons.add(button);
 		}
@@ -119,12 +119,14 @@ public class ResultDialog extends GameDialog {
 	public void update(Observable observable, Object arg) {
 		Game game = (Game) observable;
 		
-		if (game.getResult() == Result.WIN) {
-			this.labelResult.setText("Gagné!!!");
-		} else if (game.getResult() == Result.LOOSE) {
-			this.labelResult.setText("Perdu...");
+		switch (game.getResult()) {
+			case WIN:
+				this.labelResult.setText("Gagné!!!");
+				break;
+			case LOOSE:
+				this.labelResult.setText("Perdu...");
+				break;
 		}
-		
 		this.labelScore.setText(String.valueOf(game.getScore()));
 		
 		super.update(observable, arg);

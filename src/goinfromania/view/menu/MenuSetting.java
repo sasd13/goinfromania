@@ -1,6 +1,6 @@
 package goinfromania.view.menu;
 
-import goinfromania.controller.MenuSettingController;
+import goinfromania.controller.menu.MenuSettingController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -11,7 +11,7 @@ import javax.swing.KeyStroke;
 public class MenuSetting extends GameMenu {
 
 	public MenuSetting() {
-		super("Options", new MenuSettingController());
+		super("Options", "MENUSETTING");
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class MenuSetting extends GameMenu {
 			}
 			menuItem.setActionCommand(command);
 			menuItem.setAccelerator(keyStroke);
-			menuItem.addActionListener(this.menuController);
+			menuItem.addActionListener(new MenuSettingController());
 			
 			add(menuItem);
 		}

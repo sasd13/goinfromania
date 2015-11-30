@@ -1,6 +1,7 @@
 package goinfromania.view.frame;
 
-import goinfromania.controller.GameController;
+import goinfromania.controller.GameManager;
+import goinfromania.controller.GameDescriptorController;
 import goinfromania.game.Element;
 import goinfromania.game.Game;
 import goinfromania.game.character.pig.Pig;
@@ -10,6 +11,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,8 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class GameDescriptorPane extends JPanel {
-
-	private GameController gameController;
 	
 	private JLabel labelLevel,
 		labelScore,
@@ -29,10 +30,10 @@ public class GameDescriptorPane extends JPanel {
 	
 	private JLabel[] labels;
 	
+	private GameDescriptorController gameDescriptorController;
+	
 	public GameDescriptorPane() {
 		super(new BorderLayout());
-		
-		this.gameController = GameController.getInstance();
 		
 		addLabelProgress();
 		addPanelDescription();
@@ -109,11 +110,26 @@ public class GameDescriptorPane extends JPanel {
 		};
 		
 		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
+		String command = null;
+		this.gameDescriptorController = new GameDescriptorController();
 		
+		int indice = -1;
 		for (JButton button : buttons) {
+			indice++;
+			
+			switch (indice) {
+				case 0:
+					command = "CONTINUE";
+					break;
+				case 1:
+					command = "DELETE";
+					break;
+			}
+			
 			button.setPreferredSize(dimension);
 			button.setFocusable(false);
-			button.addActionListener(this.gameController);
+			button.setActionCommand(command);
+			button.addActionListener(this.gameDescriptorController);
 			
 			panelButton.add(button);
 		}
@@ -134,6 +150,8 @@ public class GameDescriptorPane extends JPanel {
 		}
 		this.labelDateCreation.setText(String.valueOf(game.getDateLastUpdate()));
 		this.labelDateLastUpdate.setText(String.valueOf(game.getDateLastUpdate()));
+		
+		this.gameDescriptorController.setGame(game);
 	}
 	
 	public void clear() {

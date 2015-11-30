@@ -1,18 +1,13 @@
 package goinfromania.view.menu;
 
-import goinfromania.controller.MenuController;
-
 import javax.swing.JMenu;
 
 public abstract class GameMenu extends JMenu {
 	
-	protected MenuController menuController;
-
-	protected GameMenu(String name, MenuController menuController) {
+	protected GameMenu(String name, String command) {
 		super(name);
 		
-		this.menuController = menuController;
-		
+		setActionCommand(command);
 		prepareMenu();
 		addMenuItems();
 	}

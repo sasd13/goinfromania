@@ -18,11 +18,11 @@ public class ListGamesView extends JSplitPane implements ListSelectionListener {
 
 	private static final int LIST_WIDTH = 300;
 	
+	private List<Game> games;
+	
 	private JList<String> listPane;
 	private DefaultListModel<String> listModel;
 	private GameDescriptorPane gamePane;
-
-	private List<Game> games;
 	
 	public ListGamesView() {
 		super(JSplitPane.HORIZONTAL_SPLIT);

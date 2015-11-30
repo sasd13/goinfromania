@@ -4,7 +4,6 @@ import goinfromania.preferences.SettingPreferences;
 import goinfromania.preferences.SettingPreferencesFactory;
 import goinfromania.setting.Setting;
 import goinfromania.view.dialog.SettingDialog;
-import goinfromania.view.dialog.SettingDialogFactory;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +13,7 @@ import javax.swing.JOptionPane;
 public class SettingController implements ActionListener {
 	
 	private Setting setting;
+	
 	private SettingDialog settingDialog;
 	
 	public SettingController(SettingDialog settingDialog) {

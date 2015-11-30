@@ -3,19 +3,19 @@ package goinfromania.view.dialog;
 import java.util.Observable;
 import java.util.Observer;
 
-import goinfromania.controller.GameController;
+import goinfromania.view.frame.GameView;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 public abstract class GameDialog extends JDialog implements Observer {
 	
-	protected GameController gameController;
+	protected GameView gameView;
 	
-	protected GameDialog(GameController gameController) {
+	protected GameDialog(GameView gameView) {
 		super();
 		
-		this.gameController = gameController;
+		this.gameView = gameView;
 		
 		prepareDialog();
 	}

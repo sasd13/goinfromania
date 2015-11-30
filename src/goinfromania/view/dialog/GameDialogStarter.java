@@ -1,8 +1,7 @@
 package goinfromania.view.dialog;
 
-import goinfromania.controller.GameController;
 import goinfromania.view.DimensionConstants;
-import goinfromania.view.frame.GameFrame;
+import goinfromania.view.frame.GameView;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,7 +14,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class StarterDialog extends GameDialog implements ActionListener {
+public class GameDialogStarter extends GameDialog implements ActionListener {
 
 	private JLayeredPane layeredPane;
 	private JPanel panelReady, panelGo;
@@ -23,8 +22,8 @@ public class StarterDialog extends GameDialog implements ActionListener {
 	private int count;
 	private Timer timer;
 	
-	public StarterDialog() {
-		super(GameController.getInstance());
+	public GameDialogStarter(GameView gameView) {
+		super(gameView);
 	}
 	
 	@Override
@@ -87,7 +86,7 @@ public class StarterDialog extends GameDialog implements ActionListener {
 		this.timer = new Timer(0, this);
 		this.timer.setDelay(1200);
 		
-		setLocationRelativeTo(GameFrame.getInstance());
+		setLocationRelativeTo(this.gameView);
 		
 		this.timer.start();
 		setVisible(true);
