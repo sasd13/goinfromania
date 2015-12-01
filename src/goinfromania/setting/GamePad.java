@@ -12,11 +12,6 @@ public class GamePad extends Setting {
 	private int keyPigAttak;
 	
 	@Override
-	public String getName() {
-		return "GamePad";
-	}
-	
-	@Override
 	public void reset() {		
 		setKeyStart(KeyEvent.VK_ENTER);
 		setKeyMoveNorth(KeyEvent.VK_UP);

@@ -45,12 +45,12 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 		this.panelReady.setBackground(Color.BLACK);
 		this.panelReady.setBounds(0, 0, DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT);
 		
-		createLabelReady(font);
+		addLabelReady(font);
 		
 		this.layeredPane.add(this.panelReady, JLayeredPane.DEFAULT_LAYER);
 	}
 
-	private void createLabelReady(Font font) {
+	private void addLabelReady(Font font) {
 		JLabel labelReady = new JLabel("Ready !");
 		labelReady.setFont(font);
 		labelReady.setForeground(Color.PINK);
@@ -63,12 +63,12 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 		this.panelGo.setBackground(Color.BLACK);
 		this.panelGo.setBounds(0, 0, DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT);
 		
-		createLabelGo(font);
+		addLabelGo(font);
 		
 		this.layeredPane.add(this.panelGo, JLayeredPane.DEFAULT_LAYER);
 	}
 
-	private void createLabelGo(Font font) {
+	private void addLabelGo(Font font) {
 		JLabel labelGo = new JLabel("Go !");
 		labelGo.setFont(font);
 		labelGo.setForeground(Color.PINK);
@@ -77,7 +77,7 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 	}
 	
 	public void display() {
-		this.count = 0;
+		this.count = -1;
 		
 		setTimer();
 		setLocationRelativeTo(this.gameView);

@@ -25,26 +25,26 @@ public abstract class SettingDialog extends JDialog implements Observer {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		createForm();
-		createDialogButtons();
+		createPanelButtons();
 	}
 	
 	protected abstract void createForm();
 	
-	private void createDialogButtons() {
+	private void createPanelButtons() {
 		JPanel panelButtons = new JPanel();
 		
+		addButtonsToPanelButton(panelButtons);
+		
+		getContentPane().add(panelButtons, BorderLayout.SOUTH);
+	}
+
+	private void addButtonsToPanelButton(JPanel panelButtons) {
 		JButton[] buttons = {
 				new JButton("Fermer"),
 				new JButton("Appliquer"),
 				new JButton("Reset")
 		};
 		
-		addButtonsToPanelButton(panelButtons, buttons);
-		
-		getContentPane().add(panelButtons, BorderLayout.SOUTH);
-	}
-
-	private void addButtonsToPanelButton(JPanel panelButtons, JButton[] buttons) {
 		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		String command = null;
 		this.settingController = new SettingController(this);

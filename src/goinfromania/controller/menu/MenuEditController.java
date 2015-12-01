@@ -12,11 +12,23 @@ public class MenuEditController implements ActionListener {
 		String command = event.getActionCommand();
 		
 		if ("PAUSE".equalsIgnoreCase(command)) {
-			GameEngine.pauseGame();
+			actionPause();
 		} else if ("STOP".equalsIgnoreCase(command)) {
-			GameEngine.stopGameSafely();
+			actionStop();
 		} else if ("SAVE".equalsIgnoreCase(command)) {
-			GameEngine.saveGame();
+			actionSave();
 		}
+	}
+	
+	private void actionPause() {
+		GameEngine.pauseOrResumeGame();
+	}
+	
+	private void actionStop() {
+		GameEngine.stopGameSafely();
+	}
+	
+	private void actionSave() {
+		GameEngine.saveGame();
 	}
 }

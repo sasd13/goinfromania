@@ -12,17 +12,29 @@ public class MenuFileController implements ActionListener {
 		String command = event.getActionCommand();
 		
 		if ("NEW".equalsIgnoreCase(command)) {
-			if (GameEngine.stopGameSafely()) {
-				GameEngine.newGame();
-			}
+			actionNew();
 		} else if ("LIST".equalsIgnoreCase(command)) {
-			if (GameEngine.stopGameSafely()) {
-				GameEngine.listGames();
-			}
+			actionList();
 		} else if ("EXIT".equalsIgnoreCase(command)) {
-			if (GameEngine.stopGameSafely()) {
-				GameEngine.exitGame();
-			}
+			actionExit();
+		}
+	}
+
+	private void actionNew() {
+		if (GameEngine.stopGameSafely()) {
+			GameEngine.newGame();
+		}
+	}
+
+	private void actionList() {
+		if (GameEngine.stopGameSafely()) {
+			GameEngine.listGames();
+		}
+	}
+
+	private void actionExit() {
+		if (GameEngine.stopGameSafely()) {
+			GameEngine.exitGame();
 		}
 	}
 }

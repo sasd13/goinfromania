@@ -30,7 +30,7 @@ public class ArenaController implements KeyListener {
 		GamePad gamePad = GameEngine.getGamePad();
 		
 		if (keyCode == gamePad.getKeyStart()) {
-			GameEngine.pauseGame();
+			GameEngine.pauseOrResumeGame();
 		} else {
 			Pig pig = GameEngine.getGame().getPig();
 			

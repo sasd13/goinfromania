@@ -8,7 +8,5 @@ public abstract class Setting extends Observable {
 		reset();
 	}
 	
-	public abstract String getName();
-	
 	public abstract void reset();
 }

@@ -47,7 +47,7 @@ public class SettingController implements ActionListener {
 			
 			performSave();
 			
-			JOptionPane.showMessageDialog(this.settingDialog, "Enregitsré", this.setting.getName(), JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this.settingDialog, "Enregitsré", "Option", JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(this.settingDialog, "Configuration erronée. Vous devez corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}

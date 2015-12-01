@@ -25,7 +25,6 @@ public class ArenaView extends JPanel implements Observer {
 		setPreferredSize(new Dimension(DimensionConstants.ARENA_WIDTH, DimensionConstants.ARENA_HEIGHT));
 		setBackground(Color.BLACK);
 		setFocusable(true);
-		
 		addKeyListener(new ArenaController());
 	}
 	

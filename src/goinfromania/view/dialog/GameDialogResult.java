@@ -21,8 +21,6 @@ public class GameDialogResult extends GameDialog {
 
 	private JLabel labelResult, labelScore;
 	
-	private GameResultController gameResultController;
-	
 	public GameDialogResult(GameView gameView) {
 		super(gameView);
 		
@@ -35,14 +33,14 @@ public class GameDialogResult extends GameDialog {
 	}
 
 	private void createLayers(Dimension dimension) {
-		createLayerResult(dimension, new Font(Font.SANS_SERIF, Font.BOLD | Font.ITALIC, 96));
+		createLayerResult(dimension);
 		createLayerScore(dimension);
 	}
 	
-	private void createLayerResult(Dimension dimension, Font font) {
+	private void createLayerResult(Dimension dimension) {
 		JPanel panelResult = makeNewPanel(dimension);
 		
-		createLabelOfLayerResult(font, panelResult);
+		createLabelOfLayerResult(panelResult);
 		
 		getContentPane().add(panelResult, JLayeredPane.DEFAULT_LAYER);
 	}
@@ -55,9 +53,9 @@ public class GameDialogResult extends GameDialog {
 		return panel;
 	}
 
-	private void createLabelOfLayerResult(Font font, JPanel panelResult) {
+	private void createLabelOfLayerResult(JPanel panelResult) {
 		this.labelResult = new JLabel("", SwingConstants.HORIZONTAL);
-		this.labelResult.setFont(font);
+		this.labelResult.setFont(new Font(Font.SANS_SERIF, Font.BOLD | Font.ITALIC, 96));
 		this.labelResult.setForeground(Color.PINK);
 		
 		panelResult.add(this.labelResult, BorderLayout.CENTER);
@@ -82,20 +80,19 @@ public class GameDialogResult extends GameDialog {
 	private void createButtonsOfLayerScore(JPanel panelScore) {
 		JPanel panelButtons = new JPanel();
 		
+		addButtonsToPanelButton(panelButtons);
+		
+		panelScore.add(panelButtons, BorderLayout.SOUTH);
+	}
+
+	private void addButtonsToPanelButton(JPanel panelButtons) {
 		JButton[] buttons = {
 				new JButton("Rejouer"),
 				new JButton("Terminer")
 		};
 		
-		addButtonsToPanelButton(panelButtons, buttons);
-		
-		panelScore.add(panelButtons, BorderLayout.SOUTH);
-	}
-
-	private void addButtonsToPanelButton(JPanel panelButtons, JButton[] buttons) {
 		Dimension dimensionButton = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		String command = null;
-		this.gameResultController = new GameResultController(this);
 		
 		int indice = -1;
 		for (JButton button : buttons) {
@@ -113,7 +110,7 @@ public class GameDialogResult extends GameDialog {
 			button.setPreferredSize(dimensionButton);
 			button.setFocusable(false);
 			button.setActionCommand(command);
-			button.addActionListener(this.gameResultController);
+			button.addActionListener(new GameResultController(this));
 			
 			panelButtons.add(button);
 		}

@@ -23,17 +23,19 @@ public class Frame extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
-		
 		createGameMenuBar();
 		setMenuEditEnabled(false);
 		createLayers();
-		
 		addWindowListener(new FrameController(this));
 	}
 	
 	private void createGameMenuBar() {
 		this.gameMenuBar = new GameMenuBar();
 		setJMenuBar(this.gameMenuBar);
+	}
+	
+	public void setMenuEditEnabled(boolean enabled) {
+		this.gameMenuBar.setMenuEditEnabled(enabled);
 	}
 	
 	private void createLayers() {		
@@ -97,9 +99,5 @@ public class Frame extends JFrame {
 		
 		this.homeView.setVisible(false);
 		this.listGamesView.setVisible(false);
-	}
-	
-	public void setMenuEditEnabled(boolean enabled) {
-		this.gameMenuBar.setMenuEditEnabled(enabled);
 	}
 }

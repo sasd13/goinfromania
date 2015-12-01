@@ -40,12 +40,8 @@ public class MenuSettingController implements ActionListener {
 	private Setting readSetting(String command) {
 		Setting setting;
 		
-		if ("GAMEPAD".equalsIgnoreCase(command)) {
-			if (GameEngine.hasGameInProgress()) {
-				setting = GameEngine.getGamePad();
-			} else {
-				setting = SettingPreferencesFactory.get(command).pull();
-			}
+		if ("GAMEPAD".equalsIgnoreCase(command) && GameEngine.hasGameInProgress()) {
+			setting = GameEngine.getGamePad();
 		} else {
 			setting = SettingPreferencesFactory.get(command).pull();
 		}

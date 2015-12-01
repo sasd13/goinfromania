@@ -30,7 +30,7 @@ public class GameEngine {
 	
 	public static boolean stopGameSafely() {
 		if (hasGameInProgress()) {
-			return saveGameAndStop();
+			return confirmStopGame();
 		}
 		
 		return true;
@@ -40,29 +40,35 @@ public class GameEngine {
 		return game != null;
 	}
 	
-	private static boolean saveGameAndStop() {
+	private static boolean confirmStopGame() {
 		String message = "Arrêt de la partie. Sauvegarder la progression ?";
 		
 		int selected = JOptionPane.showConfirmDialog(null, message, "Partie", JOptionPane.YES_NO_CANCEL_OPTION);
 		
 		switch (selected) {
 			case JOptionPane.YES_OPTION:
+				stopGame();
 				saveGame();
-				stopGameAndDisplayHome();
+				finishGameAndDisplayHome();
 				return true;
 			case JOptionPane.NO_OPTION:
-				stopGameAndDisplayHome();
+				stopGame();
+				finishGameAndDisplayHome();
 				return true;
 			default:
 				return false;
 		}
 	}
 	
+	private static void stopGame() {
+		game.setState(State.STOPPED);
+	}
+	
 	public static void saveGame() {
 		GameDAO.update(game);
 	}
 	
-	public static void stopGameAndDisplayHome() {
+	public static void finishGameAndDisplayHome() {
 		game.deleteObservers();
 		game = null;
 		
@@ -83,7 +89,7 @@ public class GameEngine {
 		startGame();
 	}
 	
-	private static void startGame() {
+	public static void startGame() {
 		game.setState(State.STARTED);
 	}
 	
@@ -100,7 +106,21 @@ public class GameEngine {
 		}
 	}
 	
-	public static void pauseGame() {
+	public static void pauseOrResumeGame() {
+		switch (game.getState()) {
+			case STARTED:
+				pauseGame();
+				break;
+			case PAUSED:
+				startGame();
+				break;
+			default:
+				//TODO Throw exception
+				break;
+		}
+	}
+	
+	private static void pauseGame() {
 		//TODO
 	}
 }

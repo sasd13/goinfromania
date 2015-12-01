@@ -17,7 +17,7 @@ public class GamePadPreferences extends SettingPreferences {
 	private static final String KEY_PIG_ATTAK = "pig_attak";
 	
 	@Override
-	public Preferences getPreferences() {
+	protected Preferences getPreferences() {
 		return Preferences.userRoot().node(CLASS_NAME);
 	}
 	
