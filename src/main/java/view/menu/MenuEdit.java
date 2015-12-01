@@ -11,7 +11,7 @@ import main.java.controller.menu.MenuEditController;
 public class MenuEdit extends GameMenu {
 	
 	public MenuEdit() {
-		super("Partie", "MENUEDIT");
+		super("Partie");
 		
 		setMnemonic(KeyEvent.VK_P);
 	}

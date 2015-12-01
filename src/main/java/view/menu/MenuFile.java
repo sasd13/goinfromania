@@ -11,7 +11,7 @@ import main.java.controller.menu.MenuFileController;
 public class MenuFile extends GameMenu {
 
 	public MenuFile() {
-		super("Fichier", "MENUFILE");
+		super("Fichier");
 		
 		setMnemonic(KeyEvent.VK_F);
 	}

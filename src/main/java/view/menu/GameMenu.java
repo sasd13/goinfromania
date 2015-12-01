@@ -4,10 +4,9 @@ import javax.swing.JMenu;
 
 public abstract class GameMenu extends JMenu {
 	
-	protected GameMenu(String name, String command) {
+	protected GameMenu(String name) {
 		super(name);
 		
-		setActionCommand(command);
 		createMenuItems();
 	}
 	

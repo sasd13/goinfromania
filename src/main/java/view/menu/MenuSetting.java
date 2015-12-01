@@ -11,7 +11,7 @@ import main.java.controller.menu.MenuSettingController;
 public class MenuSetting extends GameMenu {
 
 	public MenuSetting() {
-		super("Options", "MENUSETTING");
+		super("Options");
 		
 		setMnemonic(KeyEvent.VK_O);
 	}
