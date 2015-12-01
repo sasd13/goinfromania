@@ -95,6 +95,7 @@ public class Frame extends JFrame {
 	
 	public void displayGameView() {
 		this.gameView.setVisible(true);
+		this.gameView.getArenaView().requestFocusInWindow();
 		this.layersPane.moveToFront(this.gameView);
 		
 		this.homeView.setVisible(false);

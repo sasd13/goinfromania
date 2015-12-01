@@ -89,7 +89,7 @@ public class GameEngine {
 		startGame();
 	}
 	
-	public static void startGame() {
+	private static void startGame() {
 		game.setState(State.STARTED);
 	}
 	
@@ -121,6 +121,6 @@ public class GameEngine {
 	}
 	
 	private static void pauseGame() {
-		//TODO
+		game.setState(State.PAUSED);
 	}
 }

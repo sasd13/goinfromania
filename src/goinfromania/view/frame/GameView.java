@@ -1,6 +1,7 @@
 package goinfromania.view.frame;
 
 import goinfromania.game.Game;
+import goinfromania.game.State;
 import goinfromania.game.character.pig.Pig;
 
 import java.awt.BorderLayout;
@@ -16,7 +17,7 @@ public class GameView extends JPanel implements Observer {
 
 	private ArenaView arenaView;
 	private JProgressBar progressBarLife, progressBarEnergy;
-	private JLabel labelScore;
+	private JLabel labelState, labelScore;
 	
 	public GameView() {
 		super(new BorderLayout());
@@ -63,9 +64,19 @@ public class GameView extends JPanel implements Observer {
 	private void createPanelGame() {
 		JPanel panelGame = new JPanel(new GridLayout(1, 2));
 		
+		addLabelState(panelGame);
 		addLabelScore(panelGame);
 		
 		add(panelGame, BorderLayout.SOUTH);
+	}
+	
+	private void addLabelState(JPanel panelGame) {
+		JPanel panelState = new JPanel();
+		
+		this.labelState = new JLabel();
+		panelState.add(this.labelState);
+		
+		panelGame.add(panelState);
 	}
 	
 	private void addLabelScore(JPanel panelGame) {
@@ -89,5 +100,10 @@ public class GameView extends JPanel implements Observer {
 		this.labelScore.setText(String.valueOf(game.getScore()));
 		this.progressBarLife.setValue(game.getPig().getLife());
 		this.progressBarEnergy.setValue(game.getPig().getEnergy());
+		if (game.getState() == State.PAUSED) {
+			this.labelState.setText(String.valueOf(game.getState()));
+		} else {
+			this.labelState.setText("");
+		}
 	}
 }
