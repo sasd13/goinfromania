@@ -8,11 +8,11 @@ import main.java.bean.IMovable;
 
 public class Cake implements IMovable, IEatable {
 
-	private boolean nasty;
-	private int eatValue, speed;
 	private String name;
 	private Point position;
 	private Dimension dimension;
+	private int speed, eatValue;
+	private boolean nasty;
 	
 	public Cake() {}
 	
@@ -21,6 +21,7 @@ public class Cake implements IMovable, IEatable {
 		return nasty;
 	}
 	
+	@Override
 	public void setNasty(boolean nasty) {
 		this.nasty = nasty;
 	}
@@ -73,6 +74,12 @@ public class Cake implements IMovable, IEatable {
 	@Override
 	public boolean isMovable() {
 		return true;
+	}
+	
+	@Override
+	public void setMovable(boolean movable) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

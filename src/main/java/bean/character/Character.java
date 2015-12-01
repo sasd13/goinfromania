@@ -11,7 +11,7 @@ public abstract class Character implements IMovable, ILiveable {
 	private Point position;
 	private Dimension dimension;
 	private boolean movable;
-	private int life, speed;
+	private int speed, life;
 	
 	protected Character() {}
 	

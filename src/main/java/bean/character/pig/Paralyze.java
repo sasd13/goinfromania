@@ -60,6 +60,12 @@ public class Paralyze implements IPower {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public void setMovable(boolean movable) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public int getSpeed() {
@@ -77,6 +83,12 @@ public class Paralyze implements IPower {
 	public boolean isAfar() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public void setAfar(boolean afar) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

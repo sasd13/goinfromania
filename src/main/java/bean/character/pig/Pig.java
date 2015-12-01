@@ -6,8 +6,7 @@ import main.java.bean.character.IPower;
 
 public class Pig extends Character implements IPowerful {
 
-	private boolean greedy;
-	private boolean powerful;
+	private boolean greedy, powerful;
 	private int energy;
 	
 	public boolean isGreedy() {

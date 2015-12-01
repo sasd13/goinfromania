@@ -12,11 +12,6 @@ public abstract class Enemy extends Character implements IPowerful {
 	protected Enemy() {}
 	
 	@Override
-	public String getName() {
-		return "ENEMY";
-	}
-	
-	@Override
 	public boolean hasEnergy() {
 		return this.energy > 0;
 	}
