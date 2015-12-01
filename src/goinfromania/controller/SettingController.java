@@ -63,6 +63,8 @@ public class SettingController implements ActionListener {
 		int selected = JOptionPane.showConfirmDialog(this.settingDialog, "Vous ne pourrez pas annuler les modifications. Confirmer?", "Option", JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
 			this.setting.reset();
+			
+			performSave();
 		}
 	}
 }

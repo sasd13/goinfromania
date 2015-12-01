@@ -19,7 +19,7 @@ public class MenuEdit extends GameMenu {
 	@Override
 	protected void createMenuItems() {
 		JMenuItem[] menuItems = {
-				new JMenuItem("Pause"),
+				new JMenuItem("Pause / Reprise"),
 				new JMenuItem("Stop"),
 				new JMenuItem("Sauvegarder")
 		};
