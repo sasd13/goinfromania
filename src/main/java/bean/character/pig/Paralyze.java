@@ -14,12 +14,6 @@ public class Paralyze implements IPower {
 	}
 
 	@Override
-	public boolean isCrossable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
@@ -51,6 +45,17 @@ public class Paralyze implements IPower {
 
 	@Override
 	public void setDimension(Dimension dimension) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public boolean isCrossable() {
+		return true;
+	}
+	
+	@Override
+	public void setCrossable(boolean crossable) {
 		// TODO Auto-generated method stub
 		
 	}

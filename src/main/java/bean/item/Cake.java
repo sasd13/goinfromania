@@ -17,31 +17,6 @@ public class Cake implements IMovable, IEatable {
 	public Cake() {}
 	
 	@Override
-	public boolean isNasty() {
-		return nasty;
-	}
-	
-	@Override
-	public void setNasty(boolean nasty) {
-		this.nasty = nasty;
-	}
-
-	@Override
-	public int getEatValue() {
-		return eatValue;
-	}
-	
-	@Override
-	public void setEatValue(int eatValue) {
-		this.eatValue = eatValue;
-	}
-	
-	@Override
-	public boolean isCrossable() {
-		return true;
-	}
-	
-	@Override
 	public String getName() {
 		return name;
 	}
@@ -70,6 +45,17 @@ public class Cake implements IMovable, IEatable {
 	public void setDimension(Dimension dimension) {
 		this.dimension = dimension;
 	}
+	
+	@Override
+	public boolean isCrossable() {
+		return true;
+	}
+	
+	@Override
+	public void setCrossable(boolean crossable) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public boolean isMovable() {
@@ -90,5 +76,25 @@ public class Cake implements IMovable, IEatable {
 	@Override
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+	
+	@Override
+	public boolean isNasty() {
+		return nasty;
+	}
+	
+	@Override
+	public void setNasty(boolean nasty) {
+		this.nasty = nasty;
+	}
+
+	@Override
+	public int getEatValue() {
+		return eatValue;
+	}
+	
+	@Override
+	public void setEatValue(int eatValue) {
+		this.eatValue = eatValue;
 	}
 }

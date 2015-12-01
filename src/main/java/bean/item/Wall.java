@@ -10,11 +10,6 @@ public class Wall implements IElement {
 	private String name;
 	private Point position;
 	private Dimension dimension;
-
-	@Override
-	public boolean isCrossable() {
-		return false;
-	}
 	
 	@Override
 	public String getName() {
@@ -44,5 +39,16 @@ public class Wall implements IElement {
 	@Override
 	public void setDimension(Dimension dimension) {
 		this.dimension = dimension;
+	}
+	
+	@Override
+	public boolean isCrossable() {
+		return false;
+	}
+	
+	@Override
+	public void setCrossable(boolean crossable) {
+		// TODO Auto-generated method stub
+		
 	}
 }

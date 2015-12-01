@@ -16,11 +16,6 @@ public abstract class Character implements IMovable, ILiveable {
 	protected Character() {}
 	
 	@Override
-	public boolean isCrossable() {
-		return true;
-	}
-	
-	@Override
 	public String getName() {
 		return name;
 	}
@@ -48,6 +43,17 @@ public abstract class Character implements IMovable, ILiveable {
 	@Override
 	public void setDimension(Dimension dimension) {
 		this.dimension = dimension;
+	}
+	
+	@Override
+	public boolean isCrossable() {
+		return true;
+	}
+	
+	@Override
+	public void setCrossable(boolean crossable) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	@Override

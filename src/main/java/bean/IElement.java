@@ -4,9 +4,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 public interface IElement {
-
-	boolean isCrossable();
-
+	
 	String getName();
 	
 	void setName(String name);
@@ -18,4 +16,8 @@ public interface IElement {
 	Dimension getDimension();
 
 	void setDimension(Dimension dimension);
+	
+	boolean isCrossable();
+	
+	void setCrossable(boolean crossable);
 }
