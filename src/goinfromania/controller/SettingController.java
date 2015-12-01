@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 public class SettingController implements ActionListener {
 	
 	private Setting setting;
+	private Setting settingOld;
 	
 	private SettingDialog settingDialog;
 	
@@ -49,7 +50,7 @@ public class SettingController implements ActionListener {
 			
 			JOptionPane.showMessageDialog(this.settingDialog, "Enregitsré", "Option", JOptionPane.INFORMATION_MESSAGE);
 		} else {
-			JOptionPane.showMessageDialog(this.settingDialog, "Configuration erronée. Vous devez corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this.settingDialog, "Configuration erronée. Veuillez corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -59,6 +60,9 @@ public class SettingController implements ActionListener {
 	}
 	
 	private void actionReset() {
-		this.setting.reset();
+		int selected = JOptionPane.showConfirmDialog(this.settingDialog, "Vous ne pourrez pas annuler les modifications. Confirmer?", "Option", JOptionPane.YES_NO_OPTION);
+		if (selected == JOptionPane.YES_OPTION) {
+			this.setting.reset();
+		}
 	}
 }
