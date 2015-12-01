@@ -1,6 +1,7 @@
 package goinfromania.controller;
 
 import goinfromania.controller.engine.GameEngine;
+import goinfromania.db.GameDAO;
 import goinfromania.game.Game;
 import goinfromania.view.frame.GameDescriptorPane;
 
@@ -26,11 +27,21 @@ public class GameDescriptorController implements ActionListener {
 		String command = event.getActionCommand();
 		
 		if ("CONTINUE".equalsIgnoreCase(command)) {
-			GameEngine.actionContinue(this.game);
+			actionContinue();
 		} else if ("DELETE".equalsIgnoreCase(command)) {
-			this.gameDescriptorPane.clear();
-			
-			GameEngine.actionDelete(this.game);
+			actionDelete();
 		}
+	}
+	
+	private void actionContinue() {
+		GameEngine.openGame(this.game);
+	}
+	
+	private void actionDelete() {
+		this.gameDescriptorPane.clear();
+		
+		GameDAO.delete(this.game);
+		
+		GameEngine.listGames();
 	}
 }

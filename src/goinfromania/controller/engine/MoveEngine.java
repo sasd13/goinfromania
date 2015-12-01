@@ -18,7 +18,7 @@ public class MoveEngine {
 	}
 	
 	public static Point getNextPosition(Element element, Direction direction, int speed) {
-		Point position = new Point(element.getPosition().x, element.getPosition().y);
+		Point position = element.getPosition();
 		
 		Point nextPosition = new Point();
 		

@@ -19,13 +19,21 @@ public class GameResultController implements ActionListener {
 		String command = event.getActionCommand();
 		
 		if ("REPLAY".equalsIgnoreCase(command)) {
-			this.gameDialogResult.dispose();
-			
-			GameEngine.actionNew();
+			actionReplay();
 		} else if ("END".equalsIgnoreCase(command)) {
-			this.gameDialogResult.dispose();
-			
-			GameEngine.actionStop();
+			actionEnd();
 		}
+	}
+
+	private void actionReplay() {
+		this.gameDialogResult.dispose();
+		
+		GameEngine.newGame();
+	}
+
+	private void actionEnd() {
+		this.gameDialogResult.dispose();
+		
+		GameEngine.stopGameSafely();
 	}
 }

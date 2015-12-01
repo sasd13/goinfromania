@@ -11,6 +11,7 @@ import goinfromania.setting.GamePad;
 public class GameEngine {
 	
 	private static Game game;
+	private static GamePad gamePad;
 	
 	private static FrameController frameController;
 	
@@ -18,76 +19,80 @@ public class GameEngine {
 		return game;
 	}
 	
+	public static GamePad getGamePad() {
+		return gamePad;
+	}
+	
 	public static void setFrameController(FrameController frameController) {
 		GameEngine.frameController = frameController;
 	}
 	
-	public static boolean closeIfHasGameInProgress() {
+	public static boolean stopGameSafely() {
 		if (hasGameInProgress()) {
-			return close();
+			return saveGameAndStop();
+		} else {
+			stopGameAndDisplayHome();
+			
+			return true;
 		}
-		
-		return true;
 	}
 	
 	public static boolean hasGameInProgress() {
 		return game != null;
 	}
 	
-	private static boolean close() {
+	private static boolean saveGameAndStop() {
 		String message = "Sauvegarder la partie ?";
 		
 		int selected = JOptionPane.showConfirmDialog(null, message, "Partie", JOptionPane.YES_NO_CANCEL_OPTION);
 		
 		switch (selected) {
 			case JOptionPane.YES_OPTION:
-				performSave();
-				performClose();
+				saveGame();
+				stopGameAndDisplayHome();
 				return true;
 			case JOptionPane.NO_OPTION:
-				performClose();
+				stopGameAndDisplayHome();
 				return true;
 			default:
 				return false;
 		}
 	}
 	
-	private static void performSave() {
+	public static void saveGame() {
 		GameDAO.update(game);
 	}
 	
-	private static void performClose() {
+	private static void stopGameAndDisplayHome() {
 		game.deleteObservers();
 		game = null;
 		
 		frameController.displayHome();
 	}
 	
-	public static void actionNew() {
-		GamePad gamePad = (GamePad) SettingPreferencesFactory.get("GAMEPAD").pull();
-		
-		Game game = new Game(gamePad);
-		
-		open(game);
+	public static void newGame() {		
+		openGame(new Game());
 	}
 	
-	private static void open(Game game) {
+	public static void openGame(Game game) {
 		GameEngine.game = game;
+		
+		gamePad = (GamePad) SettingPreferencesFactory.get("GAMEPAD").pull();
 		
 		frameController.displayGame(game);
 		
-		start();
+		startGame();
 	}
 	
-	private static void start() {
-		
+	private static void startGame() {
+		//TODO
 	}
 	
-	public static void actionList() {
+	public static void listGames() {
 		frameController.displayListGames();
 	}
 	
-	public static void actionExit() {
+	public static void exitGame() {
 		String message = "Quitter le jeu ?";
 		
 		int selected = JOptionPane.showConfirmDialog(null, message, Game.NAME, JOptionPane.YES_NO_OPTION);
@@ -96,27 +101,7 @@ public class GameEngine {
 		}
 	}
 	
-	public static void actionPause() {
+	public static void pauseGame() {
 		//TODO
-	}
-	
-	public static void actionStop() {
-		if (closeIfHasGameInProgress()) {
-			frameController.displayHome();
-		}
-	}
-	
-	public static void actionSave() {
-		performSave();
-	}
-	
-	public static void actionContinue(Game game) {
-		open(game);
-	}
-	
-	public static void actionDelete(Game game) {
-		GameDAO.delete(game);
-		
-		actionList();
 	}
 }

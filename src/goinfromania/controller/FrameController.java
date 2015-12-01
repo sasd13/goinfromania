@@ -20,6 +20,7 @@ public class FrameController implements WindowListener {
 	}
 	
 	public void displayHome() {
+		this.frame.setMenuEditEnabled(false);
 		this.frame.displayHomeView();
 	}
 	
@@ -27,6 +28,7 @@ public class FrameController implements WindowListener {
 		List<Game> games = GameDAO.loadAll();
 		
 		this.frame.getListGamesView().setGames(games);
+		this.frame.setMenuEditEnabled(false);
 		this.frame.displayListGamesView();
 	}
 	
@@ -34,49 +36,44 @@ public class FrameController implements WindowListener {
 		game.addObserver(this.frame.getGameView());
 		game.addObserver(this.frame.getGameView().getArenaView());
 		
+		this.frame.setMenuEditEnabled(true);
 		this.frame.displayGameView();
 	}
 	
 	@Override
 	public void windowActivated(WindowEvent event) {
-		// TODO Auto-generated method stub
-		
+		//Do nothing
 	}
 
 	@Override
 	public void windowClosed(WindowEvent event) {
-		// TODO Auto-generated method stub
-		
+		//Do nothing
 	}
 
 	@Override
 	public void windowClosing(WindowEvent event) {
-		if (GameEngine.closeIfHasGameInProgress()) {
-			GameEngine.actionExit();
+		if (GameEngine.stopGameSafely()) {
+			GameEngine.exitGame();
 		}
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent event) {
-		// TODO Auto-generated method stub
-		
+		//Do nothing
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent event) {
-		// TODO Auto-generated method stub
-		
+		//Do nothing
 	}
 
 	@Override
 	public void windowIconified(WindowEvent event) {
-		// TODO Auto-generated method stub
-		
+		//Do nothing
 	}
 
 	@Override
 	public void windowOpened(WindowEvent event) {
-		// TODO Auto-generated method stub
-		
+		//Do nothing
 	}
 }
