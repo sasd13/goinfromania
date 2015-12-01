@@ -13,7 +13,6 @@ import main.java.view.dialog.SettingDialog;
 public class SettingController implements ActionListener {
 	
 	private Setting setting;
-	private Setting settingOld;
 	
 	private SettingDialog settingDialog;
 	

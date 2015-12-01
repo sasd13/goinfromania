@@ -14,24 +14,6 @@ public class Disease implements IPower {
 	}
 
 	@Override
-	public boolean isMovable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public int getSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setSpeed(int speed) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public boolean isCrossable() {
 		// TODO Auto-generated method stub
 		return false;
@@ -72,15 +54,39 @@ public class Disease implements IPower {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public boolean isMovable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
-	public int getValue() {
+	public int getSpeed() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public void setValue() {
+	public void setSpeed(int speed) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public boolean isAfar() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getPowerValue() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public void setPowerValue(int powerValue) {
 		// TODO Auto-generated method stub
 		
 	}

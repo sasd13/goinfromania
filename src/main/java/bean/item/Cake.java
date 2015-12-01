@@ -9,7 +9,7 @@ import main.java.bean.IMovable;
 public class Cake implements IMovable, IEatable {
 
 	private boolean nasty;
-	private int value, speed;
+	private int eatValue, speed;
 	private String name;
 	private Point position;
 	private Dimension dimension;
@@ -26,12 +26,13 @@ public class Cake implements IMovable, IEatable {
 	}
 
 	@Override
-	public int getValue() {
-		return value;
+	public int getEatValue() {
+		return eatValue;
 	}
 	
-	public void setValue(int value) {
-		this.value = value;
+	@Override
+	public void setEatValue(int eatValue) {
+		this.eatValue = eatValue;
 	}
 	
 	@Override

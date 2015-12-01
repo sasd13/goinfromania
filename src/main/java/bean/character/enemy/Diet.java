@@ -9,25 +9,7 @@ import main.java.bean.character.pig.Pig;
 public class Diet implements IPower {
 	
 	public void act(Pig pig) {
-		pig.setEnergy(pig.getEnergy() - getValue());
-	}
-
-	@Override
-	public boolean isMovable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public int getSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setSpeed(int speed) {
-		// TODO Auto-generated method stub
-		
+		pig.setEnergy(pig.getEnergy() - getPowerValue());
 	}
 
 	@Override
@@ -71,15 +53,39 @@ public class Diet implements IPower {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public boolean isMovable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
-	public int getValue() {
+	public int getSpeed() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public void setValue() {
+	public void setSpeed(int speed) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public boolean isAfar() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public int getPowerValue() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public void setPowerValue(int powerValue) {
 		// TODO Auto-generated method stub
 		
 	}

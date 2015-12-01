@@ -4,5 +4,7 @@ public interface IEatable {
 
 	boolean isNasty();
 	
-	int getValue();
+	int getEatValue();
+	
+	void setEatValue(int eatValue);
 }
