@@ -1,8 +1,8 @@
 package main.java;
 
-import goinfromania.view.frame.Frame;
-
 import javax.swing.SwingUtilities;
+
+import main.java.view.Frame;
 
 public class Main {
 
