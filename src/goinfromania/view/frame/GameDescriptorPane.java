@@ -25,6 +25,11 @@ public class GameDescriptorPane extends JPanel {
 	
 	private JLabel[] labels;
 	
+	private JButton[] buttons = {
+			new JButton("Continuer"),
+			new JButton("Supprimer")
+	};
+	
 	private GameDescriptorController gameDescriptorController;
 	
 	public GameDescriptorPane() {
@@ -33,6 +38,7 @@ public class GameDescriptorPane extends JPanel {
 		createLabelProgress();
 		createPanelDescription();
 		createPanelButtons();
+		setButtonsEnabled(false);
 	}
 	
 	private void createLabelProgress() {
@@ -103,23 +109,18 @@ public class GameDescriptorPane extends JPanel {
 	private void createPanelButtons() {
 		JPanel panelButton = new JPanel();
 		
-		JButton[] buttons = {
-				new JButton("Continuer"),
-				new JButton("Supprimer")
-		};
-		
-		addButtonsToPanelButton(panelButton, buttons);
+		addButtonsToPanelButton(panelButton);
 		
 		add(panelButton, BorderLayout.SOUTH);
 	}
 
-	private void addButtonsToPanelButton(JPanel panelButton, JButton[] buttons) {
+	private void addButtonsToPanelButton(JPanel panelButton) {
 		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
 		String command = null;
 		this.gameDescriptorController = new GameDescriptorController(this);
 		
 		int indice = -1;
-		for (JButton button : buttons) {
+		for (JButton button : this.buttons) {
 			indice++;
 			
 			switch (indice) {
@@ -149,11 +150,24 @@ public class GameDescriptorPane extends JPanel {
 		this.labelDateLastUpdate.setText(String.valueOf(game.getDateLastUpdate()));
 		
 		this.gameDescriptorController.setGame(game);
+		
+		setButtonsEnabled(true);
 	}
 	
 	public void clear() {
+		clearLabels();
+		setButtonsEnabled(false);
+	}
+	
+	private void clearLabels() {
 		for (JLabel label : this.labels) {
 			label.setText("");
+		}
+	}
+	
+	private void setButtonsEnabled(boolean enabled) {
+		for (JButton button : this.buttons) {
+			button.setEnabled(enabled);
 		}
 	}
 }

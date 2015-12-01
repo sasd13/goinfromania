@@ -34,6 +34,6 @@ public class GameResultController implements ActionListener {
 	private void actionEnd() {
 		this.gameDialogResult.dispose();
 		
-		GameEngine.stopGameSafely();
+		GameEngine.stopGameAndDisplayHome();
 	}
 }

@@ -30,11 +30,9 @@ public class GameEngine {
 	public static boolean stopGameSafely() {
 		if (hasGameInProgress()) {
 			return saveGameAndStop();
-		} else {
-			stopGameAndDisplayHome();
-			
-			return true;
 		}
+		
+		return true;
 	}
 	
 	public static boolean hasGameInProgress() {
@@ -42,7 +40,7 @@ public class GameEngine {
 	}
 	
 	private static boolean saveGameAndStop() {
-		String message = "Sauvegarder la partie ?";
+		String message = "Arrêt de la partie. Sauvegarder la progression ?";
 		
 		int selected = JOptionPane.showConfirmDialog(null, message, "Partie", JOptionPane.YES_NO_CANCEL_OPTION);
 		
@@ -63,7 +61,7 @@ public class GameEngine {
 		GameDAO.update(game);
 	}
 	
-	private static void stopGameAndDisplayHome() {
+	public static void stopGameAndDisplayHome() {
 		game.deleteObservers();
 		game = null;
 		

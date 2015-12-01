@@ -25,6 +25,7 @@ public class Frame extends JFrame {
 		setResizable(false);
 		
 		createGameMenuBar();
+		setMenuEditEnabled(false);
 		createLayers();
 		
 		addWindowListener(new FrameController(this));
