@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import main.java.bean.Game;
 import main.java.bean.State;
+import main.java.bean.character.pig.Pig;
 import main.java.bean.setting.GamePad;
 import main.java.controller.FrameController;
 import main.java.db.GameDAO;
@@ -75,8 +76,19 @@ public class GameEngine {
 		frameController.displayHome();
 	}
 	
-	public static void newGame() {		
-		openGame(new Game());
+	public static void newGame() {	
+		Game game = new Game();
+		
+		addPigToGame(game);
+		
+		openGame(game);
+	}
+
+	private static void addPigToGame(Game game) {
+		Pig pig = new Pig();
+		pig.setLife(GameConstants.PIG_LIFE);
+		
+		game.addElement(pig);
 	}
 	
 	public static void openGame(Game game) {

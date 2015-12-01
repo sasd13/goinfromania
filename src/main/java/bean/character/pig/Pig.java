@@ -1,17 +1,14 @@
 package main.java.bean.character.pig;
 
-import main.java.bean.IEatable;
 import main.java.bean.character.Character;
-import main.java.bean.character.Power;
-import main.java.bean.character.enemy.Enemy;
+import main.java.bean.character.IPowerful;
+import main.java.bean.character.IPower;
 
-public class Pig extends Character {
+public class Pig extends Character implements IPowerful {
 
 	private boolean greedy;
-	
-	public Pig() {
-		setLife(LIFE_MAX);
-	}
+	private boolean powerful;
+	private int energy;
 	
 	public boolean isGreedy() {
 		return greedy;
@@ -21,30 +18,34 @@ public class Pig extends Character {
 		this.greedy = greedy;
 	}
 	
-	public void eat(IEatable eatable) {
-		if (isGreedy()) {
-			if (eatable.isNasty()) {
-				setEnergy(getEnergy() - eatable.getValue()); 
-			} else {
-				setEnergy(getEnergy() + eatable.getValue());
-			}
-		}
-	}
-	
-	public void attakEnemy(Enemy enemy) {
-		if (isPowerful()) {
-			getPowerWithEnergy().act(enemy);
-		}
-	}
-	
 	@Override
-	public Power getPowerWithEnergy() {
-		if (getEnergy() < ENERGY_MEDIUM) {
-			return new Paralyze();
-		} else if (getEnergy() < ENERGY_MAX) {
-			return new Missile();
-		}
-		
-		return super.getPowerWithEnergy();
+	public boolean hasEnergy() {
+		return this.energy > 0;
+	}
+
+	@Override
+	public int getEnergy() {
+		return energy;
+	}
+
+	@Override
+	public void setEnergy(int energy) {
+		this.energy = energy;
+	}
+
+	@Override
+	public boolean isPowerful() {
+		return powerful;
+	}
+
+	@Override
+	public void setPowerful(boolean powerful) {
+		this.powerful = powerful;
+	}
+
+	@Override
+	public IPower getPower() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

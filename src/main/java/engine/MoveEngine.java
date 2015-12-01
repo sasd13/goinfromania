@@ -4,10 +4,15 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import main.java.bean.Direction;
-import main.java.bean.IElement;
 import main.java.bean.IMovable;
+import main.java.view.DimensionConstants;
 
 public class MoveEngine {
+	
+	public static final int POSITION_X_MIN = 0;
+	public static final int POSITION_X_MAX = DimensionConstants.ARENA_WIDTH;
+	public static final int POSITION_Y_MIN = 0;
+	public static final int POSITION_Y_MAX = DimensionConstants.ARENA_HEIGHT;
 
 	public static void move(IMovable movable, Direction direction) {
 		movable.setPosition(getNextPosition(movable, direction));
@@ -38,16 +43,16 @@ public class MoveEngine {
 	}
 	
 	private static Point cropping(Point position, Dimension dimension) {
-		if (position.x < IElement.POSITION_X_MIN) {
-			position.x = IElement.POSITION_X_MIN;
-		} else if ((position.x + dimension.width) > IElement.POSITION_X_MAX) {
-			position.x = IElement.POSITION_X_MAX - dimension.width;
+		if (position.x < POSITION_X_MIN) {
+			position.x = POSITION_X_MIN;
+		} else if ((position.x + dimension.width) > POSITION_X_MAX) {
+			position.x = POSITION_X_MAX - dimension.width;
 		}
 		
-		if (position.y < IElement.POSITION_Y_MIN) {
-			position.y = IElement.POSITION_Y_MIN;
-		} else if ((position.y + dimension.height) > IElement.POSITION_Y_MAX) {
-			position.y = IElement.POSITION_Y_MAX - dimension.height;
+		if (position.y < POSITION_Y_MIN) {
+			position.y = POSITION_Y_MIN;
+		} else if ((position.y + dimension.height) > POSITION_Y_MAX) {
+			position.y = POSITION_Y_MAX - dimension.height;
 		}
 		
 		return position;

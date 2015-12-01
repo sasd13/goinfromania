@@ -5,13 +5,13 @@ import java.awt.Point;
 
 import main.java.bean.IMovable;
 
-public abstract class Character implements IMovable, ILiveable, IEnergetic, IPowerful {
+public abstract class Character implements IMovable, ILiveable {
 	
 	private String name;
 	private Point position;
 	private Dimension dimension;
-	private boolean movable, powerful;
-	private int life, speed, energy;
+	private boolean movable;
+	private int life, speed;
 	
 	protected Character() {}
 	
@@ -82,35 +82,5 @@ public abstract class Character implements IMovable, ILiveable, IEnergetic, IPow
 	@Override
 	public void setLife(int life) {
 		this.life = life;
-	}
-
-	@Override
-	public boolean hasEnergy() {
-		return this.energy > 0;
-	}
-
-	@Override
-	public int getEnergy() {
-		return energy;
-	}
-
-	@Override
-	public void setEnergy(int energy) {
-		this.energy = energy;
-	}
-
-	@Override
-	public boolean isPowerful() {
-		return powerful;
-	}
-
-	@Override
-	public void setPowerful(boolean powerful) {
-		this.powerful = powerful;
-	}
-	
-	@Override
-	public Power getPowerWithEnergy() {
-		return null;
 	}
 }

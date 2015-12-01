@@ -1,10 +1,10 @@
 package main.java.bean.character;
 
-public interface IPowerful {
+public interface IPowerful extends IEnergetic {
 
 	boolean isPowerful();
 	
 	void setPowerful(boolean powerful);
 	
-	Power getPowerWithEnergy();
+	IPower getPower();
 }

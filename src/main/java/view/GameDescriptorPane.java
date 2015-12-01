@@ -11,7 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import main.java.bean.Game;
+import main.java.bean.character.pig.Pig;
 import main.java.controller.GameDescriptorController;
+import main.java.engine.PigEngine;
 
 public class GameDescriptorPane extends JPanel {
 	
@@ -143,10 +145,12 @@ public class GameDescriptorPane extends JPanel {
 	public void bind(Game game) {
 		this.labelLevel.setText(String.valueOf(game.getLevel()));
 		this.labelScore.setText(String.valueOf(game.getScore()));
-		this.labelPigLife.setText(String.valueOf(game.getPig().getLife()));
-		this.labelPigEnergy.setText(String.valueOf(game.getPig().getEnergy()));
 		this.labelDateCreation.setText(String.valueOf(game.getDateLastUpdate()));
 		this.labelDateLastUpdate.setText(String.valueOf(game.getDateLastUpdate()));
+		
+		Pig pig = PigEngine.findPig(game.getElements());
+		this.labelPigLife.setText(String.valueOf(pig.getLife()));
+		this.labelPigEnergy.setText(String.valueOf(pig.getEnergy()));
 		
 		this.gameDescriptorController.setGame(game);
 		

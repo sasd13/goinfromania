@@ -8,6 +8,7 @@ import main.java.bean.character.pig.Pig;
 import main.java.bean.setting.GamePad;
 import main.java.engine.GameEngine;
 import main.java.engine.MoveEngine;
+import main.java.engine.PigEngine;
 
 public class ArenaController implements KeyListener {
 	
@@ -32,7 +33,7 @@ public class ArenaController implements KeyListener {
 		if (keyCode == gamePad.getKeyStart()) {
 			GameEngine.pauseOrResumeGame();
 		} else {
-			Pig pig = GameEngine.getGame().getPig();
+			Pig pig = PigEngine.findPig(GameEngine.getGame().getElements());
 			
 			if (keyCode == gamePad.getKeyMoveNorth()) {
 				MoveEngine.move(pig, Direction.NORTH);

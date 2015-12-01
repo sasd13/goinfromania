@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import main.java.bean.character.pig.Pig;
-
 public class Game extends Observable {
 	
 	public static final String NAME = "Goinfr'o'mania";
@@ -20,8 +18,6 @@ public class Game extends Observable {
 	
 	public Game() {
 		this.elements = new ArrayList<IElement>();
-		
-		addElement(new Pig());
 	}
 
 	public State getState() {
@@ -106,15 +102,5 @@ public class Game extends Observable {
 	
 	public IElement[] getElements() {
 		return this.elements.toArray(new IElement[this.elements.size()]);
-	}
-	
-	public Pig getPig() {
-		for (IElement element : this.elements) {
-			if ("PIG".equalsIgnoreCase(element.getClass().getSimpleName())) {
-				return (Pig) element;
-			}
-		}
-		
-		return null;
 	}
 }
