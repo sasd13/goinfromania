@@ -1,7 +1,7 @@
 package goinfromania.controller;
 
-import goinfromania.controller.engine.GameEngine;
 import goinfromania.db.GameDAO;
+import goinfromania.engine.GameEngine;
 import goinfromania.game.Game;
 import goinfromania.view.frame.GameDescriptorPane;
 

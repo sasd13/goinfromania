@@ -1,7 +1,7 @@
 package goinfromania.controller;
 
-import goinfromania.controller.engine.GameEngine;
-import goinfromania.controller.engine.MoveEngine;
+import goinfromania.engine.GameEngine;
+import goinfromania.engine.MoveEngine;
 import goinfromania.game.Direction;
 import goinfromania.game.character.pig.Pig;
 import goinfromania.setting.GamePad;

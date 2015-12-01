@@ -1,20 +1,20 @@
 package goinfromania.game.character;
 
-import goinfromania.game.Element;
+import java.awt.Dimension;
+import java.awt.Point;
+
 import goinfromania.game.IMovable;
 
-public abstract class Power extends Element implements IMovable {
+public abstract class Power implements IMovable {
 
 	private int value, speed;
+	private String name;
+	private Point position;
+	private Dimension dimension;
 	
 	protected Power() {}
 	
 	public abstract void act(Character character);
-	
-	@Override
-	public String getName() {
-		return "POWER";
-	}
 	
 	public int getValue() {
 		return value;
@@ -27,6 +27,36 @@ public abstract class Power extends Element implements IMovable {
 	@Override
 	public boolean isCrossable() {
 		return true;
+	}
+	
+	@Override
+	public String getName() {
+		return name;
+	}
+	
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@Override
+	public Point getPosition() {
+		return position;
+	}
+	
+	@Override
+	public void setPosition(Point position) {
+		this.position = position;
+	}
+	
+	@Override
+	public Dimension getDimension() {
+		return dimension;
+	}
+	
+	@Override
+	public void setDimension(Dimension dimension) {
+		this.dimension = dimension;
 	}
 	
 	@Override

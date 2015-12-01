@@ -1,6 +1,6 @@
 package goinfromania.controller.menu;
 
-import goinfromania.controller.engine.GameEngine;
+import goinfromania.engine.GameEngine;
 import goinfromania.preferences.SettingPreferencesFactory;
 import goinfromania.setting.Setting;
 import goinfromania.view.dialog.SettingDialog;

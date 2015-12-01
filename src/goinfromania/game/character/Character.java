@@ -1,12 +1,17 @@
 package goinfromania.game.character;
 
-import goinfromania.game.Element;
+import java.awt.Dimension;
+import java.awt.Point;
+
 import goinfromania.game.IMovable;
 
-public abstract class Character extends Element implements ILiveable, IMovable, IEnergetic, IPowerful {
+public abstract class Character implements IMovable, ILiveable, IEnergetic, IPowerful {
 	
-	private int life, speed, energy;
+	private String name;
+	private Point position;
+	private Dimension dimension;
 	private boolean movable, powerful;
+	private int life, speed, energy;
 	
 	protected Character() {}
 	
@@ -17,24 +22,34 @@ public abstract class Character extends Element implements ILiveable, IMovable, 
 	
 	@Override
 	public String getName() {
-		return "CHARACTER";
+		return name;
 	}
 	
 	@Override
-	public boolean isAlive() {
-		return this.life > 0;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	@Override
-	public int getLife() {
-		return life;
+	public Point getPosition() {
+		return position;
 	}
 	
 	@Override
-	public void setLife(int life) {
-		this.life = life;
+	public void setPosition(Point position) {
+		this.position = position;
 	}
-
+	
+	@Override
+	public Dimension getDimension() {
+		return dimension;
+	}
+	
+	@Override
+	public void setDimension(Dimension dimension) {
+		this.dimension = dimension;
+	}
+	
 	@Override
 	public boolean isMovable() {
 		return movable;
@@ -52,6 +67,21 @@ public abstract class Character extends Element implements ILiveable, IMovable, 
 	@Override
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+	
+	@Override
+	public boolean isAlive() {
+		return this.life > 0;
+	}
+	
+	@Override
+	public int getLife() {
+		return life;
+	}
+	
+	@Override
+	public void setLife(int life) {
+		this.life = life;
 	}
 
 	@Override

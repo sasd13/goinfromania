@@ -1,8 +1,15 @@
 package goinfromania.game.item;
 
-import goinfromania.game.Element;
+import java.awt.Dimension;
+import java.awt.Point;
 
-public class Wall extends Element {
+import goinfromania.game.IElement;
+
+public class Wall implements IElement {
+	
+	private String name;
+	private Point position;
+	private Dimension dimension;
 
 	@Override
 	public boolean isCrossable() {
@@ -11,6 +18,31 @@ public class Wall extends Element {
 	
 	@Override
 	public String getName() {
-		return "WALL";
+		return name;
+	}
+	
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@Override
+	public Point getPosition() {
+		return position;
+	}
+	
+	@Override
+	public void setPosition(Point position) {
+		this.position = position;
+	}
+	
+	@Override
+	public Dimension getDimension() {
+		return dimension;
+	}
+	
+	@Override
+	public void setDimension(Dimension dimension) {
+		this.dimension = dimension;
 	}
 }

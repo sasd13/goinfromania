@@ -1,26 +1,21 @@
 package goinfromania.game.item;
 
-import goinfromania.game.Element;
+import java.awt.Dimension;
+import java.awt.Point;
+
 import goinfromania.game.IEatable;
 import goinfromania.game.IMovable;
 
-public class Cake extends Element implements IMovable, IEatable {
+public class Cake implements IMovable, IEatable {
 
 	private boolean nasty;
 	private int value, speed;
+	private String name;
+	private Point position;
+	private Dimension dimension;
 	
 	public Cake() {}
 	
-	@Override
-	public boolean isCrossable() {
-		return true;
-	}
-	
-	@Override
-	public String getName() {
-		return "CAKE";
-	}
-
 	@Override
 	public boolean isNasty() {
 		return nasty;
@@ -37,6 +32,41 @@ public class Cake extends Element implements IMovable, IEatable {
 	
 	public void setValue(int value) {
 		this.value = value;
+	}
+	
+	@Override
+	public boolean isCrossable() {
+		return true;
+	}
+	
+	@Override
+	public String getName() {
+		return name;
+	}
+	
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@Override
+	public Point getPosition() {
+		return position;
+	}
+	
+	@Override
+	public void setPosition(Point position) {
+		this.position = position;
+	}
+	
+	@Override
+	public Dimension getDimension() {
+		return dimension;
+	}
+	
+	@Override
+	public void setDimension(Dimension dimension) {
+		this.dimension = dimension;
 	}
 
 	@Override

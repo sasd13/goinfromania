@@ -16,10 +16,10 @@ public class Game extends Observable {
 	private Result result;
 	private int score;
 	private Timestamp dateCreation, dateLastUpdate;
-	private List<Element> elements;
+	private List<IElement> elements;
 	
 	public Game() {
-		this.elements = new ArrayList<Element>();
+		this.elements = new ArrayList<IElement>();
 		
 		addElement(new Pig());
 	}
@@ -90,27 +90,27 @@ public class Game extends Observable {
 		notifyObservers();
 	}
 	
-	public void addElement(Element element) {
+	public void addElement(IElement element) {
 		this.elements.add(element);
 		
 		setChanged();
 		notifyObservers();
 	}
 	
-	public void removeElement(Element element) {
+	public void removeElement(IElement element) {
 		this.elements.remove(element);
 		
 		setChanged();
 		notifyObservers();
 	}
 	
-	public Element[] getElements() {
-		return this.elements.toArray(new Element[this.elements.size()]);
+	public IElement[] getElements() {
+		return this.elements.toArray(new IElement[this.elements.size()]);
 	}
 	
 	public Pig getPig() {
-		for (Element element : this.elements) {
-			if ("PIG".equalsIgnoreCase(element.getName())) {
+		for (IElement element : this.elements) {
+			if ("PIG".equalsIgnoreCase(element.getClass().getSimpleName())) {
 				return (Pig) element;
 			}
 		}

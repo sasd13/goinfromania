@@ -9,11 +9,8 @@ public class Pig extends Character {
 
 	private boolean greedy;
 	
-	public Pig() {}
-	
-	@Override
-	public String getName() {
-		return "PIG";
+	public Pig() {
+		setLife(LIFE_MAX);
 	}
 	
 	public boolean isGreedy() {

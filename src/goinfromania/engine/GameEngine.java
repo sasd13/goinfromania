@@ -1,10 +1,11 @@
-package goinfromania.controller.engine;
+package goinfromania.engine;
 
 import javax.swing.JOptionPane;
 
 import goinfromania.controller.FrameController;
 import goinfromania.db.GameDAO;
 import goinfromania.game.Game;
+import goinfromania.game.State;
 import goinfromania.preferences.SettingPreferencesFactory;
 import goinfromania.setting.GamePad;
 
@@ -83,7 +84,7 @@ public class GameEngine {
 	}
 	
 	private static void startGame() {
-		//TODO
+		game.setState(State.STARTED);
 	}
 	
 	public static void listGames() {

@@ -1,7 +1,7 @@
 package goinfromania.view.frame;
 
 import goinfromania.controller.ArenaController;
-import goinfromania.game.Element;
+import goinfromania.game.IElement;
 import goinfromania.game.Game;
 import goinfromania.view.DimensionConstants;
 
@@ -41,7 +41,7 @@ public class ArenaView extends JPanel implements Observer {
 		super.paintComponent(g);
 		
 		if (this.game != null) {
-			for (Element element : this.game.getElements()) {
+			for (IElement element : this.game.getElements()) {
 				//TODO g.drawImage(element.getImage(), element.getPosition().x, element.getPosition().y, this);
 			}
 		}

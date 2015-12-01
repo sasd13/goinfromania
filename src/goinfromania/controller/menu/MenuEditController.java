@@ -1,6 +1,6 @@
 package goinfromania.controller.menu;
 
-import goinfromania.controller.engine.GameEngine;
+import goinfromania.engine.GameEngine;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

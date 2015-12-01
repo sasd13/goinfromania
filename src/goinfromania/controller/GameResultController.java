@@ -1,6 +1,6 @@
 package goinfromania.controller;
 
-import goinfromania.controller.engine.GameEngine;
+import goinfromania.engine.GameEngine;
 import goinfromania.view.dialog.GameDialogResult;
 
 import java.awt.event.ActionEvent;

@@ -4,8 +4,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.List;
 
-import goinfromania.controller.engine.GameEngine;
 import goinfromania.db.GameDAO;
+import goinfromania.engine.GameEngine;
 import goinfromania.game.Game;
 import goinfromania.view.frame.Frame;
 

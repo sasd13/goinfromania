@@ -1,6 +1,6 @@
 package goinfromania.game;
 
-public interface IMovable {
+public interface IMovable extends IElement {
 
 	boolean isMovable();
 	
