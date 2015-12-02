@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
-import main.java.bean.Game;
 import main.java.controller.FrameController;
 import main.java.view.menu.GameMenuBar;
 
@@ -18,7 +17,7 @@ public class Frame extends JFrame {
 	private GameView gameView;
 	
 	public Frame() {
-		super(Game.NAME);
+		super("Goinfr'o'mania");
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);

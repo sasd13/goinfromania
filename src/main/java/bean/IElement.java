@@ -5,10 +5,6 @@ import java.awt.Point;
 
 public interface IElement {
 	
-	String getName();
-	
-	void setName(String name);
-
 	Point getPosition();
 
 	void setPosition(Point position);

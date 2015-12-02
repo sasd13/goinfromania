@@ -44,7 +44,7 @@ public class GameEngine {
 	private static boolean confirmStopGame() {
 		String message = "Arrêt de la partie. Sauvegarder la progression ?";
 		
-		int selected = JOptionPane.showConfirmDialog(null, message, "Partie", JOptionPane.YES_NO_CANCEL_OPTION);
+		int selected = JOptionPane.showConfirmDialog(null, message, "Confirmation", JOptionPane.YES_NO_CANCEL_OPTION);
 		
 		switch (selected) {
 			case JOptionPane.YES_OPTION:
@@ -112,7 +112,7 @@ public class GameEngine {
 	public static void exitGame() {
 		String message = "Quitter le jeu ?";
 		
-		int selected = JOptionPane.showConfirmDialog(null, message, Game.NAME, JOptionPane.YES_NO_OPTION);
+		int selected = JOptionPane.showConfirmDialog(null, message, "Confirmation", JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
 			System.exit(0);
 		}

@@ -24,6 +24,9 @@ public abstract class Enemy extends Character implements IPowerful {
 	@Override
 	public void setEnergy(int energy) {
 		this.energy = energy;
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	@Override
@@ -34,6 +37,9 @@ public abstract class Enemy extends Character implements IPowerful {
 	@Override
 	public void setPowerful(boolean powerful) {
 		this.powerful = powerful;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	@Override

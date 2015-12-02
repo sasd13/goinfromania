@@ -15,6 +15,9 @@ public class Pig extends Character implements IPowerful {
 	
 	public void setGreedy(boolean greedy) {
 		this.greedy = greedy;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	@Override
@@ -30,6 +33,9 @@ public class Pig extends Character implements IPowerful {
 	@Override
 	public void setEnergy(int energy) {
 		this.energy = energy;
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	@Override
@@ -40,6 +46,9 @@ public class Pig extends Character implements IPowerful {
 	@Override
 	public void setPowerful(boolean powerful) {
 		this.powerful = powerful;
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	@Override

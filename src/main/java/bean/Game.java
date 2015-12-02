@@ -7,8 +7,6 @@ import java.util.Observable;
 
 public class Game extends Observable {
 	
-	public static final String NAME = "Goinfr'o'mania";
-
 	private State state;
 	private Level level;
 	private Result result;

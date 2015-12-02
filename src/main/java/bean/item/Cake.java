@@ -1,71 +1,27 @@
 package main.java.bean.item;
 
-import java.awt.Dimension;
-import java.awt.Point;
-
+import main.java.bean.Element;
 import main.java.bean.IEatable;
 import main.java.bean.IMovable;
 
-public class Cake implements IMovable, IEatable {
+public class Cake extends Element implements IMovable, IEatable {
 
-	private String name;
-	private Point position;
-	private Dimension dimension;
+	private boolean movable, nasty;
 	private int speed, eatValue;
-	private boolean nasty;
 	
 	public Cake() {}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
-	
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	@Override
-	public Point getPosition() {
-		return position;
-	}
-	
-	@Override
-	public void setPosition(Point position) {
-		this.position = position;
-	}
-	
-	@Override
-	public Dimension getDimension() {
-		return dimension;
-	}
-	
-	@Override
-	public void setDimension(Dimension dimension) {
-		this.dimension = dimension;
-	}
-	
-	@Override
-	public boolean isCrossable() {
-		return true;
-	}
-	
-	@Override
-	public void setCrossable(boolean crossable) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public boolean isMovable() {
-		return true;
+		return movable;
 	}
 	
 	@Override
 	public void setMovable(boolean movable) {
-		// TODO Auto-generated method stub
+		this.movable = movable;
 		
+		setChanged();
+		notifyObservers();
 	}
 
 	@Override
@@ -76,6 +32,9 @@ public class Cake implements IMovable, IEatable {
 	@Override
 	public void setSpeed(int speed) {
 		this.speed = speed;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	@Override
@@ -86,6 +45,9 @@ public class Cake implements IMovable, IEatable {
 	@Override
 	public void setNasty(boolean nasty) {
 		this.nasty = nasty;
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	@Override
@@ -96,5 +58,8 @@ public class Cake implements IMovable, IEatable {
 	@Override
 	public void setEatValue(int eatValue) {
 		this.eatValue = eatValue;
+		
+		setChanged();
+		notifyObservers();
 	}
 }
