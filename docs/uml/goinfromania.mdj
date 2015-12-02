@@ -917,7 +917,7 @@
 									"containerExtending": false,
 									"left": 450,
 									"top": 268.5,
-									"width": 85.14990234375,
+									"width": 84,
 									"height": 25,
 									"autoResize": false,
 									"stereotypeLabel": {
@@ -1228,7 +1228,7 @@
 									"containerExtending": false,
 									"left": 269.5,
 									"top": 500.5,
-									"width": 103.9326171875,
+									"width": 103,
 									"height": 25,
 									"autoResize": false,
 									"stereotypeLabel": {
@@ -1783,7 +1783,7 @@
 									"containerExtending": false,
 									"left": 555,
 									"top": 143,
-									"width": 55.65625,
+									"width": 55,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 1.761626928146862,
@@ -1924,7 +1924,7 @@
 									"containerExtending": false,
 									"left": 556,
 									"top": 251,
-									"width": 55.65625,
+									"width": 55,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -1.5653509749368417,
@@ -2544,7 +2544,7 @@
 									"containerExtending": false,
 									"left": 279.5,
 									"top": 196.5,
-									"width": 73.58447265625,
+									"width": 73,
 									"height": 25,
 									"autoResize": false,
 									"stereotypeLabel": {
@@ -3267,7 +3267,7 @@
 									"containerExtending": false,
 									"left": 280,
 									"top": 348.5,
-									"width": 76.49169921875,
+									"width": 76,
 									"height": 25,
 									"autoResize": false,
 									"stereotypeLabel": {
@@ -4449,7 +4449,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFRTW4lRq7/Xx8="
 					},
-					"name": "game",
+					"name": "bean",
 					"ownedElements": [
 						{
 							"_type": "UMLPackage",
@@ -8899,7 +8899,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from game)",
+											"text": "(from bean)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -11539,7 +11539,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from game)",
+											"text": "(from bean)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -14032,7 +14032,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from game)",
+											"text": "(from bean)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -20273,335 +20273,6 @@
 						},
 						{
 							"_type": "UMLPackage",
-							"_id": "AAAAAAFRUkoYumH3Mro=",
-							"_parent": {
-								"$ref": "AAAAAAFRTjt6dcjUrqA="
-							},
-							"name": "frame",
-							"ownedElements": [
-								{
-									"_type": "UMLClass",
-									"_id": "AAAAAAFRTjvT08ju20w=",
-									"_parent": {
-										"$ref": "AAAAAAFRUkoYumH3Mro="
-									},
-									"name": "GameFrame",
-									"visibility": "public",
-									"isAbstract": false,
-									"isFinalSpecialization": false,
-									"isLeaf": false,
-									"isActive": false
-								},
-								{
-									"_type": "UMLClass",
-									"_id": "AAAAAAFRTjz/0cmHpfA=",
-									"_parent": {
-										"$ref": "AAAAAAFRUkoYumH3Mro="
-									},
-									"name": "HomeView",
-									"ownedElements": [
-										{
-											"_type": "UMLAssociation",
-											"_id": "AAAAAAFRTkzzVc+xfwU=",
-											"_parent": {
-												"$ref": "AAAAAAFRTjz/0cmHpfA="
-											},
-											"end1": {
-												"_type": "UMLAssociationEnd",
-												"_id": "AAAAAAFRTkzzVs+ypFY=",
-												"_parent": {
-													"$ref": "AAAAAAFRTkzzVc+xfwU="
-												},
-												"reference": {
-													"$ref": "AAAAAAFRTjz/0cmHpfA="
-												},
-												"visibility": "public",
-												"navigable": true,
-												"aggregation": "none",
-												"multiplicity": "1..1",
-												"isReadOnly": false,
-												"isOrdered": false,
-												"isUnique": false,
-												"isDerived": false,
-												"isID": false
-											},
-											"end2": {
-												"_type": "UMLAssociationEnd",
-												"_id": "AAAAAAFRTkzzVs+zQgA=",
-												"_parent": {
-													"$ref": "AAAAAAFRTkzzVc+xfwU="
-												},
-												"reference": {
-													"$ref": "AAAAAAFRTjvT08ju20w="
-												},
-												"visibility": "public",
-												"navigable": true,
-												"aggregation": "composite",
-												"isReadOnly": false,
-												"isOrdered": false,
-												"isUnique": false,
-												"isDerived": false,
-												"isID": false
-											},
-											"visibility": "public",
-											"isDerived": false
-										}
-									],
-									"visibility": "public",
-									"isAbstract": false,
-									"isFinalSpecialization": false,
-									"isLeaf": false,
-									"isActive": false
-								},
-								{
-									"_type": "UMLClass",
-									"_id": "AAAAAAFRT/nBpQ+qwjw=",
-									"_parent": {
-										"$ref": "AAAAAAFRUkoYumH3Mro="
-									},
-									"name": "ListGamesView",
-									"ownedElements": [
-										{
-											"_type": "UMLAssociation",
-											"_id": "AAAAAAFRT/qzEROT5ng=",
-											"_parent": {
-												"$ref": "AAAAAAFRT/nBpQ+qwjw="
-											},
-											"end1": {
-												"_type": "UMLAssociationEnd",
-												"_id": "AAAAAAFRT/qzEROU3qk=",
-												"_parent": {
-													"$ref": "AAAAAAFRT/qzEROT5ng="
-												},
-												"reference": {
-													"$ref": "AAAAAAFRT/nBpQ+qwjw="
-												},
-												"visibility": "public",
-												"navigable": true,
-												"aggregation": "none",
-												"multiplicity": "1..1",
-												"isReadOnly": false,
-												"isOrdered": false,
-												"isUnique": false,
-												"isDerived": false,
-												"isID": false
-											},
-											"end2": {
-												"_type": "UMLAssociationEnd",
-												"_id": "AAAAAAFRT/qzFROVfUs=",
-												"_parent": {
-													"$ref": "AAAAAAFRT/qzEROT5ng="
-												},
-												"reference": {
-													"$ref": "AAAAAAFRTjvT08ju20w="
-												},
-												"visibility": "public",
-												"navigable": true,
-												"aggregation": "composite",
-												"isReadOnly": false,
-												"isOrdered": false,
-												"isUnique": false,
-												"isDerived": false,
-												"isID": false
-											},
-											"visibility": "public",
-											"isDerived": false
-										}
-									],
-									"visibility": "public",
-									"isAbstract": false,
-									"isFinalSpecialization": false,
-									"isLeaf": false,
-									"isActive": false
-								},
-								{
-									"_type": "UMLClass",
-									"_id": "AAAAAAFRTj2FNsmyxFw=",
-									"_parent": {
-										"$ref": "AAAAAAFRUkoYumH3Mro="
-									},
-									"name": "GameView",
-									"ownedElements": [
-										{
-											"_type": "UMLAssociation",
-											"_id": "AAAAAAFRTk0EzdADunk=",
-											"_parent": {
-												"$ref": "AAAAAAFRTj2FNsmyxFw="
-											},
-											"end1": {
-												"_type": "UMLAssociationEnd",
-												"_id": "AAAAAAFRTk0EzdAERQs=",
-												"_parent": {
-													"$ref": "AAAAAAFRTk0EzdADunk="
-												},
-												"reference": {
-													"$ref": "AAAAAAFRTj2FNsmyxFw="
-												},
-												"visibility": "public",
-												"navigable": true,
-												"aggregation": "none",
-												"multiplicity": "1..1",
-												"isReadOnly": false,
-												"isOrdered": false,
-												"isUnique": false,
-												"isDerived": false,
-												"isID": false
-											},
-											"end2": {
-												"_type": "UMLAssociationEnd",
-												"_id": "AAAAAAFRTk0EzdAFaik=",
-												"_parent": {
-													"$ref": "AAAAAAFRTk0EzdADunk="
-												},
-												"reference": {
-													"$ref": "AAAAAAFRTjvT08ju20w="
-												},
-												"visibility": "public",
-												"navigable": true,
-												"aggregation": "composite",
-												"isReadOnly": false,
-												"isOrdered": false,
-												"isUnique": false,
-												"isDerived": false,
-												"isID": false
-											},
-											"visibility": "public",
-											"isDerived": false
-										}
-									],
-									"visibility": "public",
-									"isAbstract": false,
-									"isFinalSpecialization": false,
-									"isLeaf": false,
-									"isActive": false
-								},
-								{
-									"_type": "UMLClass",
-									"_id": "AAAAAAFRUkWGWFjXHZg=",
-									"_parent": {
-										"$ref": "AAAAAAFRUkoYumH3Mro="
-									},
-									"name": "GameDescriptorPane",
-									"ownedElements": [
-										{
-											"_type": "UMLAssociation",
-											"_id": "AAAAAAFRUkakLlsRVu0=",
-											"_parent": {
-												"$ref": "AAAAAAFRUkWGWFjXHZg="
-											},
-											"end1": {
-												"_type": "UMLAssociationEnd",
-												"_id": "AAAAAAFRUkakL1sStd4=",
-												"_parent": {
-													"$ref": "AAAAAAFRUkakLlsRVu0="
-												},
-												"reference": {
-													"$ref": "AAAAAAFRUkWGWFjXHZg="
-												},
-												"visibility": "public",
-												"navigable": true,
-												"aggregation": "none",
-												"multiplicity": "1..1",
-												"isReadOnly": false,
-												"isOrdered": false,
-												"isUnique": false,
-												"isDerived": false,
-												"isID": false
-											},
-											"end2": {
-												"_type": "UMLAssociationEnd",
-												"_id": "AAAAAAFRUkakL1sTk1o=",
-												"_parent": {
-													"$ref": "AAAAAAFRUkakLlsRVu0="
-												},
-												"reference": {
-													"$ref": "AAAAAAFRT/nBpQ+qwjw="
-												},
-												"visibility": "public",
-												"navigable": true,
-												"aggregation": "composite",
-												"isReadOnly": false,
-												"isOrdered": false,
-												"isUnique": false,
-												"isDerived": false,
-												"isID": false
-											},
-											"visibility": "public",
-											"isDerived": false
-										}
-									],
-									"visibility": "public",
-									"isAbstract": false,
-									"isFinalSpecialization": false,
-									"isLeaf": false,
-									"isActive": false
-								},
-								{
-									"_type": "UMLClass",
-									"_id": "AAAAAAFRUlPY+3VwBE4=",
-									"_parent": {
-										"$ref": "AAAAAAFRUkoYumH3Mro="
-									},
-									"name": "ArenaView",
-									"ownedElements": [
-										{
-											"_type": "UMLAssociation",
-											"_id": "AAAAAAFRUlRVjniUEho=",
-											"_parent": {
-												"$ref": "AAAAAAFRUlPY+3VwBE4="
-											},
-											"end1": {
-												"_type": "UMLAssociationEnd",
-												"_id": "AAAAAAFRUlRVkHiVQT8=",
-												"_parent": {
-													"$ref": "AAAAAAFRUlRVjniUEho="
-												},
-												"reference": {
-													"$ref": "AAAAAAFRUlPY+3VwBE4="
-												},
-												"visibility": "public",
-												"navigable": true,
-												"aggregation": "none",
-												"multiplicity": "1..1",
-												"isReadOnly": false,
-												"isOrdered": false,
-												"isUnique": false,
-												"isDerived": false,
-												"isID": false
-											},
-											"end2": {
-												"_type": "UMLAssociationEnd",
-												"_id": "AAAAAAFRUlRVkHiWNus=",
-												"_parent": {
-													"$ref": "AAAAAAFRUlRVjniUEho="
-												},
-												"reference": {
-													"$ref": "AAAAAAFRTj2FNsmyxFw="
-												},
-												"visibility": "public",
-												"navigable": true,
-												"aggregation": "composite",
-												"isReadOnly": false,
-												"isOrdered": false,
-												"isUnique": false,
-												"isDerived": false,
-												"isID": false
-											},
-											"visibility": "public",
-											"isDerived": false
-										}
-									],
-									"visibility": "public",
-									"isAbstract": false,
-									"isFinalSpecialization": false,
-									"isLeaf": false,
-									"isActive": false
-								}
-							],
-							"visibility": "public"
-						},
-						{
-							"_type": "UMLPackage",
 							"_id": "AAAAAAFRUkqTQWQ/xKY=",
 							"_parent": {
 								"$ref": "AAAAAAFRTjt6dcjUrqA="
@@ -20771,6 +20442,324 @@
 								}
 							],
 							"visibility": "public"
+						},
+						{
+							"_type": "UMLClass",
+							"_id": "AAAAAAFRTjvT08ju20w=",
+							"_parent": {
+								"$ref": "AAAAAAFRTjt6dcjUrqA="
+							},
+							"name": "GameFrame",
+							"visibility": "public",
+							"isAbstract": false,
+							"isFinalSpecialization": false,
+							"isLeaf": false,
+							"isActive": false
+						},
+						{
+							"_type": "UMLClass",
+							"_id": "AAAAAAFRTjz/0cmHpfA=",
+							"_parent": {
+								"$ref": "AAAAAAFRTjt6dcjUrqA="
+							},
+							"name": "HomeView",
+							"ownedElements": [
+								{
+									"_type": "UMLAssociation",
+									"_id": "AAAAAAFRTkzzVc+xfwU=",
+									"_parent": {
+										"$ref": "AAAAAAFRTjz/0cmHpfA="
+									},
+									"end1": {
+										"_type": "UMLAssociationEnd",
+										"_id": "AAAAAAFRTkzzVs+ypFY=",
+										"_parent": {
+											"$ref": "AAAAAAFRTkzzVc+xfwU="
+										},
+										"reference": {
+											"$ref": "AAAAAAFRTjz/0cmHpfA="
+										},
+										"visibility": "public",
+										"navigable": true,
+										"aggregation": "none",
+										"multiplicity": "1..1",
+										"isReadOnly": false,
+										"isOrdered": false,
+										"isUnique": false,
+										"isDerived": false,
+										"isID": false
+									},
+									"end2": {
+										"_type": "UMLAssociationEnd",
+										"_id": "AAAAAAFRTkzzVs+zQgA=",
+										"_parent": {
+											"$ref": "AAAAAAFRTkzzVc+xfwU="
+										},
+										"reference": {
+											"$ref": "AAAAAAFRTjvT08ju20w="
+										},
+										"visibility": "public",
+										"navigable": true,
+										"aggregation": "composite",
+										"isReadOnly": false,
+										"isOrdered": false,
+										"isUnique": false,
+										"isDerived": false,
+										"isID": false
+									},
+									"visibility": "public",
+									"isDerived": false
+								}
+							],
+							"visibility": "public",
+							"isAbstract": false,
+							"isFinalSpecialization": false,
+							"isLeaf": false,
+							"isActive": false
+						},
+						{
+							"_type": "UMLClass",
+							"_id": "AAAAAAFRT/nBpQ+qwjw=",
+							"_parent": {
+								"$ref": "AAAAAAFRTjt6dcjUrqA="
+							},
+							"name": "ListGamesView",
+							"ownedElements": [
+								{
+									"_type": "UMLAssociation",
+									"_id": "AAAAAAFRT/qzEROT5ng=",
+									"_parent": {
+										"$ref": "AAAAAAFRT/nBpQ+qwjw="
+									},
+									"end1": {
+										"_type": "UMLAssociationEnd",
+										"_id": "AAAAAAFRT/qzEROU3qk=",
+										"_parent": {
+											"$ref": "AAAAAAFRT/qzEROT5ng="
+										},
+										"reference": {
+											"$ref": "AAAAAAFRT/nBpQ+qwjw="
+										},
+										"visibility": "public",
+										"navigable": true,
+										"aggregation": "none",
+										"multiplicity": "1..1",
+										"isReadOnly": false,
+										"isOrdered": false,
+										"isUnique": false,
+										"isDerived": false,
+										"isID": false
+									},
+									"end2": {
+										"_type": "UMLAssociationEnd",
+										"_id": "AAAAAAFRT/qzFROVfUs=",
+										"_parent": {
+											"$ref": "AAAAAAFRT/qzEROT5ng="
+										},
+										"reference": {
+											"$ref": "AAAAAAFRTjvT08ju20w="
+										},
+										"visibility": "public",
+										"navigable": true,
+										"aggregation": "composite",
+										"isReadOnly": false,
+										"isOrdered": false,
+										"isUnique": false,
+										"isDerived": false,
+										"isID": false
+									},
+									"visibility": "public",
+									"isDerived": false
+								}
+							],
+							"visibility": "public",
+							"isAbstract": false,
+							"isFinalSpecialization": false,
+							"isLeaf": false,
+							"isActive": false
+						},
+						{
+							"_type": "UMLClass",
+							"_id": "AAAAAAFRTj2FNsmyxFw=",
+							"_parent": {
+								"$ref": "AAAAAAFRTjt6dcjUrqA="
+							},
+							"name": "GameView",
+							"ownedElements": [
+								{
+									"_type": "UMLAssociation",
+									"_id": "AAAAAAFRTk0EzdADunk=",
+									"_parent": {
+										"$ref": "AAAAAAFRTj2FNsmyxFw="
+									},
+									"end1": {
+										"_type": "UMLAssociationEnd",
+										"_id": "AAAAAAFRTk0EzdAERQs=",
+										"_parent": {
+											"$ref": "AAAAAAFRTk0EzdADunk="
+										},
+										"reference": {
+											"$ref": "AAAAAAFRTj2FNsmyxFw="
+										},
+										"visibility": "public",
+										"navigable": true,
+										"aggregation": "none",
+										"multiplicity": "1..1",
+										"isReadOnly": false,
+										"isOrdered": false,
+										"isUnique": false,
+										"isDerived": false,
+										"isID": false
+									},
+									"end2": {
+										"_type": "UMLAssociationEnd",
+										"_id": "AAAAAAFRTk0EzdAFaik=",
+										"_parent": {
+											"$ref": "AAAAAAFRTk0EzdADunk="
+										},
+										"reference": {
+											"$ref": "AAAAAAFRTjvT08ju20w="
+										},
+										"visibility": "public",
+										"navigable": true,
+										"aggregation": "composite",
+										"isReadOnly": false,
+										"isOrdered": false,
+										"isUnique": false,
+										"isDerived": false,
+										"isID": false
+									},
+									"visibility": "public",
+									"isDerived": false
+								}
+							],
+							"visibility": "public",
+							"isAbstract": false,
+							"isFinalSpecialization": false,
+							"isLeaf": false,
+							"isActive": false
+						},
+						{
+							"_type": "UMLClass",
+							"_id": "AAAAAAFRUkWGWFjXHZg=",
+							"_parent": {
+								"$ref": "AAAAAAFRTjt6dcjUrqA="
+							},
+							"name": "GameDescriptorPane",
+							"ownedElements": [
+								{
+									"_type": "UMLAssociation",
+									"_id": "AAAAAAFRUkakLlsRVu0=",
+									"_parent": {
+										"$ref": "AAAAAAFRUkWGWFjXHZg="
+									},
+									"end1": {
+										"_type": "UMLAssociationEnd",
+										"_id": "AAAAAAFRUkakL1sStd4=",
+										"_parent": {
+											"$ref": "AAAAAAFRUkakLlsRVu0="
+										},
+										"reference": {
+											"$ref": "AAAAAAFRUkWGWFjXHZg="
+										},
+										"visibility": "public",
+										"navigable": true,
+										"aggregation": "none",
+										"multiplicity": "1..1",
+										"isReadOnly": false,
+										"isOrdered": false,
+										"isUnique": false,
+										"isDerived": false,
+										"isID": false
+									},
+									"end2": {
+										"_type": "UMLAssociationEnd",
+										"_id": "AAAAAAFRUkakL1sTk1o=",
+										"_parent": {
+											"$ref": "AAAAAAFRUkakLlsRVu0="
+										},
+										"reference": {
+											"$ref": "AAAAAAFRT/nBpQ+qwjw="
+										},
+										"visibility": "public",
+										"navigable": true,
+										"aggregation": "composite",
+										"isReadOnly": false,
+										"isOrdered": false,
+										"isUnique": false,
+										"isDerived": false,
+										"isID": false
+									},
+									"visibility": "public",
+									"isDerived": false
+								}
+							],
+							"visibility": "public",
+							"isAbstract": false,
+							"isFinalSpecialization": false,
+							"isLeaf": false,
+							"isActive": false
+						},
+						{
+							"_type": "UMLClass",
+							"_id": "AAAAAAFRUlPY+3VwBE4=",
+							"_parent": {
+								"$ref": "AAAAAAFRTjt6dcjUrqA="
+							},
+							"name": "ArenaView",
+							"ownedElements": [
+								{
+									"_type": "UMLAssociation",
+									"_id": "AAAAAAFRUlRVjniUEho=",
+									"_parent": {
+										"$ref": "AAAAAAFRUlPY+3VwBE4="
+									},
+									"end1": {
+										"_type": "UMLAssociationEnd",
+										"_id": "AAAAAAFRUlRVkHiVQT8=",
+										"_parent": {
+											"$ref": "AAAAAAFRUlRVjniUEho="
+										},
+										"reference": {
+											"$ref": "AAAAAAFRUlPY+3VwBE4="
+										},
+										"visibility": "public",
+										"navigable": true,
+										"aggregation": "none",
+										"multiplicity": "1..1",
+										"isReadOnly": false,
+										"isOrdered": false,
+										"isUnique": false,
+										"isDerived": false,
+										"isID": false
+									},
+									"end2": {
+										"_type": "UMLAssociationEnd",
+										"_id": "AAAAAAFRUlRVkHiWNus=",
+										"_parent": {
+											"$ref": "AAAAAAFRUlRVjniUEho="
+										},
+										"reference": {
+											"$ref": "AAAAAAFRTj2FNsmyxFw="
+										},
+										"visibility": "public",
+										"navigable": true,
+										"aggregation": "composite",
+										"isReadOnly": false,
+										"isOrdered": false,
+										"isUnique": false,
+										"isDerived": false,
+										"isID": false
+									},
+									"visibility": "public",
+									"isDerived": false
+								}
+							],
+							"visibility": "public",
+							"isAbstract": false,
+							"isFinalSpecialization": false,
+							"isLeaf": false,
+							"isActive": false
 						}
 					],
 					"visibility": "public"
@@ -23818,9 +23807,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 212,
+									"left": 210,
 									"top": 200,
-									"width": 21.68359375,
+									"width": 24,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -5.259932770064791,
@@ -24231,9 +24220,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 88,
+									"left": 86,
 									"top": 201,
-									"width": 21.68359375,
+									"width": 24,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 0.9813247986389829,
@@ -24644,9 +24633,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 512,
+									"left": 510,
 									"top": 198,
-									"width": 21.68359375,
+									"width": 24,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -0.3887784003376158,
@@ -25341,9 +25330,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 218,
+									"left": 216,
 									"top": 360,
-									"width": 21.68359375,
+									"width": 24,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -0.6045625769466387,
@@ -26738,9 +26727,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 356,
+									"left": 354,
 									"top": 200,
-									"width": 21.68359375,
+									"width": 24,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 5.370174404668967,
@@ -27859,9 +27848,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 632,
+									"left": 630,
 									"top": 360,
-									"width": 21.68359375,
+									"width": 24,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 5.360109148000246,
@@ -28556,9 +28545,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 376,
+									"left": 374,
 									"top": 360,
-									"width": 21.68359375,
+									"width": 24,
 									"height": 13,
 									"autoResize": false,
 									"alpha": 5.648322791035656,
@@ -29253,9 +29242,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 520,
+									"left": 518,
 									"top": 359,
-									"width": 21.68359375,
+									"width": 24,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -5.465472694132343,
