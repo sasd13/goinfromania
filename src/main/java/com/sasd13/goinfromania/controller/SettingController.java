@@ -54,7 +54,7 @@ public class SettingController implements ActionListener {
 	}
 
 	private void performSave() {
-		SettingPreferences settingPreferences = SettingPreferencesFactory.get(this.setting.getClass().getSimpleName());
+		SettingPreferences settingPreferences = SettingPreferencesFactory.make(this.setting.getClass().getSimpleName());
 		settingPreferences.push(this.setting);
 	}
 	

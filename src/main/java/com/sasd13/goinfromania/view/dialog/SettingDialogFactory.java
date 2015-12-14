@@ -2,9 +2,7 @@ package com.sasd13.goinfromania.view.dialog;
 
 public class SettingDialogFactory {
 
-	private SettingDialogFactory() {}
-	
-	public static SettingDialog get(String dialogName) {
+	public static SettingDialog make(String dialogName) {
 		if ("GAMEPAD".equalsIgnoreCase(dialogName)) {
 			return new SettingDialogGamePad();
 		}

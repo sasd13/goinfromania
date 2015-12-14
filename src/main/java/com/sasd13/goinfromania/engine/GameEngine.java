@@ -94,7 +94,7 @@ public class GameEngine {
 	public static void openGame(Game game) {
 		GameEngine.game = game;
 		
-		gamePad = (GamePad) SettingPreferencesFactory.get("GAMEPAD").pull();
+		gamePad = (GamePad) SettingPreferencesFactory.make("GAMEPAD").pull();
 		
 		frameController.displayGame(game);
 		

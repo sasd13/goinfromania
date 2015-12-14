@@ -23,7 +23,7 @@ public class MenuSettingController implements ActionListener {
 	}
 	
 	private SettingDialog createDialogAndBindSetting(String command) {
-		SettingDialog settingDialog = SettingDialogFactory.get(command);
+		SettingDialog settingDialog = SettingDialogFactory.make(command);
 		
 		bindSetting(command, settingDialog);
 		
@@ -43,7 +43,7 @@ public class MenuSettingController implements ActionListener {
 		if ("GAMEPAD".equalsIgnoreCase(command) && GameEngine.hasGameInProgress()) {
 			setting = GameEngine.getGamePad();
 		} else {
-			setting = SettingPreferencesFactory.get(command).pull();
+			setting = SettingPreferencesFactory.make(command).pull();
 		}
 		
 		return setting;
