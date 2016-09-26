@@ -4,11 +4,6 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.util.Observable;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="elements")
 public abstract class Element extends Observable implements IElement {
 	
 	private int id;
