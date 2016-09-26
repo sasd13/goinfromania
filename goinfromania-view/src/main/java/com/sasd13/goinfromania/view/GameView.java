@@ -31,8 +31,8 @@ public class GameView extends JPanel implements Observer {
 	}
 
 	private void createArena() {
-		this.arenaView = new ArenaView();
-		add(this.arenaView, BorderLayout.CENTER);
+		arenaView = new ArenaView();
+		add(arenaView, BorderLayout.CENTER);
 	}
 
 	private void createPanelPig() {
@@ -48,8 +48,8 @@ public class GameView extends JPanel implements Observer {
 		JPanel panelLife = new JPanel();
 		
 		panelLife.add(new JLabel("Vie : "));
-		this.progressBarLife = new JProgressBar(PROGRESSBAR_MIN, PROGRESSBAR_MAX);
-		panelLife.add(this.progressBarLife);
+		progressBarLife = new JProgressBar(PROGRESSBAR_MIN, PROGRESSBAR_MAX);
+		panelLife.add(progressBarLife);
 		
 		panelPig.add(panelLife);
 	}
@@ -58,8 +58,8 @@ public class GameView extends JPanel implements Observer {
 		JPanel panelEnergy = new JPanel();
 		
 		panelEnergy.add(new JLabel("Energie : "));
-		this.progressBarEnergy = new JProgressBar(PROGRESSBAR_MIN, PROGRESSBAR_MAX);
-		panelEnergy.add(this.progressBarEnergy);
+		progressBarEnergy = new JProgressBar(PROGRESSBAR_MIN, PROGRESSBAR_MAX);
+		panelEnergy.add(progressBarEnergy);
 		
 		panelPig.add(panelEnergy);
 	}
@@ -76,8 +76,8 @@ public class GameView extends JPanel implements Observer {
 	private void addLabelState(JPanel panelGame) {
 		JPanel panelState = new JPanel();
 		
-		this.labelState = new JLabel();
-		panelState.add(this.labelState);
+		labelState = new JLabel();
+		panelState.add(labelState);
 		
 		panelGame.add(panelState);
 	}
@@ -86,8 +86,8 @@ public class GameView extends JPanel implements Observer {
 		JPanel panelScore = new JPanel();
 		
 		panelScore.add(new JLabel("Score : "));
-		this.labelScore = new JLabel();
-		panelScore.add(this.labelScore);
+		labelScore = new JLabel();
+		panelScore.add(labelScore);
 		
 		panelGame.add(panelScore);
 	}
@@ -100,16 +100,16 @@ public class GameView extends JPanel implements Observer {
 	public void update(Observable observable, Object arg) {
 		Game game = (Game) observable;
 		
-		this.labelScore.setText(String.valueOf(game.getScore()));
+		labelScore.setText(String.valueOf(game.getScore()));
 		
 		Pig pig = game.getPig();
-		this.progressBarLife.setValue(pig.getLife());
-		this.progressBarEnergy.setValue(pig.getEnergy());
+		progressBarLife.setValue(pig.getLife());
+		progressBarEnergy.setValue(pig.getEnergy());
 		
 		if (game.getState() == State.PAUSED) {
-			this.labelState.setText(String.valueOf(game.getState()));
+			labelState.setText(String.valueOf(game.getState()));
 		} else {
-			this.labelState.setText("");
+			labelState.setText("");
 		}
 	}
 }

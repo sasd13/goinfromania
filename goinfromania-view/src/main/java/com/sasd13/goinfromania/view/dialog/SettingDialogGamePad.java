@@ -28,7 +28,7 @@ public class SettingDialogGamePad extends SettingDialog {
 		public GamePadTextField() {
 			super();
 			
-			this.keyCode = KeyEvent.VK_UNDEFINED;
+			keyCode = KeyEvent.VK_UNDEFINED;
 			
 			addFocusListener(new FocusListener() {
 				
@@ -64,18 +64,18 @@ public class SettingDialogGamePad extends SettingDialog {
 		}
 		
 		public int getKeyCode() {
-			return this.keyCode;
+			return keyCode;
 		}
 		
 		public void setKeyCode(int keyCode) {
-			this.keyCode = keyCode;
+			keyCode = keyCode;
 		}
 		
 		private void dispatch(int keyCode) {
 			setKeyCode(keyCode);
 			
-			if (this.keyCode != KeyEvent.VK_UNDEFINED) {
-				setText(KeyEvent.getKeyText(this.keyCode));
+			if (keyCode != KeyEvent.VK_UNDEFINED) {
+				setText(KeyEvent.getKeyText(keyCode));
 			} else {
 				setText("");
 				JOptionPane.showMessageDialog(null, "Entrer une touche valide", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -100,9 +100,9 @@ public class SettingDialogGamePad extends SettingDialog {
 	
 	@Override
 	protected void createForm() {
-		this.textFields = new GamePadTextField[6];
+		textFields = new GamePadTextField[6];
 		
-		JPanel panelForm = new JPanel(new GridLayout(this.textFields.length, 2));
+		JPanel panelForm = new JPanel(new GridLayout(textFields.length, 2));
 		panelForm.setBorder(BorderFactory.createTitledBorder("Configurer les touches du clavier"));
 		
 		addTextFieldsToPanelForm(panelForm);
@@ -113,48 +113,48 @@ public class SettingDialogGamePad extends SettingDialog {
 	private void addTextFieldsToPanelForm(JPanel panelForm) {
 		String label = "Label";
 		
-		for (int i=0; i<this.textFields.length; i++) {
+		for (int i=0; i<textFields.length; i++) {
 			switch (i) {
 				case 0:
 					label = "Start";
 					
-					this.textFieldKeyStart = new GamePadTextField();
-					this.textFields[i] = this.textFieldKeyStart;
+					textFieldKeyStart = new GamePadTextField();
+					textFields[i] = textFieldKeyStart;
 					break;
 				case 1:
 					label = "Move North";
 					
-					this.textFieldKeyMoveNorth = new GamePadTextField();
-					this.textFields[i] = this.textFieldKeyMoveNorth;
+					textFieldKeyMoveNorth = new GamePadTextField();
+					textFields[i] = textFieldKeyMoveNorth;
 					break;
 				case 2:
 					label = "Move South";
 					
-					this.textFieldKeyMoveSouth = new GamePadTextField();
-					this.textFields[i] = this.textFieldKeyMoveSouth;
+					textFieldKeyMoveSouth = new GamePadTextField();
+					textFields[i] = textFieldKeyMoveSouth;
 					break;
 				case 3:
 					label = "Move West";
 					
-					this.textFieldKeyMoveWest = new GamePadTextField();
-					this.textFields[i] = this.textFieldKeyMoveWest;
+					textFieldKeyMoveWest = new GamePadTextField();
+					textFields[i] = textFieldKeyMoveWest;
 					break;
 				case 4:
 					label = "Move East";
 					
-					this.textFieldKeyMoveEast = new GamePadTextField();
-					this.textFields[i] = this.textFieldKeyMoveEast;
+					textFieldKeyMoveEast = new GamePadTextField();
+					textFields[i] = textFieldKeyMoveEast;
 					break;
 				case 5:
 					label = "Pig Attak";
 					
-					this.textFieldKeyPigAttak = new GamePadTextField();
-					this.textFields[i] = this.textFieldKeyPigAttak;
+					textFieldKeyPigAttak = new GamePadTextField();
+					textFields[i] = textFieldKeyPigAttak;
 					break;
 			}
 			
 			panelForm.add(new JLabel(label));
-			panelForm.add(this.textFields[i]);
+			panelForm.add(textFields[i]);
 		}
 	}
 	
@@ -164,7 +164,7 @@ public class SettingDialogGamePad extends SettingDialog {
 	}
 	
 	private boolean hasUndefined() {
-		for (GamePadTextField gamePadTextField : this.textFields) {
+		for (GamePadTextField gamePadTextField : textFields) {
 			if (gamePadTextField.getKeyCode() == KeyEvent.VK_UNDEFINED) {
 				return true;
 			}
@@ -174,9 +174,9 @@ public class SettingDialogGamePad extends SettingDialog {
 	}
 	
 	private boolean hasDuplicated() {
-		for (int i=0; i<this.textFields.length - 1; i++) {
-			for (int j=i+1; j<this.textFields.length; j++) {
-				if (this.textFields[i].getKeyCode() == this.textFields[j].getKeyCode()) {
+		for (int i=0; i<textFields.length - 1; i++) {
+			for (int j=i+1; j<textFields.length; j++) {
+				if (textFields[i].getKeyCode() == textFields[j].getKeyCode()) {
 					return true;
 				}
 			}
@@ -203,12 +203,12 @@ public class SettingDialogGamePad extends SettingDialog {
 	protected Setting getSettingFromForm() {
 		GamePad gamePad = new GamePad();
 		
-		gamePad.setKeyStart(this.textFieldKeyStart.getKeyCode());
-		gamePad.setKeyMoveNorth(this.textFieldKeyMoveNorth.getKeyCode());
-		gamePad.setKeyMoveSouth(this.textFieldKeyMoveSouth.getKeyCode());
-		gamePad.setKeyMoveWest(this.textFieldKeyMoveWest.getKeyCode());
-		gamePad.setKeyMoveEast(this.textFieldKeyMoveEast.getKeyCode());
-		gamePad.setKeyPigAttak(this.textFieldKeyPigAttak.getKeyCode());
+		gamePad.setKeyStart(textFieldKeyStart.getKeyCode());
+		gamePad.setKeyMoveNorth(textFieldKeyMoveNorth.getKeyCode());
+		gamePad.setKeyMoveSouth(textFieldKeyMoveSouth.getKeyCode());
+		gamePad.setKeyMoveWest(textFieldKeyMoveWest.getKeyCode());
+		gamePad.setKeyMoveEast(textFieldKeyMoveEast.getKeyCode());
+		gamePad.setKeyPigAttak(textFieldKeyPigAttak.getKeyCode());
 		
 		return gamePad;		
 	}
@@ -217,23 +217,23 @@ public class SettingDialogGamePad extends SettingDialog {
 	public void update(Observable observable, Object arg) {
 		GamePad gamePad = (GamePad) observable;
 		
-		this.textFieldKeyStart.setText(KeyEvent.getKeyText(gamePad.getKeyStart()));
-		this.textFieldKeyStart.setKeyCode(gamePad.getKeyStart());
+		textFieldKeyStart.setText(KeyEvent.getKeyText(gamePad.getKeyStart()));
+		textFieldKeyStart.setKeyCode(gamePad.getKeyStart());
 		
-		this.textFieldKeyMoveNorth.setText(KeyEvent.getKeyText(gamePad.getKeyMoveNorth()));
-		this.textFieldKeyMoveNorth.setKeyCode(gamePad.getKeyMoveNorth());
+		textFieldKeyMoveNorth.setText(KeyEvent.getKeyText(gamePad.getKeyMoveNorth()));
+		textFieldKeyMoveNorth.setKeyCode(gamePad.getKeyMoveNorth());
 		
-		this.textFieldKeyMoveSouth.setText(KeyEvent.getKeyText(gamePad.getKeyMoveSouth()));
-		this.textFieldKeyMoveSouth.setKeyCode(gamePad.getKeyMoveSouth());
+		textFieldKeyMoveSouth.setText(KeyEvent.getKeyText(gamePad.getKeyMoveSouth()));
+		textFieldKeyMoveSouth.setKeyCode(gamePad.getKeyMoveSouth());
 		
-		this.textFieldKeyMoveWest.setText(KeyEvent.getKeyText(gamePad.getKeyMoveWest()));
-		this.textFieldKeyMoveWest.setKeyCode(gamePad.getKeyMoveWest());
+		textFieldKeyMoveWest.setText(KeyEvent.getKeyText(gamePad.getKeyMoveWest()));
+		textFieldKeyMoveWest.setKeyCode(gamePad.getKeyMoveWest());
 		
-		this.textFieldKeyMoveEast.setText(KeyEvent.getKeyText(gamePad.getKeyMoveEast()));
-		this.textFieldKeyMoveEast.setKeyCode(gamePad.getKeyMoveEast());
+		textFieldKeyMoveEast.setText(KeyEvent.getKeyText(gamePad.getKeyMoveEast()));
+		textFieldKeyMoveEast.setKeyCode(gamePad.getKeyMoveEast());
 		
-		this.textFieldKeyPigAttak.setText(KeyEvent.getKeyText(gamePad.getKeyPigAttak()));
-		this.textFieldKeyPigAttak.setKeyCode(gamePad.getKeyPigAttak());
+		textFieldKeyPigAttak.setText(KeyEvent.getKeyText(gamePad.getKeyPigAttak()));
+		textFieldKeyPigAttak.setKeyCode(gamePad.getKeyPigAttak());
 		
 		super.update(observable, arg);
 	}

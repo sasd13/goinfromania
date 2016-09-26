@@ -8,8 +8,10 @@ import com.sasd13.goinfromania.dao.GameDAO;
 
 public class GameDescriptorController implements ActionListener {
 	
-	private GameEngine gameEngine = GameEngine.getInstance();
+	public static final String COMMAND_CONTINUE = "CONTINUE";
+	public static final String COMMAND_DELETE = "DELETE";
 	
+	private GameEngine gameEngine = GameEngine.getInstance();
 	private Game game;
 	
 	public void setGame(Game game) {
@@ -20,23 +22,20 @@ public class GameDescriptorController implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
 		
-		if ("CONTINUE".equalsIgnoreCase(command)) {
+		if (COMMAND_CONTINUE.equalsIgnoreCase(command)) {
 			actionContinue();
-		} else if ("DELETE".equalsIgnoreCase(command)) {
+		} else if (COMMAND_DELETE.equalsIgnoreCase(command)) {
 			actionDelete();
 		}
 	}
 	
 	private void actionContinue() {
 		gameEngine.openGame(this.game);
-		//FrameController.displayGame(game);
 	}
 	
 	private void actionDelete() {
 		//this.gameDescriptorPane.clear();
 		
 		GameDAO.delete(this.game);
-		
-		//FrameController.displayListGames();
 	}
 }

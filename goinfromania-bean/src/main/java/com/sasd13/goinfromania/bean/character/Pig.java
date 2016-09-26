@@ -20,7 +20,7 @@ public class Pig extends Character implements IPowerful {
 	
 	@Override
 	public boolean hasEnergy() {
-		return this.energy > 0;
+		return energy > 0;
 	}
 
 	@Override

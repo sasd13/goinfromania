@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
 import com.sasd13.goinfromania.controller.FrameController;
+import com.sasd13.goinfromania.util.GameConstants;
 import com.sasd13.goinfromania.util.ViewConstants;
 import com.sasd13.goinfromania.view.menu.GameMenuBar;
 
@@ -18,7 +19,7 @@ public class Frame extends JFrame {
 	private GameView gameView;
 	
 	public Frame() {
-		super("Goinfr'o'mania");
+		super(GameConstants.NAME);
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
@@ -29,75 +30,73 @@ public class Frame extends JFrame {
 	}
 	
 	private void createGameMenuBar() {
-		this.gameMenuBar = new GameMenuBar();
-		setJMenuBar(this.gameMenuBar);
+		gameMenuBar = new GameMenuBar();
+		setJMenuBar(gameMenuBar);
 	}
 	
 	public void setMenuEditEnabled(boolean enabled) {
-		this.gameMenuBar.setMenuEditEnabled(enabled);
+		gameMenuBar.setMenuEditEnabled(enabled);
 	}
 	
 	private void createLayers() {		
 		Dimension dimension = new Dimension(ViewConstants.PANEL_WIDTH, ViewConstants.PANEL_HEIGHT);
 		
-		this.layersPane = new JLayeredPane();
-		this.layersPane.setPreferredSize(dimension);
+		layersPane = new JLayeredPane();
+		layersPane.setPreferredSize(dimension);
 		
 		addLayerHome(dimension);
 		addLayerListGames(dimension);
 		addLayerGame(dimension);
 		
-		getContentPane().add(this.layersPane);
+		getContentPane().add(layersPane);
 	}
 
 	private void addLayerHome(Dimension dimension) {
-		this.homeView = new HomeView();
-		this.homeView.setBounds(0, 0, dimension.width, dimension.height);
-		this.layersPane.add(this.homeView, JLayeredPane.DEFAULT_LAYER);
+		homeView = new HomeView();
+		homeView.setBounds(0, 0, dimension.width, dimension.height);
+		layersPane.add(homeView, JLayeredPane.DEFAULT_LAYER);
 	}
 
 	private void addLayerListGames(Dimension dimension) {
-		this.listGamesView = new ListGamesView();
-		this.listGamesView.setBounds(0, 0, dimension.width, dimension.height);
-		this.layersPane.add(this.listGamesView, JLayeredPane.DEFAULT_LAYER);
+		listGamesView = new ListGamesView();
+		listGamesView.setBounds(0, 0, dimension.width, dimension.height);
+		layersPane.add(listGamesView, JLayeredPane.DEFAULT_LAYER);
 	}
 
 	private void addLayerGame(Dimension dimension) {
-		this.gameView = new GameView();
-		this.gameView.setBounds(0, 0, dimension.width, dimension.height);
-		this.layersPane.add(this.gameView, JLayeredPane.DEFAULT_LAYER);
-	}
-	
-	public ListGamesView getListGamesView() {
-		return listGamesView;
-	}
-	
-	public GameView getGameView() {
-		return gameView;
+		gameView = new GameView();
+		gameView.setBounds(0, 0, dimension.width, dimension.height);
+		layersPane.add(gameView, JLayeredPane.DEFAULT_LAYER);
 	}
 	
 	public void displayHomeView() {
-		this.homeView.setVisible(true);
-		this.layersPane.moveToFront(this.homeView);
+		setMenuEditEnabled(false);
 		
-		this.gameView.setVisible(false);
-		this.listGamesView.setVisible(false);
+		homeView.setVisible(true);
+		layersPane.moveToFront(homeView);
+		
+		gameView.setVisible(false);
+		listGamesView.setVisible(false);
 	}
 	
 	public void displayListGamesView() {
-		this.listGamesView.setVisible(true);
-		this.layersPane.moveToFront(this.listGamesView);
+		setMenuEditEnabled(false);
 		
-		this.homeView.setVisible(false);
-		this.gameView.setVisible(false);
+		listGamesView.setVisible(true);
+		layersPane.moveToFront(listGamesView);
+		
+		homeView.setVisible(false);
+		gameView.setVisible(false);
 	}
 	
 	public void displayGameView() {
-		this.gameView.setVisible(true);
-		this.gameView.getArenaView().requestFocusInWindow();
-		this.layersPane.moveToFront(this.gameView);
+		setMenuEditEnabled(true);
 		
-		this.homeView.setVisible(false);
-		this.listGamesView.setVisible(false);
+		gameView.setVisible(true);
+		gameView.getArenaView().requestFocusInWindow();
+		layersPane.moveToFront(gameView);
+		
+		homeView.setVisible(false);
+		listGamesView.setVisible(false);
 	}
 }

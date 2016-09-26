@@ -47,7 +47,7 @@ public abstract class SettingDialog extends JDialog implements Observer {
 		
 		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
 		String command = null;
-		this.settingController = new SettingController();
+		settingController = new SettingController();
 		
 		int indice = -1;
 		for (JButton button : buttons) {
@@ -68,7 +68,7 @@ public abstract class SettingDialog extends JDialog implements Observer {
 			button.setPreferredSize(dimension);
 			button.setFocusable(false);
 			button.setActionCommand(command);
-			button.addActionListener(this.settingController);
+			button.addActionListener(settingController);
 			
 			panelButtons.add(button);
 		}
@@ -82,6 +82,6 @@ public abstract class SettingDialog extends JDialog implements Observer {
 	
 	@Override
 	public void update(Observable observable, Object arg) {
-		this.settingController.setSetting((Setting) observable);
+		//settingController.setSetting((Setting) observable);
 	}
 }

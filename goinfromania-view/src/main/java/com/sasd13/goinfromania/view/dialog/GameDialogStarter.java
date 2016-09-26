@@ -25,9 +25,9 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 	public GameDialogStarter(GameView gameView) {
 		super(gameView);
 		
-		this.layeredPane = new JLayeredPane();
+		layeredPane = new JLayeredPane();
 		
-		setContentPane(this.layeredPane);
+		setContentPane(layeredPane);
 		setSize(new Dimension(ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT));
 		setBackground(Color.BLACK);
 		createLayers();
@@ -41,13 +41,13 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 	}
 
 	private void createLayerReady(Font font) {
-		this.panelReady = new JPanel();
-		this.panelReady.setBackground(Color.BLACK);
-		this.panelReady.setBounds(0, 0, ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT);
+		panelReady = new JPanel();
+		panelReady.setBackground(Color.BLACK);
+		panelReady.setBounds(0, 0, ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT);
 		
 		addLabelReady(font);
 		
-		this.layeredPane.add(this.panelReady, JLayeredPane.DEFAULT_LAYER);
+		layeredPane.add(panelReady, JLayeredPane.DEFAULT_LAYER);
 	}
 
 	private void addLabelReady(Font font) {
@@ -55,17 +55,17 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 		labelReady.setFont(font);
 		labelReady.setForeground(Color.PINK);
 		
-		this.panelReady.add(labelReady);
+		panelReady.add(labelReady);
 	}
 	
 	private void createLayerGo(Font font) {
-		this.panelGo = new JPanel();
-		this.panelGo.setBackground(Color.BLACK);
-		this.panelGo.setBounds(0, 0, ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT);
+		panelGo = new JPanel();
+		panelGo.setBackground(Color.BLACK);
+		panelGo.setBounds(0, 0, ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT);
 		
 		addLabelGo(font);
 		
-		this.layeredPane.add(this.panelGo, JLayeredPane.DEFAULT_LAYER);
+		layeredPane.add(panelGo, JLayeredPane.DEFAULT_LAYER);
 	}
 
 	private void addLabelGo(Font font) {
@@ -73,50 +73,50 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 		labelGo.setFont(font);
 		labelGo.setForeground(Color.PINK);
 		
-		this.panelGo.add(labelGo);
+		panelGo.add(labelGo);
 	}
 	
 	public void display() {
-		this.count = -1;
+		count = -1;
 		
 		setTimer();
-		setLocationRelativeTo(this.gameView);
+		setLocationRelativeTo(gameView);
 		setVisible(true);
 		
-		this.timer.start();
+		timer.start();
 	}
 
 	private void setTimer() {
-		this.timer = new Timer(0, this);
-		this.timer.setDelay(1200);
+		timer = new Timer(0, this);
+		timer.setDelay(1200);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.count++;
+		count++;
 		
-		if (this.count == 0) {
+		if (count == 0) {
 			displayReady();
 		} else if (count == 1) {
 			displayGo();
 		} else {
-			this.timer.stop();
+			timer.stop();
 			
 			dispose();
 		}
 	}
 
 	private void displayReady() {
-		this.panelReady.setVisible(true);
-		this.layeredPane.moveToFront(this.panelReady);
+		panelReady.setVisible(true);
+		layeredPane.moveToFront(panelReady);
 		
-		this.panelGo.setVisible(false);
+		panelGo.setVisible(false);
 	}
 
 	private void displayGo() {
-		this.panelGo.setVisible(true);
-		this.layeredPane.moveToFront(this.panelGo);
+		panelGo.setVisible(true);
+		layeredPane.moveToFront(panelGo);
 		
-		this.panelReady.setVisible(false);
+		panelReady.setVisible(false);
 	}
 }

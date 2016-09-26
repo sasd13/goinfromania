@@ -54,11 +54,11 @@ public class GameDialogResult extends GameDialog {
 	}
 
 	private void createLabelOfLayerResult(JPanel panelResult) {
-		this.labelResult = new JLabel("", SwingConstants.HORIZONTAL);
-		this.labelResult.setFont(new Font(Font.SANS_SERIF, Font.BOLD | Font.ITALIC, 96));
-		this.labelResult.setForeground(Color.PINK);
+		labelResult = new JLabel("", SwingConstants.HORIZONTAL);
+		labelResult.setFont(new Font(Font.SANS_SERIF, Font.BOLD | Font.ITALIC, 96));
+		labelResult.setForeground(Color.PINK);
 		
-		panelResult.add(this.labelResult, BorderLayout.CENTER);
+		panelResult.add(labelResult, BorderLayout.CENTER);
 	}
 
 	private void createLayerScore(Dimension dimension) {
@@ -72,9 +72,9 @@ public class GameDialogResult extends GameDialog {
 	}
 
 	private void createLabelOfLayerScore(JPanel panelScore) {
-		this.labelScore = new JLabel("", SwingConstants.HORIZONTAL);
+		labelScore = new JLabel("", SwingConstants.HORIZONTAL);
 		
-		panelScore.add(this.labelScore, BorderLayout.CENTER);
+		panelScore.add(labelScore, BorderLayout.CENTER);
 	}
 
 	private void createButtonsOfLayerScore(JPanel panelScore) {
@@ -122,12 +122,12 @@ public class GameDialogResult extends GameDialog {
 		
 		switch (game.getResult()) {
 			case WIN:
-				this.labelResult.setText("Gagn�!!!");
+				labelResult.setText("Gagn�!!!");
 				break;
 			case LOOSE:
-				this.labelResult.setText("Perdu...");
+				labelResult.setText("Perdu...");
 				break;
 		}
-		this.labelScore.setText(String.valueOf(game.getScore()));
+		labelScore.setText(String.valueOf(game.getScore()));
 	}
 }

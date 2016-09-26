@@ -14,7 +14,7 @@ public class HomeView extends JPanel {
 	public HomeView() {
 		super();
 		
-		this.image = ImageLoader.loadFromPath("home.png");
+		image = ImageLoader.loadFromPath("home.png");
 		
 		setLayout(null);
 	}
@@ -23,6 +23,6 @@ public class HomeView extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		g.drawImage(this.image, 0, 0, this);
+		g.drawImage(image, 0, 0, this);
 	}
 }

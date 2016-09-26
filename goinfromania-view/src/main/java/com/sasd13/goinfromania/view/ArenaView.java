@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,10 +18,12 @@ import com.sasd13.goinfromania.util.ViewConstants;
 
 public class ArenaView extends JPanel implements Observer {
 
-	private Game game;
+	private List<IElement> elements;
 	
 	public ArenaView() {
 		super(new BorderLayout());
+		
+		elements = new ArrayList<>();
 		
 		setLayout(null);
 		setPreferredSize(new Dimension(ViewConstants.ARENA_WIDTH, ViewConstants.ARENA_HEIGHT));
@@ -30,7 +34,11 @@ public class ArenaView extends JPanel implements Observer {
 	
 	@Override
 	public void update(Observable observable, Object arg) {
-		this.game = (Game) observable;
+		Game game = (Game) observable;
+		
+		if (game != null) {
+			elements = game.getElements();
+		}
 		
 		repaint();
 	}
@@ -39,10 +47,8 @@ public class ArenaView extends JPanel implements Observer {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		if (this.game != null) {
-			for (IElement element : this.game.getElements()) {
-				//TODO g.drawImage(element.getImage(), element.getPosition().x, element.getPosition().y, this);
-			}
+		for (IElement element : elements) {
+			//TODO g.drawImage(element.getImage(), element.getPosition().x, element.getPosition().y, this);
 		}
 	}
 }

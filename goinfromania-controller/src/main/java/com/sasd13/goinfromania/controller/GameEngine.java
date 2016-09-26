@@ -9,6 +9,7 @@ import com.sasd13.goinfromania.bean.IElement;
 import com.sasd13.goinfromania.bean.State;
 import com.sasd13.goinfromania.bean.character.Pig;
 import com.sasd13.goinfromania.bean.setting.GamePad;
+import com.sasd13.goinfromania.bean.setting.EnumSettingType;
 import com.sasd13.goinfromania.dao.GameDAO;
 import com.sasd13.goinfromania.util.GameConstants;
 import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
@@ -97,7 +98,7 @@ public class GameEngine {
 	public void openGame(Game game) {
 		this.game = game;
 		
-		gamePad = (GamePad) SettingPreferencesFactory.make("GAMEPAD").pull();
+		gamePad = (GamePad) SettingPreferencesFactory.make(EnumSettingType.GAMEPAD).pull();
 		
 		startGame();
 	}

@@ -9,11 +9,11 @@ public class GameMenuBar extends JMenuBar {
 	public GameMenuBar() {
 		super();
 		
-		this.menuEdit = new MenuEdit();
+		menuEdit = new MenuEdit();
 		
 		GameMenu[] gameMenus = {
 				new MenuFile(),
-				this.menuEdit,
+				menuEdit,
 				new MenuSetting()
 		};
 		
@@ -23,6 +23,6 @@ public class GameMenuBar extends JMenuBar {
 	}
 	
 	public void setMenuEditEnabled(boolean enabled) {
-		this.menuEdit.setEnabled(enabled);
+		menuEdit.setEnabled(enabled);
 	}
 }

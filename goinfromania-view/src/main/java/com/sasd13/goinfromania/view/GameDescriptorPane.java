@@ -47,12 +47,11 @@ public class GameDescriptorPane extends JPanel {
 	}
 	
 	private void createPanelDescription() {
-		this.labels = new JLabel[6];
+		labels = new JLabel[6];
 		
-		JPanel panelGame = new JPanel(new GridLayout(this.labels.length, 2));
+		JPanel panelGame = new JPanel(new GridLayout(labels.length, 2));
 		
 		addLabelsToPanelGame(panelGame);
-		
 		add(panelGame, BorderLayout.CENTER);
 	}
 
@@ -60,50 +59,50 @@ public class GameDescriptorPane extends JPanel {
 		String label = null;
 		Font font = new Font(Font.SANS_SERIF, Font.PLAIN, getFont().getSize());
 		
-		for (int i=0; i<this.labels.length; i++) {
+		for (int i=0; i<labels.length; i++) {
 			switch (i) {
 				case 0:
 					label = "Niveau :";
 					
-					this.labelLevel = new JLabel();
-					this.labels[i] = this.labelLevel;
+					labelLevel = new JLabel();
+					labels[i] = labelLevel;
 					break;
 				case 1:
 					label = "Score :";
 					
-					this.labelScore = new JLabel();
-					this.labels[i] = this.labelScore;
+					labelScore = new JLabel();
+					labels[i] = labelScore;
 					break;
 				case 2:
 					label = "Vie :";
 					
-					this.labelPigLife = new JLabel();
-					this.labels[i] = this.labelPigLife;
+					labelPigLife = new JLabel();
+					labels[i] = labelPigLife;
 					break;
 				case 3:
 					label = "Energie :";
 					
-					this.labelPigEnergy = new JLabel();
-					this.labels[i] = this.labelPigEnergy;
+					labelPigEnergy = new JLabel();
+					labels[i] = labelPigEnergy;
 					break;
 				case 4:
 					label = "Date creation :";
 					
-					this.labelDateCreation = new JLabel();
-					this.labels[i] = this.labelDateCreation;
+					labelDateCreation = new JLabel();
+					labels[i] = labelDateCreation;
 					break;
 				case 5:
 					label = "Date mise � jour :";
 					
-					this.labelDateLastUpdate = new JLabel();
-					this.labels[i] = this.labelDateLastUpdate;
+					labelDateLastUpdate = new JLabel();
+					labels[i] = labelDateLastUpdate;
 					break;
 			}
 			
-			this.labels[i].setFont(font);
+			labels[i].setFont(font);
 			
 			panelGame.add(new JLabel(label));
-			panelGame.add(this.labels[i]);
+			panelGame.add(labels[i]);
 		}
 	}
 
@@ -118,10 +117,10 @@ public class GameDescriptorPane extends JPanel {
 	private void addButtonsToPanelButton(JPanel panelButton) {
 		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
 		String command = null;
-		this.gameDescriptorController = new GameDescriptorController();
+		gameDescriptorController = new GameDescriptorController();
 		
 		int indice = -1;
-		for (JButton button : this.buttons) {
+		for (JButton button : buttons) {
 			indice++;
 			
 			switch (indice) {
@@ -136,23 +135,23 @@ public class GameDescriptorPane extends JPanel {
 			button.setPreferredSize(dimension);
 			button.setFocusable(false);
 			button.setActionCommand(command);
-			button.addActionListener(this.gameDescriptorController);
+			button.addActionListener(gameDescriptorController);
 			
 			panelButton.add(button);
 		}
 	}
 	
 	public void bind(Game game) {
-		this.labelLevel.setText(String.valueOf(game.getLevel()));
-		this.labelScore.setText(String.valueOf(game.getScore()));
-		this.labelDateCreation.setText(String.valueOf(game.getDateLastUpdate()));
-		this.labelDateLastUpdate.setText(String.valueOf(game.getDateLastUpdate()));
+		labelLevel.setText(String.valueOf(game.getLevel()));
+		labelScore.setText(String.valueOf(game.getScore()));
+		labelDateCreation.setText(String.valueOf(game.getDateLastUpdate()));
+		labelDateLastUpdate.setText(String.valueOf(game.getDateLastUpdate()));
 		
 		Pig pig = game.getPig();
-		this.labelPigLife.setText(String.valueOf(pig.getLife()));
-		this.labelPigEnergy.setText(String.valueOf(pig.getEnergy()));
+		labelPigLife.setText(String.valueOf(pig.getLife()));
+		labelPigEnergy.setText(String.valueOf(pig.getEnergy()));
 		
-		this.gameDescriptorController.setGame(game);
+		gameDescriptorController.setGame(game);
 		
 		setButtonsEnabled(true);
 	}
@@ -163,13 +162,13 @@ public class GameDescriptorPane extends JPanel {
 	}
 	
 	private void clearLabels() {
-		for (JLabel label : this.labels) {
+		for (JLabel label : labels) {
 			label.setText("");
 		}
 	}
 	
 	private void setButtonsEnabled(boolean enabled) {
-		for (JButton button : this.buttons) {
+		for (JButton button : buttons) {
 			button.setEnabled(enabled);
 		}
 	}

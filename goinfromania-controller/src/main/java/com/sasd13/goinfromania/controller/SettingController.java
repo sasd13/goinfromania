@@ -3,29 +3,33 @@ package com.sasd13.goinfromania.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JOptionPane;
-
 import com.sasd13.goinfromania.bean.setting.Setting;
-import com.sasd13.goinfromania.util.preferences.SettingPreferences;
+import com.sasd13.goinfromania.bean.setting.EnumSettingType;
 import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
 
 public class SettingController implements ActionListener {
 	
-	private Setting setting;
+	public static final String COMMAND_CLOSE = "CLOSE";
+	public static final String COMMAND_SAVE = "SAVE";
+	public static final String COMMAND_RESET = "RESET";
 	
-	public void setSetting(Setting setting) {
+	private Setting setting;
+	private EnumSettingType settingType;
+	
+	public void setSetting(Setting setting, EnumSettingType settingType) {
 		this.setting = setting;
+		this.settingType = settingType;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		
-		if ("CLOSE".equalsIgnoreCase(command)) {
+		if (COMMAND_CLOSE.equalsIgnoreCase(command)) {
 			actionClose();
-		} else if ("SAVE".equalsIgnoreCase(command)) {
+		} else if (COMMAND_SAVE.equalsIgnoreCase(command)) {
 			actionSave();
-		} else if ("RESET".equalsIgnoreCase(command)) {
+		} else if (COMMAND_RESET.equalsIgnoreCase(command)) {
 			actionReset();
 		}
 	}
@@ -47,8 +51,7 @@ public class SettingController implements ActionListener {
 	}
 
 	private void performSave() {
-		SettingPreferences settingPreferences = SettingPreferencesFactory.make(this.setting.getClass().getSimpleName());
-		settingPreferences.push(this.setting);
+		SettingPreferencesFactory.make(settingType).push(this.setting);
 	}
 	
 	private void actionReset() {

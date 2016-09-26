@@ -15,7 +15,7 @@ public abstract class GameDialog extends JDialog implements Observer {
 	protected GameDialog(GameView gameView) {
 		super();
 		
-		this.gameView = gameView;
+		gameView = gameView;
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);

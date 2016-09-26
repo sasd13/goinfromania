@@ -7,6 +7,10 @@ import com.sasd13.goinfromania.controller.GameEngine;
 
 public class MenuEditController implements ActionListener {
 	
+	public static final String COMMAND_PAUSE = "PAUSE";
+	public static final String COMMAND_STOP = "STOP";
+	public static final String COMMAND_SAVE = "SAVE";
+	
 	private GameEngine gameEngine = GameEngine.getInstance();
 	
 	@Override

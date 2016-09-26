@@ -5,15 +5,18 @@ import java.awt.event.ActionListener;
 
 public class GameResultController implements ActionListener {
 	
+	public static final String COMMAND_REPLAY = "REPLAY";
+	public static final String COMMAND_END = "END";
+	
 	private GameEngine gameEngine = GameEngine.getInstance();
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
 		
-		if ("REPLAY".equalsIgnoreCase(command)) {
+		if (COMMAND_REPLAY.equalsIgnoreCase(command)) {
 			actionReplay();
-		} else if ("END".equalsIgnoreCase(command)) {
+		} else if (COMMAND_END.equalsIgnoreCase(command)) {
 			actionEnd();
 		}
 	}
