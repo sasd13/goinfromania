@@ -8,20 +8,18 @@ import com.sasd13.goinfromania.view.Frame;
  * Hello world!
  *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
+public class App {
+	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				Frame frame = new Frame();
-				
+
 				frame.pack();
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 			}
 		});
-    }
+	}
 }
