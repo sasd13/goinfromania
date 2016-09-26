@@ -1,8 +1,8 @@
 package com.sasd13.goinfromania.bean.character.enemy;
 
+import com.sasd13.goinfromania.bean.IPower;
 import com.sasd13.goinfromania.bean.character.Character;
 import com.sasd13.goinfromania.bean.character.IPowerful;
-import com.sasd13.goinfromania.bean.character.IPower;
 
 public abstract class Enemy extends Character implements IPowerful {
 	
@@ -11,7 +11,7 @@ public abstract class Enemy extends Character implements IPowerful {
 	
 	@Override
 	public boolean hasEnergy() {
-		return this.energy > 0;
+		return energy > 0;
 	}
 
 	@Override

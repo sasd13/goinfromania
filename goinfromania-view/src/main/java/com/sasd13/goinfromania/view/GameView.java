@@ -11,8 +11,7 @@ import javax.swing.JProgressBar;
 
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.State;
-import com.sasd13.goinfromania.bean.character.pig.Pig;
-import com.sasd13.goinfromania.controller.engine.PigEngine;
+import com.sasd13.goinfromania.bean.character.Pig;
 
 public class GameView extends JPanel implements Observer {
 	
@@ -103,7 +102,7 @@ public class GameView extends JPanel implements Observer {
 		
 		this.labelScore.setText(String.valueOf(game.getScore()));
 		
-		Pig pig = PigEngine.findPig(game.getElements());
+		Pig pig = game.getPig();
 		this.progressBarLife.setValue(pig.getLife());
 		this.progressBarEnergy.setValue(pig.getEnergy());
 		

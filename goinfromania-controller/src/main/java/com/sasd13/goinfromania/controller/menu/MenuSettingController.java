@@ -4,10 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.sasd13.goinfromania.bean.setting.Setting;
-import com.sasd13.goinfromania.controller.engine.GameEngine;
+import com.sasd13.goinfromania.controller.GameEngine;
 import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
 
 public class MenuSettingController implements ActionListener {
+	
+	private GameEngine gameEngine = GameEngine.getInstance();
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
@@ -38,8 +40,8 @@ public class MenuSettingController implements ActionListener {
 	private Setting readSetting(String command) {
 		Setting setting;
 		
-		if ("GAMEPAD".equalsIgnoreCase(command) && GameEngine.hasGameInProgress()) {
-			setting = GameEngine.getGamePad();
+		if ("GAMEPAD".equalsIgnoreCase(command) && gameEngine.hasGameInProgress()) {
+			setting = gameEngine.getGamePad();
 		} else {
 			setting = SettingPreferencesFactory.make(command).pull();
 		}

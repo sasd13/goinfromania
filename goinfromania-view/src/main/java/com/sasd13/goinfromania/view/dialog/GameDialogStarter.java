@@ -11,7 +11,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import com.sasd13.goinfromania.util.DimensionConstants;
+import com.sasd13.goinfromania.util.ViewConstants;
 import com.sasd13.goinfromania.view.GameView;
 
 public class GameDialogStarter extends GameDialog implements ActionListener {
@@ -28,7 +28,7 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 		this.layeredPane = new JLayeredPane();
 		
 		setContentPane(this.layeredPane);
-		setSize(new Dimension(DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT));
+		setSize(new Dimension(ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT));
 		setBackground(Color.BLACK);
 		createLayers();
 	}
@@ -43,7 +43,7 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 	private void createLayerReady(Font font) {
 		this.panelReady = new JPanel();
 		this.panelReady.setBackground(Color.BLACK);
-		this.panelReady.setBounds(0, 0, DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT);
+		this.panelReady.setBounds(0, 0, ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT);
 		
 		addLabelReady(font);
 		
@@ -61,7 +61,7 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 	private void createLayerGo(Font font) {
 		this.panelGo = new JPanel();
 		this.panelGo.setBackground(Color.BLACK);
-		this.panelGo.setBounds(0, 0, DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT);
+		this.panelGo.setBounds(0, 0, ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT);
 		
 		addLabelGo(font);
 		

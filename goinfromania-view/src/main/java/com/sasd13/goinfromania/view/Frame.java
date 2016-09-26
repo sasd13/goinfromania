@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
 import com.sasd13.goinfromania.controller.FrameController;
-import com.sasd13.goinfromania.util.DimensionConstants;
+import com.sasd13.goinfromania.util.ViewConstants;
 import com.sasd13.goinfromania.view.menu.GameMenuBar;
 
 public class Frame extends JFrame {
@@ -38,7 +38,7 @@ public class Frame extends JFrame {
 	}
 	
 	private void createLayers() {		
-		Dimension dimension = new Dimension(DimensionConstants.PANEL_WIDTH, DimensionConstants.PANEL_HEIGHT);
+		Dimension dimension = new Dimension(ViewConstants.PANEL_WIDTH, ViewConstants.PANEL_HEIGHT);
 		
 		this.layersPane = new JLayeredPane();
 		this.layersPane.setPreferredSize(dimension);

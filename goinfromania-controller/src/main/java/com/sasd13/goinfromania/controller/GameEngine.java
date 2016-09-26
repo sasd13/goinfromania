@@ -1,36 +1,40 @@
-package com.sasd13.goinfromania.controller.engine;
+package com.sasd13.goinfromania.controller;
+
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import com.sasd13.goinfromania.bean.Game;
+import com.sasd13.goinfromania.bean.IElement;
 import com.sasd13.goinfromania.bean.State;
-import com.sasd13.goinfromania.bean.character.pig.Pig;
+import com.sasd13.goinfromania.bean.character.Pig;
 import com.sasd13.goinfromania.bean.setting.GamePad;
-import com.sasd13.goinfromania.controller.FrameController;
 import com.sasd13.goinfromania.dao.GameDAO;
 import com.sasd13.goinfromania.util.GameConstants;
 import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
 
 public class GameEngine {
 	
-	private static Game game;
-	private static GamePad gamePad;
+	private Game game;
+	private GamePad gamePad;
 	
-	private static FrameController frameController;
+	private static class GameEngineHolder {
+		private static final GameEngine INSTANCE = new GameEngine();
+	}
 	
-	public static Game getGame() {
+	public static GameEngine getInstance() {
+		return GameEngineHolder.INSTANCE;
+	}
+	
+	public Game getGame() {
 		return game;
 	}
 	
-	public static GamePad getGamePad() {
+	public GamePad getGamePad() {
 		return gamePad;
 	}
 	
-	public static void setFrameController(FrameController frameController) {
-		GameEngine.frameController = frameController;
-	}
-	
-	public static boolean stopGameSafely() {
+	public boolean stopGameSafely() {
 		if (hasGameInProgress()) {
 			return confirmStopGame();
 		}
@@ -38,11 +42,11 @@ public class GameEngine {
 		return true;
 	}
 	
-	public static boolean hasGameInProgress() {
+	public boolean hasGameInProgress() {
 		return game != null;
 	}
 	
-	private static boolean confirmStopGame() {
+	private boolean confirmStopGame() {
 		String message = "Arr�t de la partie. Sauvegarder la progression ?";
 		
 		int selected = JOptionPane.showConfirmDialog(null, message, "Confirmation", JOptionPane.YES_NO_CANCEL_OPTION);
@@ -62,22 +66,20 @@ public class GameEngine {
 		}
 	}
 	
-	private static void stopGame() {
+	private void stopGame() {
 		game.setState(State.STOPPED);
 	}
 	
-	public static void saveGame() {
+	public void saveGame() {
 		GameDAO.update(game);
 	}
 	
-	public static void finishGameAndDisplayHome() {
+	public void finishGameAndDisplayHome() {
 		game.deleteObservers();
 		game = null;
-		
-		frameController.displayHome();
 	}
 	
-	public static void newGame() {	
+	public void newGame() {	
 		Game game = new Game();
 		
 		addPigToGame(game);
@@ -85,32 +87,26 @@ public class GameEngine {
 		openGame(game);
 	}
 
-	private static void addPigToGame(Game game) {
+	private void addPigToGame(Game game) {
 		Pig pig = new Pig();
 		pig.setLife(GameConstants.PIG_LIFE);
 		
 		game.addElement(pig);
 	}
 	
-	public static void openGame(Game game) {
-		GameEngine.game = game;
+	public void openGame(Game game) {
+		this.game = game;
 		
 		gamePad = (GamePad) SettingPreferencesFactory.make("GAMEPAD").pull();
-		
-		frameController.displayGame(game);
 		
 		startGame();
 	}
 	
-	private static void startGame() {
+	private void startGame() {
 		game.setState(State.STARTED);
 	}
 	
-	public static void listGames() {
-		frameController.displayListGames();
-	}
-	
-	public static void exitGame() {
+	public void exitGame() {
 		String message = "Quitter le jeu ?";
 		
 		int selected = JOptionPane.showConfirmDialog(null, message, "Confirmation", JOptionPane.YES_NO_OPTION);
@@ -119,7 +115,7 @@ public class GameEngine {
 		}
 	}
 	
-	public static void pauseOrResumeGame() {
+	public void pauseOrResumeGame() {
 		switch (game.getState()) {
 			case STARTED:
 				pauseGame();
@@ -133,7 +129,17 @@ public class GameEngine {
 		}
 	}
 	
-	private static void pauseGame() {
+	private void pauseGame() {
 		game.setState(State.PAUSED);
+	}
+	
+	public Pig findPig(List<IElement> elements) {
+		for (IElement element : elements) {
+			if (element instanceof Pig) {
+				return (Pig) element;
+			}
+		}
+		
+		return null;
 	}
 }

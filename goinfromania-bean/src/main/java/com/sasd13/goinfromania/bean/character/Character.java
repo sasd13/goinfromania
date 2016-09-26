@@ -35,7 +35,7 @@ public abstract class Character extends Element implements IMovable, ILiveable {
 
 	@Override
 	public boolean isAlive() {
-		return this.life > 0;
+		return life > 0;
 	}
 
 	@Override

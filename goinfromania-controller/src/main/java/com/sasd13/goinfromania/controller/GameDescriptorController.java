@@ -4,10 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.engine.GameEngine;
 import com.sasd13.goinfromania.dao.GameDAO;
 
 public class GameDescriptorController implements ActionListener {
+	
+	private GameEngine gameEngine = GameEngine.getInstance();
 	
 	private Game game;
 	
@@ -27,7 +28,8 @@ public class GameDescriptorController implements ActionListener {
 	}
 	
 	private void actionContinue() {
-		GameEngine.openGame(this.game);
+		gameEngine.openGame(this.game);
+		//FrameController.displayGame(game);
 	}
 	
 	private void actionDelete() {
@@ -35,6 +37,6 @@ public class GameDescriptorController implements ActionListener {
 		
 		GameDAO.delete(this.game);
 		
-		GameEngine.listGames();
+		//FrameController.displayListGames();
 	}
 }

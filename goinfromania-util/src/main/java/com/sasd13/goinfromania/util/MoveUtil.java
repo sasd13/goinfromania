@@ -1,19 +1,13 @@
-package com.sasd13.goinfromania.controller.engine;
+package com.sasd13.goinfromania.util;
 
 import java.awt.Dimension;
 import java.awt.Point;
 
 import com.sasd13.goinfromania.bean.Direction;
 import com.sasd13.goinfromania.bean.IMovable;
-import com.sasd13.goinfromania.util.DimensionConstants;
 
-public class MoveEngine {
+public class MoveUtil {
 	
-	public static final int POSITION_X_MIN = 0;
-	public static final int POSITION_X_MAX = DimensionConstants.ARENA_WIDTH;
-	public static final int POSITION_Y_MIN = 0;
-	public static final int POSITION_Y_MAX = DimensionConstants.ARENA_HEIGHT;
-
 	public static void move(IMovable movable, Direction direction) {
 		movable.setPosition(getNextPosition(movable, direction));
 	}
@@ -43,16 +37,16 @@ public class MoveEngine {
 	}
 	
 	private static Point cropping(Point position, Dimension dimension) {
-		if (position.x < POSITION_X_MIN) {
-			position.x = POSITION_X_MIN;
-		} else if ((position.x + dimension.width) > POSITION_X_MAX) {
-			position.x = POSITION_X_MAX - dimension.width;
+		if (position.x < GameConstants.POSITION_X_MIN) {
+			position.x = GameConstants.POSITION_X_MIN;
+		} else if ((position.x + dimension.width) > GameConstants.POSITION_X_MAX) {
+			position.x = GameConstants.POSITION_X_MAX - dimension.width;
 		}
 		
-		if (position.y < POSITION_Y_MIN) {
-			position.y = POSITION_Y_MIN;
-		} else if ((position.y + dimension.height) > POSITION_Y_MAX) {
-			position.y = POSITION_Y_MAX - dimension.height;
+		if (position.y < GameConstants.POSITION_Y_MIN) {
+			position.y = GameConstants.POSITION_Y_MIN;
+		} else if ((position.y + dimension.height) > GameConstants.POSITION_Y_MAX) {
+			position.y = GameConstants.POSITION_Y_MAX - dimension.height;
 		}
 		
 		return position;

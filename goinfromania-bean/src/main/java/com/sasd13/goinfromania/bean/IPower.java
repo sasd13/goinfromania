@@ -1,6 +1,4 @@
-package com.sasd13.goinfromania.bean.character;
-
-import com.sasd13.goinfromania.bean.IMovable;
+package com.sasd13.goinfromania.bean;
 
 public interface IPower extends IMovable {
 	

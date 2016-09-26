@@ -3,9 +3,9 @@ package com.sasd13.goinfromania.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.sasd13.goinfromania.controller.engine.GameEngine;
-
 public class GameResultController implements ActionListener {
+	
+	private GameEngine gameEngine = GameEngine.getInstance();
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
@@ -21,12 +21,13 @@ public class GameResultController implements ActionListener {
 	private void actionReplay() {
 		//this.gameDialogResult.dispose();
 		
-		GameEngine.newGame();
+		gameEngine.newGame();
 	}
 
 	private void actionEnd() {
 		//this.gameDialogResult.dispose();
 		
-		GameEngine.finishGameAndDisplayHome();
+		gameEngine.finishGameAndDisplayHome();
+		//FrameController.displayHome();
 	}
 }

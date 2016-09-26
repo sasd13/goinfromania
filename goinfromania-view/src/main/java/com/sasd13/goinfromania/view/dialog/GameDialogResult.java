@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.GameResultController;
-import com.sasd13.goinfromania.util.DimensionConstants;
+import com.sasd13.goinfromania.util.ViewConstants;
 import com.sasd13.goinfromania.view.GameView;
 
 public class GameDialogResult extends GameDialog {
@@ -26,7 +26,7 @@ public class GameDialogResult extends GameDialog {
 		
 		setContentPane(new JLayeredPane());
 		
-		Dimension dimension = new Dimension(DimensionConstants.ROUND_POPUP_WIDTH, DimensionConstants.ROUND_POPUP_HEIGHT);
+		Dimension dimension = new Dimension(ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT);
 		
 		setSize(dimension);
 		createLayers(dimension);
@@ -91,7 +91,7 @@ public class GameDialogResult extends GameDialog {
 				new JButton("Terminer")
 		};
 		
-		Dimension dimensionButton = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
+		Dimension dimensionButton = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
 		String command = null;
 		
 		int indice = -1;

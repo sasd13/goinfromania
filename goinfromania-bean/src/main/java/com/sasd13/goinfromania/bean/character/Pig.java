@@ -1,8 +1,6 @@
-package com.sasd13.goinfromania.bean.character.pig;
+package com.sasd13.goinfromania.bean.character;
 
-import com.sasd13.goinfromania.bean.character.Character;
-import com.sasd13.goinfromania.bean.character.IPowerful;
-import com.sasd13.goinfromania.bean.character.IPower;
+import com.sasd13.goinfromania.bean.IPower;
 
 public class Pig extends Character implements IPowerful {
 

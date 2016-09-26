@@ -3,9 +3,11 @@ package com.sasd13.goinfromania.controller.menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.sasd13.goinfromania.controller.engine.GameEngine;
+import com.sasd13.goinfromania.controller.GameEngine;
 
 public class MenuFileController implements ActionListener {
+	
+	private GameEngine gameEngine = GameEngine.getInstance();
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
@@ -21,20 +23,20 @@ public class MenuFileController implements ActionListener {
 	}
 
 	private void actionNew() {
-		if (GameEngine.stopGameSafely()) {
-			GameEngine.newGame();
+		if (gameEngine.stopGameSafely()) {
+			gameEngine.newGame();
 		}
 	}
 
 	private void actionList() {
-		if (GameEngine.stopGameSafely()) {
-			GameEngine.listGames();
+		if (gameEngine.stopGameSafely()) {
+			//FrameController.displayListGames();
 		}
 	}
 
 	private void actionExit() {
-		if (GameEngine.stopGameSafely()) {
-			GameEngine.exitGame();
+		if (gameEngine.stopGameSafely()) {
+			gameEngine.exitGame();
 		}
 	}
 }

@@ -4,11 +4,8 @@ import javax.swing.SwingUtilities;
 
 import com.sasd13.goinfromania.view.Frame;
 
-/**
- * Hello world!
- *
- */
 public class App {
+	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 

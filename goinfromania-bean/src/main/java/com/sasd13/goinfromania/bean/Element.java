@@ -17,6 +17,9 @@ public abstract class Element extends Observable implements IElement {
 	
 	public void setId(int id) {
 		this.id = id;
+		
+		setChanged();
+		notifyObservers();
 	}
 	
 	@Override

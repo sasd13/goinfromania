@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import com.sasd13.goinfromania.bean.character.Pig;
+
 public class Game extends Observable {
 
 	private long id;
@@ -12,12 +14,15 @@ public class Game extends Observable {
 	private Level level;
 	private Result result;
 	private int score;
-	private Timestamp dateCreation;
-	private Timestamp dateLastUpdate;
+	private Timestamp dateCreation, dateLastUpdate;
 	private List<IElement> elements;
+	private Pig pig;
 
 	public Game() {
-		this.elements = new ArrayList<IElement>();
+		elements = new ArrayList<IElement>();
+		pig = new Pig();
+		
+		elements.add(pig);
 	}
 
 	public long getId() {
@@ -26,6 +31,9 @@ public class Game extends Observable {
 
 	public void setId(long id) {
 		this.id = id;
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	public State getState() {
@@ -93,22 +101,26 @@ public class Game extends Observable {
 		setChanged();
 		notifyObservers();
 	}
+	
+	public List<IElement> getElements() {
+		return elements;
+	}
 
 	public void addElement(IElement element) {
-		this.elements.add(element);
+		elements.add(element);
 
 		setChanged();
 		notifyObservers();
 	}
 
 	public void removeElement(IElement element) {
-		this.elements.remove(element);
+		elements.remove(element);
 
 		setChanged();
 		notifyObservers();
 	}
-
-	public IElement[] getElements() {
-		return this.elements.toArray(new IElement[this.elements.size()]);
+	
+	public Pig getPig() {
+		return pig;
 	}
 }

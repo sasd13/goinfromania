@@ -4,12 +4,7 @@ import java.awt.event.KeyEvent;
 
 public class GamePad extends Setting {
 
-	private int keyStart;
-	private int keyMoveNorth;
-	private int keyMoveSouth;
-	private int keyMoveWest;
-	private int keyMoveEast;
-	private int keyPigAttak;
+	private int keyStart, keyMoveNorth, keyMoveSouth, keyMoveWest, keyMoveEast, keyPigAttak;
 	
 	@Override
 	public void reset() {		
@@ -33,7 +28,7 @@ public class GamePad extends Setting {
 	}
 	
 	public int getKeyMoveNorth() {
-		return this.keyMoveNorth;
+		return keyMoveNorth;
 	}
 	
 	public void setKeyMoveNorth(int keyMoveNorth) {

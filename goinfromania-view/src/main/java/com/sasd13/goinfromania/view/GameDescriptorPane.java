@@ -11,10 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.bean.character.pig.Pig;
+import com.sasd13.goinfromania.bean.character.Pig;
 import com.sasd13.goinfromania.controller.GameDescriptorController;
-import com.sasd13.goinfromania.controller.engine.PigEngine;
-import com.sasd13.goinfromania.util.DimensionConstants;
+import com.sasd13.goinfromania.util.ViewConstants;
 
 public class GameDescriptorPane extends JPanel {
 	
@@ -117,7 +116,7 @@ public class GameDescriptorPane extends JPanel {
 	}
 
 	private void addButtonsToPanelButton(JPanel panelButton) {
-		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
+		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
 		String command = null;
 		this.gameDescriptorController = new GameDescriptorController();
 		
@@ -149,7 +148,7 @@ public class GameDescriptorPane extends JPanel {
 		this.labelDateCreation.setText(String.valueOf(game.getDateLastUpdate()));
 		this.labelDateLastUpdate.setText(String.valueOf(game.getDateLastUpdate()));
 		
-		Pig pig = PigEngine.findPig(game.getElements());
+		Pig pig = game.getPig();
 		this.labelPigLife.setText(String.valueOf(pig.getLife()));
 		this.labelPigEnergy.setText(String.valueOf(pig.getEnergy()));
 		

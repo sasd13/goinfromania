@@ -5,10 +5,11 @@ import java.awt.event.WindowListener;
 import java.util.List;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.engine.GameEngine;
 import com.sasd13.goinfromania.dao.GameDAO;
 
 public class FrameController implements WindowListener {
+	
+	private GameEngine gameEngine = GameEngine.getInstance();
 	
 	public void displayHome() {
 		/*this.frame.setMenuEditEnabled(false);
@@ -43,8 +44,8 @@ public class FrameController implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent event) {
-		if (GameEngine.stopGameSafely()) {
-			GameEngine.exitGame();
+		if (gameEngine.stopGameSafely()) {
+			gameEngine.exitGame();
 		}
 	}
 

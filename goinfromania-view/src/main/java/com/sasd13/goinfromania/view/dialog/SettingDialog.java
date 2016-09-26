@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import com.sasd13.goinfromania.bean.setting.Setting;
 import com.sasd13.goinfromania.controller.SettingController;
-import com.sasd13.goinfromania.util.DimensionConstants;
+import com.sasd13.goinfromania.util.ViewConstants;
 
 public abstract class SettingDialog extends JDialog implements Observer {
 	
@@ -45,7 +45,7 @@ public abstract class SettingDialog extends JDialog implements Observer {
 				new JButton("Reset")
 		};
 		
-		Dimension dimension = new Dimension(DimensionConstants.BUTTON_WIDTH, DimensionConstants.BUTTON_HEIGHT);
+		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
 		String command = null;
 		this.settingController = new SettingController();
 		

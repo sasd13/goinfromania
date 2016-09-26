@@ -12,7 +12,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.util.DimensionConstants;
+import com.sasd13.goinfromania.util.ViewConstants;
 
 public class ListGamesView extends JSplitPane implements ListSelectionListener {
 
@@ -43,7 +43,7 @@ public class ListGamesView extends JSplitPane implements ListSelectionListener {
 
 	private void addScrollPane() {
 		JScrollPane listScroller = new JScrollPane(this.panelList);
-		listScroller.setPreferredSize(new Dimension(LIST_WIDTH, DimensionConstants.PANEL_HEIGHT));
+		listScroller.setPreferredSize(new Dimension(LIST_WIDTH, ViewConstants.PANEL_HEIGHT));
 		
 		add(listScroller);
 	}
