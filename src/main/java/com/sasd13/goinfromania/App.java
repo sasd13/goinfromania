@@ -13,7 +13,7 @@ public class App {
 			public void run() {
 				Frame frame = new Frame();
 
-				frame.displayHomeView();
+				frame.displayHome();
 				frame.pack();
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);

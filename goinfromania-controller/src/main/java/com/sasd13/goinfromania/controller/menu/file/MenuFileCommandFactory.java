@@ -1,12 +1,12 @@
 package com.sasd13.goinfromania.controller.menu.file;
 
-import com.sasd13.goinfromania.controller.menu.IMenuItemCommand;
-import com.sasd13.goinfromania.controller.menu.IMenuItemCommandFactory;
+import com.sasd13.goinfromania.controller.ICommand;
+import com.sasd13.goinfromania.controller.ICommandFactory;
 
-public class MenuFileCommandFactory implements IMenuItemCommandFactory {
+public class MenuFileCommandFactory implements ICommandFactory {
 
 	@Override
-	public IMenuItemCommand make(String code) {
+	public ICommand make(String code) {
 		if (EnumMenuFileType.NEW.getCode().equalsIgnoreCase(code)) {
 			return new MenuFileNewCommand();
 		} else if (EnumMenuFileType.OPEN.getCode().equalsIgnoreCase(code)) {

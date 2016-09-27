@@ -7,15 +7,16 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.menu.settings.EnumMenuSettingsType;
 import com.sasd13.goinfromania.controller.menu.settings.MenuSettingsController;
 
 public class MenuSettings extends JMenu {
 
-	public MenuSettings() {
+	public MenuSettings(IFrame frame) {
 		super("Options");
 
-		buildItems(new MenuSettingsController());
+		buildItems(new MenuSettingsController(frame));
 		setMnemonic(KeyEvent.VK_O);
 	}
 

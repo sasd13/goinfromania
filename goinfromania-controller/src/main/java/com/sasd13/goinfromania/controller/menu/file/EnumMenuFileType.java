@@ -1,8 +1,6 @@
 package com.sasd13.goinfromania.controller.menu.file;
 
-import com.sasd13.goinfromania.controller.menu.IMenuItemType;
-
-public enum EnumMenuFileType implements IMenuItemType {
+public enum EnumMenuFileType {
 	NEW("NEW"), 
 	OPEN("OPEN"), 
 	EXIT("EXIT"),
@@ -14,7 +12,6 @@ public enum EnumMenuFileType implements IMenuItemType {
 		this.code = code;
 	}
 
-	@Override
 	public String getCode() {
 		return code;
 	}

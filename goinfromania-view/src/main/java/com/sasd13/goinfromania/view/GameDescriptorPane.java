@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.character.Pig;
-import com.sasd13.goinfromania.controller.GameDescriptorController;
+import com.sasd13.goinfromania.controller.descriptor.GameDescriptorController;
 import com.sasd13.goinfromania.util.ViewConstants;
 
 public class GameDescriptorPane extends JPanel {

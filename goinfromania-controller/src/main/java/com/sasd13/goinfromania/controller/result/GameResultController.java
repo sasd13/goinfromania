@@ -1,7 +1,9 @@
-package com.sasd13.goinfromania.controller;
+package com.sasd13.goinfromania.controller.result;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import com.sasd13.goinfromania.controller.GameEngine;
 
 public class GameResultController implements ActionListener {
 	

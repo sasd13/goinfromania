@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.GameResultController;
+import com.sasd13.goinfromania.controller.result.GameResultController;
 import com.sasd13.goinfromania.util.ViewConstants;
 import com.sasd13.goinfromania.view.GameView;
 

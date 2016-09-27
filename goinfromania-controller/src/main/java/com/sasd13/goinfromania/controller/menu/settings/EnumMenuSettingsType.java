@@ -1,8 +1,6 @@
 package com.sasd13.goinfromania.controller.menu.settings;
 
-import com.sasd13.goinfromania.controller.menu.IMenuItemType;
-
-public enum EnumMenuSettingsType implements IMenuItemType {
+public enum EnumMenuSettingsType {
 	GAMEPAD("GAMEPAD"),
 	;
 
@@ -12,7 +10,6 @@ public enum EnumMenuSettingsType implements IMenuItemType {
 		this.code = code;
 	}
 
-	@Override
 	public String getCode() {
 		return code;
 	}

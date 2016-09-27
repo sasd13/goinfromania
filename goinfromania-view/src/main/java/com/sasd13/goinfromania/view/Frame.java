@@ -1,48 +1,51 @@
 package com.sasd13.goinfromania.view;
 
 import java.awt.Dimension;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
+import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.FrameController;
+import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.util.GameConstants;
 import com.sasd13.goinfromania.util.ViewConstants;
 import com.sasd13.goinfromania.view.menu.MenuBar;
 
-public class Frame extends JFrame {
-	
+public class Frame extends JFrame implements IFrame {
+
 	private JLayeredPane layersPane;
 	private MenuBar menuBar;
 	private HomeView homeView;
 	private GamesView gamesView;
 	private GameView gameView;
-	
+
 	public Frame() {
 		super(GameConstants.NAME);
-		
+
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
 		createMenuBar();
 		createLayersPane();
 		addWindowListener(new FrameController());
 	}
-	
+
 	private void createMenuBar() {
-		menuBar = new MenuBar();
+		menuBar = new MenuBar(this);
 		setJMenuBar(menuBar);
 	}
-	
-	private void createLayersPane() {	
+
+	private void createLayersPane() {
 		Dimension dimension = new Dimension(ViewConstants.PANEL_WIDTH, ViewConstants.PANEL_HEIGHT);
-		
+
 		layersPane = new JLayeredPane();
 		layersPane.setPreferredSize(dimension);
-		
+
 		addLayerHome(dimension);
 		addLayerListGames(dimension);
 		addLayerGame(dimension);
-		
+
 		getContentPane().add(layersPane);
 	}
 
@@ -66,39 +69,42 @@ public class Frame extends JFrame {
 		gameView.setVisible(false);
 		layersPane.add(gameView, JLayeredPane.DEFAULT_LAYER);
 	}
-	
-	public void displayHomeView() {		
+
+	@Override
+	public void displayHome() {
 		homeView.setVisible(true);
 		layersPane.moveToFront(homeView);
-		
+
 		gameView.setVisible(false);
 		gamesView.setVisible(false);
-		
+
 		setMenuEditEnabled(false);
 	}
-	
+
 	private void setMenuEditEnabled(boolean enabled) {
 		menuBar.setMenuEditEnabled(enabled);
 	}
-	
-	public void displayListGamesView() {		
+
+	@Override
+	public void displayGames(List<Game> games) {
 		gamesView.setVisible(true);
 		layersPane.moveToFront(gamesView);
-		
+
 		homeView.setVisible(false);
 		gameView.setVisible(false);
-		
+
 		setMenuEditEnabled(false);
 	}
-	
-	public void displayGameView() {		
+
+	@Override
+	public void displayGame(Game game) {
 		gameView.setVisible(true);
 		gameView.getArenaView().requestFocusInWindow();
 		layersPane.moveToFront(gameView);
-		
+
 		homeView.setVisible(false);
 		gamesView.setVisible(false);
-		
+
 		setMenuEditEnabled(true);
 	}
 }

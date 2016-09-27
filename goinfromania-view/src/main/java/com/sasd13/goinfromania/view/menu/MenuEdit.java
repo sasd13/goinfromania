@@ -7,15 +7,16 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.menu.edit.EnumMenuEditType;
 import com.sasd13.goinfromania.controller.menu.edit.MenuEditController;
 
 public class MenuEdit extends JMenu {
 
-	public MenuEdit() {
+	public MenuEdit(IFrame frame) {
 		super("Partie");
 
-		buildItems(new MenuEditController());
+		buildItems(new MenuEditController(frame));
 		setMnemonic(KeyEvent.VK_P);
 	}
 

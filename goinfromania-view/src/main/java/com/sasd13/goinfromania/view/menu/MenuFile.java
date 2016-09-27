@@ -7,15 +7,16 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.menu.file.EnumMenuFileType;
 import com.sasd13.goinfromania.controller.menu.file.MenuFileController;
 
 public class MenuFile extends JMenu {
 
-	public MenuFile() {
+	public MenuFile(IFrame frame) {
 		super("Fichier");
 
-		buildItems(new MenuFileController());
+		buildItems(new MenuFileController(frame));
 		setMnemonic(KeyEvent.VK_F);
 	}
 

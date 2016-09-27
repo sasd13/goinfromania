@@ -1,8 +1,6 @@
 package com.sasd13.goinfromania.controller.menu.edit;
 
-import com.sasd13.goinfromania.controller.menu.IMenuItemType;
-
-public enum EnumMenuEditType implements IMenuItemType {
+public enum EnumMenuEditType {
 	PAUSE("PAUSE"), 
 	STOP("STOP"), 
 	SAVE("SAVE"),
@@ -14,7 +12,6 @@ public enum EnumMenuEditType implements IMenuItemType {
 		this.code = code;
 	}
 
-	@Override
 	public String getCode() {
 		return code;
 	}
