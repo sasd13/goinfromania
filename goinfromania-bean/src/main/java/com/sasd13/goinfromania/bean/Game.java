@@ -10,7 +10,6 @@ import com.sasd13.goinfromania.bean.character.Pig;
 public class Game extends Observable {
 
 	private long id;
-	private State state;
 	private Level level;
 	private Result result;
 	private int score;
@@ -19,6 +18,7 @@ public class Game extends Observable {
 	private Pig pig;
 
 	public Game() {
+		result = Result.NONE;
 		elements = new ArrayList<IElement>();
 		pig = new Pig();
 		
@@ -32,17 +32,6 @@ public class Game extends Observable {
 	public void setId(long id) {
 		this.id = id;
 		
-		setChanged();
-		notifyObservers();
-	}
-
-	public State getState() {
-		return state;
-	}
-
-	public void setState(State state) {
-		this.state = state;
-
 		setChanged();
 		notifyObservers();
 	}

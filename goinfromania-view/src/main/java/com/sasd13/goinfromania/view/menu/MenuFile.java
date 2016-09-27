@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import com.sasd13.goinfromania.controller.menu.MenuFileController;
+import com.sasd13.goinfromania.controller.menu.file.MenuFileController;
 
 public class MenuFile extends GameMenu {
 

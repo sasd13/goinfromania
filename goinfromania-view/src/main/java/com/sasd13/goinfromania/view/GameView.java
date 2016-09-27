@@ -12,12 +12,10 @@ import javax.swing.JProgressBar;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.State;
 import com.sasd13.goinfromania.bean.character.Pig;
+import com.sasd13.goinfromania.util.ViewConstants;
 
 public class GameView extends JPanel implements Observer {
 	
-	private static final int PROGRESSBAR_MIN = 0;
-	private static final int PROGRESSBAR_MAX = 100;
-
 	private ArenaView arenaView;
 	private JProgressBar progressBarLife, progressBarEnergy;
 	private JLabel labelState, labelScore;
@@ -48,7 +46,7 @@ public class GameView extends JPanel implements Observer {
 		JPanel panelLife = new JPanel();
 		
 		panelLife.add(new JLabel("Vie : "));
-		progressBarLife = new JProgressBar(PROGRESSBAR_MIN, PROGRESSBAR_MAX);
+		progressBarLife = new JProgressBar(ViewConstants.PROGRESSBAR_MIN, ViewConstants.PROGRESSBAR_MAX);
 		panelLife.add(progressBarLife);
 		
 		panelPig.add(panelLife);
@@ -58,7 +56,7 @@ public class GameView extends JPanel implements Observer {
 		JPanel panelEnergy = new JPanel();
 		
 		panelEnergy.add(new JLabel("Energie : "));
-		progressBarEnergy = new JProgressBar(PROGRESSBAR_MIN, PROGRESSBAR_MAX);
+		progressBarEnergy = new JProgressBar(ViewConstants.PROGRESSBAR_MIN, ViewConstants.PROGRESSBAR_MAX);
 		panelEnergy.add(progressBarEnergy);
 		
 		panelPig.add(panelEnergy);
@@ -106,8 +104,8 @@ public class GameView extends JPanel implements Observer {
 		progressBarLife.setValue(pig.getLife());
 		progressBarEnergy.setValue(pig.getEnergy());
 		
-		if (game.getState() == State.PAUSED) {
-			labelState.setText(String.valueOf(game.getState()));
+		if (State.PAUSED == State.PAUSED) {
+			labelState.setText("Pause");
 		} else {
 			labelState.setText("");
 		}

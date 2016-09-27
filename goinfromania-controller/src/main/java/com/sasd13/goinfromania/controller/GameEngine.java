@@ -1,15 +1,11 @@
 package com.sasd13.goinfromania.controller;
 
-import java.util.List;
-
 import javax.swing.JOptionPane;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.bean.IElement;
-import com.sasd13.goinfromania.bean.State;
 import com.sasd13.goinfromania.bean.character.Pig;
-import com.sasd13.goinfromania.bean.setting.GamePad;
 import com.sasd13.goinfromania.bean.setting.EnumSettingType;
+import com.sasd13.goinfromania.bean.setting.GamePad;
 import com.sasd13.goinfromania.dao.GameDAO;
 import com.sasd13.goinfromania.util.GameConstants;
 import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
@@ -68,7 +64,7 @@ public class GameEngine {
 	}
 	
 	private void stopGame() {
-		game.setState(State.STOPPED);
+		
 	}
 	
 	public void saveGame() {
@@ -95,6 +91,10 @@ public class GameEngine {
 		game.addElement(pig);
 	}
 	
+	public void openGames() {
+		
+	}
+	
 	public void openGame(Game game) {
 		this.game = game;
 		
@@ -104,7 +104,7 @@ public class GameEngine {
 	}
 	
 	private void startGame() {
-		game.setState(State.STARTED);
+		
 	}
 	
 	public void exitGame() {
@@ -117,30 +117,14 @@ public class GameEngine {
 	}
 	
 	public void pauseOrResumeGame() {
-		switch (game.getState()) {
-			case STARTED:
-				pauseGame();
-				break;
-			case PAUSED:
-				startGame();
-				break;
-			default:
-				//TODO Throw exception
-				break;
-		}
+		
 	}
 	
 	private void pauseGame() {
-		game.setState(State.PAUSED);
+		
 	}
 	
-	public Pig findPig(List<IElement> elements) {
-		for (IElement element : elements) {
-			if (element instanceof Pig) {
-				return (Pig) element;
-			}
-		}
+	public void openSetting(EnumSettingType settingType) {
 		
-		return null;
 	}
 }

@@ -12,26 +12,20 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.dao.GameDAO;
 import com.sasd13.goinfromania.util.ViewConstants;
 
-public class ListGamesView extends JSplitPane implements ListSelectionListener {
+public class GamesView extends JSplitPane implements ListSelectionListener {
 
-	private static final int LIST_WIDTH = 300;
-	
-	private List<Game> games;
-	
 	private JList<String> panelList;
 	private GameDescriptorPane gamePane;
+	private List<Game> games;
 	
-	public ListGamesView() {
+	public GamesView() {
 		super(JSplitPane.HORIZONTAL_SPLIT);
 		
-		setDividerLocation(LIST_WIDTH);
+		setDividerLocation(ViewConstants.PANEL_LIST_WIDTH);
 		createPanelList();
 		createGameDescriptorPane();
-		
-		GameDAO.loadAll();
 	}
 
 	private void createPanelList() {
@@ -46,7 +40,7 @@ public class ListGamesView extends JSplitPane implements ListSelectionListener {
 
 	private void addScrollPane() {
 		JScrollPane listScroller = new JScrollPane(panelList);
-		listScroller.setPreferredSize(new Dimension(LIST_WIDTH, ViewConstants.PANEL_HEIGHT));
+		listScroller.setPreferredSize(new Dimension(ViewConstants.PANEL_LIST_WIDTH, ViewConstants.PANEL_HEIGHT));
 		
 		add(listScroller);
 	}
@@ -58,11 +52,8 @@ public class ListGamesView extends JSplitPane implements ListSelectionListener {
 
 	@Override
 	public void valueChanged(ListSelectionEvent event) {
-		if (event.getValueIsAdjusting() == false) {
-	        if (panelList.getSelectedIndex() >= 0) {
-	        	Game game = games.get(panelList.getSelectedIndex());
-	        	gamePane.bind(game);
-	        }
+		if (!event.getValueIsAdjusting() && panelList.getSelectedIndex() >= 0) {
+			gamePane.bind(games.get(panelList.getSelectedIndex()));
 	    }
 	}
 }

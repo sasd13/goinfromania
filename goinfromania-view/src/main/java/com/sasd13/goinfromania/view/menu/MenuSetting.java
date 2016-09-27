@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import com.sasd13.goinfromania.controller.menu.MenuSettingController;
+import com.sasd13.goinfromania.controller.menu.settings.MenuSettingsController;
 
 public class MenuSetting extends GameMenu {
 
@@ -41,7 +41,7 @@ public class MenuSetting extends GameMenu {
 			}
 			menuItem.setActionCommand(command);
 			menuItem.setAccelerator(keyStroke);
-			menuItem.addActionListener(new MenuSettingController());
+			menuItem.addActionListener(new MenuSettingsController());
 			
 			add(menuItem);
 		}

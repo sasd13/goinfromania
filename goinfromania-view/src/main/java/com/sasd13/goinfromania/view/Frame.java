@@ -15,7 +15,7 @@ public class Frame extends JFrame {
 	private JLayeredPane layersPane;
 	private GameMenuBar gameMenuBar;
 	private HomeView homeView;
-	private ListGamesView listGamesView;
+	private GamesView gamesView;
 	private GameView gameView;
 	
 	public Frame() {
@@ -24,8 +24,7 @@ public class Frame extends JFrame {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
 		createGameMenuBar();
-		setMenuEditEnabled(false);
-		createLayers();
+		createLayersPane();
 		addWindowListener(new FrameController());
 	}
 	
@@ -34,11 +33,7 @@ public class Frame extends JFrame {
 		setJMenuBar(gameMenuBar);
 	}
 	
-	public void setMenuEditEnabled(boolean enabled) {
-		gameMenuBar.setMenuEditEnabled(enabled);
-	}
-	
-	private void createLayers() {		
+	private void createLayersPane() {	
 		Dimension dimension = new Dimension(ViewConstants.PANEL_WIDTH, ViewConstants.PANEL_HEIGHT);
 		
 		layersPane = new JLayeredPane();
@@ -54,49 +49,56 @@ public class Frame extends JFrame {
 	private void addLayerHome(Dimension dimension) {
 		homeView = new HomeView();
 		homeView.setBounds(0, 0, dimension.width, dimension.height);
+		homeView.setVisible(false);
 		layersPane.add(homeView, JLayeredPane.DEFAULT_LAYER);
 	}
 
 	private void addLayerListGames(Dimension dimension) {
-		listGamesView = new ListGamesView();
-		listGamesView.setBounds(0, 0, dimension.width, dimension.height);
-		layersPane.add(listGamesView, JLayeredPane.DEFAULT_LAYER);
+		gamesView = new GamesView();
+		gamesView.setBounds(0, 0, dimension.width, dimension.height);
+		gamesView.setVisible(false);
+		layersPane.add(gamesView, JLayeredPane.DEFAULT_LAYER);
 	}
 
 	private void addLayerGame(Dimension dimension) {
 		gameView = new GameView();
 		gameView.setBounds(0, 0, dimension.width, dimension.height);
+		gameView.setVisible(false);
 		layersPane.add(gameView, JLayeredPane.DEFAULT_LAYER);
 	}
 	
-	public void displayHomeView() {
-		setMenuEditEnabled(false);
-		
+	public void displayHomeView() {		
 		homeView.setVisible(true);
 		layersPane.moveToFront(homeView);
 		
 		gameView.setVisible(false);
-		listGamesView.setVisible(false);
+		gamesView.setVisible(false);
+		
+		setMenuEditEnabled(false);
 	}
 	
-	public void displayListGamesView() {
-		setMenuEditEnabled(false);
-		
-		listGamesView.setVisible(true);
-		layersPane.moveToFront(listGamesView);
+	private void setMenuEditEnabled(boolean enabled) {
+		gameMenuBar.setMenuEditEnabled(enabled);
+	}
+	
+	public void displayListGamesView() {		
+		gamesView.setVisible(true);
+		layersPane.moveToFront(gamesView);
 		
 		homeView.setVisible(false);
 		gameView.setVisible(false);
+		
+		setMenuEditEnabled(false);
 	}
 	
-	public void displayGameView() {
-		setMenuEditEnabled(true);
-		
+	public void displayGameView() {		
 		gameView.setVisible(true);
 		gameView.getArenaView().requestFocusInWindow();
 		layersPane.moveToFront(gameView);
 		
 		homeView.setVisible(false);
-		listGamesView.setVisible(false);
+		gamesView.setVisible(false);
+		
+		setMenuEditEnabled(true);
 	}
 }
