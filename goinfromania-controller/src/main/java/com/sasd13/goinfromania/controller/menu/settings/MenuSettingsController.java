@@ -7,9 +7,11 @@ import com.sasd13.goinfromania.bean.setting.EnumSettingType;
 import com.sasd13.goinfromania.controller.GameEngine;
 
 public class MenuSettingsController implements ActionListener {
-	
+
+	private GameEngine gameEngine = GameEngine.getInstance();
+
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		GameEngine.getInstance().openSetting(EnumSettingType.find(event.getActionCommand()));
+		gameEngine.openSetting(EnumSettingType.find(event.getActionCommand()));
 	}
 }

@@ -3,13 +3,13 @@ package com.sasd13.goinfromania.controller.menu.file;
 import com.sasd13.goinfromania.controller.menu.IMenuItemType;
 
 public enum EnumMenuFileType implements IMenuItemType {
-	NEW("NEW"),
-	OPEN("OPEN"),
+	NEW("NEW"), 
+	OPEN("OPEN"), 
 	EXIT("EXIT"),
 	;
-	
+
 	private String code;
-	
+
 	private EnumMenuFileType(String code) {
 		this.code = code;
 	}
@@ -25,7 +25,7 @@ public enum EnumMenuFileType implements IMenuItemType {
 				return type;
 			}
 		}
-		
+
 		return null;
 	}
 }

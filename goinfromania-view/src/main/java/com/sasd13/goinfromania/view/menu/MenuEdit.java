@@ -3,59 +3,39 @@ package com.sasd13.goinfromania.view.menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import com.sasd13.goinfromania.controller.menu.edit.EnumMenuEditType;
 import com.sasd13.goinfromania.controller.menu.edit.MenuEditController;
 
-public class MenuEdit extends GameMenu {
-	
+public class MenuEdit extends JMenu {
+
 	public MenuEdit() {
 		super("Partie");
-		
+
+		buildItems(new MenuEditController());
 		setMnemonic(KeyEvent.VK_P);
 	}
 
-	@Override
-	protected void createMenuItems() {
-		JMenuItem[] menuItems = {
-				new JMenuItem("Pause / Reprise"),
-				new JMenuItem("Stop"),
-				new JMenuItem("Sauvegarder")
-		};
-		
-		addMenuItemsToMenu(menuItems);
-	}
+	private void buildItems(MenuEditController controller) {
+		JMenuItem menuItemPause = new JMenuItem("Pause / Reprise");
+		menuItemPause.setActionCommand(EnumMenuEditType.PAUSE.getCode());
+		menuItemPause.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+		menuItemPause.addActionListener(controller);
+		add(menuItemPause);
 
-	private void addMenuItemsToMenu(JMenuItem[] menuItems) {
-		String command = null;
-		KeyStroke keyStroke = null;
-		
-		int indice = -1;
-		for (JMenuItem menuItem : menuItems) {
-			indice++;
-			
-			switch (indice) {
-				case 0:
-					command = "PAUSE";
-					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK);
-					break;
-				case 1:
-					command = "STOP";
-					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK);
-					break;
-				case 2:
-					addSeparator();
-					
-					command = "SAVE";
-					keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK);
-					break;
-			}
-			menuItem.setActionCommand(command);
-			menuItem.setAccelerator(keyStroke);
-			menuItem.addActionListener(new MenuEditController());
-			
-			add(menuItem);
-		}
+		JMenuItem menuItemStop = new JMenuItem("Stop");
+		menuItemStop.setActionCommand(EnumMenuEditType.STOP.getCode());
+		menuItemStop.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK));
+		menuItemStop.addActionListener(controller);
+		add(menuItemStop);
+
+		JMenuItem menuItemSave = new JMenuItem("Sauvegarder");
+		menuItemSave.setActionCommand(EnumMenuEditType.SAVE.getCode());
+		menuItemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+		menuItemSave.addActionListener(controller);
+		add(menuItemSave);
 	}
 }

@@ -8,12 +8,12 @@ import javax.swing.JLayeredPane;
 import com.sasd13.goinfromania.controller.FrameController;
 import com.sasd13.goinfromania.util.GameConstants;
 import com.sasd13.goinfromania.util.ViewConstants;
-import com.sasd13.goinfromania.view.menu.GameMenuBar;
+import com.sasd13.goinfromania.view.menu.MenuBar;
 
 public class Frame extends JFrame {
 	
 	private JLayeredPane layersPane;
-	private GameMenuBar gameMenuBar;
+	private MenuBar menuBar;
 	private HomeView homeView;
 	private GamesView gamesView;
 	private GameView gameView;
@@ -23,14 +23,14 @@ public class Frame extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
-		createGameMenuBar();
+		createMenuBar();
 		createLayersPane();
 		addWindowListener(new FrameController());
 	}
 	
-	private void createGameMenuBar() {
-		gameMenuBar = new GameMenuBar();
-		setJMenuBar(gameMenuBar);
+	private void createMenuBar() {
+		menuBar = new MenuBar();
+		setJMenuBar(menuBar);
 	}
 	
 	private void createLayersPane() {	
@@ -78,7 +78,7 @@ public class Frame extends JFrame {
 	}
 	
 	private void setMenuEditEnabled(boolean enabled) {
-		gameMenuBar.setMenuEditEnabled(enabled);
+		menuBar.setMenuEditEnabled(enabled);
 	}
 	
 	public void displayListGamesView() {		

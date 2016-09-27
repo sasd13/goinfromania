@@ -2,26 +2,20 @@ package com.sasd13.goinfromania.view.menu;
 
 import javax.swing.JMenuBar;
 
-public class GameMenuBar extends JMenuBar {
-	
+public class MenuBar extends JMenuBar {
+
 	private MenuEdit menuEdit;
 
-	public GameMenuBar() {
+	public MenuBar() {
 		super();
-		
+
 		menuEdit = new MenuEdit();
-		
-		GameMenu[] gameMenus = {
-				new MenuFile(),
-				menuEdit,
-				new MenuSetting()
-		};
-		
-		for (GameMenu gameMenu : gameMenus) {
-			add(gameMenu);
-		}
+
+		add(new MenuFile());
+		add(menuEdit);
+		add(new MenuSettings());
 	}
-	
+
 	public void setMenuEditEnabled(boolean enabled) {
 		menuEdit.setEnabled(enabled);
 	}
