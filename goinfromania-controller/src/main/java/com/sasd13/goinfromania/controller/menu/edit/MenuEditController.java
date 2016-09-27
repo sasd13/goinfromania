@@ -12,7 +12,7 @@ public class MenuEditController implements ActionListener {
 	private IMenuItemCommandFactory menuItemCommandFactory;
 
 	public MenuEditController() {
-		menuItemCommandFactory = MenuCommandFactory.make(EnumMenuType.EDIT);
+		menuItemCommandFactory = MenuCommandFactory.make(EnumMenuType.EDIT.getCode());
 	}
 
 	@Override

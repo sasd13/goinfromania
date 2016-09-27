@@ -51,7 +51,7 @@ public class SettingController implements ActionListener {
 	}
 
 	private void performSave() {
-		SettingPreferencesFactory.make(settingType).push(this.setting);
+		SettingPreferencesFactory.make(settingType.getCode()).push(this.setting);
 	}
 	
 	private void actionReset() {

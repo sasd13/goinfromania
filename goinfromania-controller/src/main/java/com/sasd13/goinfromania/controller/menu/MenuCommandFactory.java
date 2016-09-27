@@ -8,16 +8,15 @@ public class MenuCommandFactory {
 
 	private MenuCommandFactory() {}
 
-	public static IMenuItemCommandFactory make(EnumMenuType menuType) {
-		switch (menuType) {
-			case FILE:
-				return new MenuFileCommandFactory();
-			case EDIT:
-				return new MenuEditCommandFactory();
-			case SETTINGS:
-				return new MenuSettingsCommandFactory();
-			default:
-				return null;
+	public static IMenuItemCommandFactory make(String code) {
+		if (EnumMenuType.FILE.getCode().equalsIgnoreCase(code)) {
+			return new MenuFileCommandFactory();
+		} else if (EnumMenuType.EDIT.getCode().equalsIgnoreCase(code)) {
+			return new MenuEditCommandFactory();
+		} else if (EnumMenuType.SETTINGS.getCode().equalsIgnoreCase(code)) {
+			return new MenuSettingsCommandFactory();
+		} else {
+			return null;
 		}
 	}
 }

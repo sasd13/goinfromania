@@ -4,19 +4,19 @@ public enum EnumSettingType {
 	GAMEPAD("GAMEPAD"),
 	;
 	
-	private String name;
+	private String code;
 	
-	private EnumSettingType(String name) {
-		this.name = name;
+	private EnumSettingType(String code) {
+		this.code = code;
 	}
 	
-	public String getName() {
-		return name;
+	public String getCode() {
+		return code;
 	}
 	
-	public static EnumSettingType find(String name) {
+	public static EnumSettingType find(String code) {
 		for (EnumSettingType type : values()) {
-			if (type.name.equalsIgnoreCase(name)) {
+			if (type.code.equalsIgnoreCase(code)) {
 				return type;
 			}
 		}

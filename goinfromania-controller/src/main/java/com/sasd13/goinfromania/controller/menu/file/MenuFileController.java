@@ -12,7 +12,7 @@ public class MenuFileController implements ActionListener {
 	private IMenuItemCommandFactory menuItemCommandFactory;
 
 	public MenuFileController() {
-		menuItemCommandFactory = MenuCommandFactory.make(EnumMenuType.FILE);
+		menuItemCommandFactory = MenuCommandFactory.make(EnumMenuType.FILE.getCode());
 	}
 
 	@Override

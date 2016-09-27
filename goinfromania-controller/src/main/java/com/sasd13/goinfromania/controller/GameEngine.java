@@ -98,7 +98,7 @@ public class GameEngine {
 	public void openGame(Game game) {
 		this.game = game;
 		
-		gamePad = (GamePad) SettingPreferencesFactory.make(EnumSettingType.GAMEPAD).pull();
+		gamePad = (GamePad) SettingPreferencesFactory.make(EnumSettingType.GAMEPAD.getCode()).pull();
 		
 		startGame();
 	}
