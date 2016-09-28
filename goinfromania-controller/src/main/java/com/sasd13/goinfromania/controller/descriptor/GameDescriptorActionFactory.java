@@ -6,11 +6,11 @@ public class GameDescriptorActionFactory {
 
 	private GameDescriptorActionFactory() {}
 	
-	public static ICommand make(String code) {
+	public static ICommand make(String code, IDescriptor descriptor) {
 		if (EnumGameDescriptorActionType.CONTINUE.getCode().equalsIgnoreCase(code)) {
-			return new GameDescriptorActionContinue();
+			return new GameDescriptorActionContinue(descriptor);
 		} else if (EnumGameDescriptorActionType.DELETE.getCode().equalsIgnoreCase(code)) {
-			return new GameDescriptorActionDelete();
+			return new GameDescriptorActionDelete(descriptor);
 		} else {
 			return null;
 		}

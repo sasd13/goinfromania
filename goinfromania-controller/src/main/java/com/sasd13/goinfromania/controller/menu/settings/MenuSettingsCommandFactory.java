@@ -1,9 +1,9 @@
 package com.sasd13.goinfromania.controller.menu.settings;
 
 import com.sasd13.goinfromania.controller.ICommand;
-import com.sasd13.goinfromania.controller.ICommandFactory;
+import com.sasd13.goinfromania.controller.menu.IMenuCommandFactory;
 
-public class MenuSettingsCommandFactory implements ICommandFactory {
+public class MenuSettingsCommandFactory implements IMenuCommandFactory {
 
 	@Override
 	public ICommand make(String code) {

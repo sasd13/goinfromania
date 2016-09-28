@@ -6,10 +6,15 @@ import com.sasd13.goinfromania.dao.GameDAO;
 
 public class GameDescriptorActionDelete implements ICommand {
 
+	private IDescriptor descriptor;
+
+	public GameDescriptorActionDelete(IDescriptor descriptor) {
+		this.descriptor = descriptor;
+	}
+
 	@Override
 	public void execute(IFrame frame) {
-		// this.gameDescriptorPane.clear();
-
-		GameDAO.delete(this.game);
+		descriptor.clear();
+		GameDAO.delete(descriptor.getDescriptable());
 	}
 }

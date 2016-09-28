@@ -12,16 +12,20 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.sasd13.goinfromania.bean.Game;
+import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.util.ViewConstants;
 
 public class GamesView extends JSplitPane implements ListSelectionListener {
 
+	private IFrame frame;
 	private JList<String> panelList;
-	private GameDescriptorPane gamePane;
+	private GameDescriptorPane gameDescriptorPane;
 	private List<Game> games;
 	
-	public GamesView() {
+	public GamesView(IFrame frame) {
 		super(JSplitPane.HORIZONTAL_SPLIT);
+		
+		this.frame = frame;
 		
 		setDividerLocation(ViewConstants.PANEL_LIST_WIDTH);
 		createPanelList();
@@ -46,14 +50,15 @@ public class GamesView extends JSplitPane implements ListSelectionListener {
 	}
 	
 	private void createGameDescriptorPane() {
-		gamePane = new GameDescriptorPane();
-		add(gamePane);
+		gameDescriptorPane = new GameDescriptorPane(frame);
+		
+		add(gameDescriptorPane);
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent event) {
 		if (!event.getValueIsAdjusting() && panelList.getSelectedIndex() >= 0) {
-			gamePane.bind(games.get(panelList.getSelectedIndex()));
+			gameDescriptorPane.bind(games.get(panelList.getSelectedIndex()));
 	    }
 	}
 }

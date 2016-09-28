@@ -4,22 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.sasd13.goinfromania.controller.menu.MenuCommandFactory;
-import com.sasd13.goinfromania.controller.ICommandFactory;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.menu.EnumMenuType;
+import com.sasd13.goinfromania.controller.menu.IMenuCommandFactory;
 
 public class MenuEditController implements ActionListener {
 
 	private IFrame frame;
-	private ICommandFactory commandFactory;
+	private IMenuCommandFactory menuCommandFactory;
 
 	public MenuEditController(IFrame frame) {
 		this.frame = frame;
-		commandFactory = MenuCommandFactory.make(EnumMenuType.EDIT.getCode());
+		menuCommandFactory = MenuCommandFactory.make(EnumMenuType.EDIT.getCode());
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		commandFactory.make(event.getActionCommand()).execute(frame);
+		menuCommandFactory.make(event.getActionCommand()).execute(frame);
 	}
 }

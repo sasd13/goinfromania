@@ -57,7 +57,7 @@ public class Frame extends JFrame implements IFrame {
 	}
 
 	private void addLayerListGames(Dimension dimension) {
-		gamesView = new GamesView();
+		gamesView = new GamesView(this);
 		gamesView.setBounds(0, 0, dimension.width, dimension.height);
 		gamesView.setVisible(false);
 		layersPane.add(gamesView, JLayeredPane.DEFAULT_LAYER);
