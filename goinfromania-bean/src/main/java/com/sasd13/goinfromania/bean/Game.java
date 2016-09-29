@@ -10,15 +10,17 @@ import com.sasd13.goinfromania.bean.character.Pig;
 public class Game extends Observable {
 
 	private long id;
-	private Level level;
-	private Result result;
+	private EnumState state;
+	private EnumLevel level;
+	private EnumResult result;
 	private int score;
 	private Timestamp dateCreation, dateLastUpdate;
 	private List<IElement> elements;
 	private Pig pig;
 
 	public Game() {
-		result = Result.NONE;
+		state = EnumState.NONE;
+		result = EnumResult.NONE;
 		elements = new ArrayList<IElement>();
 		pig = new Pig();
 		
@@ -35,23 +37,34 @@ public class Game extends Observable {
 		setChanged();
 		notifyObservers();
 	}
+	
+	public EnumState getState() {
+		return state;
+	}
+	
+	public void setState(EnumState state) {
+		this.state = state;
+		
+		setChanged();
+		notifyObservers();
+	}
 
-	public Level getLevel() {
+	public EnumLevel getLevel() {
 		return level;
 	}
 
-	public void setLevel(Level level) {
+	public void setLevel(EnumLevel level) {
 		this.level = level;
 
 		setChanged();
 		notifyObservers();
 	}
 
-	public Result getResult() {
+	public EnumResult getResult() {
 		return result;
 	}
 
-	public void setResult(Result result) {
+	public void setResult(EnumResult result) {
 		this.result = result;
 
 		setChanged();
@@ -111,5 +124,10 @@ public class Game extends Observable {
 	
 	public Pig getPig() {
 		return pig;
+	}
+	
+	public static Game clone(Game game) {
+		//TODO : clone
+		return null;
 	}
 }

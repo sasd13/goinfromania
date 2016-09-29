@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.bean.State;
 import com.sasd13.goinfromania.bean.character.Pig;
+import com.sasd13.goinfromania.engine.State;
 import com.sasd13.goinfromania.util.ViewConstants;
 
 public class GameView extends JPanel implements Observer {

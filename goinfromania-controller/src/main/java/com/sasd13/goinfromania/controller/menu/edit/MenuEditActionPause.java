@@ -1,15 +1,21 @@
 package com.sasd13.goinfromania.controller.menu.edit;
 
-import com.sasd13.goinfromania.controller.GameEngine;
+import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.engine.GameEngine;
 
 public class MenuEditActionPause implements IAction {
+	
+	private Game game;
 
-	private GameEngine gameEngine = GameEngine.getInstance();
+	public MenuEditActionPause(Game game) {
+		this.game = game;
+	}
 
 	@Override
 	public void execute(IFrame frame) {
-		gameEngine.pauseOrResumeGame();
+		GameEngine.getInstance().onPause(game);
+		//TODO : display pause
 	}
 }

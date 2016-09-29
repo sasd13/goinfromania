@@ -3,6 +3,7 @@ package com.sasd13.goinfromania.controller.menu.edit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IFrame;
 
 public class MenuEditController implements ActionListener {
@@ -13,6 +14,10 @@ public class MenuEditController implements ActionListener {
 	public MenuEditController(IFrame frame) {
 		this.frame = frame;
 		factory = new MenuEditActionFactory();
+	}
+
+	public void setGame(Game game) {
+		factory.setGame(game);
 	}
 
 	@Override

@@ -4,17 +4,28 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import com.sasd13.goinfromania.bean.Direction;
+import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.character.Pig;
 import com.sasd13.goinfromania.bean.setting.GamePad;
+import com.sasd13.goinfromania.engine.GameEngine;
 import com.sasd13.goinfromania.util.MoveUtil;
 
 public class ArenaController implements KeyListener {
-	
-	private GameEngine gameEngine = GameEngine.getInstance();
+
+	private Game game;
+	private GamePad gamePad;
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public void setGamePad(GamePad gamePad) {
+		this.gamePad = gamePad;
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		//Do nothing
+		// Do nothing
 	}
 
 	@Override
@@ -28,16 +39,16 @@ public class ArenaController implements KeyListener {
 	}
 
 	public void actionGamePad(int keyCode) {
-		GamePad gamePad = gameEngine.getGamePad();
+		GameEngine gameEngine = GameEngine.getInstance();
 
 		if (keyCode == gamePad.getKeyStart()) {
 			if (gameEngine.isGamePaused()) {
-				gameEngine.onResume();
+				gameEngine.onResume(game);
 			} else {
-				gameEngine.onPause();
+				gameEngine.onPause(game);
 			}
 		} else {
-			Pig pig = gameEngine.getGame().getPig();
+			Pig pig = game.getPig();
 
 			if (keyCode == gamePad.getKeyMoveNorth()) {
 				MoveUtil.move(pig, Direction.NORTH);

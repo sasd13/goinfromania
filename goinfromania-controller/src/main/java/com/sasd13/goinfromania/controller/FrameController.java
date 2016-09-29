@@ -3,12 +3,20 @@ package com.sasd13.goinfromania.controller;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import com.sasd13.goinfromania.bean.Game;
+import com.sasd13.goinfromania.engine.GameEngine;
+
 public class FrameController implements WindowListener {
 
 	private IFrame frame;
+	private Game game;
 
 	public FrameController(IFrame frame) {
 		this.frame = frame;
+	}
+	
+	public void setGame(Game game) {
+		this.game = game;
 	}
 
 	@Override
@@ -26,9 +34,9 @@ public class FrameController implements WindowListener {
 		GameEngine gameEngine = GameEngine.getInstance();
 		
 		if (gameEngine.hasGameInProgress()) {
-			gameEngine.onPause();
-			gameEngine.onStop();
-			gameEngine.onDestroy();
+			gameEngine.onPause(game);
+			gameEngine.onStop(game);
+			gameEngine.onDestroy(game);
 		}
 		
 		frame.close();
