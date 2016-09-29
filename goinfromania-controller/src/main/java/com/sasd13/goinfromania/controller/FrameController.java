@@ -3,6 +3,7 @@ package com.sasd13.goinfromania.controller;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.engine.GameEngine;
 
@@ -31,15 +32,10 @@ public class FrameController implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent event) {
-		GameEngine gameEngine = GameEngine.getInstance();
-		
-		if (gameEngine.hasGameInProgress()) {
-			gameEngine.onPause(game);
-			gameEngine.onStop(game);
-			gameEngine.onDestroy(game);
+		if () {
+			GameEngine.getInstance().requestState(EnumState.DESTROYED.getOrder(), game);
+			frame.close();
 		}
-		
-		frame.close();
 	}
 
 	@Override

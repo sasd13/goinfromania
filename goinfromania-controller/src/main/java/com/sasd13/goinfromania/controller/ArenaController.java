@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import com.sasd13.goinfromania.bean.Direction;
+import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.character.Pig;
 import com.sasd13.goinfromania.bean.setting.GamePad;
@@ -42,10 +43,10 @@ public class ArenaController implements KeyListener {
 		GameEngine gameEngine = GameEngine.getInstance();
 
 		if (keyCode == gamePad.getKeyStart()) {
-			if (gameEngine.isGamePaused()) {
-				gameEngine.onResume(game);
+			if (game.getState() == EnumState.RESUMED) {
+				gameEngine.requestState(EnumState.PAUSED.getOrder(), game);
 			} else {
-				gameEngine.onPause(game);
+				gameEngine.requestState(EnumState.RESUMED.getOrder(), game);
 			}
 		} else {
 			Pig pig = game.getPig();

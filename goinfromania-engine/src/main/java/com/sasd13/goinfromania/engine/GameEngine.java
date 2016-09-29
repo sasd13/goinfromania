@@ -3,8 +3,6 @@ package com.sasd13.goinfromania.engine;
 import javax.swing.JOptionPane;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.bean.setting.EnumSetting;
-import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
 
 public class GameEngine {
 
@@ -15,9 +13,9 @@ public class GameEngine {
 	public static GameEngine getInstance() {
 		return GameEngineHolder.INSTANCE;
 	}
-	
+
 	public void requestState(int stateTarget, Game game) {
-		
+		new CreateStateProcessor().process(stateTarget, game);
 	}
 
 	private void onStop(Game game) {
