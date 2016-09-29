@@ -8,7 +8,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import com.sasd13.goinfromania.controller.IFrame;
-import com.sasd13.goinfromania.controller.menu.settings.EnumMenuSettingsType;
+import com.sasd13.goinfromania.controller.menu.settings.EnumMenuSettingsAction;
 import com.sasd13.goinfromania.controller.menu.settings.MenuSettingsController;
 
 public class MenuSettings extends JMenu {
@@ -22,7 +22,7 @@ public class MenuSettings extends JMenu {
 
 	private void buildItems(MenuSettingsController controller) {
 		JMenuItem menuItemGamePad = new JMenuItem("Clavier");
-		menuItemGamePad.setActionCommand(EnumMenuSettingsType.GAMEPAD.getCode());
+		menuItemGamePad.setActionCommand(EnumMenuSettingsAction.GAMEPAD.getCode());
 		menuItemGamePad.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
 		menuItemGamePad.addActionListener(controller);
 		add(menuItemGamePad);

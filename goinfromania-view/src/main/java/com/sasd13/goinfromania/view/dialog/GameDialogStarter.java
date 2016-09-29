@@ -102,7 +102,7 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 		} else {
 			timer.stop();
 			
-			dispose();
+			close();
 		}
 	}
 

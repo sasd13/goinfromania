@@ -1,11 +1,11 @@
 package com.sasd13.goinfromania.controller.menu.file;
 
 import com.sasd13.goinfromania.controller.GameEngine;
-import com.sasd13.goinfromania.controller.ICommand;
+import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.dao.GameDAO;
 
-public class MenuFileOpenCommand implements ICommand {
+public class MenuFileActionOpen implements IAction {
 
 	private GameEngine gameEngine = GameEngine.getInstance();
 

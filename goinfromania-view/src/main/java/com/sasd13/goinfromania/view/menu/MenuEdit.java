@@ -8,7 +8,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import com.sasd13.goinfromania.controller.IFrame;
-import com.sasd13.goinfromania.controller.menu.edit.EnumMenuEditType;
+import com.sasd13.goinfromania.controller.menu.edit.EnumMenuEditAction;
 import com.sasd13.goinfromania.controller.menu.edit.MenuEditController;
 
 public class MenuEdit extends JMenu {
@@ -22,19 +22,19 @@ public class MenuEdit extends JMenu {
 
 	private void buildItems(MenuEditController controller) {
 		JMenuItem menuItemPause = new JMenuItem("Pause / Reprise");
-		menuItemPause.setActionCommand(EnumMenuEditType.PAUSE.getCode());
+		menuItemPause.setActionCommand(EnumMenuEditAction.PAUSE.getCode());
 		menuItemPause.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
 		menuItemPause.addActionListener(controller);
 		add(menuItemPause);
 
 		JMenuItem menuItemStop = new JMenuItem("Stop");
-		menuItemStop.setActionCommand(EnumMenuEditType.STOP.getCode());
+		menuItemStop.setActionCommand(EnumMenuEditAction.STOP.getCode());
 		menuItemStop.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK));
 		menuItemStop.addActionListener(controller);
 		add(menuItemStop);
 
 		JMenuItem menuItemSave = new JMenuItem("Sauvegarder");
-		menuItemSave.setActionCommand(EnumMenuEditType.SAVE.getCode());
+		menuItemSave.setActionCommand(EnumMenuEditAction.SAVE.getCode());
 		menuItemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		menuItemSave.addActionListener(controller);
 		add(menuItemSave);

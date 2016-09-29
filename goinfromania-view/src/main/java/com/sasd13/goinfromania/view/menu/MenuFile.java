@@ -8,7 +8,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import com.sasd13.goinfromania.controller.IFrame;
-import com.sasd13.goinfromania.controller.menu.file.EnumMenuFileType;
+import com.sasd13.goinfromania.controller.menu.file.EnumMenuFileAction;
 import com.sasd13.goinfromania.controller.menu.file.MenuFileController;
 
 public class MenuFile extends JMenu {
@@ -22,19 +22,19 @@ public class MenuFile extends JMenu {
 
 	private void buildItems(MenuFileController controller) {
 		JMenuItem menuItemNew = new JMenuItem("Nouveau");
-		menuItemNew.setActionCommand(EnumMenuFileType.NEW.getCode());
+		menuItemNew.setActionCommand(EnumMenuFileAction.NEW.getCode());
 		menuItemNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		menuItemNew.addActionListener(controller);
 		add(menuItemNew);
 
 		JMenuItem menuItemOpen = new JMenuItem("Open");
-		menuItemOpen.setActionCommand(EnumMenuFileType.OPEN.getCode());
+		menuItemOpen.setActionCommand(EnumMenuFileAction.OPEN.getCode());
 		menuItemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 		menuItemOpen.addActionListener(controller);
 		add(menuItemOpen);
 
 		JMenuItem menuItemExit = new JMenuItem("Exit");
-		menuItemExit.setActionCommand(EnumMenuFileType.EXIT.getCode());
+		menuItemExit.setActionCommand(EnumMenuFileAction.EXIT.getCode());
 		menuItemExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
 		menuItemExit.addActionListener(controller);
 		add(menuItemExit);

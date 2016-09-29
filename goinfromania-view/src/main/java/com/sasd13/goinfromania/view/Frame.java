@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.FrameController;
@@ -28,7 +29,7 @@ public class Frame extends JFrame implements IFrame {
 		setResizable(false);
 		createMenuBar();
 		createLayersPane();
-		addWindowListener(new FrameController());
+		addWindowListener(new FrameController(this));
 	}
 
 	private void createMenuBar() {
@@ -106,5 +107,15 @@ public class Frame extends JFrame implements IFrame {
 		gamesView.setVisible(false);
 
 		setMenuEditEnabled(true);
+	}
+
+	@Override
+	public void close() {
+		String message = "Quitter le jeu ?";
+
+		int selected = JOptionPane.showConfirmDialog(null, message, "Confirmation", JOptionPane.YES_NO_OPTION);
+		if (selected == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
 	}
 }

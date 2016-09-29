@@ -1,6 +1,6 @@
 package com.sasd13.goinfromania.controller;
 
-public interface ICommand {
+public interface IAction {
 
 	void execute(IFrame frame);
 }

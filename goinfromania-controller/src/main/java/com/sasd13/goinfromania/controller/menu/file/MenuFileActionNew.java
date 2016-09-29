@@ -2,10 +2,10 @@ package com.sasd13.goinfromania.controller.menu.file;
 
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.GameEngine;
-import com.sasd13.goinfromania.controller.ICommand;
+import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
 
-public class MenuFileNewCommand implements ICommand {
+public class MenuFileActionNew implements IAction {
 
 	private GameEngine gameEngine = GameEngine.getInstance();
 
@@ -15,7 +15,7 @@ public class MenuFileNewCommand implements ICommand {
 			Game game = new Game();
 
 			frame.displayGame(game);
-			gameEngine.startGame(game);
+			gameEngine.onCreate(game);
 		}
 	}
 }

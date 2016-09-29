@@ -13,21 +13,25 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.sasd13.goinfromania.bean.Game;
+import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.result.GameResultController;
 import com.sasd13.goinfromania.util.ViewConstants;
-import com.sasd13.goinfromania.view.GameView;
+import com.sasd13.goinfromania.view.Frame;
 
 public class GameDialogResult extends GameDialog {
 
+	private IFrame frame;
 	private JLabel labelResult, labelScore;
-	
-	public GameDialogResult(GameView gameView) {
-		super(gameView);
-		
+
+	public GameDialogResult(Frame frame) {
+		super();
+
+		this.frame = frame;
+
 		setContentPane(new JLayeredPane());
-		
+
 		Dimension dimension = new Dimension(ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT);
-		
+
 		setSize(dimension);
 		createLayers(dimension);
 	}
@@ -36,20 +40,20 @@ public class GameDialogResult extends GameDialog {
 		createLayerResult(dimension);
 		createLayerScore(dimension);
 	}
-	
+
 	private void createLayerResult(Dimension dimension) {
 		JPanel panelResult = makeNewPanel(dimension);
-		
+
 		createLabelOfLayerResult(panelResult);
-		
+
 		getContentPane().add(panelResult, JLayeredPane.DEFAULT_LAYER);
 	}
-	
+
 	private JPanel makeNewPanel(Dimension dimension) {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBackground(Color.BLACK);
 		panel.setBounds(0, 0, dimension.width, dimension.height);
-		
+
 		return panel;
 	}
 
@@ -57,47 +61,44 @@ public class GameDialogResult extends GameDialog {
 		labelResult = new JLabel("", SwingConstants.HORIZONTAL);
 		labelResult.setFont(new Font(Font.SANS_SERIF, Font.BOLD | Font.ITALIC, 96));
 		labelResult.setForeground(Color.PINK);
-		
+
 		panelResult.add(labelResult, BorderLayout.CENTER);
 	}
 
 	private void createLayerScore(Dimension dimension) {
 		JPanel panelScore = makeNewPanel(dimension);
 		panelScore.add(new JLabel("Score"), BorderLayout.NORTH);
-		
+
 		createLabelOfLayerScore(panelScore);
 		createButtonsOfLayerScore(panelScore);
-		
+
 		getContentPane().add(panelScore, JLayeredPane.DEFAULT_LAYER);
 	}
 
 	private void createLabelOfLayerScore(JPanel panelScore) {
 		labelScore = new JLabel("", SwingConstants.HORIZONTAL);
-		
+
 		panelScore.add(labelScore, BorderLayout.CENTER);
 	}
 
 	private void createButtonsOfLayerScore(JPanel panelScore) {
 		JPanel panelButtons = new JPanel();
-		
+
 		addButtonsToPanelButton(panelButtons);
-		
+
 		panelScore.add(panelButtons, BorderLayout.SOUTH);
 	}
 
 	private void addButtonsToPanelButton(JPanel panelButtons) {
-		JButton[] buttons = {
-				new JButton("Rejouer"),
-				new JButton("Terminer")
-		};
-		
+		JButton[] buttons = { new JButton("Rejouer"), new JButton("Terminer") };
+
 		Dimension dimensionButton = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
 		String command = null;
-		
+
 		int indice = -1;
 		for (JButton button : buttons) {
 			indice++;
-			
+
 			switch (indice) {
 				case 0:
 					command = "REPLAY";
@@ -106,20 +107,20 @@ public class GameDialogResult extends GameDialog {
 					command = "END";
 					break;
 			}
-			
+
 			button.setPreferredSize(dimensionButton);
 			button.setFocusable(false);
 			button.setActionCommand(command);
-			button.addActionListener(new GameResultController());
-			
+			button.addActionListener(new GameResultController(frame, this));
+
 			panelButtons.add(button);
 		}
 	}
-	
+
 	@Override
 	public void update(Observable observable, Object arg) {
 		Game game = (Game) observable;
-		
+
 		switch (game.getResult()) {
 			case WIN:
 				labelResult.setText("Gagn�!!!");

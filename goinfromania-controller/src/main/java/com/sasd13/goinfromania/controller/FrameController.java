@@ -5,7 +5,11 @@ import java.awt.event.WindowListener;
 
 public class FrameController implements WindowListener {
 
-	private GameEngine gameEngine = GameEngine.getInstance();
+	private IFrame frame;
+
+	public FrameController(IFrame frame) {
+		this.frame = frame;
+	}
 
 	@Override
 	public void windowActivated(WindowEvent event) {
@@ -19,9 +23,15 @@ public class FrameController implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent event) {
-		if (gameEngine.stopGameSafely()) {
-			gameEngine.exitGame();
+		GameEngine gameEngine = GameEngine.getInstance();
+		
+		if (gameEngine.hasGameInProgress()) {
+			gameEngine.onPause();
+			gameEngine.onStop();
+			gameEngine.onDestroy();
 		}
+		
+		frame.close();
 	}
 
 	@Override

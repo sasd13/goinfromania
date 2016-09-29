@@ -13,7 +13,7 @@ import javax.swing.SwingConstants;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.character.Pig;
 import com.sasd13.goinfromania.controller.IFrame;
-import com.sasd13.goinfromania.controller.descriptor.EnumGameDescriptorActionType;
+import com.sasd13.goinfromania.controller.descriptor.EnumGameDescriptorAction;
 import com.sasd13.goinfromania.controller.descriptor.GameDescriptorController;
 import com.sasd13.goinfromania.controller.descriptor.IDescriptor;
 import com.sasd13.goinfromania.util.ViewConstants;
@@ -99,14 +99,14 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 		formGame.buttonContinue = new JButton("Continue");
 		formGame.buttonContinue.setPreferredSize(dimension);
 		formGame.buttonContinue.setFocusable(false);
-		formGame.buttonContinue.setActionCommand(EnumGameDescriptorActionType.CONTINUE.getCode());
+		formGame.buttonContinue.setActionCommand(EnumGameDescriptorAction.CONTINUE.getCode());
 		formGame.buttonContinue.addActionListener(gameDescriptorController);
 		panelButton.add(formGame.buttonContinue);
 
 		formGame.buttonDelete = new JButton("Delete");
 		formGame.buttonDelete.setPreferredSize(dimension);
 		formGame.buttonDelete.setFocusable(false);
-		formGame.buttonDelete.setActionCommand(EnumGameDescriptorActionType.DELETE.getCode());
+		formGame.buttonDelete.setActionCommand(EnumGameDescriptorAction.DELETE.getCode());
 		formGame.buttonDelete.addActionListener(gameDescriptorController);
 		panelButton.add(formGame.buttonDelete);
 	}

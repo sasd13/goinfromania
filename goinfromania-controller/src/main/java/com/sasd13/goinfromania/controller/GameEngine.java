@@ -3,9 +3,8 @@ package com.sasd13.goinfromania.controller;
 import javax.swing.JOptionPane;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.bean.setting.EnumSettingType;
+import com.sasd13.goinfromania.bean.setting.EnumSetting;
 import com.sasd13.goinfromania.bean.setting.GamePad;
-import com.sasd13.goinfromania.dao.GameDAO;
 import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
 
 public class GameEngine {
@@ -29,75 +28,52 @@ public class GameEngine {
 		return gamePad;
 	}
 
-	public boolean stopGameSafely() {
-		if (hasGameInProgress()) {
-			return confirmStopGame();
-		}
+	public void onCreate(Game game) {
+		this.game = game;
 
-		return true;
+		gamePad = (GamePad) SettingPreferencesFactory.make(EnumSetting.GAMEPAD.getCode()).pull();
+	}
+
+	public void onStart() {
+
+	}
+
+	public void onResume() {
+
+	}
+
+	public void onPause() {
+
+	}
+
+	public void onStop() {
+		if (hasGameInProgress()) {
+			String message = "Arr�t de la partie. Sauvegarder la progression ?";
+
+			int selected = JOptionPane.showConfirmDialog(null, message, "Confirmation", JOptionPane.YES_NO_CANCEL_OPTION);
+
+			switch (selected) {
+				case JOptionPane.YES_OPTION:
+					/*stopGame();
+					saveGame();
+					finishGame();*/
+				case JOptionPane.NO_OPTION:
+					/*stopGame();
+					finishGame();*/
+			}
+		}
+	}
+
+	public void onDestroy() {
+		game.deleteObservers();
+		game = null;
 	}
 
 	public boolean hasGameInProgress() {
 		return game != null;
 	}
-
-	private boolean confirmStopGame() {
-		String message = "Arr�t de la partie. Sauvegarder la progression ?";
-
-		int selected = JOptionPane.showConfirmDialog(null, message, "Confirmation", JOptionPane.YES_NO_CANCEL_OPTION);
-
-		switch (selected) {
-			case JOptionPane.YES_OPTION:
-				stopGame();
-				saveGame();
-				finishGameAndDisplayHome();
-				return true;
-			case JOptionPane.NO_OPTION:
-				stopGame();
-				finishGameAndDisplayHome();
-				return true;
-			default:
-				return false;
-		}
-	}
-
-	private void stopGame() {
-
-	}
-
-	public void saveGame() {
-		GameDAO.update(game);
-	}
-
-	public void finishGameAndDisplayHome() {
-		game.deleteObservers();
-		game = null;
-	}
-
-	public void startGame(Game game) {
-		this.game = game;
-
-		gamePad = (GamePad) SettingPreferencesFactory.make(EnumSettingType.GAMEPAD.getCode()).pull();
-	}
-
-	public void pauseOrResumeGame() {
-
-	}
-
-	private void pauseGame() {
-
-	}
-
-	public void openSetting(EnumSettingType settingType) {
-
-	}
 	
-	public void exitGame() {
-		String message = "Quitter le jeu ?";
-
-		int selected = JOptionPane.showConfirmDialog(null, message, "Confirmation", JOptionPane.YES_NO_OPTION);
-		if (selected == JOptionPane.YES_OPTION) {
-			System.exit(0);
-		}
+	public boolean isGamePaused() {
+		return true;
 	}
 }

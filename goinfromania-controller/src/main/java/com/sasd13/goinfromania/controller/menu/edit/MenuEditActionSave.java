@@ -1,15 +1,15 @@
 package com.sasd13.goinfromania.controller.menu.edit;
 
 import com.sasd13.goinfromania.controller.GameEngine;
-import com.sasd13.goinfromania.controller.ICommand;
+import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
 
-public class MenuEditStopCommand implements ICommand {
+public class MenuEditActionSave implements IAction {
 
 	private GameEngine gameEngine = GameEngine.getInstance();
 
 	@Override
 	public void execute(IFrame frame) {
-		gameEngine.stopGameSafely();
+		gameEngine.saveGame();
 	}
 }
