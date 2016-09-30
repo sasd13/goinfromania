@@ -1,18 +1,16 @@
 package com.sasd13.goinfromania.controller;
 
+import java.util.Observer;
+
 import com.sasd13.goinfromania.bean.Game;
 
-public interface IGameView {
+public interface IGameView extends Observer {
 	
-	void start(Game game);
+	void create(Game game);
 	
-	void resume();
-
-	void pause();
+	boolean askStop();
 	
-	boolean stop();
-	
-	void finish();
+	boolean askSave();
 	
 	void displayResult();
 }

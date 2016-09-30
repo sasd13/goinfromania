@@ -2,16 +2,13 @@ package com.sasd13.goinfromania.engine;
 
 import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.IGameView;
 
 public class PauseStateProcessor implements IStateProcessor {
 
-	private IGameView gameView;
 	private ResumeStateProcessor nextResume;
 	private StopStateProcessor nextStop;
 
-	public PauseStateProcessor(IGameView gameView) {
-		this.gameView = gameView;
+	public PauseStateProcessor() {
 		nextResume = new ResumeStateProcessor();
 		nextStop = new StopStateProcessor();
 	}

@@ -19,7 +19,7 @@ public class SettingActionReset implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		if (settingDialog.reset()) {
+		if (settingDialog.askReset()) {
 			setting.reset();
 			SettingPreferencesFactory.make(code).push(setting);
 		}

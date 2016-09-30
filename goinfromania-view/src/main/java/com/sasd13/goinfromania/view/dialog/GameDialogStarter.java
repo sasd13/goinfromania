@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -16,6 +17,7 @@ import com.sasd13.goinfromania.view.GameView;
 
 public class GameDialogStarter extends GameDialog implements ActionListener {
 
+	private GameView gameView;
 	private JLayeredPane layeredPane;
 	private JPanel panelReady, panelGo;
 	
@@ -23,8 +25,9 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 	private Timer timer;
 	
 	public GameDialogStarter(GameView gameView) {
-		super(gameView);
+		super();
 		
+		this.gameView = gameView;		
 		layeredPane = new JLayeredPane();
 		
 		setContentPane(layeredPane);
@@ -102,7 +105,7 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 		} else {
 			timer.stop();
 			
-			close();
+			dispose();
 		}
 	}
 
@@ -118,5 +121,11 @@ public class GameDialogStarter extends GameDialog implements ActionListener {
 		layeredPane.moveToFront(panelGo);
 		
 		panelReady.setVisible(false);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }

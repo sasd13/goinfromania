@@ -14,13 +14,14 @@ import javax.swing.JPanel;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.IElement;
 import com.sasd13.goinfromania.controller.ArenaController;
+import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.util.ViewConstants;
 
 public class ArenaView extends JPanel implements Observer {
 
 	private List<IElement> elements;
 	
-	public ArenaView() {
+	public ArenaView(IFrame frame) {
 		super(new BorderLayout());
 		
 		elements = new ArrayList<>();
@@ -29,7 +30,7 @@ public class ArenaView extends JPanel implements Observer {
 		setPreferredSize(new Dimension(ViewConstants.ARENA_WIDTH, ViewConstants.ARENA_HEIGHT));
 		setBackground(Color.BLACK);
 		setFocusable(true);
-		addKeyListener(new ArenaController());
+		addKeyListener(new ArenaController(frame));
 	}
 	
 	@Override

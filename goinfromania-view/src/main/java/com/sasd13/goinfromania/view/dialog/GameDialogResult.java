@@ -16,14 +16,13 @@ import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.result.GameResultController;
 import com.sasd13.goinfromania.util.ViewConstants;
-import com.sasd13.goinfromania.view.Frame;
 
 public class GameDialogResult extends GameDialog {
 
 	private IFrame frame;
 	private JLabel labelResult, labelScore;
 
-	public GameDialogResult(Frame frame) {
+	public GameDialogResult(IFrame frame, Game game) {
 		super();
 
 		this.frame = frame;
@@ -33,12 +32,12 @@ public class GameDialogResult extends GameDialog {
 		Dimension dimension = new Dimension(ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT);
 
 		setSize(dimension);
-		createLayers(dimension);
+		createLayers(dimension, game);
 	}
 
-	private void createLayers(Dimension dimension) {
+	private void createLayers(Dimension dimension, Game game) {
 		createLayerResult(dimension);
-		createLayerScore(dimension);
+		createLayerScore(dimension, game);
 	}
 
 	private void createLayerResult(Dimension dimension) {
@@ -65,12 +64,12 @@ public class GameDialogResult extends GameDialog {
 		panelResult.add(labelResult, BorderLayout.CENTER);
 	}
 
-	private void createLayerScore(Dimension dimension) {
+	private void createLayerScore(Dimension dimension, Game game) {
 		JPanel panelScore = makeNewPanel(dimension);
 		panelScore.add(new JLabel("Score"), BorderLayout.NORTH);
 
 		createLabelOfLayerScore(panelScore);
-		createButtonsOfLayerScore(panelScore);
+		createButtonsOfLayerScore(panelScore, game);
 
 		getContentPane().add(panelScore, JLayeredPane.DEFAULT_LAYER);
 	}
@@ -81,15 +80,15 @@ public class GameDialogResult extends GameDialog {
 		panelScore.add(labelScore, BorderLayout.CENTER);
 	}
 
-	private void createButtonsOfLayerScore(JPanel panelScore) {
+	private void createButtonsOfLayerScore(JPanel panelScore, Game game) {
 		JPanel panelButtons = new JPanel();
 
-		addButtonsToPanelButton(panelButtons);
+		addButtonsToPanelButton(panelButtons, game);
 
 		panelScore.add(panelButtons, BorderLayout.SOUTH);
 	}
 
-	private void addButtonsToPanelButton(JPanel panelButtons) {
+	private void addButtonsToPanelButton(JPanel panelButtons, Game game) {
 		JButton[] buttons = { new JButton("Rejouer"), new JButton("Terminer") };
 
 		Dimension dimensionButton = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
@@ -111,7 +110,7 @@ public class GameDialogResult extends GameDialog {
 			button.setPreferredSize(dimensionButton);
 			button.setFocusable(false);
 			button.setActionCommand(command);
-			button.addActionListener(new GameResultController(frame, this));
+			button.addActionListener(new GameResultController(frame, this, game));
 
 			panelButtons.add(button);
 		}

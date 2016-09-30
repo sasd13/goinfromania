@@ -19,7 +19,7 @@ public class GameResultActionEnd implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		dialog.close();
-		GameEngine.getInstance().requestState(EnumState.DESTROYED.getOrder(), game);
+		dialog.dispose();
+		GameEngine.requestState(EnumState.DESTROYED, game, frame);
 	}
 }

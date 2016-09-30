@@ -54,6 +54,8 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 	private void addLabelsToPanelGame(JPanel panelGame) {
 		Font font = new Font(Font.SANS_SERIF, Font.PLAIN, getFont().getSize());
 
+		formGame = new ViewHolder();
+		
 		formGame.labelLevel = new JLabel();
 		formGame.labelLevel.setFont(font);
 		panelGame.add(new JLabel("Niveau"));

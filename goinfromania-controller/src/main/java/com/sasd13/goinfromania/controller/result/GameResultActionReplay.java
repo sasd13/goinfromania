@@ -19,15 +19,13 @@ public class GameResultActionReplay implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		GameEngine gameEngine = GameEngine.getInstance();
-		
-		gameEngine.requestState(EnumState.DESTROYED.getOrder(), game);
+		GameEngine.requestState(EnumState.DESTROYED, game, frame);
 		
 		Game newGame = Game.clone(game);
 		
-		gameEngine.requestState(EnumState.CREATED.getOrder(), newGame);
-		dialog.close();
+		GameEngine.requestState(EnumState.CREATED, newGame, frame);
+		dialog.dispose();
 		frame.displayGame(newGame);
-		gameEngine.requestState(EnumState.RESUMED.getOrder(), newGame);
+		GameEngine.requestState(EnumState.RESUMED, newGame, frame);
 	}
 }

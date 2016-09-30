@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.sasd13.goinfromania.bean.setting.Setting;
+import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.setting.ISettingDialog;
 import com.sasd13.goinfromania.controller.setting.SettingController;
 import com.sasd13.goinfromania.util.ViewConstants;
@@ -19,29 +20,34 @@ import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
 
 public abstract class SettingDialog extends JDialog implements Observer, ISettingDialog {
 	
+	private Setting setting;
+	private String settingCode;
 	private SettingController settingController;
 
-	protected SettingDialog() {
+	protected SettingDialog(IFrame frame, Setting setting, String settingCode) {
 		super();
+		
+		this.setting = setting;
+		this.settingCode = settingCode;
 		
 		setTitle("Option");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		createForm();
-		createPanelButtons();
+		createPanelButtons(frame);
 	}
 	
 	protected abstract void createForm();
 	
-	private void createPanelButtons() {
+	private void createPanelButtons(IFrame frame) {
 		JPanel panelButtons = new JPanel();
 		
-		addButtonsToPanelButton(panelButtons);
+		addButtonsToPanelButton(panelButtons, frame);
 		
 		getContentPane().add(panelButtons, BorderLayout.SOUTH);
 	}
 
-	private void addButtonsToPanelButton(JPanel panelButtons) {
+	private void addButtonsToPanelButton(JPanel panelButtons, IFrame frame) {
 		JButton[] buttons = {
 				new JButton("Fermer"),
 				new JButton("Appliquer"),
@@ -50,7 +56,7 @@ public abstract class SettingDialog extends JDialog implements Observer, ISettin
 		
 		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
 		String command = null;
-		settingController = new SettingController();
+		settingController = new SettingController(frame, this, setting);
 		
 		int indice = -1;
 		for (JButton button : buttons) {
@@ -89,22 +95,26 @@ public abstract class SettingDialog extends JDialog implements Observer, ISettin
 	}
 	
 	@Override
-	public boolean reset(Setting setting) {
-		int selected = JOptionPane.showConfirmDialog(this.settingDialog, "Vous ne pourrez pas annuler les modifications. Confirmer?", "Option", JOptionPane.YES_NO_OPTION);
-		if (selected == JOptionPane.YES_OPTION) {
-			setting.reset();
+	public boolean save() {
+		if (isFormValid()) {
+			editSettingWithForm(setting);
+			SettingPreferencesFactory.make(settingCode).push(setting);
+
+			JOptionPane.showMessageDialog(this, "Enregitsr�", "Option", JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(this, "Configuration erron�e. Veuillez corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
+		
+		return true;
 	}
 	
 	@Override
-	public boolean save(Setting setting) {
-		if (isFormValid()) {
-			settingDialog.editSettingWithForm(setting);
-			SettingPreferencesFactory.make(settingType.getCode()).push(setting);
-
-			JOptionPane.showMessageDialog(settingDialog, "Enregitsr�", "Option", JOptionPane.INFORMATION_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(settingDialog, "Configuration erron�e. Veuillez corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
+	public boolean askReset() {
+		int selected = JOptionPane.showConfirmDialog(this, "Vous ne pourrez pas annuler les modifications. Confirmer?", "Option", JOptionPane.YES_NO_OPTION);
+		if (selected == JOptionPane.YES_OPTION) {
+			return true;
 		}
+		
+		return false;
 	}
 }

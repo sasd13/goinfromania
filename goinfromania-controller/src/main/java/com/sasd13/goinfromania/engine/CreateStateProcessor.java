@@ -17,9 +17,9 @@ public class CreateStateProcessor implements IStateProcessor {
 	@Override
 	public void process(int stateTarget, Game game) {
 		if (game.getState().getOrder() < EnumState.CREATED.getOrder()) {
+			frame.displayGame(game);
 			game.setState(EnumState.CREATED);
 			// TODO : process
-			frame.displayGame(game);
 		}
 
 		if (stateTarget > EnumState.CREATED.getOrder()) {

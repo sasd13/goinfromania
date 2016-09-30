@@ -13,8 +13,13 @@ import com.sasd13.goinfromania.util.MoveUtil;
 
 public class ArenaController implements KeyListener {
 
+	private IFrame frame;
 	private Game game;
 	private GamePad gamePad;
+	
+	public ArenaController(IFrame frame) {
+		this.frame = frame;
+	}
 
 	public void setGame(Game game) {
 		this.game = game;
@@ -40,13 +45,11 @@ public class ArenaController implements KeyListener {
 	}
 
 	public void actionGamePad(int keyCode) {
-		GameEngine gameEngine = GameEngine.getInstance();
-
 		if (keyCode == gamePad.getKeyStart()) {
 			if (game.getState() == EnumState.RESUMED) {
-				gameEngine.requestState(EnumState.PAUSED.getOrder(), game);
+				GameEngine.requestState(EnumState.PAUSED, game, frame);
 			} else {
-				gameEngine.requestState(EnumState.RESUMED.getOrder(), game);
+				GameEngine.requestState(EnumState.RESUMED, game, frame);
 			}
 		} else {
 			Pig pig = game.getPig();

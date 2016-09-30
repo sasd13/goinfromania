@@ -19,7 +19,7 @@ public class SettingActionSave implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		if (settingDialog.save(setting)) {
+		if (settingDialog.save()) {
 			SettingPreferencesFactory.make(code).push(setting);
 		}
 	}

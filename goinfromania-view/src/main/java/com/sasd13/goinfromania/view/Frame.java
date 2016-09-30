@@ -8,8 +8,10 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 
 import com.sasd13.goinfromania.bean.Game;
+import com.sasd13.goinfromania.bean.setting.Setting;
 import com.sasd13.goinfromania.controller.FrameController;
 import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IGameView;
 import com.sasd13.goinfromania.util.GameConstants;
 import com.sasd13.goinfromania.util.ViewConstants;
 import com.sasd13.goinfromania.view.menu.MenuBar;
@@ -65,7 +67,7 @@ public class Frame extends JFrame implements IFrame {
 	}
 
 	private void addLayerGame(Dimension dimension) {
-		gameView = new GameView();
+		gameView = new GameView(this);
 		gameView.setBounds(0, 0, dimension.width, dimension.height);
 		gameView.setVisible(false);
 		layersPane.add(gameView, JLayeredPane.DEFAULT_LAYER);
@@ -99,6 +101,8 @@ public class Frame extends JFrame implements IFrame {
 
 	@Override
 	public void displayGame(Game game) {
+		game.addObserver(gameView);
+		
 		gameView.setVisible(true);
 		gameView.getArenaView().requestFocusInWindow();
 		layersPane.moveToFront(gameView);
@@ -108,14 +112,27 @@ public class Frame extends JFrame implements IFrame {
 
 		setMenuEditEnabled(true);
 	}
+	
+	@Override
+	public IGameView getGameView() {
+		return gameView;
+	}
+	
+	@Override
+	public void displaySetting(Setting setting) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
-	public void close() {
+	public boolean askClose() {
 		String message = "Quitter le jeu ?";
 
 		int selected = JOptionPane.showConfirmDialog(null, message, "Confirmation", JOptionPane.YES_NO_OPTION);
 		if (selected == JOptionPane.YES_OPTION) {
-			System.exit(0);
+			return true;
 		}
+		
+		return false;
 	}
 }

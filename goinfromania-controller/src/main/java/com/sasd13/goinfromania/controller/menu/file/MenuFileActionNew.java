@@ -16,16 +16,14 @@ public class MenuFileActionNew implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		GameEngine gameEngine = GameEngine.getInstance();
-
-		if (game != null && game.getState().getOrder() < EnumState.DESTROYED.getOrder()) {
-			gameEngine.requestState(EnumState.DESTROYED.getOrder(), game);
+		if (game != null && game.getState().getOrder() < EnumState.DESTROYED.getOrder() && frame.getGameView().askStop()) {
+			GameEngine.requestState(EnumState.DESTROYED, game, frame);
 		}
 
 		if (game == null || game.getState() == EnumState.DESTROYED) {
 			Game game = new Game();
 
-			gameEngine.requestState(EnumState.RESUMED.getOrder(), game);
+			GameEngine.requestState(EnumState.RESUMED, game, frame);
 		}
 	}
 }

@@ -16,6 +16,6 @@ public class MenuEditActionStop implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		GameEngine.getInstance().requestState(EnumState.STOPPED.getOrder(), game);
+		GameEngine.requestState(EnumState.STOPPED, game, frame);
 	}
 }

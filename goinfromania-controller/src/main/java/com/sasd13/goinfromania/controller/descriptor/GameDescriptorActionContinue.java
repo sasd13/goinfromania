@@ -16,6 +16,6 @@ public class GameDescriptorActionContinue implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		GameEngine.getInstance().requestState(EnumState.RESUMED.getOrder(), game);
+		GameEngine.requestState(EnumState.RESUMED, game, frame);
 	}
 }

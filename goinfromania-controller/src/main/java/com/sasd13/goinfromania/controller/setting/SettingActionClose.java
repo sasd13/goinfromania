@@ -13,6 +13,6 @@ public class SettingActionClose implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		settingDialog.close();
+		settingDialog.dispose();
 	}
 }

@@ -3,32 +3,34 @@ package com.sasd13.goinfromania.view;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.character.Pig;
+import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IGameView;
 import com.sasd13.goinfromania.util.ViewConstants;
 
-public class GameView extends JPanel implements Observer {
+public class GameView extends JPanel implements IGameView {
 
 	private ArenaView arenaView;
 	private JProgressBar progressBarLife, progressBarEnergy;
 	private JLabel labelState, labelScore;
 
-	public GameView() {
+	public GameView(IFrame frame) {
 		super(new BorderLayout());
-		
-		createArena();
+
+		createArena(frame);
 		createPanelPig();
 		createPanelGame();
 	}
 
-	private void createArena() {
-		arenaView = new ArenaView();
+	private void createArena(IFrame frame) {
+		arenaView = new ArenaView(frame);
 		add(arenaView, BorderLayout.CENTER);
 	}
 
@@ -94,17 +96,67 @@ public class GameView extends JPanel implements Observer {
 	}
 
 	@Override
+	public void create(Game game) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public boolean askStop() {
+		String message = "Arr�ter la partie ?";
+
+		int selected = JOptionPane.showConfirmDialog(null, message, "Arrêt", JOptionPane.YES_NO_OPTION);
+		if (selected == JOptionPane.YES_OPTION) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean askSave() {
+		String message = "Sauvegarder la progression ?";
+
+		int selected = JOptionPane.showConfirmDialog(null, message, "Sauvegarde", JOptionPane.YES_NO_OPTION);
+		if (selected == JOptionPane.YES_OPTION) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public void displayResult() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
 	public void update(Observable observable, Object arg) {
 		Game game = (Game) observable;
 
 		switch (game.getState()) {
-			case NONE: onNone(game); break;
-			case CREATED: onCreate(game); break;
-			case STARTED: onStart(game); break;
-			case RESUMED: onResume(game); break;
-			case PAUSED: onPause(game); break;
-			case STOPPED: onStop(game); break;
-			case DESTROYED: onDestroy(game); break;
+			case NONE:
+				onNone(game);
+				break;
+			case CREATED:
+				onCreate(game);
+				break;
+			case STARTED:
+				onStart(game);
+				break;
+			case RESUMED:
+				onResume(game);
+				break;
+			case PAUSED:
+				onPause(game);
+				break;
+			case STOPPED:
+				onStop(game);
+				break;
+			case DESTROYED:
+				onDestroy(game);
+				break;
 		}
 	}
 
@@ -113,19 +165,19 @@ public class GameView extends JPanel implements Observer {
 	}
 
 	private void onCreate(Game game) {
-		//TODO : create view
+		// TODO : create view
 	}
 
 	private void onStart(Game game) {
 		setValues(game);
-		//TODO : display starter
+		// TODO : display starter
 	}
 
 	private void setValues(Game game) {
 		labelScore.setText(String.valueOf(game.getScore()));
 
 		Pig pig = game.getPig();
-		
+
 		if (pig != null) {
 			progressBarLife.setValue(pig.getLife());
 			progressBarEnergy.setValue(pig.getEnergy());
@@ -135,19 +187,19 @@ public class GameView extends JPanel implements Observer {
 	private void onResume(Game game) {
 		labelState.setText("");
 		setValues(game);
-		//TODO : resume game
+		// TODO : resume game
 	}
 
 	private void onPause(Game game) {
 		labelState.setText("PAUSE");
-		//TODO : pause game
+		// TODO : pause game
 	}
 
 	private void onStop(Game game) {
-		//TODO : display dialog stop
+		// TODO : display dialog stop
 	}
 
 	private void onDestroy(Game game) {
-		//TODO : display empty pane
+		// TODO : display empty pane
 	}
 }
