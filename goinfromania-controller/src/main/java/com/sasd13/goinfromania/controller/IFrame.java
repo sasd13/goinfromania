@@ -12,8 +12,8 @@ public interface IFrame {
 	void displayGames(List<Game> games);
 
 	void displayGame(Game game);
-	
+
 	void displaySetting(Setting setting);
-	
-	void close();
+
+	boolean close();
 }

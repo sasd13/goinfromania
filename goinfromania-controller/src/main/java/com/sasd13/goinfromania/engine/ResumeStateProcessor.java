@@ -13,10 +13,12 @@ public class ResumeStateProcessor implements IStateProcessor {
 
 	@Override
 	public void process(int stateTarget, Game game) {
-		if (stateTarget == EnumState.RESUMED.getOrder()) {
+		if (game.getState().getOrder() < EnumState.RESUMED.getOrder()) {
 			game.setState(EnumState.RESUMED);
 			// TODO : process
-		} else {
+		}
+
+		if (stateTarget > EnumState.RESUMED.getOrder()) {
 			next.process(stateTarget, game);
 		}
 	}

@@ -10,7 +10,9 @@ public interface IGameView {
 
 	void pause();
 	
-	void stop();
+	boolean stop();
+	
+	void finish();
 	
 	void displayResult();
 }

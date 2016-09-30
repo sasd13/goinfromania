@@ -32,9 +32,9 @@ public class FrameController implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent event) {
-		if () {
+		if (frame.close()) {
 			GameEngine.getInstance().requestState(EnumState.DESTROYED.getOrder(), game);
-			frame.close();
+			System.exit(0);
 		}
 	}
 

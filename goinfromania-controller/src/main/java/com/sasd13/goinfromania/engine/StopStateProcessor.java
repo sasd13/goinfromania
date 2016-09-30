@@ -13,10 +13,12 @@ public class StopStateProcessor implements IStateProcessor {
 
 	@Override
 	public void process(int stateTarget, Game game) {
-		if (stateTarget == EnumState.STOPPED.getOrder()) {
+		if (game.getState().getOrder() < EnumState.STOPPED.getOrder()) {
 			game.setState(EnumState.STOPPED);
 			// TODO : process
-		} else {
+		}
+
+		if (stateTarget > EnumState.STOPPED.getOrder()) {
 			next.process(stateTarget, game);
 		}
 	}

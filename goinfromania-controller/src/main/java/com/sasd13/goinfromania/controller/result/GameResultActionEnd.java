@@ -1,5 +1,6 @@
 package com.sasd13.goinfromania.controller.result;
 
+import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IDialog;
@@ -19,7 +20,6 @@ public class GameResultActionEnd implements IAction {
 	@Override
 	public void execute(IFrame frame) {
 		dialog.close();
-		GameEngine.getInstance().onDestroy(game);
-		frame.displayHome();
+		GameEngine.getInstance().requestState(EnumState.DESTROYED.getOrder(), game);
 	}
 }

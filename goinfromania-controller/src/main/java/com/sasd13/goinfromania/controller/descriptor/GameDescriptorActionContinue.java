@@ -1,5 +1,6 @@
 package com.sasd13.goinfromania.controller.descriptor;
 
+import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
@@ -7,7 +8,6 @@ import com.sasd13.goinfromania.engine.GameEngine;
 
 public class GameDescriptorActionContinue implements IAction {
 
-	private GameEngine gameEngine = GameEngine.getInstance();
 	private Game game;
 
 	public GameDescriptorActionContinue(Game game) {
@@ -16,7 +16,6 @@ public class GameDescriptorActionContinue implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		gameEngine.onCreate(game);
-		frame.displayGame(game);
+		GameEngine.getInstance().requestState(EnumState.RESUMED.getOrder(), game);
 	}
 }
