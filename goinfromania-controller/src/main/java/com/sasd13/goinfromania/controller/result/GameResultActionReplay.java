@@ -1,6 +1,5 @@
 package com.sasd13.goinfromania.controller.result;
 
-import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IDialog;
@@ -19,13 +18,8 @@ public class GameResultActionReplay implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		GameEngine.requestState(EnumState.DESTROYED, game, frame);
-		
-		Game newGame = Game.clone(game);
-		
-		GameEngine.requestState(EnumState.CREATED, newGame, frame);
+		GameEngine.finishGame(game, frame);
 		dialog.dispose();
-		frame.displayGame(newGame);
-		GameEngine.requestState(EnumState.RESUMED, newGame, frame);
+		GameEngine.launchGame(Game.clone(game), frame);
 	}
 }

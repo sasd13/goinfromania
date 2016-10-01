@@ -18,7 +18,7 @@ public class MenuFileActionExit implements IAction {
 	public void execute(IFrame frame) {		
 		if (frame.askClose()) {
 			if (game != null && game.getState().getOrder() < EnumState.DESTROYED.getOrder()) {
-				GameEngine.requestState(EnumState.DESTROYED, game, frame);
+				GameEngine.finishGame(game, frame);
 			}
 			
 			frame.dispose();

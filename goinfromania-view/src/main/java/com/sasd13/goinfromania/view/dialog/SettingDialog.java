@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import com.sasd13.goinfromania.bean.setting.Setting;
 import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.setting.EnumSettingAction;
 import com.sasd13.goinfromania.controller.setting.ISettingDialog;
 import com.sasd13.goinfromania.controller.setting.SettingController;
 import com.sasd13.goinfromania.util.ViewConstants;
@@ -22,7 +23,6 @@ public abstract class SettingDialog extends JDialog implements Observer, ISettin
 	
 	private Setting setting;
 	private String settingCode;
-	private SettingController settingController;
 
 	protected SettingDialog(IFrame frame, Setting setting, String settingCode) {
 		super();
@@ -55,32 +55,28 @@ public abstract class SettingDialog extends JDialog implements Observer, ISettin
 		};
 		
 		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
-		String command = null;
-		settingController = new SettingController(frame, this, setting);
+		SettingController controller = new SettingController(frame, this, setting);
 		
-		int indice = -1;
-		for (JButton button : buttons) {
-			indice++;
-			
-			switch (indice) {
-				case 0:
-					command = "CLOSE";
-					break;
-				case 1:
-					command = "SAVE";
-					break;
-				case 2:
-					command = "RESET";
-					break;
-			}
-			
-			button.setPreferredSize(dimension);
-			button.setFocusable(false);
-			button.setActionCommand(command);
-			button.addActionListener(settingController);
-			
-			panelButtons.add(button);
-		}
+		JButton buttonClose = new JButton("Fermer");
+		buttonClose.setPreferredSize(dimension);
+		buttonClose.setFocusable(false);
+		buttonClose.setActionCommand(EnumSettingAction.CLOSE.getCode());
+		buttonClose.addActionListener(controller);
+		panelButtons.add(buttonClose);
+		
+		JButton buttonSave = new JButton("Enregistrer");
+		buttonSave.setPreferredSize(dimension);
+		buttonSave.setFocusable(false);
+		buttonSave.setActionCommand(EnumSettingAction.SAVE.getCode());
+		buttonSave.addActionListener(controller);
+		panelButtons.add(buttonSave);
+		
+		JButton buttonReset = new JButton("Reinitialiser");
+		buttonReset.setPreferredSize(dimension);
+		buttonReset.setFocusable(false);
+		buttonReset.setActionCommand(EnumSettingAction.RESET.getCode());
+		buttonReset.addActionListener(controller);
+		panelButtons.add(buttonReset);
 	}
 	
 	public abstract boolean isFormValid();
@@ -110,11 +106,13 @@ public abstract class SettingDialog extends JDialog implements Observer, ISettin
 	
 	@Override
 	public boolean askReset() {
-		int selected = JOptionPane.showConfirmDialog(this, "Vous ne pourrez pas annuler les modifications. Confirmer?", "Option", JOptionPane.YES_NO_OPTION);
-		if (selected == JOptionPane.YES_OPTION) {
-			return true;
-		}
+		int selected = JOptionPane.showConfirmDialog(
+				this, 
+				"Vous ne pourrez pas annuler les modifications. Confirmer?", 
+				"Option", 
+				JOptionPane.YES_NO_OPTION
+		);
 		
-		return false;
+		return selected == JOptionPane.YES_OPTION;
 	}
 }

@@ -1,6 +1,5 @@
 package com.sasd13.goinfromania.controller.menu.edit;
 
-import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
@@ -16,6 +15,6 @@ public class MenuEditActionStop implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		GameEngine.requestState(EnumState.STOPPED, game, frame);
+		GameEngine.stopGame(game, frame);
 	}
 }

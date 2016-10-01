@@ -47,9 +47,9 @@ public class ArenaController implements KeyListener {
 	public void actionGamePad(int keyCode) {
 		if (keyCode == gamePad.getKeyStart()) {
 			if (game.getState() == EnumState.RESUMED) {
-				GameEngine.requestState(EnumState.PAUSED, game, frame);
+				GameEngine.pauseGame(game, frame);
 			} else {
-				GameEngine.requestState(EnumState.RESUMED, game, frame);
+				GameEngine.resumeGame(game, frame);
 			}
 		} else {
 			Pig pig = game.getPig();

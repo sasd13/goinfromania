@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -131,6 +132,18 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 	@Override
 	public Game getDescriptable() {
 		return game;
+	}
+	
+	@Override
+	public boolean askDelete() {
+		int selected = JOptionPane.showConfirmDialog(
+				null, 
+				"Supprimer la partie ?", 
+				"Suppression", 
+				JOptionPane.YES_NO_OPTION
+		);
+
+		return selected == JOptionPane.YES_OPTION;
 	}
 
 	@Override

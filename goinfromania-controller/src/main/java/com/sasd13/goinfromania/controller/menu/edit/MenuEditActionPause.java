@@ -16,10 +16,10 @@ public class MenuEditActionPause implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		EnumState stateTarget = game.getState() == EnumState.RESUMED
-				? EnumState.PAUSED
-				: EnumState.RESUMED;
-		
-		GameEngine.requestState(stateTarget, game, frame);
+		if (game.getState() == EnumState.RESUMED) {
+			GameEngine.pauseGame(game, frame);
+		} else {
+			GameEngine.resumeGame(game, frame);
+		}
 	}
 }

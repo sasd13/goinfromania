@@ -14,7 +14,10 @@ public class GameDescriptorActionDelete implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		descriptor.clear();
-		GameDAO.delete(descriptor.getDescriptable());
+		if (descriptor.askDelete()) {
+			descriptor.clear();
+			GameDAO.delete(descriptor.getDescriptable());
+			frame.displayGames(GameDAO.loadAll());
+		}
 	}
 }

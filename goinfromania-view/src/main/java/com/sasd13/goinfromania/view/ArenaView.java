@@ -20,22 +20,26 @@ import com.sasd13.goinfromania.util.ViewConstants;
 public class ArenaView extends JPanel implements Observer {
 
 	private List<IElement> elements;
+	private ArenaController arenaController;
 	
 	public ArenaView(IFrame frame) {
 		super(new BorderLayout());
 		
 		elements = new ArrayList<>();
+		arenaController = new ArenaController(frame);
 		
 		setLayout(null);
 		setPreferredSize(new Dimension(ViewConstants.ARENA_WIDTH, ViewConstants.ARENA_HEIGHT));
 		setBackground(Color.BLACK);
 		setFocusable(true);
-		addKeyListener(new ArenaController(frame));
+		addKeyListener(arenaController);
 	}
 	
 	@Override
 	public void update(Observable observable, Object arg) {
 		Game game = (Game) observable;
+		
+		arenaController.setGame(game);
 		
 		if (game != null) {
 			elements = game.getElements();

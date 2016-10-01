@@ -103,26 +103,26 @@ public class GameView extends JPanel implements IGameView {
 
 	@Override
 	public boolean askStop() {
-		String message = "Arr�ter la partie ?";
-
-		int selected = JOptionPane.showConfirmDialog(null, message, "Arrêt", JOptionPane.YES_NO_OPTION);
-		if (selected == JOptionPane.YES_OPTION) {
-			return true;
-		}
-
-		return false;
+		int selected = JOptionPane.showConfirmDialog(
+				null, 
+				"Arr�ter la partie ?", 
+				"Arrêt", 
+				JOptionPane.YES_NO_OPTION
+		);
+		
+		return selected == JOptionPane.YES_OPTION;
 	}
 
 	@Override
 	public boolean askSave() {
-		String message = "Sauvegarder la progression ?";
+		int selected = JOptionPane.showConfirmDialog(
+				null, 
+				"Sauvegarder la progression ?", 
+				"Sauvegarde", 
+				JOptionPane.YES_NO_OPTION
+		);
 
-		int selected = JOptionPane.showConfirmDialog(null, message, "Sauvegarde", JOptionPane.YES_NO_OPTION);
-		if (selected == JOptionPane.YES_OPTION) {
-			return true;
-		}
-
-		return false;
+		return selected == JOptionPane.YES_OPTION;
 	}
 
 	@Override

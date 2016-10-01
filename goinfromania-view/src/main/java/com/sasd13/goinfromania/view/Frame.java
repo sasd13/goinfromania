@@ -23,15 +23,18 @@ public class Frame extends JFrame implements IFrame {
 	private HomeView homeView;
 	private GamesView gamesView;
 	private GameView gameView;
+	private FrameController frameController;
 
 	public Frame() {
 		super(GameConstants.NAME);
+
+		frameController = new FrameController(this);
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
 		createMenuBar();
 		createLayersPane();
-		addWindowListener(new FrameController(this));
+		addWindowListener(frameController);
 	}
 
 	private void createMenuBar() {
@@ -90,6 +93,8 @@ public class Frame extends JFrame implements IFrame {
 
 	@Override
 	public void displayGames(List<Game> games) {
+		gamesView.setGames(games);
+		
 		gamesView.setVisible(true);
 		layersPane.moveToFront(gamesView);
 
@@ -102,7 +107,8 @@ public class Frame extends JFrame implements IFrame {
 	@Override
 	public void displayGame(Game game) {
 		game.addObserver(gameView);
-		
+		frameController.setGame(game);
+
 		gameView.setVisible(true);
 		gameView.getArenaView().requestFocusInWindow();
 		layersPane.moveToFront(gameView);
@@ -112,27 +118,27 @@ public class Frame extends JFrame implements IFrame {
 
 		setMenuEditEnabled(true);
 	}
-	
+
 	@Override
 	public IGameView getGameView() {
 		return gameView;
 	}
-	
+
 	@Override
 	public void displaySetting(Setting setting) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public boolean askClose() {
-		String message = "Quitter le jeu ?";
+		int selected = JOptionPane.showConfirmDialog(
+				null, 
+				"Quitter le jeu ?", 
+				"Confirmation", 
+				JOptionPane.YES_NO_OPTION
+		);
 
-		int selected = JOptionPane.showConfirmDialog(null, message, "Confirmation", JOptionPane.YES_NO_OPTION);
-		if (selected == JOptionPane.YES_OPTION) {
-			return true;
-		}
-		
-		return false;
+		return selected == JOptionPane.YES_OPTION;
 	}
 }

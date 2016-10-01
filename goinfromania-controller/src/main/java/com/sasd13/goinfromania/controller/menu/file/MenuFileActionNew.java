@@ -17,13 +17,11 @@ public class MenuFileActionNew implements IAction {
 	@Override
 	public void execute(IFrame frame) {
 		if (game != null && game.getState().getOrder() < EnumState.DESTROYED.getOrder() && frame.getGameView().askStop()) {
-			GameEngine.requestState(EnumState.DESTROYED, game, frame);
+			GameEngine.finishGame(game, frame);
 		}
 
 		if (game == null || game.getState() == EnumState.DESTROYED) {
-			Game game = new Game();
-
-			GameEngine.requestState(EnumState.RESUMED, game, frame);
+			GameEngine.launchNewGame(frame);
 		}
 	}
 }

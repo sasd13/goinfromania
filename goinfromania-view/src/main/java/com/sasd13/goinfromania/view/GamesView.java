@@ -14,6 +14,7 @@ import javax.swing.event.ListSelectionListener;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.util.ViewConstants;
+import com.sasd13.goinfromania.util.builder.GamesListStringBuilder;
 
 public class GamesView extends JSplitPane implements ListSelectionListener {
 
@@ -30,6 +31,17 @@ public class GamesView extends JSplitPane implements ListSelectionListener {
 		setDividerLocation(ViewConstants.PANEL_LIST_WIDTH);
 		createPanelList();
 		createGameDescriptorPane();
+	}
+	
+	public void setGames(List<Game> games) {
+		this.games = games;
+		
+		setData();
+	}
+	
+	private void setData() {
+		List<String> listData = new GamesListStringBuilder(games).build();
+		panelList.setListData(listData.toArray(new String[listData.size()]));
 	}
 
 	private void createPanelList() {

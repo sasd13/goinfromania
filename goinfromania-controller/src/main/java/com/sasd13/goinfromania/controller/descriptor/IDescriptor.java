@@ -6,5 +6,7 @@ public interface IDescriptor {
 
 	Game getDescriptable();
 	
+	boolean askDelete();
+	
 	void clear();
 }
