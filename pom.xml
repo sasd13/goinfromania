@@ -35,7 +35,6 @@
     <module>goinfromania-bean</module>
     <module>goinfromania-controller</module>
     <module>goinfromania-dao</module>
-    <module>goinfromania-engine</module>
     <module>goinfromania-util</module>
     <module>goinfromania-view</module>
   </modules>

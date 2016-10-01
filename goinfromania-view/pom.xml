@@ -37,4 +37,11 @@
 			<version>2.0</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/res</directory>
+			</resource>
+		</resources>
+	</build>
 </project>

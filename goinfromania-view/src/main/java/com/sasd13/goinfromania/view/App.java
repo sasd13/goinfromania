@@ -1,8 +1,6 @@
-package com.sasd13.goinfromania;
+package com.sasd13.goinfromania.view;
 
 import javax.swing.SwingUtilities;
-
-import com.sasd13.goinfromania.view.Frame;
 
 public class App {
 	
