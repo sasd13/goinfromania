@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.bean.character.Pig;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.descriptor.EnumGameDescriptorAction;
 import com.sasd13.goinfromania.controller.descriptor.GameDescriptorController;
@@ -26,7 +25,7 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 		private JButton buttonContinue, buttonDelete;
 	}
 
-	private ViewHolder formGame;
+	private ViewHolder formDescription;
 	private IFrame frame;
 	private Game game;
 
@@ -35,113 +34,108 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 
 		this.frame = frame;
 
-		createLabelProgress();
-		createPanelDescription();
-		createPanelButtons();
+		buildView();
+	}
+
+	private void buildView() {
+		buildLabelProgress();
+		buildPanelDescription();
+		buildPanelButtons();
 		setButtonsEnabled(false);
 	}
 
-	private void createLabelProgress() {
+	private void buildLabelProgress() {
 		add(new JLabel("Progression", SwingConstants.CENTER), BorderLayout.NORTH);
 	}
 
-	private void createPanelDescription() {
-		JPanel panelGame = new JPanel(new GridLayout(6, 2));
+	private void buildPanelDescription() {
+		JPanel panelDescription = new JPanel(new GridLayout(6, 2));
 
-		addLabelsToPanelGame(panelGame);
-		add(panelGame, BorderLayout.CENTER);
+		addLabelsToPanelDescription(panelDescription);
+		add(panelDescription, BorderLayout.CENTER);
 	}
 
-	private void addLabelsToPanelGame(JPanel panelGame) {
+	private void addLabelsToPanelDescription(JPanel panelDescription) {
+		formDescription = new ViewHolder();
 		Font font = new Font(Font.SANS_SERIF, Font.PLAIN, getFont().getSize());
 
-		formGame = new ViewHolder();
-		
-		formGame.labelLevel = new JLabel();
-		formGame.labelLevel.setFont(font);
-		panelGame.add(new JLabel("Niveau"));
-		panelGame.add(formGame.labelLevel);
+		formDescription.labelLevel = new JLabel();
+		formDescription.labelLevel.setFont(font);
+		panelDescription.add(new JLabel("Niveau"));
+		panelDescription.add(formDescription.labelLevel);
 
-		formGame.labelScore = new JLabel();
-		formGame.labelScore.setFont(font);
-		panelGame.add(new JLabel("Score"));
-		panelGame.add(formGame.labelScore);
+		formDescription.labelScore = new JLabel();
+		formDescription.labelScore.setFont(font);
+		panelDescription.add(new JLabel("Score"));
+		panelDescription.add(formDescription.labelScore);
 
-		formGame.labelPigLife = new JLabel();
-		formGame.labelPigLife.setFont(font);
-		panelGame.add(new JLabel("Vie"));
-		panelGame.add(formGame.labelPigLife);
+		formDescription.labelPigLife = new JLabel();
+		formDescription.labelPigLife.setFont(font);
+		panelDescription.add(new JLabel("Vie"));
+		panelDescription.add(formDescription.labelPigLife);
 
-		formGame.labelPigEnergy = new JLabel();
-		formGame.labelPigEnergy.setFont(font);
-		panelGame.add(new JLabel("Energie"));
-		panelGame.add(formGame.labelPigEnergy);
+		formDescription.labelPigEnergy = new JLabel();
+		formDescription.labelPigEnergy.setFont(font);
+		panelDescription.add(new JLabel("Energie"));
+		panelDescription.add(formDescription.labelPigEnergy);
 
-		formGame.labelDateCreation = new JLabel();
-		formGame.labelDateCreation.setFont(font);
-		panelGame.add(new JLabel("Date creation"));
-		panelGame.add(formGame.labelDateCreation);
+		formDescription.labelDateCreation = new JLabel();
+		formDescription.labelDateCreation.setFont(font);
+		panelDescription.add(new JLabel("Date creation"));
+		panelDescription.add(formDescription.labelDateCreation);
 
-		formGame.labelDateLastUpdate = new JLabel();
-		formGame.labelDateLastUpdate.setFont(font);
-		panelGame.add(new JLabel("Date modification :"));
-		panelGame.add(formGame.labelDateLastUpdate);
+		formDescription.labelDateLastUpdate = new JLabel();
+		formDescription.labelDateLastUpdate.setFont(font);
+		panelDescription.add(new JLabel("Date modification :"));
+		panelDescription.add(formDescription.labelDateLastUpdate);
 	}
 
-	private void createPanelButtons() {
-		JPanel panelButton = new JPanel();
+	private void buildPanelButtons() {
+		JPanel panelButtons = new JPanel();
 
-		addButtonsToPanelButton(panelButton);
-		add(panelButton, BorderLayout.SOUTH);
+		addButtonsToPanelButton(panelButtons);
+		add(panelButtons, BorderLayout.SOUTH);
 	}
 
-	private void addButtonsToPanelButton(JPanel panelButton) {
+	private void addButtonsToPanelButton(JPanel panelButtons) {
 		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
 		GameDescriptorController gameDescriptorController = new GameDescriptorController(frame, this);
 
-		formGame.buttonContinue = new JButton("Continue");
-		formGame.buttonContinue.setPreferredSize(dimension);
-		formGame.buttonContinue.setFocusable(false);
-		formGame.buttonContinue.setActionCommand(EnumGameDescriptorAction.CONTINUE.getCode());
-		formGame.buttonContinue.addActionListener(gameDescriptorController);
-		panelButton.add(formGame.buttonContinue);
-
-		formGame.buttonDelete = new JButton("Delete");
-		formGame.buttonDelete.setPreferredSize(dimension);
-		formGame.buttonDelete.setFocusable(false);
-		formGame.buttonDelete.setActionCommand(EnumGameDescriptorAction.DELETE.getCode());
-		formGame.buttonDelete.addActionListener(gameDescriptorController);
-		panelButton.add(formGame.buttonDelete);
+		buildButtonContinue(panelButtons, dimension, gameDescriptorController);
+		buildButtonDelete(panelButtons, dimension, gameDescriptorController);
 	}
 
-	public void bind(Game game) {
-		this.game = game;
-
-		formGame.labelLevel.setText(String.valueOf(game.getLevel()));
-		formGame.labelScore.setText(String.valueOf(game.getScore()));
-		formGame.labelDateCreation.setText(String.valueOf(game.getDateLastUpdate()));
-		formGame.labelDateLastUpdate.setText(String.valueOf(game.getDateLastUpdate()));
-
-		Pig pig = game.getPig();
-		formGame.labelPigLife.setText(String.valueOf(pig.getLife()));
-		formGame.labelPigEnergy.setText(String.valueOf(pig.getEnergy()));
-
-		setButtonsEnabled(true);
+	private void buildButtonContinue(JPanel panelButtons, Dimension dimension, GameDescriptorController gameDescriptorController) {
+		formDescription.buttonContinue = new JButton("Continue");
+		formDescription.buttonContinue.setPreferredSize(dimension);
+		formDescription.buttonContinue.setFocusable(false);
+		formDescription.buttonContinue.setActionCommand(EnumGameDescriptorAction.CONTINUE.getCode());
+		formDescription.buttonContinue.addActionListener(gameDescriptorController);
+		panelButtons.add(formDescription.buttonContinue);
 	}
 
+	private void buildButtonDelete(JPanel panelButtons, Dimension dimension, GameDescriptorController gameDescriptorController) {
+		formDescription.buttonDelete = new JButton("Delete");
+		formDescription.buttonDelete.setPreferredSize(dimension);
+		formDescription.buttonDelete.setFocusable(false);
+		formDescription.buttonDelete.setActionCommand(EnumGameDescriptorAction.DELETE.getCode());
+		formDescription.buttonDelete.addActionListener(gameDescriptorController);
+		panelButtons.add(formDescription.buttonDelete);
+	}
+	
+	private void setButtonsEnabled(boolean enabled) {
+		formDescription.buttonContinue.setEnabled(enabled);
+		formDescription.buttonDelete.setEnabled(enabled);
+	}
+	
 	@Override
 	public Game getDescriptable() {
 		return game;
 	}
-	
+
 	@Override
 	public boolean askDelete() {
-		int selected = JOptionPane.showConfirmDialog(
-				null, 
-				"Supprimer la partie ?", 
-				"Suppression", 
-				JOptionPane.YES_NO_OPTION
-		);
+		int selected = JOptionPane.showConfirmDialog(null, "Supprimer la partie ?", "Suppression", JOptionPane.YES_NO_OPTION);
 
 		return selected == JOptionPane.YES_OPTION;
 	}
@@ -153,16 +147,27 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 	}
 
 	private void clearLabels() {
-		formGame.labelLevel.setText("");
-		formGame.labelScore.setText("");
-		formGame.labelPigLife.setText("");
-		formGame.labelPigEnergy.setText("");
-		formGame.labelDateCreation.setText("");
-		formGame.labelDateLastUpdate.setText("");
+		formDescription.labelLevel.setText("");
+		formDescription.labelScore.setText("");
+		formDescription.labelPigLife.setText("");
+		formDescription.labelPigEnergy.setText("");
+		formDescription.labelDateCreation.setText("");
+		formDescription.labelDateLastUpdate.setText("");
 	}
 
-	private void setButtonsEnabled(boolean enabled) {
-		formGame.buttonContinue.setEnabled(enabled);
-		formGame.buttonDelete.setEnabled(enabled);
+	public void bind(Game game) {
+		this.game = game;
+
+		setLabels(game);
+		setButtonsEnabled(true);
+	}
+
+	private void setLabels(Game game) {
+		formDescription.labelLevel.setText(String.valueOf(game.getLevel()));
+		formDescription.labelScore.setText(String.valueOf(game.getScore()));
+		formDescription.labelDateCreation.setText(String.valueOf(game.getDateLastUpdate()));
+		formDescription.labelDateLastUpdate.setText(String.valueOf(game.getDateLastUpdate()));
+		formDescription.labelPigLife.setText(String.valueOf(game.getPig().getLife()));
+		formDescription.labelPigEnergy.setText(String.valueOf(game.getPig().getEnergy()));
 	}
 }

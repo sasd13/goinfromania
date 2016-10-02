@@ -16,15 +16,26 @@ public class MenuSettings extends JMenu {
 	public MenuSettings(IFrame frame) {
 		super("Options");
 
-		buildItems(new MenuSettingsController(frame));
+		buildView(frame);
+	}
+	
+	private void buildView(IFrame frame) {
 		setMnemonic(KeyEvent.VK_O);
+		buildItems(frame);
 	}
 
-	private void buildItems(MenuSettingsController controller) {
-		JMenuItem menuItemGamePad = new JMenuItem("Clavier");
-		menuItemGamePad.setActionCommand(EnumMenuSettingsAction.GAMEPAD.getCode());
-		menuItemGamePad.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
-		menuItemGamePad.addActionListener(controller);
-		add(menuItemGamePad);
+	private void buildItems(IFrame frame) {
+		MenuSettingsController controller = new MenuSettingsController(frame);
+		
+		addItemGamepad(controller);
+	}
+
+	private void addItemGamepad(MenuSettingsController controller) {
+		JMenuItem menuItemGamepad = new JMenuItem("Clavier");
+		
+		menuItemGamepad.setActionCommand(EnumMenuSettingsAction.GAMEPAD.getCode());
+		menuItemGamepad.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
+		menuItemGamepad.addActionListener(controller);
+		add(menuItemGamepad);
 	}
 }

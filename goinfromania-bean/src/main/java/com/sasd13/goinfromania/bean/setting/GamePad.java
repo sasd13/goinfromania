@@ -2,7 +2,7 @@ package com.sasd13.goinfromania.bean.setting;
 
 import java.awt.event.KeyEvent;
 
-public class GamePad extends Setting {
+public class Gamepad extends Setting {
 
 	private int keyStart, keyMoveNorth, keyMoveSouth, keyMoveWest, keyMoveEast, keyPigAttak;
 	

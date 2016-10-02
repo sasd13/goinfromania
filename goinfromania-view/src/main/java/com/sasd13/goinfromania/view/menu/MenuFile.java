@@ -16,24 +16,43 @@ public class MenuFile extends JMenu {
 	public MenuFile(IFrame frame) {
 		super("Fichier");
 
-		buildItems(new MenuFileController(frame));
+		buildView(frame);
+	}
+	
+	private void buildView(IFrame frame) {
 		setMnemonic(KeyEvent.VK_F);
+		buildItems(frame);
 	}
 
-	private void buildItems(MenuFileController controller) {
+	private void buildItems(IFrame frame) {
+		MenuFileController controller = new MenuFileController(frame);
+		
+		addItemNew(controller);
+		addItemOpen(controller);
+		addItemExit(controller);
+	}
+
+	private void addItemNew(MenuFileController controller) {
 		JMenuItem menuItemNew = new JMenuItem("Nouveau");
+		
 		menuItemNew.setActionCommand(EnumMenuFileAction.NEW.getCode());
 		menuItemNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		menuItemNew.addActionListener(controller);
 		add(menuItemNew);
+	}
 
+	private void addItemOpen(MenuFileController controller) {
 		JMenuItem menuItemOpen = new JMenuItem("Open");
+		
 		menuItemOpen.setActionCommand(EnumMenuFileAction.OPEN.getCode());
 		menuItemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 		menuItemOpen.addActionListener(controller);
 		add(menuItemOpen);
+	}
 
+	private void addItemExit(MenuFileController controller) {
 		JMenuItem menuItemExit = new JMenuItem("Exit");
+		
 		menuItemExit.setActionCommand(EnumMenuFileAction.EXIT.getCode());
 		menuItemExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
 		menuItemExit.addActionListener(controller);

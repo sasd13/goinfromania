@@ -5,28 +5,36 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.sasd13.goinfromania.bean.Game;
+import com.sasd13.goinfromania.controller.IDialog;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.result.GameResultController;
 import com.sasd13.goinfromania.util.ViewConstants;
 
-public class GameDialogResult extends GameDialog {
+public class GameResultDialog extends JDialog implements Observer, IDialog {
 
 	private IFrame frame;
 	private JLabel labelResult, labelScore;
 
-	public GameDialogResult(IFrame frame, Game game) {
+	public GameResultDialog(IFrame frame, Game game) {
 		super();
 
 		this.frame = frame;
 
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setModalityType(ModalityType.APPLICATION_MODAL);
+		setResizable(false);
+		setUndecorated(true);
 		setContentPane(new JLayeredPane());
 
 		Dimension dimension = new Dimension(ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT);

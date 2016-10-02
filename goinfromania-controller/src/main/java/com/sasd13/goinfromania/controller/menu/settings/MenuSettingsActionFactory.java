@@ -8,7 +8,7 @@ public class MenuSettingsActionFactory implements IMenuActionFactory {
 	@Override
 	public IAction make(String code) {
 		if (EnumMenuSettingsAction.GAMEPAD.getCode().equalsIgnoreCase(code)) {
-			return new MenuSettingsActionGamePad();
+			return new MenuSettingsActionGamepad();
 		} else {
 			return null;
 		}

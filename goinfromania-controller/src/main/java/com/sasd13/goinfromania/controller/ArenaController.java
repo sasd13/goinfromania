@@ -7,7 +7,7 @@ import com.sasd13.goinfromania.bean.Direction;
 import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.character.Pig;
-import com.sasd13.goinfromania.bean.setting.GamePad;
+import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.engine.GameEngine;
 import com.sasd13.goinfromania.util.MoveUtil;
 
@@ -15,7 +15,7 @@ public class ArenaController implements KeyListener {
 
 	private IFrame frame;
 	private Game game;
-	private GamePad gamePad;
+	private Gamepad gamepad;
 	
 	public ArenaController(IFrame frame) {
 		this.frame = frame;
@@ -25,8 +25,8 @@ public class ArenaController implements KeyListener {
 		this.game = game;
 	}
 
-	public void setGamePad(GamePad gamePad) {
-		this.gamePad = gamePad;
+	public void setGamepad(Gamepad gamepad) {
+		this.gamepad = gamepad;
 	}
 
 	@Override
@@ -36,16 +36,16 @@ public class ArenaController implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		actionGamePad(e.getKeyCode());
+		actionGamepad(e.getKeyCode());
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		actionGamePad(e.getKeyCode());
+		actionGamepad(e.getKeyCode());
 	}
 
-	public void actionGamePad(int keyCode) {
-		if (keyCode == gamePad.getKeyStart()) {
+	public void actionGamepad(int keyCode) {
+		if (keyCode == gamepad.getKeyStart()) {
 			if (game.getState() == EnumState.RESUMED) {
 				GameEngine.pauseGame(game, frame);
 			} else {
@@ -54,15 +54,15 @@ public class ArenaController implements KeyListener {
 		} else {
 			Pig pig = game.getPig();
 
-			if (keyCode == gamePad.getKeyMoveNorth()) {
+			if (keyCode == gamepad.getKeyMoveNorth()) {
 				MoveUtil.move(pig, Direction.NORTH);
-			} else if (keyCode == gamePad.getKeyMoveSouth()) {
+			} else if (keyCode == gamepad.getKeyMoveSouth()) {
 				MoveUtil.move(pig, Direction.SOUTH);
-			} else if (keyCode == gamePad.getKeyMoveWest()) {
+			} else if (keyCode == gamepad.getKeyMoveWest()) {
 				MoveUtil.move(pig, Direction.WEST);
-			} else if (keyCode == gamePad.getKeyMoveEast()) {
+			} else if (keyCode == gamepad.getKeyMoveEast()) {
 				MoveUtil.move(pig, Direction.EAST);
-			} else if (keyCode == gamePad.getKeyPigAttak()) {
+			} else if (keyCode == gamepad.getKeyPigAttak()) {
 				// TODO
 			}
 		}

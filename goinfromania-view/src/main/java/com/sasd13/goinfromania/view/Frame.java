@@ -18,8 +18,8 @@ import com.sasd13.goinfromania.view.menu.MenuBar;
 
 public class Frame extends JFrame implements IFrame {
 
-	private JLayeredPane layersPane;
 	private MenuBar menuBar;
+	private JLayeredPane layersPane;
 	private HomeView homeView;
 	private GamesView gamesView;
 	private GameView gameView;
@@ -27,31 +27,32 @@ public class Frame extends JFrame implements IFrame {
 
 	public Frame() {
 		super(GameConstants.NAME);
-
-		frameController = new FrameController(this);
-
+		
+		buildView();
+	}
+	
+	private void buildView() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
-		createMenuBar();
-		createLayersPane();
-		addWindowListener(frameController);
+		buildMenuBar();
+		buildLayersPane();
+		buildFrameController();
 	}
 
-	private void createMenuBar() {
+	private void buildMenuBar() {
 		menuBar = new MenuBar(this);
+		
 		setJMenuBar(menuBar);
 	}
 
-	private void createLayersPane() {
-		Dimension dimension = new Dimension(ViewConstants.PANEL_WIDTH, ViewConstants.PANEL_HEIGHT);
-
+	private void buildLayersPane() {
 		layersPane = new JLayeredPane();
+		Dimension dimension = new Dimension(ViewConstants.PANEL_WIDTH, ViewConstants.PANEL_HEIGHT);
+		
 		layersPane.setPreferredSize(dimension);
-
 		addLayerHome(dimension);
-		addLayerListGames(dimension);
+		addLayerGames(dimension);
 		addLayerGame(dimension);
-
 		getContentPane().add(layersPane);
 	}
 
@@ -62,7 +63,7 @@ public class Frame extends JFrame implements IFrame {
 		layersPane.add(homeView, JLayeredPane.DEFAULT_LAYER);
 	}
 
-	private void addLayerListGames(Dimension dimension) {
+	private void addLayerGames(Dimension dimension) {
 		gamesView = new GamesView(this);
 		gamesView.setBounds(0, 0, dimension.width, dimension.height);
 		gamesView.setVisible(false);
@@ -75,48 +76,42 @@ public class Frame extends JFrame implements IFrame {
 		gameView.setVisible(false);
 		layersPane.add(gameView, JLayeredPane.DEFAULT_LAYER);
 	}
+	
+	private void buildFrameController() {
+		frameController = new FrameController(this);
+		
+		addWindowListener(frameController);
+	}
 
 	@Override
 	public void displayHome() {
 		homeView.setVisible(true);
 		layersPane.moveToFront(homeView);
-
 		gameView.setVisible(false);
 		gamesView.setVisible(false);
-
-		setMenuEditEnabled(false);
-	}
-
-	private void setMenuEditEnabled(boolean enabled) {
-		menuBar.setMenuEditEnabled(enabled);
+		menuBar.setMenuEditEnabled(false);
 	}
 
 	@Override
 	public void displayGames(List<Game> games) {
 		gamesView.setGames(games);
-		
 		gamesView.setVisible(true);
 		layersPane.moveToFront(gamesView);
-
 		homeView.setVisible(false);
 		gameView.setVisible(false);
-
-		setMenuEditEnabled(false);
+		menuBar.setMenuEditEnabled(false);
 	}
 
 	@Override
 	public void displayGame(Game game) {
 		game.addObserver(gameView);
 		frameController.setGame(game);
-
 		gameView.setVisible(true);
 		gameView.getArenaView().requestFocusInWindow();
 		layersPane.moveToFront(gameView);
-
 		homeView.setVisible(false);
 		gamesView.setVisible(false);
-
-		setMenuEditEnabled(true);
+		menuBar.setMenuEditEnabled(true);
 	}
 
 	@Override

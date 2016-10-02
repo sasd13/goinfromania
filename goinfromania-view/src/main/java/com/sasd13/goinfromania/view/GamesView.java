@@ -28,23 +28,16 @@ public class GamesView extends JSplitPane implements ListSelectionListener {
 		
 		this.frame = frame;
 		
+		buildView();
+	}
+	
+	private void buildView() {
 		setDividerLocation(ViewConstants.PANEL_LIST_WIDTH);
-		createPanelList();
-		createGameDescriptorPane();
-	}
-	
-	public void setGames(List<Game> games) {
-		this.games = games;
-		
-		setData();
-	}
-	
-	private void setData() {
-		List<String> listData = new GamesListStringBuilder(games).build();
-		panelList.setListData(listData.toArray(new String[listData.size()]));
+		buildPanelList();
+		buildGameDescriptorPane();
 	}
 
-	private void createPanelList() {
+	private void buildPanelList() {
 		panelList = new JList<>(new DefaultListModel<String>());
 		panelList.setLayoutOrientation(JList.VERTICAL);
 		panelList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -56,15 +49,27 @@ public class GamesView extends JSplitPane implements ListSelectionListener {
 
 	private void addScrollPane() {
 		JScrollPane listScroller = new JScrollPane(panelList);
-		listScroller.setPreferredSize(new Dimension(ViewConstants.PANEL_LIST_WIDTH, ViewConstants.PANEL_HEIGHT));
 		
+		listScroller.setPreferredSize(new Dimension(ViewConstants.PANEL_LIST_WIDTH, ViewConstants.PANEL_HEIGHT));
 		add(listScroller);
 	}
 	
-	private void createGameDescriptorPane() {
+	private void buildGameDescriptorPane() {
 		gameDescriptorPane = new GameDescriptorPane(frame);
 		
 		add(gameDescriptorPane);
+	}
+	
+	public void setGames(List<Game> games) {
+		this.games = games;
+		
+		setListData();
+	}
+	
+	private void setListData() {
+		List<String> listData = new GamesListStringBuilder(games).build();
+		
+		panelList.setListData(listData.toArray(new String[listData.size()]));
 	}
 
 	@Override

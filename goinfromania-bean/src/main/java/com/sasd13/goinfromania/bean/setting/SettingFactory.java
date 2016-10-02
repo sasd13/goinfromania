@@ -6,7 +6,7 @@ public class SettingFactory {
 	
 	public static Setting make(String code) {
 		if (EnumSetting.GAMEPAD.getCode().equalsIgnoreCase(code)) {
-			return new GamePad();
+			return new Gamepad();
 		} else {
 			return null;
 		}

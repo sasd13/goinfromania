@@ -9,12 +9,7 @@ import com.sasd13.goinfromania.util.ImageLoader;
 
 public class HomeView extends JPanel {
 	
-	private static final String IMAGE_PATH = "home.png";
-	private static BufferedImage image;
-	
-	static {
-		image = ImageLoader.loadFromPath(IMAGE_PATH);
-	}
+	private static BufferedImage image = ImageLoader.loadFromPath(ImageConstants.HOME);
 	
 	public HomeView() {
 		super();

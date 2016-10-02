@@ -6,7 +6,7 @@ import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.util.preferences.SettingPreferences;
 import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
 
-public class MenuSettingsActionGamePad implements IAction {
+public class MenuSettingsActionGamepad implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
