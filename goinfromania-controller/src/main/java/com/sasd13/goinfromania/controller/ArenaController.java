@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 import com.sasd13.goinfromania.bean.Direction;
 import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.bean.character.Pig;
+import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.engine.GameEngine;
 import com.sasd13.goinfromania.util.MoveUtil;
@@ -52,7 +52,7 @@ public class ArenaController implements KeyListener {
 				GameEngine.resumeGame(game, frame);
 			}
 		} else {
-			Pig pig = game.getPig();
+			IPig pig = game.getPig();
 
 			if (keyCode == gamepad.getKeyMoveNorth()) {
 				MoveUtil.move(pig, Direction.NORTH);

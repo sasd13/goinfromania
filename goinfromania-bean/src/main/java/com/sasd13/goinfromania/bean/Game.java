@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import com.sasd13.goinfromania.bean.character.Pig;
-
 public class Game extends Observable {
 
 	private long id;
@@ -16,7 +14,7 @@ public class Game extends Observable {
 	private int score;
 	private Timestamp dateCreation, dateLastUpdate;
 	private List<IElement> elements;
-	private Pig pig;
+	private IPig pig;
 
 	public Game() {
 		state = EnumState.NONE;
@@ -108,10 +106,6 @@ public class Game extends Observable {
 	public void addElement(IElement element) {
 		elements.add(element);
 
-		if (element instanceof Pig) {
-			pig = (Pig) element;
-		}
-
 		setChanged();
 		notifyObservers();
 	}
@@ -123,8 +117,14 @@ public class Game extends Observable {
 		notifyObservers();
 	}
 
-	public Pig getPig() {
+	public IPig getPig() {
 		return pig;
+	}
+
+	public void setPig(IPig pig) {
+		this.pig = pig;
+
+		addElement(pig);
 	}
 
 	public static Game clone(Game game) {

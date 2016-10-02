@@ -1,4 +1,4 @@
-package com.sasd13.goinfromania.bean.character;
+package com.sasd13.goinfromania.bean;
 
 public interface ILiveable {
 	

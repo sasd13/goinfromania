@@ -5,7 +5,6 @@ import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.character.Pig;
 import com.sasd13.goinfromania.bean.setting.EnumSetting;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
-import com.sasd13.goinfromania.bean.setting.SettingFactory;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
 
@@ -36,15 +35,15 @@ public class CreateStateProcessor implements IStateProcessor {
 	private void createGame(Game game) {
 		frame.displayGame(game);
 		game.setState(EnumState.CREATED);
-		game.addElement(new Pig());
-		
+		game.setPig(new Pig());
+
 		setGamepad();
-		//frame.displayGame(game);
+		// frame.displayGame(game);
 	}
-	
+
 	private void setGamepad() {
 		Gamepad gamepad = (Gamepad) SettingPreferencesFactory.make(EnumSetting.GAMEPAD.getCode()).pull();
-		
+
 		frame.getGameView().setGamepad(gamepad);
 	}
 }

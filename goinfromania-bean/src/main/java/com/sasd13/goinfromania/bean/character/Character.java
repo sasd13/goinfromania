@@ -1,6 +1,7 @@
 package com.sasd13.goinfromania.bean.character;
 
 import com.sasd13.goinfromania.bean.Element;
+import com.sasd13.goinfromania.bean.ILiveable;
 import com.sasd13.goinfromania.bean.IMovable;
 
 public abstract class Character extends Element implements IMovable, ILiveable {

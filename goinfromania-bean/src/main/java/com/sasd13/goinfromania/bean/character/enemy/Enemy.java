@@ -1,8 +1,8 @@
 package com.sasd13.goinfromania.bean.character.enemy;
 
 import com.sasd13.goinfromania.bean.IPower;
+import com.sasd13.goinfromania.bean.IPowerful;
 import com.sasd13.goinfromania.bean.character.Character;
-import com.sasd13.goinfromania.bean.character.IPowerful;
 
 public abstract class Enemy extends Character implements IPowerful {
 	

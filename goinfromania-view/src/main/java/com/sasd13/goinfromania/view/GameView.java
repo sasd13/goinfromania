@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.bean.character.Pig;
+import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.IGameView;
@@ -165,7 +165,7 @@ public class GameView extends JPanel implements Observer, IGameView {
 	private void setValues() {
 		labelGameScore.setText(String.valueOf(game.getScore()));
 
-		Pig pig = game.getPig();
+		IPig pig = game.getPig();
 
 		if (pig != null) {
 			progressBarPigLife.setValue(pig.getLife());

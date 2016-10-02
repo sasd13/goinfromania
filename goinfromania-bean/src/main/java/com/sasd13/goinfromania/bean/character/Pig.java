@@ -1,23 +1,26 @@
 package com.sasd13.goinfromania.bean.character;
 
+import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.IPower;
 
-public class Pig extends Character implements IPowerful {
+public class Pig extends Character implements IPig {
 
 	private boolean greedy, powerful;
 	private int energy;
-	
+
+	@Override
 	public boolean isGreedy() {
 		return greedy;
 	}
-	
+
+	@Override
 	public void setGreedy(boolean greedy) {
 		this.greedy = greedy;
-		
+
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	@Override
 	public boolean hasEnergy() {
 		return energy > 0;
@@ -31,7 +34,7 @@ public class Pig extends Character implements IPowerful {
 	@Override
 	public void setEnergy(int energy) {
 		this.energy = energy;
-		
+
 		setChanged();
 		notifyObservers();
 	}
@@ -44,7 +47,7 @@ public class Pig extends Character implements IPowerful {
 	@Override
 	public void setPowerful(boolean powerful) {
 		this.powerful = powerful;
-		
+
 		setChanged();
 		notifyObservers();
 	}
