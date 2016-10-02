@@ -6,12 +6,12 @@ import com.sasd13.goinfromania.controller.IDialog;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.engine.GameEngine;
 
-public class GameResultActionEnd implements IAction {
+public class GameResultActionFinish implements IAction {
 
 	private IDialog dialog;
 	private Game game;
 
-	public GameResultActionEnd(IDialog dialog, Game game) {
+	public GameResultActionFinish(IDialog dialog, Game game) {
 		this.dialog = dialog;
 		this.game = game;
 	}

@@ -14,6 +14,8 @@ import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.IGameView;
 import com.sasd13.goinfromania.util.GameConstants;
 import com.sasd13.goinfromania.util.ViewConstants;
+import com.sasd13.goinfromania.view.dialog.SettingDialog;
+import com.sasd13.goinfromania.view.dialog.SettingDialogFactory;
 import com.sasd13.goinfromania.view.menu.MenuBar;
 
 public class Frame extends JFrame implements IFrame {
@@ -27,10 +29,10 @@ public class Frame extends JFrame implements IFrame {
 
 	public Frame() {
 		super(GameConstants.NAME);
-		
+
 		buildView();
 	}
-	
+
 	private void buildView() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
@@ -41,14 +43,14 @@ public class Frame extends JFrame implements IFrame {
 
 	private void buildMenuBar() {
 		menuBar = new MenuBar(this);
-		
+
 		setJMenuBar(menuBar);
 	}
 
 	private void buildLayersPane() {
 		layersPane = new JLayeredPane();
 		Dimension dimension = new Dimension(ViewConstants.PANEL_WIDTH, ViewConstants.PANEL_HEIGHT);
-		
+
 		layersPane.setPreferredSize(dimension);
 		addLayerHome(dimension);
 		addLayerGames(dimension);
@@ -76,10 +78,10 @@ public class Frame extends JFrame implements IFrame {
 		gameView.setVisible(false);
 		layersPane.add(gameView, JLayeredPane.DEFAULT_LAYER);
 	}
-	
+
 	private void buildFrameController() {
 		frameController = new FrameController(this);
-		
+
 		addWindowListener(frameController);
 	}
 
@@ -121,18 +123,18 @@ public class Frame extends JFrame implements IFrame {
 
 	@Override
 	public void displaySetting(Setting setting) {
-		// TODO Auto-generated method stub
+		SettingDialog settingDialog = SettingDialogFactory.make(setting.getCode(), setting, this);
 
+		setting.addObserver(settingDialog);
+		settingDialog.update(setting, null);
+		settingDialog.pack();
+		settingDialog.setLocationRelativeTo(this);
+		settingDialog.setVisible(true);
 	}
 
 	@Override
 	public boolean askClose() {
-		int selected = JOptionPane.showConfirmDialog(
-				null, 
-				"Quitter le jeu ?", 
-				"Confirmation", 
-				JOptionPane.YES_NO_OPTION
-		);
+		int selected = JOptionPane.showConfirmDialog(null, "Quitter le jeu ?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
 		return selected == JOptionPane.YES_OPTION;
 	}

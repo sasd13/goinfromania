@@ -11,8 +11,8 @@ public class GameResultActionFactory {
 	public static IAction make(String code, IDialog dialog, Game game) {
 		if (EnumGameResultAction.REPLAY.getCode().equalsIgnoreCase(code)) {
 			return new GameResultActionReplay(dialog, game);
-		} else if (EnumGameResultAction.END.getCode().equalsIgnoreCase(code)) {
-			return new GameResultActionEnd(dialog, game);
+		} else if (EnumGameResultAction.FINISH.getCode().equalsIgnoreCase(code)) {
+			return new GameResultActionFinish(dialog, game);
 		} else {
 			return null;
 		}

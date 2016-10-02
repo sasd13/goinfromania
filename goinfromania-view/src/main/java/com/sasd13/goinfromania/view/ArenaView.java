@@ -21,39 +21,45 @@ public class ArenaView extends JPanel implements Observer {
 
 	private List<IElement> elements;
 	private ArenaController arenaController;
-	
+
 	public ArenaView(IFrame frame) {
 		super(new BorderLayout());
-		
+
 		elements = new ArrayList<>();
-		arenaController = new ArenaController(frame);
-		
+
+		buildView(frame);
+	}
+
+	private void buildView(IFrame frame) {
 		setLayout(null);
 		setPreferredSize(new Dimension(ViewConstants.ARENA_WIDTH, ViewConstants.ARENA_HEIGHT));
 		setBackground(Color.BLACK);
 		setFocusable(true);
+		buildArenaController(frame);
+	}
+
+	private void buildArenaController(IFrame frame) {
+		arenaController = new ArenaController(frame);
+
 		addKeyListener(arenaController);
 	}
-	
+
 	@Override
 	public void update(Observable observable, Object arg) {
 		Game game = (Game) observable;
-		
+
 		arenaController.setGame(game);
-		
-		if (game != null) {
-			elements = game.getElements();
-		}
-		
+		elements = game.getElements();
+
 		repaint();
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
 		for (IElement element : elements) {
-			//TODO g.drawImage(element.getImage(), element.getPosition().x, element.getPosition().y, this);
+			// TODO g.drawImage(element.getImage(), element.getPosition().x, element.getPosition().y, this);
 		}
 	}
 }

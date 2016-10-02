@@ -8,7 +8,7 @@ public class SettingDialogFactory {
 
 	public static SettingDialog make(String code, Setting setting, IFrame frame) {
 		if (EnumSetting.GAMEPAD.getCode().equalsIgnoreCase(code)) {
-			return new SettingDialogGamepad(frame, setting, code);
+			return new SettingDialogGamepad(frame, setting);
 		} else {
 			return null;
 		}

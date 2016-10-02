@@ -9,19 +9,17 @@ public class SettingActionReset implements IAction {
 
 	private ISettingDialog settingDialog;
 	private Setting setting;
-	private String code;
 
-	public SettingActionReset(ISettingDialog settingDialog, Setting setting, String code) {
+	public SettingActionReset(ISettingDialog settingDialog, Setting setting) {
 		this.settingDialog = settingDialog;
 		this.setting = setting;
-		this.code = code;
 	}
 
 	@Override
 	public void execute(IFrame frame) {
 		if (settingDialog.askReset()) {
 			setting.reset();
-			SettingPreferencesFactory.make(code).push(setting);
+			SettingPreferencesFactory.make(setting.getCode()).push(setting);
 		}
 	}
 }

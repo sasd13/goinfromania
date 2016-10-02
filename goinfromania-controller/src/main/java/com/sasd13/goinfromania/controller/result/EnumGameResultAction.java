@@ -2,7 +2,7 @@ package com.sasd13.goinfromania.controller.result;
 
 public enum EnumGameResultAction {
 	REPLAY("REPLAY"),
-	END("END"),
+	FINISH("FINISH"),
 	;
 
 	private String code;

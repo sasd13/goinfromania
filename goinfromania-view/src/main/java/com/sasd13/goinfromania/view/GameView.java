@@ -3,6 +3,7 @@ package com.sasd13.goinfromania.view;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -10,85 +11,84 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.bean.character.Pig;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.IGameView;
 import com.sasd13.goinfromania.util.ViewConstants;
 
-public class GameView extends JPanel implements IGameView {
+public class GameView extends JPanel implements Observer, IGameView {
 
 	private ArenaView arenaView;
-	private JProgressBar progressBarLife, progressBarEnergy;
-	private JLabel labelState, labelScore;
+	private JProgressBar progressBarPigLife, progressBarPigEnergy;
+	private JLabel labelGameState, labelGameScore;
+	private Game game;
 
 	public GameView(IFrame frame) {
 		super(new BorderLayout());
 
-		createArena(frame);
-		createPanelPig();
-		createPanelGame();
+		buildView(frame);
 	}
 
-	private void createArena(IFrame frame) {
+	private void buildView(IFrame frame) {
+		buildArena(frame);
+		buildPanelPigState();
+		buildPanelGameState();
+	}
+
+	private void buildArena(IFrame frame) {
 		arenaView = new ArenaView(frame);
+
 		add(arenaView, BorderLayout.CENTER);
 	}
 
-	private void createPanelPig() {
-		JPanel panelPig = new JPanel(new GridLayout(1, 2));
+	private void buildPanelPigState() {
+		JPanel panelPigState = new JPanel(new GridLayout(1, 2));
 
-		addProgressBarLife(panelPig);
-		addProgressBarEnergy(panelPig);
-
-		add(panelPig, BorderLayout.NORTH);
+		addProgressBarPigLife(panelPigState);
+		addProgressBarPigEnergy(panelPigState);
+		add(panelPigState, BorderLayout.NORTH);
 	}
 
-	private void addProgressBarLife(JPanel panelPig) {
-		JPanel panelLife = new JPanel();
+	private void addProgressBarPigLife(JPanel panelPigState) {
+		progressBarPigLife = new JProgressBar(ViewConstants.PROGRESSBAR_MIN, ViewConstants.PROGRESSBAR_MAX);
+		JPanel panelPigLife = new JPanel();
 
-		panelLife.add(new JLabel("Vie : "));
-		progressBarLife = new JProgressBar(ViewConstants.PROGRESSBAR_MIN, ViewConstants.PROGRESSBAR_MAX);
-		panelLife.add(progressBarLife);
-
-		panelPig.add(panelLife);
+		panelPigLife.add(new JLabel("Vie : "));
+		panelPigLife.add(progressBarPigLife);
+		panelPigState.add(panelPigLife);
 	}
 
-	private void addProgressBarEnergy(JPanel panelPig) {
-		JPanel panelEnergy = new JPanel();
+	private void addProgressBarPigEnergy(JPanel panelPigState) {
+		progressBarPigEnergy = new JProgressBar(ViewConstants.PROGRESSBAR_MIN, ViewConstants.PROGRESSBAR_MAX);
+		JPanel panelPigEnergy = new JPanel();
 
-		panelEnergy.add(new JLabel("Energie : "));
-		progressBarEnergy = new JProgressBar(ViewConstants.PROGRESSBAR_MIN, ViewConstants.PROGRESSBAR_MAX);
-		panelEnergy.add(progressBarEnergy);
-
-		panelPig.add(panelEnergy);
+		panelPigEnergy.add(new JLabel("Energie : "));
+		panelPigEnergy.add(progressBarPigEnergy);
+		panelPigState.add(panelPigEnergy);
 	}
 
-	private void createPanelGame() {
+	private void buildPanelGameState() {
 		JPanel panelGame = new JPanel(new GridLayout(1, 2));
 
 		addLabelState(panelGame);
 		addLabelScore(panelGame);
-
 		add(panelGame, BorderLayout.SOUTH);
 	}
 
-	private void addLabelState(JPanel panelGame) {
+	private void addLabelState(JPanel panelGameState) {
+		labelGameState = new JLabel();
 		JPanel panelState = new JPanel();
 
-		labelState = new JLabel();
-		panelState.add(labelState);
-
-		panelGame.add(panelState);
+		panelState.add(labelGameState);
+		panelGameState.add(panelState);
 	}
 
-	private void addLabelScore(JPanel panelGame) {
+	private void addLabelScore(JPanel panelGameScore) {
+		labelGameScore = new JLabel();
 		JPanel panelScore = new JPanel();
 
 		panelScore.add(new JLabel("Score : "));
-		labelScore = new JLabel();
-		panelScore.add(labelScore);
-
-		panelGame.add(panelScore);
+		panelScore.add(labelGameScore);
+		panelGameScore.add(panelScore);
 	}
 
 	public ArenaView getArenaView() {
@@ -96,110 +96,82 @@ public class GameView extends JPanel implements IGameView {
 	}
 
 	@Override
-	public void create(Game game) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public boolean askStop() {
-		int selected = JOptionPane.showConfirmDialog(
-				null, 
-				"Arr�ter la partie ?", 
-				"Arrêt", 
-				JOptionPane.YES_NO_OPTION
-		);
-		
+		int selected = JOptionPane.showConfirmDialog(null, "Arr�ter la partie ?", "Arrêt", JOptionPane.YES_NO_OPTION);
+
 		return selected == JOptionPane.YES_OPTION;
 	}
 
 	@Override
 	public boolean askSave() {
-		int selected = JOptionPane.showConfirmDialog(
-				null, 
-				"Sauvegarder la progression ?", 
-				"Sauvegarde", 
-				JOptionPane.YES_NO_OPTION
-		);
+		int selected = JOptionPane.showConfirmDialog(null, "Sauvegarder la progression ?", "Sauvegarde", JOptionPane.YES_NO_OPTION);
 
 		return selected == JOptionPane.YES_OPTION;
 	}
 
 	@Override
 	public void displayResult() {
-		// TODO Auto-generated method stub
+		// TODO : display result
 
 	}
 
 	@Override
 	public void update(Observable observable, Object arg) {
-		Game game = (Game) observable;
+		game = (Game) observable;
 
 		switch (game.getState()) {
-			case NONE:
-				onNone(game);
-				break;
 			case CREATED:
-				onCreate(game);
+				onCreate();
 				break;
 			case STARTED:
-				onStart(game);
+				onStart();
 				break;
 			case RESUMED:
-				onResume(game);
+				onResume();
 				break;
 			case PAUSED:
-				onPause(game);
+				onPause();
 				break;
 			case STOPPED:
-				onStop(game);
+				onStop();
 				break;
-			case DESTROYED:
-				onDestroy(game);
+			default:
+				clear();
 				break;
 		}
 	}
 
-	private void onNone(Game game) {
-
+	private void onCreate() {
+		// TODO : bind arena view and add observer
 	}
 
-	private void onCreate(Game game) {
-		// TODO : create view
-	}
-
-	private void onStart(Game game) {
-		setValues(game);
+	private void onStart() {
+		setValues();
 		// TODO : display starter
 	}
 
-	private void setValues(Game game) {
-		labelScore.setText(String.valueOf(game.getScore()));
-
-		Pig pig = game.getPig();
-
-		if (pig != null) {
-			progressBarLife.setValue(pig.getLife());
-			progressBarEnergy.setValue(pig.getEnergy());
-		}
+	private void setValues() {
+		labelGameScore.setText(String.valueOf(game.getScore()));
+		progressBarPigLife.setValue(game.getPig().getLife());
+		progressBarPigEnergy.setValue(game.getPig().getEnergy());
 	}
 
-	private void onResume(Game game) {
-		labelState.setText("");
-		setValues(game);
+	private void onResume() {
+		labelGameState.setText("");
+		setValues();
 		// TODO : resume game
 	}
 
-	private void onPause(Game game) {
-		labelState.setText("PAUSE");
+	private void onPause() {
+		labelGameState.setText("PAUSE");
 		// TODO : pause game
 	}
 
-	private void onStop(Game game) {
+	private void onStop() {
 		// TODO : display dialog stop
 	}
 
-	private void onDestroy(Game game) {
+	private void clear() {
 		// TODO : display empty pane
 	}
 }

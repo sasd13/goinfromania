@@ -7,6 +7,11 @@ public class Gamepad extends Setting {
 	private int keyStart, keyMoveNorth, keyMoveSouth, keyMoveWest, keyMoveEast, keyPigAttak;
 	
 	@Override
+	public String getCode() {
+		return EnumSetting.GAMEPAD.getCode();
+	}
+	
+	@Override
 	public void reset() {		
 		setKeyStart(KeyEvent.VK_ENTER);
 		setKeyMoveNorth(KeyEvent.VK_UP);

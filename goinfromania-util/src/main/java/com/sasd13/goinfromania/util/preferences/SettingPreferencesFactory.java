@@ -6,7 +6,7 @@ public class SettingPreferencesFactory {
 
 	private SettingPreferencesFactory() {}
 
-	public static SettingPreferences make(String code) {
+	public static ISettingPreferences make(String code) {
 		if (EnumSetting.GAMEPAD.getCode().equalsIgnoreCase(code)) {
 			return new GamepadPreferences();
 		} else {

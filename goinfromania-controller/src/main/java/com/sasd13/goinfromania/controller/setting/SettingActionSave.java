@@ -9,18 +9,16 @@ public class SettingActionSave implements IAction {
 
 	private ISettingDialog settingDialog;
 	private Setting setting;
-	private String code;
 
-	public SettingActionSave(ISettingDialog settingDialog, Setting setting, String code) {
+	public SettingActionSave(ISettingDialog settingDialog, Setting setting) {
 		this.settingDialog = settingDialog;
 		this.setting = setting;
-		this.code = code;
 	}
 
 	@Override
 	public void execute(IFrame frame) {
 		if (settingDialog.save()) {
-			SettingPreferencesFactory.make(code).push(setting);
+			SettingPreferencesFactory.make(setting.getCode()).push(setting);
 		}
 	}
 }

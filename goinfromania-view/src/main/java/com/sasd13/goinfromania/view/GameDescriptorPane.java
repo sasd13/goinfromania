@@ -59,31 +59,50 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 		formDescription = new ViewHolder();
 		Font font = new Font(Font.SANS_SERIF, Font.PLAIN, getFont().getSize());
 
+		addLabelLevel(panelDescription, font);
+		addLabelScore(panelDescription, font);
+		addLabelPigLife(panelDescription, font);
+		addLabelPigEnergy(panelDescription, font);
+		addLabelDateCreation(panelDescription, font);
+		addLabelDateLastUpdate(panelDescription, font);
+	}
+
+	private void addLabelLevel(JPanel panelDescription, Font font) {
 		formDescription.labelLevel = new JLabel();
 		formDescription.labelLevel.setFont(font);
 		panelDescription.add(new JLabel("Niveau"));
 		panelDescription.add(formDescription.labelLevel);
+	}
 
+	private void addLabelScore(JPanel panelDescription, Font font) {
 		formDescription.labelScore = new JLabel();
 		formDescription.labelScore.setFont(font);
 		panelDescription.add(new JLabel("Score"));
 		panelDescription.add(formDescription.labelScore);
+	}
 
+	private void addLabelPigLife(JPanel panelDescription, Font font) {
 		formDescription.labelPigLife = new JLabel();
 		formDescription.labelPigLife.setFont(font);
 		panelDescription.add(new JLabel("Vie"));
 		panelDescription.add(formDescription.labelPigLife);
+	}
 
+	private void addLabelPigEnergy(JPanel panelDescription, Font font) {
 		formDescription.labelPigEnergy = new JLabel();
 		formDescription.labelPigEnergy.setFont(font);
 		panelDescription.add(new JLabel("Energie"));
 		panelDescription.add(formDescription.labelPigEnergy);
+	}
 
+	private void addLabelDateCreation(JPanel panelDescription, Font font) {
 		formDescription.labelDateCreation = new JLabel();
 		formDescription.labelDateCreation.setFont(font);
 		panelDescription.add(new JLabel("Date creation"));
 		panelDescription.add(formDescription.labelDateCreation);
+	}
 
+	private void addLabelDateLastUpdate(JPanel panelDescription, Font font) {
 		formDescription.labelDateLastUpdate = new JLabel();
 		formDescription.labelDateLastUpdate.setFont(font);
 		panelDescription.add(new JLabel("Date modification :"));
@@ -101,12 +120,13 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
 		GameDescriptorController gameDescriptorController = new GameDescriptorController(frame, this);
 
-		buildButtonContinue(panelButtons, dimension, gameDescriptorController);
-		buildButtonDelete(panelButtons, dimension, gameDescriptorController);
+		addButtonContinue(panelButtons, dimension, gameDescriptorController);
+		addButtonDelete(panelButtons, dimension, gameDescriptorController);
 	}
 
-	private void buildButtonContinue(JPanel panelButtons, Dimension dimension, GameDescriptorController gameDescriptorController) {
+	private void addButtonContinue(JPanel panelButtons, Dimension dimension, GameDescriptorController gameDescriptorController) {
 		formDescription.buttonContinue = new JButton("Continue");
+		
 		formDescription.buttonContinue.setPreferredSize(dimension);
 		formDescription.buttonContinue.setFocusable(false);
 		formDescription.buttonContinue.setActionCommand(EnumGameDescriptorAction.CONTINUE.getCode());
@@ -114,20 +134,21 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 		panelButtons.add(formDescription.buttonContinue);
 	}
 
-	private void buildButtonDelete(JPanel panelButtons, Dimension dimension, GameDescriptorController gameDescriptorController) {
+	private void addButtonDelete(JPanel panelButtons, Dimension dimension, GameDescriptorController gameDescriptorController) {
 		formDescription.buttonDelete = new JButton("Delete");
+		
 		formDescription.buttonDelete.setPreferredSize(dimension);
 		formDescription.buttonDelete.setFocusable(false);
 		formDescription.buttonDelete.setActionCommand(EnumGameDescriptorAction.DELETE.getCode());
 		formDescription.buttonDelete.addActionListener(gameDescriptorController);
 		panelButtons.add(formDescription.buttonDelete);
 	}
-	
+
 	private void setButtonsEnabled(boolean enabled) {
 		formDescription.buttonContinue.setEnabled(enabled);
 		formDescription.buttonDelete.setEnabled(enabled);
 	}
-	
+
 	@Override
 	public Game getDescriptable() {
 		return game;

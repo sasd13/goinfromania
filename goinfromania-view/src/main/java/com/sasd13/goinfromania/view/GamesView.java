@@ -22,15 +22,15 @@ public class GamesView extends JSplitPane implements ListSelectionListener {
 	private JList<String> panelList;
 	private GameDescriptorPane gameDescriptorPane;
 	private List<Game> games;
-	
+
 	public GamesView(IFrame frame) {
 		super(JSplitPane.HORIZONTAL_SPLIT);
-		
+
 		this.frame = frame;
-		
+
 		buildView();
 	}
-	
+
 	private void buildView() {
 		setDividerLocation(ViewConstants.PANEL_LIST_WIDTH);
 		buildPanelList();
@@ -43,32 +43,32 @@ public class GamesView extends JSplitPane implements ListSelectionListener {
 		panelList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		panelList.setVisibleRowCount(-1);
 		panelList.addListSelectionListener(this);
-		
+
 		addScrollPane();
 	}
 
 	private void addScrollPane() {
 		JScrollPane listScroller = new JScrollPane(panelList);
-		
+
 		listScroller.setPreferredSize(new Dimension(ViewConstants.PANEL_LIST_WIDTH, ViewConstants.PANEL_HEIGHT));
 		add(listScroller);
 	}
-	
+
 	private void buildGameDescriptorPane() {
 		gameDescriptorPane = new GameDescriptorPane(frame);
-		
+
 		add(gameDescriptorPane);
 	}
-	
+
 	public void setGames(List<Game> games) {
 		this.games = games;
-		
+
 		setListData();
 	}
-	
+
 	private void setListData() {
 		List<String> listData = new GamesListStringBuilder(games).build();
-		
+
 		panelList.setListData(listData.toArray(new String[listData.size()]));
 	}
 
@@ -76,6 +76,6 @@ public class GamesView extends JSplitPane implements ListSelectionListener {
 	public void valueChanged(ListSelectionEvent event) {
 		if (!event.getValueIsAdjusting() && panelList.getSelectedIndex() >= 0) {
 			gameDescriptorPane.bind(games.get(panelList.getSelectedIndex()));
-	    }
+		}
 	}
 }

@@ -32,74 +32,71 @@ public class GameStarterDialog extends JDialog implements Observer, IDialog, Act
 		super();
 
 		this.gameView = gameView;
-		layeredPane = new JLayeredPane();
 
+		buildView();
+	}
+
+	private void buildView() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setResizable(false);
 		setUndecorated(true);
-		setContentPane(layeredPane);
 		setSize(new Dimension(ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT));
 		setBackground(Color.BLACK);
-		createLayers();
+		buildLayers();
 	}
 
-	private void createLayers() {
+	private void buildLayers() {
+		layeredPane = new JLayeredPane();
 		Font font = new Font(Font.SANS_SERIF, Font.BOLD | Font.ITALIC, 96);
 
-		createLayerReady(font);
-		createLayerGo(font);
+		setContentPane(layeredPane);
+		buildLayerReady(font);
+		buildLayerGo(font);
 	}
 
-	private void createLayerReady(Font font) {
+	private void buildLayerReady(Font font) {
 		panelReady = new JPanel();
+
 		panelReady.setBackground(Color.BLACK);
 		panelReady.setBounds(0, 0, ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT);
-
 		addLabelReady(font);
-
 		layeredPane.add(panelReady, JLayeredPane.DEFAULT_LAYER);
 	}
 
 	private void addLabelReady(Font font) {
 		JLabel labelReady = new JLabel("Ready !");
+
 		labelReady.setFont(font);
 		labelReady.setForeground(Color.PINK);
-
 		panelReady.add(labelReady);
 	}
 
-	private void createLayerGo(Font font) {
+	private void buildLayerGo(Font font) {
 		panelGo = new JPanel();
+
 		panelGo.setBackground(Color.BLACK);
 		panelGo.setBounds(0, 0, ViewConstants.ROUND_POPUP_WIDTH, ViewConstants.ROUND_POPUP_HEIGHT);
-
 		addLabelGo(font);
-
 		layeredPane.add(panelGo, JLayeredPane.DEFAULT_LAYER);
 	}
 
 	private void addLabelGo(Font font) {
 		JLabel labelGo = new JLabel("Go !");
+
 		labelGo.setFont(font);
 		labelGo.setForeground(Color.PINK);
-
 		panelGo.add(labelGo);
 	}
 
 	public void display() {
 		count = -1;
+		timer = new Timer(0, this);
 
-		setTimer();
 		setLocationRelativeTo(gameView);
 		setVisible(true);
-
-		timer.start();
-	}
-
-	private void setTimer() {
-		timer = new Timer(0, this);
 		timer.setDelay(1200);
+		timer.start();
 	}
 
 	@Override
@@ -112,7 +109,6 @@ public class GameStarterDialog extends JDialog implements Observer, IDialog, Act
 			displayGo();
 		} else {
 			timer.stop();
-
 			dispose();
 		}
 	}
@@ -120,14 +116,12 @@ public class GameStarterDialog extends JDialog implements Observer, IDialog, Act
 	private void displayReady() {
 		panelReady.setVisible(true);
 		layeredPane.moveToFront(panelReady);
-
 		panelGo.setVisible(false);
 	}
 
 	private void displayGo() {
 		panelGo.setVisible(true);
 		layeredPane.moveToFront(panelGo);
-
 		panelReady.setVisible(false);
 	}
 

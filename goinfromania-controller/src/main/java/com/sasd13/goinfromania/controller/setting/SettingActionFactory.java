@@ -11,9 +11,9 @@ public class SettingActionFactory {
 		if (EnumSettingAction.CLOSE.getCode().equalsIgnoreCase(code)) {
 			return new SettingActionClose(settingDialog);
 		} else if (EnumSettingAction.SAVE.getCode().equalsIgnoreCase(code)) {
-			return new SettingActionSave(settingDialog, setting, code);
+			return new SettingActionSave(settingDialog, setting);
 		} else if (EnumSettingAction.RESET.getCode().equalsIgnoreCase(code)) {
-			return new SettingActionReset(settingDialog, setting, code);
+			return new SettingActionReset(settingDialog, setting);
 		} else {
 			return null;
 		}
