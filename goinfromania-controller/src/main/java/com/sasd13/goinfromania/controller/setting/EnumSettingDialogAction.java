@@ -1,6 +1,6 @@
 package com.sasd13.goinfromania.controller.setting;
 
-public enum EnumSettingAction {
+public enum EnumSettingDialogAction {
 	CLOSE("CLOSE"), 
 	SAVE("SAVE"), 
 	RESET("RESET"),
@@ -8,7 +8,7 @@ public enum EnumSettingAction {
 
 	private String code;
 
-	private EnumSettingAction(String code) {
+	private EnumSettingDialogAction(String code) {
 		this.code = code;
 	}
 
@@ -16,8 +16,8 @@ public enum EnumSettingAction {
 		return code;
 	}
 
-	public static EnumSettingAction find(String code) {
-		for (EnumSettingAction action : values()) {
+	public static EnumSettingDialogAction find(String code) {
+		for (EnumSettingDialogAction action : values()) {
 			if (action.code.equalsIgnoreCase(code)) {
 				return action;
 			}

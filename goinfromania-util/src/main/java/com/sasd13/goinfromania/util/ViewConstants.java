@@ -3,7 +3,7 @@ package com.sasd13.goinfromania.util;
 public interface ViewConstants {
 	int ARENA_WIDTH = 800; //Ne pas modifier
 	int ARENA_HEIGHT = 550; //Ne pas modifier
-	int BUTTON_WIDTH = 100;
+	int BUTTON_WIDTH = 120;
 	int BUTTON_HEIGHT = 30;
 	int FRAME_WIDTH = 640;
 	int FRAME_HEIGHT = 480;

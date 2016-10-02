@@ -5,19 +5,20 @@ import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
 
-public class SettingActionSave implements IAction {
+public class SettingDialogActionReset implements IAction {
 
 	private ISettingDialog settingDialog;
 	private Setting setting;
 
-	public SettingActionSave(ISettingDialog settingDialog, Setting setting) {
+	public SettingDialogActionReset(ISettingDialog settingDialog, Setting setting) {
 		this.settingDialog = settingDialog;
 		this.setting = setting;
 	}
 
 	@Override
 	public void execute(IFrame frame) {
-		if (settingDialog.save()) {
+		if (settingDialog.askReset()) {
+			setting.reset();
 			SettingPreferencesFactory.make(setting.getCode()).push(setting);
 		}
 	}

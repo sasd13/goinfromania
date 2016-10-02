@@ -11,6 +11,7 @@ public class MenuSettingsActionGamepad implements IAction {
 	@Override
 	public void execute(IFrame frame) {
 		Setting setting = SettingPreferencesFactory.make(EnumSetting.GAMEPAD.getCode()).pull();
+
 		frame.displaySetting(setting);
 	}
 }

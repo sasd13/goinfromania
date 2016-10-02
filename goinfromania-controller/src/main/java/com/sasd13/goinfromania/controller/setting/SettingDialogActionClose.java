@@ -3,11 +3,11 @@ package com.sasd13.goinfromania.controller.setting;
 import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
 
-public class SettingActionClose implements IAction {
+public class SettingDialogActionClose implements IAction {
 
 	private ISettingDialog settingDialog;
 
-	public SettingActionClose(ISettingDialog settingDialog) {
+	public SettingDialogActionClose(ISettingDialog settingDialog) {
 		this.settingDialog = settingDialog;
 	}
 
