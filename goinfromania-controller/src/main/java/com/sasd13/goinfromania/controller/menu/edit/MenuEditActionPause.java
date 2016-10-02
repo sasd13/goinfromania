@@ -7,7 +7,7 @@ import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.engine.GameEngine;
 
 public class MenuEditActionPause implements IAction {
-	
+
 	private Game game;
 
 	public MenuEditActionPause(Game game) {

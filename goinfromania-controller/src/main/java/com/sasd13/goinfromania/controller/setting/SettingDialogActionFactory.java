@@ -5,7 +5,8 @@ import com.sasd13.goinfromania.controller.IAction;
 
 public class SettingDialogActionFactory {
 
-	private SettingDialogActionFactory() {}
+	private SettingDialogActionFactory() {
+	}
 
 	public static IAction make(String code, ISettingDialog settingDialog, Setting setting) {
 		if (EnumSettingDialogAction.CLOSE.getCode().equalsIgnoreCase(code)) {

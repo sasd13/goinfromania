@@ -22,9 +22,6 @@ public class Game extends Observable {
 		state = EnumState.NONE;
 		result = EnumResult.NONE;
 		elements = new ArrayList<IElement>();
-		pig = new Pig();
-		
-		elements.add(pig);
 	}
 
 	public long getId() {
@@ -33,18 +30,18 @@ public class Game extends Observable {
 
 	public void setId(long id) {
 		this.id = id;
-		
+
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	public EnumState getState() {
 		return state;
 	}
-	
+
 	public void setState(EnumState state) {
 		this.state = state;
-		
+
 		setChanged();
 		notifyObservers();
 	}
@@ -103,13 +100,17 @@ public class Game extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	public List<IElement> getElements() {
 		return elements;
 	}
 
 	public void addElement(IElement element) {
 		elements.add(element);
+
+		if (element instanceof Pig) {
+			pig = (Pig) element;
+		}
 
 		setChanged();
 		notifyObservers();
@@ -121,13 +122,13 @@ public class Game extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	public Pig getPig() {
 		return pig;
 	}
-	
+
 	public static Game clone(Game game) {
-		//TODO : clone
+		// TODO : clone
 		return null;
 	}
 }

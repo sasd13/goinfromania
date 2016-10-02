@@ -3,9 +3,8 @@ package com.sasd13.goinfromania.controller;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.engine.GameEngine;
+import com.sasd13.goinfromania.engine.FrameEngine;
 
 public class FrameController implements WindowListener {
 
@@ -15,7 +14,7 @@ public class FrameController implements WindowListener {
 	public FrameController(IFrame frame) {
 		this.frame = frame;
 	}
-	
+
 	public void setGame(Game game) {
 		this.game = game;
 	}
@@ -32,14 +31,7 @@ public class FrameController implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent event) {
-		if (frame.askClose()) {
-			if (game != null && game.getState().getOrder() < EnumState.DESTROYED.getOrder()) {
-				GameEngine.finishGame(game, frame);
-			}
-			
-			frame.dispose();
-			System.exit(0);
-		}
+		FrameEngine.closeFrame(frame, game);
 	}
 
 	@Override

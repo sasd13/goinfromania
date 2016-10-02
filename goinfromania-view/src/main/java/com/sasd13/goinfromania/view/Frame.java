@@ -109,10 +109,10 @@ public class Frame extends JFrame implements IFrame {
 		game.addObserver(gameView);
 		frameController.setGame(game);
 		gameView.setVisible(true);
-		gameView.getArenaView().requestFocusInWindow();
 		layersPane.moveToFront(gameView);
 		homeView.setVisible(false);
 		gamesView.setVisible(false);
+		menuBar.setGame(game);
 		menuBar.setMenuEditEnabled(true);
 	}
 

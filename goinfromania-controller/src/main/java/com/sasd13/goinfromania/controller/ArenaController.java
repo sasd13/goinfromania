@@ -16,7 +16,7 @@ public class ArenaController implements KeyListener {
 	private IFrame frame;
 	private Game game;
 	private Gamepad gamepad;
-	
+
 	public ArenaController(IFrame frame) {
 		this.frame = frame;
 	}

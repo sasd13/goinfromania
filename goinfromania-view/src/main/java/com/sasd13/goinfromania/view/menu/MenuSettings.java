@@ -18,7 +18,7 @@ public class MenuSettings extends JMenu {
 
 		buildView(frame);
 	}
-	
+
 	private void buildView(IFrame frame) {
 		setMnemonic(KeyEvent.VK_O);
 		buildItems(frame);
@@ -26,13 +26,13 @@ public class MenuSettings extends JMenu {
 
 	private void buildItems(IFrame frame) {
 		MenuSettingsController controller = new MenuSettingsController(frame);
-		
+
 		addItemGamepad(controller);
 	}
 
 	private void addItemGamepad(MenuSettingsController controller) {
 		JMenuItem menuItemGamepad = new JMenuItem("Clavier");
-		
+
 		menuItemGamepad.setActionCommand(EnumMenuSettingsAction.GAMEPAD.getCode());
 		menuItemGamepad.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
 		menuItemGamepad.addActionListener(controller);

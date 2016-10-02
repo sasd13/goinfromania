@@ -11,12 +11,16 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import com.sasd13.goinfromania.bean.Game;
+import com.sasd13.goinfromania.bean.character.Pig;
+import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.IGameView;
 import com.sasd13.goinfromania.util.ViewConstants;
+import com.sasd13.goinfromania.view.dialog.GameResultDialog;
 
 public class GameView extends JPanel implements Observer, IGameView {
 
+	private IFrame frame;
 	private ArenaView arenaView;
 	private JProgressBar progressBarPigLife, progressBarPigEnergy;
 	private JLabel labelGameState, labelGameScore;
@@ -25,16 +29,18 @@ public class GameView extends JPanel implements Observer, IGameView {
 	public GameView(IFrame frame) {
 		super(new BorderLayout());
 
-		buildView(frame);
+		this.frame = frame;
+
+		buildView();
 	}
 
-	private void buildView(IFrame frame) {
-		buildArena(frame);
+	private void buildView() {
+		buildArena();
 		buildPanelPigState();
 		buildPanelGameState();
 	}
 
-	private void buildArena(IFrame frame) {
+	private void buildArena() {
 		arenaView = new ArenaView(frame);
 
 		add(arenaView, BorderLayout.CENTER);
@@ -91,8 +97,9 @@ public class GameView extends JPanel implements Observer, IGameView {
 		panelGameScore.add(panelScore);
 	}
 
-	public ArenaView getArenaView() {
-		return arenaView;
+	@Override
+	public void setGamepad(Gamepad gamepad) {
+		arenaView.setGamepad(gamepad);
 	}
 
 	@Override
@@ -111,8 +118,13 @@ public class GameView extends JPanel implements Observer, IGameView {
 
 	@Override
 	public void displayResult() {
-		// TODO : display result
+		GameResultDialog gameResultDialog = new GameResultDialog(frame, game);
 
+		game.addObserver(gameResultDialog);
+		gameResultDialog.update(game, null);
+		gameResultDialog.pack();
+		gameResultDialog.setLocationRelativeTo(this);
+		gameResultDialog.setVisible(true);
 	}
 
 	@Override
@@ -142,7 +154,7 @@ public class GameView extends JPanel implements Observer, IGameView {
 	}
 
 	private void onCreate() {
-		// TODO : bind arena view and add observer
+		game.addObserver(arenaView);
 	}
 
 	private void onStart() {
@@ -152,13 +164,19 @@ public class GameView extends JPanel implements Observer, IGameView {
 
 	private void setValues() {
 		labelGameScore.setText(String.valueOf(game.getScore()));
-		progressBarPigLife.setValue(game.getPig().getLife());
-		progressBarPigEnergy.setValue(game.getPig().getEnergy());
+
+		Pig pig = game.getPig();
+
+		if (pig != null) {
+			progressBarPigLife.setValue(pig.getLife());
+			progressBarPigEnergy.setValue(pig.getEnergy());
+		}
 	}
 
 	private void onResume() {
 		labelGameState.setText("");
 		setValues();
+		arenaView.requestFocusInWindow();
 		// TODO : resume game
 	}
 

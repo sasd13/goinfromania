@@ -17,7 +17,7 @@ public class MenuFileActionOpen implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		if (game != null && game.getState().getOrder() < EnumState.DESTROYED.getOrder() && frame.getGameView().askStop()) {
+		if (game != null && game.getState().getOrder() < EnumState.DESTROYED.getOrder()) {
 			GameEngine.finishGame(game, frame);
 		}
 

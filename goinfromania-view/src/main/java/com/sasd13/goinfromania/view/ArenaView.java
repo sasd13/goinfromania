@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.IElement;
+import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.controller.ArenaController;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.util.ViewConstants;
@@ -42,6 +43,10 @@ public class ArenaView extends JPanel implements Observer {
 		arenaController = new ArenaController(frame);
 
 		addKeyListener(arenaController);
+	}
+
+	public void setGamepad(Gamepad gamepad) {
+		arenaController.setGamepad(gamepad);
 	}
 
 	@Override

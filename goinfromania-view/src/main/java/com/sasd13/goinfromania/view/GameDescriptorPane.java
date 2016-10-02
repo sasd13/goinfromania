@@ -126,7 +126,7 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 
 	private void addButtonContinue(JPanel panelButtons, Dimension dimension, GameDescriptorController gameDescriptorController) {
 		formDescription.buttonContinue = new JButton("Continue");
-		
+
 		formDescription.buttonContinue.setPreferredSize(dimension);
 		formDescription.buttonContinue.setFocusable(false);
 		formDescription.buttonContinue.setActionCommand(EnumGameDescriptorAction.CONTINUE.getCode());
@@ -136,7 +136,7 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 
 	private void addButtonDelete(JPanel panelButtons, Dimension dimension, GameDescriptorController gameDescriptorController) {
 		formDescription.buttonDelete = new JButton("Delete");
-		
+
 		formDescription.buttonDelete.setPreferredSize(dimension);
 		formDescription.buttonDelete.setFocusable(false);
 		formDescription.buttonDelete.setActionCommand(EnumGameDescriptorAction.DELETE.getCode());

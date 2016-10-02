@@ -6,7 +6,8 @@ import com.sasd13.goinfromania.controller.IDialog;
 
 public class GameResultActionFactory {
 
-	private GameResultActionFactory() {}
+	private GameResultActionFactory() {
+	}
 
 	public static IAction make(String code, IDialog dialog, Game game) {
 		if (EnumGameResultAction.REPLAY.getCode().equalsIgnoreCase(code)) {

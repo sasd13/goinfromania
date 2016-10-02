@@ -1,13 +1,13 @@
 package com.sasd13.goinfromania.bean;
 
 public enum EnumState {
-	NONE(-1), 
-	CREATED(0), 
-	STARTED(1), 
-	RESUMED(2), 
-	PAUSED(3), 
-	STOPPED(4), 
-	DESTROYED(5),;
+	NONE(0), 
+	CREATED(1), 
+	STARTED(2), 
+	RESUMED(3), 
+	PAUSED(4), 
+	STOPPED(5), 
+	DESTROYED(6),;
 
 	private int order;
 
