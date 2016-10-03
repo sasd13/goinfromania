@@ -8,6 +8,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 
 import com.sasd13.goinfromania.bean.Game;
+import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.bean.setting.Setting;
 import com.sasd13.goinfromania.controller.FrameController;
 import com.sasd13.goinfromania.controller.IFrame;
@@ -60,6 +61,7 @@ public class Frame extends JFrame implements IFrame {
 
 	private void addLayerHome(Dimension dimension) {
 		homeView = new HomeView();
+
 		homeView.setBounds(0, 0, dimension.width, dimension.height);
 		homeView.setVisible(false);
 		layersPane.add(homeView, JLayeredPane.DEFAULT_LAYER);
@@ -67,6 +69,7 @@ public class Frame extends JFrame implements IFrame {
 
 	private void addLayerGames(Dimension dimension) {
 		gamesView = new GamesView(this);
+
 		gamesView.setBounds(0, 0, dimension.width, dimension.height);
 		gamesView.setVisible(false);
 		layersPane.add(gamesView, JLayeredPane.DEFAULT_LAYER);
@@ -74,6 +77,7 @@ public class Frame extends JFrame implements IFrame {
 
 	private void addLayerGame(Dimension dimension) {
 		gameView = new GameView(this);
+
 		gameView.setBounds(0, 0, dimension.width, dimension.height);
 		gameView.setVisible(false);
 		layersPane.add(gameView, JLayeredPane.DEFAULT_LAYER);
@@ -87,33 +91,38 @@ public class Frame extends JFrame implements IFrame {
 
 	@Override
 	public void displayHome() {
+		menuBar.setMenuEditEnabled(false);
+
 		homeView.setVisible(true);
 		layersPane.moveToFront(homeView);
 		gameView.setVisible(false);
 		gamesView.setVisible(false);
-		menuBar.setMenuEditEnabled(false);
 	}
 
 	@Override
 	public void displayGames(List<Game> games) {
+		menuBar.setMenuEditEnabled(false);
 		gamesView.setGames(games);
+
 		gamesView.setVisible(true);
 		layersPane.moveToFront(gamesView);
 		homeView.setVisible(false);
 		gameView.setVisible(false);
-		menuBar.setMenuEditEnabled(false);
 	}
 
 	@Override
-	public void displayGame(Game game) {
-		game.addObserver(gameView);
+	public void displayGame(Game game, Gamepad gamepad) {
+		menuBar.setMenuEditEnabled(true);
+		menuBar.setGame(game);
+		menuBar.setGamepad(gamepad);
+		gameView.setGamepad(gamepad);
 		frameController.setGame(game);
+		game.addObserver(gameView);
+
 		gameView.setVisible(true);
 		layersPane.moveToFront(gameView);
 		homeView.setVisible(false);
 		gamesView.setVisible(false);
-		menuBar.setGame(game);
-		menuBar.setMenuEditEnabled(true);
 	}
 
 	@Override

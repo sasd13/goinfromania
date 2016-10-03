@@ -3,7 +3,7 @@ package com.sasd13.goinfromania.controller.menu.edit;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
-import com.sasd13.goinfromania.engine.GameEngine;
+import com.sasd13.goinfromania.engine.GameHandler;
 
 public class MenuEditActionStop implements IAction {
 
@@ -15,6 +15,6 @@ public class MenuEditActionStop implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		GameEngine.stopGame(game, frame);
+		GameHandler.stopGame(game, frame);
 	}
 }

@@ -6,7 +6,7 @@ public interface IPower extends IMovable {
 	
 	void setAfar(boolean afar);
 
-	int getPowerValue();
+	int getIntensity();
 	
-	void setPowerValue(int powerValue);
+	void setIntensity(int intensity);
 }

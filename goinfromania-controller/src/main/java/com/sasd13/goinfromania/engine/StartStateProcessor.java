@@ -2,29 +2,24 @@ package com.sasd13.goinfromania.engine;
 
 import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IGameView;
 
 public class StartStateProcessor implements IStateProcessor {
 
-	private IFrame frame;
 	private ResumeStateProcessor next;
 
-	public StartStateProcessor(IFrame frame) {
-		this.frame = frame;
-	}
-
 	@Override
-	public void process(int stateTarget, Game game) {
+	public void process(int stateTarget, Game game, IGameView gameView) {
 		if (game.getState().getOrder() < EnumState.STARTED.getOrder()) {
 			startGame(game);
 		}
 
 		if (stateTarget > EnumState.STARTED.getOrder()) {
 			if (next == null) {
-				next = new ResumeStateProcessor(frame);
+				next = new ResumeStateProcessor();
 			}
 
-			next.process(stateTarget, game);
+			next.process(stateTarget, game, gameView);
 		}
 	}
 

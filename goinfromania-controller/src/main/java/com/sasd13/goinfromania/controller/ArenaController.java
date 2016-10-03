@@ -8,7 +8,7 @@ import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
-import com.sasd13.goinfromania.engine.GameEngine;
+import com.sasd13.goinfromania.engine.GameHandler;
 import com.sasd13.goinfromania.util.MoveUtil;
 
 public class ArenaController implements KeyListener {
@@ -47,9 +47,9 @@ public class ArenaController implements KeyListener {
 	public void actionGamepad(int keyCode) {
 		if (keyCode == gamepad.getKeyStart()) {
 			if (game.getState() == EnumState.RESUMED) {
-				GameEngine.pauseGame(game, frame);
+				GameHandler.pauseGame(game, frame);
 			} else {
-				GameEngine.resumeGame(game, frame);
+				GameHandler.resumeGame(game, frame);
 			}
 		} else {
 			IPig pig = game.getPig();

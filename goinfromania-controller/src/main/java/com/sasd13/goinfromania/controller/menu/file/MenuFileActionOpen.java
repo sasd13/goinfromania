@@ -5,7 +5,7 @@ import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.dao.GameDAO;
-import com.sasd13.goinfromania.engine.GameEngine;
+import com.sasd13.goinfromania.engine.GameHandler;
 
 public class MenuFileActionOpen implements IAction {
 
@@ -18,7 +18,7 @@ public class MenuFileActionOpen implements IAction {
 	@Override
 	public void execute(IFrame frame) {
 		if (game != null && game.getState().getOrder() < EnumState.DESTROYED.getOrder()) {
-			GameEngine.finishGame(game, frame);
+			GameHandler.finishGame(game, frame);
 		}
 
 		if (game == null || game.getState() == EnumState.DESTROYED) {

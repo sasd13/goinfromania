@@ -4,7 +4,7 @@ import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IDialog;
 import com.sasd13.goinfromania.controller.IFrame;
-import com.sasd13.goinfromania.engine.GameEngine;
+import com.sasd13.goinfromania.engine.GameHandler;
 
 public class GameResultActionReplay implements IAction {
 
@@ -18,8 +18,8 @@ public class GameResultActionReplay implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		GameEngine.finishGame(game, frame);
+		GameHandler.finishGame(game, frame);
 		dialog.dispose();
-		GameEngine.launchGame(Game.clone(game), frame);
+		GameHandler.launchGame(Game.clone(game), frame);
 	}
 }

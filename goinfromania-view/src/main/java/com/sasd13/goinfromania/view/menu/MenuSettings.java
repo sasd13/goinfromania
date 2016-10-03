@@ -7,11 +7,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.menu.settings.EnumMenuSettingsAction;
 import com.sasd13.goinfromania.controller.menu.settings.MenuSettingsController;
 
 public class MenuSettings extends JMenu {
+
+	private MenuSettingsController menuSettingsController;
 
 	public MenuSettings(IFrame frame) {
 		super("Options");
@@ -25,9 +28,9 @@ public class MenuSettings extends JMenu {
 	}
 
 	private void buildItems(IFrame frame) {
-		MenuSettingsController controller = new MenuSettingsController(frame);
+		menuSettingsController = new MenuSettingsController(frame);
 
-		addItemGamepad(controller);
+		addItemGamepad(menuSettingsController);
 	}
 
 	private void addItemGamepad(MenuSettingsController controller) {
@@ -37,5 +40,9 @@ public class MenuSettings extends JMenu {
 		menuItemGamepad.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
 		menuItemGamepad.addActionListener(controller);
 		add(menuItemGamepad);
+	}
+
+	public void setGamepad(Gamepad gamepad) {
+		menuSettingsController.setGamepad(gamepad);
 	}
 }

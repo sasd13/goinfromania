@@ -4,7 +4,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.engine.FrameEngine;
+import com.sasd13.goinfromania.engine.FrameHandler;
 
 public class FrameController implements WindowListener {
 
@@ -31,7 +31,7 @@ public class FrameController implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent event) {
-		FrameEngine.closeFrame(frame, game);
+		FrameHandler.closeFrame(frame, game);
 	}
 
 	@Override

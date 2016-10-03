@@ -97,7 +97,6 @@ public class GameView extends JPanel implements Observer, IGameView {
 		panelGameScore.add(panelScore);
 	}
 
-	@Override
 	public void setGamepad(Gamepad gamepad) {
 		arenaView.setGamepad(gamepad);
 	}

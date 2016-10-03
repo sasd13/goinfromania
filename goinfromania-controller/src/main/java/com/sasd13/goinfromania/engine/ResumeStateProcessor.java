@@ -2,29 +2,24 @@ package com.sasd13.goinfromania.engine;
 
 import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IGameView;
 
 public class ResumeStateProcessor implements IStateProcessor {
 
-	private IFrame frame;
 	private PauseStateProcessor next;
 
-	public ResumeStateProcessor(IFrame frame) {
-		this.frame = frame;
-	}
-
 	@Override
-	public void process(int stateTarget, Game game) {
+	public void process(int stateTarget, Game game, IGameView gameView) {
 		if (game.getState().getOrder() < EnumState.RESUMED.getOrder() || game.getState() == EnumState.PAUSED) {
 			resumeGame(game);
 		}
 
 		if (stateTarget > EnumState.RESUMED.getOrder()) {
 			if (next == null) {
-				next = new PauseStateProcessor(frame);
+				next = new PauseStateProcessor();
 			}
 
-			next.process(stateTarget, game);
+			next.process(stateTarget, game, gameView);
 		}
 	}
 

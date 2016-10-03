@@ -4,7 +4,7 @@ import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
-import com.sasd13.goinfromania.engine.GameEngine;
+import com.sasd13.goinfromania.engine.GameHandler;
 
 public class MenuEditActionPause implements IAction {
 
@@ -17,9 +17,9 @@ public class MenuEditActionPause implements IAction {
 	@Override
 	public void execute(IFrame frame) {
 		if (game.getState() == EnumState.RESUMED) {
-			GameEngine.pauseGame(game, frame);
+			GameHandler.pauseGame(game, frame);
 		} else {
-			GameEngine.resumeGame(game, frame);
+			GameHandler.resumeGame(game, frame);
 		}
 	}
 }

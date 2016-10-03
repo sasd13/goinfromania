@@ -3,7 +3,7 @@ package com.sasd13.goinfromania.controller.menu.file;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
-import com.sasd13.goinfromania.engine.FrameEngine;
+import com.sasd13.goinfromania.engine.FrameHandler;
 
 public class MenuFileActionExit implements IAction {
 
@@ -15,6 +15,6 @@ public class MenuFileActionExit implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		FrameEngine.closeFrame(frame, game);
+		FrameHandler.closeFrame(frame, game);
 	}
 }

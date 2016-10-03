@@ -4,7 +4,7 @@ import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
 import com.sasd13.goinfromania.controller.IFrame;
-import com.sasd13.goinfromania.engine.GameEngine;
+import com.sasd13.goinfromania.engine.GameHandler;
 
 public class MenuFileActionNew implements IAction {
 
@@ -17,11 +17,11 @@ public class MenuFileActionNew implements IAction {
 	@Override
 	public void execute(IFrame frame) {
 		if (game != null && game.getState().getOrder() < EnumState.DESTROYED.getOrder()) {
-			GameEngine.finishGame(game, frame);
+			GameHandler.finishGame(game, frame);
 		}
 
 		if (game == null || game.getState() == EnumState.DESTROYED) {
-			GameEngine.launchNewGame(frame);
+			GameHandler.launchGame(new Game(), frame);
 		}
 	}
 }
