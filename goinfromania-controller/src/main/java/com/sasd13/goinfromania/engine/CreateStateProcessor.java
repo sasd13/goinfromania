@@ -2,12 +2,17 @@ package com.sasd13.goinfromania.engine;
 
 import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.bean.character.Pig;
 import com.sasd13.goinfromania.controller.IGameView;
+import com.sasd13.goinfromania.util.builder.PigBuilder;
 
 public class CreateStateProcessor implements IStateProcessor {
 
 	private StartStateProcessor next;
+	private PigBuilder pigBuilder;
+
+	public CreateStateProcessor() {
+		pigBuilder = new PigBuilder();
+	}
 
 	@Override
 	public void process(int stateTarget, Game game, IGameView gameView) {
@@ -26,7 +31,7 @@ public class CreateStateProcessor implements IStateProcessor {
 
 	private void createGame(Game game) {
 		game.setState(EnumState.CREATED);
-		game.setPig(new Pig());
+		game.setPig(pigBuilder.build());
 
 		// frame.displayGame(game);
 	}

@@ -37,6 +37,9 @@ public class GameHandler {
 
 	public static void finishGame(Game game) {
 		requestState(EnumState.DESTROYED, game);
-		game.deleteObservers();
+		
+		if (game.getState() == EnumState.DESTROYED) {
+			game.deleteObservers();
+		}
 	}
 }

@@ -7,6 +7,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.menu.settings.EnumMenuSettingsAction;
@@ -40,6 +41,10 @@ public class MenuSettings extends JMenu {
 		menuItemGamepad.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
 		menuItemGamepad.addActionListener(controller);
 		add(menuItemGamepad);
+	}
+
+	public void setGame(Game game) {
+		menuSettingsController.setGame(game);
 	}
 
 	public void setGamepad(Gamepad gamepad) {

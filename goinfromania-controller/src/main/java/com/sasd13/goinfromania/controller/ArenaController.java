@@ -9,12 +9,16 @@ import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.engine.GameHandler;
-import com.sasd13.goinfromania.util.MoveUtil;
 
 public class ArenaController implements KeyListener {
 
+	private IArena arena;
 	private Game game;
 	private Gamepad gamepad;
+
+	public ArenaController(IArena arena) {
+		this.arena = arena;
+	}
 
 	public void setGame(Game game) {
 		this.game = game;
@@ -46,17 +50,17 @@ public class ArenaController implements KeyListener {
 			} else {
 				GameHandler.resumeGame(game);
 			}
-		} else {
+		} else if (game.getState() == EnumState.RESUMED) {
 			IPig pig = game.getPig();
 
 			if (keyCode == gamepad.getKeyMoveNorth()) {
-				MoveUtil.move(pig, Direction.NORTH);
+				MoveHandler.move(pig, Direction.NORTH, arena);
 			} else if (keyCode == gamepad.getKeyMoveSouth()) {
-				MoveUtil.move(pig, Direction.SOUTH);
+				MoveHandler.move(pig, Direction.SOUTH, arena);
 			} else if (keyCode == gamepad.getKeyMoveWest()) {
-				MoveUtil.move(pig, Direction.WEST);
+				MoveHandler.move(pig, Direction.WEST, arena);
 			} else if (keyCode == gamepad.getKeyMoveEast()) {
-				MoveUtil.move(pig, Direction.EAST);
+				MoveHandler.move(pig, Direction.EAST, arena);
 			} else if (keyCode == gamepad.getKeyPigAttak()) {
 				// TODO
 			}

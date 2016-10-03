@@ -18,7 +18,8 @@ public class GameResultActionFinish implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		dialog.dispose();
 		GameHandler.finishGame(game);
+		dialog.dispose();
+		frame.displayHome();
 	}
 }

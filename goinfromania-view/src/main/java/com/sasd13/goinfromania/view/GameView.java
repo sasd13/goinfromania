@@ -16,7 +16,9 @@ import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.controller.IGameView;
 import com.sasd13.goinfromania.util.ViewConstants;
+import com.sasd13.goinfromania.view.arena.ArenaView;
 import com.sasd13.goinfromania.view.dialog.GameResultDialog;
+import com.sasd13.goinfromania.view.dialog.GameStarterDialog;
 
 public class GameView extends JPanel implements Observer, IGameView {
 
@@ -25,6 +27,7 @@ public class GameView extends JPanel implements Observer, IGameView {
 	private JProgressBar progressBarPigLife, progressBarPigEnergy;
 	private JLabel labelGameState, labelGameScore;
 	private Game game;
+	private GameStarterDialog gameStarterDialog;
 
 	public GameView(IFrame frame) {
 		super(new BorderLayout());
@@ -154,11 +157,12 @@ public class GameView extends JPanel implements Observer, IGameView {
 
 	private void onCreate() {
 		game.addObserver(arenaView);
+		labelGameState.setText("");
 	}
 
 	private void onStart() {
 		setValues();
-		// TODO : display starter
+		displayStarter();
 	}
 
 	private void setValues() {
@@ -170,6 +174,14 @@ public class GameView extends JPanel implements Observer, IGameView {
 			progressBarPigLife.setValue(pig.getLife());
 			progressBarPigEnergy.setValue(pig.getEnergy());
 		}
+	}
+
+	private void displayStarter() {
+		if (gameStarterDialog == null) {
+			gameStarterDialog = new GameStarterDialog(this);
+		}
+
+		gameStarterDialog.display();
 	}
 
 	private void onResume() {

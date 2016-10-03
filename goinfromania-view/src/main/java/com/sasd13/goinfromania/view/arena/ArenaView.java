@@ -1,4 +1,4 @@
-package com.sasd13.goinfromania.view;
+package com.sasd13.goinfromania.view.arena;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,9 +15,10 @@ import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.IElement;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.controller.ArenaController;
+import com.sasd13.goinfromania.controller.IArena;
 import com.sasd13.goinfromania.util.ViewConstants;
 
-public class ArenaView extends JPanel implements Observer {
+public class ArenaView extends JPanel implements Observer, IArena {
 
 	private List<IElement> elements;
 	private ArenaController arenaController;
@@ -39,7 +40,7 @@ public class ArenaView extends JPanel implements Observer {
 	}
 
 	private void buildArenaController() {
-		arenaController = new ArenaController();
+		arenaController = new ArenaController(this);
 
 		addKeyListener(arenaController);
 	}
@@ -63,7 +64,7 @@ public class ArenaView extends JPanel implements Observer {
 		super.paintComponent(g);
 
 		for (IElement element : elements) {
-			// TODO g.drawImage(element.getImage(), element.getPosition().x, element.getPosition().y, this);
+			g.drawImage(ImageFinder.find(element), element.getPosition().x, element.getPosition().y, this);
 		}
 	}
 }

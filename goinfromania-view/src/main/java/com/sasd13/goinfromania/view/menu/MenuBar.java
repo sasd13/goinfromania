@@ -31,6 +31,7 @@ public class MenuBar extends JMenuBar {
 	public void setGame(Game game) {
 		menuFile.setGame(game);
 		menuEdit.setGame(game);
+		menuSettings.setGame(game);
 	}
 
 	public void setGamepad(Gamepad gamepad) {

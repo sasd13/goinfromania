@@ -94,9 +94,9 @@ public class GameStarterDialog extends JDialog implements Observer, IDialog, Act
 		timer = new Timer(0, this);
 
 		setLocationRelativeTo(gameView);
-		setVisible(true);
 		timer.setDelay(1200);
 		timer.start();
+		setVisible(true);
 	}
 
 	@Override
@@ -104,13 +104,20 @@ public class GameStarterDialog extends JDialog implements Observer, IDialog, Act
 		count++;
 
 		if (count == 0) {
-			displayReady();
+			hideReadyAndGo();
 		} else if (count == 1) {
+			displayReady();
+		} else if (count == 2) {
 			displayGo();
 		} else {
 			timer.stop();
 			dispose();
 		}
+	}
+	
+	private void hideReadyAndGo() {
+		panelReady.setVisible(false);
+		panelGo.setVisible(false);
 	}
 
 	private void displayReady() {
