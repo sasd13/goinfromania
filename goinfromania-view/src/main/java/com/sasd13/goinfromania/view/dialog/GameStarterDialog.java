@@ -15,11 +15,11 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import com.sasd13.goinfromania.controller.IDialog;
+import com.sasd13.goinfromania.controller.IDialogView;
 import com.sasd13.goinfromania.util.ViewConstants;
 import com.sasd13.goinfromania.view.GameView;
 
-public class GameStarterDialog extends JDialog implements Observer, IDialog, ActionListener {
+public class GameStarterDialog extends JDialog implements Observer, IDialogView, ActionListener {
 
 	private GameView gameView;
 	private JLayeredPane layeredPane;

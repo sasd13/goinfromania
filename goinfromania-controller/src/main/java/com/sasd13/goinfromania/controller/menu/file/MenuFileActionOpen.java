@@ -2,10 +2,10 @@ package com.sasd13.goinfromania.controller.menu.file;
 
 import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
+import com.sasd13.goinfromania.controller.GameHandler;
 import com.sasd13.goinfromania.controller.IAction;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.dao.GameDAO;
-import com.sasd13.goinfromania.engine.GameHandler;
 
 public class MenuFileActionOpen implements IAction {
 
@@ -16,13 +16,13 @@ public class MenuFileActionOpen implements IAction {
 	}
 
 	@Override
-	public void execute(IFrame frame) {
+	public void execute(IFrameView frameView) {
 		if (game != null && game.getState().getOrder() < EnumState.DESTROYED.getOrder()) {
 			GameHandler.finishGame(game);
 		}
 
 		if (game == null || game.getState() == EnumState.DESTROYED) {
-			frame.displayGames(GameDAO.loadAll());
+			frameView.displayGames(GameDAO.loadAll());
 		}
 	}
 }

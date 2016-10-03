@@ -5,7 +5,8 @@ import com.sasd13.goinfromania.controller.IAction;
 
 public class GameDescriptorActionFactory {
 
-	private GameDescriptorActionFactory() {}
+	private GameDescriptorActionFactory() {
+	}
 
 	public static IAction make(String code, IDescriptor descriptor, Game game) {
 		if (EnumGameDescriptorAction.CONTINUE.getCode().equalsIgnoreCase(code)) {

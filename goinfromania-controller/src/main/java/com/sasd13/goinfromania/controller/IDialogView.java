@@ -1,6 +1,6 @@
 package com.sasd13.goinfromania.controller;
 
-public interface IArena {
+public interface IDialogView {
 
-	void repaint();
+	void dispose();
 }

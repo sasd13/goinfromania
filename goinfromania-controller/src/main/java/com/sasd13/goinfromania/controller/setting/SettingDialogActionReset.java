@@ -2,7 +2,7 @@ package com.sasd13.goinfromania.controller.setting;
 
 import com.sasd13.goinfromania.bean.setting.Setting;
 import com.sasd13.goinfromania.controller.IAction;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
 
 public class SettingDialogActionReset implements IAction {
@@ -16,7 +16,7 @@ public class SettingDialogActionReset implements IAction {
 	}
 
 	@Override
-	public void execute(IFrame frame) {
+	public void execute(IFrameView frameView) {
 		if (settingDialog.askReset()) {
 			setting.reset();
 			SettingPreferencesFactory.make(setting.getCode()).push(setting);

@@ -8,7 +8,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.controller.menu.file.EnumMenuFileAction;
 import com.sasd13.goinfromania.controller.menu.file.MenuFileController;
 
@@ -16,19 +16,19 @@ public class MenuFile extends JMenu {
 
 	private MenuFileController menuFileController;
 
-	public MenuFile(IFrame frame) {
+	public MenuFile(IFrameView frameView) {
 		super("Fichier");
 
-		buildView(frame);
+		buildView(frameView);
 	}
 
-	private void buildView(IFrame frame) {
+	private void buildView(IFrameView frameView) {
 		setMnemonic(KeyEvent.VK_F);
-		buildItems(frame);
+		buildItems(frameView);
 	}
 
-	private void buildItems(IFrame frame) {
-		menuFileController = new MenuFileController(frame);
+	private void buildItems(IFrameView frameView) {
+		menuFileController = new MenuFileController(frameView);
 
 		addItemNew();
 		addItemOpen();

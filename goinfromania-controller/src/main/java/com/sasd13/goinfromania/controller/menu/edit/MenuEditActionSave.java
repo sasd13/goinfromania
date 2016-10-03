@@ -2,7 +2,7 @@ package com.sasd13.goinfromania.controller.menu.edit;
 
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.dao.GameDAO;
 
 public class MenuEditActionSave implements IAction {
@@ -14,7 +14,7 @@ public class MenuEditActionSave implements IAction {
 	}
 
 	@Override
-	public void execute(IFrame frame) {
+	public void execute(IFrameView frameView) {
 		// TODO : do in background
 		GameDAO.update(game);
 	}

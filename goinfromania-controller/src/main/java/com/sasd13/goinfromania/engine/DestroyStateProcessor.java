@@ -9,7 +9,12 @@ public class DestroyStateProcessor implements IStateProcessor {
 	@Override
 	public void process(int stateTarget, Game game, IGameView gameView) {
 		if (game.getState().getOrder() < EnumState.DESTROYED.getOrder()) {
-			game.setState(EnumState.DESTROYED);
+			destroyGame(game);
 		}
+	}
+
+	private void destroyGame(Game game) {
+		game.setState(EnumState.DESTROYED);
+		game.deleteObservers();
 	}
 }

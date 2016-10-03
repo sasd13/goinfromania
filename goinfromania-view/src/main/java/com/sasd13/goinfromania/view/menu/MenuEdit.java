@@ -8,7 +8,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.controller.menu.edit.EnumMenuEditAction;
 import com.sasd13.goinfromania.controller.menu.edit.MenuEditController;
 
@@ -16,19 +16,19 @@ public class MenuEdit extends JMenu {
 
 	private MenuEditController menuEditController;
 
-	public MenuEdit(IFrame frame) {
+	public MenuEdit(IFrameView frameView) {
 		super("Partie");
 
-		buildView(frame);
+		buildView(frameView);
 	}
 
-	private void buildView(IFrame frame) {
+	private void buildView(IFrameView frameView) {
 		setMnemonic(KeyEvent.VK_P);
-		buildItems(frame);
+		buildItems(frameView);
 	}
 
-	private void buildItems(IFrame frame) {
-		menuEditController = new MenuEditController(frame);
+	private void buildItems(IFrameView frameView) {
+		menuEditController = new MenuEditController(frameView);
 
 		addItemPause();
 		addItemStop();

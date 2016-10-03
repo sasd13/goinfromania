@@ -8,16 +8,15 @@ import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
-import com.sasd13.goinfromania.engine.GameHandler;
 
 public class ArenaController implements KeyListener {
 
-	private IArena arena;
+	private IArenaView arenaView;
 	private Game game;
 	private Gamepad gamepad;
 
-	public ArenaController(IArena arena) {
-		this.arena = arena;
+	public ArenaController(IArenaView arenaView) {
+		this.arenaView = arenaView;
 	}
 
 	public void setGame(Game game) {
@@ -54,13 +53,13 @@ public class ArenaController implements KeyListener {
 			IPig pig = game.getPig();
 
 			if (keyCode == gamepad.getKeyMoveNorth()) {
-				MoveHandler.move(pig, Direction.NORTH, arena);
+				MoveHandler.move(pig, Direction.NORTH, arenaView);
 			} else if (keyCode == gamepad.getKeyMoveSouth()) {
-				MoveHandler.move(pig, Direction.SOUTH, arena);
+				MoveHandler.move(pig, Direction.SOUTH, arenaView);
 			} else if (keyCode == gamepad.getKeyMoveWest()) {
-				MoveHandler.move(pig, Direction.WEST, arena);
+				MoveHandler.move(pig, Direction.WEST, arenaView);
 			} else if (keyCode == gamepad.getKeyMoveEast()) {
-				MoveHandler.move(pig, Direction.EAST, arena);
+				MoveHandler.move(pig, Direction.EAST, arenaView);
 			} else if (keyCode == gamepad.getKeyPigAttak()) {
 				// TODO
 			}

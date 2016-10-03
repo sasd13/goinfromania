@@ -10,11 +10,11 @@ import com.sasd13.goinfromania.util.MoveUtil;
 
 public class MoveHandler {
 
-	public static void move(IMovable movable, Direction direction, IArena arena) {
+	public static void move(IMovable movable, Direction direction, IArenaView arenaView) {
 		Point nextPosition = cropping(MoveUtil.getNextPosition(movable, direction), movable.getDimension());
 
 		movable.setPosition(nextPosition);
-		arena.repaint();
+		arenaView.repaint();
 	}
 
 	private static Point cropping(Point position, Dimension dimension) {

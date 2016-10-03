@@ -1,7 +1,7 @@
 package com.sasd13.goinfromania.controller.setting;
 
 import com.sasd13.goinfromania.controller.IAction;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 
 public class SettingDialogActionClose implements IAction {
 
@@ -12,7 +12,7 @@ public class SettingDialogActionClose implements IAction {
 	}
 
 	@Override
-	public void execute(IFrame frame) {
+	public void execute(IFrameView frameView) {
 		settingDialog.dispose();
 	}
 }

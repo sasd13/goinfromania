@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.bean.setting.Setting;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.util.ViewConstants;
 
 public class SettingDialogGamepad extends SettingDialog {
@@ -80,8 +80,8 @@ public class SettingDialogGamepad extends SettingDialog {
 
 	private GamepadTextField[] textFields;
 
-	public SettingDialogGamepad(IFrame frame, Setting setting) {
-		super(frame, setting);
+	public SettingDialogGamepad(IFrameView frameView, Setting setting) {
+		super(frameView, setting);
 
 		setPreferredSize(new Dimension(ViewConstants.FRAME_WIDTH, ViewConstants.FRAME_HEIGHT));
 	}

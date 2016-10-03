@@ -6,17 +6,17 @@ import java.awt.event.ActionListener;
 import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
-import com.sasd13.goinfromania.controller.IFrame;
-import com.sasd13.goinfromania.engine.GameHandler;
+import com.sasd13.goinfromania.controller.GameHandler;
+import com.sasd13.goinfromania.controller.IFrameView;
 
 public class MenuSettingsController implements ActionListener {
 
-	private IFrame frame;
+	private IFrameView frameView;
 	private MenuSettingsActionFactory factory;
 	private Game game;
 
-	public MenuSettingsController(IFrame frame) {
-		this.frame = frame;
+	public MenuSettingsController(IFrameView frameView) {
+		this.frameView = frameView;
 		factory = new MenuSettingsActionFactory();
 	}
 
@@ -34,6 +34,6 @@ public class MenuSettingsController implements ActionListener {
 			GameHandler.pauseGame(game);
 		}
 		
-		factory.make(event.getActionCommand()).execute(frame);
+		factory.make(event.getActionCommand()).execute(frameView);
 	}
 }

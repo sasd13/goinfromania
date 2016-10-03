@@ -16,21 +16,21 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.IDialog;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IDialogView;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.controller.result.EnumGameResultAction;
 import com.sasd13.goinfromania.controller.result.GameResultController;
 import com.sasd13.goinfromania.util.ViewConstants;
 
-public class GameResultDialog extends JDialog implements Observer, IDialog {
+public class GameResultDialog extends JDialog implements Observer, IDialogView {
 
-	private IFrame frame;
+	private IFrameView frameView;
 	private JLabel labelResult, labelScore;
 
-	public GameResultDialog(IFrame frame, Game game) {
+	public GameResultDialog(IFrameView frameView, Game game) {
 		super();
 
-		this.frame = frame;
+		this.frameView = frameView;
 
 		buildView(game);
 	}
@@ -101,7 +101,7 @@ public class GameResultDialog extends JDialog implements Observer, IDialog {
 
 	private void addButtonsToPanelButton(JPanel panelButtons, Game game) {
 		Dimension dimensionButton = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
-		GameResultController gameResultController = new GameResultController(frame, this, game);
+		GameResultController gameResultController = new GameResultController(frameView, this, game);
 
 		addButtonReplay(panelButtons, dimensionButton, gameResultController);
 		addButtonFinish(panelButtons, dimensionButton, gameResultController);

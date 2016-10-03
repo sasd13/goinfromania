@@ -2,9 +2,8 @@ package com.sasd13.goinfromania.controller.menu.settings;
 
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.controller.IAction;
-import com.sasd13.goinfromania.controller.menu.IMenuActionFactory;
 
-public class MenuSettingsActionFactory implements IMenuActionFactory {
+public class MenuSettingsActionFactory {
 
 	private Gamepad gamepad;
 
@@ -12,7 +11,6 @@ public class MenuSettingsActionFactory implements IMenuActionFactory {
 		this.gamepad = gamepad;
 	}
 
-	@Override
 	public IAction make(String code) {
 		IAction action = null;
 

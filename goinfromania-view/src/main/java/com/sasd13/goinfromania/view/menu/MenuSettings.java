@@ -9,7 +9,7 @@ import javax.swing.KeyStroke;
 
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.controller.menu.settings.EnumMenuSettingsAction;
 import com.sasd13.goinfromania.controller.menu.settings.MenuSettingsController;
 
@@ -17,19 +17,19 @@ public class MenuSettings extends JMenu {
 
 	private MenuSettingsController menuSettingsController;
 
-	public MenuSettings(IFrame frame) {
+	public MenuSettings(IFrameView frameView) {
 		super("Options");
 
-		buildView(frame);
+		buildView(frameView);
 	}
 
-	private void buildView(IFrame frame) {
+	private void buildView(IFrameView frameView) {
 		setMnemonic(KeyEvent.VK_O);
-		buildItems(frame);
+		buildItems(frameView);
 	}
 
-	private void buildItems(IFrame frame) {
-		menuSettingsController = new MenuSettingsController(frame);
+	private void buildItems(IFrameView frameView) {
+		menuSettingsController = new MenuSettingsController(frameView);
 
 		addItemGamepad(menuSettingsController);
 	}

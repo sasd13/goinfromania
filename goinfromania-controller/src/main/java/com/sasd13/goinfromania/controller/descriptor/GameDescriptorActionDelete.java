@@ -2,7 +2,7 @@ package com.sasd13.goinfromania.controller.descriptor;
 
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.dao.GameDAO;
 
 public class GameDescriptorActionDelete implements IAction {
@@ -16,11 +16,11 @@ public class GameDescriptorActionDelete implements IAction {
 	}
 
 	@Override
-	public void execute(IFrame frame) {
+	public void execute(IFrameView frameView) {
 		if (descriptor.askDelete()) {
 			descriptor.clear();
 			GameDAO.delete(game);
-			frame.displayGames(GameDAO.loadAll());
+			frameView.displayGames(GameDAO.loadAll());
 		}
 	}
 }

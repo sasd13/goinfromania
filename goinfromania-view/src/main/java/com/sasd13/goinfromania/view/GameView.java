@@ -3,7 +3,6 @@ package com.sasd13.goinfromania.view;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,26 +12,26 @@ import javax.swing.JProgressBar;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.controller.IGameView;
 import com.sasd13.goinfromania.util.ViewConstants;
 import com.sasd13.goinfromania.view.arena.ArenaView;
 import com.sasd13.goinfromania.view.dialog.GameResultDialog;
 import com.sasd13.goinfromania.view.dialog.GameStarterDialog;
 
-public class GameView extends JPanel implements Observer, IGameView {
+public class GameView extends JPanel implements IGameView {
 
-	private IFrame frame;
+	private IFrameView frameView;
 	private ArenaView arenaView;
 	private JProgressBar progressBarPigLife, progressBarPigEnergy;
 	private JLabel labelGameState, labelGameScore;
 	private Game game;
 	private GameStarterDialog gameStarterDialog;
 
-	public GameView(IFrame frame) {
+	public GameView(IFrameView frameView) {
 		super(new BorderLayout());
 
-		this.frame = frame;
+		this.frameView = frameView;
 
 		buildView();
 	}
@@ -120,7 +119,7 @@ public class GameView extends JPanel implements Observer, IGameView {
 
 	@Override
 	public void displayResult() {
-		GameResultDialog gameResultDialog = new GameResultDialog(frame, game);
+		GameResultDialog gameResultDialog = new GameResultDialog(frameView, game);
 
 		game.addObserver(gameResultDialog);
 		gameResultDialog.update(game, null);

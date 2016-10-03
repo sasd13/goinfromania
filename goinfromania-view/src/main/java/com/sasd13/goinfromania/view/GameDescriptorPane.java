@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.controller.descriptor.EnumGameDescriptorAction;
 import com.sasd13.goinfromania.controller.descriptor.GameDescriptorController;
 import com.sasd13.goinfromania.controller.descriptor.IDescriptor;
@@ -26,13 +26,13 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 	}
 
 	private ViewHolder formDescription;
-	private IFrame frame;
+	private IFrameView frameView;
 	private GameDescriptorController gameDescriptorController;
 
-	public GameDescriptorPane(IFrame frame) {
+	public GameDescriptorPane(IFrameView frameView) {
 		super(new BorderLayout());
 
-		this.frame = frame;
+		this.frameView = frameView;
 
 		buildView();
 	}
@@ -118,7 +118,7 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 
 	private void addButtonsToPanelButton(JPanel panelButtons) {
 		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
-		gameDescriptorController = new GameDescriptorController(frame, this);
+		gameDescriptorController = new GameDescriptorController(frameView, this);
 
 		addButtonContinue(panelButtons, dimension, gameDescriptorController);
 		addButtonDelete(panelButtons, dimension, gameDescriptorController);
@@ -171,7 +171,7 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 		formDescription.labelDateLastUpdate.setText("");
 	}
 
-	public void bind(Game game) {
+	public void setGame(Game game) {
 		gameDescriptorController.setGame(game);
 
 		setLabels(game);

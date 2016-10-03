@@ -4,24 +4,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 
 public class MenuEditController implements ActionListener {
 
-	private IFrame frame;
-	private MenuEditActionFactory factory;
+	private IFrameView frameView;
+	private Game game;
 
-	public MenuEditController(IFrame frame) {
-		this.frame = frame;
-		factory = new MenuEditActionFactory();
+	public MenuEditController(IFrameView frameView) {
+		this.frameView = frameView;
 	}
 
 	public void setGame(Game game) {
-		factory.setGame(game);
+		this.game = game;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		factory.make(event.getActionCommand()).execute(frame);
+		MenuEditActionFactory.make(event.getActionCommand(), game).execute(frameView);
 	}
 }

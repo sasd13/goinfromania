@@ -11,7 +11,7 @@ import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.bean.setting.Setting;
 import com.sasd13.goinfromania.controller.FrameController;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.controller.IGameView;
 import com.sasd13.goinfromania.util.GameConstants;
 import com.sasd13.goinfromania.util.ViewConstants;
@@ -19,7 +19,7 @@ import com.sasd13.goinfromania.view.dialog.SettingDialog;
 import com.sasd13.goinfromania.view.dialog.SettingDialogFactory;
 import com.sasd13.goinfromania.view.menu.MenuBar;
 
-public class Frame extends JFrame implements IFrame {
+public class Frame extends JFrame implements IFrameView {
 
 	private MenuBar menuBar;
 	private JLayeredPane layersPane;
@@ -117,13 +117,12 @@ public class Frame extends JFrame implements IFrame {
 		menuBar.setGamepad(gamepad);
 		gameView.setGamepad(gamepad);
 		frameController.setGame(game);
-		game.addObserver(gameView);
 
 		gameView.setVisible(true);
 		layersPane.moveToFront(gameView);
 		homeView.setVisible(false);
 		gamesView.setVisible(false);
-		
+
 		return gameView;
 	}
 

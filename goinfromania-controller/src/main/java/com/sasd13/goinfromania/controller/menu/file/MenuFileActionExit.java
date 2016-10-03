@@ -1,9 +1,11 @@
 package com.sasd13.goinfromania.controller.menu.file;
 
+import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
+import com.sasd13.goinfromania.controller.FrameHandler;
+import com.sasd13.goinfromania.controller.GameHandler;
 import com.sasd13.goinfromania.controller.IAction;
-import com.sasd13.goinfromania.controller.IFrame;
-import com.sasd13.goinfromania.engine.FrameHandler;
+import com.sasd13.goinfromania.controller.IFrameView;
 
 public class MenuFileActionExit implements IAction {
 
@@ -14,7 +16,11 @@ public class MenuFileActionExit implements IAction {
 	}
 
 	@Override
-	public void execute(IFrame frame) {
-		FrameHandler.closeFrame(frame, game);
+	public void execute(IFrameView frameView) {
+		if (game != null && game.getState().getOrder() < EnumState.PAUSED.getOrder()) {
+			GameHandler.pauseGame(game);
+		}
+
+		FrameHandler.closeFrame(frameView, game);
 	}
 }

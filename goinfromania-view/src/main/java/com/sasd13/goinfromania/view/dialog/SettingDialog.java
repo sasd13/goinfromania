@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.sasd13.goinfromania.bean.setting.Setting;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.controller.setting.EnumSettingDialogAction;
 import com.sasd13.goinfromania.controller.setting.ISettingDialog;
 import com.sasd13.goinfromania.controller.setting.SettingDialogController;
@@ -22,34 +22,34 @@ public abstract class SettingDialog extends JDialog implements Observer, ISettin
 
 	private Setting setting;
 
-	protected SettingDialog(IFrame frame, Setting setting) {
+	protected SettingDialog(IFrameView frameView, Setting setting) {
 		super();
 
 		this.setting = setting;
 
-		buildView(frame);
+		buildView(frameView);
 	}
 
-	private void buildView(IFrame frame) {
+	private void buildView(IFrameView frameView) {
 		setTitle("Option");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		buildForm();
-		buildPanelButtons(frame);
+		buildPanelButtons(frameView);
 	}
 
 	protected abstract void buildForm();
 
-	private void buildPanelButtons(IFrame frame) {
+	private void buildPanelButtons(IFrameView frameView) {
 		JPanel panelButtons = new JPanel();
 
-		addButtonsToPanelButton(panelButtons, frame);
+		addButtonsToPanelButton(panelButtons, frameView);
 		getContentPane().add(panelButtons, BorderLayout.SOUTH);
 	}
 
-	private void addButtonsToPanelButton(JPanel panelButtons, IFrame frame) {
+	private void addButtonsToPanelButton(JPanel panelButtons, IFrameView frameView) {
 		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
-		SettingDialogController controller = new SettingDialogController(frame, this, setting);
+		SettingDialogController controller = new SettingDialogController(frameView, this, setting);
 
 		addButtonClose(panelButtons, dimension, controller);
 		addButtonSave(panelButtons, dimension, controller);

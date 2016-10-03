@@ -4,16 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 
 public class GameDescriptorController implements ActionListener {
 
-	private IFrame frame;
+	private IFrameView frameView;
 	private IDescriptor descriptor;
 	private Game game;
 
-	public GameDescriptorController(IFrame frame, IDescriptor descriptor) {
-		this.frame = frame;
+	public GameDescriptorController(IFrameView frameView, IDescriptor descriptor) {
+		this.frameView = frameView;
 		this.descriptor = descriptor;
 	}
 
@@ -23,6 +23,6 @@ public class GameDescriptorController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		GameDescriptorActionFactory.make(event.getActionCommand(), descriptor, game).execute(frame);
+		GameDescriptorActionFactory.make(event.getActionCommand(), descriptor, game).execute(frameView);
 	}
 }

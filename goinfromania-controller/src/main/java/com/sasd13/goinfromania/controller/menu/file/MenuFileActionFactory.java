@@ -2,9 +2,8 @@ package com.sasd13.goinfromania.controller.menu.file;
 
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IAction;
-import com.sasd13.goinfromania.controller.menu.IMenuActionFactory;
 
-public class MenuFileActionFactory implements IMenuActionFactory {
+public class MenuFileActionFactory {
 
 	private Game game;
 
@@ -12,7 +11,6 @@ public class MenuFileActionFactory implements IMenuActionFactory {
 		this.game = game;
 	}
 
-	@Override
 	public IAction make(String code) {
 		IAction action = null;
 

@@ -1,6 +1,8 @@
 package com.sasd13.goinfromania.controller;
 
-public interface IGameView {
+import java.util.Observer;
+
+public interface IGameView extends Observer {
 
 	boolean askStop();
 

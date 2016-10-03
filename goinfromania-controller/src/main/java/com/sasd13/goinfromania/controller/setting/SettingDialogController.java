@@ -4,22 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.sasd13.goinfromania.bean.setting.Setting;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 
 public class SettingDialogController implements ActionListener {
 
-	private IFrame frame;
+	private IFrameView frameView;
 	private ISettingDialog settingDialog;
 	private Setting setting;
 
-	public SettingDialogController(IFrame frame, ISettingDialog settingDialog, Setting setting) {
-		this.frame = frame;
+	public SettingDialogController(IFrameView frameView, ISettingDialog settingDialog, Setting setting) {
+		this.frameView = frameView;
 		this.settingDialog = settingDialog;
 		this.setting = setting;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		SettingDialogActionFactory.make(e.getActionCommand(), settingDialog, setting).execute(frame);
+		SettingDialogActionFactory.make(e.getActionCommand(), settingDialog, setting).execute(frameView);
 	}
 }

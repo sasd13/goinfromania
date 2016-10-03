@@ -6,7 +6,7 @@ import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.bean.setting.Setting;
 
-public interface IFrame {
+public interface IFrameView {
 
 	void displayHome();
 

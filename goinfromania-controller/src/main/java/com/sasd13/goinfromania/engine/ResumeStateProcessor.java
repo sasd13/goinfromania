@@ -10,7 +10,8 @@ public class ResumeStateProcessor implements IStateProcessor {
 
 	@Override
 	public void process(int stateTarget, Game game, IGameView gameView) {
-		if (game.getState().getOrder() < EnumState.RESUMED.getOrder() || game.getState() == EnumState.PAUSED) {
+		if (game.getState().getOrder() < EnumState.RESUMED.getOrder() 
+				|| (game.getState() == EnumState.PAUSED && stateTarget == EnumState.RESUMED.getOrder())) {
 			resumeGame(game);
 		}
 

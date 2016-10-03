@@ -4,7 +4,7 @@ import javax.swing.JMenuBar;
 
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
-import com.sasd13.goinfromania.controller.IFrame;
+import com.sasd13.goinfromania.controller.IFrameView;
 
 public class MenuBar extends JMenuBar {
 
@@ -12,13 +12,17 @@ public class MenuBar extends JMenuBar {
 	private MenuEdit menuEdit;
 	private MenuSettings menuSettings;
 
-	public MenuBar(IFrame frame) {
+	public MenuBar(IFrameView frameView) {
 		super();
 
-		menuFile = new MenuFile(frame);
-		menuEdit = new MenuEdit(frame);
-		menuSettings = new MenuSettings(frame);
+		menuFile = new MenuFile(frameView);
+		menuEdit = new MenuEdit(frameView);
+		menuSettings = new MenuSettings(frameView);
 
+		buildView();
+	}
+
+	private void buildView() {
 		add(menuFile);
 		add(menuEdit);
 		add(menuSettings);
