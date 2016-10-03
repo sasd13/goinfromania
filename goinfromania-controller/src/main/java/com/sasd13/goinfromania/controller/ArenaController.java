@@ -13,13 +13,8 @@ import com.sasd13.goinfromania.util.MoveUtil;
 
 public class ArenaController implements KeyListener {
 
-	private IFrame frame;
 	private Game game;
 	private Gamepad gamepad;
-
-	public ArenaController(IFrame frame) {
-		this.frame = frame;
-	}
 
 	public void setGame(Game game) {
 		this.game = game;
@@ -47,9 +42,9 @@ public class ArenaController implements KeyListener {
 	public void actionGamepad(int keyCode) {
 		if (keyCode == gamepad.getKeyStart()) {
 			if (game.getState() == EnumState.RESUMED) {
-				GameHandler.pauseGame(game, frame);
+				GameHandler.pauseGame(game);
 			} else {
-				GameHandler.resumeGame(game, frame);
+				GameHandler.resumeGame(game);
 			}
 		} else {
 			IPig pig = game.getPig();

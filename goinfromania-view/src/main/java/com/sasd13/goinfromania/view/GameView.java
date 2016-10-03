@@ -41,7 +41,7 @@ public class GameView extends JPanel implements Observer, IGameView {
 	}
 
 	private void buildArena() {
-		arenaView = new ArenaView(frame);
+		arenaView = new ArenaView();
 
 		add(arenaView, BorderLayout.CENTER);
 	}

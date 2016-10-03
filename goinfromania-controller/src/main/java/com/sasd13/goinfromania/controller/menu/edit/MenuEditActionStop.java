@@ -15,6 +15,7 @@ public class MenuEditActionStop implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		GameHandler.stopGame(game, frame);
+		GameHandler.finishGame(game);
+		frame.displayHome();
 	}
 }

@@ -15,7 +15,6 @@ import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.IElement;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.controller.ArenaController;
-import com.sasd13.goinfromania.controller.IFrame;
 import com.sasd13.goinfromania.util.ViewConstants;
 
 public class ArenaView extends JPanel implements Observer {
@@ -23,24 +22,24 @@ public class ArenaView extends JPanel implements Observer {
 	private List<IElement> elements;
 	private ArenaController arenaController;
 
-	public ArenaView(IFrame frame) {
+	public ArenaView() {
 		super(new BorderLayout());
 
 		elements = new ArrayList<>();
 
-		buildView(frame);
+		buildView();
 	}
 
-	private void buildView(IFrame frame) {
+	private void buildView() {
 		setLayout(null);
 		setPreferredSize(new Dimension(ViewConstants.ARENA_WIDTH, ViewConstants.ARENA_HEIGHT));
 		setBackground(Color.BLACK);
 		setFocusable(true);
-		buildArenaController(frame);
+		buildArenaController();
 	}
 
-	private void buildArenaController(IFrame frame) {
-		arenaController = new ArenaController(frame);
+	private void buildArenaController() {
+		arenaController = new ArenaController();
 
 		addKeyListener(arenaController);
 	}

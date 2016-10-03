@@ -27,7 +27,7 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 
 	private ViewHolder formDescription;
 	private IFrame frame;
-	private Game game;
+	private GameDescriptorController gameDescriptorController;
 
 	public GameDescriptorPane(IFrame frame) {
 		super(new BorderLayout());
@@ -118,7 +118,7 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 
 	private void addButtonsToPanelButton(JPanel panelButtons) {
 		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
-		GameDescriptorController gameDescriptorController = new GameDescriptorController(frame, this);
+		gameDescriptorController = new GameDescriptorController(frame, this);
 
 		addButtonContinue(panelButtons, dimension, gameDescriptorController);
 		addButtonDelete(panelButtons, dimension, gameDescriptorController);
@@ -150,11 +150,6 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 	}
 
 	@Override
-	public Game getDescriptable() {
-		return game;
-	}
-
-	@Override
 	public boolean askDelete() {
 		int selected = JOptionPane.showConfirmDialog(null, "Supprimer la partie ?", "Suppression", JOptionPane.YES_NO_OPTION);
 
@@ -177,7 +172,7 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 	}
 
 	public void bind(Game game) {
-		this.game = game;
+		gameDescriptorController.setGame(game);
 
 		setLabels(game);
 		setButtonsEnabled(true);

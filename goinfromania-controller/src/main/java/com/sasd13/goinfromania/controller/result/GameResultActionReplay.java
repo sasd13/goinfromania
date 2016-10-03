@@ -18,7 +18,7 @@ public class GameResultActionReplay implements IAction {
 
 	@Override
 	public void execute(IFrame frame) {
-		GameHandler.finishGame(game, frame);
+		GameHandler.finishGame(game);
 		dialog.dispose();
 		GameHandler.launchGame(Game.clone(game), frame);
 	}

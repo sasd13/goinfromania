@@ -12,9 +12,7 @@ public interface IFrame {
 
 	void displayGames(List<Game> games);
 
-	void displayGame(Game game, Gamepad gamepad);
-
-	IGameView getGameView();
+	IGameView displayGame(Game game, Gamepad gamepad);
 
 	void displaySetting(Setting setting);
 

@@ -111,7 +111,7 @@ public class Frame extends JFrame implements IFrame {
 	}
 
 	@Override
-	public void displayGame(Game game, Gamepad gamepad) {
+	public IGameView displayGame(Game game, Gamepad gamepad) {
 		menuBar.setMenuEditEnabled(true);
 		menuBar.setGame(game);
 		menuBar.setGamepad(gamepad);
@@ -123,10 +123,7 @@ public class Frame extends JFrame implements IFrame {
 		layersPane.moveToFront(gameView);
 		homeView.setVisible(false);
 		gamesView.setVisible(false);
-	}
-
-	@Override
-	public IGameView getGameView() {
+		
 		return gameView;
 	}
 

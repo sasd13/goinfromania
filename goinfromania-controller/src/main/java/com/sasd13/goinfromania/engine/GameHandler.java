@@ -10,30 +10,33 @@ import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
 
 public class GameHandler {
 
-	private static void requestState(EnumState state, Game game, IGameView gameView) {
+	private static IGameView gameView;
+
+	private static void requestState(EnumState state, Game game) {
 		new CreateStateProcessor().process(state.getOrder(), game, gameView);
 	}
 
 	public static void launchGame(Game game, IFrame frame) {
 		Gamepad gamepad = (Gamepad) SettingPreferencesFactory.make(EnumSetting.GAMEPAD.getCode()).pull();
+		gameView = frame.displayGame(game, gamepad);
 
-		frame.displayGame(game, gamepad);
-		requestState(EnumState.RESUMED, game, frame.getGameView());
+		requestState(EnumState.RESUMED, game);
 	}
 
-	public static void resumeGame(Game game, IFrame frame) {
-		requestState(EnumState.RESUMED, game, frame.getGameView());
+	public static void resumeGame(Game game) {
+		requestState(EnumState.RESUMED, game);
 	}
 
-	public static void pauseGame(Game game, IFrame frame) {
-		requestState(EnumState.PAUSED, game, frame.getGameView());
+	public static void pauseGame(Game game) {
+		requestState(EnumState.PAUSED, game);
 	}
 
-	public static void stopGame(Game game, IFrame frame) {
-		requestState(EnumState.STOPPED, game, frame.getGameView());
+	public static void stopGame(Game game) {
+		requestState(EnumState.STOPPED, game);
 	}
 
-	public static void finishGame(Game game, IFrame frame) {
-		requestState(EnumState.DESTROYED, game, frame.getGameView());
+	public static void finishGame(Game game) {
+		requestState(EnumState.DESTROYED, game);
+		game.deleteObservers();
 	}
 }

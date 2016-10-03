@@ -8,12 +8,12 @@ public class FrameHandler {
 
 	public static void closeFrame(IFrame frame, Game game) {
 		if (game != null && game.getState().getOrder() < EnumState.PAUSED.getOrder()) {
-			GameHandler.pauseGame(game, frame);
+			GameHandler.pauseGame(game);
 		}
 
 		if (frame.askClose()) {
 			if (game != null && game.getState().getOrder() < EnumState.DESTROYED.getOrder()) {
-				GameHandler.finishGame(game, frame);
+				GameHandler.finishGame(game);
 			}
 
 			if (game == null || game.getState() == EnumState.DESTROYED) {
