@@ -9,9 +9,7 @@ public class MenuEditActionFactory {
 	}
 
 	public static IAction make(String code, Game game) {
-		if (EnumMenuEditAction.PAUSE.getCode().equalsIgnoreCase(code)) {
-			return new MenuEditActionPause(game);
-		} else if (EnumMenuEditAction.STOP.getCode().equalsIgnoreCase(code)) {
+		if (EnumMenuEditAction.STOP.getCode().equalsIgnoreCase(code)) {
 			return new MenuEditActionStop(game);
 		} else if (EnumMenuEditAction.SAVE.getCode().equalsIgnoreCase(code)) {
 			return new MenuEditActionSave(game);

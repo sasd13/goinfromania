@@ -1,7 +1,6 @@
 package com.sasd13.goinfromania.controller.menu.edit;
 
 public enum EnumMenuEditAction {
-	PAUSE("PAUSE"), 
 	STOP("STOP"), 
 	SAVE("SAVE"),
 	;

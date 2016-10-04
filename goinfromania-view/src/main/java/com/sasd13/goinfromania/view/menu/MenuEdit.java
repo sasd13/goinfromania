@@ -30,18 +30,8 @@ public class MenuEdit extends JMenu {
 	private void buildItems(IFrameView frameView) {
 		menuEditController = new MenuEditController(frameView);
 
-		addItemPause();
 		addItemStop();
 		addItemSave();
-	}
-
-	private void addItemPause() {
-		JMenuItem menuItemPause = new JMenuItem("Pause / Reprise");
-
-		menuItemPause.setActionCommand(EnumMenuEditAction.PAUSE.getCode());
-		menuItemPause.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
-		menuItemPause.addActionListener(menuEditController);
-		add(menuItemPause);
 	}
 
 	private void addItemStop() {
