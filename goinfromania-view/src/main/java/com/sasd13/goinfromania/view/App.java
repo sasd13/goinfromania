@@ -2,6 +2,10 @@ package com.sasd13.goinfromania.view;
 
 import javax.swing.SwingUtilities;
 
+import com.sasd13.goinfromania.bean.setting.EnumSetting;
+import com.sasd13.goinfromania.bean.setting.Gamepad;
+import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
+
 public class App {
 	
 	public static void main(String[] args) {
@@ -9,7 +13,8 @@ public class App {
 
 			@Override
 			public void run() {
-				Frame frame = new Frame();
+				Gamepad gamepad = (Gamepad) SettingPreferencesFactory.make(EnumSetting.GAMEPAD.getCode()).pull();
+				Frame frame = new Frame(gamepad);
 
 				frame.displayHome();
 				frame.pack();

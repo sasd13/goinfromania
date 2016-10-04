@@ -2,10 +2,7 @@ package com.sasd13.goinfromania.controller;
 
 import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.bean.setting.EnumSetting;
-import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.engine.CreateStateProcessor;
-import com.sasd13.goinfromania.util.preferences.SettingPreferencesFactory;
 
 public class GameHandler {
 
@@ -21,8 +18,7 @@ public class GameHandler {
 	}
 
 	public static void launchGame(Game game, IFrameView frameView) {
-		Gamepad gamepad = (Gamepad) SettingPreferencesFactory.make(EnumSetting.GAMEPAD.getCode()).pull();
-		gameView = frameView.displayGame(game, gamepad);
+		gameView = frameView.displayGame(game);
 
 		requestState(EnumState.RESUMED, game);
 	}

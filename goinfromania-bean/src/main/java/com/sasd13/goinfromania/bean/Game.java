@@ -1,8 +1,6 @@
 package com.sasd13.goinfromania.bean;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 
 public class Game extends Observable {
@@ -10,16 +8,15 @@ public class Game extends Observable {
 	private long id;
 	private EnumState state;
 	private EnumLevel level;
-	private EnumResult result;
+	private Arena arena;
 	private int score;
+	private EnumResult result;
 	private Timestamp dateCreation, dateLastUpdate;
-	private List<IElement> elements;
-	private IPig pig;
 
 	public Game() {
 		state = EnumState.NONE;
+		arena = new Arena(this);
 		result = EnumResult.NONE;
-		elements = new ArrayList<IElement>();
 	}
 
 	public long getId() {
@@ -55,15 +52,8 @@ public class Game extends Observable {
 		notifyObservers();
 	}
 
-	public EnumResult getResult() {
-		return result;
-	}
-
-	public void setResult(EnumResult result) {
-		this.result = result;
-
-		setChanged();
-		notifyObservers();
+	public Arena getArena() {
+		return arena;
 	}
 
 	public int getScore() {
@@ -72,6 +62,17 @@ public class Game extends Observable {
 
 	public void setScore(int score) {
 		this.score = score;
+
+		setChanged();
+		notifyObservers();
+	}
+
+	public EnumResult getResult() {
+		return result;
+	}
+
+	public void setResult(EnumResult result) {
+		this.result = result;
 
 		setChanged();
 		notifyObservers();
@@ -97,34 +98,6 @@ public class Game extends Observable {
 
 		setChanged();
 		notifyObservers();
-	}
-
-	public List<IElement> getElements() {
-		return elements;
-	}
-
-	public void addElement(IElement element) {
-		elements.add(element);
-
-		setChanged();
-		notifyObservers();
-	}
-
-	public void removeElement(IElement element) {
-		elements.remove(element);
-
-		setChanged();
-		notifyObservers();
-	}
-
-	public IPig getPig() {
-		return pig;
-	}
-
-	public void setPig(IPig pig) {
-		this.pig = pig;
-
-		addElement(pig);
 	}
 
 	public static Game clone(Game game) {

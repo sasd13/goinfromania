@@ -20,34 +20,30 @@ import com.sasd13.goinfromania.util.ViewConstants;
 
 public abstract class SettingDialog extends JDialog implements Observer, ISettingDialog {
 
-	private Setting setting;
-
 	protected SettingDialog(IFrameView frameView, Setting setting) {
 		super();
 
-		this.setting = setting;
-
-		buildView(frameView);
+		buildView(frameView, setting);
 	}
 
-	private void buildView(IFrameView frameView) {
+	private void buildView(IFrameView frameView, Setting setting) {
 		setTitle("Option");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		buildForm();
-		buildPanelButtons(frameView);
+		buildPanelButtons(frameView, setting);
 	}
 
 	protected abstract void buildForm();
 
-	private void buildPanelButtons(IFrameView frameView) {
+	private void buildPanelButtons(IFrameView frameView, Setting setting) {
 		JPanel panelButtons = new JPanel();
 
-		addButtonsToPanelButton(panelButtons, frameView);
+		addButtonsToPanelButton(panelButtons, frameView, setting);
 		getContentPane().add(panelButtons, BorderLayout.SOUTH);
 	}
 
-	private void addButtonsToPanelButton(JPanel panelButtons, IFrameView frameView) {
+	private void addButtonsToPanelButton(JPanel panelButtons, IFrameView frameView, Setting setting) {
 		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
 		SettingDialogController controller = new SettingDialogController(frameView, this, setting);
 
@@ -92,7 +88,7 @@ public abstract class SettingDialog extends JDialog implements Observer, ISettin
 	}
 
 	@Override
-	public boolean save() {
+	public boolean save(Setting setting) {
 		if (!isFormValid()) {
 			JOptionPane.showMessageDialog(this, "Configuration erron�e. Veuillez corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
 

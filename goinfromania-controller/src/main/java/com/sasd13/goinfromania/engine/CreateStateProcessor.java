@@ -1,5 +1,6 @@
 package com.sasd13.goinfromania.engine;
 
+import com.sasd13.goinfromania.bean.Arena;
 import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.controller.IGameView;
@@ -30,8 +31,11 @@ public class CreateStateProcessor implements IStateProcessor {
 	}
 
 	private void createGame(Game game, IGameView gameView) {
-		game.addObserver(gameView);
 		game.setState(EnumState.CREATED);
-		game.setPig(pigBuilder.build());
+		
+		Arena arena = game.getArena();
+		
+		gameView.displayArena(arena);
+		arena.setPig(pigBuilder.build());
 	}
 }

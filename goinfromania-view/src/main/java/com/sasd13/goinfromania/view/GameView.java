@@ -9,12 +9,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import com.sasd13.goinfromania.bean.EnumState;
+import com.sasd13.goinfromania.bean.Arena;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
+import com.sasd13.goinfromania.controller.IArenaView;
 import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.controller.IGameView;
+import com.sasd13.goinfromania.util.GameConstants;
 import com.sasd13.goinfromania.util.ViewConstants;
 import com.sasd13.goinfromania.view.arena.ArenaView;
 import com.sasd13.goinfromania.view.dialog.GameResultDialog;
@@ -27,22 +29,22 @@ public class GameView extends JPanel implements IGameView {
 	private JProgressBar progressBarPigLife, progressBarPigEnergy;
 	private JLabel labelGameState, labelGameScore;
 
-	public GameView(IFrameView frameView) {
+	public GameView(IFrameView frameView, Gamepad gamepad) {
 		super(new BorderLayout());
 
 		this.frameView = frameView;
 
-		buildView();
+		buildView(gamepad);
 	}
 
-	private void buildView() {
-		buildArena();
+	private void buildView(Gamepad gamepad) {
+		buildArena(gamepad);
 		buildPanelPigState();
 		buildPanelGameState();
 	}
 
-	private void buildArena() {
-		arenaView = new ArenaView();
+	private void buildArena(Gamepad gamepad) {
+		arenaView = new ArenaView(gamepad);
 
 		add(arenaView, BorderLayout.CENTER);
 	}
@@ -98,33 +100,26 @@ public class GameView extends JPanel implements IGameView {
 		panelGameScore.add(panelScore);
 	}
 
-	public ArenaView getArenaView() {
+	@Override
+	public IArenaView displayArena(Arena arena) {
+		arena.addObserver(arenaView);
+
 		return arenaView;
 	}
 
-	public void setGame(Game game) {
-		if (game.getState() == EnumState.PAUSED) {
+	public void setPaused(boolean paused) {
+		if (paused) {
 			labelGameState.setText("PAUSED");
 		} else {
 			labelGameState.setText("");
 		}
-		
-		labelGameScore.setText(String.valueOf(game.getScore()));
-
-		IPig pig = game.getPig();
-
-		if (pig != null) {
-			progressBarPigLife.setValue(pig.getLife());
-			progressBarPigEnergy.setValue(pig.getEnergy());
-		}
-	}
-
-	public void setGamepad(Gamepad gamepad) {
-		arenaView.setGamepad(gamepad);
 	}
 
 	public void clear() {
-		// TODO : display empty pane
+		setPaused(false);
+		labelGameScore.setText("");
+		progressBarPigLife.setValue(GameConstants.LIFE_MIN);
+		progressBarPigEnergy.setValue(GameConstants.ENERGY_MIN);
 	}
 
 	@Override
@@ -156,6 +151,18 @@ public class GameView extends JPanel implements IGameView {
 	public void update(Observable observable, Object arg) {
 		Game game = (Game) observable;
 
-		CycleFactory.make(game.getState().getOrder()).execute(this, game);
+		setValues(game);
+		CycleFactory.make(game.getState().getOrder()).execute(game, this, arenaView);
+	}
+
+	private void setValues(Game game) {
+		labelGameScore.setText(String.valueOf(game.getScore()));
+		
+		IPig pig = game.getArena().getPig();
+		
+		if (pig != null) {
+			progressBarPigLife.setValue(game.getArena().getPig().getLife());
+			progressBarPigEnergy.setValue(game.getArena().getPig().getEnergy());
+		}
 	}
 }

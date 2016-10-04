@@ -183,7 +183,7 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 		formDescription.labelScore.setText(String.valueOf(game.getScore()));
 		formDescription.labelDateCreation.setText(String.valueOf(game.getDateLastUpdate()));
 		formDescription.labelDateLastUpdate.setText(String.valueOf(game.getDateLastUpdate()));
-		formDescription.labelPigLife.setText(String.valueOf(game.getPig().getLife()));
-		formDescription.labelPigEnergy.setText(String.valueOf(game.getPig().getEnergy()));
+		formDescription.labelPigLife.setText(String.valueOf(game.getArena().getPig().getLife()));
+		formDescription.labelPigEnergy.setText(String.valueOf(game.getArena().getPig().getEnergy()));
 	}
 }

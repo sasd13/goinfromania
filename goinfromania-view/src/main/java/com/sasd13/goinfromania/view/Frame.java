@@ -11,6 +11,7 @@ import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.bean.setting.Setting;
 import com.sasd13.goinfromania.controller.FrameController;
+import com.sasd13.goinfromania.controller.IDialogView;
 import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.controller.IGameView;
 import com.sasd13.goinfromania.util.GameConstants;
@@ -28,34 +29,35 @@ public class Frame extends JFrame implements IFrameView {
 	private GameView gameView;
 	private FrameController frameController;
 
-	public Frame() {
+	public Frame(Gamepad gamepad) {
 		super(GameConstants.NAME);
 
-		buildView();
+		buildView(gamepad);
 	}
 
-	private void buildView() {
+	private void buildView(Gamepad gamepad) {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
-		buildMenuBar();
-		buildLayersPane();
+		buildMenuBar(gamepad);
+		buildLayersPane(gamepad);
 		buildFrameController();
 	}
 
-	private void buildMenuBar() {
+	private void buildMenuBar(Gamepad gamepad) {
 		menuBar = new MenuBar(this);
 
+		menuBar.setGamepad(gamepad);
 		setJMenuBar(menuBar);
 	}
 
-	private void buildLayersPane() {
+	private void buildLayersPane(Gamepad gamepad) {
 		layersPane = new JLayeredPane();
 		Dimension dimension = new Dimension(ViewConstants.PANEL_WIDTH, ViewConstants.PANEL_HEIGHT);
 
 		layersPane.setPreferredSize(dimension);
 		addLayerHome(dimension);
 		addLayerGames(dimension);
-		addLayerGame(dimension);
+		addLayerGame(dimension, gamepad);
 		getContentPane().add(layersPane);
 	}
 
@@ -75,8 +77,8 @@ public class Frame extends JFrame implements IFrameView {
 		layersPane.add(gamesView, JLayeredPane.DEFAULT_LAYER);
 	}
 
-	private void addLayerGame(Dimension dimension) {
-		gameView = new GameView(this);
+	private void addLayerGame(Dimension dimension, Gamepad gamepad) {
+		gameView = new GameView(this, gamepad);
 
 		gameView.setBounds(0, 0, dimension.width, dimension.height);
 		gameView.setVisible(false);
@@ -111,12 +113,11 @@ public class Frame extends JFrame implements IFrameView {
 	}
 
 	@Override
-	public IGameView displayGame(Game game, Gamepad gamepad) {
+	public IGameView displayGame(Game game) {
 		menuBar.setMenuEditEnabled(true);
 		menuBar.setGame(game);
-		menuBar.setGamepad(gamepad);
-		gameView.setGamepad(gamepad);
 		frameController.setGame(game);
+		game.addObserver(gameView);
 
 		gameView.setVisible(true);
 		layersPane.moveToFront(gameView);
@@ -127,7 +128,7 @@ public class Frame extends JFrame implements IFrameView {
 	}
 
 	@Override
-	public void displaySetting(Setting setting) {
+	public IDialogView displaySetting(Setting setting) {
 		SettingDialog settingDialog = SettingDialogFactory.make(setting.getCode(), setting, this);
 
 		setting.addObserver(settingDialog);
@@ -135,6 +136,8 @@ public class Frame extends JFrame implements IFrameView {
 		settingDialog.pack();
 		settingDialog.setLocationRelativeTo(this);
 		settingDialog.setVisible(true);
+
+		return settingDialog;
 	}
 
 	@Override

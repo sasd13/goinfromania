@@ -11,7 +11,7 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import com.sasd13.goinfromania.bean.Game;
+import com.sasd13.goinfromania.bean.Arena;
 import com.sasd13.goinfromania.bean.IElement;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.controller.ArenaController;
@@ -23,38 +23,34 @@ public class ArenaView extends JPanel implements Observer, IArenaView {
 	private List<IElement> elements;
 	private ArenaController arenaController;
 
-	public ArenaView() {
+	public ArenaView(Gamepad gamepad) {
 		super(new BorderLayout());
 
 		elements = new ArrayList<>();
 
-		buildView();
+		buildView(gamepad);
 	}
 
-	private void buildView() {
+	private void buildView(Gamepad gamepad) {
 		setLayout(null);
 		setPreferredSize(new Dimension(ViewConstants.ARENA_WIDTH, ViewConstants.ARENA_HEIGHT));
 		setBackground(Color.BLACK);
 		setFocusable(true);
-		buildArenaController();
+		buildArenaController(gamepad);
 	}
 
-	private void buildArenaController() {
-		arenaController = new ArenaController(this);
+	private void buildArenaController(Gamepad gamepad) {
+		arenaController = new ArenaController(this, gamepad);
 
 		addKeyListener(arenaController);
 	}
 
-	public void setGamepad(Gamepad gamepad) {
-		arenaController.setGamepad(gamepad);
-	}
-
 	@Override
 	public void update(Observable observable, Object arg) {
-		Game game = (Game) observable;
+		Arena arena = (Arena) observable;
 
-		arenaController.setGame(game);
-		elements = game.getElements();
+		arenaController.setArena(arena);
+		elements = arena.getElements();
 
 		repaint();
 	}

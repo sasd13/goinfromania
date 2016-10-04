@@ -3,7 +3,6 @@ package com.sasd13.goinfromania.controller;
 import java.util.List;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.bean.setting.Setting;
 
 public interface IFrameView {
@@ -12,9 +11,9 @@ public interface IFrameView {
 
 	void displayGames(List<Game> games);
 
-	IGameView displayGame(Game game, Gamepad gamepad);
+	IGameView displayGame(Game game);
 
-	void displaySetting(Setting setting);
+	IDialogView displaySetting(Setting setting);
 
 	boolean askClose();
 
