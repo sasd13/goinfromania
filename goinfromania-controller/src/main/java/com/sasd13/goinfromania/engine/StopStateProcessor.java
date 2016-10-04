@@ -11,22 +11,20 @@ public class StopStateProcessor implements IStateProcessor {
 
 	@Override
 	public void process(int stateTarget, Game game, IGameView gameView) {
-		if (gameView.askStop()) {
-			if (game.getState().getOrder() < EnumState.STOPPED.getOrder()) {
-				if (gameView.askSave()) {
-					GameDAO.update(game);
-				}
-
-				stopGame(game);
+		if (game.getState().getOrder() < EnumState.STOPPED.getOrder()) {
+			if (gameView.askSave()) {
+				GameDAO.update(game);
 			}
 
-			if (stateTarget > EnumState.STOPPED.getOrder()) {
-				if (next == null) {
-					next = new DestroyStateProcessor();
-				}
+			stopGame(game);
+		}
 
-				next.process(stateTarget, game, gameView);
+		if (stateTarget > EnumState.STOPPED.getOrder()) {
+			if (next == null) {
+				next = new DestroyStateProcessor();
 			}
+
+			next.process(stateTarget, game, gameView);
 		}
 	}
 

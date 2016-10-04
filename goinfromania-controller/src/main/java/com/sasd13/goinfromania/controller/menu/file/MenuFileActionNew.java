@@ -17,7 +17,7 @@ public class MenuFileActionNew implements IAction {
 	@Override
 	public void execute(IFrameView frameView) {
 		if (game != null && game.getState().getOrder() < EnumState.DESTROYED.getOrder()) {
-			GameHandler.finishGame(game);
+			GameHandler.finishGameWithAsking(game);
 		}
 
 		if (game == null || game.getState() == EnumState.DESTROYED) {

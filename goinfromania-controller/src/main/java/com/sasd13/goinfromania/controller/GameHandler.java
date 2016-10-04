@@ -38,4 +38,10 @@ public class GameHandler {
 	public static void finishGame(Game game) {
 		requestState(EnumState.DESTROYED, game);
 	}
+
+	public static void finishGameWithAsking(Game game) {
+		if (gameView.askStop()) {
+			requestState(EnumState.DESTROYED, game);
+		}
+	}
 }

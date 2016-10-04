@@ -17,7 +17,7 @@ public class CreateStateProcessor implements IStateProcessor {
 	@Override
 	public void process(int stateTarget, Game game, IGameView gameView) {
 		if (game.getState().getOrder() < EnumState.CREATED.getOrder()) {
-			createGame(game, gameView);
+			createGame(game);
 		}
 
 		if (stateTarget > EnumState.CREATED.getOrder()) {
@@ -29,7 +29,7 @@ public class CreateStateProcessor implements IStateProcessor {
 		}
 	}
 
-	private void createGame(Game game, IGameView gameView) {
+	private void createGame(Game game) {
 		game.setState(EnumState.CREATED);
 		game.getArena().setPig(pigBuilder.build());
 	}

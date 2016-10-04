@@ -16,7 +16,7 @@ public class MenuEditActionStop implements IAction {
 
 	@Override
 	public void execute(IFrameView frameView) {
-		GameHandler.finishGame(game);
+		GameHandler.finishGameWithAsking(game);
 		
 		if (game.getState() == EnumState.DESTROYED) {
 			frameView.displayHome();

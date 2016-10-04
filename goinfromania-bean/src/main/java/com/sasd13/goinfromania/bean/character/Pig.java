@@ -5,8 +5,24 @@ import com.sasd13.goinfromania.bean.IPower;
 
 public class Pig extends Character implements IPig {
 
+	private EnumPigState state;
 	private boolean greedy, powerful;
 	private int energy;
+	
+	public Pig() {
+		state = EnumPigState.NORMAL;
+	}
+	
+	public EnumPigState getState() {
+		return state;
+	}
+	
+	public void setState(EnumPigState state) {
+		this.state = state;
+		
+		setChanged();
+		notifyObservers();
+	}
 
 	@Override
 	public boolean isGreedy() {

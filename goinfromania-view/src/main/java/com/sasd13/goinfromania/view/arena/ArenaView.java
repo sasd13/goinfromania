@@ -17,6 +17,7 @@ import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.controller.ArenaController;
 import com.sasd13.goinfromania.controller.IArenaView;
 import com.sasd13.goinfromania.util.ViewConstants;
+import com.sasd13.goinfromania.view.arena.image.DrawableFactory;
 
 public class ArenaView extends JPanel implements Observer, IArenaView {
 
@@ -71,7 +72,7 @@ public class ArenaView extends JPanel implements Observer, IArenaView {
 		super.paintComponent(g);
 
 		for (IElement element : elements) {
-			g.drawImage(ImageFinder.find(element), element.getPosition().x, element.getPosition().y, this);
+			g.drawImage(DrawableFactory.make(element).draw(element), element.getPosition().x, element.getPosition().y, this);
 		}
 	}
 }
