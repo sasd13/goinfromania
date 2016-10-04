@@ -14,12 +14,12 @@ public class App {
 			@Override
 			public void run() {
 				Gamepad gamepad = (Gamepad) SettingPreferencesFactory.make(EnumSetting.GAMEPAD.getCode()).pull();
-				Frame frame = new Frame(gamepad);
+				FrameView frameView = new FrameView(gamepad);
 
-				frame.displayHome();
-				frame.pack();
-				frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
+				frameView.displayHome();
+				frameView.pack();
+				frameView.setLocationRelativeTo(null);
+				frameView.setVisible(true);
 			}
 		});
 	}

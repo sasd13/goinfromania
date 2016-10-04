@@ -43,13 +43,24 @@ public class ArenaView extends JPanel implements Observer, IArenaView {
 		arenaController = new ArenaController(this, gamepad);
 
 		addKeyListener(arenaController);
+		addFocusListener(arenaController);
+	}
+
+	public void displayArena(Arena arena) {
+		arena.addObserver(this);
+		arenaController.setArena(arena);
+	}
+
+	public void clear() {
+		elements = new ArrayList<>();
+
+		repaint();
 	}
 
 	@Override
 	public void update(Observable observable, Object arg) {
 		Arena arena = (Arena) observable;
 
-		arenaController.setArena(arena);
 		elements = arena.getElements();
 
 		repaint();

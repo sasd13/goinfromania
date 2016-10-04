@@ -20,7 +20,7 @@ import com.sasd13.goinfromania.view.dialog.SettingDialog;
 import com.sasd13.goinfromania.view.dialog.SettingDialogFactory;
 import com.sasd13.goinfromania.view.menu.MenuBar;
 
-public class Frame extends JFrame implements IFrameView {
+public class FrameView extends JFrame implements IFrameView {
 
 	private MenuBar menuBar;
 	private JLayeredPane layersPane;
@@ -29,7 +29,7 @@ public class Frame extends JFrame implements IFrameView {
 	private GameView gameView;
 	private FrameController frameController;
 
-	public Frame(Gamepad gamepad) {
+	public FrameView(Gamepad gamepad) {
 		super(GameConstants.NAME);
 
 		buildView(gamepad);
@@ -117,7 +117,7 @@ public class Frame extends JFrame implements IFrameView {
 		menuBar.setMenuEditEnabled(true);
 		menuBar.setGame(game);
 		frameController.setGame(game);
-		game.addObserver(gameView);
+		gameView.displayGame(game);
 
 		gameView.setVisible(true);
 		layersPane.moveToFront(gameView);
@@ -142,7 +142,7 @@ public class Frame extends JFrame implements IFrameView {
 
 	@Override
 	public boolean askClose() {
-		int selected = JOptionPane.showConfirmDialog(null, "Quitter le jeu ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+		int selected = JOptionPane.showConfirmDialog(null, "Quitter le jeu?", "Sortie", JOptionPane.YES_NO_OPTION);
 
 		return selected == JOptionPane.YES_OPTION;
 	}

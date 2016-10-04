@@ -17,12 +17,12 @@ import javax.swing.JTextField;
 
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 import com.sasd13.goinfromania.bean.setting.Setting;
-import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.util.ViewConstants;
+import com.sasd13.goinfromania.view.FrameView;
 
 public class SettingDialogGamepad extends SettingDialog {
 
-	private class GamepadTextField extends JTextField {
+	private static class GamepadTextField extends JTextField {
 
 		private int keyCode;
 
@@ -71,7 +71,7 @@ public class SettingDialogGamepad extends SettingDialog {
 				setText(KeyEvent.getKeyText(keyCode));
 			} else {
 				setText("");
-				JOptionPane.showMessageDialog(null, "Entrer une touche valide", "Erreur", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Entrer une touche valide", "Gamepad", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -80,7 +80,7 @@ public class SettingDialogGamepad extends SettingDialog {
 
 	private GamepadTextField[] textFields;
 
-	public SettingDialogGamepad(IFrameView frameView, Setting setting) {
+	public SettingDialogGamepad(FrameView frameView, Setting setting) {
 		super(frameView, setting);
 
 		setPreferredSize(new Dimension(ViewConstants.FRAME_WIDTH, ViewConstants.FRAME_HEIGHT));
@@ -199,8 +199,6 @@ public class SettingDialogGamepad extends SettingDialog {
 
 	@Override
 	public void update(Observable observable, Object arg) {
-		super.update(observable, arg);
-
 		Gamepad gamepad = (Gamepad) observable;
 
 		setTextFieldKeyStart(gamepad);

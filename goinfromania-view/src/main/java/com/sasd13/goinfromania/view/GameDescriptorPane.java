@@ -12,13 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.sasd13.goinfromania.bean.Game;
-import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.controller.descriptor.EnumGameDescriptorAction;
 import com.sasd13.goinfromania.controller.descriptor.GameDescriptorController;
-import com.sasd13.goinfromania.controller.descriptor.IDescriptor;
+import com.sasd13.goinfromania.controller.descriptor.IDescriptorView;
 import com.sasd13.goinfromania.util.ViewConstants;
 
-public class GameDescriptorPane extends JPanel implements IDescriptor {
+public class GameDescriptorPane extends JPanel implements IDescriptorView {
 
 	private static class ViewHolder {
 		private JLabel labelLevel, labelScore, labelPigLife, labelPigEnergy, labelDateCreation, labelDateLastUpdate;
@@ -26,21 +25,18 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 	}
 
 	private ViewHolder formDescription;
-	private IFrameView frameView;
 	private GameDescriptorController gameDescriptorController;
 
-	public GameDescriptorPane(IFrameView frameView) {
+	public GameDescriptorPane(FrameView frameView) {
 		super(new BorderLayout());
 
-		this.frameView = frameView;
-
-		buildView();
+		buildView(frameView);
 	}
 
-	private void buildView() {
+	private void buildView(FrameView frameView) {
 		buildLabelProgress();
 		buildPanelDescription();
-		buildPanelButtons();
+		buildPanelButtons(frameView);
 		setButtonsEnabled(false);
 	}
 
@@ -109,14 +105,14 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 		panelDescription.add(formDescription.labelDateLastUpdate);
 	}
 
-	private void buildPanelButtons() {
+	private void buildPanelButtons(FrameView frameView) {
 		JPanel panelButtons = new JPanel();
 
-		addButtonsToPanelButton(panelButtons);
+		addButtonsToPanelButton(panelButtons, frameView);
 		add(panelButtons, BorderLayout.SOUTH);
 	}
 
-	private void addButtonsToPanelButton(JPanel panelButtons) {
+	private void addButtonsToPanelButton(JPanel panelButtons, FrameView frameView) {
 		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
 		gameDescriptorController = new GameDescriptorController(frameView, this);
 
@@ -151,7 +147,7 @@ public class GameDescriptorPane extends JPanel implements IDescriptor {
 
 	@Override
 	public boolean askDelete() {
-		int selected = JOptionPane.showConfirmDialog(null, "Supprimer la partie ?", "Suppression", JOptionPane.YES_NO_OPTION);
+		int selected = JOptionPane.showConfirmDialog(null, "Supprimer la partie?", "Suppression", JOptionPane.YES_NO_OPTION);
 
 		return selected == JOptionPane.YES_OPTION;
 	}

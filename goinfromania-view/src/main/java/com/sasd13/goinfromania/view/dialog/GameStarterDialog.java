@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -17,21 +15,19 @@ import javax.swing.Timer;
 
 import com.sasd13.goinfromania.controller.IDialogView;
 import com.sasd13.goinfromania.util.ViewConstants;
-import com.sasd13.goinfromania.view.GameView;
 
-public class GameStarterDialog extends JDialog implements Observer, IDialogView, ActionListener {
+public class GameStarterDialog extends JDialog implements IDialogView, ActionListener {
 
-	private GameView gameView;
 	private JLayeredPane layeredPane;
 	private JPanel panelReady, panelGo;
 
 	private int count;
 	private Timer timer;
 
-	public GameStarterDialog(GameView gameView) {
+	public GameStarterDialog() {
 		super();
 
-		this.gameView = gameView;
+		timer = new Timer(0, this);
 
 		buildView();
 	}
@@ -89,14 +85,10 @@ public class GameStarterDialog extends JDialog implements Observer, IDialogView,
 		panelGo.add(labelGo);
 	}
 
-	public void display() {
+	public void startTimer() {
 		count = -1;
-		timer = new Timer(0, this);
-
-		setLocationRelativeTo(gameView);
 		timer.setDelay(1200);
-		timer.start();
-		setVisible(true);
+		timer.restart();
 	}
 
 	@Override
@@ -114,7 +106,7 @@ public class GameStarterDialog extends JDialog implements Observer, IDialogView,
 			dispose();
 		}
 	}
-	
+
 	private void hideReadyAndGo() {
 		panelReady.setVisible(false);
 		panelGo.setVisible(false);
@@ -130,11 +122,5 @@ public class GameStarterDialog extends JDialog implements Observer, IDialogView,
 		panelGo.setVisible(true);
 		layeredPane.moveToFront(panelGo);
 		panelReady.setVisible(false);
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-
 	}
 }

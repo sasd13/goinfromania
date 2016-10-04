@@ -9,12 +9,12 @@ import com.sasd13.goinfromania.controller.IFrameView;
 public class GameDescriptorController implements ActionListener {
 
 	private IFrameView frameView;
-	private IDescriptor descriptor;
+	private IDescriptorView descriptorView;
 	private Game game;
 
-	public GameDescriptorController(IFrameView frameView, IDescriptor descriptor) {
+	public GameDescriptorController(IFrameView frameView, IDescriptorView descriptorView) {
 		this.frameView = frameView;
-		this.descriptor = descriptor;
+		this.descriptorView = descriptorView;
 	}
 
 	public void setGame(Game game) {
@@ -23,6 +23,6 @@ public class GameDescriptorController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		GameDescriptorActionFactory.make(event.getActionCommand(), descriptor, game).execute(frameView);
+		GameDescriptorActionFactory.make(event.getActionCommand(), descriptorView, game).execute(frameView);
 	}
 }

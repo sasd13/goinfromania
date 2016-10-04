@@ -15,7 +15,6 @@ public class MenuEditActionSave implements IAction {
 
 	@Override
 	public void execute(IFrameView frameView) {
-		// TODO : do in background
 		GameDAO.update(game);
 	}
 }

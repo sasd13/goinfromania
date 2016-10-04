@@ -1,5 +1,7 @@
 package com.sasd13.goinfromania.controller;
 
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -9,7 +11,7 @@ import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
 
-public class ArenaController implements KeyListener {
+public class ArenaController implements KeyListener, FocusListener {
 
 	private IArenaView arenaView;
 	private Gamepad gamepad;
@@ -61,5 +63,15 @@ public class ArenaController implements KeyListener {
 				// TODO
 			}
 		}
+	}
+
+	@Override
+	public void focusGained(FocusEvent arg0) {
+		// Do nothing
+	}
+
+	@Override
+	public void focusLost(FocusEvent arg0) {
+		GameHandler.pauseGame(arena.getGame());
 	}
 }

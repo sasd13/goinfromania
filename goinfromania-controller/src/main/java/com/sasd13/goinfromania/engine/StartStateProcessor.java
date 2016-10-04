@@ -25,6 +25,5 @@ public class StartStateProcessor implements IStateProcessor {
 
 	private void startGame(Game game) {
 		game.setState(EnumState.STARTED);
-		// TODO : process
 	}
 }

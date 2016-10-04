@@ -15,6 +15,5 @@ public class DestroyStateProcessor implements IStateProcessor {
 
 	private void destroyGame(Game game) {
 		game.setState(EnumState.DESTROYED);
-		game.deleteObservers();
 	}
 }

@@ -12,9 +12,11 @@ public class StartCycle implements ICycle {
 	@Override
 	public void execute(Game game, GameView gameView, ArenaView arenaView) {
 		if (gameStarterDialog == null) {
-			gameStarterDialog = new GameStarterDialog(gameView);
+			gameStarterDialog = new GameStarterDialog();
 		}
 
-		gameStarterDialog.display();
+		gameStarterDialog.startTimer();
+		gameStarterDialog.setLocationRelativeTo(gameView);
+		gameStarterDialog.setVisible(true);
 	}
 }

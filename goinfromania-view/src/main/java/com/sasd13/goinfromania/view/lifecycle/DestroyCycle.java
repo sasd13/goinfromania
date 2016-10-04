@@ -8,6 +8,7 @@ public class DestroyCycle implements ICycle {
 
 	@Override
 	public void execute(Game game, GameView gameView, ArenaView arenaView) {
-		// TODO Auto-generated method stub
+		gameView.clear();
+		arenaView.clear();
 	}
 }

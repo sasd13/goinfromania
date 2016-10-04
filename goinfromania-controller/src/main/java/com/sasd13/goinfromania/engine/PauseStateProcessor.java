@@ -32,6 +32,5 @@ public class PauseStateProcessor implements IStateProcessor {
 
 	private void pauseGame(Game game) {
 		game.setState(EnumState.PAUSED);
-		// TODO : process
 	}
 }

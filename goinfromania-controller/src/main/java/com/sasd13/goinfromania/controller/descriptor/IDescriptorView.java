@@ -1,6 +1,6 @@
 package com.sasd13.goinfromania.controller.descriptor;
 
-public interface IDescriptor {
+public interface IDescriptorView {
 
 	boolean askDelete();
 

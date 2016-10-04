@@ -7,18 +7,18 @@ import com.sasd13.goinfromania.dao.GameDAO;
 
 public class GameDescriptorActionDelete implements IAction {
 
-	private IDescriptor descriptor;
+	private IDescriptorView descriptorView;
 	private Game game;
 
-	public GameDescriptorActionDelete(IDescriptor descriptor, Game game) {
-		this.descriptor = descriptor;
+	public GameDescriptorActionDelete(IDescriptorView descriptorView, Game game) {
+		this.descriptorView = descriptorView;
 		this.game = game;
 	}
 
 	@Override
 	public void execute(IFrameView frameView) {
-		if (descriptor.askDelete()) {
-			descriptor.clear();
+		if (descriptorView.askDelete()) {
+			descriptorView.clear();
 			GameDAO.delete(game);
 			frameView.displayGames(GameDAO.loadAll());
 		}

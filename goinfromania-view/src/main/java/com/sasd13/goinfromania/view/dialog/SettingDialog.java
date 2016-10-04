@@ -2,7 +2,6 @@ package com.sasd13.goinfromania.view.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
@@ -12,21 +11,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.sasd13.goinfromania.bean.setting.Setting;
-import com.sasd13.goinfromania.controller.IFrameView;
 import com.sasd13.goinfromania.controller.setting.EnumSettingDialogAction;
 import com.sasd13.goinfromania.controller.setting.ISettingDialog;
 import com.sasd13.goinfromania.controller.setting.SettingDialogController;
 import com.sasd13.goinfromania.util.ViewConstants;
+import com.sasd13.goinfromania.view.FrameView;
 
 public abstract class SettingDialog extends JDialog implements Observer, ISettingDialog {
 
-	protected SettingDialog(IFrameView frameView, Setting setting) {
+	protected SettingDialog(FrameView frameView, Setting setting) {
 		super();
 
 		buildView(frameView, setting);
 	}
 
-	private void buildView(IFrameView frameView, Setting setting) {
+	private void buildView(FrameView frameView, Setting setting) {
 		setTitle("Option");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setModalityType(ModalityType.APPLICATION_MODAL);
@@ -36,14 +35,14 @@ public abstract class SettingDialog extends JDialog implements Observer, ISettin
 
 	protected abstract void buildForm();
 
-	private void buildPanelButtons(IFrameView frameView, Setting setting) {
+	private void buildPanelButtons(FrameView frameView, Setting setting) {
 		JPanel panelButtons = new JPanel();
 
 		addButtonsToPanelButton(panelButtons, frameView, setting);
 		getContentPane().add(panelButtons, BorderLayout.SOUTH);
 	}
 
-	private void addButtonsToPanelButton(JPanel panelButtons, IFrameView frameView, Setting setting) {
+	private void addButtonsToPanelButton(JPanel panelButtons, FrameView frameView, Setting setting) {
 		Dimension dimension = new Dimension(ViewConstants.BUTTON_WIDTH, ViewConstants.BUTTON_HEIGHT);
 		SettingDialogController controller = new SettingDialogController(frameView, this, setting);
 
@@ -83,14 +82,9 @@ public abstract class SettingDialog extends JDialog implements Observer, ISettin
 	}
 
 	@Override
-	public void update(Observable observable, Object arg) {
-		// settingController.setSetting((Setting) observable);
-	}
-
-	@Override
 	public boolean save(Setting setting) {
 		if (!isFormValid()) {
-			JOptionPane.showMessageDialog(this, "Configuration erron�e. Veuillez corriger", "Erreur", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Configuration erronee. Veuillez corriger", "Option", JOptionPane.ERROR_MESSAGE);
 
 			return false;
 		}

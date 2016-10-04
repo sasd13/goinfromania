@@ -9,12 +9,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import com.sasd13.goinfromania.bean.Arena;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
-import com.sasd13.goinfromania.controller.IArenaView;
-import com.sasd13.goinfromania.controller.IFrameView;
+import com.sasd13.goinfromania.controller.IDialogView;
 import com.sasd13.goinfromania.controller.IGameView;
 import com.sasd13.goinfromania.util.GameConstants;
 import com.sasd13.goinfromania.util.ViewConstants;
@@ -24,12 +22,12 @@ import com.sasd13.goinfromania.view.lifecycle.CycleFactory;
 
 public class GameView extends JPanel implements IGameView {
 
-	private IFrameView frameView;
+	private FrameView frameView;
 	private ArenaView arenaView;
 	private JProgressBar progressBarPigLife, progressBarPigEnergy;
 	private JLabel labelGameState, labelGameScore;
 
-	public GameView(IFrameView frameView, Gamepad gamepad) {
+	public GameView(FrameView frameView, Gamepad gamepad) {
 		super(new BorderLayout());
 
 		this.frameView = frameView;
@@ -100,11 +98,9 @@ public class GameView extends JPanel implements IGameView {
 		panelGameScore.add(panelScore);
 	}
 
-	@Override
-	public IArenaView displayArena(Arena arena) {
-		arena.addObserver(arenaView);
-
-		return arenaView;
+	public void displayGame(Game game) {
+		game.addObserver(this);
+		arenaView.displayArena(game.getArena());
 	}
 
 	public void setPaused(boolean paused) {
@@ -124,20 +120,20 @@ public class GameView extends JPanel implements IGameView {
 
 	@Override
 	public boolean askStop() {
-		int selected = JOptionPane.showConfirmDialog(null, "Arr�ter la partie ?", "Arrêt", JOptionPane.YES_NO_OPTION);
+		int selected = JOptionPane.showConfirmDialog(null, "Arreter la partie?", "Arrêt", JOptionPane.YES_NO_OPTION);
 
 		return selected == JOptionPane.YES_OPTION;
 	}
 
 	@Override
 	public boolean askSave() {
-		int selected = JOptionPane.showConfirmDialog(null, "Sauvegarder la progression ?", "Sauvegarde", JOptionPane.YES_NO_OPTION);
+		int selected = JOptionPane.showConfirmDialog(null, "Sauvegarder la progression?", "Sauvegarde", JOptionPane.YES_NO_OPTION);
 
 		return selected == JOptionPane.YES_OPTION;
 	}
 
 	@Override
-	public void displayResult(Game game) {
+	public IDialogView displayResult(Game game) {
 		GameResultDialog gameResultDialog = new GameResultDialog(frameView, game);
 
 		game.addObserver(gameResultDialog);
@@ -145,6 +141,8 @@ public class GameView extends JPanel implements IGameView {
 		gameResultDialog.pack();
 		gameResultDialog.setLocationRelativeTo(this);
 		gameResultDialog.setVisible(true);
+
+		return gameResultDialog;
 	}
 
 	@Override
@@ -152,14 +150,14 @@ public class GameView extends JPanel implements IGameView {
 		Game game = (Game) observable;
 
 		setValues(game);
-		CycleFactory.make(game.getState().getOrder()).execute(game, this, arenaView);
+		CycleFactory.make(game.getState().getOrder(), frameView).execute(game, this, arenaView);
 	}
 
 	private void setValues(Game game) {
 		labelGameScore.setText(String.valueOf(game.getScore()));
-		
+
 		IPig pig = game.getArena().getPig();
-		
+
 		if (pig != null) {
 			progressBarPigLife.setValue(game.getArena().getPig().getLife());
 			progressBarPigEnergy.setValue(game.getArena().getPig().getEnergy());
