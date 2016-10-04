@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import com.sasd13.goinfromania.bean.EnumState;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
@@ -17,7 +18,7 @@ import com.sasd13.goinfromania.controller.IGameView;
 import com.sasd13.goinfromania.util.ViewConstants;
 import com.sasd13.goinfromania.view.arena.ArenaView;
 import com.sasd13.goinfromania.view.dialog.GameResultDialog;
-import com.sasd13.goinfromania.view.dialog.GameStarterDialog;
+import com.sasd13.goinfromania.view.lifecycle.CycleFactory;
 
 public class GameView extends JPanel implements IGameView {
 
@@ -25,8 +26,6 @@ public class GameView extends JPanel implements IGameView {
 	private ArenaView arenaView;
 	private JProgressBar progressBarPigLife, progressBarPigEnergy;
 	private JLabel labelGameState, labelGameScore;
-	private Game game;
-	private GameStarterDialog gameStarterDialog;
 
 	public GameView(IFrameView frameView) {
 		super(new BorderLayout());
@@ -99,8 +98,33 @@ public class GameView extends JPanel implements IGameView {
 		panelGameScore.add(panelScore);
 	}
 
+	public ArenaView getArenaView() {
+		return arenaView;
+	}
+
+	public void setGame(Game game) {
+		if (game.getState() == EnumState.PAUSED) {
+			labelGameState.setText("PAUSED");
+		} else {
+			labelGameState.setText("");
+		}
+		
+		labelGameScore.setText(String.valueOf(game.getScore()));
+
+		IPig pig = game.getPig();
+
+		if (pig != null) {
+			progressBarPigLife.setValue(pig.getLife());
+			progressBarPigEnergy.setValue(pig.getEnergy());
+		}
+	}
+
 	public void setGamepad(Gamepad gamepad) {
 		arenaView.setGamepad(gamepad);
+	}
+
+	public void clear() {
+		// TODO : display empty pane
 	}
 
 	@Override
@@ -118,7 +142,7 @@ public class GameView extends JPanel implements IGameView {
 	}
 
 	@Override
-	public void displayResult() {
+	public void displayResult(Game game) {
 		GameResultDialog gameResultDialog = new GameResultDialog(frameView, game);
 
 		game.addObserver(gameResultDialog);
@@ -130,76 +154,8 @@ public class GameView extends JPanel implements IGameView {
 
 	@Override
 	public void update(Observable observable, Object arg) {
-		game = (Game) observable;
+		Game game = (Game) observable;
 
-		switch (game.getState()) {
-			case CREATED:
-				onCreate();
-				break;
-			case STARTED:
-				onStart();
-				break;
-			case RESUMED:
-				onResume();
-				break;
-			case PAUSED:
-				onPause();
-				break;
-			case STOPPED:
-				onStop();
-				break;
-			default:
-				clear();
-				break;
-		}
-	}
-
-	private void onCreate() {
-		game.addObserver(arenaView);
-		labelGameState.setText("");
-	}
-
-	private void onStart() {
-		setValues();
-		displayStarter();
-	}
-
-	private void setValues() {
-		labelGameScore.setText(String.valueOf(game.getScore()));
-
-		IPig pig = game.getPig();
-
-		if (pig != null) {
-			progressBarPigLife.setValue(pig.getLife());
-			progressBarPigEnergy.setValue(pig.getEnergy());
-		}
-	}
-
-	private void displayStarter() {
-		if (gameStarterDialog == null) {
-			gameStarterDialog = new GameStarterDialog(this);
-		}
-
-		gameStarterDialog.display();
-	}
-
-	private void onResume() {
-		labelGameState.setText("");
-		setValues();
-		arenaView.requestFocusInWindow();
-		// TODO : resume game
-	}
-
-	private void onPause() {
-		labelGameState.setText("PAUSE");
-		// TODO : pause game
-	}
-
-	private void onStop() {
-		// TODO : display dialog stop
-	}
-
-	private void clear() {
-		// TODO : display empty pane
+		CycleFactory.make(game.getState().getOrder()).execute(this, game);
 	}
 }
