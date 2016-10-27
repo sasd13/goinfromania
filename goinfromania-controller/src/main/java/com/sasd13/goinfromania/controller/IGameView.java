@@ -5,6 +5,8 @@ import java.util.Observer;
 import com.sasd13.goinfromania.bean.Game;
 
 public interface IGameView extends Observer {
+	
+	IArenaView getArenaView();
 
 	boolean askStop();
 

@@ -3,14 +3,15 @@ package com.sasd13.goinfromania.util.builder;
 import java.awt.Dimension;
 import java.awt.Point;
 
+import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.character.Pig;
 import com.sasd13.goinfromania.util.GameConstants;
 
-public class PigBuilder implements IBuilder<Pig> {
+public class PigBuilder implements IBuilder<IPig> {
 
 	@Override
-	public Pig build() {
-		Pig pig = new Pig();
+	public IPig build() {
+		IPig pig = new Pig();
 
 		pig.setCrossable(true);
 		pig.setDimension(new Dimension(GameConstants.DIMENSION_WIDTH_MAX, GameConstants.DIMENSION_HEIGHT_MAX));

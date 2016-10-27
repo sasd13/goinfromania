@@ -22,8 +22,12 @@ import com.sasd13.goinfromania.view.FrameView;
 
 public class SettingDialogGamepad extends SettingDialog {
 
+	private static final long serialVersionUID = 3527321933695782435L;
+
 	private static class GamepadTextField extends JTextField {
 
+		private static final long serialVersionUID = -7059093300473037839L;
+		
 		private int keyCode;
 
 		public GamepadTextField() {

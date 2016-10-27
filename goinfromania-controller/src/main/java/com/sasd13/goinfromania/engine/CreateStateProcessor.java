@@ -31,6 +31,6 @@ public class CreateStateProcessor implements IStateProcessor {
 
 	private void createGame(Game game) {
 		game.setState(EnumState.CREATED);
-		game.getArena().setPig(pigBuilder.build());
+		pigBuilder.build();
 	}
 }

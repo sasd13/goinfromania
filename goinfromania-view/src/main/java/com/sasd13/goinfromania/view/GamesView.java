@@ -17,6 +17,8 @@ import com.sasd13.goinfromania.util.builder.GamesListStringBuilder;
 
 public class GamesView extends JSplitPane implements ListSelectionListener {
 
+	private static final long serialVersionUID = -3542678100958649679L;
+	
 	private JList<String> panelList;
 	private GameDescriptorPane gameDescriptorPane;
 	private List<Game> games;

@@ -22,6 +22,8 @@ import com.sasd13.goinfromania.view.menu.MenuBar;
 
 public class FrameView extends JFrame implements IFrameView {
 
+	private static final long serialVersionUID = -8274874279164299983L;
+	
 	private MenuBar menuBar;
 	private JLayeredPane layersPane;
 	private HomeView homeView;

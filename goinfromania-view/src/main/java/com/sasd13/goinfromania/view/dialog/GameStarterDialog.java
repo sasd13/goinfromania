@@ -18,6 +18,8 @@ import com.sasd13.goinfromania.util.ViewConstants;
 
 public class GameStarterDialog extends JDialog implements IDialogView, ActionListener {
 
+	private static final long serialVersionUID = -1378266883448515264L;
+	
 	private JLayeredPane layeredPane;
 	private JPanel panelReady, panelGo;
 

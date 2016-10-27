@@ -14,6 +14,8 @@ import com.sasd13.goinfromania.controller.menu.settings.MenuSettingsController;
 
 public class MenuSettings extends JMenu {
 
+	private static final long serialVersionUID = 2180946428680907745L;
+	
 	private MenuSettingsController menuSettingsController;
 
 	public MenuSettings(IFrameView frameView) {

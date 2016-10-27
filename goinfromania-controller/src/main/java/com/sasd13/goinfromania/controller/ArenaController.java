@@ -13,12 +13,10 @@ import com.sasd13.goinfromania.bean.setting.Gamepad;
 
 public class ArenaController implements KeyListener, FocusListener {
 
-	private IArenaView arenaView;
 	private Gamepad gamepad;
 	private Arena arena;
 
-	public ArenaController(IArenaView arenaView, Gamepad gamepad) {
-		this.arenaView = arenaView;
+	public ArenaController(Gamepad gamepad) {
 		this.gamepad = gamepad;
 	}
 
@@ -52,13 +50,13 @@ public class ArenaController implements KeyListener, FocusListener {
 			IPig pig = arena.getPig();
 
 			if (keyCode == gamepad.getKeyMoveNorth()) {
-				MoveHandler.move(pig, Direction.NORTH, arenaView);
+				MoveHandler.move(pig, Direction.NORTH);
 			} else if (keyCode == gamepad.getKeyMoveSouth()) {
-				MoveHandler.move(pig, Direction.SOUTH, arenaView);
+				MoveHandler.move(pig, Direction.SOUTH);
 			} else if (keyCode == gamepad.getKeyMoveWest()) {
-				MoveHandler.move(pig, Direction.WEST, arenaView);
+				MoveHandler.move(pig, Direction.WEST);
 			} else if (keyCode == gamepad.getKeyMoveEast()) {
-				MoveHandler.move(pig, Direction.EAST, arenaView);
+				MoveHandler.move(pig, Direction.EAST);
 			} else if (keyCode == gamepad.getKeyPigAttak()) {
 				// TODO
 			}

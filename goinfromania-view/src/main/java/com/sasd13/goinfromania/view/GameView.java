@@ -12,6 +12,7 @@ import javax.swing.JProgressBar;
 import com.sasd13.goinfromania.bean.Game;
 import com.sasd13.goinfromania.bean.IPig;
 import com.sasd13.goinfromania.bean.setting.Gamepad;
+import com.sasd13.goinfromania.controller.IArenaView;
 import com.sasd13.goinfromania.controller.IDialogView;
 import com.sasd13.goinfromania.controller.IGameView;
 import com.sasd13.goinfromania.util.GameConstants;
@@ -22,6 +23,8 @@ import com.sasd13.goinfromania.view.lifecycle.CycleFactory;
 
 public class GameView extends JPanel implements IGameView {
 
+	private static final long serialVersionUID = -2692724054568178376L;
+	
 	private FrameView frameView;
 	private ArenaView arenaView;
 	private JProgressBar progressBarPigLife, progressBarPigEnergy;
@@ -100,6 +103,7 @@ public class GameView extends JPanel implements IGameView {
 
 	public void displayGame(Game game) {
 		game.addObserver(this);
+		//game.getArena().getPig().a
 		arenaView.displayArena(game.getArena());
 	}
 
@@ -116,6 +120,11 @@ public class GameView extends JPanel implements IGameView {
 		labelGameScore.setText("");
 		progressBarPigLife.setValue(GameConstants.LIFE_MIN);
 		progressBarPigEnergy.setValue(GameConstants.ENERGY_MIN);
+	}
+	
+	@Override
+	public IArenaView getArenaView() {
+		return arenaView;
 	}
 
 	@Override

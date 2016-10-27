@@ -8,6 +8,8 @@ import com.sasd13.goinfromania.controller.IFrameView;
 
 public class MenuBar extends JMenuBar {
 
+	private static final long serialVersionUID = 5081689764455337682L;
+	
 	private MenuFile menuFile;
 	private MenuEdit menuEdit;
 	private MenuSettings menuSettings;

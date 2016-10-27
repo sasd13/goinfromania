@@ -19,6 +19,8 @@ import com.sasd13.goinfromania.util.ViewConstants;
 
 public class GameDescriptorPane extends JPanel implements IDescriptorView {
 
+	private static final long serialVersionUID = 3666540380529189296L;
+
 	private static class ViewHolder {
 		private JLabel labelLevel, labelScore, labelPigLife, labelPigEnergy, labelDateCreation, labelDateLastUpdate;
 		private JButton buttonContinue, buttonDelete;

@@ -21,6 +21,8 @@ import com.sasd13.goinfromania.view.arena.image.DrawableFactory;
 
 public class ArenaView extends JPanel implements Observer, IArenaView {
 
+	private static final long serialVersionUID = -2475159232108298384L;
+	
 	private List<IElement> elements;
 	private ArenaController arenaController;
 
@@ -41,7 +43,7 @@ public class ArenaView extends JPanel implements Observer, IArenaView {
 	}
 
 	private void buildArenaController(Gamepad gamepad) {
-		arenaController = new ArenaController(this, gamepad);
+		arenaController = new ArenaController(gamepad);
 
 		addKeyListener(arenaController);
 		addFocusListener(arenaController);

@@ -9,6 +9,8 @@ import com.sasd13.goinfromania.util.ImageLoader;
 
 public class HomeView extends JPanel {
 
+	private static final long serialVersionUID = 5260102566642890040L;
+	
 	private static BufferedImage image = ImageLoader.loadFromPath(ImageConstants.HOME);
 
 	public HomeView() {

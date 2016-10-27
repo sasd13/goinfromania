@@ -14,6 +14,8 @@ import com.sasd13.goinfromania.controller.menu.edit.MenuEditController;
 
 public class MenuEdit extends JMenu {
 
+	private static final long serialVersionUID = -4083803287551454249L;
+	
 	private MenuEditController menuEditController;
 
 	public MenuEdit(IFrameView frameView) {

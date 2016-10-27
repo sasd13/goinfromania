@@ -19,6 +19,8 @@ import com.sasd13.goinfromania.view.FrameView;
 
 public abstract class SettingDialog extends JDialog implements Observer, ISettingDialog {
 
+	private static final long serialVersionUID = 4633518337812776202L;
+
 	protected SettingDialog(FrameView frameView, Setting setting) {
 		super();
 

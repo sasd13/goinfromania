@@ -24,6 +24,8 @@ import com.sasd13.goinfromania.view.FrameView;
 
 public class GameResultDialog extends JDialog implements Observer, IDialogView {
 
+	private static final long serialVersionUID = 802565668274455405L;
+	
 	private JLabel labelResult, labelScore;
 
 	public GameResultDialog(FrameView frameView, Game game) {
